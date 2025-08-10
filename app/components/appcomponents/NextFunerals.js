@@ -4,11 +4,14 @@ import Dropdown from "@/app/components/appcomponents/Dropdown";
 import nodeTie from "@/public/icon_node_tie.png";
 import Image from "next/image";
 import regionsAndCities from "@/utils/regionAndCities";
+import { useRouter } from "next/navigation";
 
 import Link from "next/link";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+
 const NextFunerals = () => {
-    const [selectedCity, setSelectedCity] = useState(null);
+  const router = useRouter();
+  const [selectedCity, setSelectedCity] = useState(null);
 
   const cityOptions = [
     ...Object.values(regionsAndCities)
@@ -22,7 +25,13 @@ const NextFunerals = () => {
 
   
   const handleCitySelect = (item) => {
-    setSelectedCity(item.place);
+    if (item.id === "allCities") {
+      setSelectedCity(null);
+    } else {
+      setSelectedCity(item.place);
+      // Redirect to pogrebi page with selected city
+      router.push(`/pogrebi?city=${encodeURIComponent(item.place)}`);
+    }
   };
   return (
     <div className="w-full bg-gradient-to-br from-[#D3D7DA30] to-[#ECF6FF30] border-[#939393] border-t-2 border-b-2">

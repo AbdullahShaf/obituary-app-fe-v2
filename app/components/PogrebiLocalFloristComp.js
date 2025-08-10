@@ -2,10 +2,12 @@
 import React from 'react';
 import Dropdown from '@/app/components/appcomponents/Dropdown';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import regionsAndCities from '@/utils/regionAndCities';
+
 const PogrebiLocalFloristComp = () => {
- 
-const [selectedCity, setSelectedCity] = useState(null);
+  const router = useRouter();
+  const [selectedCity, setSelectedCity] = useState(null);
 
 const cityOptions =  [
   
@@ -24,8 +26,8 @@ const cityOptions =  [
       return
     }
     setSelectedCity(item.place);
-    setSelectedRegion(null);
-   
+    // Redirect to cvetlicarne page with selected city
+    router.push(`/cvetlicarne?city=${encodeURIComponent(item.place)}`);
   };
   return (
     <div className=' mx-auto w-full z-20'>
@@ -63,10 +65,9 @@ const cityOptions =  [
                 isFrom={'florist'}
                 data={cityOptions}
                 selectedValue={selectedCity}
-                onSelect={()=>handleCitySelect()}
+                onSelect={handleCitySelect}
                 />
             </div>
-            
           </div>
         </div>
       </div>

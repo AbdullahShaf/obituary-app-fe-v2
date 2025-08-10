@@ -2,8 +2,11 @@
 import React from "react";
 import Dropdown from "./Dropdown";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import regionsAndCities from "@/utils/regionAndCities";
+
 const FloristsComp = () => {
+  const router = useRouter();
   const [selectedCity, setSelectedCity] = useState(null);
 
   const cityOptions = [
@@ -17,7 +20,13 @@ const FloristsComp = () => {
   ];
 
   const handleCitySelect = (item) => {
-    setSelectedCity(item.place);
+    if (item.id === "allCities") {
+      setSelectedCity(null);
+    } else {
+      setSelectedCity(item.place);
+      // Redirect to cvetlicarne page with selected city
+      router.push(`/cvetlicarne?city=${encodeURIComponent(item.place)}`);
+    }
   };
   // 17 September 2024
   const arrPlace = [
@@ -79,7 +88,7 @@ const FloristsComp = () => {
               >
                 <div className="flex mobile:w-full mobile:justify-end items-center h-[47px] mobile:h-[33px] ">
                   <div className="text-[40px] mobile:text-[28px] tablet:customOpt40 desktop:customOpt40 text-[#414141] whitespace-nowrap">
-                    Lokalne cvetličarne
+                   Lokalne cvetličarne
                   </div>
                 </div>
                 <Dropdown
@@ -88,7 +97,7 @@ const FloristsComp = () => {
                   isFromNotification={false}
                   data={cityOptions}
                   selectedValue={selectedCity}
-                  onSelect={() => handleCitySelect()}
+                  onSelect={handleCitySelect}
                 />
               </div>
             </div>

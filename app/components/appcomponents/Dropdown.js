@@ -102,7 +102,7 @@ const Dropdown = ({
       {isOpen && (
         <ul
           tabIndex={0}
-          className="dropdown-content  z-[1] shadow-box-shadow   rounded-box w-full max-h-60 overflow-y-auto"
+          className="dropdown-content z-[9999] shadow-box-shadow rounded-box w-full max-h-60 overflow-y-auto"
           style={{ backgroundColor: "#f1fffe" }}
         >
           {data.map((item, index) => (

@@ -122,18 +122,11 @@ function HomeContent(props) {
   const handleFloristCitySelect = (item) => {
     if (item.id === "allCities") {
       setSelectedFloristCity(null);
-      // Keep existing city/region params but remove florist city
-      const currentParams = new URLSearchParams(window.location.search);
-      currentParams.delete('floristCity');
-      const queryString = currentParams.toString();
-      router.replace(`/?${queryString}`);
-      return;
+    } else {
+      setSelectedFloristCity(item.place);
+      // Redirect to cvetlicarne page with selected city
+      router.push(`/cvetlicarne?city=${encodeURIComponent(item.place)}`);
     }
-    setSelectedFloristCity(item.place);
-    // Keep existing city/region params and add florist city
-    const currentParams = new URLSearchParams(window.location.search);
-    currentParams.set('floristCity', item.place);
-    router.replace(`/?${currentParams.toString()}`);
   };
 
   // Update URL params - improved version
@@ -403,17 +396,19 @@ function HomeContent(props) {
                   Lokalne cvetličarne
                 </div>
               </div>
-              <Dropdown
-                label={"Mesto"}
-                isFromFlower={true}
-                isFromNotification={false}
-                isFrom={"mainPage"}
-                isFromFlowerGreenBgTablet={false}
-                isFromObituary={false}
-                data={cityOptions}
-                selectedValue={selectedFloristCity}
-                onSelect={handleFloristCitySelect}
-              />
+              <div className="relative">
+                <Dropdown
+                  label={"Mesto"}
+                  isFromFlower={true}
+                  isFromNotification={false}
+                  isFrom={"mainPage"}
+                  isFromFlowerGreenBgTablet={false}
+                  isFromObituary={false}
+                  data={cityOptions}
+                  selectedValue={selectedFloristCity}
+                  onSelect={handleFloristCitySelect}
+                />
+              </div>
             </div>
           </div>
         </div>

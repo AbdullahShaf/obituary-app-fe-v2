@@ -20,6 +20,8 @@ const MemorialPageView = () => {
         className=" flex flex-col items-center
         desktop:w-[1200px] tablet:w-full mobile:w-[360px] mx-auto h-full  absolute"
       >
+        {/* Transparent overlay to make "Odpri Spominsko stran" section unclickable */}
+        <div className="absolute inset-0 bg-transparent z-50 cursor-not-allowed"></div>
         <div className="flex flex-col items-center justify-center desktop:w-[904px] tablet:w-[90%] mobile:w-[331px] mx-auto h-[430px] mobile:h-[448px] mt-[79px] mobile:mt-[72px] mobile:mb-[56.15px] mb-[65.15px] rounded-lg border-2 border-[#FFFFFF] backdrop-blur-md bg-[#ffffff90]">
           <div className="h-[303px] mobile:h-auto  w-[750px] mobile:w-[295px] tablet:w-[556px] flex flex-col items-center">
             <div

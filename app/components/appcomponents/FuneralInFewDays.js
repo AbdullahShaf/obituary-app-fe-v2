@@ -236,7 +236,7 @@ const FuneralInFewDays = ({ data }) => {
   ];
 
   return (
-    <div className="w-full h-auto flex justify-center items-center mb-5 mobile:bg-[#DAEBF140]">
+    <div className="w-full h-auto flex justify-center items-center mobile:bg-[#DAEBF140]">
       <div className="flex w-full h-auto mobile:self-center tablet:h-[729px] mobile:w-[360px] mobile:h-auto flex-col items-center tablet:bg-[#DAEBF140] tablet:border-t-[1px] tablet:border-b-[1px] tablet:border-b-[#D4D4D4] tablet:border-t-[#D4D4D4]">
         <div className="flex flex-col desktop:w-[1087px] desktop:h-[159px] desktop:pl-[85px] tablet:w-[598px] tablet:h-[626px] tablet:mt-[45px] mobile:w-[321px] mobile:h-auto mobile:mt-[28px]">
           {/*Header text*/}

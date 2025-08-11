@@ -121,15 +121,18 @@ const FuneralsCompanyBanner = ({ data }) => {
               {data?.phone}
             </div>
           </div>
-          <div className="h-6 w-[2px] bg-[#D4D4D4]" />
-
+          {data?.website && <div className="h-6 w-[2px] bg-[#D4D4D4]" />}
           <div>
-            <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
-              WEBSITE
-            </div>
-            <div className="w-full text-[#1E2125] text-[16px] font-normal leading-[24px] whitespace-nowrap ">
-              {data?.website || "www.komunala-trbovlje.si"}
-            </div>
+            {data?.website && (
+              <div>
+                <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
+                  WEBSITE
+                </div>
+                <div className="w-full text-[#1E2125] text-[16px] font-normal leading-[24px] whitespace-nowrap ">
+                  {data?.website}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -146,15 +149,19 @@ const FuneralsCompanyBanner = ({ data }) => {
             </div>
           </div>
           <div className="flex flex-1 items-center">
-            <div className="h-6 w-[2px] bg-[#D4D4D4] mr-9 ml-1" />
-            <div>
-              <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
-                WEBSITE
+            {data?.website && (
+              <div className="h-6 w-[2px] bg-[#D4D4D4] mr-9 ml-1" />
+            )}
+            {data?.website && (
+              <div>
+                <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
+                  WEBSITE
+                </div>
+                <div className="w-full text-[#1E2125] text-[16px] font-normal leading-[24px] whitespace-nowrap ">
+                  {data?.website}
+                </div>
               </div>
-              <div className="w-full text-[#1E2125] text-[16px] font-normal leading-[24px] whitespace-nowrap ">
-                {data?.website || "www.komunala-trbovlje.si"}
-              </div>
-            </div>
+            )}
           </div>
         </div>
 
@@ -202,15 +209,16 @@ const FuneralsCompanyBanner = ({ data }) => {
             </div>
           </div>
 
-          <div className=" flex flex-col flex-1  mt-[14px]">
-            <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
-              WEBSITE
+          {data?.website && (
+            <div className=" flex flex-col flex-1  mt-[14px]">
+              <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
+                WEBSITE
+              </div>
+              <div className="w-full text-[#1E2125] text-[16px] font-normal leading-[24px] whitespace-nowrap ">
+                {data?.website}
+              </div>
             </div>
-            <div className="w-full text-[#1E2125] text-[16px] font-normal leading-[24px] whitespace-nowrap ">
-              {data?.website || "www.komunala-trbovlje.si"}
-            </div>
-          </div>
-
+          )}
           <div className="flex flex-1 justify-between items-center mt-[14px]">
             <div className=" flex flex-col flex-1 ">
               <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
@@ -246,9 +254,9 @@ const FuneralsCompanyBanner = ({ data }) => {
 
       <div
         key={`${data?.id}-description`}
-        className="  h-[565px] mobile:h-[937px] tablet:h-[606pxpx] max-w-[1280px] w-full flex justify-center items-end"
+        className="  h-[565px] mobile:h-[937px] tablet:h-[606px] max-w-[1280px] w-full flex justify-center items-end"
       >
-        <div className="max-w-[1009px] w-full tablet:w-[597.23px] mobile:w-[296px] flex mobile:flex-col justify-between desktop:px-6 mb-16 mobile:mb-12">
+        <div className="max-w-[1009px] w-full tablet:w-[75%] mobile:w-[296px] flex mobile:flex-col justify-between desktop:px-6 mb-16 mobile:mb-12">
           <div className=" relative desktop:w-[452px] desktop:h-[295px] tablet:w-[276px] tablet:h-[235.81px] flex flex-col justify-center">
             <div className="text-[#1E2125] mobile:text-[28px] text-[40px] font-normal leading-[47px] mobile:leading-[33px] whitespace-nowrap mobile:text-center">
               {data?.title || "Predstavitev"}

@@ -39,7 +39,7 @@ const SpecialOffer = ({ data }) => {
   const [slides, setSlides] = useState([]);
 
   useEffect(() => {
-    if (data?.slides?.length) {
+    if (data?.slides?.length > 0) {
       setSlides(data?.slides);
     } else {
       setSlides(defaultSlides);
@@ -48,7 +48,7 @@ const SpecialOffer = ({ data }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const activeSlide = slides?.[currentIndex] || defaultSlides?.[0] || {};
+  const activeSlide = slides[currentIndex] || {};
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -64,7 +64,7 @@ const SpecialOffer = ({ data }) => {
 
   return (
     <div className="relative w-full overflow-hidden">
-      <div className="w-full flex-shrink-0 lg:w-[90%] px-5 mx-auto  desktop:bg-[#FBF8F4] bg-white flex items-center justify-between">
+      <div className="w-full flex-shrink-0 lg:w-[80%] lg:max-w-[1400px] px-5 mx-auto flex items-center justify-between">
         <button
           onClick={handlePrev}
           className="mobile:hidden flex my-auto mr-[30px] tablet:ml-[30px]"
@@ -75,7 +75,7 @@ const SpecialOffer = ({ data }) => {
         {slides && slides.length > 0 && (
           <div
             key={`${activeSlide?.id}-${currentIndex}`}
-            className="h-full max-w-[1023px] w-full py-28 tablet:py-8 mobile:py-6 flex desktop:flex-row flex-col-reverse justify-between items-center"
+            className="h-full max-w-[1023px] w-full py-[180px] tablet:py-8 mobile:py-6 flex desktop:flex-row flex-col-reverse justify-between items-center"
           >
             <div className=" flex  flex-col w-[450px] mobile:w-[300px]">
               <div className="text-[32px] leading-[47px mobile:leading-[38px] font-variation-customOpt40  text-[#000000] mobile:text-[32px] ">

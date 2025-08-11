@@ -9,13 +9,14 @@ import "slick-carousel/slick/slick-theme.css";
 export default function ImageCarousel({ images }) {
   const [dotStartIndex, setDotStartIndex] = React.useState(0);
   const visibleDots = 6; // Number of dots to show at once
+  const isSingleImage = images.length <= 1;
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: !isSingleImage,
     speed: 1000,
     slidesToShow: 1, // how many images visible at once
     slidesToScroll: 1,
-    arrows: true,
+    arrows: !isSingleImage,
     autoplay: false,
     autoplaySpeed: 3000,
     cssEase: "ease-in-out",
@@ -23,10 +24,12 @@ export default function ImageCarousel({ images }) {
     prevArrow: <PrevArrow />,
     beforeChange: (oldIndex, newIndex) => {
       // Change the visible dots window
-      if (newIndex >= dotStartIndex + visibleDots) {
-        setDotStartIndex(newIndex - visibleDots + 1);
-      } else if (newIndex < dotStartIndex) {
-        setDotStartIndex(newIndex);
+      if (!isSingleImage) {
+        if (newIndex >= dotStartIndex + visibleDots) {
+          setDotStartIndex(newIndex - visibleDots + 1);
+        } else if (newIndex < dotStartIndex) {
+          setDotStartIndex(newIndex);
+        }
       }
     },
     appendDots: (dots) => {

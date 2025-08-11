@@ -19,7 +19,7 @@ const SadProgram = ({ data }) => {
   return (
     <div className="relative max-w-[1920px] bg-[#F5F7F9] w-full py-16 tablet:py-12 mobile:py-8  overflow-hidden mx-auto justify-center items-center flex ">
       {/*Main Contianer (chlid contianer)*/}
-      <div className="flex w-[901px] h-[869px] tablet:w-[613px] tablet:h-[1395px] mobile:h-[1492px] mobile:w-[292px] flex-col">
+      <div className="flex w-[901px] tablet:w-[613px] tablet:h-auto mobile:w-[292px] flex-col">
         {/*Header contianer*/}
         <div className="flex w-[613px] h-[111px] mobile:w-[292px] mobile:h-[174px] flex-col tablet:justify-center tablet:items-center mobile:justify-center mobile:items-center">
           <div className="text-[40px] mt-[-8px] text-[#1E2125] mobile:text-[32px] mobile:font-variation-customOpt32 font-variation-customOpt40">
@@ -31,9 +31,9 @@ const SadProgram = ({ data }) => {
         </div>
 
         {/*Contianer for grid*/}
-        <div className="flex flex-col w-full h-[678px] tablet:w-[600px] tablet:h-[1236px] mobile:w-[288px] mobile:h-[1492px] tablet:mx-auto mobile:mx-auto">
+        <div className="flex flex-col w-full h-auto tablet:w-[600px] mobile:w-[288px] tablet:mx-auto mobile:mx-auto">
           {/*Column contianer*/}
-          <div className="w-[900px] h-[291] tablet:w-[600px] tablet:h-[1236px] mobile:w-[288px] mobile:h-[1236px] mt-12 mobile:mt-10 grid grid-cols-4 gap-6 tablet:grid-cols-2 mobile:grid-cols-1">
+          <div className="w-[900px] tablet:w-[600px] mobile:w-[288px] mt-12 mobile:mt-10 grid grid-cols-4 gap-6 tablet:grid-cols-2 mobile:grid-cols-1">
             {/*List of Tablet & Desktop*/}
             {list.length > 0 &&
               list.map((item, index) => (

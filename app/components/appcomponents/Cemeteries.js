@@ -38,7 +38,7 @@ const Cemeteries = ({ data }) => {
   }, [data]);
 
   return (
-    <div className="relative w-full h-[639px] tablet:h-[785px] mobile:h-[510px] overflow-hidden mx-auto flex justify-center items-center bg-[#E0E9F3]">
+    <div className="relative mobile:mt-[40px] w-full h-[639px] tablet:h-[785px] mobile:h-auto overflow-hidden mx-auto flex justify-center items-center bg-[#E0E9F3]">
       {companyId === null && (
         <>
           <div
@@ -74,10 +74,10 @@ const Cemeteries = ({ data }) => {
       )}
       {/*Main container*/}
       <div
-        className="flex mt-[73.5px] pt-1 mobile:pt-0 desktop:justify-around desktop:pt-0 tablet:items-center tablet:flex-col mobile:flex-col
+        className="flex mt-[73.5px] mobile:mb-[73.5px] pt-1 mobile:pt-0 desktop:justify-around desktop:pt-0 tablet:items-center tablet:flex-col mobile:flex-col
                         w-[1024px] h-[452px]
                         tablet:w-[600px] tablet:h-[815px] 
-                        mobile:w-[300px] mobile:h-[410.75px]"
+                        mobile:w-auto mobile:h-auto"
       >
         {/*Image Carousel*/}
         <div className="hidden desktop:flex">
@@ -85,7 +85,7 @@ const Cemeteries = ({ data }) => {
         </div>
 
         {/*Text Container*/}
-        <div className="flex w-[384.84px] h-auto mobile:w-[294px] mobile:h-[169px] ml-[40.64px] tablet:ml-0 tablet:mt-[31px] mobile:ml-[6px] mobile:mt-0 flex-col">
+        <div className="flex w-[384.84px] mobile:mx-auto h-auto mobile:w-[294px] mobile:h-[169px] ml-[40.64px] tablet:ml-0 tablet:mt-[31px] mobile:mt-0 flex-col">
           <div className="text-[40px] text-[#1E2125] font-variation-customOpt40 mobile:text-[28px] mobile:font-variation-customOpt28 ">
             Naša pokopališča
           </div>
@@ -94,7 +94,11 @@ const Cemeteries = ({ data }) => {
             Upravljamo z naslednjimi pokopališči:
           </div>
 
-          <div className="overflow-auto scrollbar-hide mt-6 pl-[17px] h-[214px]">
+          <div
+            className={`overflow-auto scrollbar-hide mt-6 pl-[17px] ${
+              cemeteries.length > 8 && "h-[214px]"
+            }`}
+          >
             <ol className="list-decimal flex w-[324px] flex-col mobile:w-[294px]">
               {cemeteries &&
                 cemeteries?.map((cemetery, index) => (
@@ -110,7 +114,7 @@ const Cemeteries = ({ data }) => {
         </div>
 
         {/*This contianer is for tablet for image */}
-        <div className="hidden tablet:flex mt-5">
+        <div className="hidden mobile:flex tablet:flex mt-5">
           <ImageCarousel images={cemeteries} />
         </div>
       </div>

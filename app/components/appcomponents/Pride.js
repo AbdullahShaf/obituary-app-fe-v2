@@ -11,28 +11,28 @@ const Pride = ({ data }) => {
         overflow-hidden mx-auto flex desktop:justify-center desktop:items-center tablet:justify-center tablet:items-center mobile:justify-center"
     >
       <div
-        className="max-w-[889px] flex flex-row mobile:flex-col mobile:mt-[30px] items-center justify-between w-full h-[266px] 
+        className="max-w-[889px] flex flex-row mobile:flex-col mobile:my-[60px] items-center justify-between w-full h-[266px] 
             tablet:w-[594.33px] tablet:h-[265px] mobile:w-[293.49px] mobile:h-[479.13]px"
       >
         <div
-          className="w-[419px] h-[230px] tablet:h-[332px] tablet:w-[269px] tablet:mt-[43.5px] mobile:w-[269px]
+          className="w-[419px] h-[230px] tablet:h-[332px] tablet:w-[269px] tablet:mt-[43.5px] mobile:w-[300px]
                 mobile:h-[251px]"
         >
           <div
             className="leading-[46.88px] desktop:ml-[10px] tablet:mt-[15px] mobile:text-[28px] 
-                    mobile:font-variation-customOpt28 mobile:leading-[32.81px] mobile:flex mobile:justify-center text-[32px] text-[#1E2125] font-variation-customOpt40"
+                    mobile:font-variation-customOpt28 mobile:text-center mobile:leading-[32.81px] mobile:flex mobile:justify-center text-[32px] text-[#1E2125] font-variation-customOpt40"
           >
             <div>{data?.secondary_title || "Naš ponos"}</div>
           </div>
           <div
-            className="font-variation-customOpt16 flex flex-col mt-[15px] text-[#414141] desktop:ml-[10px] leading-[24px] 
+            className="font-variation-customOpt16 flex flex-col mt-[15px] tablet:mt-0 text-[#414141] desktop:ml-[10px] leading-[24px] 
                     tablet:leading-[22.4px] tablet:text-[14px] text-[16px] mobile:text-[14px] mobile:leading-[22.4px] mobile:text-center"
           >
             {/* <div>{data?.secondary_description}</div> */}
 
             <div
               className="mt-[25px] tablet:mt-[20px] tablet:leading-[22.4px] tablet:text-[14px] text-[#414141]
-                        mobile:text-[14px] mobile:leading-[22.4px] mobile:text-center"
+                        mobile:text-[14px] mobile:mt-[0] mobile:leading-[22.4px] mobile:text-center"
             >
               {data?.secondary_description ||
                 "Projekt prenove trboveljskega pokopališča je bil leta 2020 izbran kot primer dobre prakse trajnostnega urbanega razvoja v okviru razpisa Mesta mestom."}

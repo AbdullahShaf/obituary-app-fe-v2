@@ -4,7 +4,7 @@ import API_BASE_URL from "@/config/apiConfig";
 
 const Qualityflowers = ({ data }) => {
   return (
-    <div className=" w-full relative h-[278px] tablet:bg-[#FFFFFF] mobile:bg-[#FFFFFF] tablet:h-[337px] mobile:h-[537px] overflow-hidden mx-auto flex flex-col items-center">
+    <div className=" w-full relative h-[278px] desktop:mt-5 tablet:bg-[#FFFFFF] mobile:bg-[#FFFFFF] tablet:h-[337px] mobile:h-[537px] overflow-hidden mx-auto flex flex-col items-center">
       {data?.showBoxBackground === false && (
         <>
           <div className="w-full desktop:block mobile:hidden tablet:hidden h-full relative">

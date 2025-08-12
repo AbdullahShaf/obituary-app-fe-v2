@@ -139,7 +139,7 @@ const Layout = ({
 
       {/* Footer */}
       {forFooter == "company" ? (
-        <CompanyFooter />
+        <CompanyFooter data={data} />
       ) : forFooter == "memorypage" ? null : (
         <Footer />
       )}

@@ -59,7 +59,7 @@ const SunflowerFlorist = ({ data }) => {
     <div className="bg-white desktop:bg-[#EDF1F3]">
       {/* Main Container */}
       <div
-        className="relative max-w-[1920px] mobile:h-[908px] mobile:w-[360px] w-full mx-auto h-[514px] tablet:h-[838.23px] overflow-hidden flex flex-row 
+        className="relative max-w-[1920px] mobile:h-[908px] mobile:w-[360px] w-full mx-auto h-[514px] tablet:h-auto overflow-hidden flex flex-row 
             mobile:flex-col tablet:flex-col tablet:items-center desktop:bg-[#DAEBF120] bg-white desktop:justify-center"
       >
         <div className="flex desktop:hidden mobile:w-[306px] mobile:h-[84px] mobile:mt-[6.27px] w-[593px] h-[42px] mx-auto flex-wrap mt-[43.23px] text-center text-[#939393] text-[14px] leading-[21px]">
@@ -85,14 +85,15 @@ const SunflowerFlorist = ({ data }) => {
           </div>
 
           <div className="tablet:flex flex-row w-full justify-between hidden ">
-            <button onClick={handlePrev} className={" my-auto ml-[-20px]"}>
-              <img
-                src="/img_back.png"
-                alt="Prev"
-                className="h-[40px] w-[17px]"
-              />
-            </button>
-
+            {shops.length > 1 && (
+              <button onClick={handlePrev} className={" my-auto ml-[-20px]"}>
+                <img
+                  src="/img_back.png"
+                  alt="Prev"
+                  className="h-[40px] w-[17px]"
+                />
+              </button>
+            )}
             <Image
               src={
                 data?.logo
@@ -105,22 +106,23 @@ const SunflowerFlorist = ({ data }) => {
               className="h-[200px] w-[300px] mobile:w-[297px] mobile:h-[240px] 
                         mobile:mt-[18px] rounded-md mx-auto tablet:mt-[33px] mt-[56px]"
             />
-
-            <button onClick={handleNext} className={" my-auto mr-[-20px]"}>
-              <img
-                src="/img_forward.png"
-                alt="Next"
-                className="h-[40px] w-[17px]"
-              />
-            </button>
+            {shops.length > 1 && (
+              <button onClick={handleNext} className={" my-auto mr-[-20px]"}>
+                <img
+                  src="/img_forward.png"
+                  alt="Next"
+                  className="h-[40px] w-[17px]"
+                />
+              </button>
+            )}
           </div>
 
-          <div className="flex h-[180px] w-[370px] justify-center flex-row mobile:w-[297px] mobile:h-[240px] mobile:mt-[18px] mx-auto tablet:mt-[33px] mt-[56px]">
+          <div className="tablet:hidden desktop:flex mobile:flex flex h-[180px] w-[370px] justify-center flex-row mobile:w-[297px] mobile:h-[240px] mobile:mt-[18px] mx-auto tablet:mt-[33px] mt-[56px]">
             <img
               key={`${data?.id}-${currentIndex}-logo-${currentShop?.id}`}
               src={getLogo(data?.logo)}
               alt="sunflower_img"
-              className=" tablet:hidden w-full h-full object-contain mobile:flex desktop:flex   rounded-md "
+              className="w-full h-full object-contain rounded-md"
             />
           </div>
 
@@ -143,7 +145,7 @@ const SunflowerFlorist = ({ data }) => {
         </div>
 
         {/* Second detail Container for website and other texts */}
-        <div className="max-w-[684px] w-full h-full flex flex-col mobile:mt-[37.27px] mobile:bg-white tablet:bg-white">
+        <div className="max-w-[684px] w-full h-full tablet:my-[50px] flex flex-col mobile:mt-[37.27px] mobile:bg-white tablet:bg-white">
           {/* Conatiner for top most texts */}
           <div className="w-[593px] hidden h-[42px] mr-[91px] desktop:flex flex-wrap mt-[16px] text-center text-[#939393] text-[14px] leading-[21px]">
             {/* {images[currentIndex].detail} */}
@@ -159,7 +161,7 @@ const SunflowerFlorist = ({ data }) => {
               <p className="text-[20px] leading-[23.44px] text-[#1E2125] font-variation-customOpt20">
                 Obiščite našo spletno stran:
                 <Link href="https://www.suniflower.com">
-                  <href className="text-[#1E2125] text-[24px] font-semibold  font-variation-customOpt24">
+                  <href className="text-[#1E2125] text-[24px] font-variation-customOpt24">
                     www.suniflower.com
                   </href>
                 </Link>

@@ -87,7 +87,7 @@ export const FrequentlyAskedQuestionView = ({ from, data }) => {
                         }}
                         className={`flex w-full justify-between items-center ${
                           openIndex === index ? "pt-3" : "py-3"
-                        }  border-t border-t-[#D4D4D4] px-6 mobile:px-[8px]`}
+                        }  border-t border-t-[#D4D4D4] px-5 mobile:px-[8px]`}
                       >
                         <div className="flex font-variation-customOpt16 font-normal text-[16px] leading-[24px] text-[#1E2125] text-center">
                           {faq.question}
@@ -103,7 +103,7 @@ export const FrequentlyAskedQuestionView = ({ from, data }) => {
                       </button>
                       {openIndex === index && (
                         <div
-                          className="flex ql-editor text-black w-full flex-col ml-8 px-14 mobile:px-0 "
+                          className="flex ql-editor text-black w-full text-[14px] flex-col ml-4 mobile:px-0 "
                           dangerouslySetInnerHTML={{ __html: faq.answer }}
                           style={{ paddingTop: "0px !important" }}
                         />

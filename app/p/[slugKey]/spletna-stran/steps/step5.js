@@ -238,7 +238,12 @@ const SliderBlock = React.memo(function SliderBlock({
   const [isDefaultOpen, setIsDefaultOpen] = useState(index === 1);
 
   return (
-    <OpenableBlock isDefaultOpen={isDefaultOpen} title={title} index={index}>
+    <OpenableBlock
+      isDefaultOpen={isDefaultOpen}
+      hasDeleteButton={true}
+      title={title}
+      index={index}
+    >
       <div className="space-y-[16px]">
         <div className="space-y-[8px]">
           <label className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">

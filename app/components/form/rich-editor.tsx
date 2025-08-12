@@ -22,23 +22,23 @@ function RichTexEditor({ value, handleChange }: Props) {
         value={value}
         onChange={handleChange}
         formats={[
-          "header",
+          // "header",
           "bold",
           "italic",
-          "blockquote",
-          "align",
+          // "blockquote",
+          // "align",
           "underline",
-          "strike",
-          "list",
-          // "color",
-          "link",
+          // "strike",
+          // "list",
+          // // "color",
+          // "link",
         ]}
         modules={{
           toolbar: {
             container: [
-              [{ header: [3, 4, 5, 6, false] }],
-              ["bold", "italic", "underline", "strike", "blockquote"],
-              [{ align: [] }],
+              // [{ header: [3, 4, 5, 6, false] }],
+              ["bold", "italic", "underline"],
+              // [{ align: [] }],
               // [
               //   {
               //     color: [
@@ -57,8 +57,8 @@ function RichTexEditor({ value, handleChange }: Props) {
               //     ],
               //   },
               // ],
-              [{ list: "ordered" }, { list: "bullet" }],
-              ["link"],
+              // [{ list: "ordered" }, { list: "bullet" }],
+              // ["link"],
             ],
           },
         }}

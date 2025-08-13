@@ -12,14 +12,20 @@ import React, { useState } from "react";
 
 type Props = {
   companyData: any;
+  setIsRender: (value: boolean) => void;
 };
 
-const CompanyPreview = ({ companyData }: Props) => {
+const CompanyPreview = ({ companyData, setIsRender }: Props) => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
-      <button onClick={() => setOpenModal(true)}>
+      <button
+        onClick={() => {
+          setOpenModal(true);
+          setIsRender(true);
+        }}
+      >
         <div className="inline-flex gap-[8px] cursor-pointer">
           <span className="text-[14px] text-[#3C3E41] leading-[24px]">
             Predogled strani

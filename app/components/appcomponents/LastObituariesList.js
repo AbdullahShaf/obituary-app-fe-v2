@@ -12,16 +12,18 @@ const LastObituariesList = () => {
 
   const [obituaries, setObituaries] = useState([]);
   const [user, setUser] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
 
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("user");
-  //   if (!storedUser) {
-  //     toast.error("You must be logged in to access this page.");
-  //     router.push("/registracija");
-  //   } else {
-  //     setUser(JSON.parse(storedUser));
-  //   }
-  // }, []);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (!storedUser) {
+      toast.error("You must be logged in to access this page.");
+      router.push("/registracija");
+    } else {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   useEffect(() => {
     const fetchObituary = async () => {
@@ -49,7 +51,35 @@ const LastObituariesList = () => {
 
     if (user) fetchObituary();
   }, [user]);
+  const totalPages = Math.ceil(obituaries.length / itemsPerPage);
 
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      const width = window.innerWidth;
+
+      if (width >= 1024) {
+        // Desktop
+        setItemsPerPage(6); // 6+6
+      } else if (width >= 768) {
+        // Tablet
+        setItemsPerPage(4); // 5+5
+      } else {
+        // Mobile
+        setItemsPerPage(4); // Single column
+      }
+    };
+
+    updateItemsPerPage(); // Initial check
+    window.addEventListener("resize", updateItemsPerPage); // On resize
+
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
+
+  const goToPage = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
   return (
     <div
       className="flex flex-col w-full items-center  
@@ -59,7 +89,7 @@ const LastObituariesList = () => {
     >
       <div className="flex flex-col">
         <div className="flex items-center justify-center h-[33px] tablet:h-[47px] desktop:h-[47px] ">
-          <div className="font-variation-customOpt28 tablet:font-variation-customOpt40 desktop:font-variation-customOpt40 desktop:text-[40px] tablet:text-[40px] text-[28px]  text-[#1E2125] leading-[46.88px] ">
+          <div className="font-variation-customOpt28 tablet:font-variation-customOpt40 desktop:font-variation-customOpt40 desktop:text-[40px] tablet:text-[40px] mobile:text-[24px]  text-[#1E2125] leading-[46.88px] ">
             Zadnje osmrtnice
           </div>
         </div>
@@ -71,58 +101,77 @@ const LastObituariesList = () => {
       </div>
       <div className="flex flex-col mt-[29.35px] items-center tablet:mt-12 desktop:mt-12">
         <div className="mx-auto mobile:hidden tablet:hidden desktop:grid desktop:grid-cols-2 grid-cols-1 mobile:gap-[22px] tablet:gap-6 desktop:gap-6 justify-between">
-          {obituaries.map((obituary, index) => (
-            <ObituaryCard
-              data={obituary}
-              index={index}
-              key={index}
-              mob={false}
-            />
-          ))}
+          {obituaries
+            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+            .map((obituary, index) => (
+              <ObituaryCard
+                data={obituary}
+                index={index}
+                key={index}
+                mob={false}
+              />
+            ))}
         </div>
         <div className="mx-auto hidden tablet:grid desktop:hidden grid-cols-1 mobile:gap-[22px] tablet:gap-6 desktop:gap-6 justify-between">
-          {obituaries.map((obituary, index) => (
-            <ObituaryCard
-              data={obituary}
-              index={index}
-              key={index}
-              mob={false}
-            />
-          ))}
+          {obituaries
+            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+            .map((obituary, index) => (
+              <ObituaryCard
+                data={obituary}
+                index={index}
+                key={index}
+                mob={false}
+              />
+            ))}
         </div>
 
         <div className="mx-auto grid tablet:hidden desktop:hidden  grid-cols-1 mobile:gap-[22px] tablet:gap-6 desktop:gap-6 justify-between">
-          {obituaries.map((obituary, index) => (
-            <ObituaryCard
-              data={obituary}
-              index={index}
-              key={index}
-              mob={true}
-            />
-          ))}
+          {obituaries
+            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+            .map((obituary, index) => (
+              <ObituaryCard
+                data={obituary}
+                index={index}
+                key={index}
+                mob={true}
+              />
+            ))}
         </div>
-        <div className="w-[272px] h-[48px] mt-[25px] tablet:mt-12   desktop:mt-12 gap-2 flex flex-row justify-center ">
-          <div className="w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
+        <div className="w-[272px] h-[48px] mt-[47.27px] gap-2 flex flex-row justify-center mobile:mt-[30px] mobile:mb-[66px] mb-[87.81px]">
+          <div
+            className="w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] hover:border-black hover:border-2"
+            onClick={() => goToPage(currentPage - 1)}
+          >
             <Image
               src={imgPrevious}
               alt="imgPrevious"
               className=" w-[5.66px] h-[8.49px]"
             />
           </div>
-          <div className="w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
-            1
-          </div>
-          <div className="w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
-            2
-          </div>
-          <div className="w-[48px] h-[48px] flex mobile:hidden rounded-lg text-black justify-center items-center shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
-            3
-          </div>
-          <div className="w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
+          {Array.from({ length: totalPages }).map((_, index) => {
+            const pageNumber = index + 1;
+            return (
+              <div
+                key={pageNumber}
+                onClick={() => goToPage(pageNumber)}
+                className={`hover:border-black hover:border-2 w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center cursor-pointer shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] ${
+                  currentPage === pageNumber ? "bg-gray-300 font-bold" : ""
+                }`}
+              >
+                {pageNumber}
+              </div>
+            );
+          })}
+          <div
+            className="w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] hover:border-black hover:border-2 cursor-pointer transition-colors duration-200"
+            onClick={() => {
+              goToPage(currentPage + 1);
+            }}
+          >
             <Image
               src={imgNext}
               alt="imgNext"
-              className=" w-[5.66px] h-[8.49px]"
+              className="w-[5.66px] h-[8.49px]"
             />
           </div>
         </div>

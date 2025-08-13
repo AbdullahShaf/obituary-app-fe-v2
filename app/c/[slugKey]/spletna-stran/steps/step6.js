@@ -72,7 +72,7 @@ export default function Step6({ data, onChange, handleStepChange }) {
       const response = await companyService.updateCompany(formData, companyId);
       onChange(response.company);
       toast.success("Podatki so shranjeni");
-
+      router.refresh();
       console.log(response);
       return true;
     } catch (error) {

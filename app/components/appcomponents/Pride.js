@@ -5,21 +5,21 @@ const Pride = ({ data }) => {
   return (
     <div
       key={`${data?.id}-pride`}
-      className="max-w-[1920px] relative w-full tablet:h-[359px] mobile:h-[567px] desktop:pt-[64px] desktop:pb-[64px] 
+      className="max-w-[1920px] relative w-full tablet:h-[359px] mobile:h-auto desktop:pt-[64px] desktop:pb-[64px] 
          tablet:bg-gradient-to-r tablet:from-[#E6EBFA66] tablet:to-[#E2EEFC66]
          mobile:bg-gradient-to-r mobile:from-[#E6EBFA66] mobile:to-[#E2EEFC66]
         overflow-hidden mx-auto flex desktop:justify-center desktop:items-center tablet:justify-center tablet:items-center mobile:justify-center"
     >
       <div
-        className="max-w-[889px] flex flex-row mobile:flex-col mobile:my-[60px] items-center justify-between w-full h-[266px] 
-            tablet:w-[594.33px] tablet:h-[265px] mobile:w-[293.49px] mobile:h-[479.13]px"
+        className="max-w-[889px] flex flex-row mobile:flex-col mobile:mt-[60px] items-center justify-between w-full h-[266px] 
+            tablet:w-[594.33px] tablet:h-[265px] mobile:w-[293.49px] mobile:h-auto"
       >
         <div
           className="w-[419px] h-[230px] tablet:h-[332px] tablet:w-[269px] tablet:mt-[43.5px] mobile:w-[300px]
                 mobile:h-[251px]"
         >
           <div
-            className="leading-[46.88px] desktop:ml-[10px] tablet:mt-[15px] mobile:text-[28px] 
+            className="leading-[46.88px] desktop:ml-[10px] tablet:mt-[15px] mobile:text-[24px] 
                     mobile:font-variation-customOpt28 mobile:text-center mobile:leading-[32.81px] mobile:flex mobile:justify-center text-[32px] text-[#1E2125] font-variation-customOpt40"
           >
             <div>{data?.secondary_title || "Naš ponos"}</div>

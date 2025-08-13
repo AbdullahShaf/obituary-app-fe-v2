@@ -22,7 +22,7 @@ const SadProgram = ({ data }) => {
       <div className="flex w-[901px] tablet:w-[613px] tablet:h-auto mobile:w-[292px] flex-col">
         {/*Header contianer*/}
         <div className="flex w-[613px] h-[111px] mobile:w-[292px] mobile:h-[174px] flex-col tablet:justify-center tablet:items-center mobile:justify-center mobile:items-center">
-          <div className="text-[40px] mt-[-8px] text-[#1E2125] mobile:text-[32px] mobile:font-variation-customOpt32 font-variation-customOpt40">
+          <div className="text-[40px] mt-[-8px] text-[#1E2125] mobile:text-[24px] mobile:font-variation-customOpt32 font-variation-customOpt40">
             Žalni program
           </div>
           <div className="text-[16px] text-[#939393] font-variation-customOpt16 leading-[24px] mt-[11px]">
@@ -36,7 +36,7 @@ const SadProgram = ({ data }) => {
           <div className="w-[900px] tablet:w-[600px] mobile:w-[288px] mt-12 mobile:mt-10 grid grid-cols-4 gap-6 tablet:grid-cols-2 mobile:grid-cols-1">
             {/*List of Tablet & Desktop*/}
             {list.length > 0 &&
-              list.map((item, index) => (
+              list.slice(0, 4).map((item, index) => (
                 <div
                   key={`${item.id}-${index}`}
                   className=" bg-gradient-to-br from-white to-[#ffffff30] border-white border-2 desktop:w-[211px] desktop:h-[295px] w-[292px] h-[295px] flex items-center flex-col rounded-lg shadow-custom-light-dark mobile:hidden"
@@ -62,7 +62,7 @@ const SadProgram = ({ data }) => {
               ))}
 
             {/*List for Mobile*/}
-            {list.map((item, index) => (
+            {list.slice(0, 4).map((item, index) => (
               <div
                 key={`${item.id}-${index}`}
                 className=" bg-gradient-to-br from-white to-[#ffffff30] border-white border-2 w-[292px] h-[295px] items-center flex-col rounded-lg shadow-custom-light-dark mobile:flex hidden"

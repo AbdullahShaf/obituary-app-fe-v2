@@ -64,7 +64,7 @@ const FuneralsCompanyBanner = ({ data }) => {
       />
       <div className="bg-white rounded-2xl border-2 p-7 mobile:p-4 border-[#EDF1F3]  h-[185px] mobile:h-[405px] tablet:h-[272px] max-w-[1009px] w-full tablet:w-[80%] mobile:w-[296px] absolute top-[195px] mobile:top-[184px] tablet:top-[152px]">
         <div className="w-full flex mobile:flex-col items-center">
-          <div className="min-w-200 flex justify-start mobile:min-w-[184px] max-w-[290px] h-[90px] w-full">
+          <div className="min-w-200 flex justify-start mobile:justify-center mobile:min-w-[184px] max-w-[290px] h-[90px] w-full">
             <div>
               <img
                 key={`${data?.id}-logo`}
@@ -258,7 +258,7 @@ const FuneralsCompanyBanner = ({ data }) => {
       >
         <div className="max-w-[1009px] w-full tablet:w-[75%] mobile:w-[296px] flex mobile:flex-col justify-between desktop:px-6 mb-16 mobile:mb-12">
           <div className=" relative desktop:w-[452px] desktop:h-[295px] tablet:w-[276px] tablet:h-[235.81px] flex flex-col justify-center">
-            <div className="text-[#1E2125] mobile:text-[28px] text-[40px] font-normal leading-[47px] mobile:leading-[33px] whitespace-nowrap mobile:text-center">
+            <div className="text-[#1E2125] mobile:text-[24px] text-[40px] font-normal leading-[47px] mobile:leading-[33px] whitespace-nowrap mobile:text-center">
               {data?.title || "Predstavitev"}
             </div>
             <div className="text-[#414141] text-[16px] font-normal leading-[24px] mt-4 mobile:text-center mobile:mb-10">

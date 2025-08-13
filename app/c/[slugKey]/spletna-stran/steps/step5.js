@@ -9,7 +9,12 @@ import slideService from "@/services/slides-service";
 import toast from "react-hot-toast";
 import CompanyPreview from "../components/company-preview";
 
-export default function Step5({ data, onChange, handleStepChange }) {
+export default function Step5({
+  data,
+  onChange,
+  handleStepChange,
+  setIsRender,
+}) {
   const [slides, setSlides] = useState([
     {
       index: 1,
@@ -136,7 +141,9 @@ export default function Step5({ data, onChange, handleStepChange }) {
                 </div>
               </div>
             </div>
-            {companyId && <CompanyPreview companyData={data} />}
+            {companyId && (
+              <CompanyPreview companyData={data} setIsRender={setIsRender} />
+            )}
           </div>
           <div className="space-y-[8px]">
             <div className="space-y-[8px] pb-[38px] text-[14px] text-[#6D778E] leading-[20px]">

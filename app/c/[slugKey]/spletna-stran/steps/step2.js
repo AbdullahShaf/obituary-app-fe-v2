@@ -12,7 +12,12 @@ import companyService from "@/services/company-service";
 import Link from "next/link";
 import CompanyPreview from "../components/company-preview";
 
-export default function Step2({ data, onChange, handleStepChange }) {
+export default function Step2({
+  data,
+  onChange,
+  handleStepChange,
+  setIsRender,
+}) {
   const [offers, setOffers] = useState([
     {
       index: 0,
@@ -159,7 +164,9 @@ export default function Step2({ data, onChange, handleStepChange }) {
                 </div>
               </div>
             </div>
-            {companyId && <CompanyPreview companyData={data} />}
+            {companyId && (
+              <CompanyPreview companyData={data} setIsRender={setIsRender} />
+            )}
           </div>
           <div className="space-y-[8px]">
             {/* disable subtitle */}

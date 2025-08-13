@@ -10,7 +10,12 @@ import companyService, { submitStep1Data } from "@/services/company-service";
 import toast from "react-hot-toast";
 import CompanyPreview from "../components/company-preview";
 
-export default function Step1({ data, onChange, handleStepChange }) {
+export default function Step1({
+  data,
+  onChange,
+  handleStepChange,
+  setIsRender,
+}) {
   const [openedBlock, setOpenedBlock] = useState(1);
   const [heading, setHeading] = useState("");
   const [phone, setPhone] = useState("");
@@ -117,7 +122,9 @@ export default function Step1({ data, onChange, handleStepChange }) {
                   </div>
                 </div>
               </div>
-              {companyId && <CompanyPreview companyData={data} />}
+              {companyId && (
+                <CompanyPreview companyData={data} setIsRender={setIsRender} />
+              )}
             </div>
             <div className="space-y-[8px]">
               <OpenableBlock

@@ -19,7 +19,7 @@ const Qualityflowers = ({ data }) => {
 
           <div className="w-full h-[244px] hidden tablet:block relative">
             <Image
-              src="/plava_tablica.jpg"
+              src="/plava_desktop.avif"
               alt="plava_tablica"
               layout="fill"
               objectFit="cover"
@@ -28,7 +28,7 @@ const Qualityflowers = ({ data }) => {
 
           <div className="w-full mobile:h-[474px] hidden mobile:block relative">
             <Image
-              src="/plava_roza.avif.png"
+              src="/plava_desktop.avif"
               alt="plava_roza"
               layout="fill"
               objectFit="cover"

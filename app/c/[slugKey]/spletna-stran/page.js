@@ -14,6 +14,7 @@ export default function SpletnaStran() {
   const [step, setStep] = useState(1);
   const [company, setCompany] = useState(null);
   const [user, setUser] = useState(null);
+  const [isRender, setIsRender] = useState(false);
   const handleStepChange = (step) => {
     setStep(step);
     console.log(step);
@@ -25,7 +26,8 @@ export default function SpletnaStran() {
     if (user) {
       getCompany();
     }
-  }, [user]);
+    setIsRender(false);
+  }, [user, isRender]);
   useEffect(() => {
     const currUser = localStorage.getItem("user");
     if (currUser) {
@@ -54,6 +56,7 @@ export default function SpletnaStran() {
           data={company}
           onChange={handleCompanyChange}
           handleStepChange={handleStepChange}
+          setIsRender={setIsRender}
         />
       ),
     },
@@ -65,6 +68,7 @@ export default function SpletnaStran() {
           data={company}
           onChange={handleCompanyChange}
           handleStepChange={handleStepChange}
+          setIsRender={setIsRender}
         />
       ),
     },
@@ -76,6 +80,7 @@ export default function SpletnaStran() {
           data={company}
           onChange={handleCompanyChange}
           handleStepChange={handleStepChange}
+          setIsRender={setIsRender}
         />
       ),
     },
@@ -87,6 +92,7 @@ export default function SpletnaStran() {
           data={company}
           onChange={handleCompanyChange}
           handleStepChange={handleStepChange}
+          setIsRender={setIsRender}
         />
       ),
     },
@@ -98,6 +104,7 @@ export default function SpletnaStran() {
           data={company}
           onChange={handleCompanyChange}
           handleStepChange={handleStepChange}
+          setIsRender={setIsRender}
         />
       ),
     },
@@ -109,6 +116,7 @@ export default function SpletnaStran() {
           data={company}
           onChange={handleCompanyChange}
           handleStepChange={handleStepChange}
+          setIsRender={setIsRender}
         />
       ),
     },

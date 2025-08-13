@@ -34,15 +34,17 @@ export const FrequentlyAskedQuestionView = ({ from, data }) => {
   useEffect(() => {
     const customFaq = data?.faqs || [];
 
-    if (customFaq.length > 4) {
+    if (customFaq.length > 0) {
       setFaqs(customFaq);
-    } else if (customFaq.length > 0) {
-      const updatedList = [...defaultQuestions];
-      for (let i = 0; i < customFaq.length; i++) {
-        updatedList[i] = customFaq[i];
-      }
-      setFaqs(updatedList);
-    } else {
+    } 
+    // else if (customFaq.length > 0) {
+    //   const updatedList = [...defaultQuestions];
+    //   for (let i = 0; i < customFaq.length; i++) {
+    //     updatedList[i] = customFaq[i];
+    //   }
+    //   setFaqs(updatedList);
+    // } 
+    else {
       setFaqs(defaultQuestions);
     }
   }, [data]);
@@ -55,7 +57,7 @@ export const FrequentlyAskedQuestionView = ({ from, data }) => {
       >
         <div className="h-full  mx-auto max-w-[700px] px-5 w-full flex flex-col items-start tablet:items-center mobile:items-center">
           <div className="flex mb-8 mobile:flex-col w-full justify-between ">
-            <div className="self-start text-[#1E2125] text-[40px] mobile:text-[28px] font-normal leading-[47px] mobile:leading-[33px]">
+            <div className="self-start text-[#1E2125] text-[40px] mobile:text-[24px] font-normal leading-[47px] mobile:leading-[33px]">
               Pogosta vprašanja
             </div>
             {from == "7" || from == "8" ? null : (
@@ -158,7 +160,7 @@ export const FrequentlyAskedQuestionView2 = ({ from, data }) => {
       >
         <div className="h-full  mx-auto max-w-[700px] px-5 w-full flex flex-col items-start tablet:items-center mobile:items-center">
           <div className="flex mobile:flex-col w-full justify-between mb-[27px]">
-            <div className="self-start text-[#1E2125] text-[40px] mobile:text-[28px] font-normal leading-[47px] mobile:leading-[33px]">
+            <div className="self-start text-[#1E2125] text-[40px] mobile:text-[24px] font-normal leading-[47px] mobile:leading-[33px]">
               Pogosta vprašanja
             </div>
           </div>

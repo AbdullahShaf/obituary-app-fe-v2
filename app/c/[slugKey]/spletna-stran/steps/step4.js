@@ -12,7 +12,12 @@ import { toast } from "react-hot-toast";
 import companyService from "@/services/company-service";
 import CompanyPreview from "../components/company-preview";
 
-export default function Step4({ data, onChange, handleStepChange }) {
+export default function Step4({
+  data,
+  onChange,
+  handleStepChange,
+  setIsRender,
+}) {
   const [companyId, setCompanyId] = useState(null);
   const [boxes, setBoxes] = useState([
     {
@@ -160,7 +165,9 @@ export default function Step4({ data, onChange, handleStepChange }) {
                 </div>
               </div>
             </div>
-            {companyId && <CompanyPreview companyData={data} />}
+            {companyId && (
+              <CompanyPreview companyData={data} setIsRender={setIsRender} />
+            )}
           </div>
           <div className="space-y-[8px]">
             {boxes.map((block) => (

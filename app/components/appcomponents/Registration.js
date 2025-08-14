@@ -38,7 +38,7 @@ const Registration = () => {
       }
     }
   }, [isDesktop]);
-  
+
   const [activeDiv, setActiveDiv] = useState("login");
 
   const handleEmailInput = (event) => {
@@ -135,7 +135,6 @@ const Registration = () => {
 
         // better and more reliable navigation
         redirectToRoleBasedRoute(role, slugKey, isDesktop);
-
       }
     } catch (error) {
       toast.error("Login failed. Please check your credentials.");
@@ -167,10 +166,11 @@ const Registration = () => {
             <div className="flex flex-row justify-between mx-auto">
               {/* Login Div */}
               <div
-                className={`transition-all duration-300 ease-in-out ${activeDiv === "login"
-                  ? "w-[234px] h-[56px] mobile:w-[180px] mobile:h-[48px] shadow-custom-dark-to-white bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] rounded-[8px] border-[1px] border-[#FFFFFF] text-[#1E2125] text-[24px] mobile:text-[24px] leading-[24px] font-variation-customOpt24"
-                  : "w-[143px] h-[36px] bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] shadow-custom-light-dark-with-white rounded-[8px] text-[#6D778E] text-[16px] leading-[24px] font-variation-customOpt16"
-                  }  flex justify-center items-center`}
+                className={`transition-all duration-300 ease-in-out ${
+                  activeDiv === "login"
+                    ? "w-[234px] h-[56px] mobile:w-[180px] mobile:h-[48px] shadow-custom-dark-to-white bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] rounded-[8px] border-[1px] border-[#FFFFFF] text-[#1E2125] text-[24px] mobile:text-[24px] leading-[24px] font-variation-customOpt24"
+                    : "w-[143px] h-[36px] bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] shadow-custom-light-dark-with-white rounded-[8px] text-[#6D778E] text-[16px] leading-[24px] font-variation-customOpt16"
+                }  flex justify-center items-center`}
               >
                 <button
                   type="button"
@@ -183,10 +183,11 @@ const Registration = () => {
 
               {/* Register Div */}
               <div
-                className={`transition-all duration-300 ease-in-out ${activeDiv === "register"
-                  ? "w-[234px] h-[56px] mobile:w-[180px] mobile:h-[48px] shadow-custom-dark-to-white bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] rounded-[8px] border-[1px] border-[#FFFFFF] text-[#1E2125] text-[24px] mobile:text-[24px] leading-[24px] font-variation-customOpt24"
-                  : "w-[143px] h-[36px] bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] shadow-custom-light-dark-with-white rounded-[8px] text-[#6D778E] text-[16px] leading-[24px] font-variation-customOpt16"
-                  } flex justify-center items-center ml-4`}
+                className={`transition-all duration-300 ease-in-out ${
+                  activeDiv === "register"
+                    ? "w-[234px] h-[56px] mobile:w-[180px] mobile:h-[48px] shadow-custom-dark-to-white bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] rounded-[8px] border-[1px] border-[#FFFFFF] text-[#1E2125] text-[24px] mobile:text-[24px] leading-[24px] font-variation-customOpt24"
+                    : "w-[143px] h-[36px] bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] shadow-custom-light-dark-with-white rounded-[8px] text-[#6D778E] text-[16px] leading-[24px] font-variation-customOpt16"
+                } flex justify-center items-center ml-4`}
               >
                 <button
                   type="button"
@@ -287,8 +288,8 @@ const Registration = () => {
                     <CheckIcon className="hidden ml-[-1px] size-4 rotate-6 fill-white group-data-[checked]:block" />
                   </Checkbox>
                   <div className="">
-                    Dajem privolitev, da me Firma s.p. preko elektronske pošte, do
-                    preklica obvešča o posodobitvah, nadgradnjah, novostih in
+                    Dajem privolitev, da me Firma s.p. preko elektronske pošte,
+                    do preklica obvešča o posodobitvah, nadgradnjah, novostih in
                     ugodnostih.
                   </div>
                 </label>

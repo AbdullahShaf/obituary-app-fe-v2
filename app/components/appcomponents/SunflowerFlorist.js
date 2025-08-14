@@ -133,7 +133,7 @@ const SunflowerFlorist = ({ data }) => {
             />
           </div> */}
 
-          <div className="hidden mobile:flex w-[297px] h-[48px] flex-row justify-end mr-[8px] mt-[-52px]">
+          <div className="hidden w-[297px] h-[48px] flex-row justify-end mr-[8px] mt-[-52px]">
             <div className="w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center mb-[0px] mr-[0px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
               <Image
                 src={imgTelephone}

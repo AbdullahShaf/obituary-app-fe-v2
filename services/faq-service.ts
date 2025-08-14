@@ -8,8 +8,17 @@ const createFaq = async (data: any) => {
   return response.data;
 };
 
+const deleteFaq = async (id: number, companyId: string | number) => {
+  const endpoint = `/faq/${id}?companyId=${companyId}`;
+  const response = await axios.delete(endpoint, {
+    headers: { "Content-Type": "application/json" },
+  });
+  return response.data;
+};
+
 const faqService = {
   createFaq,
+  deleteFaq,
 };
 
 export default faqService;

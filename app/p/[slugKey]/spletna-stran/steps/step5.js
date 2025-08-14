@@ -135,6 +135,19 @@ export default function Step5({ data, onChange, handleStepChange }) {
     ]);
   };
 
+  const handleDeleteFaq = async (faq) => {
+    try {
+      console.log("Deleting FAQ with ID:", faq);
+      const { faqs } = await faqService.deleteFaq(faq.id, faq.companyId);
+      const updatedCompany = { ...data, faqs: faqs };
+      onChange(updatedCompany);
+      console.log("FAQ deleted successfully");
+      toast.success("Faq's Deleted Successfully");
+    } catch (err) {
+      console.error("Failed to delete FAQ", err);
+    }
+  };
+
   return (
     <>
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
@@ -167,6 +180,7 @@ export default function Step5({ data, onChange, handleStepChange }) {
                 faq={block}
                 handleAnswerChange={handleAnswerChange}
                 handleQuestionChange={handleQuestionChange}
+                handleDelete={handleDeleteFaq}
               />
             ))}
             <div className="flex items-center justify-end pt-[8px] pb-[16px]">
@@ -234,15 +248,17 @@ const SliderBlock = React.memo(function SliderBlock({
   faq,
   handleAnswerChange,
   handleQuestionChange,
+  handleDelete,
 }) {
   const [isDefaultOpen, setIsDefaultOpen] = useState(index === 1);
 
   return (
     <OpenableBlock
       isDefaultOpen={isDefaultOpen}
-      hasDeleteButton={true}
+      hasDeleteButton={faq.companyId && true}
       title={title}
       index={index}
+      onDelete={() => handleDelete(faq)}
     >
       <div className="space-y-[16px]">
         <div className="space-y-[8px]">

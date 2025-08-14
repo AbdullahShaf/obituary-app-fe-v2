@@ -241,7 +241,7 @@ const FuneralInFewDays = ({ data }) => {
         <div className="flex flex-col desktop:w-[1087px] desktop:h-[159px] desktop:pl-[85px] tablet:w-[598px] tablet:h-[626px] tablet:mt-[45px] mobile:w-[321px] mobile:h-auto mobile:mt-[28px]">
           {/*Header text*/}
           <div className="flex h-12 items-center desktop:pt-[53.65px] desktop:pb-[30px] desktop:pl-[2px] tablet:pr-[21px]">
-            <div className="text-[#1E2125] text-[40px] font-variation-customOpt40 font-normal mobile:text-[28px] mobile:font-variation-customOpt28">
+            <div className="text-[#1E2125] text-[40px] font-variation-customOpt40 font-normal mobile:text-[24px] mobile:font-variation-customOpt28">
               Pogrebi v prihodnjih dneh
             </div>
           </div>
@@ -401,7 +401,7 @@ const ListView = ({ item, key }) => {
   };
   return (
     <div
-      className="h-[89px] w-full flex items-center justify-between px-[20px] tablet:px-[21px] border-b-[1px]    border-[#C3C6C8] "
+      className="h-[89px] cursor-pointer w-full flex items-center justify-between px-[20px] tablet:px-[21px] border-b-[1px]    border-[#C3C6C8] "
       onClick={() => handleClick()}
     >
       <div className="flex h-6 items-center p-[1px] ">

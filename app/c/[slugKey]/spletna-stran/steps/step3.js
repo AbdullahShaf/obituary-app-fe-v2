@@ -7,7 +7,12 @@ import packageService from "@/services/pacakge-service";
 import toast from "react-hot-toast";
 import CompanyPreview from "../components/company-preview";
 
-export default function Step3({ data, onChange, handleStepChange }) {
+export default function Step3({
+  data,
+  onChange,
+  handleStepChange,
+  setIsRender,
+}) {
   const [packages, setPackages] = useState([
     {
       index: 1,
@@ -171,7 +176,9 @@ export default function Step3({ data, onChange, handleStepChange }) {
                 </div>
               </div>
             </div>
-            {companyId && <CompanyPreview companyData={data} />}
+            {companyId && (
+              <CompanyPreview companyData={data} setIsRender={setIsRender} />
+            )}
           </div>
           <div className="space-y-[8px]">
             <div className="space-y-[8px] pb-[28px]">

@@ -4,7 +4,6 @@ import { Toaster } from "react-hot-toast";
 import "react-quill-new/dist/quill.snow.css";
 import "./globals.css";
 import "slick-carousel/slick/slick.css";
-import SessionBootstrap from "./components/SessionBootStrap/page";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -41,7 +40,6 @@ export default function RootLayout({
             duration: 3000,
           }}
         />
-        <SessionBootstrap />
         {children}
       </body>
     </html>

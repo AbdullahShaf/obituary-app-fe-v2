@@ -14,18 +14,23 @@ import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   LocalQuickReview,
+  LocalQuickReviewModal,
 } from "./components/appcomponents/LocalQuickReview";
 import MegaMenu from "./components/appcomponents/MegaMenuMain";
 import obituaryService from "@/services/obituary-service";
 import { toast } from "react-hot-toast";
 import regionsAndCities from "@/utils/regionAndCities";
+import MainOptions from "./components/appcomponents/MainOptions";
 import HomePageBox from "./components/appcomponents/HomePageBox";
 import IpadSlider from "./components/appcomponents/IpadSlider";
+import SlideOne from "./components/slidercomponents/SlideOne";
+import SlideTwo from "./components/slidercomponents/SlideTwo";
 
 function HomeContent(props) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  // 17 September 2024
   const arrPlace = [
     { place: "City 1", url: "/cvetlicarne", id: 1 },
     {
@@ -48,11 +53,9 @@ function HomeContent(props) {
   const [obituaries, setObituaries] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isMessageModalVisible, setIsMessageModalVisible] = useState(false);
-  const [isLocalQuickModalVisible, setIsLocalQuickModalVisible] =
-    useState(false);
+  const [isLocalQuickModalVisible, setIsLocalQuickModalVisible] = useState(false);
   const [isMemoralPopupVisible, setIsMemoralPopupVisible] = useState(false);
-  const [isLocalQuickReviewModalVisible, setIsLocalQuickReviewModalVisible] =
-    useState(false);
+  const [isLocalQuickReviewModalVisible, setIsLocalQuickReviewModalVisible] = useState(false);
 
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState(null);
@@ -61,8 +64,8 @@ function HomeContent(props) {
 
   // Initialize state from URL parameters on component mount
   useEffect(() => {
-    const cityParam = searchParams.get("city");
-    const regionParam = searchParams.get("region");
+    const cityParam = searchParams.get('city');
+    const regionParam = searchParams.get('region');
 
     if (cityParam) {
       setSelectedCity(cityParam);
@@ -131,17 +134,17 @@ function HomeContent(props) {
     const params = new URLSearchParams();
 
     // Keep existing florist city if it exists
-    const currentFloristCity = searchParams.get("floristCity");
+    const currentFloristCity = searchParams.get('floristCity');
     if (currentFloristCity) {
-      params.set("floristCity", currentFloristCity);
+      params.set('floristCity', currentFloristCity);
     }
 
     // Add city and region if they exist
-    if (city) params.set("city", city);
-    if (region) params.set("region", region);
+    if (city) params.set('city', city);
+    if (region) params.set('region', region);
 
     const queryString = params.toString();
-    router.replace(queryString ? `/?${queryString}` : "/");
+    router.replace(queryString ? `/?${queryString}` : '/');
   };
 
   useEffect(() => {

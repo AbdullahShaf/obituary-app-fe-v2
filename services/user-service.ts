@@ -1,4 +1,4 @@
-import axiosInstance from "./axios";
+import axios from "./axios";
 
 const registerUser = async (userData: {
   email: string;
@@ -11,7 +11,7 @@ const registerUser = async (userData: {
   try {
     const endpoint = "/user";
 
-    const response = await axiosInstance.post(endpoint, userData);
+    const response = await axios.post(endpoint, userData);
     return response.data;
   } catch (error: unknown) {
     return error;
@@ -22,7 +22,7 @@ const getMyUser = async () => {
   try {
     const endpoint = "/user/me";
 
-    const response = await axiosInstance.get(endpoint);
+    const response = await axios.get(endpoint);
     return response.data;
   } catch (error: unknown) {
     return new Error("Network error or no response");
@@ -40,7 +40,7 @@ const updateMyUser = async (userData: {
   try {
     const endpoint = "/user/me";
 
-    const response = await axiosInstance.patch(endpoint, userData);
+    const response = await axios.patch(endpoint, userData);
     return response.data;
   } catch (error: unknown) {
     return new Error("Network error or no response");
@@ -51,7 +51,7 @@ const updateUserAndCompany = async (formData: FormData, id: string) => {
   try {
     const endpoint = `/user/${id}`;
 
-    const response = await axiosInstance.patch(endpoint, formData, {
+    const response = await axios.patch(endpoint, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -67,7 +67,7 @@ const deleteMyUser = async () => {
   try {
     const endpoint = "/user/me";
 
-    const response = await axiosInstance.delete(endpoint);
+    const response = await axios.delete(endpoint);
     return response.data;
   } catch (error: unknown) {
     return new Error("Network error or no response");
@@ -77,7 +77,7 @@ const deleteMyUser = async () => {
 const changeSlug = async (slug: string) => {
   const endpoint = "/user/me/slug-key";
 
-  const response = await axiosInstance.patch(
+  const response = await axios.patch(
     endpoint,
     { slugKey: slug },
     { withCredentials: true }

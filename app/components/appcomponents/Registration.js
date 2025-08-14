@@ -28,7 +28,7 @@ const Registration = () => {
       setIsDesktop(true);
     }
   }, []);
-
+  
   // Check if user is already logged in and redirect
   useEffect(() => {
     if (isAuthenticated()) {

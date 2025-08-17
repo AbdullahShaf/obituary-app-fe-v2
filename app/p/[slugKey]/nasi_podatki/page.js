@@ -13,6 +13,7 @@ import ModalNew3 from "@/app/components/appcomponents/ModalNew3";
 
 export default function AccountSettings() {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isPrivilegijiExpanded, setIsPrivilegijiExpanded] = useState(false);
 
   useEffect(() => {
     getCompleteCompanyData();
@@ -21,7 +22,7 @@ export default function AccountSettings() {
   const [selectedCity, setSelectedCity] = useState(null);
   const [isShowModal1, setIsShowModal1] = useState(false);
   const [select_id, setSelect_Id] = useState("");
-  
+
   const getCompleteCompanyData = async () => {
     try {
       const queryParams = {};
@@ -33,11 +34,11 @@ export default function AccountSettings() {
       console.log(error);
     }
   };
-  
+
   const handleModalVisibility = () => {
     setIsModalVisible(true);
   };
-  
+
   const cityOptions = [
     ...Object.values(regionsAndCities)
       .flat()
@@ -88,6 +89,16 @@ export default function AccountSettings() {
                 {data?.CompanyPage?.website}
               </span>
             </div>
+            <button
+              onClick={() => {
+                setIsShowModal1(true);
+              }}
+              className="inline-flex items-center gap-3"
+            >
+              <span className="text-[#2c7ba3] text-[14px]   ">
+                DOPOLNI PODATKE
+              </span>
+            </button>
           </div>
           <div className="space-y-[18px]">
             <div className="flex items-center gap-[12px]">
@@ -114,7 +125,7 @@ export default function AccountSettings() {
           </div>
         </div>
         <hr className="my-[28px]" />
-        
+
         <div className="space-y-4 text-[#6D778E] text-[14px]">
           <div className="space-y-1">
             <span className="uppercase">OBČINA:</span>
@@ -131,7 +142,7 @@ export default function AccountSettings() {
                     placeholder={"Dodaj še drugo mesto"}
                   />
                 </div>
-                <Link
+                {/* <Link
                   href=""
                   className="inline-flex items-center gap-3 tabletUserAcc:hidden mobileUserAcc:hidden"
                 >
@@ -143,7 +154,7 @@ export default function AccountSettings() {
                   <span className="text-[#2c7ba3] text-[14px] uppercase underline">
                     Preveri, kako gre
                   </span>
-                </Link>
+                </Link> */}
               </div>
             </div>
             {data?.secondaryCity && (
@@ -167,22 +178,35 @@ export default function AccountSettings() {
         {/* PRIVILEGES SECTION */}
         <div className="space-y-4 text-[#6D778E] mt-[60px] text-[14px]">
           <h4
-            className="text-[#2c7ba3] text-[20px] font-medium pb-2"
+            className="text-[#2c7ba3] text-[20px] font-medium pb-2 flex items-center cursor-pointer hover:text-[#1d5a78] transition-colors"
             style={{
               fontVariationSettings: "'wdth' 50,'opsz' 26",
             }}
+            onClick={() => setIsPrivilegijiExpanded(!isPrivilegijiExpanded)}
           >
             Privilegiji
+            <svg
+              className={`ml-2 w-5 h-5 transition-transform ${isPrivilegijiExpanded ? 'rotate-180' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
           </h4>
-          
-          <div className="space-y-3">
+
+          <div
+            className={`space-y-3 overflow-hidden transition-all duration-300 ${isPrivilegijiExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}
+          >
             {/* Funeral Company List Publication */}
             <div className="flex items-center gap-3">
               <input
                 type="checkbox"
                 checked={data?.createObituaryPermission}
+                disabled
                 readOnly
-                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2"
+                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2 cursor-not-allowed disabled:opacity-100 disabled:bg-[#0A85C2] disabled:checked:bg-[#0A85C2]"
               />
               <span className="text-[#3C3E41]">
                 Objava na seznamu pogrebnih podjetij
@@ -197,8 +221,9 @@ export default function AccountSettings() {
               <input
                 type="checkbox"
                 checked={false}
+                disabled
                 readOnly
-                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2"
+                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2 cursor-not-allowed disabled:opacity-100 disabled:bg-[#0A85C2] disabled:checked:bg-[#0A85C2]"
               />
               <span className="text-[#3C3E41]">Spletna stran</span>
               <span className="text-[#6D778E] text-[12px]">(kmalu)</span>
@@ -209,8 +234,9 @@ export default function AccountSettings() {
               <input
                 type="checkbox"
                 checked={data?.createObituaryPermission}
+                disabled
                 readOnly
-                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2"
+                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2 cursor-not-allowed disabled:opacity-100 disabled:bg-[#0A85C2] disabled:checked:bg-[#0A85C2]"
               />
               <span className="text-[#3C3E41]">Objava osmrtnic</span>
               <span className="text-[#6D778E] text-[12px]">
@@ -223,8 +249,9 @@ export default function AccountSettings() {
               <input
                 type="checkbox"
                 checked={data?.assignKeeperPermission}
+                disabled
                 readOnly
-                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2"
+                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2 cursor-not-allowed disabled:opacity-100 disabled:bg-[#0A85C2] disabled:checked:bg-[#0A85C2]"
               />
               <span className="text-[#3C3E41]">Mesečni skrbniki</span>
               <span className="text-[#6D778E] text-[12px]">
@@ -237,8 +264,9 @@ export default function AccountSettings() {
               <input
                 type="checkbox"
                 checked={data?.sendMobilePermission}
+                disabled
                 readOnly
-                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2"
+                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2 cursor-not-allowed disabled:opacity-100 disabled:bg-[#0A85C2] disabled:checked:bg-[#0A85C2]"
               />
               <span className="text-[#3C3E41]">Digitalne mobi kartice</span>
               <span className="text-[#6D778E] text-[12px]">(kmalu)</span>
@@ -249,8 +277,9 @@ export default function AccountSettings() {
               <input
                 type="checkbox"
                 checked={!!data?.secondaryCity}
+                disabled
                 readOnly
-                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2"
+                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2 cursor-not-allowed disabled:opacity-100 disabled:bg-[#0A85C2] disabled:checked:bg-[#0A85C2]"
               />
               <span className="text-[#3C3E41]">Dodatna občina</span>
               <span className="text-[#6D778E] text-[12px]">
@@ -263,8 +292,9 @@ export default function AccountSettings() {
               <input
                 type="checkbox"
                 checked={data?.sendGiftsPermission}
+                disabled
                 readOnly
-                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2"
+                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2 cursor-not-allowed disabled:opacity-100 disabled:bg-[#0A85C2] disabled:checked:bg-[#0A85C2]"
               />
               <span className="text-[#3C3E41]">Sodelovanje na spominskih straneh</span>
             </div>
@@ -274,8 +304,9 @@ export default function AccountSettings() {
               <input
                 type="checkbox"
                 checked={true}
+                disabled
                 readOnly
-                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2"
+                className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2 cursor-not-allowed disabled:opacity-100 disabled:bg-[#0A85C2] disabled:checked:bg-[#0A85C2]"
               />
               <span className="text-[#3C3E41]">Promocija BREZ RIZIKA</span>
               <span className="text-[#6D778E] text-[12px]">(odpri)</span>
@@ -310,6 +341,16 @@ export default function AccountSettings() {
       {isModalVisible && (
         <ChangePasswordModal setModalVisible={setIsModalVisible} />
       )}
+      <ModalNew3
+        isShowModal={isShowModal1}
+        setIsShowModal={setIsShowModal1}
+        select_id={select_id}
+        set_Id={setSelect_Id}
+        data={data?.CompanyPage?.id}
+        onChange={(updatedShops) => {
+          console.log(updatedShops, "====");
+        }}
+      />
     </CompanyAccountLayout>
   );
 }

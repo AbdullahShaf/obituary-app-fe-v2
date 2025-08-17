@@ -28,7 +28,7 @@ const FuneralList = () => {
     const params = new URLSearchParams();
 
     if (region && region.trim() !== "") {
-      params.set('region ', region);
+      params.set('region', region);
     }
 
     const newUrl = params.toString() ? `?${params.toString()}` : window.location.pathname;
@@ -190,14 +190,16 @@ const FuneralList = () => {
       <div className="flex justify-center  w-[310px] tablet:w-[612px] desktop:w-[1088px] desktop:justify-between">
         <div className="w-full">
           {companies?.length > 0 ? (
-            companies.map((item, index) => (
-              <FuneralBlock
-                item={item}
-                index={index}
-                key={`company-${index}`}
-                obituaryCount={obituariesCount[item.id] || 0} // Pass count to FuneralBlock
-              />
-            ))
+            companies.map((item, index) => {
+              return (
+                <FuneralBlock
+                  item={item}
+                  index={index}
+                  key={item.id || `company-${index}`}
+                  obituaryCount={obituariesCount[item.id] || 0} // Pass count to FuneralBlock
+                />
+              );
+            })
           ) : (
             <div className="flex flex-col items-center justify-center w-full h-32 text-gray-500">
               <p>Še ni vnešenih pogrebnih podjetij..</p>
@@ -214,8 +216,12 @@ const FuneralList = () => {
 
 // Update FuneralBlock component to accept obituaryCount
 const FuneralBlock = ({ item, index, obituaryCount }) => {
+  const router = useRouter();
   const handleClick = () => {
-    window.location.href = "/funeralpromo";
+    if (!item?.id) {
+      return;
+    }
+    router.push(`/funeralcompany/${item.id}`);
   };
 
   return (

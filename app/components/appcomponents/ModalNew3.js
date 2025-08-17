@@ -14,6 +14,7 @@ import Image from "next/image";
 import Modals from "./Modals";
 import userService from "@/services/user-service";
 import toast from "react-hot-toast";
+import companyService from "@/services/company-service";
 
 export default function ModalNew3({
   isShowModal,
@@ -36,15 +37,7 @@ export default function ModalNew3({
 
   const handleSubmit = async () => {
     try {
-      const formdata = new FormData();
-
-      if (name.trim() !== "") formdata.append("name", name);
-      if (address.trim() !== "") formdata.append("address", address);
-      if (website.trim() !== "") formdata.append("website", website);
-      if (email.trim() !== "") formdata.append("email", email);
-      if (selectedFile) formdata.append("picture", selectedFile);
-
-      // Get user ID from localStorage
+      // Ensure user is logged in
       const user = JSON.parse(localStorage.getItem("user"));
       const userId = user?.id;
 
@@ -53,21 +46,39 @@ export default function ModalNew3({
         return;
       }
 
-      const response = await userService.updateUserAndCompany(formdata, userId);
+      // Prepare form data
+      const formData = new FormData();
+      const fields = { name, address, website, email };
 
-      console.log(response);
-      toast.success("Updated Successfully");
-      
-      // Close modal after successful update
+      Object.entries(fields).forEach(([key, value]) => {
+        if (value.trim() !== "") formData.append(key, value);
+      });
+
+      if (selectedFile) {
+        formData.append("picture", selectedFile);
+      }
+
+      let response;
+
+      if (!data || data === "undefined") {
+        // Create company if no data exists
+        response = await companyService.createCompany(formData, "funeral");
+        toast.success("Created successfully");
+      } else {
+        // Update company if data exists
+        response = await companyService.updateCompany(formData, data);
+        toast.success("Updated successfully");
+      }
+
       setIsShowModal(false);
-      
-      // Call onChange callback if provided
+
       if (onChange) {
         onChange(response);
       }
+
     } catch (error) {
-      console.log(error);
-      toast.error("Error occurred while updating");
+      console.error("Submission error:", error);
+      toast.error("An error occurred while submitting. Please try again.");
     }
   };
   const handleFileChange = (e) => {

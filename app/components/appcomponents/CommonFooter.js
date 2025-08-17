@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import React from "react";
 import logo2 from "@/public/footer_logo.png";
 import logoWhite from "@/public/footer_logo.png";
 import Link from "next/link";
@@ -81,22 +82,19 @@ const CommonFooter = ({ currentPage = "/" }) => {
         />
         <div className="inline-flex gap-[10px] mobile:gap-[8px] text-[14px] items-center mobile:justify-end mobile:px-[20px] mobile:w-full">
           {linksToRender.map((link, index) => (
-            <>
+            <React.Fragment key={link.label}>
               <Link
-                key={link.label}
                 href={link.path}
-                className={`text-[#1860A3] underline ${link.showOnMobile === false ? "mobile:hidden" : ""
-                  }`}
+                className={`text-[#1860A3] underline ${link.showOnMobile === false ? "mobile:hidden" : ""}`}
               >
                 {link.label}
               </Link>
               {index < linksToRender.length - 1 && (
                 <div
-                  className={`w-[5px] h-[5px] bg-[#1860A3] rounded-full ${link.showOnMobile === false ? "mobile:hidden" : ""
-                    }`}
+                  className={`w-[5px] h-[5px] bg-[#1860A3] rounded-full ${link.showOnMobile === false ? "mobile:hidden" : ""}`}
                 ></div>
               )}
-            </>
+            </React.Fragment>
           ))}
         </div>
       </div>

@@ -4,6 +4,7 @@ import imgFlag from "@/public/img_Flag.png";
 import { format } from "date-fns";
 
 const ObituaryPublished = ({ set_Id, setModal, data }) => {
+  console.log(data, "is data from obit");
   return (
     <>
       <div className="mx-auto border-t-[1px] border-b-[1px] border-[#DCE4E4] w-full flex items-center overflow-hidden bg-[#FFFAF826] py-[68px] mobile:py-[30px]">

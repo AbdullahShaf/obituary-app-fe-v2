@@ -7,7 +7,8 @@ import ModalNew2 from "../components/appcomponents/ModalNew2";
 import ModalNew3 from "../components/appcomponents/ModalNew3";
 import ModalNew4 from "../components/appcomponents/ModalNew4";
 import ModalNew5 from "../components/appcomponents/ModalNew5";
-
+import ModelNew6 from "../components/appcomponents/ModelNew6";
+import ModalNew6 from "../components/appcomponents/ModelNew6";
 
 const MemoryPage = ({ params }) => {
   const handleMemoryChange = () => {
@@ -22,6 +23,7 @@ const MemoryPage = ({ params }) => {
   const [isShowModal3, setIsShowModal3] = useState(false);
   const [isShowModal4, setIsShowModal4] = useState(false);
   const [isShowModal5, setIsShowModal5] = useState(false);
+  const [isShowModal6, setIsShowModal6] = useState(false);
 
   return (
     <Layout
@@ -52,15 +54,21 @@ const MemoryPage = ({ params }) => {
           set_Id={setSelect_Id}
         />
 
-         <ModalNew4
+        <ModalNew4
           isShowModal={isShowModal4}
           setIsShowModal={setIsShowModal4}
           select_id={select_id}
           set_Id={setSelect_Id}
         />
 
-         <ModalNew5
+        <ModalNew5
           isShowModal={isShowModal5}
+          setIsShowModal={setIsShowModal5}
+          select_id={select_id}
+          set_Id={setSelect_Id}
+        />
+        <ModalNew6
+          isShowModal={isShowModal6}
           setIsShowModal={setIsShowModal5}
           select_id={select_id}
           set_Id={setSelect_Id}
@@ -68,7 +76,9 @@ const MemoryPage = ({ params }) => {
 
         {/* Button Box */}
         <div className="bg-zinc-400 shadow-md rounded-xl p-8 w-full max-w-md space-y-4 text-center">
-          <h1 className="text-2xl font-semibold text-gray-800">Choose a Modal</h1>
+          <h1 className="text-2xl font-semibold text-gray-800">
+            Choose a Modal
+          </h1>
 
           <div className="grid gap-4">
             <button
@@ -91,16 +101,23 @@ const MemoryPage = ({ params }) => {
             </button>
             <button
               onClick={() => setIsShowModal4(true)}
-              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200">
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+            >
               Modal 4
             </button>
 
-             <button
+            <button
               onClick={() => setIsShowModal5(true)}
-              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200">
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+            >
               Modal 5
             </button>
-
+            <button
+              onClick={() => setIsShowModal6(true)}
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+            >
+              Modal 6
+            </button>
           </div>
         </div>
       </div>

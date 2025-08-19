@@ -21,16 +21,22 @@ const ObituaryListContent = () => {
       <ObituaryListComponent city={city} />
       <NextFunerals />
       <MemorialPageView />
-      <SponsorComponent text="To stran so omogočili "/>
+      <SponsorComponent text="To stran so omogočili " />
       <FloristsComp />
-      <CommonFooter currentPage="/osmrtnice"/>
+      <CommonFooter currentPage="/osmrtnice" />
     </>
   );
 };
 
 const ObituaryList = () => {
   return (
-    <Layout megaMenu={""} isMegaMenuVisible={false} from={"18"}  currentPage="osmrtnice" forFooter={'memorypage'}>
+    <Layout
+      megaMenu={""}
+      isMegaMenuVisible={false}
+      from={"18"}
+      currentPage="osmrtnice"
+      forFooter={"memorypage"}
+    >
       <div className="flex flex-col mx-auto bg-[#F5F7F9] w-full">
         <Suspense fallback={<div>Loading...</div>}>
           <ObituaryListContent />

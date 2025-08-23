@@ -32,7 +32,7 @@ const TopBar = ({
     const isUser = user.role === "User";
     const isFuneral = user.role === "Funeral";
     const isFlorist = user.role === "Florist";
-    const isAdmin = user.role === "SUPERADMIN";
+    const isAdmin = user.role === "SUPERADMIN"
     const desktop = isDesktop();
     const slugKey = user.slugKey;
 
@@ -49,8 +49,8 @@ const TopBar = ({
     } else if (isFlorist && !desktop) {
       router.push(`/c/${slugKey}/menu`);
     } else if (isAdmin && isDesktop) {
-      router.push("/admin/Obituaries");
-    }
+      router.push('/admin/Obituaries')
+    } 
   };
 
   // Update the local quick review button click handler
@@ -82,8 +82,7 @@ const TopBar = ({
               />
             </button>
             <button
-              disabled
-              className="ml-[50px]  tablet:ml-[95px] desktop:ml-[80px] cursor-not-allowed"
+              className="ml-[50px]  tablet:ml-[95px] desktop:ml-[80px]"
               onClick={() => {
                 setIsMessageModalVisible(true);
                 setIsModalVisible(false);
@@ -98,8 +97,7 @@ const TopBar = ({
               />
             </button>
             <button
-              disabled
-              className="ml-[50px] tablet:ml-[95px] desktop:ml-[80px] cursor-not-allowed"
+              className="ml-[50px] tablet:ml-[95px] desktop:ml-[80px]"
               onClick={() => {
                 setIsModalVisible(true);
                 setIsMessageModalVisible(false);

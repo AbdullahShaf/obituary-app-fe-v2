@@ -153,10 +153,7 @@ export function FAQHeader2() {
             />
           </Link>
         </div>
-        <Link
-          href={"/resitve-za-pogrebna-podjetja"}
-          className="hidden mobile:flex"
-        >
+        <Link href={"/resitve-za-pogrebna-podjetja"} className="hidden mobile:flex">
           <Image
             src={"/faq_header_top.png"}
             alt="Menu"
@@ -168,5 +165,6 @@ export function FAQHeader2() {
     </header>
   );
 }
+
 
 export default Header;

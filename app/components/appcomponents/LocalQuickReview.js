@@ -100,10 +100,10 @@ const LocalQuickReview = ({ setIsLocalQuickModalVisible }) => {
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/40 to-transparent shadow-lg shadow-[#A6ABBD]/50 rounded-[10px]" />
-                <div className="w-full bg-[#E7EBF0] rounded-[10px] flex items-center justify-between py-[15px] px-[8px] min-h-[60px] relative">
+                <div className="w-full bg-[#E7EBF0] rounded-[10px] flex items-center justify-between  px-[8px] min-h-[60px] relative">
                   <Link
                     href={`/pogrebi`}
-                    className="w-full bg-[#E7EBF0] rounded-[10px] flex items-center justify-between py-[15px] px-[8px] min-h-[60px] relative"
+                    className="w-full bg-[#E7EBF0] rounded-[10px] flex items-center justify-between  px-[8px] min-h-[60px] relative"
                   >
                     <div className="flex flex-row justify-between items-center pl-[24px] gap-[17px]">
                       <h4 className="text-[#0D94E8] text-[32px] font-bold leading-[24px]">

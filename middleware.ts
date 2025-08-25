@@ -59,9 +59,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // if (!token) {
-  //   return NextResponse.redirect(new URL("/registracija", request.url));
-  // }
+  if (!token) {
+    return NextResponse.redirect(new URL("/registracija", request.url));
+  }
 
   // Admin route protection - only SUPERADMIN can access
   if (isAdminRoute && role !== "SUPERADMIN") {

@@ -38,7 +38,7 @@ const MemoryPageContent = ({ params }) => {
   useEffect(() => {
     fetchMemory();
   }, []);
-
+  console.log(obituary, "is obituary");
   useEffect(() => {
     console.log("set is modal:", isShowModal);
   }, [isShowModal]);
@@ -118,8 +118,10 @@ const MemoryPageContent = ({ params }) => {
 
       // Build URL with city and region as query params
       const urlParams = [];
-      if (queryParams.city) urlParams.push(`city=${encodeURIComponent(queryParams.city)}`);
-      if (queryParams.region) urlParams.push(`region=${encodeURIComponent(queryParams.region)}`);
+      if (queryParams.city)
+        urlParams.push(`city=${encodeURIComponent(queryParams.city)}`);
+      if (queryParams.region)
+        urlParams.push(`region=${encodeURIComponent(queryParams.region)}`);
       const queryString = urlParams.length ? `?${urlParams.join("&")}` : "";
 
       router.push(`/m/${data.slugKey}${queryString}`);

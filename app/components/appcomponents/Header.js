@@ -32,7 +32,7 @@ function Header({ onMenuCLick, from, isMegaMenuVisible }) {
             </Link>
             {/* <Link href={"/loginpage"}> */}
             <button
-              className=" rounded-full hover:bg-gray-100 active:bg-gray-200  transition duration-200 ease-in-out cursor-pointer transform-gpu active:scale-95"
+              className=" rounded-full hover:bg-gray-100 active:bg-gray-200  transition duration-200 ease-in-out  transform-gpu active:scale-95"
               onClick={() => {
                 setShowCloseButton(!showCloseButton);
                 onMenuCLick();
@@ -153,7 +153,10 @@ export function FAQHeader2() {
             />
           </Link>
         </div>
-        <Link href={"/resitve-za-pogrebna-podjetja"} className="hidden mobile:flex">
+        <Link
+          href={"/resitve-za-pogrebna-podjetja"}
+          className="hidden mobile:flex"
+        >
           <Image
             src={"/faq_header_top.png"}
             alt="Menu"
@@ -165,6 +168,5 @@ export function FAQHeader2() {
     </header>
   );
 }
-
 
 export default Header;

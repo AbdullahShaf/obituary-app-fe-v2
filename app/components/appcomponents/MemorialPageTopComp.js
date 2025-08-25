@@ -99,7 +99,9 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
       if (error.status === 409) {
         toast.error("You can only burn one candle per 24 hours.");
       } else {
-        toast.error(error.data?.message || "Error burning candle. Please try again.");
+        toast.error(
+          error.data?.message || "Error burning candle. Please try again."
+        );
       }
 
       set_Id("3");
@@ -132,9 +134,9 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
 
   useEffect(() => {
     if (data.Condolences && data?.Condolences?.length > 0) {
-      setLimitedCondolances(data?.Condolences.slice(0, maxCondolances))
+      setLimitedCondolances(data?.Condolences.slice(0, maxCondolances));
     }
-  }, [data, data?.Condolances, maxCondolances])
+  }, [data, data?.Condolances, maxCondolances]);
 
   return (
     <div
@@ -197,8 +199,8 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
                           data.image
                             ? `${API_BASE_URL}/${data.image}`
                             : data.gender === "Male"
-                              ? "/img_profile.png"
-                              : "/woman.png"
+                            ? "/img_profile.png"
+                            : "/woman.png"
                         }
                         alt="Slika"
                         width={1000}
@@ -215,17 +217,17 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
                       <h1 className="text-[#1E2125] text-[28px] tablet:text-[40px] desktop:text-[40px] font-variation-customOpt28 tablet:font-variation-customOpt40 desktop:font-variation-customOpt40 font-normal">
                         {data.name && data.sirName
                           ? `${formatTitleCase(data.name)} ${formatTitleCase(
-                            data.sirName
-                          )}`.length > 25
-                            ? `${`${formatTitleCase(
-                              data.name
-                            )} ${formatTitleCase(data.sirName)}`.slice(
-                              0,
-                              25
-                            )}...`
-                            : `${formatTitleCase(data.name)} ${formatTitleCase(
                               data.sirName
-                            )}`
+                            )}`.length > 25
+                            ? `${`${formatTitleCase(
+                                data.name
+                              )} ${formatTitleCase(data.sirName)}`.slice(
+                                0,
+                                25
+                              )}...`
+                            : `${formatTitleCase(data.name)} ${formatTitleCase(
+                                data.sirName
+                              )}`
                           : ""}
                       </h1>
                     </div>
@@ -445,14 +447,14 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
                   [
                     ...(data.funeralTimestamp
                       ? [
-                        {
-                          type: "funeral",
-                          timestamp: new Date(
-                            data.funeralTimestamp
-                          ).getTime(),
-                          details: data,
-                        },
-                      ]
+                          {
+                            type: "funeral",
+                            timestamp: new Date(
+                              data.funeralTimestamp
+                            ).getTime(),
+                            details: data,
+                          },
+                        ]
                       : []),
                     ...(Array.isArray(parsedEvents) ? parsedEvents : [])
                       .filter((event) => {
@@ -496,14 +498,14 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
                       {[
                         ...(data.funeralTimestamp
                           ? [
-                            {
-                              type: "funeral",
-                              timestamp: new Date(
-                                data.funeralTimestamp
-                              ).getTime(),
-                              details: data,
-                            },
-                          ]
+                              {
+                                type: "funeral",
+                                timestamp: new Date(
+                                  data.funeralTimestamp
+                                ).getTime(),
+                                details: data,
+                              },
+                            ]
                           : []),
                         ...(Array.isArray(parsedEvents) ? parsedEvents : [])
                           .filter((event) => {
@@ -543,9 +545,9 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
                             .getHours()
                             .toString()
                             .padStart(2, "0")}:${date
-                              .getMinutes()
-                              .toString()
-                              .padStart(2, "0")}`;
+                            .getMinutes()
+                            .toString()
+                            .padStart(2, "0")}`;
 
                           if (item.type === "funeral") {
                             return (
@@ -611,8 +613,8 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
                                     <div className="text-[#1E2125] text-[20px] font-medium">
                                       {item.details.eventName
                                         ? formatTitleCase(
-                                          item.details.eventName
-                                        )
+                                            item.details.eventName
+                                          )
                                         : ""}
                                     </div>
                                   </div>
@@ -624,14 +626,14 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
                                       {item.details.eventLocation
                                         ? item.details.eventLocation.length > 50
                                           ? `${formatTitleCase(
-                                            item.details.eventLocation.slice(
-                                              0,
-                                              50
-                                            )
-                                          )}...`
+                                              item.details.eventLocation.slice(
+                                                0,
+                                                50
+                                              )
+                                            )}...`
                                           : formatTitleCase(
-                                            item.details.eventLocation
-                                          )
+                                              item.details.eventLocation
+                                            )
                                         : ""}
                                     </p>
                                   </div>
@@ -666,10 +668,11 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
                   flex-col pt-4 pl-[22px] pr-[18px] w-[100%]                       
                   desktop:w-[517px]   desktop:pl-[22px] desktop:pr-[14px]
                   bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]
-                  ${parsedEvents.length === 90
+                  ${
+                    parsedEvents.length === 90
                       ? "desktop:mt-2"
                       : "desktop:mt-[24px]"
-                    }
+                  }
                   `}
                   style={{
                     background:
@@ -730,10 +733,11 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
                 </div>
 
                 <div
-                  className={`flex self-end ${parsedEvents.length === 90
-                    ? "tablet:mt-2 desktop:mt-[10px] mobile:mt-[10px]"
-                    : "tablet:mt-4 desktop:mt-[28px] mobile:mt-[28px]"
-                    } desktop:h-[0px] items-center desktop:pr-[20px]`}
+                  className={`flex self-end ${
+                    parsedEvents.length === 90
+                      ? "tablet:mt-2 desktop:mt-[10px] mobile:mt-[10px]"
+                      : "tablet:mt-4 desktop:mt-[28px] mobile:mt-[28px]"
+                  } desktop:h-[0px] items-center desktop:pr-[20px]`}
                 >
                   {false && (
                     <>
@@ -1167,64 +1171,66 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
 
         <div className="w-[824px] tablet:w-[629px] mobile:w-[321px] grid grid-cols-2 mobile:grid-cols-1 mx-auto  gap-[24px]">
           <div className="flex flex-col gap-[27px]">
-            {limitedCondolances && limitedCondolances.filter((_, index) => index % 2 === 0).map(
-              (item, index) => (
-                <div
-                  className="bg-white rounded-[3px] text-[16px] text-[#414141]"
-                  style={{
-                    boxShadow: "5px 5px 10px 0px #C2C2C280",
-                  }}
-                  key={index}
-                >
-                  <div className="px-[17px] pt-[14px] pb-[28px]">
-                    {item.message}
-                  </div>
-                  <div className="bg-[#E1E7E8] text-[#6D778E] px-[16px] py-[4px] flex justify-between">
-                    <div className="flex items-end gap-[4px]">
-                      <span className="text-[16px] leading-none">
-                        {item.name}
-                      </span>
+            {limitedCondolances &&
+              limitedCondolances
+                .filter((_, index) => index % 2 === 0)
+                .map((item, index) => (
+                  <div
+                    className="bg-white rounded-[3px] text-[16px] text-[#414141]"
+                    style={{
+                      boxShadow: "5px 5px 10px 0px #C2C2C280",
+                    }}
+                    key={index}
+                  >
+                    <div className="px-[17px] pt-[14px] pb-[28px]">
+                      {item.message}
+                    </div>
+                    <div className="bg-[#E1E7E8] text-[#6D778E] px-[16px] py-[4px] flex justify-between">
+                      <div className="flex items-end gap-[4px]">
+                        <span className="text-[16px] leading-none">
+                          {item.name}
+                        </span>
+                        <span className="text-[12px] leading-none">
+                          {item.relation}
+                        </span>
+                      </div>
                       <span className="text-[12px] leading-none">
-                        {item.relation}
+                        {formatDate(item?.createdTimestamp)}
                       </span>
                     </div>
-                    <span className="text-[12px] leading-none">
-                      {formatDate(item?.createdTimestamp)}
-                    </span>
                   </div>
-                </div>
-              )
-            )}
+                ))}
           </div>
           <div className="flex flex-col gap-[27px]">
-            {limitedCondolances && limitedCondolances.filter((_, index) => index % 2 !== 0).map(
-              (item, index) => (
-                <div
-                  className="bg-white rounded-[3px] text-[16px] text-[#414141]"
-                  style={{
-                    boxShadow: "5px 5px 10px 0px #C2C2C280",
-                  }}
-                  key={index}
-                >
-                  <div className="px-[17px] pt-[14px] pb-[28px]">
-                    {item.message}
-                  </div>
-                  <div className="bg-[#E1E7E8] text-[#6D778E] px-[16px] py-[4px] flex justify-between">
-                    <div className="flex items-end gap-[4px]">
-                      <span className="text-[16px] leading-none">
-                        {item.name}
-                      </span>
+            {limitedCondolances &&
+              limitedCondolances
+                .filter((_, index) => index % 2 !== 0)
+                .map((item, index) => (
+                  <div
+                    className="bg-white rounded-[3px] text-[16px] text-[#414141]"
+                    style={{
+                      boxShadow: "5px 5px 10px 0px #C2C2C280",
+                    }}
+                    key={index}
+                  >
+                    <div className="px-[17px] pt-[14px] pb-[28px]">
+                      {item.message}
+                    </div>
+                    <div className="bg-[#E1E7E8] text-[#6D778E] px-[16px] py-[4px] flex justify-between">
+                      <div className="flex items-end gap-[4px]">
+                        <span className="text-[16px] leading-none">
+                          {item.name}
+                        </span>
+                        <span className="text-[12px] leading-none">
+                          {item.relation}
+                        </span>
+                      </div>
                       <span className="text-[12px] leading-none">
-                        {item.relation}
+                        {formatDate(item?.createdTimestamp)}
                       </span>
                     </div>
-                    <span className="text-[12px] leading-none">
-                      {formatDate(item?.createdTimestamp)}
-                    </span>
                   </div>
-                </div>
-              )
-            )}
+                ))}
           </div>
         </div>
         <div
@@ -1238,7 +1244,7 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
             alt="Slika"
             width={74}
             height={74}
-          // className="mt-[24px] mb-[71px] mx-auto"
+            // className="mt-[24px] mb-[71px] mx-auto"
           />
         </div>
       </div>

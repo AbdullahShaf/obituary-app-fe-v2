@@ -77,7 +77,6 @@ export default function ModalNew6({
       onChange(null);
       resetForm();
     } catch (error) {
-      console.log('>>>>>>>>>>>>>> error', error);
       toast.error("Napaka pri shranjevanju podatkov");
     }
   }

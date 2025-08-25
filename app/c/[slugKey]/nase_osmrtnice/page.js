@@ -217,7 +217,7 @@ export default function Obituaries() {
                       <td className="pr-[25px]">
                         <span
                           onClick={() => {
-                            if (typeof window != undefined) {
+                            if (typeof window !== "undefined") {
                               window.location.href = `/dopolni-osmrtnico/${obituary.id}`
                             }
                           }}

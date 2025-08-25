@@ -100,9 +100,11 @@ const UpdateObituary = ({ set_Id, setModal }) => {
             setLoading(true);
             const result = await obituaryService.getSingleObituaryById(orbituaryId);
 
-            console.log(">>>>>>>>>>>>> Response Variable: ", result);
-
-            if (!result) return;
+            if (!result?.obituaries?.length) {
+                toast.error("Obituary not found.");
+                router.push("/"); // or the listing page
+                return;
+            }
 
             setDataExists(true);
             const response = result.obituaries[0];
@@ -461,8 +463,8 @@ const UpdateObituary = ({ set_Id, setModal }) => {
             <div className="mx-auto mt-[44px] flex flex-row gap-[6px] mobile:flex-wrap mobile:justify-center">
                 <div
                     className={`${activeDivtype === "KORAK 1"
-                            ? "shadow-custom-light-dark-box-image rounded-[10px] border-[#0A85C2] border-[2px] bg-gradient-to-b from-[#FFFFFF] to-[#DADADA] text-[16px] font-semibold leading-[24px] font-variation-customOpt16 text-[#1E2125]"
-                            : "text-[16px] font-sourcesans text-[#1E2125] bg-gradient-to-b from-[#E3E8EC] to-[#FFFFFF10] rounded-[8px] shadow-custom-dark-to-white leading-[24px] font-variation-customOpt16 border-[1px] border-[#FFFFFF]"
+                        ? "shadow-custom-light-dark-box-image rounded-[10px] border-[#0A85C2] border-[2px] bg-gradient-to-b from-[#FFFFFF] to-[#DADADA] text-[16px] font-semibold leading-[24px] font-variation-customOpt16 text-[#1E2125]"
+                        : "text-[16px] font-sourcesans text-[#1E2125] bg-gradient-to-b from-[#E3E8EC] to-[#FFFFFF10] rounded-[8px] shadow-custom-dark-to-white leading-[24px] font-variation-customOpt16 border-[1px] border-[#FFFFFF]"
                         }`}
                 >
                     <button
@@ -475,8 +477,8 @@ const UpdateObituary = ({ set_Id, setModal }) => {
 
                 <div
                     className={`${activeDivtype === "KORAK 2"
-                            ? "shadow-custom-light-dark-box-image rounded-[10px] border-[#0A85C2] font-semibold border-[2px] bg-gradient-to-b from-[#FFFFFF] to-[#DADADA] text-[16px] leading-[24px] font-variation-customOpt16 text-[#1E2125]"
-                            : "text-[16px] font-sourcesans text-[#1E2125] bg-gradient-to-b from-[#E3E8EC] to-[#FFFFFF10] rounded-[8px] shadow-custom-dark-to-white leading-[24px] font-variation-customOpt16 border-[1px] border-[#FFFFFF]"
+                        ? "shadow-custom-light-dark-box-image rounded-[10px] border-[#0A85C2] font-semibold border-[2px] bg-gradient-to-b from-[#FFFFFF] to-[#DADADA] text-[16px] leading-[24px] font-variation-customOpt16 text-[#1E2125]"
+                        : "text-[16px] font-sourcesans text-[#1E2125] bg-gradient-to-b from-[#E3E8EC] to-[#FFFFFF10] rounded-[8px] shadow-custom-dark-to-white leading-[24px] font-variation-customOpt16 border-[1px] border-[#FFFFFF]"
                         }`}
                 >
                     <button
@@ -489,8 +491,8 @@ const UpdateObituary = ({ set_Id, setModal }) => {
 
                 <div
                     className={`${activeDivtype === "POTRDITEV"
-                            ? "shadow-custom-light-dark-box-image rounded-[10px] border-[#0A85C2] font-semibold border-[2px] bg-gradient-to-b from-[#FFFFFF] to-[#DADADA] text-[16px] leading-[24px] font-variation-customOpt16 text-[#1E2125]"
-                            : "text-[16px] font-sourcesans text-[#1E2125] rounded-[8px] bg-gradient-to-b from-[#E3E8EC] to-[#FFFFFF10] shadow-custom-dark-to-white leading-[24px] font-variation-customOpt16 border-[1px] border-[#FFFFFF]"
+                        ? "shadow-custom-light-dark-box-image rounded-[10px] border-[#0A85C2] font-semibold border-[2px] bg-gradient-to-b from-[#FFFFFF] to-[#DADADA] text-[16px] leading-[24px] font-variation-customOpt16 text-[#1E2125]"
+                        : "text-[16px] font-sourcesans text-[#1E2125] rounded-[8px] bg-gradient-to-b from-[#E3E8EC] to-[#FFFFFF10] shadow-custom-dark-to-white leading-[24px] font-variation-customOpt16 border-[1px] border-[#FFFFFF]"
                         }`}
                 >
                     <button
@@ -505,8 +507,8 @@ const UpdateObituary = ({ set_Id, setModal }) => {
             {/*Main Container for details */}
             <div
                 className={`px-[50px] mx-auto desktop:max-w-[650px]  desktop:w-full tablet:max-w-[650px]  tablet:w-full ${activeDivtype === "KOREK 1"
-                        ? "pt-[61px] pb-[44px]"
-                        : "pt-[45px] pb-[39px]"
+                    ? "pt-[61px] pb-[44px]"
+                    : "pt-[45px] pb-[39px]"
                     } mt-[51px] flex flex-col
      bg-gradient-to-br from-[#FFFFFF] to-[#FFFFFF30] backdrop-blur rounded-2xl border-[4px] border-[#FFFFFF] shadow-lg
      mobile:px-[15px] mobile:min-w-[360px] mobile:mt-[39px] mobile:pb-[23px]
@@ -1706,8 +1708,8 @@ const UpdateObituary = ({ set_Id, setModal }) => {
                                 <div
                                     onClick={!loading ? handleSubmit : null} // Disable onClick when isLoading is true
                                     className={`flex flex-1 px-[90px] py-3 mobile:px-10 text-center justify-center items-center rounded-lg shadow-custom-dual text-[16px] cursor-pointer ${loading
-                                            ? "bg-gray-400 cursor-not-allowed" // Disabled styles
-                                            : "bg-gradient-to-b from-[#0d94e8] to-[#1860a3] text-[#ffffff]" // Enabled styles
+                                        ? "bg-gray-400 cursor-not-allowed" // Disabled styles
+                                        : "bg-gradient-to-b from-[#0d94e8] to-[#1860a3] text-[#ffffff]" // Enabled styles
                                         }`}
                                 >
                                     {loading ? "Shranjujem..." : "Posodobi podatke"}

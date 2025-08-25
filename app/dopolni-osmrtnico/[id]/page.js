@@ -99,6 +99,9 @@ const Obituaryform = () => {
           setIsShowModal={setIsShowModal}
           select_id={select_id}
           set_Id={setSelect_Id}
+          selectedImage={null}
+          data={null}
+          updateObituary={() => { }}
         />
         {/* <HeaderRegistration isfrom={"ObituaryForm"} /> */}
 

@@ -68,7 +68,7 @@ export default function CompanySidebar({
           <CommonViewBusinessAccSidebar
             imgPath={
               normalPath === "/nase_spominske" ||
-              normalPath === "/nasi_prispevki"
+                normalPath === "/nasi_prispevki"
                 ? "/anti_spominske.png"
                 : "/spominske.png"
             }
@@ -126,8 +126,8 @@ export default function CompanySidebar({
         <CommonViewBusinessAccSidebar
           imgPath={
             normalPath == "/nasi_podatki" ||
-            normalPath == "/narocila" ||
-            normalPath == "/promocije"
+              normalPath == "/narocila" ||
+              normalPath == "/promocije"
               ? "/icon_white_setting.png"
               : "/ico_setting.png"
           }
@@ -170,7 +170,7 @@ export default function CompanySidebar({
 
           <div
             className="w-[186px]   cursor-pointer rounded-[10px] mt-[20px]"
-                          onClick={logout}
+            onClick={logout}
           >
             <div className="h-[48px] flex justify-start items-center rounded-[8px]">
               <div className="ml-[15px]">

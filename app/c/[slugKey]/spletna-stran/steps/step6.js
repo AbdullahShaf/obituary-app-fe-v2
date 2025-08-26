@@ -121,7 +121,7 @@ export default function Step6({
 
       const data = {
         companyId,
-        shops: shopsToSend,
+        shops: JSON.stringify(shopsToSend),
       };
       await handlePublish();
       const response = await shopService.createShop(data);

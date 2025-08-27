@@ -98,12 +98,10 @@ const getMyCards = async () => {
 };
 
 const downloadCard = async (cardId: string) => {
-  const endpoint = "/user/me/download";
+  const endpoint = `/user/me/download/${cardId}`;
 
-  const response = await axios.patch(
-    endpoint,
-    { cardId: cardId },
-    { withCredentials: true }
+  const response = await axios.get(
+    endpoint
   );
 
   return response.data;

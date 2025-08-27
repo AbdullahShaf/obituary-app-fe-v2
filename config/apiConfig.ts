@@ -1,4 +1,4 @@
-export const isDev = true
+export const isDev = false
 ; // use this to toggle for development.
 
 const API_BASE_URL = isDev

@@ -106,7 +106,7 @@ const CompanyAccountLayout = ({ children }) => {
         break;
       case "/nasa_darila":
         setHeadingOne("Darila strankam");
-        setHeadingTwo("Mesečni pregled");
+        // setHeadingTwo("Mesečni pregled"); // Removed temporarily
         setHeadingThree(null);
         break;
       case "/narocila":

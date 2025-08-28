@@ -43,6 +43,8 @@ const MemoryPageContent = ({ params }) => {
     console.log("set is modal:", isShowModal);
   }, [isShowModal]);
 
+  console.log('>>>>>>>>> obituary', obituary);
+
   const fetchMemory = async () => {
     try {
       const response = await obituaryService.getMemory({ slugKey: slugKey });

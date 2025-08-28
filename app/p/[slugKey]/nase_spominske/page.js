@@ -2,6 +2,7 @@
 import CompanyAccountLayout from "@/app/components/appcomponents/CompanyAccountLayout";
 import obituaryService from "@/services/obituary-service";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Spominske() {
   const [obituaries, setObituaries] = useState([]);
@@ -9,6 +10,32 @@ export default function Spominske() {
     currentMonthCount: 0,
     lastMonthCount: 0,
   });
+  const [totalObitWithKeeper, setTotalObitWithKeeper] = useState(0);
+  const [monthlyTotalData, setMonthlyTotalData] = useState({});
+  const [currentMonthData, setCurrentMonthlData] = useState(null);
+  useEffect(() => {
+    getMonthlyData();
+  }, []);
+
+  const getMonthlyData = async () => {
+    try {
+      const response = await obituaryService.getMonthlyCompanyData();
+      if (response) {
+        setMonthlyTotalData(response.obituaries);
+        setTotalObitWithKeeper(response.totalObituariesWithKeeper);
+        const now = new Date();
+        const formatted = now.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+        if (typeof response.obituaries[formatted] !== undefined) {
+          setCurrentMonthlData(response.obituaries[formatted]);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log('>>>>>>>> currentMonthData', currentMonthData);
+
   useEffect(() => {
     getObituaries();
   }, []);
@@ -43,9 +70,9 @@ export default function Spominske() {
               <div className="flex justify-between items-start mb-[2px]">
                 <h2 className="text-[32px] text-[#CCCCCC] font-light leading-none flex items-end gap-[10px]">
                   <span className="font-bold text-[#6D778E] text-[40px]">
-                    {obituaries.length}
+                    {currentMonthData?.obituaries?.length ?? 0}
                   </span>
-                  I <span>{monthData.lastMonthCount}</span>
+                  I <span>{monthData.currentMonthCount}</span>
                 </h2>
                 <img
                   src="/ico_pregled.png"
@@ -65,9 +92,9 @@ export default function Spominske() {
               <div className="flex justify-between items-start mb-[2px]">
                 <h2 className="text-[32px] text-[#CCCCCC] font-light leading-none flex items-end gap-[10px]">
                   <span className="font-bold text-[#6D778E] text-[40px]">
-                    5
+                    {totalObitWithKeeper}
                   </span>{" "}
-                  I <span>2</span>
+                  I <span>{currentMonthData?.stats?.keeperCount ?? 0}</span>
                 </h2>
                 <img
                   src="/spominske.png"
@@ -190,36 +217,38 @@ export default function Spominske() {
           <div className="mt-[36px] grid grid-cols-4 tabletUserAcc:grid-cols-3 mobileUserAcc:grid-cols-3 gap-[18px]">
             {obituaries.length > 0
               ? obituaries.map((obituary, index) => (
-                  <div
-                    key={index}
-                    className="bg-gradient-to-b from-[#0D94E8] to-[#1860A3] rounded-[8px] p-[2px] h-[72px]"
-                  >
-                    <div className="bg-[#E9F1E8] rounded-[7px] w-full h-full">
-                      <div className="w-full flex flex-col items-center justify-center pt-[9px] pb-0">
+                <div
+                  key={index}
+                  className="bg-gradient-to-b from-[#0D94E8] to-[#1860A3] rounded-[8px] p-[2px] h-[72px]"
+                >
+                  <div className="bg-[#E9F1E8] rounded-[7px] w-full h-full">
+                    <div className="w-full flex flex-col items-center justify-center pt-[9px] pb-0 cursor-pointer">
+                      <Link href={`/m/${obituary.slugKey}`} className="text-[14px] text-[#6D778E] w-full flex flex-col items-center justify-center">
                         <p className="text-[16px] text-[#1E2125]">
                           {obituary.name} {obituary.sirName}
                         </p>
                         <p className="text-[14px] text-[#6D778E]">
                           {obituary.city}
                         </p>
-                      </div>
-                      <div className="flex justify-between items-center px-[6px] pb-[6px]">
-                        {obituary.hasKeeper === true ? (
-                          <img src="/dodana.png" alt="" className="h-[10px]" />
-                        ) : (
-                          <img
-                            src="/ico_pregled.png"
-                            alt=""
-                            className="h-[10px]"
-                          />
-                        )}
-                        <span className="text-[#6D778E99] text-[10px] leading-none">
-                          {formatDate(obituary.createdTimestamp)}
-                        </span>
-                      </div>
+                      </Link>
+                    </div>
+                    <div className="flex justify-between items-center px-[6px] pb-[6px]">
+                      {obituary.hasKeeper === true ? (
+                        <img src="/dodana.png" alt="" className="h-[10px]" />
+                      ) : (
+                        <img
+                          src="/ico_pregled.png"
+                          alt=""
+                          className="h-[10px]"
+                        />
+                      )}
+                      <span className="text-[#6D778E99] text-[10px] leading-none">
+                        {formatDate(obituary.createdTimestamp)}
+                      </span>
                     </div>
                   </div>
-                ))
+                </div>
+              ))
               : null}
           </div>
         </div>

@@ -40,9 +40,17 @@ const getFloristShops = async (queryParams?: {
   return response.data;
 };
 
+const deleteShop = async (id: any) => {
+  const endpoint = `/florist_shop?id=${id}`;
+
+  const response = await axios.delete(endpoint);
+  return response.data;
+};
+
 const shopService = {
   createShop,
   getFloristShops,
+  deleteShop
 };
 
 export default shopService;

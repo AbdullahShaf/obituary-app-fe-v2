@@ -55,11 +55,29 @@ const Card3 = ({ data = {}, cardRefs, index, cemetery }) => {
 
         <div className="name-year-container text-[#F8EDE3] mt-[177px]">
           <h1 className="text-center text-[24px] font-medium h-[20px]">
-            {formatToDottedDate(data?.funeralTimestamp)} ob{" "}
-            {formatDayAndTimeSlovenian(data?.funeralTimestamp).time}
+            {data?.funeralTimestamp ? (
+              <>
+                {formatToDottedDate(data?.funeralTimestamp)} ob{" "}
+                {formatDayAndTimeSlovenian(data?.funeralTimestamp).time}
+              </>
+            ) : (
+              <>
+                &nbsp;{" "}
+                &nbsp;
+              </>
+            )}
           </h1>
           <p className="text-center mx-auto mt-[16px] text-[18px] h-[20px]">
-            {data?.Cemetry?.funeralCemetery ?? cemetery}
+            {data?.funeralTimestamp ? (
+              <>
+                {data?.Cemetry?.funeralCemetery ?? cemetery}
+              </>
+            ) : (
+              <>
+                &nbsp;
+              </>
+            )}
+
             {/* {data?.Cemetry?.funeralCemetery} v {data?.funeralLocation} */}
           </p>
         </div>

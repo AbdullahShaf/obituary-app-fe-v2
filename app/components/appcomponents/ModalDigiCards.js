@@ -17,13 +17,12 @@ export default function ModalDigiCards({
     const downloadCard = (id) => {
         const downloadURL = `${API_BASE_URL}/user/me/download/${id}`;
 
-        const popup = window.open(downloadURL, '_blank');
-        toast.success("Kartica je bila uspešno prenesena");
-
+        const popup = window.open(downloadURL, '_blank', 'noopener,noreferrer');
         if (!popup) {
             alert('Popup blocked. Please allow popups for this site.');
             return;
         }
+        toast.success("Kartica je bila uspešno prenesena");
     };
 
 

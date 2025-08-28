@@ -383,7 +383,7 @@ const AddObituary = ({ set_Id, setModal }) => {
             .getFullYear()
             .toString()
             .slice(2)}`;
-      console.log('>>>>>>>>>>>>>>>>>>>>>>> obit', response);
+
       setObituaryResponse(response);
     } catch (error) {
       console.error("Error creating obituary:", error);

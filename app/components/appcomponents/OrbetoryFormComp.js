@@ -132,7 +132,6 @@ const OrbetoryFormComp = ({
       const response = await cardService.assignCard(formData);
       toast.success("Card is sent to user");
     } catch (error) {
-      console.log('>>>>>>>>>>>>> error', error);
       if (error?.response?.status === 404) {
         toast.error("No Such User Found");
       } else if (error?.response?.status === 409) {

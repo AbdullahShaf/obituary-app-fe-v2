@@ -107,6 +107,27 @@ const downloadCard = async (cardId: string) => {
   return response.data;
 };
 
+const getMyKeeperStatus = async () => {
+  try {
+    const endpoint = "/user/me/keeper";
+
+    const response = await axios.get(endpoint);
+    return response.data;
+  } catch (error: unknown) {
+    return new Error("Network error or no response");
+  }
+};
+
+const updateKeeperStatus = async (id: string) => {
+  const endpoint = `/user/me/keeper/${id}`;
+
+  const response = await axios.patch(
+    endpoint
+  );
+
+  return response.data;
+};
+
 const userService = {
   registerUser,
   getMyUser,
@@ -115,7 +136,9 @@ const userService = {
   changeSlug,
   updateUserAndCompany,
   getMyCards,
-  downloadCard
+  downloadCard,
+  getMyKeeperStatus,
+  updateKeeperStatus
 };
 
 export default userService;

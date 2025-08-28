@@ -7,6 +7,7 @@ import DropdownWithSearch from "./DropdownWithSearch";
 import regionsAndCities from "@/utils/regionAndCities";
 import ModalLibrary from "../appcomponents/ModalLibrary";
 import ModalDigiCards from "../appcomponents/ModalDigiCards";
+import ModalKeeperNotification from "../appcomponents/ModalKeeperNotification";
 import Dropdown from "@/app/components/appcomponents/Dropdown";
 import userService from "@/services/user-service";
 import toast from "react-hot-toast";
@@ -22,6 +23,8 @@ const MyAccount = () => {
   const [user, setUser] = useState("");
   const [selectedCity, setSelectedCity] = useState(null);
   const [digiCards, setDigiCards] = useState([]);
+  const [showKeeperModal, setShowKeeperModal] = useState(false);
+  const [keeperId, setKeeperId] = useState(null);
 
   // const [showImageView, setShowImageView] = useState(false)
 
@@ -110,10 +113,23 @@ const MyAccount = () => {
   ];
 
   const getAllCards = async () => {
-    const response = await userService.getMyCards();
-    if (response && response?.userCards && response?.userCards?.length) {
-      let myCards = response?.userCards?.filter((item) => item?.cardPdf && item?.cardImage);
-      setDigiCards(myCards);
+    try {
+      const response = await userService.getMyCards();
+      if (response?.userCards?.length) {
+        const myCards = response?.userCards?.filter((item) => item?.cardPdf && item?.cardImage);
+        setDigiCards(myCards);
+      } else {
+        setDigiCards([]);
+      }
+
+      const keeperStatus = await userService.getMyKeeperStatus();
+      if (keeperStatus && keeperStatus?.user && keeperStatus?.user?.id) {
+        setShowKeeperModal(true);
+        setKeeperId(keeperStatus?.user?.id);
+      }
+    } catch (e) {
+      toast.error("Napaka pri pridobivanju kartic.");
+      console.error("getAllCards failed:", e);
     }
   }
 
@@ -404,6 +420,7 @@ const MyAccount = () => {
       </div>
 
       <ModalDigiCards isShowModal={isShowCards} setIsShowModal={setIsShowCards} data={digiCards} />
+      <ModalKeeperNotification isShowModal={showKeeperModal} setIsShowModal={setShowKeeperModal} keeperId={keeperId} />
     </div>
   );
 };

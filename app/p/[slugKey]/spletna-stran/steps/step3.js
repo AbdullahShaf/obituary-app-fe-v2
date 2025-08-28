@@ -137,7 +137,7 @@ export default function Step3({ data, onChange, handleStepChange }) {
       toast.error("Cemetery is not saved yet.");
       return;
     }
-    console.log("Deleting cemetery with ID:", cemetery);
+    console.log("Deleting cemetery with ID:", cemetery?.id);
     try {
       const { cemeteries } = await cemetryService.deleteCemetery(cemetery.id);
       setCemetries(cemeteries);

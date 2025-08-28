@@ -62,11 +62,11 @@ export const FrequentlyAskedQuestionView = ({ from, data }) => {
             </div>
             {from == "7" || from == "8" ? null : (
               <div className="self-end">
-                <button className="flex mobile:mt-3 items-center rounded-lg py-3 px-6 justify-center border-[#0A85C270] border-2 shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
+                <div className="flex mobile:mt-3 items-center rounded-lg py-3 px-6 justify-center border-[#0A85C270] border-2 shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
                   <div className=" flex font-variation-customOpt16 font-normal text-[16px] leading-6 text-[#414141] text-center">
                     Kaj storiti, ko se zgodi
                   </div>
-                </button>
+                </div>
               </div>
             )}
           </div>

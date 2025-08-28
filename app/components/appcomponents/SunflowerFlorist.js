@@ -162,9 +162,9 @@ const SunflowerFlorist = ({ data }) => {
               <p className="text-[20px] leading-[23.44px] text-[#1E2125] font-variation-customOpt20">
                 Obiščite našo spletno stran:
                 <Link href="https://www.suniflower.com">
-                  <a className="text-[#1E2125] text-[24px] font-variation-customOpt24">
+                  <span className="text-[#1E2125] ml-1 text-[24px] font-variation-customOpt24">
                     www.suniflower.com
-                  </a>
+                  </span>
                 </Link>
               </p>
             )}

@@ -4,7 +4,7 @@ import {
 } from "@/utils/dateUtils";
 import React from "react";
 
-const Card2 = ({ data = {}, cardRefs, index }) => {
+const Card2 = ({ data = {}, cardRefs, index, cemetery }) => {
   return (
     <div
       ref={(el) => {
@@ -42,7 +42,8 @@ const Card2 = ({ data = {}, cardRefs, index }) => {
             <p className="text-[#78600B] text-center mx-auto mt-3 text-[14px] font-light">
               {formatDayAndTimeSlovenian(data?.funeralTimestamp).dayName} ob{" "}
               {formatDayAndTimeSlovenian(data?.funeralTimestamp).time} <br />{" "}
-              {data?.Cemetry?.funeralCemetery} v {data?.funeralLocation}
+              {data?.Cemetry?.funeralCemetery ?? cemetery}
+              {/* {data?.Cemetry?.funeralCemetery} v {data?.funeralLocation} */}
             </p>
           </div>
         </div>

@@ -2,7 +2,7 @@ import API_BASE_URL from "@/config/apiConfig";
 import { formatToDottedDate } from "@/utils/dateUtils";
 import React from "react";
 
-const Card5 = ({ data = {}, cardRefs, index }) => {
+const Card5 = ({ data = {}, cardRefs, index, cemetery }) => {
   return (
     <div
       ref={(el) => {

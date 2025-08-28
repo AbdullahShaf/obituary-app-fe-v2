@@ -6,6 +6,8 @@ import DropdownWithSearch from "./DropdownWithSearch";
 
 import regionsAndCities from "@/utils/regionAndCities";
 import ModalLibrary from "../appcomponents/ModalLibrary";
+import ModalDigiCards from "../appcomponents/ModalDigiCards";
+import ModalKeeperNotification from "../appcomponents/ModalKeeperNotification";
 import Dropdown from "@/app/components/appcomponents/Dropdown";
 import userService from "@/services/user-service";
 import toast from "react-hot-toast";
@@ -15,10 +17,14 @@ const MyAccount = () => {
     /* 17 October 2024 */
   }
   const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowCards, setIsShowCards] = useState(false);
   const [select_id, setSelect_Id] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [user, setUser] = useState("");
   const [selectedCity, setSelectedCity] = useState(null);
+  const [digiCards, setDigiCards] = useState([]);
+  const [showKeeperModal, setShowKeeperModal] = useState(false);
+  const [keeperId, setKeeperId] = useState(null);
 
   // const [showImageView, setShowImageView] = useState(false)
 
@@ -86,6 +92,7 @@ const MyAccount = () => {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+    getAllCards();
   }, []);
   const formatDate = (timestamp) => {
     return new Date(timestamp).toLocaleString("sl-SI", {
@@ -104,6 +111,27 @@ const MyAccount = () => {
       }))
       .sort((a, b) => a.place.localeCompare(b.place, "sl")),
   ];
+
+  const getAllCards = async () => {
+    try {
+      const response = await userService.getMyCards();
+      if (response?.userCards?.length) {
+        const myCards = response?.userCards?.filter((item) => item?.cardPdf && item?.cardImage);
+        setDigiCards(myCards);
+      } else {
+        setDigiCards([]);
+      }
+
+      const keeperStatus = await userService.getMyKeeperStatus();
+      if (keeperStatus && keeperStatus?.user && keeperStatus?.user?.id) {
+        setShowKeeperModal(true);
+        setKeeperId(keeperStatus?.user?.id);
+      }
+    } catch (e) {
+      toast.error("Napaka pri pridobivanju kartic.");
+      console.error("getAllCards failed:", e);
+    }
+  }
 
   const handleCitySelect = async (item) => {
     try {
@@ -132,6 +160,30 @@ const MyAccount = () => {
         className="flex mt-[75px] tabletUserAcc:mt-[46px] gap-y-5 mobileUserAcc:gap-y-3 flex-col desktopUserAcc:pr-[170px] pr-0
                 mobileUserAcc:mt-[27px]"
       >
+        {digiCards?.length ? (
+          <span
+            className="inline-flex items-center text-[14px] text-[#4B5563] font-variation-customOpt14 mobileUserAcc:text-[#9CA3AF] mobileUserAcc:text-[13px] mobileUserAcc:font-variation-customOpt13 font-semibold mb-1 space-x-3 transition-colors duration-300 hover:text-[#2563EB]">
+            {/* Stylish Gift Icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 text-[#4B5563] mobileUserAcc:text-[#9CA3AF] transition-colors duration-300 group-hover:text-[#2563EB]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.8}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2v-7" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 12V7a4 4 0 10-4 4h8a4 4 0 10-4-4v5" />
+            </svg>
+            {/* Text */}
+            <span className="relative cursor-pointer" onClick={() => setIsShowCards(true)}>
+              Moje darilne kartice
+              <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            </span>
+          </span>
+        ) : null}
+
         <div className="flex gap-[26px] mobileUserAcc:gap-3 mobileUserAcc:flex-col tabletUserAcc:justify-between">
           <div className="flex desktopUserAcc:w-[403px] flex-col w-full">
             <label className="text-[14px] text-[#6D778E] font-variation-customOpt14 mobileUserAcc:text-[#ACACAC] mobileUserAcc:text-[13px] mobileUserAcc:font-variation-customOpt13 font-normal mb-1">
@@ -260,8 +312,8 @@ const MyAccount = () => {
                   {user?.city
                     ? user.city
                     : selectedCity
-                    ? selectedCity
-                    : "Izberi občino"}
+                      ? selectedCity
+                      : "Izberi občino"}
                 </span>
               </div>
               <div className="hidden  h-5 w-24   justify-between pl-0 pr-0 items-center mobileUserAcc:flex">
@@ -366,6 +418,9 @@ const MyAccount = () => {
           height={32}
         />
       </div>
+
+      <ModalDigiCards isShowModal={isShowCards} setIsShowModal={setIsShowCards} data={digiCards} />
+      <ModalKeeperNotification isShowModal={showKeeperModal} setIsShowModal={setShowKeeperModal} keeperId={keeperId} />
     </div>
   );
 };

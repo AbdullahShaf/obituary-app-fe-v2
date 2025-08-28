@@ -2,7 +2,7 @@
 import API_BASE_URL from "@/config/apiConfig";
 import React, { useRef } from "react";
 
-const Card1 = ({ data, cardRefs, index }) => {
+const Card1 = ({ data, cardRefs, index, cemetery }) => {
   const formatDate = (timestamp) => {
     const funeralDate = new Date(timestamp);
     if (isNaN(funeralDate.getTime())) return "";
@@ -74,7 +74,8 @@ const Card1 = ({ data, cardRefs, index }) => {
               </h1>
               <p className="">{formatDate(data?.funeralTimestamp)}</p>
               <p className="text-[#fff] pb-10">
-                {data?.Cemetry?.funeralCemetery} v {data?.funeralLocation}
+                {data?.Cemetry?.funeralCemetery ?? cemetery}
+                {/* {data?.Cemetry?.funeralCemetery} v {data?.funeralLocation} */}
               </p>
             </div>
           </div>

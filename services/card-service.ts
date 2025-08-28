@@ -5,7 +5,7 @@ const assignCard = async (data: any) => {
   const endpoint = `/card`;
   try {
     const response = await axios.post(endpoint, data, {
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "multipart/form-data" },
     });
     return response.data;
   } catch (error) {

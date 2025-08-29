@@ -27,6 +27,7 @@ export default function AccountSettings() {
   const [isShowModal6, setIsShowModal6] = useState(false);
   const [select_id, setSelect_Id] = useState("");
   const [firstPayload, setFirstPayload] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleModal6 = () => {
     setIsShowModal1(false);
@@ -99,6 +100,14 @@ export default function AccountSettings() {
 
   // Check if there are any florist shops
   const hasFloristShops = data?.CompanyPage?.FloristShops && data?.CompanyPage?.FloristShops?.length > 0;
+
+  const deleteShop = async (id) => {
+    setIsLoading(true);
+    await shopService.deleteShop(id);
+    setIsLoading(false);
+    getCompleteCompanyData();
+    toast.success('Florist shop deleted successfully.');
+  }
 
   return (
     <CompanyAccountLayout>
@@ -201,8 +210,16 @@ export default function AccountSettings() {
                       <span className="text-[#3C3E41]">{item.address}</span>
                       <span className="text-[#3C3E41]">{item.telephone}</span>
                       <span className="text-[#3C3E41]">{item.email}</span>
-                      <span className="text-[#3C3E41]">{item?.website}</span>
+                      {item?.website ? <span className="text-[#3C3E41]">{item?.website}</span> : null}
                     </div>
+                    <span
+                      className={`text-[#a4a4a4] table w-[50px] transition-opacity duration-200 ${isLoading ? 'opacity-50 cursor-not-allowed pointer-events-none' : 'cursor-pointer'
+                        }`}
+                      onClick={!isLoading ? () => deleteShop(item?.id) : null}
+                    >
+                      Zbriši
+                    </span>
+
                   </div>
                 ))}
               </div>

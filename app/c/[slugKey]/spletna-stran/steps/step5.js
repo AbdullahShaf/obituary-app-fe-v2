@@ -57,6 +57,10 @@ export default function Step5({
       //   toast.error("Each Slide must have an image,title and description");
       //   return;
       // }
+      if (!companyId) {
+        toast.error("Company is not ready. Please try again in a moment.");
+        return false;
+      }
       const formData = new FormData();
       formData.append("companyId", companyId);
 
@@ -123,7 +127,7 @@ export default function Step5({
   return (
     <>
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        Blue Daisy Florist, London
+        {data?.heading || "Blue Daisy Florist, London"}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[20px]">

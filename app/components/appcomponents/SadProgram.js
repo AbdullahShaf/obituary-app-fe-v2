@@ -17,12 +17,12 @@ const SadProgram = ({ data }) => {
   }, [data?.packages]);
 
   return (
-    <div className="relative max-w-[1920px] bg-[#F5F7F9] w-full py-16 tablet:py-12 mobile:py-8  overflow-hidden mx-auto justify-center items-center flex ">
+    <div className="relative max-w-[1920px] mobile:mb-[41px] bg-[#F5F7F9] w-full py-16 tablet:py-12 mobile:py-8  overflow-hidden mx-auto justify-center items-center flex ">
       {/*Main Contianer (chlid contianer)*/}
       <div className="flex w-[901px] tablet:w-[613px] tablet:h-auto mobile:w-[292px] flex-col">
         {/*Header contianer*/}
         <div className="flex w-[613px] h-[111px] mobile:w-[292px] mobile:h-[174px] flex-col tablet:justify-center tablet:items-center mobile:justify-center mobile:items-center">
-          <div className="text-[40px] mt-[-8px] text-[#1E2125] mobile:text-[24px] mobile:font-variation-customOpt32 font-variation-customOpt40">
+          <div className="text-[40px] tablet:text-[32px] mt-[-8px] text-[#1E2125] mobile:text-[24px] mobile:font-variation-customOpt32 font-variation-customOpt40">
             Žalni program
           </div>
           <div className="text-[16px] text-[#939393] font-variation-customOpt16 leading-[24px] mt-[11px]">
@@ -43,11 +43,12 @@ const SadProgram = ({ data }) => {
                 >
                   <Image
                     src={
+                      typeof item.image === "string" &&
                       item.image.includes("packageUploads")
                         ? `${API_BASE_URL}/${item.image}`
                         : item.image
                     }
-                    alt="flower 1 image"
+                    alt={item.title || "package image"}
                     className="w-[119.65px] h-[135.08px] mt-[58.27px]"
                     width={120}
                     height={135}
@@ -69,11 +70,12 @@ const SadProgram = ({ data }) => {
               >
                 <Image
                   src={
+                    typeof item.image === "string" &&
                     item.image.includes("packageUploads")
                       ? `${API_BASE_URL}/${item.image}`
                       : item.image
                   }
-                  alt="flower 1 image"
+                  alt={item.title || "package image"}
                   className="w-[119.65px] h-[135.08px] mt-[58.27px]"
                   width={120}
                   height={135}
@@ -88,10 +90,11 @@ const SadProgram = ({ data }) => {
             ))}
           </div>
 
-          {/*Show More text contianer for mobile*/}
+          {/*Show More text contianer for mobile
           <div className="text-[16px] text-[#414141] font-variation-customOpt14 mt-[21px] self-center mobile:flex hidden">
             Show more
           </div>
+          */}
         </div>
 
         {/*Bottom text Contianer*/}

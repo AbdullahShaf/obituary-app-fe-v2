@@ -14,6 +14,7 @@ export default function SpletnaStran() {
   const [step, setStep] = useState(1);
   const [company, setCompany] = useState(null);
   const [user, setUser] = useState(null);
+  const [render, setRender] = useState(false);
 
   const handleStepChange = (step) => {
     setStep(step);
@@ -28,7 +29,7 @@ export default function SpletnaStran() {
     if (user) {
       getCompany();
     }
-  }, [user]);
+  }, [user, render]);
 
   const getCompany = async () => {
     try {
@@ -46,6 +47,7 @@ export default function SpletnaStran() {
     }
   };
   const handleCompanyChange = (data) => {
+    setRender(!render);
     setCompany(data);
   };
   const steps = [

@@ -59,12 +59,13 @@ const SunflowerFlorist = ({ data }) => {
     <div className="bg-white desktop:bg-[#EDF1F3]">
       {/* Main Container */}
       <div
-        className="relative max-w-[1920px] mobile:h-[908px] mobile:w-[360px] w-full mx-auto h-[514px] tablet:h-auto overflow-hidden flex flex-row 
+        className="relative max-w-[1920px] mobile:h-[908px] mobile:w-[360px] w-full mx-auto mobile:h-auto mobile:mb-5 h-[514px] tablet:h-auto overflow-hidden flex flex-row 
             mobile:flex-col tablet:flex-col tablet:items-center desktop:bg-[#DAEBF120] bg-white desktop:justify-center"
       >
-        <div className="flex desktop:hidden mobile:w-[306px] mobile:h-[84px] mobile:mt-[6.27px] w-[593px] h-[42px] mx-auto flex-wrap mt-[43.23px] text-center text-[#939393] text-[14px] leading-[21px]">
-          {/* {images[currentIndex].detail} */}
+        {/*<div className="flex desktop:hidden mobile:w-[306px] mobile:h-[84px] mobile:mt-[6.27px] w-[593px] h-[42px] mx-auto flex-wrap mt-[43.23px] text-center text-[#939393] text-[14px] leading-[21px]">
+        {images[currentIndex].detail} 
         </div>
+        */}
         {shops.length > 1 && (
           <button
             onClick={handlePrev}
@@ -117,7 +118,7 @@ const SunflowerFlorist = ({ data }) => {
             )}
           </div>
 
-          <div className="tablet:hidden desktop:flex mobile:flex flex h-[180px] w-[370px] justify-center flex-row mobile:w-[200px] mobile:h-[120px] mobile:mt-[0px] mobile:ml-10 mobile:mr-auto tablet:mt-[33px] mt-[56px]">
+          <div className="tablet:hidden desktop:flex mobile:flex flex h-[180px] w-[370px] justify-center flex-row mobile:w-[200px] mobile:h-[120px] mobile:mt-[50px] mobile:ml-10 mobile:mr-auto tablet:mt-[33px] mt-[45px]">
             <img
               key={`${data?.id}-${currentIndex}-logo-${currentShop?.id}`}
               src={getLogo(data?.logo)}
@@ -161,9 +162,9 @@ const SunflowerFlorist = ({ data }) => {
               <p className="text-[20px] leading-[23.44px] text-[#1E2125] font-variation-customOpt20">
                 Obiščite našo spletno stran:
                 <Link href="https://www.suniflower.com">
-                  <href className="text-[#1E2125] text-[24px] font-variation-customOpt24">
+                  <span className="text-[#1E2125] ml-1 text-[24px] font-variation-customOpt24">
                     www.suniflower.com
-                  </href>
+                  </span>
                 </Link>
               </p>
             )}
@@ -237,37 +238,39 @@ const SunflowerFlorist = ({ data }) => {
             />
           </div>
 
-          <div className="mobile:flex flex-row hidden mt-[18px] justify-between w-[275px] h-[41px] ml-[29px]">
-            <div>
+          <div className="mobile:flex flex-row hidden mt-[18px] mobile:justify-center justify-between w-[275px] h-[41px] ml-[29px]">
+            <div className="mobile:hidden tablet:flex desktop:flex">
               <ProgressBar
                 currentSlide={currentIndex}
                 totalSlides={shops.length}
               />
             </div>
 
-            <div className="flex gap-[30px] flex-row items-center ">
-              <button
-                onClick={handlePrev}
-                className="mobile:flex h-[36px] shadow-custom-light-dark-with-white-button bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] justify-center items-center rounded-lg w-[36px] px-2"
-              >
-                <img
-                  src="/img_back_mob.png"
-                  alt="back"
-                  className="h-[13.79px] w-[8.43px]"
-                />
-              </button>
+            {shops.length > 1 && (
+              <div className="flex gap-[30px] flex-row items-center ">
+                <button
+                  onClick={handlePrev}
+                  className="mobile:flex h-[36px] shadow-custom-light-dark-with-white-button bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] justify-center items-center rounded-lg w-[36px] px-2"
+                >
+                  <img
+                    src="/img_back_mob.png"
+                    alt="back"
+                    className="h-[13.79px] w-[8.43px]"
+                  />
+                </button>
 
-              <button
-                onClick={handleNext}
-                className="mobile:flex h-[36px] shadow-custom-light-dark-with-white-button bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] justify-center items-center rounded-lg w-[36px] px-2 "
-              >
-                <img
-                  src="/img_forward_mob.png"
-                  alt="back"
-                  className="h-[13.79px] w-[8.43px]"
-                />
-              </button>
-            </div>
+                <button
+                  onClick={handleNext}
+                  className="mobile:flex h-[36px] shadow-custom-light-dark-with-white-button bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] justify-center items-center rounded-lg w-[36px] px-2 "
+                >
+                  <img
+                    src="/img_forward_mob.png"
+                    alt="back"
+                    className="h-[13.79px] w-[8.43px]"
+                  />
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="ml-[29px] tablet:mx-auto mobile:mx-auto flex flex-row gap-[16px] w-[176px] h-[48px] tablet:mt-[26px] mobile:mt-[29px] mt-[63px]">

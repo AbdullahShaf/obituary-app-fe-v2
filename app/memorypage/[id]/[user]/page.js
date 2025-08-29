@@ -19,6 +19,7 @@ import AnnouncementBlock from "../../../components/appcomponents/AnnouncementBlo
 import { FlowerShops2 } from "../../../components/appcomponents/FlowerShops";
 import { useRouter } from "next/navigation";
 import Card1 from "@/app/components/mobile-cards/card1";
+import { getTemplateCardImages } from "@/utils/commonUtils";
 
 const MemoryPage = ({ params }) => {
   const { id, user } = params;
@@ -116,8 +117,8 @@ const MemoryPage = ({ params }) => {
         .getDate()
         .toString()
         .padStart(2, "0")}${(funeralDate.getMonth() + 1)
-        .toString()
-        .padStart(2, "0")}${funeralDate.getFullYear().toString().slice(2)}`; // Format: DDMMYY
+          .toString()
+          .padStart(2, "0")}${funeralDate.getFullYear().toString().slice(2)}`; // Format: DDMMYY
 
       router.push(
         `/memorypage/${data.id}/${data.name}_${data.sirName}_${funeralDateFormatted}`
@@ -165,6 +166,8 @@ const MemoryPage = ({ params }) => {
         <ShippingNotifications
           set_Id={setSelect_Id}
           setModal={setIsShowModal}
+          images={getTemplateCardImages(obituary?.cardImages)}
+          blurredImages={Boolean(obituary?.cardImages?.length)}
         />
         <FlowerShops
           data={obituary}

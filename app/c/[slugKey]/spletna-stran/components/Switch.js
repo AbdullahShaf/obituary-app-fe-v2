@@ -2,16 +2,19 @@
 
 import { useEffect, useState } from "react";
 
-export default function Switch({ onChange, currentValue }) {
+export default function Switch({ onChange, currentValue, disabled = false }) {
   const [isOn, setIsOn] = useState(currentValue);
   const handleChange = (condition) => {
+    if (disabled) return;
     setIsOn(condition);
     onChange(condition);
   };
 
   return (
     <div
-      className="flex items-center gap-[8px] border border-[#C0CBE2] w-[56px] h-[32px] rounded-[16px] px-[4px] cursor-pointer"
+      className={`flex items-center gap-[8px] border border-[#C0CBE2] w-[56px] h-[32px] rounded-[16px] px-[4px] ${
+        disabled ? "cursor-not-allowed" : "cursor-pointer"
+      }`}
       onClick={() => handleChange(!isOn)}
     >
       <div

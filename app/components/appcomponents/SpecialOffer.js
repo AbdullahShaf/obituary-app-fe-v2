@@ -67,15 +67,17 @@ const SpecialOffer = ({ data }) => {
       <div className="w-full flex-shrink-0 lg:w-[80%] lg:max-w-[1400px] px-5 mx-auto flex items-center justify-between">
         <button
           onClick={handlePrev}
+          disabled={currentIndex === 0}
+          aria-label="Previous slide"
           className="mobile:hidden flex my-auto mr-[30px] tablet:ml-[30px]"
         >
-          <img src="/img_back.png" alt="Next" className="h-[40px] w-[17px]" />
+          <img src="/img_back.png" alt="" className="h-[40px] w-[17px]" />
         </button>
 
         {slides && slides.length > 0 && (
           <div
             key={`${activeSlide?.id}-${currentIndex}`}
-            className="h-full max-w-[1023px] w-full py-[100px] tablet:py-8 mobile:py-12 flex desktop:flex-row flex-col-reverse justify-between items-center"
+            className="h-full max-w-[1023px] w-full py-[100px] tablet:py-14 mobile:py-14 flex desktop:flex-row flex-col-reverse justify-between items-center"
           >
             <div className=" flex  flex-col w-[450px] mobile:w-[300px]">
               <div className="text-[32px] leading-[47px] mobile:leading-[38px] font-variation-customOpt40  text-[#000000] mobile:text-[24px] ">
@@ -96,11 +98,12 @@ const SpecialOffer = ({ data }) => {
               {currentIndex > 0 && (
                 <button
                   onClick={handlePrev}
+                  aria-label="Previous slide"
                   className=" absolute bottom-2 left-2 mobile:flex hidden h-[36px] shadow-custom-light-dark-with-white-button bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] justify-center items-center rounded-lg w-[36px] px-2"
                 >
                   <img
                     src="/img_back_mob.png"
-                    alt="back"
+                    alt=""
                     className="h-[13.79px] w-[8.43px]"
                   />
                 </button>
@@ -109,11 +112,12 @@ const SpecialOffer = ({ data }) => {
               {currentIndex < slides.length - 1 && (
                 <button
                   onClick={handleNext}
+                  aria-label="Next slide"
                   className=" absolute bottom-2 right-2 mobile:flex hidden h-[36px] shadow-custom-light-dark-with-white-button bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] justify-center items-center rounded-lg w-[36px] px-2 "
                 >
                   <img
                     src="/img_forward_mob.png"
-                    alt="back"
+                    alt=""
                     className="h-[13.79px] w-[8.43px]"
                   />
                 </button>
@@ -124,13 +128,11 @@ const SpecialOffer = ({ data }) => {
 
         <button
           onClick={handleNext}
-          className="mobile:hidden flex my-auto ml-[30px] tablet:mr-[30px]"
+          disabled={currentIndex === slides.length - 1}
+          aria-label="Next slide"
+          className="mobile:hidden flex my-auto ml-[30px] tablet:mr-[30px] disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <img
-            src="/img_forward.png"
-            alt="Next"
-            className="h-[40px] w-[17px]"
-          />
+          <img src="/img_forward.png" alt="" className="h-[40px] w-[17px]" />
         </button>
       </div>
     </div>

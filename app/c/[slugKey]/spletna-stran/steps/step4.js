@@ -147,7 +147,7 @@ export default function Step4({
   return (
     <>
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        Blue Daisy Florist, London
+        {data?.heading || "Blue Daisy Florist, London"}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[43px]">
@@ -213,6 +213,7 @@ export default function Step4({
               <ImageSelector
                 setFile={(file) => setImage(file)}
                 inputId={"boxes-bg-image"}
+                disabled={true}
               />
               <div className="flex items-center justify-center gap-[22px] py-[9px]">
                 <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
@@ -221,6 +222,7 @@ export default function Step4({
                 <Switch
                   onChange={handleSwitchChange}
                   currentValue={showBackground}
+                  disabled={true}
                 />
                 <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
                   Prikaži svojo sliko

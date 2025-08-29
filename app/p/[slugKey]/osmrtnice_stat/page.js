@@ -17,13 +17,14 @@ export default function Obituaries() {
   const getMonthlyData = async () => {
     try {
       const response = await obituaryService.getMonthlyCompanyData();
-      console.log(response);
-      setMonthlyData(response.obituaries);
-      setTotalObits(response.totalObituaries);
-      setTotalObitWithKeeper(response.totalObituariesWithKeeper);
-      setTotalCompleteObits(response.totalComplete);
-      setTotalWithFunerals(response.totalWithFunerals);
-      setTotalWithPhotos(response.totalWithPhotos);
+      if (response) {
+        setMonthlyData(response.obituaries);
+        setTotalObits(response.totalObituaries);
+        setTotalObitWithKeeper(response.totalObituariesWithKeeper);
+        setTotalCompleteObits(response.totalComplete);
+        setTotalWithFunerals(response.totalWithFunerals);
+        setTotalWithPhotos(response.totalWithPhotos);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -32,6 +33,7 @@ export default function Obituaries() {
   const getObjavePercentage = (obits, total) => {
     return (obits / total) * 100;
   };
+
   return (
     <CompanyAccountLayout>
       <div className="w-full max-w-[950px]">
@@ -42,7 +44,7 @@ export default function Obituaries() {
                 {totalObits}
               </h2>
               <div className="text-[#6D778E] text-[12px] font-normal">
-                vseh lokalno: <span className="font-semibold">332</span>
+                vseh lokalno: <span className="font-semibold">-</span>
               </div>
             </div>
             <p className="text-[16px] text-[#1E2125]">
@@ -56,7 +58,7 @@ export default function Obituaries() {
                 {totalObitWithKeeper}
               </h2>
               <div className="text-[#6D778E] text-[12px] font-normal">
-                vseh lokaln: <span className="font-semibold">133</span>
+                vseh lokalno: <span className="font-semibold">-</span>
               </div>
             </div>
             <p className="text-[16px] text-[#1E2125]">

@@ -65,7 +65,7 @@ const Offer = ({ data }) => {
         {/*Header container*/}
         {images.length > 0 && (
           <div className="flex w-[537px] h-[70px] tablet:w-[488.57px] mobile:w-[296px] mobile:h-auto items-center flex-col">
-            <div className="text-[40px] mobile:text-[24px] text-[#000000] font-variation-customOpt40 mobile:font-variation-customOpt32 mt-[-6px] mobile:mt-[-18px]">
+            <div className="text-[40px] tablet:text-[32px] mobile:text-[24px] text-[#000000] font-variation-customOpt40 mobile:font-variation-customOpt32 mt-[-6px] mobile:mt-[-18px]">
               Naša ponudba
             </div>
             {data?.offer_subtitle && (
@@ -91,7 +91,7 @@ const Offer = ({ data }) => {
                 height={345}
                 className="w-[291px] h-[345px] tablet:w-[210px] tablet:h-[289px] mobile:w-[249.96px] mobile:h-[296.35px] mt-[22px] tablet:mt-0 rounded-lg"
               />
-              <div className="text-[24px] text-[#1E2125] mobile:text-[20px] mobile:font-variation-customOpt20wght400 font-variation-customOpt24 mobile mt-5 mobile:mt-[14px] text-center">
+              <div className="text-[24px] tablet:text-[20px] text-[#1E2125] mobile:text-[20px] mobile:font-variation-customOpt20wght400 font-variation-customOpt24 mobile mt-5 mobile:mt-[14px] text-center">
                 {images[currentIndex].title}
               </div>
             </div>
@@ -106,7 +106,7 @@ const Offer = ({ data }) => {
                 height={345}
                 className="w-[291px] h-[345px] tablet:w-[210px] tablet:h-[289px] mobile:w-[249.96px] mobile:h-[296.35px] mt-[22px] tablet:mt-0 rounded-lg"
               />
-              <div className="text-[24px] text-[#1E2125] mobile:text-[20px] mobile:font-variation-customOpt20wght400 font-variation-customOpt24 mobile mt-5 mobile:mt-[14px] text-center">
+              <div className="text-[24px] tablet:text-[20px] text-[#1E2125] mobile:text-[20px] mobile:font-variation-customOpt20wght400 font-variation-customOpt24 mobile mt-5 mobile:mt-[14px] text-center">
                 {data?.offer_one_title}
               </div>
             </div>
@@ -119,7 +119,7 @@ const Offer = ({ data }) => {
                 height={345}
                 className="w-[291px] h-[345px] tablet:w-[210px] tablet:h-[289px] mobile:w-[249.96px] mobile:h-[296.35px] mt-[22px] tablet:mt-0 rounded-lg"
               />
-              <div className="text-[24px] text-[#1E2125] mobile:text-[20px] mobile:font-variation-customOpt20wght400 font-variation-customOpt24 mobile mt-5 mobile:mt-[14px] text-center">
+              <div className="text-[24px] tablet:text-[20px] text-[#1E2125] mobile:text-[20px] mobile:font-variation-customOpt20wght400 font-variation-customOpt24 mobile mt-5 mobile:mt-[14px] text-center">
                 {images[0].title}
               </div>
             </div>
@@ -149,7 +149,7 @@ const Offer = ({ data }) => {
                 height={345}
                 className="w-[291px] h-[345px] tablet:w-[210px] tablet:h-[289px] mobile:w-[249.96px] mobile:h-[296.35px] mt-[22px] tablet:mt-0 rounded-lg"
               />
-              <div className="text-[24px] text-[#1E2125] mobile:text-[20px] mobile:font-variation-customOpt20wght400 font-variation-customOpt24 mobile mt-5 mobile:mt-[14px] text-center">
+              <div className="text-[24px] tablet:text-[20px] text-[#1E2125] mobile:text-[20px] mobile:font-variation-customOpt20wght400 font-variation-customOpt24 mobile mt-5 mobile:mt-[14px] text-center">
                 {images[1].title}
               </div>
             </div>
@@ -181,7 +181,7 @@ const Offer = ({ data }) => {
                 height={345}
                 className="w-[291px] h-[345px] tablet:w-[210px] tablet:h-[289px] mobile:w-[249.96px] mobile:h-[296.35px] mt-[22px] tablet:mt-0 rounded-lg"
               />
-              <div className="text-[24px] text-[#1E2125] mobile:text-[20px] mobile:font-variation-customOpt20wght400 font-variation-customOpt24 mobile mt-5 mobile:mt-[14px] text-center">
+              <div className="text-[24px] tablet:text-[20px] text-[#1E2125] mobile:text-[20px] mobile:font-variation-customOpt20wght400 font-variation-customOpt24 mobile mt-5 mobile:mt-[14px] text-center">
                 {images[2].title}
               </div>
             </div>

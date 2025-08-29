@@ -119,17 +119,16 @@ export default function Step6({
         return !isEmpty && (!shop.id || shop.updated);
       });
 
-      const data = {
+      const payload = {
         companyId,
         shops: JSON.stringify(shopsToSend),
       };
       await handlePublish();
-      const response = await shopService.createShop(data);
-      const updatedCompany = {
+      const response = await shopService.createShop(payload);
+      onChange({
         ...data,
         shops: response.shops,
-      };
-      onChange(updatedCompany);
+      });
       toast.success("Trgovine so ustvarjene, podjetje je poslano za odobritev");
       router.push(`/floristdetails/${companyId}`);
 
@@ -156,6 +155,7 @@ export default function Step6({
   };
 
   useEffect(() => {
+    if (!data) return;
     setCompanyId(data.id);
     setName(data.name);
     setHighlightText(data.highlightText);
@@ -176,7 +176,7 @@ export default function Step6({
   return (
     <>
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        Blue Daisy Florist, London
+        {data?.heading || "Blue Daisy Florist, London"}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[44px]">

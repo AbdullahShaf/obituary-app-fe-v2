@@ -158,7 +158,7 @@ export default function Step3({
   return (
     <>
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        Blue Daisy Florist, London
+        {data?.heading || "Blue Daisy Florist, London"}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[43px]">
@@ -214,9 +214,6 @@ export default function Step3({
                   alt="Dodaj sliko"
                   className="w-[16px] h-[16px]"
                 />
-                <span className="text-[14px] text-[#3C3E41] font-normal leading-[100%]">
-                  DODAJ ŠE DODATNE (največ 8)
-                </span>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { Checkbox } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/16/solid";
@@ -11,6 +11,8 @@ import cardService from "@/services/card-service";
 import toast from "react-hot-toast";
 import keeperService from "@/services/keeper-service";
 import { useRouter } from "next/navigation";
+import MobileCards from "./MobileCards";
+import { getCardsImageAndPdfsFiles } from "@/utils/downloadCards";
 
 const OrbetoryFormComp = ({
   setModalVisible,
@@ -31,6 +33,7 @@ const OrbetoryFormComp = ({
   const [user, setUser] = useState(null);
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const cardRefs = useRef([]);
 
   const [debouncedValue, setDebouncedValue] = useState("");
 
@@ -58,6 +61,9 @@ const OrbetoryFormComp = ({
       console.log(error);
     }
   };
+
+  const selectedObitData = selectedObituary && obituaries.find((option) => option.id === selectedObituary.value);
+
   const data = obituaries?.map((item) => ({
     value: item.id,
     label: `${item.name} ${item.sirName}`,
@@ -95,6 +101,7 @@ const OrbetoryFormComp = ({
   const submitMobileCard = async () => {
     // Check permission before allowing submission
     const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+    // Temporarily commented
     if (!currentUser.sendMobilePermission) {
       toast.error("You don't have permission to send mobile cards.");
       return;
@@ -103,11 +110,26 @@ const OrbetoryFormComp = ({
     try {
       if (!validateData()) return;
 
-      const response = await cardService.assignCard({
-        obituaryId: selectedObituary.value,
-        cardId: cardSelected.value,
-        email,
+      // Wait for cardRefs to be populated
+      let attempts = 0;
+      while (!cardRefs.current && attempts < 10) {
+        await new Promise((resolve) => setTimeout(resolve, 50));
+        attempts++;
+      }
+      if (!cardRefs.current) return;
+      const { images, pdfs } = await getCardsImageAndPdfsFiles([cardRefs.current[cardSelected.value - 1]]);
+      const formData = new FormData();
+      images.forEach((image) => {
+        formData.append(`cardImages`, image);
       });
+      pdfs.forEach((pdf) => {
+        formData.append(`cardPdfs`, pdf);
+      });
+      formData.append(`obituaryId`, selectedObituary.value);
+      formData.append(`cardId`, cardSelected.value);
+      formData.append(`email`, email);
+
+      const response = await cardService.assignCard(formData);
       toast.success("Card is sent to user");
     } catch (error) {
       if (error?.response?.status === 404) {
@@ -210,6 +232,11 @@ const OrbetoryFormComp = ({
     tablet: bg-cover bg-center w-full mx-auto desktop:mt-[80.02px] mobile:mt-[60px] tablet:mt-[79px] flex justify-center items-center
     "
     >
+
+      {selectedObitData?.id && (
+        <MobileCards cardRefs={cardRefs} data={selectedObitData} cemetery={''} />
+      )}
+
       {/* Fixed background image for desktop */}
       <img
         src="/login_ozadje.avif"
@@ -446,8 +473,8 @@ const OrbetoryFormComp = ({
                     backgroundColor: isDisabled
                       ? '#f5f5f5' // Light gray bg for disabled options
                       : isFocused
-                      ? '#e8f5f4' // Hover highlight for enabled options
-                      : '#fff',
+                        ? '#e8f5f4' // Hover highlight for enabled options
+                        : '#fff',
                     color: isDisabled ? '#999' : '#333', // Dimmed text for disabled
                     cursor: isDisabled ? 'not-allowed' : 'pointer',
                     fontStyle: 'normal',
@@ -609,8 +636,8 @@ const OrbetoryFormComp = ({
                     backgroundColor: isDisabled
                       ? '#f5f5f5' // Light gray bg for disabled options
                       : isFocused
-                      ? '#e8f5f4' // Hover highlight for enabled options
-                      : '#fff',
+                        ? '#e8f5f4' // Hover highlight for enabled options
+                        : '#fff',
                     color: isDisabled ? '#999' : '#333', // Dimmed text for disabled
                     cursor: isDisabled ? 'not-allowed' : 'pointer',
                     fontStyle: 'normal',

@@ -56,7 +56,7 @@ export default function Step1({
       let response;
       if (companyId !== null) {
         const hasChanges =
-          (data && data.address !== heading) ||
+          (data && data.heading !== heading) ||
           data.title !== title ||
           data.description !== description ||
           data.phone !== phone ||
@@ -103,7 +103,7 @@ export default function Step1({
   return (
     <>
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        Blue Daisy Florist, London
+        {data?.heading || "Blue Daisy Florist, London"}
       </div>
       <div>
         <div className="min-h-full flex flex-col justify-between gap-[16px] relative">
@@ -202,23 +202,23 @@ export default function Step1({
                   <span className="text-[16px] leading-[24px] text-[#ACAAAA]">
                     Steklen okvirček
                   </span>
-                  <Image
+                  {/* <Image
                     src="/question_mark.png"
                     width={24}
                     height={24}
                     alt="Spletna stran"
-                  />
+                  />*/}
                 </div>
                 <div className="flex items-center justify-between gap-[12px] py-[2px]">
                   <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
-                    Prikaži steklen okvir
+                    Izbriši steklen okvir
                   </span>
                   <Switch
                     onChange={handleSwitchChange}
                     currentValue={glassFrameState}
                   />
                   <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
-                    Izbriši steklen okvir
+                    Prikaži steklen okvir
                   </span>
                 </div>
                 <div className="space-y-[8px]">

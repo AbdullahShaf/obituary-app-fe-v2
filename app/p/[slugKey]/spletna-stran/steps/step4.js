@@ -52,13 +52,13 @@ export default function Step4({ data, onChange, handleStepChange }) {
     try {
       const formData = new FormData();
 
-      if (secondaryTitle && secondaryTitle?.length > 100) {
-        toast.error("Naslov ne sme biti daljši od 100 znakov.");
+      if (secondaryTitle && secondaryTitle?.length > 24) {
+        toast.error("Naslov ne sme biti daljši od 24 znakov.");
         return false;
       }
 
-      if (secondaryDescription && secondaryDescription?.length > 500) {
-        toast.error("Tekst ne sme biti daljši od 500 znakov.");
+      if (secondaryDescription && secondaryDescription?.length > 240) {
+        toast.error("Tekst ne sme biti daljši od 240 znakov.");
         return false;
       }
 
@@ -92,7 +92,7 @@ export default function Step4({ data, onChange, handleStepChange }) {
   return (
     <>
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        Blue Daisy Florist, London
+        {data?.heading || "Blue Daisy Florist, London"}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[43px]">

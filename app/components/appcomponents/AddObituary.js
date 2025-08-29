@@ -416,7 +416,7 @@ const AddObituary = ({ set_Id, setModal }) => {
   return (
     <>
       {obituaryResponse?.id && (
-        <MobileCards cardRefs={cardRefs} data={obituaryResponse} />
+        <MobileCards cardRefs={cardRefs} data={obituaryResponse} cemetery={selectedCemeteryLabel} />
       )}
       {loading && <BackDropLoader />}
       {/* Main Container for all the content and background */}

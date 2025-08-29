@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function ImageSelector({ setFile, inputId }) {
+export default function ImageSelector({ setFile, inputId, disabled = false }) {
   const [photo, setPhoto] = useState(null);
 
   const handleChange = (event) => {
@@ -33,10 +33,13 @@ export default function ImageSelector({ setFile, inputId }) {
         className="hidden"
         id={inputId}
         onChange={handleChange}
+        disabled={disabled}
       />
       <label
         htmlFor={inputId}
-        className="border border-[#6D778E] bg-[#6D778E] py-[7px] px-[42px] flex items-center justify-center gap-[4px] rounded-[4px] mx-[4px] cursor-pointer"
+        className={`border border-[#6D778E] bg-[#6D778E] ${
+          disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+        } py-[7px] px-[42px] flex items-center justify-center gap-[4px] rounded-[4px] mx-[4px]`}
       >
         <Image
           src="/upload_icon.png"

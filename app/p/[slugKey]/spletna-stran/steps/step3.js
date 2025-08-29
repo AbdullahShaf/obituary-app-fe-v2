@@ -89,7 +89,7 @@ export default function Step3({ data, onChange, handleStepChange }) {
         // Append default fields
         formData.append(`cemeteries[${index}][name]`, cemetery.name);
         formData.append(`cemeteries[${index}][address]`, cemetery.address);
-        formData.append(`cemeteries[${index}][city]`, user.city);
+        formData.append(`cemeteries[${index}][city]`, user?.city ?? "");
 
         // If image is selected, append it
         if (cemetery.image) {
@@ -121,6 +121,7 @@ export default function Step3({ data, onChange, handleStepChange }) {
           cemeteries: response.cemeteries,
         };
         onChange(updateCompany);
+        setCemetries(response.cemeteries);
         toast.success("Cemetries Updated Successfully");
       }
       return true;
@@ -131,10 +132,30 @@ export default function Step3({ data, onChange, handleStepChange }) {
     }
   };
 
+  const handleDeleteCemtery = async (cemetery) => {
+    if (!cemetery?.id) {
+      toast.error("Cemetery is not saved yet.");
+      return;
+    }
+    console.log("Deleting cemetery with ID:", cemetery?.id);
+    try {
+      const { cemeteries } = await cemetryService.deleteCemetery(cemetery.id);
+      setCemetries(cemeteries);
+      const updateCompany = {
+        ...data,
+        cemeteries: cemeteries,
+      };
+      onChange(updateCompany);
+      toast.success("Cemetery deleted successfully");
+    } catch (err) {
+      console.error("Failed to delete Cemetery", err);
+    }
+  };
+
   return (
     <>
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        Blue Daisy Florist, London
+        {data?.heading || "Blue Daisy Florist, London"}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[22px]">
@@ -158,8 +179,6 @@ export default function Step3({ data, onChange, handleStepChange }) {
             <p className="text-[14px] text-[#6D778E] font-normal leading-[20px] pb-[18px]">
               Če za nekatera manjša pokopališča nimate pri roki najboljših slik,
               lahko izberete naše univerzalne in dodate svoje naknadno. <br />{" "}
-              (tudi sicer so bolj pomembne informacije o pokopališčih, kot
-              slike).
             </p>
             {cemetries.map((block) => (
               <SliderBlock
@@ -168,6 +187,7 @@ export default function Step3({ data, onChange, handleStepChange }) {
                 cemetery={block}
                 onChange={handleCemeteryChange}
                 title={`Pokopališče ${block.index}`}
+                handleDelete={handleDeleteCemtery}
               />
             ))}
             <div className="flex items-center justify-end pt-[8px] pb-[16px]">
@@ -235,13 +255,19 @@ export default function Step3({ data, onChange, handleStepChange }) {
   );
 }
 
-function SliderBlock({ index, title, cemetery, onChange }) {
+function SliderBlock({ index, title, cemetery, onChange, handleDelete }) {
   const [isDefaultOpen, setIsDefaultOpen] = useState(index === 1);
   const handleChange = (e) => {
     onChange(index - 1, { ...cemetery, [e.target.name]: e.target.value });
   };
   return (
-    <OpenableBlock isDefaultOpen={isDefaultOpen} title={title} index={index}>
+    <OpenableBlock
+      isDefaultOpen={isDefaultOpen}
+      title={title}
+      index={index}
+      hasDeleteButton={index !== 1 && true}
+      onDelete={() => handleDelete(cemetery)}
+    >
       <div className="space-y-[16px]">
         <div className="space-y-[8px]">
           <div className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">

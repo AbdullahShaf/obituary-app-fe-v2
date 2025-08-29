@@ -8,9 +8,8 @@ import React, { useEffect, useState } from "react";
 
 export default function Obituaries() {
   const [obituaries, setObituaries] = useState([]);
-  const [user, setUser] = useState(); 
+  const [user, setUser] = useState();
 
-  
   useEffect(() => {
     const getUser = async () => {
       const user = await userService.getMyUser();
@@ -169,9 +168,9 @@ export default function Obituaries() {
                       <td>
                         <div className="inline-flex gap-[16px] items-center">
                           <div className="space-y-[1px]">
-                            <span className="text-[14px] text-[#6D778E]">
+                            <a href={`/m/${obituary.slugKey}`} className="text-[14px] text-[#6D778E]" target="_blank">
                               {obituary.name}
-                            </span>
+                            </a>
                             <div className="text-[#3C3E41] text-[16px]">
                               {obituary.sirName}
                             </div>
@@ -243,7 +242,12 @@ export default function Obituaries() {
                         </div>
                       </td>
                       <td className="pr-[25px]">
-                        <button className="border-[2px] border-[#0A85C2] bg-white rounded-[6px] px-[11px] py-[5px] flex items-center gap-[16px] shadow-md ml-auto ">
+                        <button className="border-[2px] border-[#0A85C2] bg-white rounded-[6px] px-[11px] py-[5px] flex items-center gap-[16px] shadow-md ml-auto "
+                        onClick={() => {
+                          if(typeof window !== undefined){
+                            window.location.href = `/dopolni-osmrtnico/${obituary?.id}`;
+                          }
+                        }}>
                           <img
                             src="/edit.png"
                             alt=""

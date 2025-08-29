@@ -1,6 +1,6 @@
 import React from "react";
 
-const Card4 = ({ cardRefs, index }) => {
+const Card4 = ({ cardRefs, index, cemetery }) => {
   return (
     <div
       ref={(el) => {

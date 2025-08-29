@@ -77,6 +77,10 @@ export default function AccountSettings() {
               <span className="uppercase">Enote:</span>
               <span className="text-[#3C3E41]">{data?.name}</span>
             </div>
+            <div className="flex items-center gap-[12px]">
+              <span className="uppercase">NASLOV:</span>
+              <span className="text-[#3C3E41]">{data?.CompanyPage?.address}</span>
+            </div>
 
             <div className="flex items-center gap-[12px]">
               <span className="uppercase">Email:</span>
@@ -348,6 +352,7 @@ export default function AccountSettings() {
         set_Id={setSelect_Id}
         data={data?.CompanyPage?.id}
         onChange={(updatedShops) => {
+          getCompleteCompanyData();
           console.log(updatedShops, "====");
         }}
       />

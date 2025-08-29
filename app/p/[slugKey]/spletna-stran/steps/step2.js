@@ -73,7 +73,7 @@ export default function Step2({ data, onChange, handleStepChange }) {
   return (
     <>
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        Blue Daisy Florist, London
+        {data?.heading || "Blue Daisy Florist, London"}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[43px]">
@@ -84,7 +84,7 @@ export default function Step2({ data, onChange, handleStepChange }) {
               </div>
               <div className="space-y-0">
                 <div className="text-[14px] text-[#6D778E] leading-[24px] font-normal">
-                  KORAK 1
+                  KORAK 2
                 </div>
                 <div className="text-[20px] text-[#1E2125] leading-[100%] font-semibold">
                   Zgornji blok
@@ -96,7 +96,7 @@ export default function Step2({ data, onChange, handleStepChange }) {
           <div className="space-y-[21px]">
             <OpenableBlock
               isDefaultOpen={true}
-              title="Teskti"
+              title="Teksti"
               index={1}
               openBlock={openedBlock === 1}
               handleOpenBlock={() => setOpenedBlock(1)}
@@ -167,9 +167,7 @@ export default function Step2({ data, onChange, handleStepChange }) {
               </div>
             </div>
             <p className="text-[16px] text-[#6D778E] leading-[24px]">
-              Velikost slik bo avtomatsko prilagojena. Če slik trenutno nimate
-              pri roki, lahko izpolnite preostalo, slike pa dodate kadarkoli
-              kasneje.{" "}
+              Velikost slik bo avtomatsko prilagojena.
             </p>
           </div>
         </div>

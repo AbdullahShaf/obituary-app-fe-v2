@@ -19,6 +19,7 @@ export default function Darila() {
       console.log(error, "==============");
     }
   };
+  console.log('>>>>>>>>> logs', logs);
   return (
     <CompanyAccountLayout>
       <div className="w-full max-w-[969px]">
@@ -135,9 +136,9 @@ export default function Darila() {
                       </td>
                       <td className="px-4 py-[12px] border-t border-b border-[#A1B1D4] text-center text-[16px]">
                         <div className="flex flex-col items-start gap-0">
-                          <span className="text-[#6D778E] text-[12px]">
-                            {log.name}
-                          </span>
+                          <Link href={`/m/${log?.slugKey}`} className="text-[#6D778E] text-[12px]">
+                            {log.name} {log?.sirName}
+                          </Link>
                           <span className="text-[#3C3E41] text-[14px]">
                             {log.surname}
                           </span>

@@ -14,21 +14,21 @@ const defaultFaqs = [
     question: "",
     answer: "",
   },
-  {
-    index: 2,
-    question: "",
-    answer: "",
-  },
-  {
-    index: 3,
-    question: "",
-    answer: "",
-  },
-  {
-    index: 4,
-    question: "",
-    answer: "",
-  },
+  // {
+  //   index: 2,
+  //   question: "",
+  //   answer: "",
+  // },
+  // {
+  //   index: 3,
+  //   question: "",
+  //   answer: "",
+  // },
+  // {
+  //   index: 4,
+  //   question: "",
+  //   answer: "",
+  // },
 ];
 
 export default function Step5({ data, onChange, handleStepChange }) {
@@ -107,7 +107,7 @@ export default function Step5({ data, onChange, handleStepChange }) {
       const response = await faqService.createFaq(payload);
       const updatedCompany = { ...data, faqs: response.faqs };
       onChange(updatedCompany);
-
+      setFaqs(response.faqs);
       toast.success("Faq's Updated Successfully");
       return true;
     } catch (error) {
@@ -139,9 +139,9 @@ export default function Step5({ data, onChange, handleStepChange }) {
     try {
       console.log("Deleting FAQ with ID:", faq);
       const { faqs } = await faqService.deleteFaq(faq.id, faq.companyId);
+      setFaqs(faqs);
       const updatedCompany = { ...data, faqs: faqs };
       onChange(updatedCompany);
-      console.log("FAQ deleted successfully");
       toast.success("Faq's Deleted Successfully");
     } catch (err) {
       console.error("Failed to delete FAQ", err);
@@ -151,7 +151,7 @@ export default function Step5({ data, onChange, handleStepChange }) {
   return (
     <>
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        Blue Daisy Florist, London
+        {data?.heading || "Blue Daisy Florist, London"}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[20px]">
@@ -255,7 +255,7 @@ const SliderBlock = React.memo(function SliderBlock({
   return (
     <OpenableBlock
       isDefaultOpen={isDefaultOpen}
-      hasDeleteButton={faq.companyId && true}
+      hasDeleteButton={faq.companyId && index !== 1 && true}
       title={title}
       index={index}
       onDelete={() => handleDelete(faq)}

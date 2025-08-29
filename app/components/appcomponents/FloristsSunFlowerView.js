@@ -46,7 +46,7 @@ const FloristsSunFlowerView = ({ data }) => {
             >
               <div className="flex mobile:h-[66px] h-[42px] items-center">
                 <h1
-                  className="flex mobile:text-[28px] text-[36px] text-[#1E2125] font-variation-customOpt36
+                  className="flex mobile:text-[24px] tablet:text-[32px] text-[36px] text-[#1E2125] font-variation-customOpt36
                            font-normal mobile:leading-[32.81px] leading-[47px] "
                 >
                   {data?.title || "Cvetličana z dolgoletno tradicijo"}

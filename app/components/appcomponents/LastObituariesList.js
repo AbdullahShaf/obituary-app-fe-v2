@@ -6,24 +6,22 @@ import imgPrevious from "@/public/previous_img.png";
 import imgNext from "@/public/next_img.png";
 import { toast } from "react-hot-toast";
 import obituaryService from "@/services/obituary-service";
+import { useAuth} from "@/hooks/useAuth";
 
 const LastObituariesList = () => {
   const router = useRouter();
+  const { user, isAuthenticated, isLoading } = useAuth();
 
   const [obituaries, setObituaries] = useState([]);
-  const [user, setUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
+    if (!isLoading && !isAuthenticated) {
       toast.error("You must be logged in to access this page.");
       router.push("/registracija");
-    } else {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+    } 
+  }, [isLoading]);
 
   useEffect(() => {
     const fetchObituary = async () => {

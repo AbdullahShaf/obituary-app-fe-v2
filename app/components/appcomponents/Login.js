@@ -6,8 +6,8 @@ import { Checkbox } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
-import authService from "@/services/auth-service";
 import { redirectToRoleBasedRoute } from "@/utils/navigationUtils"; 
+import { getSession, signIn } from "next-auth/react";
 
 const Login = () => {
   const router = useRouter();
@@ -37,18 +37,11 @@ const Login = () => {
         password: inputValueGeslo,
       };
 
-      const response = await authService.login(payload);
-
-      if (response.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
-        return;
-      }
-
-      localStorage.setItem("user", JSON.stringify(response.user));
-
-      toast.success(response.message || "Login successful!");
+      const response = await signIn("signIn", {
+        email: payload.email,
+        password: payload.password,
+        redirect: false,
+      });
       
       if (response?.user) {
         const role = response.user.role;

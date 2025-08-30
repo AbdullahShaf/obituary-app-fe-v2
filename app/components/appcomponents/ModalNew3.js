@@ -15,6 +15,7 @@ import Modals from "./Modals";
 import userService from "@/services/user-service";
 import toast from "react-hot-toast";
 import companyService from "@/services/company-service";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function ModalNew3({
   isShowModal,
@@ -26,6 +27,8 @@ export default function ModalNew3({
   updateObituary,
   onChange,
 }) {
+  const { user } = useAuth();
+
   const [scrollBehavior, setScrollBehavior] = React.useState("outside");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -38,7 +41,6 @@ export default function ModalNew3({
   const handleSubmit = async () => {
     try {
       // Ensure user is logged in
-      const user = JSON.parse(localStorage.getItem("user"));
       const userId = user?.id;
 
       if (!userId) {

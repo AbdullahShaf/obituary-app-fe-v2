@@ -9,11 +9,12 @@ import Step4 from "./steps/step4";
 import Step5 from "./steps/step5";
 import Step6 from "./steps/step6";
 import companyService from "@/services/company-service";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function SpletnaStran() {
+  const { user } = useAuth();
   const [step, setStep] = useState(1);
   const [company, setCompany] = useState(null);
-  const [user, setUser] = useState(null);
   const [isRender, setIsRender] = useState(false);
   const handleStepChange = (step) => {
     setStep(step);
@@ -28,13 +29,7 @@ export default function SpletnaStran() {
     }
     setIsRender(false);
   }, [user, isRender]);
-  useEffect(() => {
-    const currUser = localStorage.getItem("user");
-    if (currUser) {
-      setUser(JSON.parse(currUser));
-      console.log(JSON.parse(currUser));
-    }
-  }, []);
+
   const getCompany = async () => {
     try {
       const response = await companyService.getFloristCompany({ id: user.id });

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Router from "next/router";
 import Link from "next/link";
-import { useLogout } from "@/utils/authUtils";
+import { useAuth } from "@/hooks/useAuth";
 
 const AdminSideMenuButton = ({
   isFrom,
@@ -12,12 +12,12 @@ const AdminSideMenuButton = ({
   isSelectedButton,
 }) => {
 
-  const {logout} = useLogout();
+  const {logout} = useAuth();
 
   const handleLogout = () => {
     if (placeholderText === "Logout") {
       logout();
-    } else return
+    } else return;
   }
 
   return (

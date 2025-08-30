@@ -9,22 +9,18 @@ import Step4 from "./steps/step4";
 import Step5 from "./steps/step5";
 import Step6 from "./steps/step6";
 import companyService from "@/services/company-service";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function SpletnaStran() {
   const [step, setStep] = useState(1);
   const [company, setCompany] = useState(null);
-  const [user, setUser] = useState(null);
+  const { user } = useAuth();
   const [render, setRender] = useState(false);
 
   const handleStepChange = (step) => {
     setStep(step);
   };
-  useEffect(() => {
-    const currUser = localStorage.getItem("user");
-    if (currUser) {
-      setUser(JSON.parse(currUser));
-    }
-  }, []);
+
   useEffect(() => {
     if (user) {
       getCompany();

@@ -3,24 +3,20 @@ import Image from "next/image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 import obituaryService from "@/services/obituary-service";
 
 const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary }) => {
+  const { user } = useAuth();
+
   const [currentURL, setCurrentURL] = useState("");
-  const [user, setUser] = useState(null);
   const [maxCondolances, setMaxCondolances] = useState(6);
   const [limitedCondolances, setLimitedCondolances] = useState([]);
 
   const toggleText = () => {
     setShowFullObituaryText((prev) => !prev);
   };
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {

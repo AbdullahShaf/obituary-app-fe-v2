@@ -1,6 +1,5 @@
 "use client";
 
-import UserAccountHeaderNew from "@/app/components/appcomponents/UserAccountHeaderNew";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 import ButtonWhiteBG, {
@@ -9,10 +8,8 @@ import ButtonWhiteBG, {
 import obituaryService from "@/services/obituary-service";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
-import ButtonLightGreen from "@/app/components/appcomponents/buttonLightGreen";
+import { useAuth } from "@/hooks/useAuth";
 import UserCompanyHeaderNew from "@/app/components/appcomponents/UserCompanyHeaderNew";
-import authService from "@/services/auth-service";
-import { useLogout } from "@/utils/authUtils";
 
 export default function Funeral() {
   const [isMobilSideBarOpen, setIsMobilSideBarOpen] = useState(true);
@@ -22,9 +19,7 @@ export default function Funeral() {
   const gotoTopRef = useRef(null);
   const pathname = usePathname();
   
-  const { logout } = useLogout();
-
-  const [user, setUser] = useState(null);
+  const { logout, user } = useAuth();
 
   useEffect(() => {
     fetchPendingPosts();
@@ -32,13 +27,7 @@ export default function Funeral() {
   }, []);
 
   const [pendingPosts, setPendingPosts] = useState([]);
-  useEffect(() => {
-    const currUser = localStorage.getItem("user");
-    if (currUser) {
-      setUser(JSON.parse(currUser));
-      console.log(JSON.parse(currUser));
-    }
-  }, []);
+
   const fetchPendingPosts = async () => {
     try {
       const response = await obituaryService.fetchPendingPosts();

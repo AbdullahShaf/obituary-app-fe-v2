@@ -8,7 +8,7 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useLogout } from "@/utils/authUtils";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function CompanySidebar({
   showAlternateContent,
@@ -17,22 +17,12 @@ export default function CompanySidebar({
 }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [user, setUser] = useState(null);
+  const { user, logout } = useAuth();
 
   const normalPath = pathname.startsWith("/c")
     ? pathname.replace("/c", "")
     : pathname.replace("/p", "");
   const absolutePath = pathname.startsWith("/c") ? "/c" : "/p";
-
-  const { logout } = useLogout();
-
-  useEffect(() => {
-    const currUser = localStorage.getItem("user");
-    if (currUser) {
-      setUser(JSON.parse(currUser));
-      console.log(JSON.parse(currUser));
-    }
-  }, []);
 
   return (
     <div

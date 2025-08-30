@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import logo from "@/public/app_logo.png";
 import iconMenu from "@/public/icon_menu_black.png";
 import backIcon from "@/public/memory_header_left.png";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import omr from "@/public/omr.png";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -44,11 +44,19 @@ const headerLinkSets = {
   "/resitve-za-cvetlicarne": [
     { label: "Cvetličarne", path: "/resitve-za-cvetlicarne", active: false },
     { label: " PRILOŽNOST", path: "/c-priloznost", active: true },
-    { label: "Pogrebna podjetja", path: "/resitve-za-pogrebna-podjetja", active: false },
+    {
+      label: "Pogrebna podjetja",
+      path: "/resitve-za-pogrebna-podjetja",
+      active: false,
+    },
   ],
   "/resitve-za-pogrebna-podjetja": [
     { label: "Cvetličarne", path: "/resitve-za-cvetlicarne", active: false },
-    { label: "Pogrebna podjetja", path: "/resitve-za-pogrebna-podjetja", active: false },
+    {
+      label: "Pogrebna podjetja",
+      path: "/resitve-za-pogrebna-podjetja",
+      active: false,
+    },
     { label: " PRILOŽNOST", path: "/p-priloznost", active: true },
   ],
 };
@@ -62,8 +70,10 @@ function CommonHeader({ currentPage }) {
   // Modal states
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isMessageModalVisible, setIsMessageModalVisible] = useState(false);
-  const [isLocalQuickModalVisible, setIsLocalQuickModalVisible] = useState(false);
-  const [isLocalQuickReviewModalVisible, setIsLocalQuickReviewModalVisible] = useState(false);
+  const [isLocalQuickModalVisible, setIsLocalQuickModalVisible] =
+    useState(false);
+  const [isLocalQuickReviewModalVisible, setIsLocalQuickReviewModalVisible] =
+    useState(false);
 
   // User state
   const [user, setUser] = useState(null);
@@ -72,17 +82,11 @@ function CommonHeader({ currentPage }) {
   // Check user authentication on component mount
   useEffect(() => {
     const checkUser = () => {
-      try {
-        const currUser = localStorage.getItem("user");
-        if (currUser) {
-          const parsedUser = JSON.parse(currUser);
-          setUser(parsedUser);
-        }
-      } catch (error) {
-        console.error("Error parsing user from localStorages:", error);
-        setUser(null);
-      } finally {
+      if (user !== undefined && user !== null) {
         setIsUserLoaded(true);
+        return;
+      } else {
+        console.error("User not loaded");
       }
     };
 
@@ -100,11 +104,13 @@ function CommonHeader({ currentPage }) {
     }
   };
 
-
   // Prevent body scroll when modal is open
   useEffect(() => {
-    const isAnyModalOpen = isModalVisible || isMessageModalVisible ||
-      isLocalQuickModalVisible || isLocalQuickReviewModalVisible;
+    const isAnyModalOpen =
+      isModalVisible ||
+      isMessageModalVisible ||
+      isLocalQuickModalVisible ||
+      isLocalQuickReviewModalVisible;
 
     if (isAnyModalOpen) {
       document.body.style.overflow = "hidden";
@@ -116,7 +122,12 @@ function CommonHeader({ currentPage }) {
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [isModalVisible, isMessageModalVisible, isLocalQuickModalVisible, isLocalQuickReviewModalVisible]);
+  }, [
+    isModalVisible,
+    isMessageModalVisible,
+    isLocalQuickModalVisible,
+    isLocalQuickReviewModalVisible,
+  ]);
 
   return (
     <>
@@ -127,7 +138,9 @@ function CommonHeader({ currentPage }) {
             setIsModalVisible={setIsModalVisible}
             setIsMessageModalVisible={setIsMessageModalVisible}
             setIsLocalQuickModalVisible={setIsLocalQuickModalVisible}
-            setIsLocalQuickReviewModalVisible={setIsLocalQuickReviewModalVisible}
+            setIsLocalQuickReviewModalVisible={
+              setIsLocalQuickReviewModalVisible
+            }
             onLocalQuickReviewClick={handleLocalQuickReviewClick}
           />
         )}
@@ -135,7 +148,6 @@ function CommonHeader({ currentPage }) {
         <div className="flex w-full justify-center">
           <div className="flex w-full h-[68px] tablet:w-[744px] mobile:w-[360px] mx-auto tablet:h-[80px] px-4 tablet:px-6 desktop:w-[1200px] desktop:h-[92.02px] desktop:px-[18px]">
             <div className="flex justify-between items-center w-full h-full">
-
               {/* Logo */}
               <Link href="/" className="flex">
                 <Image
@@ -159,10 +171,13 @@ function CommonHeader({ currentPage }) {
                       >
                         <Link
                           href={link.path}
-                          className={`font-normal hover:text-blue-500 transition duration-200 tablet:text-[18px] desktop:text-[20px] ${link.active ? "!text-[#0A85C2]" : "text-[#1E2125]"
-                            }`}
+                          className={`font-normal hover:text-blue-500 transition duration-200 tablet:text-[18px] desktop:text-[20px] ${
+                            link.active ? "!text-[#0A85C2]" : "text-[#1E2125]"
+                          }`}
                         >
-                          {link.active && <span className="text-[#EB1D1D]">{">>"}</span>}
+                          {link.active && (
+                            <span className="text-[#EB1D1D]">{">>"}</span>
+                          )}
                           {link.label}
                         </Link>
                       </li>

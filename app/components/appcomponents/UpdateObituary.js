@@ -13,11 +13,12 @@ import { useParams } from "next/navigation";
 import ModalDropBox from "./ModalDropBox";
 import API_BASE_URL from "@/config/apiConfig";
 import cemetryService from "@/services/cemetry-service";
+import { useAuth } from "@/hooks/useAuth";
 
 const UpdateObituary = ({ set_Id, setModal }) => {
     const router = useRouter();
+    const { user } = useAuth();
 
-    const [user, setUser] = useState(null);
     const [selectedRegion, setSelectedRegion] = useState("");
     const [selectedCity, setSelectedCity] = useState("");
     const [inputValueName, setInputValueName] = useState("");
@@ -83,7 +84,6 @@ const UpdateObituary = ({ set_Id, setModal }) => {
     const funeralDropdownRef = useRef(null);
 
     useEffect(() => {
-        const storedUser = localStorage.getItem("user");
         if (!storedUser) {
             toast.error("You must be logged in to access this page.");
             router.push("/registracija");

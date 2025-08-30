@@ -6,11 +6,11 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import companyService from "@/services/company-service";
 import FuneralCompanyPreview from "../components/funeral-company-preview";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Step6({ data, onChange, handleStepChange }) {
   const [openBlock, setOpenBlock] = useState(1);
   const [companyId, setCompanyId] = useState(null);
-  const [user, setUser] = useState(null);
   const [workingHours, setWorkingHours] = useState(null);
   const [emergencyPhone, setEmergencyPhone] = useState(null);
   const [workingHourHighlightText, setWorkingHourHighlightText] =
@@ -23,20 +23,13 @@ export default function Step6({ data, onChange, handleStepChange }) {
     },
   ]);
 
-  console.log(openBlock);
+  const { user } = useAuth();
+
 
   const addSliderBlock = () => {
     setSliderBlocks([...sliderBlocks, { id: sliderBlocks.length + 1 }]);
   };
 
-  const router = useRouter();
-  useEffect(() => {
-    const currUser = localStorage.getItem("user");
-    if (!currUser) {
-      return;
-    }
-    setUser(JSON.parse(currUser));
-  }, [router]);
   useEffect(() => {
     if (data && data !== null) {
       setCompanyId(data.id);

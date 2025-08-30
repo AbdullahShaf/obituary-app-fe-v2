@@ -8,9 +8,10 @@ import ButtonWhiteBG, {
 } from "@/app/components/appcomponents/buttonwhitebg";
 import obituaryService from "@/services/obituary-service";
 import { useRouter, usePathname } from "next/navigation";
-import { useLogout } from "@/utils/authUtils";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Funeral() {
+  const { user } = useAuth();
   const [isMobilSideBarOpen, setIsMobilSideBarOpen] = useState(true);
   const [showAlternateContent, setShowAlternateContent] = useState(false);
   const [isKeeper, setIsKeeper] = useState(false);
@@ -18,12 +19,9 @@ export default function Funeral() {
   const gotoTopRef = useRef(null);
   const pathname = usePathname();
 
-  const { logout } = useLogout();
-
-  const [user, setUser] = useState(null);
+  const { logout } = useAuth();
 
   useEffect(() => {
-    getUserData();
     fetchPendingPosts();
     getKeeperMemory();
   }, []);
@@ -66,13 +64,6 @@ export default function Funeral() {
 
   const toggleMobileSidebar = () => {
     setIsMobilSideBarOpen(!isMobilSideBarOpen);
-  };
-
-  const getUserData = () => {
-    const currUser = localStorage.getItem("user");
-    if (currUser) {
-      setUser(JSON.parse(currUser));
-    }
   };
   
   return (

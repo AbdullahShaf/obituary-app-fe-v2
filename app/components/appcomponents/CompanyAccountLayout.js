@@ -7,10 +7,12 @@ import CompanyFooterMobile from "@/app/components/appcomponents/CompanyFooterMob
 import { usePathname } from "next/navigation";
 import obituaryService from "@/services/obituary-service";
 import CompanySidebar from "@/app/components/appcomponents/CompanySidebar";
+import { useAuth } from "@/hooks/useAuth";
 
 const CompanyAccountLayout = ({ children }) => {
   const pathname = usePathname();
-  const [user, setUser] = useState(null);
+  const { user, isAuthenticated } = useAuth();
+  
 
   const normalPath = pathname.startsWith("/c")
     ? pathname.replace("/c", "")
@@ -35,13 +37,7 @@ const CompanyAccountLayout = ({ children }) => {
   const [hrefLinkTwo, setHrefLinkTwo] = useState("");
 
   const [innnerSize, setInnnerSize] = useState(false);
-  useEffect(() => {
-    const currUser = localStorage.getItem("user");
-    if (currUser) {
-      setUser(JSON.parse(currUser));
-      console.log(JSON.parse(currUser));
-    }
-  }, []);
+  
   function handleResize() {
     if (window.innerWidth <= 744) {
       setInnnerSize(true); // Change state value when width is <= 744

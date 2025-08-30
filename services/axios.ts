@@ -1,24 +1,20 @@
 import axios from "axios";
 import API_BASE_URL from "@/config/apiConfig";
 import toast from "react-hot-toast";
+import { getSession } from "next-auth/react";
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => {
-    const accesstoken = localStorage.getItem("access-token");
-    const refreshtoken = localStorage.getItem("refresh-token");
+  async (config) => {
+    const session = await getSession();
+    const accessToken = session?.user?.accessToken;
+    console.log("Axios Request - Access Token:", accessToken ? "Found" : "Not found");
 
-    console.log("Axios Request - Access Token:", accesstoken ? "Found" : "Not found");
-    console.log("Axios Request - Refresh Token:", refreshtoken ? "Found" : "Not found");
-
-    if (accesstoken) {
-      config.headers["access-token"] = accesstoken;
-    }
-    if (refreshtoken) {
-      config.headers["refresh-token"] = refreshtoken;
+    if (accessToken) {
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
 
     return config;
@@ -30,23 +26,10 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    const newAccessToken = response.headers["access-token"];
-    const newRefreshToken = response.headers["refresh-token"];
-
-    if (newAccessToken) {
-      localStorage.setItem("access-token", newAccessToken);
-    }
-    if (newRefreshToken) {
-      localStorage.setItem("refresh-token", newRefreshToken);
-    }
-
     return response;
   },
   (error) => {
     if (error.response.status === 401) {
-      localStorage.removeItem("access-token");
-      localStorage.removeItem("refresh-token");
-      localStorage.removeItem("user");
       toast.error("Token Expired Please Relogin!");
       // if (window.location.pathname !== "/registrationpage") {
       //   window.location.href = "/registrationpage";

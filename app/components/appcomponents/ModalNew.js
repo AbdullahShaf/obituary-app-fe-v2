@@ -14,6 +14,7 @@ import Image from "next/image";
 import Modals from "./Modals";
 import shopService from "@/services/shop-service";
 import toast from "react-hot-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function ModalNew2({
   isShowModal,
@@ -26,6 +27,8 @@ export default function ModalNew2({
   updateObituary,
   toggleModal6 = () => { }
 }) {
+  const { user } = useAuth();
+
   const [scrollBehavior, setScrollBehavior] = React.useState("outside");
   const [shops, setShops] = useState([{}]);
 
@@ -42,8 +45,6 @@ export default function ModalNew2({
         return;
       }
 
-      // Get user ID from local storage
-      const user = JSON.parse(localStorage.getItem("user"));
       const userId = user?.id;
 
       const payload = {

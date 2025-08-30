@@ -18,6 +18,7 @@ import {
   LocalQuickReviewModal,
 } from "@/app/components/appcomponents/LocalQuickReview";
 import MemoryHeader from "./MemoryHeader";
+import { useAuth } from "@/hooks/useAuth";
 
 const Layout = ({
   children,
@@ -31,8 +32,9 @@ const Layout = ({
   handleCloseModal = () => {},
   isModalLayout = false,
 }) => {
+  const { user, isAuthenticated } = useAuth();
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isMessageModalVisible, setIsMessageModalVisible] = useState(false);
   const [isLocalQuickModalVisible, setIsLocalQuickModalVisible] =
@@ -43,13 +45,6 @@ const Layout = ({
   const OnDrawerButtonClicked = (item) => {
     console.log(item.name);
   };
-
-  useEffect(() => {
-    const currUser = localStorage.getItem("user");
-    if (currUser) {
-      setUser(JSON.parse(currUser));
-    }
-  }, []);
 
   return (
     <div>

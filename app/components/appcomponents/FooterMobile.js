@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import { IconView } from "./Commonfunction";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import authService from "@/services/auth-service";
-import { useLogout } from "@/utils/authUtils";
+import { useAuth } from "@/hooks/useAuth";
 
 function FooterMobile({ handleGoToTop, setIsMobilSideBarOpen }) {
   const pathname = usePathname();
@@ -21,7 +20,7 @@ function FooterMobile({ handleGoToTop, setIsMobilSideBarOpen }) {
   //   }
   // }, [pathname]);
 
-  const {logout} = useLogout();
+  const {logout} = useAuth();
   return (
     <div className=" hidden mobileUserAcc:flex tabletUserAcc:flex self-end bottom-0 rounded-t-[12px] fixed z-[999] w-full h-[85px] bg-[#FFFFFF] shadow-lg justify-center items-center">
       <div

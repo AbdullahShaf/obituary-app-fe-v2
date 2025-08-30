@@ -5,8 +5,10 @@ import Image from "next/image";
 import { toast } from "react-hot-toast";
 import userService from "@/services/user-service";
 import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function ChangeUrlSlug({open, setOpen}) {
+  const { user } = useAuth();
   const [slug, setSlug] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [newSlug, setNewSlug] = useState("");
@@ -18,7 +20,7 @@ export default function ChangeUrlSlug({open, setOpen}) {
     try {
     const response = await userService.changeSlug(newSlug);
     if(!response.error) {
-      localStorage.setItem("user", JSON.stringify({ ...JSON.parse(localStorage.getItem("user")), slugKey: newSlug }));
+      //  TODO: Add session refresh so that user object in session reflects the new slug
       setSlug(newSlug);
       setOpen(false);
       toast.success("Naslov strani je bil uspešno spremenjen");
@@ -34,7 +36,7 @@ export default function ChangeUrlSlug({open, setOpen}) {
   }
 
   useEffect(() => {
-    setSlug(JSON.parse(localStorage.getItem("user"))?.slugKey || "");
+    setSlug(user?.slugKey);
   }, [open]);
 
   return <div className={`w-full h-screen fixed bg-[#344054B2] backdrop-blur-[16px] z-[1000] flex items-center justify-center transition-all duration-300 ${open ? "opacity-100 visible" : "opacity-0 invisible"}`}>

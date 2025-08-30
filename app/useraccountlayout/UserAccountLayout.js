@@ -7,9 +7,13 @@ import SidebarDekstop from "../components/appcomponents/SidebarDekstop";
 import FooterMobile from "../components/appcomponents/FooterMobile";
 import { usePathname } from "next/navigation";
 import obituaryService from "@/services/obituary-service";
+import { useAuth } from "@/hooks/useAuth";
+
 const UserAccountLayout = ({ children }) => {
+  const { user } = useAuth();
+
   const pathname = usePathname();
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const gotoTopRef = useRef(null);
   const [isMobilSideBarOpen, setIsMobilSideBarOpen] = useState(false);
 
@@ -36,13 +40,13 @@ const UserAccountLayout = ({ children }) => {
     }
   }
 
-  useEffect(() => {
-    const currUser = localStorage.getItem("user");
-    if (currUser) {
-      setUser(JSON.parse(currUser));
-      console.log(JSON.parse(currUser));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const currUser = useAuth().user;
+  //   if (currUser) {
+  //     setUser(JSON.parse(currUser));
+  //     console.log("user from layout", JSON.parse(currUser));
+  //   }
+  // }, []);
 
   useEffect(() => {
     handleResize();

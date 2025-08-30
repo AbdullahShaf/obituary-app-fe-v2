@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import FuneralCompanyPreview from "../components/funeral-company-preview";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Step3({ data, onChange, handleStepChange }) {
   const [cemetries, setCemetries] = useState([
@@ -21,15 +22,8 @@ export default function Step3({ data, onChange, handleStepChange }) {
     },
   ]);
   const [companyId, setCompanyId] = useState(null);
-  const [user, setUser] = useState(null);
-  const router = useRouter();
-  useEffect(() => {
-    const currUser = localStorage.getItem("user");
-    if (!currUser) {
-      return;
-    }
-    setUser(JSON.parse(currUser));
-  }, [router]);
+  const { user } = useAuth();
+
   useEffect(() => {
     if (data && data !== null) {
       setCompanyId(data.id);

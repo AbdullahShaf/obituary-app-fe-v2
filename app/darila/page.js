@@ -1,15 +1,12 @@
 "use client";
 import Layout from "../components/appcomponents/Layout";
 import OrbetoryFormComp from "../components/appcomponents/OrbetoryFormComp";
-import LoginFooter from "../components/appcomponents/LoginFooter";
 import Newobituary from "../components/appcomponents/Newobituary";
-import Header from "../components/appcomponents/HeaderLogin";
-import UserAccountHeader from "../components/appcomponents/UserAccountHeader";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import AddFuneralModal from "../components/appcomponents/AddFuneralModal";
 import keeperService from "@/services/keeper-service";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 const FloristsGifts = () => {
   const [showBelowForms, setShowBelowForms] = useState(false);
@@ -20,23 +17,8 @@ const FloristsGifts = () => {
   const [KeeperExpiry, setKeeperExpiry] = useState(null);
   const [selectedObituary, setSelectedObituary] = useState(null);
   const [email, setEmail] = useState("");
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
-  // Check permissions on page load
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
-      toast.error("You must be logged in to access this page.");
-      router.push("/registracija");
-      return;
-    }
-
-    const parsedUser = JSON.parse(storedUser);
-    setUser(parsedUser);
-    setLoading(false);
-  }, [router]);
+  const { user, isLoading, isAuthenticated } = useAuth();
 
   const funcShowForms = (shouldShow) => {
     setShowBelowForms(shouldShow);
@@ -54,7 +36,7 @@ const FloristsGifts = () => {
   };
   const handleAssignKeeper = async () => {
     // Check permission before allowing submission
-    const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+    const currentUser = isAuthenticated ? user : {};
     if (!currentUser.assignKeeperPermission) {
       toast.error("You don't have permission to assign keepers.");
       return;
@@ -87,7 +69,7 @@ const FloristsGifts = () => {
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <Layout megaMenu={""} isMegaMenuVisible={false} from={"18"} currentPage="" forFooter={'memorypage'}>
         <div className="flex flex-1 flex-col bg-[#F5F7F9] items-center justify-center min-h-screen">

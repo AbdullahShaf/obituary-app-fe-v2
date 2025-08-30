@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { CommonViewUserAccSidebar } from "./Commonfunction";
 import { usePathname, useRouter } from "next/navigation";
-import authService from "@/services/auth-service";
-import { useLogout } from "@/utils/authUtils";
+import { useAuth } from "@/hooks/useAuth";
 
 function SidebarDekstop({
   showAlternateContent,
@@ -13,17 +12,8 @@ function SidebarDekstop({
 }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [user, setUser] = useState(null);
 
-  const { logout } = useLogout();
-
-  useEffect(() => {
-    const currUser = localStorage.getItem("user");
-    if (currUser) {
-      setUser(JSON.parse(currUser));
-      console.log(JSON.parse(currUser));
-    }
-  }, []);
+  const { logout, user, isAuthenticated } = useAuth();
   return (
     <div
       className="px-[22px] mx-auto bg-[#F1F5F8] pt-[36px] hidden desktopUserAcc:flex flex-col border-r-2 border-[#FFFFFF]

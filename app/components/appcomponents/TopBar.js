@@ -1,3 +1,4 @@
+import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -11,15 +12,9 @@ const TopBar = ({
   onLocalQuickReviewClick, // New prop
 }) => {
   const popuButtonRef = React.useRef();
-  const [user, setUser] = useState(null);
-  const router = useRouter();
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, [router]);
+  const router = useRouter();
+  const { user } = useAuth();
 
   const isDesktop = () => window.innerWidth >= 758;
 
@@ -51,21 +46,6 @@ const TopBar = ({
     } else if (isAdmin && isDesktop) {
       router.push('/admin/Obituaries')
     } 
-  };
-
-  // Update the local quick review button click handler
-  const handleLocalQuickReviewClick = () => {
-    if (onLocalQuickReviewClick) {
-      onLocalQuickReviewClick();
-    } else {
-      // Fallback to old behavior
-      const user = localStorage.getItem("user");
-      if (user) {
-        setIsLocalQuickReviewModalVisible(true);
-      } else {
-        setIsLocalQuickModalVisible(true);
-      }
-    }
   };
 
   return (

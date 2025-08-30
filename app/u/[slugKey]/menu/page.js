@@ -3,29 +3,33 @@ import React, { useEffect, useRef, useState } from "react";
 import obituaryService from "@/services/obituary-service";
 import UserAccountHeaderNew from "../../../components/appcomponents/UserAccountHeaderNew";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 const UserAccountDashboard = () => {
   const [isMobilSideBarOpen, setIsMobilSideBarOpen] = useState(true);
   const [isKeeper, setIsKeeper] = useState(false);
   const router = useRouter();
   const gotoTopRef = useRef(null);
-  const [user, setUser] = useState(null);
+  const { user, isLoading, isAuthenticated, status } = useAuth();
+
+  console.log("user", user);
+  console.log("Status", status);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (window.innerWidth > 768) {
-        const currUser = localStorage.getItem("user");
-        if (currUser) {
-          const parsedUser = JSON.parse(currUser);
-          setUser(parsedUser);
-          router.push(`u/${parsedUser.slugKey}/moj-racun`);
+        if (!isLoading && isAuthenticated) {
+          const parsedUser = user;
+          console.log("parsedUser", parsedUser);
+          console.log(isAuthenticated);
+          router.replace(`/u/${parsedUser.slugKey}/moj-racun`);
         }
       } else {
         fetchPendingPosts();
         getKeeperMemory();
       }
     }
-  }, []);
+  }, [isLoading]);
 
   const [pendingPosts, setPendingPosts] = useState([]);
 

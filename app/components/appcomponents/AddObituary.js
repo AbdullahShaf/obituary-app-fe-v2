@@ -14,11 +14,12 @@ import ModalDropBox from "./ModalDropBox";
 import MobileCards from "./MobileCards";
 import { getCardsImageAndPdfsFiles } from "@/utils/downloadCards";
 import BackDropLoader from "../ui/backdrop-loader";
+import { useAuth } from "@/hooks/useAuth";
 
 const AddObituary = ({ set_Id, setModal }) => {
   const router = useRouter();
+  const { user, isAuthenticated } = useAuth();
 
-  const [user, setUser] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [inputValueName, setInputValueName] = useState("");
@@ -84,16 +85,6 @@ const AddObituary = ({ set_Id, setModal }) => {
 
   const funeralDropdownRef = useRef(null);
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
-      toast.error("You must be logged in to access this page.");
-      router.push("/registracija");
-    } else {
-      const parsedUser = JSON.parse(storedUser);
-      console.log(parsedUser, "ParsedUser");
-    }
-  }, [router]);
   const [cemeteries, setCemeteries] = useState([]);
   useEffect(() => {
     console.log(inputValueFuneralCemetery, "=================");
@@ -284,9 +275,7 @@ const AddObituary = ({ set_Id, setModal }) => {
   };
 
   const handleSubmit = async () => {
-    // Check permission before allowing submission
-    const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
-    // Temporarily commented
+    const currentUser = isAuthenticated ? user : {};
     if (!currentUser.createObituaryPermission) {
       toast.error("You don't have permission to create obituaries.");
       return;

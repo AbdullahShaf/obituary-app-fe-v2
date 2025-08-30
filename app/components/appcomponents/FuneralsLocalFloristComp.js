@@ -31,8 +31,8 @@ const cityOptions =  [
       return
     }
     setSelectedCity(item.place);
-    // Redirect to funerals page with selected city
-    router.push(`/pogrebi?city=${encodeURIComponent(item.place)}`);
+    // Redirect to florist page with selected city
+    router.push(`/cvetlicarne?city=${encodeURIComponent(item.place)}`);
   };
   return (
     <div className=' mx-auto w-full mobile:hidden tablet:block desktop:block'>

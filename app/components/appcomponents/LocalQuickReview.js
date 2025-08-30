@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from "@/hooks/useAuth";
 import obituaryService from "@/services/obituary-service";
 import { user } from "@nextui-org/react";
 import Image from "next/image";
@@ -175,7 +176,8 @@ const LocalQuickReview = ({ setIsLocalQuickModalVisible }) => {
 };
 
 const LocalQuickReviewModal = ({ setIsLocalQuickReviewModalVisible }) => {
-  const [user, setUser] = useState(null);
+  const { user, isLoading, isAuthenticated } = useAuth(); 
+
   const [obituaries, setObituaries] = useState([]);
   const [obituaryCount, setObituaryCount] = useState(0);
   const [funerals, setFunerals] = useState([]);
@@ -183,11 +185,8 @@ const LocalQuickReviewModal = ({ setIsLocalQuickReviewModalVisible }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const currUser = localStorage.getItem("user");
+    const currUser = isAuthenticated ? user : {};
     if (currUser) {
-      const parsedUser = JSON.parse(currUser);
-      setUser(parsedUser);
-
       const fetchData = async () => {
         try {
           setLoading(true);
@@ -242,7 +241,7 @@ const LocalQuickReviewModal = ({ setIsLocalQuickReviewModalVisible }) => {
 
       fetchData();
     }
-  }, []);
+  }, [isLoading, isAuthenticated, user]);
 
   const getFormattedDate = () => {
     const days = [

@@ -25,10 +25,13 @@ import HomePageBox from "./components/appcomponents/HomePageBox";
 import IpadSlider from "./components/appcomponents/IpadSlider";
 import SlideOne from "./components/slidercomponents/SlideOne";
 import SlideTwo from "./components/slidercomponents/SlideTwo";
+import { useAuth } from "@/hooks/useAuth";
+
 
 function HomeContent(props) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { user } = useAuth();
 
   // 17 September 2024
   const arrPlace = [

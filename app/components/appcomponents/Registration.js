@@ -7,12 +7,12 @@ import { CheckIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
 import userService from "@/services/user-service";
-import authService from "@/services/auth-service";
 import { redirectToRoleBasedRoute } from "@/utils/navigationUtils";
-import { isAuthenticated, getUser } from "@/utils/authUtils";
+import { useAuth } from "@/hooks/useAuth";
 
 const Registration = () => {
   const router = useRouter();
+  const { login, user, isLoadingm, isAuthenticated} = useAuth();
 
   const [inputValueEmail, setInputValueEmail] = useState("");
   const [inputValueGeslo, setInputValueGeslo] = useState("");
@@ -31,13 +31,12 @@ const Registration = () => {
   
   // Check if user is already logged in and redirect
   useEffect(() => {
-    if (isAuthenticated()) {
-      const user = getUser();
+    if (isAuthenticated) {
       if (user && user.role && user.slugKey) {
         redirectToRoleBasedRoute(user.role, user.slugKey, isDesktop);
       }
     }
-  }, [isDesktop]);
+  }, [user, isAuthenticated, isDesktop]);
 
   const [activeDiv, setActiveDiv] = useState("login");
 
@@ -111,23 +110,25 @@ const Registration = () => {
     }
 
     try {
-      const payload = {
+      const credentials = {
         email: inputValueEmail,
         password: inputValueGeslo,
       };
 
-      const response = await authService.login(payload);
-      console.log(response);
-      if (response.error) {
+      const response = await login(credentials);
+      console.log("loginResponse", response);
+
+      if (response.status === 401) {
+        toast.error(
+          response.error || "Invalid Credentials!"
+        );
+        return;
+      } else if (response.error) {
         toast.error(
           response.error || "Something went wrong. Please try again!"
         );
         return;
       }
-
-      localStorage.setItem("user", JSON.stringify(response.user));
-
-      toast.success(response.message || "Login successful!");
 
       if (response?.user) {
         const role = response.user.role;
@@ -137,6 +138,7 @@ const Registration = () => {
         redirectToRoleBasedRoute(role, slugKey, isDesktop);
       }
     } catch (error) {
+      console.log(error);
       toast.error("Login failed. Please check your credentials.");
     }
   };

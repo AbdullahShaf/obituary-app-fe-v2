@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import companyService from "@/services/company-service";
 import FuneralCompanyPreview from "../components/funeral-company-preview";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Step1({ data, onChange, handleStepChange }) {
   const [openedBlock, setOpenedBlock] = useState(1);
@@ -20,7 +21,7 @@ export default function Step1({ data, onChange, handleStepChange }) {
   const [background, setBackground] = useState(null);
   const [companyId, setCompanyId] = useState(null);
 
-  const [user, setUser] = useState(null);
+  const { user } = useAuth();
 
   useEffect(() => {
     if (data && data !== null) {
@@ -36,13 +37,7 @@ export default function Step1({ data, onChange, handleStepChange }) {
     }
   }, [data]);
 
-  useEffect(() => {
-    const currUser = localStorage.getItem("user");
-    if (!currUser) {
-      return;
-    }
-    setUser(JSON.parse(currUser));
-  }, []);
+
   const validateFields = () => {
     if (!heading || !logo || !background) {
       toast.error("All fields are mandatory.");

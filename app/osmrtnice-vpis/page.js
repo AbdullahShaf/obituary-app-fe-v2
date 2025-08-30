@@ -7,28 +7,26 @@ import ModalLibrary from "../components/appcomponents/ModalLibrary";
 import Layout from "../components/appcomponents/Layout";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 const Obituaryform = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [select_id, setSelect_Id] = useState("");
-  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  
   const router = useRouter();
+  const { user, isAuthenticated } = useAuth();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
+    if (!isAuthenticated) {
       toast.error("You must be logged in to access this page.");
       router.push("/registracija");
       return;
     }
 
-    const parsedUser = JSON.parse(storedUser);
-    setUser(parsedUser);
-
     // Temporarily commented
     // Check if user has permission to create obituaries
-    if (!parsedUser.createObituaryPermission) {
+    if (!user.createObituaryPermission) {
       toast.error("You don't have permission to create obituaries.");
       router.push("/");
       return;

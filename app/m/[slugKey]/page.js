@@ -40,7 +40,6 @@ const MemoryPageContent = ({ params }) => {
   useEffect(() => {
     fetchMemory();
   }, []);
-  console.log(obituary, "is obituary");
 
   const fetchMemory = async () => {
     try {
@@ -52,8 +51,6 @@ const MemoryPageContent = ({ params }) => {
         );
         return;
       }
-
-      console.log('>>>>>>>>>> memory fetched', response);
 
       let finalResponse = response.obituary;
 

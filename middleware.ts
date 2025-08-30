@@ -79,6 +79,18 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    // "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|js|css|ico)$).*)", // Exclude APIs, static, and images
+    "/registracija", // Explicitly include the pages you want
+    "/moj-racun",
+    "/moji-prispevki",
+    "/obletnice",
+    "/pregled",
+    "/pregled2",
+    "/user-accounts-dashboard",
+    "/potrditev-objave",
+    "/admin/:path*", // Admin routes
+    "/c/:slug/:page*", // Parametric routes
+    "/p/:slug/:page*",
+    "/u/:slug/:page*",
   ],
 };

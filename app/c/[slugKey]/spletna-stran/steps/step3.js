@@ -66,8 +66,8 @@ export default function Step3({
     }
   }, [data]);
   const addSliderBlock = () => {
-    if (packages?.length >= 8) {
-      toast.error("Dodate lahko največ 8 paketov");
+    if (packages?.length >= 4) {
+      toast.error("Dodate lahko največ 4 paketov");
       return;
     }
     setPackages([

@@ -12,13 +12,12 @@ import { useAuth } from "@/hooks/useAuth";
 const Obituaryform = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [select_id, setSelect_Id] = useState("");
-  const [loading, setLoading] = useState(true);
   
   const router = useRouter();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, isLoading } = useAuth();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isLoading && !isAuthenticated) {
       toast.error("You must be logged in to access this page.");
       router.push("/registracija");
       return;
@@ -26,16 +25,15 @@ const Obituaryform = () => {
 
     // Temporarily commented
     // Check if user has permission to create obituaries
-    if (!user.createObituaryPermission) {
+    if (!isLoading && !isAuthenticated &&!user.createObituaryPermission) {
       toast.error("You don't have permission to create obituaries.");
       router.push("/");
       return;
     }
 
-    setLoading(false);
-  }, [router]);
+  }, [isLoading, isAuthenticated, user]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <Layout
         megaMenu={""}

@@ -85,7 +85,7 @@ const Cemeteries = ({ data }) => {
         </div>
 
         {/*Text Container*/}
-        <div className="flex w-[384.84px] mobile:mx-auto h-auto mobile:w-[294px] mobile:h-[169px] ml-[40.64px] tablet:ml-0 tablet:mt-[31px] mobile:mt-0 flex-col">
+        <div className="flex w-[384.84px] mobile:mx-auto h-auto mobile:w-[294px] mobile:h-auto ml-[40.64px] tablet:ml-0 tablet:mt-[31px] mobile:mt-0 flex-col">
           <div className="text-[40px] text-[#1E2125] font-variation-customOpt40 mobile:text-[24px] mobile:font-variation-customOpt28 ">
             Naša pokopališča
           </div>
@@ -95,7 +95,7 @@ const Cemeteries = ({ data }) => {
           </div>
 
           <div
-            className={`overflow-auto scrollbar-hide mt-6 pl-[17px] ${
+            className={`overflow-auto scrollbar-hide mt-6 pl-[37px] tablet:pl-[40px] ${
               cemeteries.length > 8 && "h-[214px]"
             }`}
           >

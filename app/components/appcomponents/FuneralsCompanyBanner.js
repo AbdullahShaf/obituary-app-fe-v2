@@ -65,7 +65,7 @@ const FuneralsCompanyBanner = ({ data }) => {
       />
       <div className="bg-white rounded-2xl border-2 p-7 mobile:p-4 border-[#EDF1F3]  h-[185px] mobile:h-[405px] tablet:h-[272px] max-w-[1009px] w-full tablet:w-[80%] mobile:w-[296px] absolute top-[195px] mobile:top-[184px] tablet:top-[152px]">
         <div className="w-full flex mobile:flex-col items-center">
-          <div className="min-w-200 flex justify-start mobile:justify-center mobile:min-w-[184px] max-w-[290px] h-[90px] w-full">
+          <div className="min-w-200 flex justify-start mobile:justify-center mobile:min-w-[184px] mobile:h-auto max-w-[290px] h-[90px] w-full">
             <div>
               <img
                 key={`${data?.id}-logo`}
@@ -73,12 +73,12 @@ const FuneralsCompanyBanner = ({ data }) => {
                 alt="App Logo"
                 // width={1000}
                 // height={1000}
-                className="w-full object-contain mobile:w-[184px] mobile:h-[75px] h-full"
+                className="w-full object-contain mobile:w-[184px] mobile:h-[120px] h-full"
               />
             </div>
           </div>
 
-          <h1 className="w-full text-[#1E2125] text-[24px] font-semibold leading-[28px] mobile:mt-2">
+          <h1 className="w-full text-[#1E2125] text-[24px] desktop:font-semibold leading-[28px] mobile:mt-2">
             {data?.heading || data?.User?.company}
           </h1>
           <div className="hidden desktop:flex min-w-[150px] gap-2">
@@ -102,7 +102,7 @@ const FuneralsCompanyBanner = ({ data }) => {
 
         <div
           key={`${data?.id}-address`}
-          class="hidden  desktop:flex justify-between items-center mt-3"
+          className="hidden  desktop:flex justify-between items-center mt-3"
         >
           <div>
             <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
@@ -139,7 +139,7 @@ const FuneralsCompanyBanner = ({ data }) => {
 
         <div
           key={`${data?.id}-address-tablet`}
-          class="hidden  tablet:flex justify-between items-center mt-3"
+          className="hidden  tablet:flex justify-between items-center mt-3"
         >
           <div className="flex flex-1 flex-col">
             <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
@@ -168,7 +168,7 @@ const FuneralsCompanyBanner = ({ data }) => {
 
         <div
           key={`${data?.id}-address-mobile`}
-          class="hidden  tablet:flex justify-between items-center mt-4"
+          className="hidden  tablet:flex justify-between items-center mt-4"
         >
           <div className="flex flex-1 flex-col">
             <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
@@ -199,7 +199,7 @@ const FuneralsCompanyBanner = ({ data }) => {
 
         <div
           key={`${data?.id}-address-mobile`}
-          class="hidden  mobile:flex flex-col mt-10"
+          className="hidden  mobile:flex flex-col mt-10"
         >
           <div className=" flex flex-col flex-1">
             <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">

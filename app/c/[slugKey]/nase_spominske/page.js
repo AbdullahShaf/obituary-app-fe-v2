@@ -48,8 +48,6 @@ export default function Spominske() {
     }
   };
 
-  console.log('>>>>>>>>> monthData', monthData);
-
   const formatDate = (timestamp) => {
     const funeralDate = new Date(timestamp);
     if (isNaN(funeralDate.getTime())) return "";

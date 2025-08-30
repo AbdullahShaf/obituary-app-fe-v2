@@ -102,7 +102,7 @@ const FuneralsCompanyBanner = ({ data }) => {
 
         <div
           key={`${data?.id}-address`}
-          class="hidden  desktop:flex justify-between items-center mt-3"
+          className="hidden  desktop:flex justify-between items-center mt-3"
         >
           <div>
             <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
@@ -139,7 +139,7 @@ const FuneralsCompanyBanner = ({ data }) => {
 
         <div
           key={`${data?.id}-address-tablet`}
-          class="hidden  tablet:flex justify-between items-center mt-3"
+          className="hidden  tablet:flex justify-between items-center mt-3"
         >
           <div className="flex flex-1 flex-col">
             <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
@@ -168,7 +168,7 @@ const FuneralsCompanyBanner = ({ data }) => {
 
         <div
           key={`${data?.id}-address-mobile`}
-          class="hidden  tablet:flex justify-between items-center mt-4"
+          className="hidden  tablet:flex justify-between items-center mt-4"
         >
           <div className="flex flex-1 flex-col">
             <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">
@@ -199,7 +199,7 @@ const FuneralsCompanyBanner = ({ data }) => {
 
         <div
           key={`${data?.id}-address-mobile`}
-          class="hidden  mobile:flex flex-col mt-10"
+          className="hidden  mobile:flex flex-col mt-10"
         >
           <div className=" flex flex-col flex-1">
             <div className="w-full text-[#939393] text-[14px] font-normal leading-[16px] whitespace-nowrap">

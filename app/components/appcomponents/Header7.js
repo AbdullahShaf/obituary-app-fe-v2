@@ -45,7 +45,7 @@ function ObituaryHeader({ from, data, handleCloseModal }) {
               </div>
 
               <div className="mobile:hidden flex items-center h-[53px] ml-[20px] desktop:ml-[49px] desktop:pr-[10px] ">
-                <h
+                <h2
                   className="text-[#414141] 
                 tablet:text-[28px] tablet:font-variation-customOpt28 tablet:font-normal
                 desktop:text-[32px] desktop:font-variation-customOpt32wght500"
@@ -53,14 +53,14 @@ function ObituaryHeader({ from, data, handleCloseModal }) {
                   {from === 7
                     ? `${data?.heading || "Cvetličarna Suniflower"}`
                     : `${data?.heading || "Pogrebni zavod"}`}
-                </h>
+                </h2>
               </div>
               <div className="flex h-[50px] flex-col tablet:hidden desktop:hidden ml-[22px] pl-[2px]">
-                <h className="text-[#414141] text-[20px] font-variation-customOpt20 font-normal">
+                <h2 className="text-[#414141] text-[20px] font-variation-customOpt20 font-normal">
                   {from === 7
                     ? `${data?.heading || "Cvetličarna Suniflower"}`
                     : `${data?.heading || "Pogrebni zavod"}`}
-                </h>
+                </h2>
                 {/* <h className="text-[#939393] text-[16px] font-variation-customOpt20 font-normal">
                   {from === 7 ? "Milano" : "Rome"}
                 </h> */}

@@ -15,7 +15,7 @@ import ModalNew6 from "../../../components/appcomponents/ModalNew6";
 import { useAuth } from "@/hooks/useAuth";
 
 export default function AccountSettings() {
-  const { user, isLoading, isAuthenticated, updateUserAndRefreshSession } =
+  const { user, isLoading, isAuthenticated, refreshUserSession } =
     useAuth();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -91,8 +91,13 @@ export default function AccountSettings() {
       }
       setLoading(true);
       try {
-        const result = await updateUserAndRefreshSession({ city: newCity });
-        if (result.success) {
+        const response = await userService.updateMyUser(cityPayload);
+
+        if (response) {
+          await refreshUserSession();
+
+        // const result = await updateUserAndRefreshSession({ city: newCity });
+        // if (result.success) {
           toast.success("City updated and session refreshed!");
           setSelectedCity(item);
         } else {

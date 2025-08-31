@@ -13,7 +13,7 @@ import ModalNew3 from "@/app/components/appcomponents/ModalNew3";
 import { useAuth } from "@/hooks/useAuth";
 
 export default function AccountSettings() {
-  const { updateUserAndRefreshSession } = useAuth();
+  const { refreshUserSession } = useAuth();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isPrivilegijiExpanded, setIsPrivilegijiExpanded] = useState(false);
 
@@ -53,8 +53,9 @@ export default function AccountSettings() {
 
   const handleCitySelect = async (item) => {
     try {
-      const result = await updateUserAndRefreshSession({ secondaryCity: item });
-      if (result.success) {
+      const response = await userService.updateMyUser({ secondaryCity: item });
+      if (response) {
+        await refreshUserSession();
         toast.success("City Updated Successfully");
         setSelectedCity(item);
         setData((prevData) => ({
@@ -85,7 +86,9 @@ export default function AccountSettings() {
             </div>
             <div className="flex items-center gap-[12px]">
               <span className="uppercase">NASLOV:</span>
-              <span className="text-[#3C3E41]">{data?.CompanyPage?.address}</span>
+              <span className="text-[#3C3E41]">
+                {data?.CompanyPage?.address}
+              </span>
             </div>
 
             <div className="flex items-center gap-[12px]">
@@ -196,18 +199,29 @@ export default function AccountSettings() {
           >
             Privilegiji
             <svg
-              className={`ml-2 w-5 h-5 transition-transform ${isPrivilegijiExpanded ? 'rotate-180' : ''}`}
+              className={`ml-2 w-5 h-5 transition-transform ${
+                isPrivilegijiExpanded ? "rotate-180" : ""
+              }`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
             </svg>
           </h4>
 
           <div
-            className={`space-y-3 overflow-hidden transition-all duration-300 ${isPrivilegijiExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}
+            className={`space-y-3 overflow-hidden transition-all duration-300 ${
+              isPrivilegijiExpanded
+                ? "max-h-[1000px] opacity-100"
+                : "max-h-0 opacity-0"
+            }`}
           >
             {/* Funeral Company List Publication */}
             <div className="flex items-center gap-3">
@@ -306,7 +320,9 @@ export default function AccountSettings() {
                 readOnly
                 className="w-4 h-4 text-[#0A85C2] bg-gray-100 border-gray-300 rounded focus:ring-[#0A85C2] focus:ring-2 cursor-not-allowed disabled:opacity-100 disabled:bg-[#0A85C2] disabled:checked:bg-[#0A85C2]"
               />
-              <span className="text-[#3C3E41]">Sodelovanje na spominskih straneh</span>
+              <span className="text-[#3C3E41]">
+                Sodelovanje na spominskih straneh
+              </span>
             </div>
 
             {/* Risk-Free Promotion */}

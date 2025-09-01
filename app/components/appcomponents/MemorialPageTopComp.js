@@ -14,6 +14,13 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary, fetchMemo
   const [limitedCondolances, setLimitedCondolances] = useState([]);
   const [currentCount, setCurrentCount] = useState(0);
 
+  const defaultMessage = {
+    message: 'Iskreno sožalje',
+    name: 'osmrtnica.com',
+    relation: '',
+    createdTimestamp: data?.createdTimestamp ?? ''
+  };
+
   useEffect(() => {
     if (data && data?.id) {
       setCurrentCount(data?.totalCandles);
@@ -1188,7 +1195,7 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary, fetchMemo
 
         <div className="w-[824px] tablet:w-[629px] mobile:w-[321px] grid grid-cols-2 mobile:grid-cols-1 mx-auto  gap-[24px]">
           <div className="flex flex-col gap-[27px]">
-            {limitedCondolances &&
+            {limitedCondolances?.length > 0 ? (
               limitedCondolances
                 .filter((_, index) => index % 2 === 0)
                 .map((item, index) => (
@@ -1216,7 +1223,33 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary, fetchMemo
                       </span>
                     </div>
                   </div>
-                ))}
+                ))
+            ) : (
+              <div
+                className="bg-white rounded-[3px] text-[16px] text-[#414141]"
+                style={{
+                  boxShadow: "5px 5px 10px 0px #C2C2C280",
+                }}
+              >
+                <div className="px-[17px] pt-[14px] pb-[28px]">
+                  {defaultMessage.message}
+                </div>
+                <div className="bg-[#E1E7E8] text-[#6D778E] px-[16px] py-[4px] flex justify-between">
+                  <div className="flex items-end gap-[4px]">
+                    <span className="text-[16px] leading-none">
+                      {defaultMessage.name}
+                    </span>
+                    <span className="text-[12px] leading-none">
+                      {defaultMessage.relation}
+                    </span>
+                  </div>
+                  <span className="text-[12px] leading-none">
+                    {formatDate(defaultMessage?.createdTimestamp)}
+                  </span>
+                </div>
+              </div>
+            )}
+
           </div>
           <div className="flex flex-col gap-[27px]">
             {limitedCondolances &&

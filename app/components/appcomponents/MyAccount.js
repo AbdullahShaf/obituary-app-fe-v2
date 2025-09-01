@@ -28,6 +28,7 @@ const MyAccount = () => {
   const [keeperId, setKeeperId] = useState(null);
 
   // const [showImageView, setShowImageView] = useState(false)
+  console.log('>>>>>>>>>>>> digiCards', digiCards);
 
   const CustomDropdown = ({
     label,
@@ -181,7 +182,7 @@ const MyAccount = () => {
                     setIsShowCards(true);
                     setShownCard(digiCard.id);
                   }}>
-                    {digiCard.user.company} ti pošilja digitalno kartico {digiCard.obit.name} {digiCard.obit.sirName}
+                    {digiCard.user.company} ti pošilja digitalno kartico {digiCard.obit.name} {digiCard.obit.sirName} ({formatDate(digiCard.createdTimestamp).replace(/\s/g, "")})
                     <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                   </span>
                 </span>

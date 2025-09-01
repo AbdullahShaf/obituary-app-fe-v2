@@ -1,4 +1,6 @@
-const APP_ENVIRONMENT = process.env.NODE_ENV as 'local' | 'production' | 'staging';
+type AppEnv = "development" | "production" | "test" | "staging";
+
+const APP_ENVIRONMENT = process.env.NEXT_PUBLIC_APP_ENV as AppEnv;
 
 export const isDev = APP_ENVIRONMENT === 'staging' || APP_ENVIRONMENT === 'production' ? false : true; 
 

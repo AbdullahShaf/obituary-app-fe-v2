@@ -4,11 +4,13 @@ import obituaryService from "@/services/obituary-service";
 import userService from "@/services/user-service";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function Obituaries() {
   const [obituaries, setObituaries] = useState([]);
   const [user, setUser] = useState();
+  const router = useRouter();
 
   useEffect(() => {
     const getUser = async () => {
@@ -65,7 +67,7 @@ export default function Obituaries() {
         <div className="mt-[60px]">
           <div className="flex items-center gap-3">
             {user?.createObituaryPermission ? (
-              <div className="h-[55px] bg-gradient-to-b from-[#0D94E8] to-[#1860A3] border-2 custom-border-gradient inline-flex flex-row items-center justify-center rounded-[8px] w-[310px] relative cursor-pointer tabletUserAcc:w-[310px]">
+              <div onClick={() => router.push('/osmrtnice-vpis')} className="h-[55px] bg-gradient-to-b from-[#0D94E8] to-[#1860A3] border-2 custom-border-gradient inline-flex flex-row items-center justify-center rounded-[8px] w-[310px] relative cursor-pointer tabletUserAcc:w-[310px]">
                 <Link
                   href={"/osmrtnice-vpis"}
                   className="text-[18px] text-[#FFFFFF]
@@ -98,7 +100,7 @@ export default function Obituaries() {
                 />
               </div>
             )}
-            <div className="h-[55px] bg-gradient-to-b from-[#F9AB16] to-[#C5870E] border-2 custom-border-gradient inline-flex flex-row items-center justify-center rounded-[8px] w-[310px] relative cursor-pointer tabletUserAcc:w-[310px]">
+            <div onClick={() => router.push('/darila')} className="h-[55px] bg-gradient-to-b from-[#F9AB16] to-[#C5870E] border-2 custom-border-gradient inline-flex flex-row items-center justify-center rounded-[8px] w-[310px] relative cursor-pointer tabletUserAcc:w-[310px]">
               <Link
                 href={"/darila"}
                 className="text-[18px] text-[#FFFFFF]
@@ -243,11 +245,11 @@ export default function Obituaries() {
                       </td>
                       <td className="pr-[25px]">
                         <button className="border-[2px] border-[#0A85C2] bg-white rounded-[6px] px-[11px] py-[5px] flex items-center gap-[16px] shadow-md ml-auto "
-                        onClick={() => {
-                          if(typeof window !== undefined){
-                            window.location.href = `/dopolni-osmrtnico/${obituary?.id}`;
-                          }
-                        }}>
+                          onClick={() => {
+                            if (typeof window !== undefined) {
+                              window.location.href = `/dopolni-osmrtnico/${obituary?.id}`;
+                            }
+                          }}>
                           <img
                             src="/edit.png"
                             alt=""

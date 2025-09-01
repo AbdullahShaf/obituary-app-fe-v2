@@ -101,7 +101,7 @@ const ImageSlider = () => {
 
       <div className="relative  w-[931.34px] tablet:w-[600px] mobile:w-full h-[345px] tablet:h-[267.07px] mobile:h-[267.07px]">
         {images.map((image, index) => (
-          <ImageSliderBlock image={image} index={index} />
+          <ImageSliderBlock image={image} index={index} key={index} />
         ))}
       </div>
       <div className="absolute bottom-[86px] mobile:bottom-[66px] z-30 w-[931.34px] tablet:w-[600px] mobile:w-full h-[345px] tablet:h-[267.07px] mobile:h-[267.07px] flex items-center ">

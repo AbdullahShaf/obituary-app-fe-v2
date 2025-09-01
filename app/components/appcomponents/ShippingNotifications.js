@@ -154,7 +154,7 @@ const ShippingNotifications = ({
           >
             <div className="relative  flex-1  flex flex-row mobile:justify-center">
               {finalImages.map((image, index) => (
-                <ImageSliderBlock image={image} index={index} />
+                <ImageSliderBlock image={image} index={index} key={index} />
               ))}
             </div>
 

@@ -92,34 +92,36 @@ const FlowerShops = ({ setIsOpen, data, showShop }) => {
         </div>
       </div>
       <div className="jdmobile:h-[790px] jdtablet:h-[880px] jddesktop:h-[664px] w-full pt-[10px] pb-[10px] bg-[#F8EDE3]">
-        <div className="mx-auto jdmobile:w-[370px] jdtablet:w-[700px] jddesktop:w-[1280px] w-[400px] grid grid-cols-2 jdtablet:grid-cols-3 jddesktop:grid-cols-6 jdmobile:justify-center place-items-center items-end">
-          {/* Sponsor Card */}
-          {data?.Company && (
-            <div
-              className="bg-[#36556C] jddesktop:h-[230px] jddesktop:w-[182px] jdtablet:h-[230px] jdtablet:w-[182px] jdmobile:h-[184px] jdmobile:w-[150px] rounded-[8px] jdmobile:rounded-[2px] overflow-hidden relative flex flex-col items-center justify-center px-[12px] jdmobile:mb-5 jdtablet:mb-5 jddesktop:mb-5"
-              style={{
-                boxShadow: "0px 50px 40px -40px rgba(60, 62, 65, 1)",
-              }}
-            >
-              <div className="text-[#FF984E] mobile:text-[16px] text-[24px]  font-semibold  mobile:font-normal text-center">
-                {data?.User.name}
-              </div>
-              <div className="text-[#E9EAF5] text-[14px] mt-[30px] text-center">
-                {data?.city}
-              </div>
-              <div className="absolute bottom-[12px] right-[12px]">
-                <img
-                  src="/memory_demo/info.png"
-                  alt="info"
-                  className="w-[24px] h-[24px]"
-                />
-              </div>
-            </div>
-          )}
+        {data?.floristShops?.length > 0 && (
+          <div className="mx-auto jdmobile:w-[370px] jdtablet:w-[700px] jddesktop:w-[1280px] w-[400px] grid grid-cols-2 jdtablet:grid-cols-3 jddesktop:grid-cols-6 jdmobile:justify-center place-items-center items-end">
+            {/* Sponsor Card */}
+            {data?.Company &&
+              typeof data.Company.type === "string" &&
+              data.Company.type.toLowerCase() === "florist" && (
+                <div
+                  className="bg-[#36556C] jddesktop:h-[230px] jddesktop:w-[182px] jdtablet:h-[230px] jdtablet:w-[182px] jdmobile:h-[184px] jdmobile:w-[150px] rounded-[8px] jdmobile:rounded-[2px] overflow-hidden relative flex flex-col items-center justify-center px-[12px] jdmobile:mb-5 jdtablet:mb-5 jddesktop:mb-5"
+                  style={{
+                    boxShadow: "0px 50px 40px -40px rgba(60, 62, 65, 1)",
+                  }}
+                >
+                  <div className="text-[#FF984E] mobile:text-[16px] text-[24px]  font-semibold  mobile:font-normal text-center">
+                    {data?.User.name}
+                  </div>
+                  <div className="text-[#E9EAF5] text-[14px] mt-[30px] text-center">
+                    {data?.city}
+                  </div>
+                  <div className="absolute bottom-[12px] right-[12px]">
+                    <img
+                      src="/memory_demo/info.png"
+                      alt="info"
+                      className="w-[24px] h-[24px]"
+                    />
+                  </div>
+                </div>
+              )}
 
-          {/* Cards (from cardImages) */}
-          {data?.floristShops?.length > 0 &&
-            data.floristShops.map((item, index) => (
+            {/* Cards (from cardImages) */}
+            {data.floristShops.map((item, index) => (
               <Link
                 href={`/floristdetails/${item.id}`}
                 key={index}
@@ -141,23 +143,25 @@ const FlowerShops = ({ setIsOpen, data, showShop }) => {
                         }`
                       : item?.logo || item?.CompanyPage?.logo
                   }
-                  alt={`Card ${index + 1}`}
+                  alt={`${item?.shopName || "Cvetličarna"} logo`}
                   width={120}
                   height={70}
                   className="w-[120px] h-[70px] object-contain mobile:w-[97px] mobile:h-[55px]"
                 />
                 <div className="text-[#9FA6B7] text-[13px] mt-[35px] mobile:bg-[#36556C] mobile:w-full mobile:text-white text-center mobile:py-2">
-                  Spominska kartica {index + 1}
+                  {item?.shopName || item?.CompanyPage?.name || "Cvetličarna"}
                 </div>
               </Link>
             ))}
-
-          {data?.floristShops?.length === 0 && (
-            <div className="text-[#3C3E41] text-[16px] leading-[24px] mt-[16px] jdmobile:w-full jdmobile:text-center flex items-center h-full">
-              Še ni vnešenih cvetličarn.
+          </div>
+        )}
+        {data?.floristShops?.length === 0 && (
+          <div className="w-full">
+            <div className="flex flex-col items-center justify-center w-full h-32 text-gray-500">
+              <p>Še ni vnešenih&nbsp;cvetličarn.</p>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   ) : null;

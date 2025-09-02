@@ -125,12 +125,12 @@ export default function Step6({
       };
       await handlePublish();
       const response = await shopService.createShop(payload);
-      onChange({
-        ...data,
-        shops: response.shops,
-      });
-      toast.success("Trgovine so ustvarjene, podjetje je poslano za odobritev");
-      router.push(`/floristdetails/${companyId}`);
+      // onChange({
+      //   ...data,
+      //   shops: response.shops,
+      // });
+      toast.success("Poslano v potrditev");
+      // router.push(`/floristdetails/${companyId}`);
 
       console.log(response);
     } catch (error) {

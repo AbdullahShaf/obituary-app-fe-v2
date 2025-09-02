@@ -257,6 +257,7 @@ const FloristlistCom = ({ item, index }) => {
                shadow-custom-light-dark-box-image
                 bg-gradient-to-br from-[#FFFFFF] to-[#FFFFFF30]
                 mobile:bg-gradient-to-br mobile:from-[#E3E8EC] mobile:to-[#FFFFFF]
+                flex items-center
                "
         >
           {item?.logo || item?.CompanyPage?.logo ? (
@@ -271,10 +272,7 @@ const FloristlistCom = ({ item, index }) => {
               width={500}
               height={500}
               className="
-              mobile:rounded-[5px]
-              mobile:object-cover
-                      h-full w-full object-cover
-                        rounded-lg "
+              mobile:rounded-[5px] rounded-lg max-h-[100%]"
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'flex';

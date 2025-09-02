@@ -204,6 +204,9 @@ export default function Step4({ data, onChange, handleStepChange }) {
           className="w-full h-full object-contain"
         />
       </div>
+      <div className="w-full text-[16px] text-[#6D778E] leading-[24px] mt-[29px] italic col-span-2">
+        Op. Shranjevanje lahko včasih traja tudi pol minute. Počakajte prosim.
+      </div>
     </>
   );
 }

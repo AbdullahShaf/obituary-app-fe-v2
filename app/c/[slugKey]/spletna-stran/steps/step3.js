@@ -203,19 +203,6 @@ export default function Step3({
                 onChange={handlePackageChange}
               />
             ))}
-
-            <div className="flex items-center justify-end pt-[8px] pb-[16px]">
-              <div
-                className="inline-flex items-center gap-[8px] cursor-pointer"
-                onClick={addSliderBlock}
-              >
-                <img
-                  src="/florist_plus.png"
-                  alt="Dodaj sliko"
-                  className="w-[16px] h-[16px]"
-                />
-              </div>
-            </div>
           </div>
         </div>
         <div className="space-y-[8px]">

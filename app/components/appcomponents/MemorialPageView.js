@@ -120,7 +120,7 @@ const MemorialPageView = () => {
                 if (index < 3) {
                   const imageUrl = item.image ? `${API_BASE_URL}/${item.image}` : "/user5.jpeg";
                   return (
-                    <div key={index} className="mobile:pr-5 mx-5">
+                    <div key={index} className={`${index > 1 ? "hidden md:block" : ""} mx-5`}>
                       <div className="rounded-xl shadow-custom-light-dark-box-image p-1 bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] ">
                         <Image
                           src={imageUrl}

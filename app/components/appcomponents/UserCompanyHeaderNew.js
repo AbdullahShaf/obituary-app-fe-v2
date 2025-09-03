@@ -36,7 +36,7 @@ function UserCompanyHeaderNew({
           {/* 17 October 2024 */}
           <div
             className=" flex 
-                        w-full px-[15.6px] h-[80px]
+                        w-full mobile:px-0 px-[15.6px] h-[80px]
                         tabletUserAcc:max-w-[764px] tabletUserAcc:w-full 
                         desktopUserAcc:w-[1260px] desktopUserAcc:px-[18px] justify-between items-center
                         "
@@ -51,7 +51,7 @@ function UserCompanyHeaderNew({
               </Link>
 
               <div
-                className=" flex flex-col tabletUserAcc:hidden mobileUserAcc:hidden items-center cursor-pointer "
+                className=" hidden flex-col tabletUserAcc:hidden mobileUserAcc:hidden items-center cursor-pointer "
                 onClick={onMenuClick}
               >
                 <Image
@@ -61,8 +61,8 @@ function UserCompanyHeaderNew({
                   className="w-[32px] h-[25px]"
                 />
               </div>
-              <div className="hidden tabletUserAcc:flex mobileUserAcc:flex items-center gap-[35px]">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center gap-[35px]">
+                <div className="flex hidden tabletUserAcc:hidden mobileUserAcc:hidden items-center gap-2">
                   <img
                     src="/bell_icon.png"
                     alt="back"
@@ -73,7 +73,7 @@ function UserCompanyHeaderNew({
                   </span>
                 </div>
                 <div
-                  className="flex items-center"
+                  className="flex items-center cursor-pointer"
                   onClick={() => {
                     // 23 October 2024
                     router.back();

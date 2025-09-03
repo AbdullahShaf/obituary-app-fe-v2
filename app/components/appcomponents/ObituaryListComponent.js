@@ -181,10 +181,10 @@ const ObituaryListComponent = ({ city }) => {
         setItemsPerPage(12); // 6+6
       } else if (width >= 768) {
         // Tablet
-        setItemsPerPage(16); // 5+5
+        setItemsPerPage(8); // 5+5
       } else {
         // Mobile
-        setItemsPerPage(16); // Single column
+        setItemsPerPage(8); // Single column
       }
     };
 
@@ -341,33 +341,47 @@ const ObituaryListComponent = ({ city }) => {
 
         <div className="w-[272px] h-[48px] mt-[47.27px] gap-2 flex flex-row justify-center mobile:mt-[30px] mobile:mb-[66px] mb-[87.81px]">
           <div
-            className="w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] hover:border-black hover:border-2"
-            onClick={() => goToPage(currentPage - 1)}
+            className="w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] hover:border-black hover:border-2 cursor-pointer"
+            onClick={() => goToPage(Math.max(1, currentPage - 1))}
           >
             <Image
               src={imgPrevious}
               alt="imgPrevious"
-              className=" w-[5.66px] h-[8.49px]"
+              className="w-[5.66px] h-[8.49px]"
             />
           </div>
-          {Array.from({ length: totalPages }).map((_, index) => {
-            const pageNumber = index + 1;
-            return (
+
+          {/* Page Numbers (max 4 visible at a time) */}
+          {(() => {
+            const maxVisiblePages = 4;
+            const startPage = Math.max(
+              1,
+              currentPage - Math.floor(maxVisiblePages / 2)
+            );
+            const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            const adjustedStartPage = Math.max(
+              1,
+              endPage - maxVisiblePages + 1
+            );
+
+            return Array.from(
+              { length: endPage - adjustedStartPage + 1 },
+              (_, i) => adjustedStartPage + i
+            ).map((pageNumber) => (
               <div
                 key={pageNumber}
                 onClick={() => goToPage(pageNumber)}
-                className={`hover:border-black hover:border-2 w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center cursor-pointer shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] ${currentPage === pageNumber ? 'bg-gray-300 font-bold' : ''
+                className={`hover:border-black hover:border-2 w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center cursor-pointer shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] ${currentPage === pageNumber ? "bg-gray-300 font-bold" : ""
                   }`}
               >
                 {pageNumber}
               </div>
-            );
-          })}
+            ));
+          })()}
+
           <div
             className="w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] hover:border-black hover:border-2 cursor-pointer transition-colors duration-200"
-            onClick={() => {
-              goToPage(currentPage + 1);
-            }}
+            onClick={() => goToPage(Math.min(totalPages, currentPage + 1))}
           >
             <Image
               src={imgNext}
@@ -375,7 +389,6 @@ const ObituaryListComponent = ({ city }) => {
               className="w-[5.66px] h-[8.49px]"
             />
           </div>
-
         </div>
       </div>
     </div>

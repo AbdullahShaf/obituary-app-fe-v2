@@ -1022,9 +1022,9 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary, fetchMemo
                 <div className="text-[#1E2125] text-[28px] tablet:text-[40px] desktop:text-[40px] font-variation-customOpt28 tablet:font-variation-customOpt40 desktop:font-variation-customOpt40 font-normal">
                   Posvetilo
                 </div>
-                <div className="text-[#0A85C2] text-[24px] font-[400] absolute top-[-3px] right-[-38px]">
+                {/* <div className="text-[#0A85C2] text-[24px] font-[400] absolute top-[-3px] right-[-38px]">
                   22
-                </div>
+                </div> */}
               </div>
               <div
                 className="flex items-center mt-4 h-6 cursor-pointer"
@@ -1070,9 +1070,9 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary, fetchMemo
               <div className="text-[#1E2125] text-[28px] tablet:text-[40px] desktop:text-[40px] font-variation-customOpt28 tablet:font-variation-customOpt40 desktop:font-variation-customOpt40 font-normal">
                 Nepozabni trenutki
               </div>
-              <div className="text-[#0A85C2] text-[24px] font-[400] absolute top-[-3px] right-[-38px]">
+              {/* <div className="text-[#0A85C2] text-[24px] font-[400] absolute top-[-3px] right-[-38px]">
                 22
-              </div>
+              </div> */}
             </div>
 
             <button

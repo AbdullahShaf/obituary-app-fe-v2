@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo2 from "@/public/footer_logo.png";
 import logoWhite from "@/public/footer_logo.png";
 import Link from "next/link";
@@ -67,9 +67,25 @@ const footerLinkSets = {
   ],
 };
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const checkMobile = () => setIsMobile(window.innerWidth < 768);
+      checkMobile(); // initial check
+      window.addEventListener("resize", checkMobile);
+      return () => window.removeEventListener("resize", checkMobile);
+    }
+  }, []);
+
+  return isMobile;
+}
+
 const CommonFooter = ({ currentPage = "/" }) => {
   const pathname = usePathname();
-  const linksToRender = footerLinkSets[currentPage] || [];
+  const isMobile = useIsMobile();
+  const linksToRender = !isMobile ? footerLinkSets[currentPage] || [] : footerLinkSets[currentPage].filter((item) => item.showOnMobile);
 
   return (
     <div className="bg-[#D4E6F9] border-l-1 border-r-1 border-t-1 border-b-1 border-color-[#D3D3D3] tablet:pt-[31px] pt-[29px] mobile:pt-[15px] pb-[14px]">
@@ -87,13 +103,13 @@ const CommonFooter = ({ currentPage = "/" }) => {
             <React.Fragment key={link.label}>
               <Link
                 href={link.path}
-                className={`text-[#1860A3] underline ${link.showOnMobile === false ? "mobile:hidden" : "sm:hidden"}`}
+                className={`text-[#1860A3] underline ${link.showOnMobile === false ? "hidden md:block" : "block md:hidden"}`}
               >
                 {link.label}
               </Link>
               {index < linksToRender.length - 1 && (
                 <div
-                  className={`w-[5px] h-[5px] bg-[#1860A3] rounded-full ${link.showOnMobile === false ? "mobile:hidden" : "sm:hidden"}`}
+                  className={`w-[5px] h-[5px] bg-[#1860A3] rounded-full ${link.showOnMobile === false ? "hidden md:block" : "block md:hidden"}`}
                 ></div>
               )}
             </React.Fragment>

@@ -87,7 +87,7 @@ const FloristsComp = () => {
                                 "
               >
                 <div className="flex mobile:w-full mobile:justify-end items-center h-[47px] mobile:h-[33px] ">
-                  <div className="text-[40px] mobile:text-[28px] tablet:customOpt40 desktop:customOpt40 text-[#414141] whitespace-nowrap">
+                  <div className="text-[40px] mobile:text-[28px] tablet:text-[32px] tablet:customOpt40 desktop:customOpt40 text-[#414141] whitespace-nowrap">
                    Lokalne cvetličarne
                   </div>
                 </div>

@@ -58,7 +58,7 @@ const cityOptions =  [
               <div className='text-[40px] customOpt40 leading-[46.88px] font-[400px] desktop:text-[#3C3E41] hidden desktop:block mobile:text-[28px] mobile:leading-[32.81px] whitespace-nowrap'>
                 Lokalne cvetličarne
               </div>
-              <div className='text-[40px] customOpt40 leading-[46.88px] font-[400px] tablet:text-white hidden tablet:block mobile:text-[28px] mobile:leading-[32.81px] whitespace-nowrap'>
+              <div className='text-[40px] customOpt40 leading-[46.88px] font-[400px] tablet:text-white hidden tablet:block mobile:text-[28px] tablet:text-[32px] mobile:leading-[32.81px] whitespace-nowrap'>
                 Poišči lokalne cvetličarne
               </div>
             </div>

@@ -1,6 +1,6 @@
 import axios from "./axios";
 
-const adminService = {
+const adminService = { 
   // Get all users (admin only)
   getAllUsers: async () => {
     try {

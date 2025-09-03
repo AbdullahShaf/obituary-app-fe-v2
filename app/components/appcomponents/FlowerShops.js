@@ -38,6 +38,7 @@ import Link from "next/link";
 // };
 
 const FlowerShops = ({ setIsOpen, data, showShop }) => {
+  console.log('>>>>>>>>>> data', data);
   useEffect(() => {
     if (data?.floristShops?.length > 0) {
       const firstShop = data.floristShops[0];
@@ -130,25 +131,26 @@ const FlowerShops = ({ setIsOpen, data, showShop }) => {
                   boxShadow: "0px 50px 40px -40px rgba(60, 62, 65, 1)",
                 }}
               >
-                <Image
-                  src={
-                    (item?.logo || item?.CompanyPage?.logo)?.includes(
-                      "floristShopUploads"
-                    ) ||
-                    (item?.logo || item?.CompanyPage?.logo)?.includes(
-                      "companyUploads"
-                    )
-                      ? `${API_BASE_URL}/${
-                          item?.logo || item?.CompanyPage?.logo
+                <div className="h-[80px] flex items-center">
+                  <Image
+                    src={
+                      (item?.logo || item?.CompanyPage?.logo)?.includes(
+                        "floristShopUploads"
+                      ) ||
+                        (item?.logo || item?.CompanyPage?.logo)?.includes(
+                          "companyUploads"
+                        )
+                        ? `${API_BASE_URL}/${item?.logo || item?.CompanyPage?.logo
                         }`
-                      : item?.logo || item?.CompanyPage?.logo
-                  }
-                  alt={`${item?.shopName || "Cvetličarna"} logo`}
-                  width={120}
-                  height={70}
-                  className="w-[120px] h-[70px] object-contain mobile:w-[97px] mobile:h-[55px]"
-                />
-                <div className="text-[#9FA6B7] text-[13px] mt-[35px] mobile:bg-[#36556C] mobile:w-full mobile:text-white text-center mobile:py-2">
+                        : item?.logo || item?.CompanyPage?.logo
+                    }
+                    alt={`${item?.shopName || "Cvetličarna"} logo`}
+                    width={120}
+                    height={70}
+                    className="w-[120px] h-[70px] object-contain mobile:w-[97px] mobile:h-[55px]"
+                  />
+                </div>
+                <div className="text-[#9FA6B7] text-[13px] mt-[5px] mobile:bg-[#36556C] mobile:w-full mobile:text-white text-center mobile:py-2">
                   {item?.shopName || item?.CompanyPage?.name || "Cvetličarna"}
                 </div>
               </Link>

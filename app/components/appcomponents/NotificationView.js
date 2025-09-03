@@ -34,7 +34,7 @@ const NotificationView = () => {
   return (
     <div className="w-full bg-[#fffbf4] flex justify-center mobile:h-[529px] relative">
       {/* Transparent overlay to make section unclickable */}
-      <div className="absolute inset-0 bg-transparent z-50 cursor-not-allowed"></div>
+      <div className="absolute inset-0 bg-transparent cursor-not-allowed"></div>
       <div
         className="
       desktop:w-[1200px] desktop:h-[453px] desktop:pl-[57px] desktop:pr-[55px]

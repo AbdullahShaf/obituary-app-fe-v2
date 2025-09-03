@@ -42,7 +42,7 @@ const Dropdown = ({
           : isFromFlower
           ? "dropdown w-[476px] h-[48px] tablet:w-[320px] mobile:w-[302px]"
           : isFromFlowerGreenBgTablet
-          ? "dropdown w-[292px] desktop:w-[476px] h-[48px] tablet:w-[320px]"
+          ? "dropdown w-[292px] desktop:w-[476px] h-[48px] tablet:w-[476px]"
           : "dropdown w-[292px] desktop:w-[227px] h-[48px]  z-[1]"
       }
     >

@@ -38,10 +38,10 @@ const FloristsGifts = () => {
     // Check permission before allowing submission
     const currentUser = isAuthenticated ? user : {};
     // Temporarily commented
-    // if (!currentUser.assignKeeperPermission) {
-    //   toast.error("You don't have permission to assign keepers.");
-    //   return;
-    // }
+    if (!currentUser.assignKeeperPermission) {
+      toast.error("You don't have permission to assign keepers.");
+      return;
+    }
 
     try {
       const formData = new FormData();

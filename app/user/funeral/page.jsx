@@ -85,7 +85,7 @@ export default function Funeral() {
           alt="funeral banner"
           className="w-full h-full object-cover absolute top-0 left-0 z-0"
         />
-        <div className="relative z-10 desktopUserAcc:pt-16 tabletUserAcc:pt-0">
+        <div className="relative z-10 mobile:mt-5 desktopUserAcc:pt-16 tabletUserAcc:pt-0">
           <div className="w-full tabletUserAcc:max-w-[620px] desktopUserAcc:w-[620px] mobileUserAcc:max-w-[310px] text-[16px]">
             <div
               className="text-[#0A85C2] text-[32px] leading-[38px] font-semibold mb-5"

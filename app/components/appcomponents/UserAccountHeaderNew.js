@@ -10,6 +10,7 @@ import ButtonWhiteBG from "./buttonwhitebg";
 import ButtonLightGreen from "./buttonLightGreen";
 import FooterMobile from "../appcomponents/FooterMobile";
 import CompanyFooterMobile from "./CompanyFooterMobile";
+import backIcon from "@/public/memory_header_left.png";
 
 function UserAccountHeaderNew({
   onMenuClick,
@@ -30,47 +31,51 @@ function UserAccountHeaderNew({
       <header className="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 ">
         <div className=" flex w-full justify-center">
           {/* 17 October 2024 */}
-          <div
-            className=" flex 
-                        w-full px-[15.6px] desktopUserAcc:h-[75px] tabletUserAcc:h-[70px] mobileUserAcc:h-[58px]
-                        tabletUserAcc:max-w-[764px] tabletUserAcc:w-full 
-                        desktopUserAcc:w-[1260px] mobileUserAcc:max-w-[360px] desktopUserAcc:px-[18px] justify-between items-center
-                        "
-          >
-            <div className="hidden mobileUserAcc:flex tabletUserAcc:flex ">
-              <div
-                className="flex items-center "
-                onClick={() => {
-                  // 23 October 2024
-                  router.back();
-                }}
-              >
-                <Image src={back_icon} width={30} height={32} />
-                <div className="text-[14px]  text-[#3C3E41] font-variation-customOpt12 font-bold ml-2 mt-[2px] ">
-                  NAZAJ
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 justify-between w-full mobileUserAcc:w-auto mx-5">
-              <Link href={"/"} className="flex items-center ">
+          <div className="flex w-full h-[68px] tablet:w-[744px] mobile:w-[360px] mobile:px-0 mx-auto tablet:h-[80px] px-4 tablet:px-6 desktop:w-[1200px] desktop:h-[92.02px] desktop:px-[18px]">
+            <div className="flex items-center gap-3 justify-between w-full mx-5">
+              <Link href="/" className="flex">
                 <Image
                   src={omr}
                   alt="App Logo"
-                  className="box-border h-[21px] w-[166.76px] mobileUserAcc:h-[18px] mobileUserAcc:w-[150px]  "
+                  width={500}
+                  height={500}
+                  className="box-border relative bottom-[2px] h-[22px] w-[182.76px] desktop:w-[255.31px] desktop:h-[32px]"
                 />
               </Link>
 
               <div
-                className=" flex flex-col mobileUserAcc:hidden   items-center cursor-pointer "
+                className=" hidden flex-col tabletUserAcc:hidden mobileUserAcc:hidden items-center cursor-pointer "
                 onClick={onMenuClick}
               >
                 <Image
                   src={"/icon_menu_black.png"}
                   width={32}
                   height={25}
-                  className="w-[32px] h-[25px] mobileUserAcc:w-[30px] mobileUserAcc:h-[22px]"
+                  className="w-[32px] h-[25px]"
                 />
+              </div>
+              <div className="flex items-center gap-[35px]">
+                <div className="flex hidden tabletUserAcc:hidden mobileUserAcc:hidden items-center gap-2">
+                  <img
+                    src="/bell_icon.png"
+                    alt="back"
+                    className="w-[20px] h-[20px] mb-[15px]"
+                  />
+                  <span className="text-[34px] font-bold text-[#EB1D1D] mt-[15px]">
+                    2
+                  </span>
+                </div>
+                <button
+                  onClick={() => router.back()}
+                  className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                  title="Nazaj"
+                >
+                  <Image
+                    src={backIcon}
+                    alt="Back"
+                    className="h-8 w-8 mobile:h-7 mobile:w-7"
+                  />
+                </button>
               </div>
             </div>
           </div>

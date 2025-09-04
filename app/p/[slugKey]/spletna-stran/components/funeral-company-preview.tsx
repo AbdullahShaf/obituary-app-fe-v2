@@ -17,6 +17,7 @@ type Props = {
 
 const FuneralCompanyPreview = ({ company }: Props) => {
   const [openModal, setOpenModal] = useState(false);
+console.log('company',company);
 
   return (
     <>

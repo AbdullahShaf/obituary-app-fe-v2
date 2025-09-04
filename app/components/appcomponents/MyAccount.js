@@ -13,10 +13,12 @@ import userService from "@/services/user-service";
 import toast from "react-hot-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { useSession } from "next-auth/react";
+import InfoModal from "./InfoModal";
+import MemoryModal from "../appcomponents/MemoryModal";
 
 const MyAccount = () => {
-  const { user, isLoading, isAuthenticated, updateUserAndRefreshSession} = useAuth();
-  
+  const { user, isLoading, isAuthenticated, updateUserAndRefreshSession } = useAuth();
+
   const [isShowModal, setIsShowModal] = useState(false);
   const [isShowCards, setIsShowCards] = useState(false);
   const [shownCard, setShownCard] = useState(0);
@@ -26,9 +28,13 @@ const MyAccount = () => {
   const [digiCards, setDigiCards] = useState([]);
   const [showKeeperModal, setShowKeeperModal] = useState(false);
   const [keeperId, setKeeperId] = useState(null);
+  const [keeperNotifications, setKeeperNotifications] = useState([]);
+  const [keeperNotification, setKeeperNotification] = useState([]);
+  const [memoryPopupOpen, setMemoryPopupOpen] = useState(false);
+  const [notifyCard, setNotifyCard] = useState(null);
+  const [showNotifyCard, setShowNotifyCard] = useState(false);
 
   // const [showImageView, setShowImageView] = useState(false)
-  console.log('>>>>>>>>>>>> digiCards', digiCards);
 
   const CustomDropdown = ({
     label,
@@ -113,14 +119,26 @@ const MyAccount = () => {
       if (response?.userCards?.length) {
         const myCards = response?.userCards?.filter((item) => item?.cardPdf && item?.cardImage);
         setDigiCards(myCards);
+        const foundCard = response?.userCards?.filter((item) => !item?.isNotified);
+        if (foundCard && foundCard?.length) {
+          setNotifyCard(foundCard[0]);
+          setShowNotifyCard(true);
+        }
+        console.log('>>>>>>>>>>>>>>>> foundCard', foundCard[0])
       } else {
         setDigiCards([]);
       }
 
-      const keeperStatus = await userService.getMyKeeperStatus();
-      if (keeperStatus && keeperStatus?.user && keeperStatus?.user?.id) {
-        setShowKeeperModal(true);
-        setKeeperId(keeperStatus?.user);
+      const resp = await userService.getMyKeeperNotifications();
+      if (resp) {
+        setKeeperNotifications(resp?.notifications ?? []);
+        if (resp?.notifications?.length) {
+          const notifiedNotification = resp?.notifications?.filter((item) => !item?.isNotified);
+          if (notifiedNotification?.length) {
+            setShowKeeperModal(true);
+            setKeeperNotification(notifiedNotification[0]);
+          }
+        }
       }
     } catch (e) {
       toast.error("Napaka pri pridobivanju kartic.");
@@ -130,7 +148,7 @@ const MyAccount = () => {
 
   useEffect(() => {
     getAllCards();
-  }, []); 
+  }, []);
 
   const handleCitySelect = async (item) => {
     try {
@@ -144,6 +162,15 @@ const MyAccount = () => {
       toast.error("Error Updating City");
     }
   };
+
+  const updateStatus = async () => {
+    await userService.updateKeeperStatus(keeperNotification?.id);
+  };
+
+  const updateCardStatus = async () => {
+    await userService.updateCardStatus(notifyCard?.id);
+  };
+
   return (
     <div className="flex flex-col mx-auto w-full tabletUserAcc:max-w-[744px] mobileUserAcc:max-w-[360px]">
       <ModalLibrary
@@ -162,7 +189,7 @@ const MyAccount = () => {
             {digiCards.map((digiCard) => {
               return (
                 <span
-                key={digiCard}
+                  key={digiCard}
                   className="inline-flex items-center text-[14px] text-[#4B5563] font-variation-customOpt14 mobileUserAcc:text-[#9CA3AF] mobileUserAcc:text-[13px] mobileUserAcc:font-variation-customOpt13 font-semibold mb-1 space-x-3 transition-colors duration-300 hover:text-[#2563EB]">
                   {/* Stylish Gift Icon */}
                   <svg
@@ -179,10 +206,44 @@ const MyAccount = () => {
                   </svg>
                   {/* Text */}
                   <span className="relative cursor-pointer" onClick={() => {
-                    setIsShowCards(true);
-                    setShownCard(digiCard.id);
+                    setMemoryPopupOpen(true);
+                    setShownCard(digiCard);
                   }}>
                     {digiCard.user.company} ti pošilja digitalno kartico {digiCard.obit.name} {digiCard.obit.sirName} ({formatDate(digiCard.createdTimestamp).replace(/\s/g, "")})
+                    <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  </span>
+                </span>
+              )
+            })}
+          </>
+        ) : null}
+
+        {keeperNotifications?.length ? (
+          <>
+            {keeperNotifications?.map((item) => {
+              return (
+                <span
+                  key={item.id}
+                  className="inline-flex items-center text-[14px] text-[#4B5563] font-variation-customOpt14 mobileUserAcc:text-[#9CA3AF] mobileUserAcc:text-[13px] mobileUserAcc:font-variation-customOpt13 font-semibold mb-1 space-x-3 transition-colors duration-300 hover:text-[#2563EB]">
+                  {/* Stylish Gift Icon */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6 text-[#4B5563] mobileUserAcc:text-[#9CA3AF] transition-colors duration-300 group-hover:text-[#2563EB]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.8}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2v-7" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 12V7a4 4 0 10-4 4h8a4 4 0 10-4-4v5" />
+                  </svg>
+                  {/* Text */}
+                  <span className="relative cursor-pointer" onClick={() => {
+                    setShowKeeperModal(true);
+                    setKeeperNotification(item);
+                  }}>
+                    {item.Sender.company} ti podarja status Skrbnika za cel mesec {item.Obituary.name} {item.Obituary.sirName} ({formatDate(item.createdTimestamp).replace(/\s/g, "")})
                     <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                   </span>
                 </span>
@@ -427,7 +488,40 @@ const MyAccount = () => {
       </div>
 
       <ModalDigiCards isShowModal={isShowCards} setIsShowModal={setIsShowCards} data={digiCards} setShownCard={setShownCard} shownCard={shownCard} />
-      <ModalKeeperNotification isShowModal={showKeeperModal} setIsShowModal={setShowKeeperModal} keeperId={keeperId} />
+
+      <InfoModal
+        icon={"/giftbox.svg"}
+        heading={keeperNotification?.Sender?.company}
+        text={"ti podarja status Skrbnika za cel mesec"}
+        name={`${keeperNotification?.Obituary?.name} ${keeperNotification?.Obituary?.sirName}`}
+        isOpen={showKeeperModal}
+        onClose={() => {
+          setShowKeeperModal(false);
+          if (keeperNotification?.id) {
+            updateStatus();
+          }
+        }}
+      />
+
+      <InfoModal
+        icon={"/giftbox.svg"}
+        heading={notifyCard?.senderUser?.company}
+        text={"ti podarja digitalno kartico"}
+        name={`${notifyCard?.obit?.name} ${notifyCard?.obit?.sirName}`}
+        isOpen={showNotifyCard}
+        onClose={() => {
+          setShowNotifyCard(false);
+          if (notifyCard?.id) {
+            updateCardStatus();
+          }
+        }}
+      />
+
+      <MemoryModal
+        isOpen={memoryPopupOpen}
+        onClose={() => setMemoryPopupOpen(false)}
+        shownCard={shownCard}
+      />
     </div>
   );
 };

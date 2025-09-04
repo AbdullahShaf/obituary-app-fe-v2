@@ -7,6 +7,14 @@ const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
 });
 
+export const axiosNoAuth = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    accept: "application/json",
+    "Content-Type": "application/json",
+  },
+});
+
 axiosInstance.interceptors.request.use(
   async (config) => {
     const session = await getSession();

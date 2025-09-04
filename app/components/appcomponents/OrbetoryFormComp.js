@@ -107,10 +107,10 @@ const OrbetoryFormComp = ({
     // Check permission before allowing submission
     const currentUser = isAuthenticated ? user : {};
     // Temporarily commented
-    if (!currentUser.sendMobilePermission) {
-      toast.error("You don't have permission to send mobile cards.");
-      return;
-    }
+    // if (!currentUser.sendMobilePermission) {
+    //   toast.error("You don't have permission to send mobile cards.");
+    //   return;
+    // }
 
     try {
       if (!validateData()) return;

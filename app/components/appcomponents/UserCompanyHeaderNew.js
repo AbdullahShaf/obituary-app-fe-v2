@@ -11,6 +11,8 @@ import FooterMobile from "../appcomponents/FooterMobile";
 import CompanyFooterMobile from "./CompanyFooterMobile";
 import { usePathname } from "next/navigation";
 import backIcon from "@/public/memory_header_left.png";
+import { useSession } from "next-auth/react";
+import { useAuth } from "@/hooks/useAuth";
 
 function UserCompanyHeaderNew({
   onMenuClick,
@@ -24,8 +26,12 @@ function UserCompanyHeaderNew({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-
+  const { ghostLogin } = useAuth();
+  const { data: session } = useSession();
+  const isGhost = session?.user?.me?.isGhost;
+  const adminId = session?.user?.me?.adminId;
   const [isButtonHide, setIsButtonHide] = useState(false);
+  console.log('>>>>>> adminId', adminId, isGhost, session);
 
   const absolutePath = pathname.startsWith("/c") ? "/c" : "/p";
 
@@ -57,6 +63,11 @@ function UserCompanyHeaderNew({
                   className="w-[32px] h-[25px]"
                 />
               </div>
+              {isGhost && adminId ? (
+                <button className="text-[#333]" onClick={async () => {
+                  await ghostLogin({ userId: adminId, adminId: 0 })
+                }}>Nazaj k skrbniku</button>
+              ) : null}
               <div className="flex items-center gap-[35px]">
                 <div className="flex hidden tabletUserAcc:hidden mobileUserAcc:hidden items-center gap-2">
                   <img
@@ -187,17 +198,17 @@ function UserCompanyHeaderNew({
 
                       {memories && memories.length > 0
                         ? memories.map((item, index) => (
-                            <Link
-                              href={"/memorypage"}
-                              className="my-5"
-                              key={index}
-                            >
-                              <ButtonLightGreen
-                                isMobile={true}
-                                placeholderText={`${item.name} ${item.sirName}`}
-                              />
-                            </Link>
-                          ))
+                          <Link
+                            href={"/memorypage"}
+                            className="my-5"
+                            key={index}
+                          >
+                            <ButtonLightGreen
+                              isMobile={true}
+                              placeholderText={`${item.name} ${item.sirName}`}
+                            />
+                          </Link>
+                        ))
                         : null}
                     </div>
                   )}
@@ -315,16 +326,16 @@ function UserCompanyHeaderNew({
 
                       {memories && memories.length > 0
                         ? memories.map((item, index) => (
-                            <Link
-                              href={"/memorypage"}
-                              className="mt-[10px]"
-                              key={index}
-                            >
-                              <ButtonLightGreen
-                                placeholderText={`${item.name} ${item.sirName}`}
-                              />
-                            </Link>
-                          ))
+                          <Link
+                            href={"/memorypage"}
+                            className="mt-[10px]"
+                            key={index}
+                          >
+                            <ButtonLightGreen
+                              placeholderText={`${item.name} ${item.sirName}`}
+                            />
+                          </Link>
+                        ))
                         : null}
                     </React.Fragment>
                   )}

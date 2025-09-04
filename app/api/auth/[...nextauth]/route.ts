@@ -74,6 +74,36 @@ const authOptions: AuthOptions = {
         }
       },
     }),
+    CredentialsProvider({
+      name: "ghost-login",
+      id: "ghost-login",
+      credentials: {
+        userId: { label: "User ID", type: "text" },
+        adminId: { label: "Admin ID", type: "text" },
+      },
+
+      async authorize(credentials): Promise<any> {
+        if (typeof credentials !== "undefined") {
+          const res = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/auth/ghost-login`,
+            {
+              userId: credentials.userId,
+              adminId: credentials.adminId,
+            }
+          );
+          if (res.status === 200 || res.status == 201) {
+            return {
+              token: res.data.token,
+              user: res.data.user,
+            };
+          } else {
+            return null;
+          }
+        } else {
+          return null;
+        }
+      },
+    }),
   ],
   debug: true,
   session: { strategy: "jwt", maxAge: 90 * 24 * 60 * 60 }, // ! session age ( 3 months)

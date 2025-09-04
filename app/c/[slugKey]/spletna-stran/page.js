@@ -23,6 +23,7 @@ export default function SpletnaStran() {
   const handleCompanyChange = (data) => {
     setCompany(data);
   };
+  console.log('>>>>>>>>>>> company', company);
   useEffect(() => {
     if (user) {
       getCompany();

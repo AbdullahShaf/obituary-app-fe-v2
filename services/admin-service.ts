@@ -1,6 +1,6 @@
 import axios from "./axios";
 
-const adminService = { 
+const adminService = {
   // Get all users (admin only)
   getAllUsers: async () => {
     try {
@@ -67,6 +67,26 @@ const adminService = {
     } catch (error) {
       console.error("Error fetching funeral companies:", error);
       throw error;
+    }
+  },
+
+  // Get companies with approval request
+  getCompaniesWithApprovalRequest: async () => {
+    try {
+      const response = await axios.get("/admin/compines-for-approval");
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching companies:", error);
+    }
+  },
+
+  // PATCH Approve company's request
+  approveCompanyRequest: async (id: string) => {
+    try {
+      const response = await axios.patch(`/admin/approve-request/${id}`);
+      return response;
+    } catch (error) {
+      console.error("Error in aprroval:", error);
     }
   },
 

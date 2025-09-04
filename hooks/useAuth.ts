@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { IUserComplete } from "@/types/auth";
 import userService from "@/services/user-service";
+import axiosInstance, { axiosNoAuth } from "@/services/axios";
 
 export function useAuth() {
   const { data: session, status, update } = useSession();
@@ -20,6 +21,7 @@ export function useAuth() {
         password: credentials.password,
         redirect: false,
       });
+      console.log("login", result);
 
       if (result?.error) {
         toast.error("Invalid credentials");
@@ -41,6 +43,44 @@ export function useAuth() {
             router.push(`/u/${user.slugKey}/moj-racun`);
           }
         }, 100);
+
+        return { success: true, user: result };
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("Login failed");
+      return { success: false, error: "Login failed" };
+    }
+  };
+
+
+  const ghostLogin = async (credentials: { userId: string; adminId: string }) => {
+    try {
+      const result = await signIn("ghost-login", {
+        ...credentials,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        toast.error("Invalid credentials");
+        return { success: false, error: result.error };
+      }
+
+      if (result?.ok) {
+        toast.success("Zahteva uspešna!");
+        const newSession = await getSession();
+        const user1 = newSession?.user.me as IUserComplete | undefined;
+
+        // Wait for session to update, then redirect
+        setTimeout(() => {
+          if (user1?.role === "SUPERADMIN") {
+            router.push("/admin/approval-requests");
+          } else if (user1?.role === "Florist") {
+            router.push(`/c/${user1.slugKey}/spletna-stran`);
+          } else if (user1?.role === "Funeral") {
+            router.push(`/p/${user1.slugKey}/spletna-stran`);
+          }
+        }, 2000);
 
         return { success: true, user: result };
       }
@@ -151,6 +191,7 @@ export function useAuth() {
     status,
     login,
     logout,
+    ghostLogin,
     hasPermission,
     isRole,
     isAdmin: user?.role === "SUPERADMIN",

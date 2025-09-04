@@ -103,13 +103,13 @@ const CommonFooter = ({ currentPage = "/" }) => {
             <React.Fragment key={link.label}>
               <Link
                 href={link.path}
-                className={`text-[#1860A3] underline ${link.showOnMobile === false ? "hidden md:block" : "block md:hidden"}`}
+                className={`text-[#1860A3] underline ${link.showOnMobile === false ? "hidden md:block" : "block"}`}
               >
                 {link.label}
               </Link>
               {index < linksToRender.length - 1 && (
                 <div
-                  className={`w-[5px] h-[5px] bg-[#1860A3] rounded-full ${link.showOnMobile === false ? "hidden md:block" : "block md:hidden"}`}
+                  className={`w-[5px] h-[5px] bg-[#1860A3] rounded-full ${link.showOnMobile === false ? "hidden md:block" : "block"}`}
                 ></div>
               )}
             </React.Fragment>

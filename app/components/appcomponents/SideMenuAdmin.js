@@ -22,9 +22,10 @@ const SideMenuAdmin = ({
   }, [pathname]);
 
   const menuItems = [
-    { text: "Notifications", imgSrc: "/ico_notification_bell.png", path: "#" },
+    { text: "Notifications", imgSrc: "/ico_notification_bell.png", path: "/admin/approval-requests" },
     { text: "Obituaries", imgSrc: "/ico_user.png", path: "/admin/Obituaries" },
     { text: "Memory Books", imgSrc: "/ico_funerals.png", path: "/admin/memorybooks" },
+    // { text: "Approval Requests", imgSrc: "/ico_funerals.png", path: "/admin/approval-requests" },
     {
       text: "Funeral Companies",
       imgSrc: "/ico_funeral_comp.png",

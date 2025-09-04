@@ -1,4 +1,4 @@
-import axios from "./axios";
+import axios, { axiosNoAuth } from "./axios";
 
 // Helper to get cookie value
 function getCookie(name: string) {
@@ -37,6 +37,17 @@ const getFuneralCompany = async (queryParams?: {
   return response.data;
 };
 
+
+const getFuneralCompanyBySlug = async (queryParams?: {
+  slug: string;
+}) => {
+  const endpoint = `/company/funeral/by-slug`;
+  const response = await axiosNoAuth.get(endpoint, {
+    params: queryParams,
+  });
+  return response.data;
+};
+
 const getCompleteCompany = async (queryParams?: { type?: string }) => {
   const endpoint = `/company/details`;
   const response = await axios.get(endpoint, {
@@ -54,6 +65,16 @@ const getFloristCompany = async (queryParams?: {
   const response = await axios.get(endpoint, {
     params: queryParams,
     headers: getAuthHeaders(),
+  });
+  return response.data;
+};
+
+const getFloristCompanyBySlug = async (queryParams?: {
+  slug: string;
+}) => {
+  const endpoint = `/company/florist/by-slug`;
+  const response = await axiosNoAuth.get(endpoint, {
+    params: queryParams,
   });
   return response.data;
 };
@@ -84,10 +105,10 @@ const updateCompany = async (formData: FormData, id: String) => {
 
 const companyService = {
   createCompany,
-  getFuneralCompany,
+  getFuneralCompany, getFuneralCompanyBySlug,
   updateCompany,
   getFloristCompany,
-  getCompleteCompany,
+  getCompleteCompany, getFloristCompanyBySlug,
   getCompanies,
 };
 

@@ -87,20 +87,23 @@ export default function Step6({ data, onChange, handleStepChange }) {
       console.error("Error:", error);
       toast.error(
         error?.response?.data?.error ||
-          "Failed to update company. Please try again."
+        "Failed to update company. Please try again."
       );
       return false;
     }
   };
 
-  const handlePublish = async () => {
+  const handlePublish = async (send = '') => {
     try {
-      if (data && data.status === "DRAFT") {
+      if (data && data.status === "SENT_FOR_APPROVAL") {
         toast.error("Company is already sent for approval");
         return false;
       }
       const formData = new FormData();
       formData.append("status", "DRAFT");
+      if (send) {
+        formData.append("allowStatus", send);
+      }
 
       const response = await companyService.updateCompany(formData, companyId);
       onChange(response.company);
@@ -227,7 +230,7 @@ export default function Step6({ data, onChange, handleStepChange }) {
                     setOpenBlock(2);
                   }
                 } else {
-                  handlePublish();
+                  handlePublish('send');
                   handleStepChange(6);
                 }
               }}

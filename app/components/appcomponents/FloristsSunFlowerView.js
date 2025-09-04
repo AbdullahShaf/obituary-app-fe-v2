@@ -16,7 +16,7 @@ const FloristsSunFlowerView = ({ data }) => {
       <div className="flex desktop:mt-[92.02px] tablet:mt-[80px]  mt-[72px] justify-center h-[451px] tablet:h-[415px] desktop:h-[456px] w-full shadow-custom-light-dark-banner">
         <Image
           key={data?.background}
-          src={getBackground(data?.background)}
+          src={data?.background}
           alt="soncnica"
           width={0}
           height={0}

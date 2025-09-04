@@ -27,7 +27,7 @@ const Offer = ({ data }) => {
   const images = [
     data?.offer_one_image && data?.offer_one_title
       ? {
-          image: getImageUrl(data.offer_one_image),
+          image: data.offer_one_image,
           title: data.offer_one_title,
         }
       : {
@@ -36,7 +36,7 @@ const Offer = ({ data }) => {
         },
     data?.offer_two_image && data?.offer_two_title
       ? {
-          image: getImageUrl(data.offer_two_image),
+          image: data.offer_two_image,
           title: data.offer_two_title,
         }
       : {
@@ -46,7 +46,7 @@ const Offer = ({ data }) => {
 
     data?.offer_three_image && data?.offer_three_title
       ? {
-          image: getImageUrl(data.offer_three_image),
+          image: data.offer_three_image,
           title: data.offer_three_title,
         }
       : {

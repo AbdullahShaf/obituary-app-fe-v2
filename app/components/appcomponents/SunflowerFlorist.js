@@ -96,11 +96,7 @@ const SunflowerFlorist = ({ data }) => {
               </button>
             )}
             <Image
-              src={
-                data?.logo
-                  ? `${API_BASE_URL}/${data?.logo}`
-                  : "/suniflo_logo.avif"
-              }
+              src={data?.logo || "/suniflo_logo.avif"}
               alt="sunflower_img"
               width={300}
               height={200}

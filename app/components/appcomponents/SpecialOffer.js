@@ -91,7 +91,7 @@ const SpecialOffer = ({ data }) => {
               <Image
                 width={350}
                 height={350}
-                src={getSlideImage(activeSlide)}
+                src={activeSlide.image}
                 alt={activeSlide.title || "slide"}
                 className=" w-[351px] h-[351px] tablet:w-[450px] tablet:h-[411px] mobile:w-[296px] mobile:h-[296px]  rounded"
               />

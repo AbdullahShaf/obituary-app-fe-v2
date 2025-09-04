@@ -47,7 +47,7 @@ export default function ImageFullView({
               >
                 <div className="flex justify-center h-screen items-center self-center ">
                   <Image
-                    src={`${API_BASE_URL}/${item.fileUrl}`}
+                    src={item.fileUrl}
                     alt="sponser4 of the image"
                     width={210}
                     height={72}

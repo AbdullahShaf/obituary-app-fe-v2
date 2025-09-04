@@ -96,11 +96,7 @@ export default function ImageCarousel({ images }) {
             className="relative h-[320px] rounded-lg overflow-hidden"
           >
             <Image
-              src={
-                cemetery.image.includes("cemetryUploads")
-                  ? `${API_BASE_URL}/${cemetery.image}`
-                  : cemetery.image
-              }
+              src={cemetery.image}
               alt={`Slide ${index + 1}`}
               fill
               className="object-cover w-full h-full"

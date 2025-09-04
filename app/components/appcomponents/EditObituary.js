@@ -113,7 +113,7 @@ const AddObituary = ({ set_Id, setModal }) => {
         setSelectedRegion(response.region || "");
         setSelectedCity(response.city || "");
         setInputValueGender(response.gender || "");
-        setUploadedImage(`${API_BASE_URL}/${response.image}`);
+        setUploadedImage(response.image || "");
       } catch (err) {
         console.error("Error setting basic info state:", err);
         // toast.error("Failed to set basic obituary information.");

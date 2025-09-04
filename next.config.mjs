@@ -2,7 +2,13 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: ["localhost", "dev111.osmrtnica.com", "staging.osmrtnica.com", "osmrtnica.com"],
+    domains: [
+      "localhost",
+      "dev111.osmrtnica.com",
+      "staging.osmrtnica.com",
+      "osmrtnica.com",
+      "obituary-app-bee.b-cdn.net",
+    ],
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {

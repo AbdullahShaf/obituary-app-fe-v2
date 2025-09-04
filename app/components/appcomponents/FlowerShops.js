@@ -38,7 +38,7 @@ import Link from "next/link";
 // };
 
 const FlowerShops = ({ setIsOpen, data, showShop }) => {
-  console.log('>>>>>>>>>> data', data);
+  console.log(">>>>>>>>>> data", data);
   useEffect(() => {
     if (data?.floristShops?.length > 0) {
       const firstShop = data.floristShops[0];
@@ -137,11 +137,12 @@ const FlowerShops = ({ setIsOpen, data, showShop }) => {
                       (item?.logo || item?.CompanyPage?.logo)?.includes(
                         "floristShopUploads"
                       ) ||
-                        (item?.logo || item?.CompanyPage?.logo)?.includes(
-                          "companyUploads"
-                        )
-                        ? `${API_BASE_URL}/${item?.logo || item?.CompanyPage?.logo
-                        }`
+                      (item?.logo || item?.CompanyPage?.logo)?.includes(
+                        "companyUploads"
+                      )
+                        ? `${API_BASE_URL}/${
+                            item?.logo || item?.CompanyPage?.logo
+                          }`
                         : item?.logo || item?.CompanyPage?.logo
                     }
                     alt={`${item?.shopName || "Cvetličarna"} logo`}

@@ -42,12 +42,7 @@ const SadProgram = ({ data }) => {
                   className=" bg-gradient-to-br from-white to-[#ffffff30] border-white border-2 desktop:w-[211px] desktop:h-[295px] w-[292px] h-[295px] flex items-center flex-col rounded-lg shadow-custom-light-dark mobile:hidden"
                 >
                   <Image
-                    src={
-                      typeof item.image === "string" &&
-                      item.image.includes("packageUploads")
-                        ? `${API_BASE_URL}/${item.image}`
-                        : item.image
-                    }
+                    src={item?.image}
                     alt={item.title || "package image"}
                     className="w-[119.65px] h-[135.08px] mt-[58.27px]"
                     width={120}
@@ -69,12 +64,7 @@ const SadProgram = ({ data }) => {
                 className=" bg-gradient-to-br from-white to-[#ffffff30] border-white border-2 w-[292px] h-[295px] items-center flex-col rounded-lg shadow-custom-light-dark mobile:flex hidden"
               >
                 <Image
-                  src={
-                    typeof item.image === "string" &&
-                    item.image.includes("packageUploads")
-                      ? `${API_BASE_URL}/${item.image}`
-                      : item.image
-                  }
+                  src={item.image}
                   alt={item.title || "package image"}
                   className="w-[119.65px] h-[135.08px] mt-[58.27px]"
                   width={120}

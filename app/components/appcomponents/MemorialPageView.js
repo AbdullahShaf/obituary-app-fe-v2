@@ -67,8 +67,8 @@ const MemorialPageView = () => {
                 </div>
                 <p className="font-variation-customOpt16 mb-12 mobile:mb-4 mt-4 text-[#3C3E41] text-[16px] text-center leading-6 font-normal w-[629.27px] tablet:w-[596px] mobile:w-[301px]">
                   Spomini niso večni. Prehitro nam uidejo, čarobni trenutki se
-                  pozabijo, slike zbledijo. Povežite spomine na najdražje v celoto
-                  in jih ohranite.
+                  pozabijo, slike zbledijo. Povežite spomine na najdražje v
+                  celoto in jih ohranite.
                 </p>
 
                 <div className="w-full flex flex-row mobile:flex-col mx-auto justify-between mr-12">
@@ -118,9 +118,12 @@ const MemorialPageView = () => {
             >
               {obituaries?.map((item, index) => {
                 if (index < 3) {
-                  const imageUrl = item.image ? `${API_BASE_URL}/${item.image}` : "/user5.jpeg";
+                  const imageUrl = item.image || "/user5.jpeg";
                   return (
-                    <div key={index} className={`${index > 1 ? "hidden md:block" : ""} mx-5`}>
+                    <div
+                      key={index}
+                      className={`${index > 1 ? "hidden md:block" : ""} mx-5`}
+                    >
                       <div className="rounded-xl shadow-custom-light-dark-box-image p-1 bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] ">
                         <Image
                           src={imageUrl}
@@ -131,10 +134,10 @@ const MemorialPageView = () => {
                         />
                       </div>
                       <div className="text-center mt-3 text-[14px] font-normal text-[#1E2125] leading-[24px]">
-                        {item?.name}  {item?.sirName}
+                        {item?.name} {item?.sirName}
                       </div>
                     </div>
-                  )
+                  );
                 }
               })}
             </div>

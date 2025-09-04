@@ -77,7 +77,7 @@ const Pride = ({ data }) => {
         </div>
       </div>
 
-      {!data.id && (
+      {!data?.id && (
         <div
           className="hidden z-[45] absolute desktop:w-[1200px] tablet:w-[680px] mobile:w-[360px] justify-end
                 mobile:mt-[4050px] tablet:mt-[3700px] desktop:mt-[10%] desktop:flex

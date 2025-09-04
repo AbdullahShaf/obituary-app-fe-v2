@@ -37,6 +37,17 @@ const getFuneralCompany = async (queryParams?: {
   return response.data;
 };
 
+
+const getFuneralCompanyBySlug = async (queryParams?: {
+  slug: string;
+}) => {
+  const endpoint = `/company/funeral/by-slug`;
+  const response = await axiosNoAuth.get(endpoint, {
+    params: queryParams,
+  });
+  return response.data;
+};
+
 const getCompleteCompany = async (queryParams?: { type?: string }) => {
   const endpoint = `/company/details`;
   const response = await axios.get(endpoint, {
@@ -94,7 +105,7 @@ const updateCompany = async (formData: FormData, id: String) => {
 
 const companyService = {
   createCompany,
-  getFuneralCompany,
+  getFuneralCompany, getFuneralCompanyBySlug,
   updateCompany,
   getFloristCompany,
   getCompleteCompany, getFloristCompanyBySlug,

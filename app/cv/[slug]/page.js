@@ -10,8 +10,9 @@ import SadProgram from "@/app/components/appcomponents/SadProgram";
 import SpecialOffer from "@/app/components/appcomponents/SpecialOffer";
 import SunflowerFlorist from "@/app/components/appcomponents/SunflowerFlorist";
 import companyService from "@/services/company-service";
-import {AccessDenied} from "./AccessDenied"
-export default function SpletnaPage() {
+import { AccessDenied } from "./AccessDenied";
+
+export default function FloristPage() {
     const params = useParams();
     const [company, setCompany] = useState(null);
     const slug = params?.slug;
@@ -31,26 +32,31 @@ export default function SpletnaPage() {
             console.log(error);
         }
     };
-console.log('company',company);
+    console.log('company', company);
 
     return (
         <>
             {
-                company?.status !== "PUBLISHED" ?
+                (company?.id && company?.status !== "PUBLISHED") ?
                     <AccessDenied /> :
+                    <>
+                        {
+                            company ?
 
-                    <Layout from={"18"} forFooter={""} currentPage="">
-                        <div className="flex flex-1 flex-col bg-[#F5F7F9]">
-                            <div className="flex flex-col relative mx-auto overflow-auto w-full bg-[#F5F7F9]">
-                                <FloristsSunFlowerView data={company} />
-                                <Offer data={company} />
-                                <SadProgram key={company?.id} data={company} />
-                                <Qualityflowers data={company} />
-                                <SpecialOffer key={company?.id} data={company} />
-                                <SunflowerFlorist key={company?.id} data={company} />
-                            </div>
-                        </div>
-                    </Layout>
+                                <Layout from={"18"} forFooter={""} currentPage="">
+                                    <div className="flex flex-1 flex-col bg-[#F5F7F9]">
+                                        <div className="flex flex-col relative mx-auto overflow-auto w-full bg-[#F5F7F9]">
+                                            <FloristsSunFlowerView data={company} />
+                                            <Offer data={company} />
+                                            <SadProgram key={company?.id} data={company} />
+                                            <Qualityflowers data={company} />
+                                            <SpecialOffer key={company?.id} data={company} />
+                                            <SunflowerFlorist key={company?.id} data={company} />
+                                        </div>
+                                    </div>
+                                </Layout> : null
+                        }
+                    </>
             }
         </>
     );

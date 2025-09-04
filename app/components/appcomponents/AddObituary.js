@@ -278,10 +278,10 @@ const AddObituary = ({ set_Id, setModal }) => {
     const currentUser = isAuthenticated ? user : {};
 
     // Temporarily commented
-    // if (!currentUser.createObituaryPermission) {
-    //   toast.error("You don't have permission to create obituaries.");
-    //   return;
-    // }
+    if (!currentUser.createObituaryPermission) {
+      toast.error("You don't have permission to create obituaries.");
+      return;
+    }
 
     if (!validateFields()) return;
 

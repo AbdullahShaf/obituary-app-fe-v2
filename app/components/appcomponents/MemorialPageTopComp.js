@@ -6,9 +6,11 @@ import toast from "react-hot-toast";
 import { useAuth } from "@/hooks/useAuth";
 
 import obituaryService from "@/services/obituary-service";
+import { useRouter } from "next/navigation";
 
 const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary, fetchMemory }) => {
   const { user } = useAuth();
+  const router = useRouter();
   const [currentURL, setCurrentURL] = useState("");
   const [maxCondolances, setMaxCondolances] = useState(6);
   const [limitedCondolances, setLimitedCondolances] = useState([]);
@@ -890,9 +892,10 @@ const MemorialPageTopComp = ({ set_Id, setModal, data, updateObituary, fetchMemo
 
                 <div
                   onClick={() => {
-                    set_Id("error_report"), openCandleModal();
+                    // set_Id("error_report"), openCandleModal();
+                    router.push('/kontakt')
                   }}
-                  className="flex self-end mt-4 tablet:mt-6 desktop:mt-6 h-[15px] desktop:h-[16px] items-center desktop:pr-[20px]"
+                  className="flex cursor-pointer self-end mt-4 tablet:mt-6 desktop:mt-6 h-[15px] desktop:h-[16px] items-center desktop:pr-[20px]"
                 >
                   <Image
                     src={"/flag.png"}

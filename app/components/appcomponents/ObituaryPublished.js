@@ -1,9 +1,12 @@
+"use client"
 import React from "react";
 import Image from "next/image";
 import imgFlag from "@/public/img_Flag.png";
 import { format } from "date-fns";
+import { useRouter } from "next/navigation";
 
 const ObituaryPublished = ({ set_Id, setModal, data }) => {
+  const router = useRouter();
   return (
     <>
       <div className="mx-auto border-t-[1px] border-b-[1px] border-[#DCE4E4] w-full flex items-center overflow-hidden bg-[#FFFAF826] py-[68px] mobile:py-[30px]">
@@ -103,9 +106,10 @@ const ObituaryPublished = ({ set_Id, setModal, data }) => {
                 </div>
                 <div
                   onClick={() => {
-                    set_Id("error_report"), setModal(true);
+                    // set_Id("error_report"), setModal(true);
+                    router.push('/kontakt')
                   }}
-                  className="mt-[1px] "
+                  className="mt-[1px] cursor-pointer"
                 >
                   Sporoči napake
                 </div>
@@ -114,19 +118,19 @@ const ObituaryPublished = ({ set_Id, setModal, data }) => {
                 <span className="text-[14px]">Zadnje spremembe:</span> <br />
                 {data && data?.MemoryLogs?.length > 0
                   ? data?.MemoryLogs?.map((item, index) => (
-                      <div
-                        key={index}
-                        className="leading-[14.06px] text-[12px] desktop:mr-[3px] tablet:mr-[3px] mt-[4px] font-variation-customOpt12 text-[#414141]"
-                      >
-                        <div>
-                          {item.typeInSL}:&nbsp; {item.userName},&nbsp;
-                          {format(
-                            new Date(item.createdTimestamp),
-                            "dd.MM.yyyy"
-                          )}
-                        </div>
+                    <div
+                      key={index}
+                      className="leading-[14.06px] text-[12px] desktop:mr-[3px] tablet:mr-[3px] mt-[4px] font-variation-customOpt12 text-[#414141]"
+                    >
+                      <div>
+                        {item.typeInSL}:&nbsp; {item.userName},&nbsp;
+                        {format(
+                          new Date(item.createdTimestamp),
+                          "dd.MM.yyyy"
+                        )}
                       </div>
-                    ))
+                    </div>
+                  ))
                   : null}
               </div>
               {/* {data && data?.MemoryLogs?.length > 0

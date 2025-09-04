@@ -16,7 +16,7 @@ const FloristList = () => {
   const searchParams = useSearchParams();
 
   // Get city from URL params, default to empty (no filter)
-  const [selectedCity, setSelectedCity] = useState(searchParams.get('city') || "");
+  const [selectedCity, setSelectedCity] = useState(searchParams.get('city') || "Ljubljana");
   const [floristList, setFloristList] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -102,6 +102,14 @@ const FloristList = () => {
     const cityParam = searchParams.get('city') || "";
     setSelectedCity(cityParam);
   }, [searchParams]);
+
+  // Set default city in URL if none is specified
+  useEffect(() => {
+    if (!searchParams.get('city')) {
+      updateUrlParams("Ljubljana");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="max-w-[1920px] w-full pb-[81px] tablet:pb-[55px] desktop:pb-[121px] tablet:w-full mobile:w-full mx-auto flex flex-col items-center desktop:bg-[#F5F7F9] mobile:bg-white tablet:bg-white">

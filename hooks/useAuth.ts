@@ -21,6 +21,7 @@ export function useAuth() {
         password: credentials.password,
         redirect: false,
       });
+      console.log("login", result);
 
       if (result?.error) {
         toast.error("Invalid credentials");
@@ -52,27 +53,22 @@ export function useAuth() {
     }
   };
 
-  const ghostLogin = async (userId: string) => {
-    try {
-      const result = await axiosNoAuth.post(`/auth/ghost-login/${userId}`, {
-        userId: userId
-      });
-      console.log("RESULT", result);
 
-      if (result?.data?.error) {
-        toast.error(result?.data.error);
-        return { success: false, error: result?.data.error };
+  const ghostLogin = async (credentials: { userId: string; adminId: string }) => {
+    try {
+      const result = await signIn("ghost-login", {
+        ...credentials,
+        redirect: false,
+      });
+      console.log("ghost login", result);
+
+      if (result?.error) {
+        toast.error("Invalid credentials");
+        return { success: false, error: result.error };
       }
 
-      if (result?.status == 200) {
-        toast.success("Ghost Login successful!");
-        await update({
-          ...session,
-          user: {
-            ...session?.user,
-            me: result,
-          },
-        });
+      if (result?.ok) {
+        toast.success("Login successful!");
 
         // Wait for session to update, then redirect
         setTimeout(() => {
@@ -82,8 +78,6 @@ export function useAuth() {
             router.push(`/c/${user.slugKey}/menu`);
           } else if (user?.role === "Funeral") {
             router.push(`/p/${user.slugKey}/menu`);
-          } else if (user?.role === "User") {
-            router.push(`/u/${user.slugKey}/moj-racun`);
           }
         }, 100);
 

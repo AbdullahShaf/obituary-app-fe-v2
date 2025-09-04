@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 
 const CompaniesWithApprovalReq = () => {
   const { ghostLogin } = useAuth();
+  const { data: session } = useSession();
   const [whichScreen, setWhichScreen] = useState(1);
   const [whichTab, setWhichTab] = useState("");
   const [companies, setCompanies] = useState([]);
@@ -25,8 +26,7 @@ const CompaniesWithApprovalReq = () => {
       return "N/A";
     }
   };
-const {data} = useSession();
-console.log("session",data);
+  console.log("session", session);
 
   // Fetch companies on mount
   useEffect(() => {
@@ -67,7 +67,8 @@ console.log("session",data);
 
   const handleGhostLogin = async (userId) => {
     try {
-      ghostLogin(userId)
+      const adminId = session?.user?.me?.id;
+      await ghostLogin({userId, adminId});
     } catch (err) {
 
     }

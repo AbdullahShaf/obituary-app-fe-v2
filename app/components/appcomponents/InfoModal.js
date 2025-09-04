@@ -26,15 +26,18 @@ export default function InfoModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-      <div className="relative mobile:w-[70%] w-[460px] max-w-full rounded-xl bg-[#E7EEF3] shadow-xl px-6 py-12">
+      <div className="relative mobile:w-[344px] mobile:w-[210px] w-[550px] h-[240px] max-w-full rounded-xl bg-[#E7EEF3] shadow-xl mobile:px-0 flex flex-col justify-center">
         {/* Close Button */}
         <button onClick={onClose} className="absolute right-3 top-3 ">
-          <img className="w-10 h-10" src="/close-icon.svg" />
+          <img
+            className="mobile:w-[33.33px] mobile:h-[33.33px] w-[46.67px] h-[46.67px]"
+            src="/close-icon.svg"
+          />
         </button>
 
         {/* Content */}
         <div className="flex items-center justify-center my-3">
-          <div className="flex items-center w-[90%] space-x-3 rounded-[1px] border border-[#0D94E8] bg-gradient-to-b from-[#0D94E8] to-[#1860A3] p-4 text-white shadow-md">
+          <div className="flex items-center mobile:w-[300px] w-[365px] h-[100px] space-x-3 rounded-[1px] border border-[#0D94E8] bg-gradient-to-b from-[#0D94E8] to-[#1860A3] px-4 text-white shadow-md">
             <img className="w-9 h-9" src={icon} />
             <div className="flex flex-col text-[#B2E6E3] items-start">
               <h2>{heading}</h2>

@@ -60,7 +60,7 @@ function UserAccountHeaderNew({
               </div>
 
               {
-                1 == 1 ? <>
+                (isGhost && adminId) ? <>
                   <div>Ghost Login</div>
                   <button>Back to admin</button>
                 </> :

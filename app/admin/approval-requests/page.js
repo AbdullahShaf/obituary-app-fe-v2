@@ -6,9 +6,11 @@ import adminService from "../../../services/admin-service";
 import { toast } from "react-hot-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const CompaniesWithApprovalReq = () => {
   const { ghostLogin } = useAuth();
+  const router = useRouter();
   const { data: session } = useSession();
   const [whichScreen, setWhichScreen] = useState(1);
   const [whichTab, setWhichTab] = useState("");
@@ -68,8 +70,9 @@ const CompaniesWithApprovalReq = () => {
   const handleGhostLogin = async (userId) => {
     try {
       const adminId = session?.user?.me?.id;
-      await ghostLogin({userId, adminId});
+      await ghostLogin({ userId, adminId });
     } catch (err) {
+      console.error('Error in ghost-login', err);
 
     }
   }

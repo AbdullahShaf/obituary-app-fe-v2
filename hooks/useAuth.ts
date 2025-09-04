@@ -60,7 +60,6 @@ export function useAuth() {
         ...credentials,
         redirect: false,
       });
-      console.log("ghost login", result);
 
       if (result?.error) {
         toast.error("Invalid credentials");
@@ -69,17 +68,19 @@ export function useAuth() {
 
       if (result?.ok) {
         toast.success("Login successful!");
+        const newSession = await getSession();
+        const user1 = newSession?.user.me as IUserComplete | undefined;
 
         // Wait for session to update, then redirect
         setTimeout(() => {
-          if (user?.role === "SUPERADMIN") {
-            router.push("/admin/approval-requests");
-          } else if (user?.role === "Florist") {
-            router.push(`/c/${user.slugKey}/menu`);
-          } else if (user?.role === "Funeral") {
-            router.push(`/p/${user.slugKey}/menu`);
+          if (user1?.role === "SUPERADMIN") {
+            router.push("/admin/obituaries");
+          } else if (user1?.role === "Florist") {
+            router.push(`/c/${user1.slugKey}/spletna-stran`);
+          } else if (user1?.role === "Funeral") {
+            router.push(`/p/${user1.slugKey}/spletna-stran`);
           }
-        }, 100);
+        }, 2000);
 
         return { success: true, user: result };
       }

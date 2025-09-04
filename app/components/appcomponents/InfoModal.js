@@ -38,7 +38,7 @@ export default function InfoModal({
         {/* Content */}
         <div className="flex items-center justify-center my-3">
           <div className="flex items-center mobile:w-[300px] w-[365px] h-[100px] space-x-3 rounded-[1px] border border-[#0D94E8] bg-gradient-to-b from-[#0D94E8] to-[#1860A3] px-4 text-white shadow-md">
-            <img className="w-9 h-9" src={icon} />
+            <img className="w-[24px] h-[22px]" src={icon} />
             <div className="flex flex-col text-[#B2E6E3] items-start">
               <h2>{heading}</h2>
               <p className="text-[#FFFFFF]">{text}</p>

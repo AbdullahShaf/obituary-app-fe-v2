@@ -1,8 +1,31 @@
 "use client";
 
+import Link from "next/link";
+
+const linksToRender = [
+    { label: "Splošni pogoji", path: "/", active: false },
+    { label: "Politika zasebnosti", path: "/", active: false },
+    { label: "Piškotki", path: "/", active: false }
+];
+
 export default function Mobile() {
     return (
         <div>
+            <ul className="flex items-center justify-center mb-6 mt-[-15px]">
+                {linksToRender.map((link, index) => (
+                    <li key={index} className="flex items-center">
+                        <Link
+                            href={link.path}
+                            className="font-normal text-[14px] leading-[24px] tracking-[0] text-right align-middle underline decoration-solid decoration-0 underline-offset-0 text-[#6D778E]"
+                        >
+                            {link.label}
+                        </Link>
+                        {index !== linksToRender.length - 1 && (
+                            <span className="mx-2 inline-block w-[5px] h-[5px] rounded-full bg-[#919191]"></span>
+                        )}
+                    </li>
+                ))}
+            </ul>
             <h1 className="font-medium text-[24px] leading-[27px] tracking-[0] mb-[25px] mobile:text-[16px]">Splošni pogoji poslovanja</h1>
 
             {/* Section 1 */}

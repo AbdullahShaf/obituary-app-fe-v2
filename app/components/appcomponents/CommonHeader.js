@@ -64,6 +64,11 @@ const headerLinkSets = {
     { label: "Politika zasebnosti", path: "/", active: false },
     { label: "Piškotki", path: "/", active: false },
   ],
+  "/politika-zasebnosti": [
+    { label: "Splošni pogoji", path: "/", active: false },
+    { label: "Politika zasebnosti", path: "/", active: false },
+    { label: "Piškotki", path: "/", active: false },
+  ],
 };
 
 function CommonHeader({ currentPage }) {

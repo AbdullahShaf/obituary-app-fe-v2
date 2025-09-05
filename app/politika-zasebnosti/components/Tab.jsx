@@ -13,15 +13,11 @@ export const Tab = () => {
                         <h2 className="font-medium text-[16px] leading-[27px] tracking-[0] mb-[5px]">1. Uvodne določbe</h2>
                         <p className="font-light text-[16px] leading-[27px] tracking-[0]">
                             Ta politika zasebnosti opisuje, kako družba Aleja 8, Saša Dolinšek s.p., Trg svobode 32, 1420 Trbovlje kot upravljavec osebnih podatkov obdeluje osebne podatke uporabnikov v zvezi z uporabo spletne strani{" "}
-                            <a
-                                href="https://www.osmrtnica.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                www.osmrtnica.com.
-                            </a>{" "}
-                            Politika zasebnosti velja za vse uporabnike Spletne strani, ne glede na to, ali dostopajo kot registrirani uporabniki ali kot obiskovalci. Politika je skladna z GDPR in Zakonom o varstvu osebnih podatkov.
                         </p>
+                        <p>www.osmrtnica.com.</p>
+                        <p>
+                            Politika zasebnosti velja za vse uporabnike Spletne strani, ne glede na to, ali dostopajo kot registrirani uporabniki ali kot obiskovalci.</p>
+                        <p>Politika je skladna z GDPR in Zakonom o varstvu osebnih podatkov.</p>
                     </section>
 
                     <section>
@@ -157,7 +153,7 @@ export const Tab = () => {
                         <p className="font-light text-[16px] leading-[27px] tracking-[0] ">
                             Z bunny.net imamo sklenjen Data Processing Agreement (DPA), ki zagotavlja varovanje osebnih podatkov v skladu z zahtevami GDPR. Več o obdelavi podatkov pri bunny.net si lahko preberete tukaj:
                         </p>
-                        <a href="https://bunny.net/gdpr/" className="underline-offset-4">https://bunny.net/gdpr/</a>
+                        <a href="https://bunny.net/gdpr/" className="underline underline-offset-4">https://bunny.net/gdpr/</a>
                     </section>
 
                     <section>

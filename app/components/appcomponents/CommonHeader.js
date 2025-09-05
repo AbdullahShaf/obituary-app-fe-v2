@@ -59,6 +59,11 @@ const headerLinkSets = {
     },
     { label: " PRILOŽNOST", path: "/p-priloznost", active: true },
   ],
+  "/splosni-pogoji": [
+    { label: "Splošni pogoji", path: "/", active: false },
+    { label: "Politika zasebnosti", path: "/", active: false },
+    { label: "Piškotki", path: "/", active: false },
+  ],
 };
 
 function CommonHeader({ currentPage }) {

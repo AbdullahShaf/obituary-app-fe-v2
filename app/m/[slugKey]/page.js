@@ -16,6 +16,7 @@ import AnnouncementBlock from "../../components/appcomponents/AnnouncementBlock"
 import { FlowerShops2 } from "../../components/appcomponents/FlowerShops";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getTemplateCardImages } from "@/utils/commonUtils";
+import { useAuth } from "@/hooks/useAuth";
 
 const MemoryPageContent = ({ params }) => {
   const { slugKey } = params;

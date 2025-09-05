@@ -3,7 +3,6 @@ import React from "react";
 import iconArrowRight from "@/public/icon_arrowright.png";
 import Link from "next/link";
 import { format } from "date-fns";
-import API_BASE_URL from "@/config/apiConfig";
 
 const calculateAge = (birthDate, deathDate) => {
   const birth = new Date(birthDate);
@@ -20,21 +19,28 @@ const calculateAge = (birthDate, deathDate) => {
   return age;
 };
 
-const ObituaryCard = ({ data, key, index, mob, selectedCity, selectedRegion }) => {
+const ObituaryCard = ({
+  data,
+  key,
+  index,
+  mob,
+  selectedCity,
+  selectedRegion,
+}) => {
   const formattedBirthDate = new Date(data.birthDate).getFullYear();
   const formattedDeathDate = format(new Date(data.deathDate), "dd.MM.yyyy");
 
   const age = calculateAge(data.birthDate, data.deathDate);
 
-  const imageUrl = data.image ? `${API_BASE_URL}/${data.image}` : "/user5.jpeg";
+  const imageUrl = data?.image || "/user5.jpeg";
 
   const funeralDate = new Date(data.deathDate);
   const funeralDateFormatted = `${funeralDate
     .getDate()
     .toString()
     .padStart(2, "0")}${(funeralDate.getMonth() + 1)
-      .toString()
-      .padStart(2, "0")}${funeralDate.getFullYear().toString().slice(2)}`;
+    .toString()
+    .padStart(2, "0")}${funeralDate.getFullYear().toString().slice(2)}`;
 
   const religionImages = {
     1: "/icon_cross.png",
@@ -49,15 +55,17 @@ const ObituaryCard = ({ data, key, index, mob, selectedCity, selectedRegion }) =
     const params = new URLSearchParams();
 
     if (selectedCity) {
-      params.set('city', selectedCity);
+      params.set("city", selectedCity);
     }
     if (selectedRegion) {
-      params.set('region', selectedRegion);
+      params.set("region", selectedRegion);
     }
 
     const queryString = params.toString();
 
-    return queryString ? `/m/${data.slugKey}?${queryString}` : `/m/${data.slugKey}`;
+    return queryString
+      ? `/m/${data.slugKey}?${queryString}`
+      : `/m/${data.slugKey}`;
   };
 
   return (
@@ -152,12 +160,13 @@ const ObituaryCard = ({ data, key, index, mob, selectedCity, selectedRegion }) =
               "
           >
             <Image
-              src={religionImages[data.symbol]}
+              src={religionImages[data?.symbol]}
               alt="Slika"
               width={1000}
               height={1000}
-              className={`w-[51px] ${data.symbol === "3" ? "h-[50px]" : "h-[55px]"
-                }`}
+              className={`w-[51px] ${
+                data.symbol === "3" ? "h-[50px]" : "h-[55px]"
+              }`}
             />
           </div>
         )}
@@ -173,8 +182,9 @@ const ObituaryCard = ({ data, key, index, mob, selectedCity, selectedRegion }) =
               alt="Slika"
               width={500}
               height={500}
-              className={` w-[37.66px] tablet:h-[65px] tablet:w-[51px] ${data.symbol === "3" ? "h-[40px]" : "h-[48px]"
-                }`}
+              className={` w-[37.66px] tablet:h-[65px] tablet:w-[51px] ${
+                data.symbol === "3" ? "h-[40px]" : "h-[48px]"
+              }`}
             />
           </div>
         )}

@@ -1,6 +1,4 @@
-import API_BASE_URL from "@/config/apiConfig";
 import { formatToDottedDate } from "@/utils/dateUtils";
-import React from "react";
 
 const Card5 = ({ data = {}, cardRefs, index, cemetery }) => {
   return (
@@ -29,7 +27,7 @@ const Card5 = ({ data = {}, cardRefs, index, cemetery }) => {
           <div className="img-container mx-auto rounded-full  shadow-md p-2 h-[200px] w-[140.7567596435547px] flex justify-center">
             <img
               className="object-cover rounded-full"
-              src={`${API_BASE_URL}/${data?.image}`}
+              src={data?.image}
               alt="Mario"
             />
           </div>

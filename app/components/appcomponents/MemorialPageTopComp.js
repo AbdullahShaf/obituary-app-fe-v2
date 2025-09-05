@@ -1,4 +1,3 @@
-import API_BASE_URL from "@/config/apiConfig";
 import Image from "next/image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
@@ -220,13 +219,7 @@ const MemorialPageTopComp = ({
                       }}
                     >
                       <Image
-                        src={
-                          data?.image
-                            ? `${API_BASE_URL}/${data?.image}`
-                            : data?.gender === "Male"
-                            ? "/img_profile.png"
-                            : "/woman.png"
-                        }
+                        src={data?.image || "/user5.jpeg"}
                         alt="Slika"
                         width={1000}
                         height={1000}
@@ -1140,7 +1133,7 @@ const MemorialPageTopComp = ({
                       }}
                     >
                       <Image
-                        src={`${API_BASE_URL}/${item.fileUrl}`}
+                        src={item.fileUrl}
                         alt="Slika"
                         width={200}
                         height={200}
@@ -1161,7 +1154,7 @@ const MemorialPageTopComp = ({
                       }}
                     >
                       <Image
-                        src={`${API_BASE_URL}/${item.fileUrl}`}
+                        src={item.fileUrl}
                         alt="Slika"
                         width={200}
                         height={200}

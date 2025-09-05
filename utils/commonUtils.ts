@@ -1,7 +1,7 @@
 import API_BASE_URL from "@/config/apiConfig";
 
 export const getRemoteUrl = (filePath: string) => {
-  return `${API_BASE_URL}/${filePath}`;
+  return filePath;
 };
 
 export const getTemplateCardImages = (images?: string[]) => {

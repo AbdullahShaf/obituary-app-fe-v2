@@ -6,15 +6,6 @@ import imgInsta from "@/public/img_insta.png";
 import imgLocation from "@/public/img_Location.png";
 import imgTelephone from "@/public/img_telephone.png";
 import Image from "next/image";
-import API_BASE_URL from "@/config/apiConfig";
-
-const getLogo = (logo) => {
-  if (!logo) return "/suniflo_logo.avif";
-  if (logo?.includes("companyUploads")) {
-    return `${API_BASE_URL}/${logo}`;
-  }
-  return logo;
-};
 
 const SunflowerFlorist = ({ data }) => {
   const ProgressBar = ({ currentSlide, totalSlides }) => {
@@ -96,11 +87,7 @@ const SunflowerFlorist = ({ data }) => {
               </button>
             )}
             <Image
-              src={
-                data?.logo
-                  ? `${API_BASE_URL}/${data?.logo}`
-                  : "/suniflo_logo.avif"
-              }
+              src={data?.logo || "/suniflo_logo.avif"}
               alt="sunflower_img"
               width={300}
               height={200}
@@ -121,7 +108,7 @@ const SunflowerFlorist = ({ data }) => {
           <div className="tablet:hidden desktop:flex mobile:flex flex h-[180px] w-[370px] justify-center flex-row mobile:w-[200px] mobile:h-[120px] mobile:mt-[50px] mobile:ml-10 mobile:mr-auto tablet:mt-[33px] mt-[45px]">
             <img
               key={`${data?.id}-${currentIndex}-logo-${currentShop?.id}`}
-              src={getLogo(data?.logo)}
+              src={data?.logo}
               alt="sunflower_img"
               className="w-full h-full object-contain rounded-md"
             />

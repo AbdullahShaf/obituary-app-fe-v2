@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import API_BASE_URL from "@/config/apiConfig";
 import ImageCarousel from "./CemeteriesSliderComponent/CemeteriesSlider";
 const defaultCemeteries = [
   {

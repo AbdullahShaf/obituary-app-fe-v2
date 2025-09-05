@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import API_BASE_URL from "@/config/apiConfig";
 import packageService from "@/services/pacakge-service";
 import Link from "next/link";
 // const FlowerShops = ({ set_Id, setModal }) => {
@@ -38,7 +37,7 @@ import Link from "next/link";
 // };
 
 const FlowerShops = ({ setIsOpen, data, showShop }) => {
-  console.log('>>>>>>>>>> data', data);
+  console.log(">>>>>>>>>> data", data);
   useEffect(() => {
     if (data?.floristShops?.length > 0) {
       const firstShop = data.floristShops[0];
@@ -133,17 +132,7 @@ const FlowerShops = ({ setIsOpen, data, showShop }) => {
               >
                 <div className="h-[80px] flex items-center">
                   <Image
-                    src={
-                      (item?.logo || item?.CompanyPage?.logo)?.includes(
-                        "floristShopUploads"
-                      ) ||
-                        (item?.logo || item?.CompanyPage?.logo)?.includes(
-                          "companyUploads"
-                        )
-                        ? `${API_BASE_URL}/${item?.logo || item?.CompanyPage?.logo
-                        }`
-                        : item?.logo || item?.CompanyPage?.logo
-                    }
+                    src={item?.logo}
                     alt={`${item?.shopName || "Cvetličarna"} logo`}
                     width={120}
                     height={70}

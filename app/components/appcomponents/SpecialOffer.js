@@ -81,18 +81,18 @@ const SpecialOffer = ({ data }) => {
           >
             <div className=" flex  flex-col w-[450px] mobile:w-[300px]">
               <div className="text-[32px] leading-[47px] mobile:leading-[38px] font-variation-customOpt40  text-[#000000] mobile:text-[24px] ">
-                {activeSlide.title}
+                {activeSlide?.title}
               </div>
               <div className="text-[16px] text-[#414141] font-variation-customOpt16 leading-[24px] mt-[20px]">
-                {activeSlide.description}
+                {activeSlide?.description}
               </div>
             </div>
             <div className=" relative tablet:mb-6 mobile:mb-8">
               <Image
                 width={350}
                 height={350}
-                src={getSlideImage(activeSlide)}
-                alt={activeSlide.title || "slide"}
+                src={activeSlide?.image || "/porocna.avif"}
+                alt={activeSlide?.title || "slide"}
                 className=" w-[351px] h-[351px] tablet:w-[450px] tablet:h-[411px] mobile:w-[296px] mobile:h-[296px]  rounded"
               />
               {currentIndex > 0 && (

@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import useScrollbarWidth from "@/app/hooks/useScrollbarWidth";
-import API_BASE_URL from "@/config/apiConfig";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
@@ -116,7 +115,7 @@ const ImageWall = ({
           className="mt-[-4px] relative cursor-pointer flex flex-shrink-0 shadow-custom-light-dark-box-image-wall p-1 bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] "
         >
           <img
-            src={`${API_BASE_URL}/${image.fileUrl}`}
+            src={image.fileUrl}
             alt="sponser4 of the image"
             className="flex w-full h-auto max-w-48 mobile:max-w-40 bg-center"
           />

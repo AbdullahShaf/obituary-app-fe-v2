@@ -4,25 +4,8 @@ import iconFb from "@/public/icon_facebook.png";
 import iconEmail from "@/public/ico_message.png";
 
 import iconWeb from "@/public/icon_web.png";
-import API_BASE_URL from "@/config/apiConfig";
 import Link from "next/link";
 import classNames from "classnames";
-const getBackgroundImage = (data) => {
-  if (!data) return "/pok_gabrsko4.avif";
-  if (data.background && data.background.includes("companyUploads")) {
-    return `${API_BASE_URL}/${data.background}`;
-  }
-  return data.background || "/pok_gabrsko4.avif";
-};
-
-const getLogoImage = (data) => {
-  if (!data) return "/logo_funeral_company.png";
-  const logoPath = data.company_logo;
-  if (typeof logoPath === "string" && logoPath.includes("companyUploads")) {
-    return `${API_BASE_URL}/${logoPath}`;
-  }
-  return logoPath || "/logo_funeral_company.png";
-};
 
 const IconLinkComponent = ({ link, icon, alt, className }) => {
   const formattedLink = link
@@ -57,7 +40,7 @@ const FuneralsCompanyBanner = ({ data }) => {
     <div className="relative bg-gradient-to-b to-[#E8F0F5] from-[#EBEDEF] flex-col w-full overflow-hidden mx-auto desktop:mt-[92.02px] mobile:mt-[72px] tablet:mt-[80px] flex justify-center items-center">
       <Image
         key={`${data?.id}-background`}
-        src={getBackgroundImage(data)}
+        src={data.background}
         alt="pok_gabrsko"
         width={1280}
         height={300}
@@ -69,7 +52,7 @@ const FuneralsCompanyBanner = ({ data }) => {
             <div>
               <img
                 key={`${data?.id}-logo`}
-                src={getLogoImage(data)}
+                src={data?.logo}
                 alt="App Logo"
                 // width={1000}
                 // height={1000}
@@ -272,22 +255,14 @@ const FuneralsCompanyBanner = ({ data }) => {
             <Image
               width={265}
               height={256}
-              src={
-                data?.funeral_section_one_image_one
-                  ? `${API_BASE_URL}/${data.funeral_section_one_image_one}`
-                  : "/pokopalisce_gabrsko1.avif"
-              }
+              src={data.funeral_section_one_image_one}
               alt="Slika"
               className=" desktop:h-[256px]  desktop:w-[367.21px] w-[266.98px] h-[186.63px] object-cover rounded-lg border-[3px] border-white"
             />
             <Image
               width={162}
               height={156}
-              src={
-                data?.funeral_section_one_image_two
-                  ? `${API_BASE_URL}/${data.funeral_section_one_image_two}`
-                  : "/pokopalisce_gabrsko2.avif"
-              }
+              src={data?.funeral_section_one_image_two}
               alt="Slika"
               className="desktop:h-[156px] desktop:w-[222.72px] w-[162.59px] h-[114.38px] object-cover absolute bottom-0 left-0 rounded-lg border-[3px] border-white"
             />

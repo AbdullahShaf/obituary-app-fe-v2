@@ -7,7 +7,6 @@ import Image from "next/image";
 import Modals from "./Modals";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
-import API_BASE_URL from "@/config/apiConfig";
 
 // Import Swiper styles
 import "swiper/css";
@@ -47,7 +46,7 @@ export default function ImageFullView({
               >
                 <div className="flex justify-center h-screen items-center self-center ">
                   <Image
-                    src={`${API_BASE_URL}/${item.fileUrl}`}
+                    src={item.fileUrl}
                     alt="sponser4 of the image"
                     width={210}
                     height={72}

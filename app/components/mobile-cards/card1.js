@@ -1,5 +1,4 @@
 "use client";
-import API_BASE_URL from "@/config/apiConfig";
 import React, { useRef } from "react";
 
 const Card1 = ({ data, cardRefs, index, cemetery }) => {
@@ -44,10 +43,7 @@ const Card1 = ({ data, cardRefs, index, cemetery }) => {
         <div>
           <div className="ml-[35px] mt-[63.35px]">
             <div className="w-[138px]  bg-[#3b3b3b] rounded-t-full overflow-hidden border-[6px]  border-[#3b3b3b] shadow-2xl flex items-start justify-center pt-1">
-              <img
-                src={`${API_BASE_URL}/${data?.image}`}
-                className="w-auto max-h-[188px]"
-              />
+              <img src={data?.image} className="w-auto max-h-[188px]" />
             </div>
 
             <br />
@@ -70,22 +66,22 @@ const Card1 = ({ data, cardRefs, index, cemetery }) => {
 
             <div className="mt-[153px]">
               <h1 className="text-[#D89B1C] text-[24px] font-semibold">
-                {data?.funeralTimestamp ? `${dayName} ob ${time}` : '\u00A0'}
+                {data?.funeralTimestamp ? `${dayName} ob ${time}` : "\u00A0"}
               </h1>
 
               <p className="">
                 {data?.funeralTimestamp ? (
                   <>{formatDate(data?.funeralTimestamp)}</>
-                ) : <>
-                  &nbsp;
-                </>}
+                ) : (
+                  <>&nbsp;</>
+                )}
               </p>
               <p className="text-[#fff] pb-10">
                 {data?.funeralTimestamp ? (
                   <>{data?.Cemetry?.funeralCemetery ?? cemetery}</>
-                ) : <>
-                  &nbsp;
-                </>}
+                ) : (
+                  <>&nbsp;</>
+                )}
                 {/* {data?.Cemetry?.funeralCemetery} v {data?.funeralLocation} */}
               </p>
             </div>

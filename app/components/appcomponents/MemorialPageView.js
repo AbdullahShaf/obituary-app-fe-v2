@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import obituaryService from "@/services/obituary-service";
-import API_BASE_URL from "@/config/apiConfig";
 
 const MemorialPageView = () => {
   const [obituaries, setObituaries] = useState([]);
@@ -118,9 +117,7 @@ const MemorialPageView = () => {
             >
               {obituaries?.map((item, index) => {
                 if (index < 3) {
-                  const imageUrl = item.image
-                    ? `${API_BASE_URL}/${item.image}`
-                    : "/user5.jpeg";
+                  const imageUrl = item?.image || "/user5.jpeg";
                   return (
                     <div
                       key={index}

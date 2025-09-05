@@ -22,6 +22,8 @@ const MemoryPageContent = ({ params }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const { user, isLoading } = useAuth();
+
   const [isShowModal, setIsShowModal] = useState(false);
   const [select_id, setSelect_Id] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
@@ -37,11 +39,7 @@ const MemoryPageContent = ({ params }) => {
 
   useEffect(() => {
     fetchMemory();
-  }, []);
-  console.log(obituary, "is obituary");
-  useEffect(() => {
-    console.log("set is modal:", isShowModal);
-  }, [isShowModal]);
+  }, [user, isLoading]);
 
   const fetchMemory = async () => {
     try {

@@ -11,7 +11,6 @@ import { toast } from "react-hot-toast";
 import obituaryService from "@/services/obituary-service";
 import { useParams } from "next/navigation";
 import ModalDropBox from "./ModalDropBox";
-import API_BASE_URL from "@/config/apiConfig";
 import cemetryService from "@/services/cemetry-service";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -113,7 +112,7 @@ const AddObituary = ({ set_Id, setModal }) => {
         setSelectedRegion(response.region || "");
         setSelectedCity(response.city || "");
         setInputValueGender(response.gender || "");
-        setUploadedImage(`${API_BASE_URL}/${response.image}`);
+        setUploadedImage(response.image || "");
       } catch (err) {
         console.error("Error setting basic info state:", err);
         // toast.error("Failed to set basic obituary information.");

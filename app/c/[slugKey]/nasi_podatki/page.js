@@ -1,7 +1,6 @@
 "use client";
 import CompanyAccountLayout from "@/app/components/appcomponents/CompanyAccountLayout";
 import companyService from "@/services/company-service";
-import API_BASE_URL from "@/config/apiConfig";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import ChangePasswordModal from "../../../components/appcomponents/ChangePasswordModal";

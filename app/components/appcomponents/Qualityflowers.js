@@ -48,7 +48,7 @@ const Qualityflowers = ({ data }) => {
         <>
           <div className="w-full desktop:block mobile:hidden tablet:hidden h-full relative">
             <Image
-              src={`${API_BASE_URL}/${data?.boxBackgroundImage}`}
+              src={data?.boxBackgroundImage}
               alt="plava_desktop"
               layout="fill"
               objectFit="cover"
@@ -58,7 +58,7 @@ const Qualityflowers = ({ data }) => {
 
           <div className="w-full h-[244px] hidden tablet:block relative">
             <Image
-              src={`${API_BASE_URL}/${data?.boxBackgroundImage}`}
+              src={data?.boxBackgroundImage}
               alt="plava_tablica"
               layout="fill"
               objectFit="cover"
@@ -67,7 +67,7 @@ const Qualityflowers = ({ data }) => {
 
           <div className="w-full mobile:h-[474px] hidden mobile:block relative">
             <Image
-              src={`${API_BASE_URL}/${data?.boxBackgroundImage}`}
+              src={data?.boxBackgroundImage}
               alt="plava_roza"
               layout="fill"
               objectFit="cover"
@@ -90,7 +90,7 @@ const Qualityflowers = ({ data }) => {
                                      backdrop-blur border-[2px] border-[#FFFFFF] rounded-[16px] flex flex-col items-center"
               >
                 <Image
-                  src={resolveIconSrc(data.box_one_icon)}
+                  src={data?.box_one_icon}
                   width={70}
                   height={70}
                   alt="vehicle"
@@ -113,7 +113,7 @@ const Qualityflowers = ({ data }) => {
                      backdrop-blur border-[2px] border-[#FFFFFF] rounded-[16px]"
               >
                 <Image
-                  src={`${data.box_two_icon}`}
+                  src={`${data?.box_two_icon}`}
                   width={70}
                   height={70}
                   alt="vehicle"

@@ -36,11 +36,12 @@ const IconLinkComponent = ({ link, icon, alt, className }) => {
 };
 
 const FuneralsCompanyBanner = ({ data }) => {
+  console.log("data in banner", data);
   return (
     <div className="relative bg-gradient-to-b to-[#E8F0F5] from-[#EBEDEF] flex-col w-full overflow-hidden mx-auto desktop:mt-[92.02px] mobile:mt-[72px] tablet:mt-[80px] flex justify-center items-center">
       <Image
         key={`${data?.id}-background`}
-        src={data.background}
+        src={data?.background}
         alt="pok_gabrsko"
         width={1280}
         height={300}
@@ -52,7 +53,7 @@ const FuneralsCompanyBanner = ({ data }) => {
             <div>
               <img
                 key={`${data?.id}-logo`}
-                src={data?.logo}
+                src={data?.logo || ""}
                 alt="App Logo"
                 // width={1000}
                 // height={1000}
@@ -255,14 +256,14 @@ const FuneralsCompanyBanner = ({ data }) => {
             <Image
               width={265}
               height={256}
-              src={data.funeral_section_one_image_one}
+              src={data?.funeral_section_one_image_one || ""}
               alt="Slika"
               className=" desktop:h-[256px]  desktop:w-[367.21px] w-[266.98px] h-[186.63px] object-cover rounded-lg border-[3px] border-white"
             />
             <Image
               width={162}
               height={156}
-              src={data?.funeral_section_one_image_two}
+              src={data?.funeral_section_one_image_two || ""}
               alt="Slika"
               className="desktop:h-[156px] desktop:w-[222.72px] w-[162.59px] h-[114.38px] object-cover absolute bottom-0 left-0 rounded-lg border-[3px] border-white"
             />

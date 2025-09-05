@@ -628,7 +628,7 @@ const Guardians = () => {
           </span>
         </div>
 
-        <div className="flex desktopUserAcc:hidden justify-between items-center w-full mt-7">
+        <div className="ml-[10px] w-full flex overflow-y-hidden  gap-[24px] tabletUserAcc:overflow-x-scroll tabletUserAcc:ml-3 mobileUserAcc:ml-3 mobileUserAcc:overflow-x-scroll mobileUserAcc:space-x-1 tabletUserAcc:space-x-1 py-4 pb-6 tabletUserAcc:snap-x mobileUserAcc:snap-x snap-mandatory">
           {memories.map((memory) => {
             const isActive = memory.id === activeTab;
 
@@ -655,7 +655,8 @@ const Guardians = () => {
                   lineHeight: "28px",
                   fontVariationSettings: "'opsz' 24, 'wdth' 50",
                 }}
-                className="border-gradient p-3 m-0 h-[60px] mobileUserAcc:w-full tabletUserAcc:w-[334px] tabletUserAcc:justify-between items-center mobileUserAcc:justify-between font-variation-customOpt14 flex rounded-lg bg-white text-[#0A85C2] text-[24px] font-semibold border-2 border-[#0D94E8]"
+                className="border-gradient p-3 h-[60px] flex items-center rounded-lg bg-white text-[#0A85C2] text-[24px] font-semibold border-2 border-[#0D94E8] whitespace-nowrap"
+
               >
                 Dopolni / uredi to stran
                 <Image

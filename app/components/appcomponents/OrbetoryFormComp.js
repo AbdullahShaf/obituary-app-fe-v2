@@ -176,7 +176,7 @@ const OrbetoryFormComp = ({
       disabled: false
     },
   ];
-  
+
   const getUpdatedCards = () => {
     const selected = selectedObituary && selectedObituary?.value && obituaries.find(
       (option) => option.id === selectedObituary.value
@@ -314,21 +314,23 @@ const OrbetoryFormComp = ({
                mobile:w-[95px] mobile:font-normal
                "
             >
-              Posvetilo
+              {/* Posvetilo */}
+              Kmalu
             </button>
           ) : user?.sendMobilePermission ? (
             <button
               type="button"
-              onClick={() => {
-                setSelectedBtn(3);
-                showForms(false);
-              }}
+              // onClick={() => {
+              //   setSelectedBtn(3);
+              //   showForms(false);
+              // }}
               className="w-[144px] h-[47px] rounded-[8px] bg-[linear-gradient(180deg,_#0D94E8_0%,_#1860A3_100%)] border-[2px] border-[solid] border-[#FFFFFF] font-sourcesans text-[16px] font-normal leading-[24px] text-[#ffffff]
               tablet:w-[133px] tablet:font-normal
               mobile:w-[95px] mobile:font-normal
               "
             >
-              Posvetilo
+              {/* Posvetilo */}
+              Kmalu
             </button>
           ) : (
             <button
@@ -340,7 +342,8 @@ const OrbetoryFormComp = ({
                "
               title="You don't have permission to send mobile cards"
             >
-              Posvetilo (ZAPRTO)
+              {/* Posvetilo (ZAPRTO) */}
+              Kmalu
             </button>
           )}
         </div>

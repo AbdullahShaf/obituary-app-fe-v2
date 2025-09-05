@@ -31,6 +31,7 @@ const UserAccountLayout = ({ children }) => {
   const [hrefLinkTwo, setHrefLinkTwo] = useState("");
 
   const [innnerSize, setInnnerSize] = useState(false);
+  const [isTabScreen, setIsTabScreen] = useState(false);
 
   function handleResize() {
     if (window.innerWidth <= 744) {
@@ -38,7 +39,12 @@ const UserAccountLayout = ({ children }) => {
     } else {
       setInnnerSize(false); // Reset state value otherwise
     }
+    console.log('>>>>>>>>>>>>>>>> window.innerWidth', window.innerWidth);
+    if (window.innerWidth >= 768 && window.innerWidth <= 991) {
+      setIsTabScreen(true);
+    }
   }
+
 
   // useEffect(() => {
   //   const currUser = useAuth().user;
@@ -112,12 +118,12 @@ const UserAccountLayout = ({ children }) => {
 
       case "/potrditev-objave":
         setHeadingOne(
-          innnerSize
+          innnerSize || (window.innerWidth >= 745 && window.innerWidth <= 991)
             ? "Potrebna potrditev"
             : "Potrebna potrditev s tvoje strani"
         );
-        setHeadingTwo(!innnerSize ? "Moji Skrbniki" : "");
-        setHeadingThree(!innnerSize ? "Trajanje statusa Skrbnikov" : "");
+        setHeadingTwo(window.innerWidth >= 744 ? "Moji Skrbniki" : "");
+        setHeadingThree(window.innerWidth >= 744 ? "Trajanje statusa Skrbnikov" : "");
         setHrefLinkOne(`${basePath}/pregled2`);
         setHrefLinkTwo(`${basePath}/dodaj-vsebine`);
         break;
@@ -237,12 +243,11 @@ const UserAccountLayout = ({ children }) => {
                     href={hrefLinkOne}
                     className={` mt-[10px]
                     
-                    ${
-                      pathname == "/potrditev-objave" ||
-                      pathname == "/dodaj-vsebine"
+                    ${pathname == "/potrditev-objave" ||
+                        pathname == "/dodaj-vsebine"
                         ? "mobileUserAcc:hidden "
                         : ""
-                    }
+                      }
                     `}
                   >
                     <div
@@ -262,21 +267,19 @@ const UserAccountLayout = ({ children }) => {
                   {hrefLinkTwo && headingThree && (
                     <Link
                       href={hrefLinkTwo}
-                      className={` mt-[10px] ${
-                        pathname == "/moj-racun" ||
+                      className={` mt-[10px] ${pathname == "/moj-racun" ||
                         pathname == "/moji-prispevki" ||
                         pathname == "/pregled2" ||
                         pathname == "/potrditev-objave" ||
                         pathname == "/dodaj-vsebine"
-                          ? "mobileUserAcc:hidden "
-                          : ""
-                      }
-                    
-                    ${
-                      pathname == "/potrditev-objave"
-                        ? "tabletUserAcc:hidden "
+                        ? "mobileUserAcc:hidden "
                         : ""
-                    }
+                        }
+                    
+                    ${pathname == "/potrditev-objave"
+                          ? "tabletUserAcc:hidden "
+                          : ""
+                        }
                     `}
                     >
                       <div

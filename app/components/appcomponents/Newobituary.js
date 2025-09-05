@@ -102,7 +102,8 @@ const Newobituary = ({ focusRef, setFile, setName, setRelation, onSubmit }) => {
                 {!selectedFile ? (
                   <>
                     <p className="w-[214px] flex justify-center items-center mobile:w-[150px] mobile:h-8 h-[40px] rounded-[4px] bg-gradient-to-b from-[#7D88A2] to-[#5E677B] text-white leading-6 text-md">
-                      Izberi sliko in jo prenesi
+                      {/* Izberi sliko <span className="hidden md:inline">in jo prenesi</span> */}
+                      Izberi sliko {window.innerWidth > 744 && "in jo prenesi"}
                     </p>
                     <span className="text-sm text-[#939393] mt-1">
                       Format: jpg, png, webp

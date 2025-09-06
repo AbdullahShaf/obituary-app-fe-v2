@@ -12,7 +12,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 const Registration = () => {
   const router = useRouter();
-  const { login, user, isLoadingm, isAuthenticated} = useAuth();
+  const { login, user, isLoadingm, isAuthenticated } = useAuth();
 
   const [inputValueEmail, setInputValueEmail] = useState("");
   const [inputValueGeslo, setInputValueGeslo] = useState("");
@@ -28,7 +28,7 @@ const Registration = () => {
       setIsDesktop(true);
     }
   }, []);
-  
+
   // Check if user is already logged in and redirect
   useEffect(() => {
     if (isAuthenticated) {
@@ -53,7 +53,7 @@ const Registration = () => {
   };
 
   const handleRegister = async () => {
-    if (!inputValueEmail || !inputValueGeslo || !inputValueConfirmGeslo) {
+    if (!inputValueEmail || !inputValueGeslo || !inputValueConfirmGeslo || !enabledRememberMe) {
       toast.error("All fields are required");
       return;
     }
@@ -168,11 +168,10 @@ const Registration = () => {
             <div className="flex flex-row justify-between mx-auto">
               {/* Login Div */}
               <div
-                className={`transition-all duration-300 ease-in-out ${
-                  activeDiv === "login"
+                className={`transition-all duration-300 ease-in-out ${activeDiv === "login"
                     ? "w-[234px] h-[56px] mobile:w-[180px] mobile:h-[48px] shadow-custom-dark-to-white bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] rounded-[8px] border-[1px] border-[#FFFFFF] text-[#1E2125] text-[24px] mobile:text-[24px] leading-[24px] font-variation-customOpt24"
                     : "w-[143px] h-[36px] bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] shadow-custom-light-dark-with-white rounded-[8px] text-[#6D778E] text-[16px] leading-[24px] font-variation-customOpt16"
-                }  flex justify-center items-center`}
+                  }  flex justify-center items-center`}
               >
                 <button
                   type="button"
@@ -185,11 +184,10 @@ const Registration = () => {
 
               {/* Register Div */}
               <div
-                className={`transition-all duration-300 ease-in-out ${
-                  activeDiv === "register"
+                className={`transition-all duration-300 ease-in-out ${activeDiv === "register"
                     ? "w-[234px] h-[56px] mobile:w-[180px] mobile:h-[48px] shadow-custom-dark-to-white bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] rounded-[8px] border-[1px] border-[#FFFFFF] text-[#1E2125] text-[24px] mobile:text-[24px] leading-[24px] font-variation-customOpt24"
                     : "w-[143px] h-[36px] bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] shadow-custom-light-dark-with-white rounded-[8px] text-[#6D778E] text-[16px] leading-[24px] font-variation-customOpt16"
-                } flex justify-center items-center ml-4`}
+                  } flex justify-center items-center ml-4`}
               >
                 <button
                   type="button"
@@ -309,10 +307,13 @@ const Registration = () => {
                     >
                       <CheckIcon className="hidden ml-[-1px] size-4 rotate-6 fill-white group-data-[checked]:block" />
                     </Checkbox>
-                    Strinjam se s{" "}
-                    <Link href={"#"} className="underline">
-                      {" "}
-                      splošnimi pogoji in pravili{" "}
+                    Strinjam se s &nbsp;
+                    <Link href={"/splosni-pogoji"} className="underline">
+                      splošnimi pogoji{" "}
+                    </Link>
+                    &nbsp;in&nbsp;
+                     <Link href={"/politika-zasebnosti"} className="underline">
+                      politiko zasebnosti{" "}
                     </Link>
                   </label>
                   {/*  */}

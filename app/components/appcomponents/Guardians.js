@@ -136,18 +136,17 @@ const Guardians = () => {
           <div className="flex flex-wrap gap-[16px]">
             {memories && memories.length > 0
               ? memories.map((item, index) => (
-                  <button
-                    className={`px-4 py-2 h-12 rounded-lg p-6 min-w-[116px] ${
-                      activeTab === item.id
-                        ? "bg-gradient-to-t from-[#530CC6] to-[#0D94E8] text-white"
-                        : "bg-white text-[#6D778E] border-gradient"
+                <button
+                  className={`px-4 py-2 h-12 rounded-lg p-6 min-w-[116px] ${activeTab === item.id
+                      ? "bg-gradient-to-t from-[#530CC6] to-[#0D94E8] text-white"
+                      : "bg-white text-[#6D778E] border-gradient"
                     }`}
-                    onClick={() => setActiveTab(item.id)}
-                    key={index}
-                  >
-                    {item.name} {item.sirName}
-                  </button>
-                ))
+                  onClick={() => setActiveTab(item.id)}
+                  key={index}
+                >
+                  {item.name} {item.sirName}
+                </button>
+              ))
               : null}
           </div>
           {/* 17 October 2024 - tabletUserAcc:max-w-[950px] */}
@@ -170,11 +169,11 @@ const Guardians = () => {
                 {/* 25 October 2024 */}
                 {memories && memories.length > 0
                   ? (() => {
-                      const memory = memories.find(
-                        (memory) => memory.id === activeTab
-                      );
-                      return memory ? `${memory.name} ${memory.sirName}` : null;
-                    })()
+                    const memory = memories.find(
+                      (memory) => memory.id === activeTab
+                    );
+                    return memory ? `${memory.name} ${memory.sirName}` : null;
+                  })()
                   : null}
               </h1>
 
@@ -194,11 +193,11 @@ const Guardians = () => {
                 >
                   {memories && memories.length > 0
                     ? (() => {
-                        const keeper = keepers.find(
-                          (keeper) => keeper.obituaryId === activeTab
-                        );
-                        return keeper ? formattedDate(keeper.expiry) : null;
-                      })()
+                      const keeper = keepers.find(
+                        (keeper) => keeper.obituaryId === activeTab
+                      );
+                      return keeper ? formattedDate(keeper.expiry) : null;
+                    })()
                     : null}
                 </span>
               </div>
@@ -219,11 +218,11 @@ const Guardians = () => {
                 >
                   {memories && memories.length > 0
                     ? (() => {
-                        const keeper = keepers.find(
-                          (keeper) => keeper.obituaryId === activeTab
-                        );
-                        return keeper ? formattedDate(keeper.expiry) : null;
-                      })()
+                      const keeper = keepers.find(
+                        (keeper) => keeper.obituaryId === activeTab
+                      );
+                      return keeper ? formattedDate(keeper.expiry) : null;
+                    })()
                     : null}
                 </span>
               </div>
@@ -619,17 +618,18 @@ const Guardians = () => {
           <span className="text-[#530CC6] font-medium">
             {memories && memories.length > 0
               ? (() => {
-                  const keeper = keepers.find(
-                    (keeper) => keeper.obituaryId === activeTab
-                  );
-                  return keeper ? formattedDate(keeper.expiry) : null;
-                })()
+                const keeper = keepers.find(
+                  (keeper) => keeper.obituaryId === activeTab
+                );
+                return keeper ? formattedDate(keeper.expiry) : null;
+              })()
               : null}
           </span>
         </div>
 
         <div className="flex desktopUserAcc:hidden justify-between items-center w-full mt-7">
-          {memories.map((memory) => {
+          {/* NOTE: Old code with multiple button */}
+          {/* {memories.map((memory) => {
             const isActive = memory.id === activeTab;
 
             // Format the date for the URL
@@ -667,7 +667,45 @@ const Guardians = () => {
                 />
               </Link>
             );
-          })}
+          })} */}
+
+          {(() => {
+            const memory = memories.find((m) => m.id === activeTab);
+            if (!memory) return null;
+
+            const deathDateFormatted = new Date(memory.deathDate)
+              .toISOString()
+              .split("T")[0]
+              .split("-")
+              .reverse()
+              .join(".");
+
+            const memoryLink = `/memorypage/${memory.id}/${memory.name}_${memory.sirName}_${deathDateFormatted}`;
+
+          return (
+              <Link
+                key={memory.id}
+                href={memoryLink}
+                style={{
+                  color: "#0A85C2",
+                  fontWeight: 600,
+                  fontSize: "24px",
+                  lineHeight: "28px",
+                  fontVariationSettings: "'opsz' 24, 'wdth' 50",
+                }}
+                className="border-gradient p-3 m-0 h-[60px] mobileUserAcc:w-full tabletUserAcc:w-[334px] tabletUserAcc:justify-between items-center mobileUserAcc:justify-between font-variation-customOpt14 flex rounded-lg bg-white text-[#0A85C2] text-[24px] font-semibold border-2 border-[#0D94E8]"
+              >
+                Dopolni / uredi to stran
+                <Image
+                  src="/img_left_arrow.png"
+                  className="w-8 h-10 object-cover"
+                  width={28}
+                  height={32}
+                  alt="Arrow"
+                />
+              </Link>
+            );
+          })()}
 
           <div className="tabletUserAcc:flex hidden">
             <Image
@@ -723,9 +761,8 @@ const Guardians = () => {
           </div>
 
           <div
-            className={`overflow-x-auto w-full ${
-              isTableVisible ? "block" : "hidden"
-            }`}
+            className={`overflow-x-auto w-full ${isTableVisible ? "block" : "hidden"
+              }`}
           >
             <table className="w-full tabletUserAcc:max-w-[950px]">
               <thead>
@@ -741,18 +778,18 @@ const Guardians = () => {
               <tbody>
                 {logs && logs.length > 0
                   ? logs.map((item, index) => (
-                      <tr className="bg-[#FFFFFF80]" key={index}>
-                        <td className="px-6 py-2 border-b border-[#A1B1D4] text-sm font-normal text-[#3C3E41]">
-                          {formattedDateWithTime(item.createdTimestamp)}
-                        </td>
-                        <td className="px-6 py-2 border-b border-[#A1B1D4] text-base font-normal text-[#3C3E41]">
-                          <strong className="text-[#6D778E] text-sm font-normal">
-                            {item.interactionData?.name || item?.userName}
-                          </strong>
-                          <br /> {item.typeInSL}
-                        </td>
-                      </tr>
-                    ))
+                    <tr className="bg-[#FFFFFF80]" key={index}>
+                      <td className="px-6 py-2 border-b border-[#A1B1D4] text-sm font-normal text-[#3C3E41]">
+                        {formattedDateWithTime(item.createdTimestamp)}
+                      </td>
+                      <td className="px-6 py-2 border-b border-[#A1B1D4] text-base font-normal text-[#3C3E41]">
+                        <strong className="text-[#6D778E] text-sm font-normal">
+                          {item.interactionData?.name || item?.userName}
+                        </strong>
+                        <br /> {item.typeInSL}
+                      </td>
+                    </tr>
+                  ))
                   : null}
               </tbody>
             </table>

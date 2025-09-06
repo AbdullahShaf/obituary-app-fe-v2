@@ -484,7 +484,7 @@ const PostConfirmation = () => {
           </div>
         ) : null}
       </div>
-      <div>
+      {/* <div>
         <h1>Assign Keeper</h1>
         <form onSubmit={handleSubmit}>
           <input
@@ -501,7 +501,7 @@ const PostConfirmation = () => {
           />
           <button type="submit">Assign</button>
         </form>
-      </div>
+      </div> */}
       {/*  responsive code for tablet */}
       <div className="desktopUserAcc:hidden">
         <div className="text-[14px] text-[#6D778E] mobileUserAcc:text-nowrap font-medium text-right mt-[50px]">
@@ -515,7 +515,7 @@ const PostConfirmation = () => {
             Prispevek drugih moraš potrditi, sicer ne bo objavljen{" "}
           </p>
         </div>
-        <div className="w-full border-t border-[#000000] border-opacity-50 mobileUserAcc:hidden"></div>
+        <div className="w-full border-t border-[#000000] border-opacity-50 mobileUserAcc:hidden tabletUserAcc:hidden"></div>
 
         {pendingPosts && pendingPosts?.length > 0 ? (
           pendingPosts.map((item, index) => (
@@ -626,9 +626,12 @@ const PostConfirmation = () => {
               <div className="w-full border-t border-[#000000] border-opacity-50 "></div>
             </>
           ))
-        ) : (
-          <p>No Pending Posts Found</p>
-        )}
+        ) 
+        :null 
+        // (
+        //   <p>No Pending Posts Found</p>
+        // )
+        }
 
         <div className="mobileUserAcc:hidden overflow-x-auto mt-[100px]">
           {/* 25 October 2024 */}
@@ -717,9 +720,11 @@ const PostConfirmation = () => {
                 </table>
               </div>
             </div>
-          ) : (
-            <p>No Previous Posts Found</p>
-          )}
+          ) : null
+          // (
+          //   <p>No Previous Posts Found</p>
+          // )
+          }
         </div>
 
         {/* new dropdown code */}

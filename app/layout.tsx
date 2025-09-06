@@ -1,4 +1,4 @@
-'use client'
+"use client";
 // import type { Metadata } from "next";
 import { robotoFlex, sourceSerif, greatVibes } from "@/utils/customFonts";
 import { Toaster } from "react-hot-toast";
@@ -6,6 +6,7 @@ import "react-quill-new/dist/quill.snow.css";
 import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import { SessionProvider } from "next-auth/react";
+import Script from "next/script";
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -20,6 +21,11 @@ export default function RootLayout({
   return (
     <html lang="sl">
       <head>
+        <Script
+          id="cookieyes"
+          src="https://cdn-cookieyes.com/client_data/4ea35c9889e0f2f54d3cfc92/script.js"
+          strategy="afterInteractive"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400&display=swap"
           rel="stylesheet"

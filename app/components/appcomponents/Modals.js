@@ -717,10 +717,11 @@ const Modals = ({
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
-    if (!data?.candles?.lastBurnedCandleTime) return;
+    // To handle first click
+    const dateToCheck = data?.candles?.lastBurnedCandleTime ? data?.candles?.lastBurnedCandleTime : new Date();
 
     const targetDate =
-      new Date(data.candles.lastBurnedCandleTime).getTime() +
+      new Date(dateToCheck).getTime() +
       24 * 60 * 60 * 1000;
 
     const updateCountdown = () => {
@@ -794,9 +795,8 @@ const Modals = ({
                   setIsSelectedReligion("");
                 }
               }}
-              className={`p-[10px] ${
-                isSelectedRelegion === "1" ? "shadow-custom-dark-to-white" : ""
-              }`}
+              className={`p-[10px] ${isSelectedRelegion === "1" ? "shadow-custom-dark-to-white" : ""
+                }`}
             >
               <Image
                 src={"/icon_cross.png"}
@@ -814,9 +814,8 @@ const Modals = ({
                   setIsSelectedReligion("");
                 }
               }}
-              className={`p-[10px] ${
-                isSelectedRelegion === "2" ? "shadow-custom-dark-to-white" : ""
-              }`}
+              className={`p-[10px] ${isSelectedRelegion === "2" ? "shadow-custom-dark-to-white" : ""
+                }`}
             >
               <Image
                 src={"/img_plus2.png"}
@@ -834,9 +833,8 @@ const Modals = ({
                   setIsSelectedReligion("");
                 }
               }}
-              className={`py-[20px] px-[10px] ${
-                isSelectedRelegion === "3" ? "shadow-custom-dark-to-white" : ""
-              }`}
+              className={`py-[20px] px-[10px] ${isSelectedRelegion === "3" ? "shadow-custom-dark-to-white" : ""
+                }`}
             >
               <Image
                 src={"/img_moon_star.png"}
@@ -854,9 +852,8 @@ const Modals = ({
                   setIsSelectedReligion("");
                 }
               }}
-              className={`p-[10px] ${
-                isSelectedRelegion === "4" ? "shadow-custom-dark-to-white" : ""
-              }`}
+              className={`p-[10px] ${isSelectedRelegion === "4" ? "shadow-custom-dark-to-white" : ""
+                }`}
             >
               <Image
                 src={"/img_plus3.png"}
@@ -874,9 +871,8 @@ const Modals = ({
                   setIsSelectedReligion("");
                 }
               }}
-              className={`p-[10px] ${
-                isSelectedRelegion === "5" ? "shadow-custom-dark-to-white" : ""
-              }`}
+              className={`p-[10px] ${isSelectedRelegion === "5" ? "shadow-custom-dark-to-white" : ""
+                }`}
             >
               <Image
                 src={"/img_star.png"}
@@ -1833,9 +1829,8 @@ const Modals = ({
               Osmrtnica in več informacij na strani:
             </div>
             <div className="flex mobile:hidden text-base font-normal text-[#0A85C2] mt-1 underline ">
-              {`${
-                typeof window !== "undefined" ? window.location.origin : ""
-              }/m/${data?.slugKey}`}
+              {`${typeof window !== "undefined" ? window.location.origin : ""
+                }/m/${data?.slugKey}`}
             </div>
           </div>
           <div className="mobile:w-[100%] w-[254px] mt-8">
@@ -2327,9 +2322,8 @@ function CommonStyle({ item, index, key }) {
   return (
     <div
       key={key}
-      className={` ${
-        index % 2 !== 0 ? "bg-[#E8F0F6]" : "bg-white popup-custom-shadow"
-      }  h-14 flex-row flex items-center border-b-[1px] border-[#D4D4D4] mobile:flex-row-reverse mobile:justify-between mobile:pr-[4px] relative `}
+      className={` ${index % 2 !== 0 ? "bg-[#E8F0F6]" : "bg-white popup-custom-shadow"
+        }  h-14 flex-row flex items-center border-b-[1px] border-[#D4D4D4] mobile:flex-row-reverse mobile:justify-between mobile:pr-[4px] relative `}
     >
       <div
         className={`py-[10px] border-2 text-[#6D778E]

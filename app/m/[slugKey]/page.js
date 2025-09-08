@@ -68,7 +68,7 @@ const MemoryPageContent = ({ params }) => {
           return;
         }
 
-        setObituary(visitRespone);
+        // setObituary(visitRespone);
         if (visitRespone.Condolences.length === 0) {
           const persons = [
             {

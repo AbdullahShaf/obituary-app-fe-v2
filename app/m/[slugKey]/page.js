@@ -55,30 +55,43 @@ const MemoryPageContent = ({ params }) => {
 
       setObituary(response.obituary);
 
-      if (response?.obituary) {
-        const visitRespone = await obituaryService.updateObituaryVisits({
-          obituaryId: response?.obituary?.id,
-          userId: currentUser?.id || null,
-        });
+      // Count a visit only once per 24 hours per obituary (client-side guard)
+      if (response?.obituary?.id) {
+        const visitKey = `visit_${response.obituary.id}`;
+        const lastVisit = localStorage.getItem(visitKey);
+        const now = Date.now();
+        const twentyFourHours = 24 * 60 * 60 * 1000;
 
-        if (visitRespone.error) {
-          toast.error(
-            visitRespone.error || "Something went wrong. Please try again!"
-          );
-          return;
-        }
+        if (!lastVisit || now - Number(lastVisit) > twentyFourHours) {
+          try {
+            const visitRespone = await obituaryService.updateObituaryVisits({
+              obituaryId: response?.obituary?.id,
+              userId: currentUser?.id || null,
+            });
 
-        setObituary(visitRespone);
-        if (visitRespone.Condolences.length === 0) {
-          const persons = [
-            {
-              name: "osmrtnica.com",
-              createdTimestamp: new Date(),
-              relation: "",
-              message: "Počivaj v miru",
-            },
-          ];
-          updateObituary({ ["Condolences"]: persons });
+            if (!visitRespone?.error) {
+              setObituary(visitRespone);
+              localStorage.setItem(visitKey, String(now));
+              if (visitRespone.Condolences.length === 0) {
+                const persons = [
+                  {
+                    name: "osmrtnica.com",
+                    createdTimestamp: new Date(),
+                    relation: "",
+                    message: "Počivaj v miru",
+                  },
+                ];
+                updateObituary({ ["Condolences"]: persons });
+              }
+            } else {
+              toast.error(
+                visitRespone.error || "Something went wrong. Please try again!"
+              );
+            }
+          } catch (e) {
+            // Silently ignore visit count failures; do not block page render
+            console.error("Visit update failed", e);
+          }
         }
       }
     } catch (err) {

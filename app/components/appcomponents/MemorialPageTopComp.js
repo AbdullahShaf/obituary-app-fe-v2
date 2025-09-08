@@ -12,7 +12,7 @@ const MemorialPageTopComp = ({
   setModal,
   data,
   updateObituary,
-  fetchMemory,
+  fetchMemory, // optional, avoid calling to prevent visit inflation
 }) => {
   const { user } = useAuth();
   const router = useRouter();
@@ -104,8 +104,8 @@ const MemorialPageTopComp = ({
         toast.success("Candle Burnt Successfully");
         openCandleModal();
         set_Id("3");
-        fetchMemory();
 
+        // Update candles locally to start countdown immediately and avoid refetch/visit inflation
         const updatedCandles = {
           ...data?.candles,
           totalCandles: (data?.candles?.totalCandles || 0) + 1,
@@ -114,7 +114,6 @@ const MemorialPageTopComp = ({
         };
 
         updateObituary({
-          ...data,
           candles: updatedCandles,
         });
       }
@@ -126,9 +125,11 @@ const MemorialPageTopComp = ({
         set_Id("3");
         toast.error("You can only burn one candle per 24 hours.");
       } else {
-        toast.error(
-          error.data?.message || "Error burning candle. Please try again."
-        );
+        const message =
+          error?.data?.message ||
+          error?.message ||
+          "Error burning candle. Please try again.";
+        toast.error(message);
       }
     }
   };

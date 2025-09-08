@@ -404,7 +404,7 @@ const MyAccount = () => {
         <div className="flex gap-[26px] mt-[50px] mobileUserAcc:mt-[24px] mobileUserAcc:gap-0 tabletUserAcc:justify-between mobileUserAcc:flex-col-reverse">
           <div className="flex desktopUserAcc:w-[403px] flex-col w-full">
             <div
-              className="text-[24px] text-[#0A85C2] font-variation-customOpt14 flex justify-between font-medium mb-1"
+              className="text-[24px] text-[#0A85C2] font-variation-customOpt14 flex justify-between font-medium mb-1 mobile:flex-wrap"
               style={{
                 fontVariationSettings: "'wdth' 50,'wght' 600,'opsz' 32",
               }}
@@ -427,14 +427,14 @@ const MyAccount = () => {
                     : "Izberi občino"}
                 </span>
               </div>
-              <div className="hidden  h-5 w-24   justify-between pl-0 pr-0 items-center mobileUserAcc:flex">
+              <div className="hidden  h-5 w-24   justify-between pl-0 pr-0 items-center mobileUserAcc:flex mobile:w-[100%] mobile:block mobile:relative mobile:top-8 mobile:text-sm">
                 <DropdownWithSearch
                   onSelectCity={handleCitySelect}
                   selectedCity={selectedCity}
                 />
               </div>
             </div>
-            <div className="text-[13px] font-normal text-[#6D778E] -mt-1 ">
+            <div className="text-[13px] font-normal text-[#6D778E] -mt-1 mobile:-mt-6">
               (omogoči hitri lokalni pregled na prvi strani)
             </div>
           </div>

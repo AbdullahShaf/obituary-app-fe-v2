@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { OffcanvasHeader, OffcanvasTitle } from "react-bootstrap";
 
 // Import Logo (you'll need to adjust the path to your actual logo)
-import Logo from "../../../public/footer_logo_white.png";
+import Logo from "../../../public/omr.png";
 
 const MegaMenu = () => {
   // 24 October 2024
@@ -115,12 +115,6 @@ const MegaMenu = () => {
     {/* Mobile Menu - Shows when mega menu is opened on mobile */}
     {isFor === "mob" && showMobileMenu && (
         <>
-        {/* Backdrop */}
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50" 
-          style={{zIndex: 9999998}}
-          onClick={() => setShowMobileMenu(false)}
-        />
         <style jsx global>{`
           header {
             display: none !important;
@@ -131,39 +125,18 @@ const MegaMenu = () => {
           div[class*="fixed"][class*="top-0"][class*="z-50"] {
             display: none !important;
           }
-          .d-none.d-md-block {
-            display: none !important;
-          }
-          div[style*="display: none"] {
-            display: none !important;
-          }
-          .d-none.d-md-block,
-          div[class*="d-none d-md-block"] {
-            display: none !important;
-          }
         `}</style>
-        <div className="fixed top-0 left-0 bottom-0 w-[280px] h-full bg-[#083545] flex flex-col overflow-y-auto shadow-lg" style={{zIndex: 9999999}}>
+        <div className="fixed inset-0 w-full h-full bg-[#07273f] flex flex-col overflow-y-auto" style={{zIndex: 9999999}}>
           {/* Offcanvas Header with logo and close button */}
-          <OffcanvasHeader style={{marginTop: "10px", paddingTop: "20px", borderBottom: "2px solid #fff", marginLeft: "15px", marginRight: "15px"}}>
+          <OffcanvasHeader style={{marginTop: "0px", paddingTop: "20px"}} className="border-b border-white border-opacity-20">
             <OffcanvasTitle className="" id={`offcanvasNavbarLabel-expand-xl`}>
               <Link className="" href="/">
               <div className="flex justify-between align-items-center w-full">
 <div className="">
-<Image src={Logo} className="px-3 pb-5" alt="App Logo" style={{width: "150px"}} />
+<Image src={Logo} className="px-3 pb-5" alt="App Logo" style={{width: "182.76px"}} />
 </div>
 <div className="pr-3">
-<button 
-              onClick={() => setShowMobileMenu(false)}
-              className="rounded-full hover:bg-gray-100 active:bg-gray-200 transition duration-200 ease-in-out transform-gpu active:scale-95"
-            >
-              <Image
-                src="/cancle_icon.png"
-                width={20}
-                height={20}
-                alt="Close"
-                className=""
-              />
-            </button>
+<span className="text-black bg-white px-2 py-1 cursor-pointer btn-close" onClick={() => setShowMobileMenu(false)}> X </span>
 </div>
               </div>
               </Link>
@@ -174,46 +147,43 @@ const MegaMenu = () => {
           <nav className="flex-1">
             <ul className="py-4">
               <li>
-                <a href="/osmrtnice" style={{fontWeight: "500", fontSize: "15px"}} className="block px-6 py-4 text-white text-[20px]">Osmrtnice</a>
+                <a href="/osmrtnice" className="block px-6 py-5 text-white text-[20px]">Osmrtnice</a>
               </li>
               <li>
-                <a href="/pogrebi?city=Ljubljana" style={{fontWeight: "500", fontSize: "15px"}} className="block px-6 pb-4 text-white text-[20px]">Pogrebi</a>
+                <a href="/pogrebi" className="block px-6 py-5 text-white text-[20px]">Pogrebi</a>
               </li>
               <li>
-                <a href="/cvetlicarne?city=Ljubljana" style={{fontWeight: "500", fontSize: "15px"}} className="block px-6 pb-4 text-white text-[20px]">Cvetličarne</a>
+                <a href="/cvetlicarne" className="block px-6 py-5 text-white text-[20px]">Cvetličarne</a>
               </li>
               <li>
-                <a href="/pogrebna-p?region=Osrednjeslovenska" style={{fontWeight: "500", fontSize: "15px"}} className="block px-6 pb-4 text-white text-[20px]">Pogrebna podjetja</a>
+                <a href="/pogrebna-podjetja" className="block px-6 py-5 text-white text-[20px]">Pogrebna podjetja</a>
               </li>
               <li>
-                <div className="block px-6 pb-4 text-white text-[20px] cursor-pointer" onClick={toggleOstaleStrani}>
+                <div className="block px-6 py-5 text-white text-[20px] cursor-pointer" onClick={toggleOstaleStrani}>
                   <div className="flex justify-between items-center">
-                    <span style={{fontWeight: "500", fontSize: "15px"}}>Ostale strani</span>
+                    <span>Ostale strani</span>
                     <span className="text-xl">{ostaleStraniOpen ? '−' : '>'}</span>
                   </div>
                 </div>
                 {ostaleStraniOpen && (
                   <ul className="bg-[#05202f] py-2">
                     <li>
-                      <a href="/zalna-stran" style={{fontWeight: "500", fontSize: "15px"}} className="block px-12 pb-4  text-white text-[18px]">Žalna stran</a>
+                      <a href="/zalna-stran" className="block px-12 py-4 text-white text-[18px]">Žalna stran</a>
                     </li>
                     <li>
-                      <a href="/spominska" style={{fontWeight: "500", fontSize: "15px"}} className="block px-12 pb-4 text-white text-[18px]">Spominska</a>
+                      <a href="/spominska-stran" className="block px-12 py-4 text-white text-[18px]">Spominska stran</a>
                     </li>
                     <li>
-                      <a href="/splosni-pogoji" style={{fontWeight: "500", fontSize: "15px"}} className="block px-12 pb-4 text-white text-[18px]">Splošni pogoji</a>
+                      <a href="/splosni-pogoji" className="block px-12 py-4 text-white text-[18px]">Splošni pogoji in drobni tisk</a>
                     </li>
                     <li>
-                      <span style={{fontWeight: "500", fontSize: "15px"}} className="block px-12 pb-2 text-white text-[18px] cursor-default">Kontaktne informacije</span>
+                      <a href="/kontakt" className="block px-12 py-4 text-white text-[18px]">Kontaktne informacije</a>
                     </li>
                   </ul>
                 )}
               </li>
               <li>
-                <a href="/registracija" style={{fontWeight: "500", fontSize: "15px"}} className="block px-6 mt-4 py-4 text-white text-[20px]">Prijava</a>
-              </li>
-              <li>
-                <a href="/" style={{fontWeight: "500", fontSize: "15px"}} className="block px-6 mt-1 py-4 text-white text-[20px]">Nazaj </a>
+                <a href="/prijava" className="block px-6 py-5 text-white text-[20px]">Prijava</a>
               </li>
             </ul>
           </nav>
@@ -1349,7 +1319,7 @@ const MegaMenu = () => {
                   {activeDiv === 3 && (
                     <div className="flex flex-col w-full max-w-[252px] gap-y-1 bg-gradient-to-b from-[#1464E1] to-[#1151B5] shadow-custom-megamenu-shadow-box text-black rounded-[10px]">
                       {/* title container */}
-                      <div className="flex flex-col pb-4 px-3 ">
+                      <div className="flex flex-col py-5 px-3 ">
                         {/* first title container */}
                         <div
                           style={{
@@ -1644,7 +1614,7 @@ const MegaMenu = () => {
                     <div>
                       <div className="flex w-full ">
                         {/* main container which is wrapped inside */}
-                        <div className="flex w-full flex-row justify-between pb-4 px-[10px]">
+                        <div className="flex w-full flex-row justify-between py-5 px-[10px]">
                           <div className="flex flex-row items-start ">
                             {/* text container */}
                             <div className="flex flex-col  justify-center ">

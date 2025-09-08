@@ -25,19 +25,18 @@ const footerLinkSets = {
   ],
   "/pogrebna-p": [
     { label: "Prva stran", path: "/", showOnMobile: true },
-    { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
     { label: "Osmrtnice", path: "/osmrtnice ", showOnMobile: false },
     { label: "Pogrebi", path: "/pogrebi ", showOnMobile: false },
     { label: "Spominske", path: "/osmrtnice ", showOnMobile: false },
-    { label: "Cvetličarne", path: "/cvetlicarne  ", showOnMobile: false },
+    { label: "Cvetličarne", path: "/cvetlicarne  ", showOnMobile: true },
   ],
   "/cvetlicarne": [
     { label: "Prva stran", path: "/", showOnMobile: true },
-    { label: "Pogrebna podjetja", path: "/pogrebna-p", showOnMobile: true },
     { label: "Osmrtnice", path: "/osmrtnice ", showOnMobile: false },
     { label: "Pogrebi", path: "/pogrebi ", showOnMobile: false },
     { label: "Spominske", path: "/osmrtnice ", showOnMobile: false },
-    { label: "Cvetličarne", path: "/cvetlicarne  ", showOnMobile: false },
+    { label: "Pogrebna podjetja", path: "/pogrebna-p", showOnMobile: true },
+    // { label: "Cvetličarne", path: "/cvetlicarne  ", showOnMobile: false },
   ],
   "/zalna-stran": [
     { label: "Prva stran", path: "/", showOnMobile: false },

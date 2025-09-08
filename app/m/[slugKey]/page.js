@@ -68,7 +68,7 @@ const MemoryPageContent = ({ params }) => {
           return;
         }
 
-        setObituary(visitRespone);
+        // setObituary(visitRespone);
         if (visitRespone.Condolences.length === 0) {
           const persons = [
             {
@@ -123,6 +123,7 @@ const MemoryPageContent = ({ params }) => {
         urlParams.push(`region=${encodeURIComponent(queryParams.region)}`);
       const queryString = urlParams.length ? `?${urlParams.join("&")}` : "";
 
+      // Temporarily commented
       router.push(`/m/${data.slugKey}${queryString}`);
     } catch (error) {
       console.error("Error fetching memory:", error);

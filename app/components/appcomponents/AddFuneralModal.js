@@ -13,8 +13,10 @@ import { sl } from "date-fns/locale";
 import DatePicker from "react-datepicker";
 import { getYear, getMonth } from "date-fns";
 import toast from "react-hot-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 const AddFuneralModal = ({ setModalVisible }) => {
+  const { user } = useAuth();
   const [obituaries, setObituaries] = useState([]);
   const [cemeteries, setCemeteries] = useState([]);
 
@@ -46,10 +48,17 @@ const AddFuneralModal = ({ setModalVisible }) => {
     try {
       let queryParams = {};
       queryParams.name = query;
+      const today = new Date().toISOString();
+      queryParams.date = today;
+      queryParams.city = user?.city;
+      queryParams.allow = 'allow';
+      console.log(queryParams, "here------------");
+
+
       const response = await obituaryService.getObituary(queryParams);
       setObituaries(response.obituaries);
     } catch (error) {
-      console.log(error);
+      console.log('>>>>>>>>>>>>>>', error);
     }
   };
 
@@ -195,7 +204,7 @@ const AddFuneralModal = ({ setModalVisible }) => {
       );
       toast.success("Obituary updated successfully!");
 
-      if(typeof window !== 'undefined'){
+      if (typeof window !== 'undefined') {
         window.location.reload();
       }
 

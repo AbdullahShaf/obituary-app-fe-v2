@@ -271,6 +271,7 @@ const AddObituary = ({ set_Id, setModal }) => {
     }
     toast.success("Template cards uploaded successfully!");
     setLoading(false);
+    // Temporarily commented
     router.push(`/m/${obituaryResponse.slugKey}`);
   };
 

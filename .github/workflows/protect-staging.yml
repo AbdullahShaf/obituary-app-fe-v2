@@ -1,0 +1,22 @@
+name: Block Direct Pushes to Staging
+
+on:
+  push:
+    branches: [ "staging" ]
+
+jobs:
+  block-direct-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if push is from an allowed user
+        env:
+          ALLOWED_USERS: "mm2439,mohid-faizi,CuriousSensie"
+        run: |
+          USERNAME="${{ github.actor }}"
+          if [[ ",${ALLOWED_USERS// /}," == *",${USERNAME},"* ]]; then
+            echo "✅ $USERNAME is allowed to push directly to staging."
+          else
+            echo "::error::🚫 Direct pushes to 'staging' are blocked for $USERNAME!"
+            echo "Please create a branch and submit a Pull Request to staging instead."
+            exit 1
+          fi

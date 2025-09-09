@@ -43,6 +43,7 @@ const OrbetoryFormComp = ({
       const today = new Date().toISOString();
       queryParams.date = today;
       queryParams.city = user?.city;
+      queryParams.userId = user?.id;
       queryParams.allow = 'allow';
       console.log(queryParams, "here------------");
 

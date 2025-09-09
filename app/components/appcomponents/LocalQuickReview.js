@@ -104,7 +104,7 @@ const LocalQuickReview = ({ setIsLocalQuickModalVisible }) => {
                 <div className="w-full bg-[#E7EBF0] rounded-[10px] flex items-center justify-between py-[15px] px-[8px] min-h-[60px] relative">
                   <Link
                     href={`/pogrebi`}
-                    className="w-full bg-[#E7EBF0] rounded-[10px] flex items-center justify-between py-[15px] px-[8px] min-h-[60px] relative"
+                    className="w-full bg-[#E7EBF0] rounded-[10px] flex items-center justify-between relative"
                   >
                     <div className="flex flex-row justify-between items-center pl-[24px] gap-[17px]">
                       <h4 className="text-[#0D94E8] text-[32px] font-bold leading-[24px]">

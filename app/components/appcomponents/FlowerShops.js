@@ -146,7 +146,7 @@ const FlowerShops = ({ setIsOpen, data, showShop }) => {
             ))}
           </div>
         )}
-        {data?.floristShops?.length === 0 && (
+        {!data?.floristShops?.length && (
           <div className="w-full">
             <div className="flex flex-col items-center justify-center w-full h-32 text-gray-500">
               <p>Še ni vnešenih&nbsp;cvetličarn.</p>

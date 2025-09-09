@@ -17,7 +17,7 @@ import InfoModal from "./InfoModal";
 import MemoryModal from "../appcomponents/MemoryModal";
 
 const MyAccount = () => {
-  const { user, isLoading, isAuthenticated, updateUserAndRefreshSession,refreshUserSession } =
+  const { user, isLoading, isAuthenticated, updateUserAndRefreshSession } =
     useAuth();
 
   const [isShowModal, setIsShowModal] = useState(false);
@@ -161,7 +161,6 @@ const MyAccount = () => {
     try {
       const response = await updateUserAndRefreshSession({ city: item });
       if (response.success === true) {
-        refreshUserSession();
         toast.success("City Updated Successfully");
       }
       setSelectedCity(item);

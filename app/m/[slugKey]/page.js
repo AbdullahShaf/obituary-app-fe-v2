@@ -52,7 +52,7 @@ const MemoryPageContent = ({ params }) => {
         );
         return;
       }
-      console.log(response, "response")
+
       setObituary(response.obituary);
 
       if (response?.obituary) {

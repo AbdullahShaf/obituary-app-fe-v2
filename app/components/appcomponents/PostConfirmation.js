@@ -10,9 +10,10 @@ import danger from "../../../public/danger.png";
 import obituaryService from "@/services/obituary-service";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
-
+import { MemoryDetailModal } from "./MemoryDetailModal";
 const PostConfirmation = () => {
   const [isTableVisible, setIsTableVisible] = useState(false);
+  const [interactionModal, setInteractionModal] = useState(null);
 
   const toggleTableVisibility = () => {
     setIsTableVisible((prev) => !prev);
@@ -196,6 +197,11 @@ const PostConfirmation = () => {
   };
   return (
     <>
+      <MemoryDetailModal
+        isShowModal={interactionModal}
+        setIsShowModal={setInteractionModal}
+        data={interactionModal}
+      />
       <div className="tabletUserAcc:hidden mobileUserAcc:hidden flex flex-col mt-[86px] tabletUserAcc:mt-[46px] gap-y-5 mobileUserAcc:gap-y-3 mobileUserAcc:mt-[27px] desktopUserAcc:pr-[40px] pr-0 ">
         <div className="flex tabletUserAcc:gap-[26px] mobileUserAcc:gap-3 mobileUserAcc:flex-col tabletUserAcc:justify-between desktopUserAcc:justify-between ">
           <div className="ml-0 grid gap-4 grid-cols-2 mobileUserAcc:grid-cols-2 mobileUserAcc:ml-0 max-[360px]:grid-cols-2 ">
@@ -278,7 +284,7 @@ const PostConfirmation = () => {
                         </td>
                         <td className="w-[300px] p-4 border-t border-b border-[#0D94E8]">
                           <div className="flex items-center justify-arounds">
-                            <AiOutlineExport className="ml-2 w-[24px] h-[24px] text-[#6D778E] mr-4" />
+                            <AiOutlineExport className="ml-2 w-[24px] h-[24px] text-[#6D778E] mr-4" onClick={() => setInteractionModal(item)} />
                             <span className="flex flex-col text-[#6D778E]">
                               {item?.userName}
                               <span className="text-[14px] font-medium text-[#3C3E41]">
@@ -422,7 +428,7 @@ const PostConfirmation = () => {
                         </td>
                         <td className="w-[300px] ml-[20px] p-[16px] border-t border-b border-[#A1B1D4]">
                           <div className="flex items-center">
-                            <AiOutlineExport className="ml-2 w-[24px] h-[24px] text-[#6D778E] mr-4" />
+                            <AiOutlineExport className="ml-2 w-[24px] h-[24px] text-[#6D778E] mr-4" onClick={() => setInteractionModal(item)} />
                             <span className="flex flex-col text-[14px] font-medium text-[#6D778E]">
                               {item?.userName}
                               <span className="text-[16px] font-medium text-[#3C3E41]">
@@ -468,8 +474,8 @@ const PostConfirmation = () => {
                               item.status === "approved"
                                 ? rightImg
                                 : item.status === "rejected"
-                                ? crossImage
-                                : ""
+                                  ? crossImage
+                                  : ""
                             }
                             alt={item.message}
                             className="w-[24px] h-[24px]"
@@ -626,11 +632,11 @@ const PostConfirmation = () => {
               <div className="w-full border-t border-[#000000] border-opacity-50 "></div>
             </>
           ))
-        ) 
-        :null 
-        // (
-        //   <p>No Pending Posts Found</p>
-        // )
+        )
+          : null
+          // (
+          //   <p>No Pending Posts Found</p>
+          // )
         }
 
         <div className="mobileUserAcc:hidden overflow-x-auto mt-[100px]">
@@ -707,8 +713,8 @@ const PostConfirmation = () => {
                               item.status === "approved"
                                 ? rightImg
                                 : item.status === "rejected"
-                                ? crossImage
-                                : ""
+                                  ? crossImage
+                                  : ""
                             }
                             alt={item.message}
                             className="w-[24px] h-[24px]"
@@ -721,9 +727,9 @@ const PostConfirmation = () => {
               </div>
             </div>
           ) : null
-          // (
-          //   <p>No Previous Posts Found</p>
-          // )
+            // (
+            //   <p>No Previous Posts Found</p>
+            // )
           }
         </div>
 
@@ -771,11 +777,10 @@ const PostConfirmation = () => {
           </div>
 
           <div
-            className={`overflow-x-auto w-full ${
-              isTableVisible
-                ? "block"
-                : "hidden tabletUserAcc:block desktopUserAcc:block"
-            }`}
+            className={`overflow-x-auto w-full ${isTableVisible
+              ? "block"
+              : "hidden tabletUserAcc:block desktopUserAcc:block"
+              }`}
           >
             {previousPosts && previousPosts.length > 0 ? (
               previousPosts.map((item, index) => (
@@ -797,8 +802,8 @@ const PostConfirmation = () => {
                         item.status === "approved"
                           ? rightImg
                           : item.status === "rejected"
-                          ? crossImage
-                          : ""
+                            ? crossImage
+                            : ""
                       }
                       alt=""
                       className="w-[21px] h-[21px]"

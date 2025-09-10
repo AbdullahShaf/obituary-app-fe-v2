@@ -51,7 +51,8 @@ const Obituaryform = () => {
       </Layout>
     );
   }
-// Temporarily commented
+
+  // Temporarily commented
   if (!user?.createObituaryPermission) {
     return (
       <Layout

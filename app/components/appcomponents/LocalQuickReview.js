@@ -203,14 +203,14 @@ const LocalQuickReviewModal = ({ setIsLocalQuickReviewModalVisible }) => {
 
           // Fetch obituaries from yesterday to today (2 days range)
           const obituaryParams = {
-            city: parsedUser.city,
+            city: currUser.city,
             startDate: formattedYesterday,
             endDate: formattedToday,
           };
 
           // Fetch funerals for today and tomorrow (2 days range)
           const funeralParams = {
-            city: parsedUser.city,
+            city: currUser.city,
             startDate: formattedToday,
             endDate: formattedTomorrow,
           };

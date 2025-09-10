@@ -27,16 +27,8 @@ const ObituaryCard = ({
   selectedCity,
   selectedRegion,
 }) => {
-  const birthDateObj = new Date(data.birthDate);
-  const deathDateObj = new Date(data.deathDate);
-
-  // Conditional formatting
   const formattedBirthDate = new Date(data.birthDate).getFullYear();
-
-  const formattedDeathDate =
-    deathDateObj.getDate() === 31 && deathDateObj.getMonth() === 11
-      ? deathDateObj.getFullYear()
-      : format(deathDateObj, "dd.MM.yyyy");
+  const formattedDeathDate = format(new Date(data.deathDate), "dd.MM.yyyy");
 
   const age = calculateAge(data.birthDate, data.deathDate);
 
@@ -47,8 +39,8 @@ const ObituaryCard = ({
     .getDate()
     .toString()
     .padStart(2, "0")}${(funeralDate.getMonth() + 1)
-      .toString()
-      .padStart(2, "0")}${funeralDate.getFullYear().toString().slice(2)}`;
+    .toString()
+    .padStart(2, "0")}${funeralDate.getFullYear().toString().slice(2)}`;
 
   const religionImages = {
     1: "/icon_cross.png",
@@ -172,8 +164,9 @@ const ObituaryCard = ({
               alt="Slika"
               width={1000}
               height={1000}
-              className={`w-[51px] ${data.symbol === "3" ? "h-[50px]" : "h-[55px]"
-                }`}
+              className={`w-[51px] ${
+                data.symbol === "3" ? "h-[50px]" : "h-[55px]"
+              }`}
             />
           </div>
         )}
@@ -189,8 +182,9 @@ const ObituaryCard = ({
               alt="Slika"
               width={500}
               height={500}
-              className={` w-[37.66px] tablet:h-[65px] tablet:w-[51px] ${data.symbol === "3" ? "h-[40px]" : "h-[48px]"
-                }`}
+              className={` w-[37.66px] tablet:h-[65px] tablet:w-[51px] ${
+                data.symbol === "3" ? "h-[40px]" : "h-[48px]"
+              }`}
             />
           </div>
         )}

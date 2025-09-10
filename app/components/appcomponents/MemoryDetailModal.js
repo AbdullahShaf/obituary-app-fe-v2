@@ -12,6 +12,7 @@ import cancle_icon from "@/public/cancle_icon.png";
 import imgUp from "@/public/ico_up.png";
 import Image from "next/image";
 import Modals from "./Modals";
+import { isSafeUrl, normalizeUrl } from "@/utils/UrlSafetyCheck";
 
 const heading = { condolence: "Sožalje", dedication: "Posvetilo", photo: "Slika" }
 const formatDate = (timestamp) => {
@@ -178,10 +179,15 @@ export function MemoryDetailModal({
                                                 </p>
                                             </div>
                                             <p>{interaction?.message}</p>
-                                            {interaction?.relation ?
+                                            {(interaction?.relation && isSafeUrl(interaction?.relation)) ?
                                                 <p className="flex items-center justify-start gap-2 mt-4">
-                                                    <label>Link: </label>
-                                                    <a href={interaction?.relation} className="text-blue-400 hover:text-blue-600 hover:underline hover:underline-offset-[5px]">{interaction?.relation}</a>
+                                                    <span>Link: </span>
+                                                    <a
+                                                        href={normalizeUrl(interaction.relation)}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer nofollow ugc"
+                                                        className="text-blue-400 hover:text-blue-600 hover:underline hover:underline-offset-[5px]">{interaction?.relation}
+                                                    </a>
                                                 </p>
                                                 : null}
 

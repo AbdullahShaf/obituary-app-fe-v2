@@ -261,9 +261,14 @@ const Modals = ({
       toast.error("No image selected!");
       return;
     }
+    if (!name || name.trim() === "") {
+      toast.error("Please enter a name before submitting.");
+      return;
+    }
     const formData = new FormData();
     formData.append("picture", uploadedPicture);
     formData.append("isKeeper", isKeeper());
+    formData.append("userName", name);
     try {
       const response = await obituaryService.addPhoto(data.id, formData);
 
@@ -283,6 +288,9 @@ const Modals = ({
     } catch (error) {
       console.error(`Failed to add  photo`, error);
       toast.error("Error Adding Photo");
+    }
+    finally {
+      setName('');
     }
   };
 
@@ -419,7 +427,7 @@ const Modals = ({
     setSelect(!select);
     setOpenPicker(openPicker === type ? null : type); // Close if already open
   };
-  const updateMemory = async (field, value) => {
+  const updateMemory = async (field, value, allow) => {
     if (!user) {
       toast.error("You must log in to update.");
       return;
@@ -475,7 +483,7 @@ const Modals = ({
     console.log(formData);
 
     try {
-      const response = await obituaryService.updateObituary(data.id, formData);
+      const response = await obituaryService.updateObituary(data.id, formData, allow);
       console.log(`${field} updated successfully!`, response);
       toast.success(`${field} updated successfully!`);
 
@@ -963,7 +971,7 @@ const Modals = ({
             <ButtonBlueBorder
               placeholder={"Objavi"}
               onClick={() => {
-                updateMemory("picture", uploadedPicture);
+                updateMemory("picture", uploadedPicture, "allow");
               }}
             />
           </div>
@@ -1011,8 +1019,8 @@ const Modals = ({
 
           <div className="w-[254px] mobile:w-[100%] mt-[42px]">
             <ButtonBlueBorder
-              placeholder={"Objavi"}
-              onClick={() => updateMemory("obituary", obituaryText)}
+              placeholder={"Objavia"}
+              onClick={() => updateMemory("obituary", obituaryText, "allow")}
             />
           </div>
         </div>
@@ -1853,7 +1861,7 @@ const Modals = ({
           {/* <div className="mt-6">
             <TextFieldComp placeholder={"Napiši naslov"} />
           </div> */}
-          <div className="flex mt-6 ">
+          <div className="flex flex-col mt-6 ">
             <div
               className={
                 "flex flex-col rounded-[6px] bg-[#F2F8FF66] shadow-custom-dark-to-white w-full py-7 px-[80px] mobile:px-5 items-center justify-center "
@@ -1877,6 +1885,16 @@ const Modals = ({
               <div className="text-[#939393] font-normal text-xs mt-3 self-center ">
                 Format: jpg, png, webp
               </div>
+            </div>
+            <div className="mt-[24px] flex">
+              <TextFieldComp
+                placeholder={"Napiši svoje ime ali vzdevek"}
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                maxLength={100}
+              />
             </div>
           </div>
           {false && (

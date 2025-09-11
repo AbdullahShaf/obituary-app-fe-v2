@@ -154,6 +154,17 @@ export default function Faq1() {
                 </li>
               </ul>
 
+              <p className="font-light text-[16px] mt-12">
+                <span className="underline underline-offset-2 text-stone-800 font-bold">DODATNO</span>, ne glede na čas pridružitve:
+              </p>
+
+              <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
+                <li className="pl-4">
+                  Prva pridružena cvetličarna v posamezni občini prejme brezplačno še <span className="text-[#0A85C2] font-bold">šest mesecev </span>
+                  <span className="text-[#0A85C2] font-bold pl-5">brezplačnega oglaševanja</span> na notranjih straneh v svoji občini. In druga tri mesece.
+                </li>
+              </ul>
+
               <p className="mt-6">Splača se biti med prvimi.</p>
             </div>
           </section>
@@ -344,6 +355,17 @@ export default function Faq1() {
                     / ko o tem še ne <br />
                     <span className="pl-5"></span>vedo)
                   </span>
+                </li>
+              </ul>
+
+               <p className="font-light text-[16px] mt-12">
+                <span className="underline underline-offset-2 text-stone-800 font-bold">DODATNO</span>, ne glede na čas pridružitve:
+              </p>
+
+              <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
+                <li className="pl-4">
+                  Prva pridružena cvetličarna v posamezni <span className="pl-5">občini prejme brezplačno še </span><span className="text-[#0A85C2] font-bold">šest mesecev </span>
+                  <span className="text-[#0A85C2] font-bold pl-5">brezplačnega oglaševanja</span> na notranjih <span className="pl-5">straneh v svoji občini. In druga tri mesece.</span>
                 </li>
               </ul>
 

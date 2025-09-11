@@ -205,37 +205,37 @@ const { data: session } = useSession();
             <div className="flex items-center gap-[8px]">
               <button
                 type="button"
-                onClick={handleSubmit}
+                // onClick={handleSubmit}
                 className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
               >
                 Shrani
               </button>
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                onClick={() => {
-                  if (openBlock === 1) {
-                    handleStepChange(5);
-                  } else {
-                    setOpenBlock(1);
-                  }
-                }}
+                // onClick={() => {
+                //   if (openBlock === 1) {
+                //     handleStepChange(5);
+                //   } else {
+                //     setOpenBlock(1);
+                //   }
+                // }}
               >
                 Nazaj
               </button>
             </div>
             <button
               className="bg-gradient-to-b from-[#F916D6] to-[#9D208A] text-[#FFFFFF] font-semibold leading-[24px] text-[20px] py-[12px] px-[66px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-              onClick={async () => {
-                if (openBlock === 1) {
-                  const success = await handleSubmit();
-                  if (success) {
-                    setOpenBlock(2);
-                  }
-                } else {
-                  handlePublish('send');
-                  handleStepChange(6);
-                }
-              }}
+              // onClick={async () => {
+              //   if (openBlock === 1) {
+              //     const success = await handleSubmit();
+              //     if (success) {
+              //       setOpenBlock(2);
+              //     }
+              //   } else {
+              //     handlePublish('send');
+              //     handleStepChange(6);
+              //   }
+              // }}
             >
               Objavi
             </button>

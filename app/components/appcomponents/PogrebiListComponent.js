@@ -10,6 +10,7 @@ import Image from "next/image";
 import { toast } from "react-hot-toast";
 import obituaryService from "@/services/obituary-service";
 import regionsAndCities from "@/utils/regionAndCities";
+import {SelectDropdown} from "./SelectDropdown";
 
 const ObituaryListComponent = ({ city }) => {
   const router = useRouter();
@@ -179,7 +180,7 @@ const ObituaryListComponent = ({ city }) => {
             </div>
 
             {/* Region Dropdown */}
-            <Dropdown
+            <SelectDropdown
               label={"Regija"}
               isFromNotification={false}
               isFromFlower={false}
@@ -189,7 +190,7 @@ const ObituaryListComponent = ({ city }) => {
             />
 
             {/* City Dropdown */}
-            <Dropdown
+            <SelectDropdown
               data={cityOptions}
               label={"Občina"}
               isFromNotification={false}
@@ -213,7 +214,7 @@ const ObituaryListComponent = ({ city }) => {
           <div className="w-[600px] h-[112px] columns-2 flex flex-wrap flex-row gap-4 mt-[63px] mb-[53px]">
 
             {/* Region Dropdown */}
-            <Dropdown
+            <SelectDropdown
               label={"Regija"}
               isFromNotification={false}
               isFromFlower={false}
@@ -223,7 +224,7 @@ const ObituaryListComponent = ({ city }) => {
             />
 
             {/* City Dropdown */}
-            <Dropdown
+            <SelectDropdown
               data={cityOptions}
               label={"Mesto"}
               isFromNotification={false}
@@ -269,7 +270,7 @@ const ObituaryListComponent = ({ city }) => {
             </div>
 
             {/* Region Dropdown */}
-            <Dropdown
+            <SelectDropdown
               label={"Regija"}
               isFromNotification={false}
               isFromFlower={false}
@@ -280,7 +281,7 @@ const ObituaryListComponent = ({ city }) => {
             />
 
             {/* City Dropdown */}
-            <Dropdown
+            <SelectDropdown
               data={cityOptions}
               label={"Mesto"}
               isFromNotification={false}

@@ -9,6 +9,7 @@ import shopService from "@/services/shop-service";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import CompanyPreview from "../components/company-preview";
+import { useSession } from "next-auth/react";
 
 export default function Step6({
   data,
@@ -36,7 +37,8 @@ export default function Step6({
   const [highlightText, setHighlightText] = useState("");
   const [instagram, setInstagram] = useState("");
   const [facebook, setFacebook] = useState("");
-
+  const { data: session } = useSession();
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const addSliderBlock = () => {
     setShops([
       ...shops,
@@ -177,7 +179,7 @@ export default function Step6({
   return (
     <>
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[44px]">
@@ -339,34 +341,34 @@ export default function Step6({
               <div className="flex items-center gap-[8px]">
                 <button
                   type="button"
-                  onClick={handleShopSubmit}
+                  // onClick={handleShopSubmit}
                   className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
                 >
                   Shrani
                 </button>
                 <button
                   className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                  onClick={() => {
-                    if (openBlock === 1) {
-                      handleStepChange(5);
-                    } else {
-                      setOpenBlock(1);
-                    }
-                  }}
+                  // onClick={() => {
+                  //   if (openBlock === 1) {
+                  //     handleStepChange(5);
+                  //   } else {
+                  //     setOpenBlock(1);
+                  //   }
+                  // }}
                 >
                   Nazaj
                 </button>
               </div>
               <button
                 className="bg-gradient-to-b from-[#F916D6] to-[#9D208A] text-[#FFFFFF] font-semibold leading-[24px] text-[20px] py-[12px] px-[66px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                onClick={() => {
-                  if (openBlock === 1) {
-                    setOpenBlock(2);
-                  } else {
-                    handleShopSubmit('send');
-                    handleStepChange(6);
-                  }
-                }}
+                // onClick={() => {
+                //   if (openBlock === 1) {
+                //     setOpenBlock(2);
+                //   } else {
+                //     handleShopSubmit('send');
+                //     handleStepChange(6);
+                //   }
+                // }}
               >
                 Objavi
               </button>
@@ -376,7 +378,7 @@ export default function Step6({
               <div className="flex items-center gap-[8px] justify-between w-full">
                 <button
                   type="button"
-                  onClick={handleBCSubmit}
+                  // onClick={handleBCSubmit}
                   className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
                 >
                   Shrani
@@ -384,20 +386,20 @@ export default function Step6({
                 <div className="flex items-center gap-[8px]">
                   <button
                     className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                    onClick={() => handleStepChange(5)}
+                    // onClick={() => handleStepChange(5)}
                   >
                     Nazaj
                   </button>
                   <button
                     className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                    onClick={async () => {
-                      if (openBlock === 1) {
-                        const success = await handleBCSubmit();
-                        if (success) {
-                          setOpenBlock(2);
-                        }
-                      }
-                    }}
+                    // onClick={async () => {
+                    //   if (openBlock === 1) {
+                    //     const success = await handleBCSubmit();
+                    //     if (success) {
+                    //       setOpenBlock(2);
+                    //     }
+                    //   }
+                    // }}
                   >
                     Naslednji korak
                   </button>

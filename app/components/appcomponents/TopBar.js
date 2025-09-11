@@ -63,12 +63,12 @@ const TopBar = ({
             </button>
             <button
               className="ml-[50px]  tablet:ml-[95px] desktop:ml-[80px]"
-              onClick={() => {
-                setIsMessageModalVisible(true);
-                setIsModalVisible(false);
-                setIsLocalQuickModalVisible(false);
-                setIsLocalQuickReviewModalVisible(false);
-              }}
+              // onClick={() => {
+              //   setIsMessageModalVisible(true);
+              //   setIsModalVisible(false);
+              //   setIsLocalQuickModalVisible(false);
+              //   setIsLocalQuickReviewModalVisible(false);
+              // }}
             >
               <img
                 src="ico_email_top.png"
@@ -78,12 +78,12 @@ const TopBar = ({
             </button>
             <button
               className="ml-[50px] tablet:ml-[95px] desktop:ml-[80px]"
-              onClick={() => {
-                setIsModalVisible(true);
-                setIsMessageModalVisible(false);
-                setIsLocalQuickModalVisible(false);
-                setIsLocalQuickReviewModalVisible(false);
-              }}
+              // onClick={() => {
+              //   setIsModalVisible(true);
+              //   setIsMessageModalVisible(false);
+              //   setIsLocalQuickModalVisible(false);
+              //   setIsLocalQuickReviewModalVisible(false);
+              // }}
             >
               <img
                 src="ico_bell_top.png"

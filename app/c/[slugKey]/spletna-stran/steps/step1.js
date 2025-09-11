@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import companyService, { submitStep1Data } from "@/services/company-service";
 import toast from "react-hot-toast";
 import CompanyPreview from "../components/company-preview";
+import { useSession } from "next-auth/react";
+import InfoModal from "@/app/components/appcomponents/InfoModal";
 
 export default function Step1({
   data,
@@ -25,6 +27,11 @@ export default function Step1({
   const [companyId, setCompanyId] = useState(null);
   const [glassFrameState, setGlassFrameState] = useState(false);
   const [user, setUser] = useState(null);
+  const [showNotifyCard, setShowNotifyCard] = useState(true);
+
+  const { data: session } = useSession();
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
+
   const handleSave = async () => {
     const formData = new FormData();
 
@@ -102,8 +109,18 @@ export default function Step1({
 
   return (
     <>
+      <InfoModal
+        icon={"/giftbox.svg"}
+        heading={"V pripravi"}
+        text={"Izdelava brezplačne lastne strani bo"}
+        name={"omogočena predvidoma do 18. sept."}
+        isOpen={showNotifyCard}
+        onClose={() => {
+          setShowNotifyCard(false);
+        }}
+      />
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div>
         <div className="min-h-full flex flex-col justify-between gap-[16px] relative">
@@ -270,7 +287,7 @@ export default function Step1({
             <div className="flex items-center gap-[8px] justify-between w-full">
               <button
                 type="button"
-                onClick={handleSave}
+                // onClick={handleSave}
                 className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
               >
                 Shrani
@@ -279,19 +296,19 @@ export default function Step1({
                 <button
                   type="button"
                   className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                  onClick={() => handleStepChange(1)}
+                // onClick={() => handleStepChange(1)}
                 >
                   Nazaj
                 </button>
                 <button
                   type="button"
                   className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                  onClick={async () => {
-                    const success = await handleSave();
-                    if (success) {
-                      handleStepChange(2);
-                    }
-                  }}
+                // onClick={async () => {
+                //   const success = await handleSave();
+                //   if (success) {
+                //     handleStepChange(2);
+                //   }
+                // }}
                 >
                   Naslednji korak
                 </button>

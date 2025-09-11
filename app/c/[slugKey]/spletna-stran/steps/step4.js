@@ -11,6 +11,7 @@ import Switch from "../components/Switch";
 import { toast } from "react-hot-toast";
 import companyService from "@/services/company-service";
 import CompanyPreview from "../components/company-preview";
+import { useSession } from "next-auth/react";
 
 export default function Step4({
   data,
@@ -31,7 +32,8 @@ export default function Step4({
   const [showBackground, setShowBackground] = useState(
     data?.showBoxBackground || false
   );
-
+const { data: session } = useSession();
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const addSliderBlock = () => {
     setBoxes([...boxes, { index: boxes.length + 1 }]);
   };
@@ -147,7 +149,7 @@ export default function Step4({
   return (
     <>
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[43px]">
@@ -235,7 +237,7 @@ export default function Step4({
           <div className="flex items-center gap-[8px] justify-between w-full">
             <button
               type="button"
-              onClick={handleSubmit}
+              // onClick={handleSubmit}
               className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
             >
               Shrani
@@ -243,18 +245,18 @@ export default function Step4({
             <div className="flex items-center gap-[8px]">
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                onClick={() => handleStepChange(3)}
+                // onClick={() => handleStepChange(3)}
               >
                 Nazaj
               </button>
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                onClick={async () => {
-                  const success = await handleSubmit();
-                  if (success) {
-                    handleStepChange(5);
-                  }
-                }}
+                // onClick={async () => {
+                //   const success = await handleSubmit();
+                //   if (success) {
+                //     handleStepChange(5);
+                //   }
+                // }}
               >
                 Naslednji korak
               </button>

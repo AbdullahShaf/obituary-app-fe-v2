@@ -26,6 +26,7 @@ import IpadSlider from "./components/appcomponents/IpadSlider";
 import SlideOne from "./components/slidercomponents/SlideOne";
 import SlideTwo from "./components/slidercomponents/SlideTwo";
 import { useAuth } from "@/hooks/useAuth";
+import { SelectDropdown } from "./components/appcomponents/SelectDropdown";
 
 
 function HomeContent(props) {
@@ -275,7 +276,7 @@ function HomeContent(props) {
                 />
               </div>
 
-              <Dropdown
+              <SelectDropdown
                 label={"Išči po regiji"}
                 data={regionOptions}
                 selectedValue={selectedRegion}
@@ -287,7 +288,7 @@ function HomeContent(props) {
                 isFromObituary={false}
               />
               <div className="flex h-[16px] w-[360px] tablet:hidden desktop:hidden" />
-              <Dropdown
+              <SelectDropdown
                 label={"Išči po kraju"}
                 data={cityOptions}
                 selectedValue={selectedCity}
@@ -402,7 +403,7 @@ function HomeContent(props) {
                 </div>
               </div>
               <div className="relative">
-                <Dropdown
+                <SelectDropdown
                   label={"Mesto"}
                   isFromFlower={true}
                   isFromNotification={false}

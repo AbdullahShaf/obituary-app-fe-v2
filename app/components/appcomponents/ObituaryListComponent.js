@@ -10,6 +10,8 @@ import Image from "next/image";
 import { toast } from "react-hot-toast";
 import obituaryService from "@/services/obituary-service";
 import regionsAndCities from "@/utils/regionAndCities";
+import { SelectDropdown } from "./SelectDropdown"
+
 const ObituaryListComponent = ({ city }) => {
   const languages = [
     "Ljubljana",
@@ -228,7 +230,7 @@ const ObituaryListComponent = ({ city }) => {
               />
             </div>
             {/* Dropdown for Išči po regiji*/}
-            <Dropdown
+            <SelectDropdown
               label={"Išči po regiji"}
               isFromNotification={false}
               isFromFlower={false}
@@ -237,7 +239,7 @@ const ObituaryListComponent = ({ city }) => {
               onSelect={handleRegionSelect}
             />
             {/* Dropdown for Išči po kraju*/}
-            <Dropdown
+            <SelectDropdown
               data={cityOptions}
               label={"Išči po kraju"}
               isFromNotification={false}

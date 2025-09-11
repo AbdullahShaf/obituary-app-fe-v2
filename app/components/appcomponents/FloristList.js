@@ -9,6 +9,7 @@ import { useState } from "react";
 
 import regionsAndCities from "@/utils/regionAndCities";
 import shopService from "@/services/shop-service";
+import {SelectDropdown} from "./SelectDropdown";
 
 const FloristList = () => {
   const router = useRouter();
@@ -121,7 +122,7 @@ const FloristList = () => {
             {/* Mobile Filter Row */}
             <div className="flex tablet:hidden gap-4 w-full">
               <div className="flex-1">
-                <Dropdown
+                <SelectDropdown
                   label={"Išči po kraju"}
                   isFromNotification={false}
                   isFromFlower={false}
@@ -142,7 +143,7 @@ const FloristList = () => {
 
             {/* Tablet/Desktop Filter Row */}
             <div className="hidden tablet:block tablet:w-full desktop:w-auto">
-              <Dropdown
+              <SelectDropdown
                 label={"Išči po kraju"}
                 isFromNotification={false}
                 isFromFlower={false}

@@ -41,7 +41,7 @@ export default function Faq1() {
           Brezplačni vpis in oglaševanje
         </h1>
         <h2 className="text-[22px] mobile:hidden block mt-2 font-semibold text-center">
-          Za prvih 60 cvetličarn oziroma 15. oktobra 2025
+          Za prvih 60 cvetličarn oziroma do 15. oktobra 2025
         </h2>
 
         <h2 className="text-[22px] mobile:block hidden mobile:font-[20px] mt-2 font-semibold text-center">
@@ -56,7 +56,7 @@ export default function Faq1() {
               stranke potrebujejo.
               <br />
               <br />
-              Brezplačno izdelavo vaše strani. Dva meseca (Poldrugi mesec) brezplačne uporabe in oglaševanja in ekskluzivne
+              Brezplačno izdelavo vaše strani. Poldrugi mesec brezplačne uporabe in oglaševanja in ekskluzivne
               dodatne popuste kasneje. In seveda celo vrsto brezplačnih
               digitalnih produktov za vaše stranke. Prve pridružene cvetličarne
               pa bodo deležne še nekaj dodatnih ugodnosti.
@@ -123,9 +123,7 @@ export default function Faq1() {
               <br />
               <br />
               <span className="text-[14px]">
-                Op. V mesečni strošek je vključeno oglaševanje cvetličarne v
-                svoji občini. Za oglaševanje v več občinah odpri Pogosta
-                vprašanja tukaj.
+                Op. V naročnino je vključena brezplačna izdelava in gostovanje vaše strani + pojavljanje vaše cvetličarne na seznamu lokalnih cvetličarn (v vaši občini) + pojavljanje vaše cvetličarne na vseh lokalnih žalnih straneh (plus dodatne koristi za prve naročnike, ki so navedene na strani Priložnost).
               </span>
             </p>
           </div>

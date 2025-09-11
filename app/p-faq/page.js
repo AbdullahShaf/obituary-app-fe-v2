@@ -34,7 +34,7 @@ export default function Faq1() {
     },
     {
       question: "Imamo svojo cvetličarno",
-      answer: "Odlično! Izdelali si boste obe spletni strani, tista za pogrebno dejavnost je brezplačna, pri tisti za cvetličarno pa vam bomo obračunali 50% popust in enako vsa leta kasneje, če boste pristopili tekom otvoritvene akcije do konca junija (v primeru kasnejšega pristopa bo popust 25% in enako vsa leta kasneje). Zaradi sistema in lažjega vodenja si boste registrirali oba uporabniška računa. ",
+      answer: "Odlično! Izdelali si boste obe spletni strani, tista za pogrebno dejavnost je brezplačna, pri tisti za cvetličarno pa vam bomo obračunali 50% popust in enako vsa leta kasneje, če boste pristopili tekom otvoritvene akcije do 5. oktobra (v primeru kasnejšega pristopa bo popust 25% in enako vsa leta kasneje). Zaradi sistema in lažjega vodenja si boste registrirali oba uporabniška računa. ",
     },
     {
       question: "Imamo že svojo spletno stran. Ne rabimo še vaše.",

@@ -13,7 +13,7 @@ const roboto = Roboto_Flex({
 
 export default function SideMenu() {
   const [isOpen, setIsOpen] = useState(false);
-  const [showSubmenu, setShowSubmenu] = useState(false);
+  const [showSubmenu, setShowSubmenu] = useState(true);
 
   return (
     <menu
@@ -103,25 +103,25 @@ export default function SideMenu() {
               >
                 <a
                   href="https://osmrtnica.com/zalna-stran"
-                  className="block hover:text-indigo-300 ml-6 text-[16px] leading-[1.8]"
+                  className="block hover:text-indigo-300 ml-6 text-[18px] leading-[1.8]"
                 >
                   Žalna stran
                 </a>
                 <a
                   href="https://dev111.osmrtnica.com/spominska"
-                  className="block hover:text-indigo-300 ml-6 text-[16px] leading-[1.8]"
+                  className="block hover:text-indigo-300 ml-6 text-[18px] leading-[1.8]"
                 >
                   Spominska stran
                 </a>
                 <a
                   href="https://osmrtnica.com/splosni-pogoji"
-                  className="block hover:text-indigo-300 ml-6 text-[16px] leading-[1.8]"
+                  className="block hover:text-indigo-300 ml-6 text-[18px] leading-[1.8]"
                 >
                   Splošni pogoji in drobni tisk
                 </a>
                 <a
                   href="https://osmrtnica.com/"
-                  className="block hover:text-indigo-300 ml-6 text-[16px] leading-[1.8]"
+                  className="block hover:text-indigo-300 ml-6 text-[18px] leading-[1.8]"
                 >
                   Kontaktne informacije
                 </a>

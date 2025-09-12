@@ -28,7 +28,7 @@ const ObituaryCard = ({
   selectedRegion,
 }) => {
   const formattedBirthDate = new Date(data.birthDate).getFullYear();
-  const formattedDeathDate = new Date(data.deathDate).getFullYear();
+  const formattedDeathDate = format(new Date(data.deathDate), "dd.MM.yyyy");
 
   const age = calculateAge(data.birthDate, data.deathDate);
 

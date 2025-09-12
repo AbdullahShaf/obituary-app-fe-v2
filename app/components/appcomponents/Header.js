@@ -1,11 +1,26 @@
+'use client'
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import iconMenu from "@/public/icon_menu_black.png";
 import omr from "@/public/omr.png";
 import Link from "next/link";
 //test
 function Header({ onMenuCLick, from, isMegaMenuVisible }) {
   const [showCloseButton, setShowCloseButton] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <header className="flex flex-col fixed top-[45px] left-0 right-0 shadow-md z-50 pt-[1px] bg-[#FFFFFF]">
       <div className=" flex w-full justify-center">
@@ -13,11 +28,10 @@ function Header({ onMenuCLick, from, isMegaMenuVisible }) {
           className={`
         desktop:h-[92.02px] mobile:h-[72px] tablet:h-[79px]
         w-full  desktop:w-[1200px]
-        desktop:pl-[23px] ${
-          isMegaMenuVisible && from === "1"
-            ? "tablet:max-w-[700px] tablet:w-full mobile:max-w-[400px] mobile:w-full"
-            : ""
-        } desktop:pr-[27px] tablet:pl-[23px]  tablet:pr-[27px] mobile:px-[24px]
+        desktop:pl-[23px] ${isMegaMenuVisible && from === "1"
+              ? "tablet:max-w-[700px] tablet:w-full mobile:max-w-[400px] mobile:w-full"
+              : ""
+            } desktop:pr-[27px] tablet:pl-[23px]  tablet:pr-[27px] mobile:px-[24px]
         `}
         >
           <div className="mobile:h-[72px] tablet:h-[79px] desktop:h-[92.02px] w-full desktop:w-[1150px] flex justify-between items-center ">
@@ -34,8 +48,10 @@ function Header({ onMenuCLick, from, isMegaMenuVisible }) {
             <button
               className=" rounded-full hover:bg-gray-100 active:bg-gray-200  transition duration-200 ease-in-out  transform-gpu active:scale-95"
               onClick={() => {
-                setShowCloseButton(!showCloseButton);
-                onMenuCLick();
+                if (windowWidth <= 600) {
+                  setShowCloseButton(!showCloseButton);
+                  onMenuCLick();
+                }
               }}
             >
               {showCloseButton === false && (

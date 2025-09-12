@@ -7,7 +7,7 @@ import Link from "next/link";
 //test
 function Header({ onMenuCLick, from, isMegaMenuVisible }) {
   const [showCloseButton, setShowCloseButton] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(()=> typeof window !== "undefined" ? window.innerWidth : 0);
 
   useEffect(() => {
     const handleResize = () => {

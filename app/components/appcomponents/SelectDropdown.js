@@ -89,11 +89,9 @@ export const SelectDropdown = ({
     onSelect({ place: selectedOption.value });
   };
   const customFilter = (candidate, input) => {
-    // Convert both candidate (option) and input to lowercase for case-insensitive comparison
     const lowerCaseInput = input.toLowerCase();
     const lowerCaseLabel = candidate.label.toLowerCase();
 
-    // Check if the label starts with the input string
     return lowerCaseLabel.startsWith(lowerCaseInput);
   };
   return (

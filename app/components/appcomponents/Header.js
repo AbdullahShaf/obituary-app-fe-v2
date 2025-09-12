@@ -1,5 +1,6 @@
+'use client'
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import iconMenu from "@/public/icon_menu_black.png";
 import omr from "@/public/omr.png";
 import Link from "next/link";
@@ -7,6 +8,20 @@ import SideMenu from "../ui/sideMenu";
 //test
 function Header({ onMenuCLick, from, isMegaMenuVisible }) {
   const [showCloseButton, setShowCloseButton] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(()=> typeof window !== "undefined" ? window.innerWidth : 0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <header className="flex flex-col fixed top-[45px] left-0 right-0 shadow-md z-50 pt-[1px] bg-[#FFFFFF]">
       <div className=" flex w-full justify-center">
@@ -34,8 +49,10 @@ function Header({ onMenuCLick, from, isMegaMenuVisible }) {
             <button
               className=" hidden tablet:block desktop:block rounded-full hover:bg-gray-100 active:bg-gray-200  transition duration-200 ease-in-out  transform-gpu active:scale-95"
               onClick={() => {
-                setShowCloseButton(!showCloseButton);
-                onMenuCLick();
+                if (windowWidth <= 600) {
+                  setShowCloseButton(!showCloseButton);
+                  onMenuCLick();
+                }
               }}
             >
               {showCloseButton === false && (

@@ -354,16 +354,16 @@ export default function AccountSettings() {
         <div className="grid grid-cols-2 tabletUserAcc:grid-cols-3 mobileUserAcc:grid-cols-3 gap-4 text-[#6D778E] mt-[60px] text-[14px]">
           <div className="flex items-center gap-[12px] tabletUserAcc:col-span-2 mobileUserAcc:col-span-2">
             <span className="uppercase">stran na osmrtnica.com:</span>
-            <Link
+            {/* <Link
               href={`/funeralcompany/${data?.CompanyPage?.id}`}
               className="text-[#3C3E41]"
             >
               {`/funeralcompany/${data?.CompanyPage?.id}`}
-            </Link>
+            </Link> */}
           </div>
           <div className="flex items-center gap-[12px]">
             <span className="uppercase">izdelana:</span>
-            <span className="text-[#3C3E41]">
+            {/* <span className="text-[#3C3E41]">
               {(() => {
                 const date = new Date(data?.CompanyPage?.createdTimestamp);
                 const day = String(date.getDate()).padStart(2, "0");
@@ -371,7 +371,7 @@ export default function AccountSettings() {
                 const year = date.getFullYear();
                 return `${day}.${month}.${year}`;
               })()}
-            </span>
+            </span> */}
           </div>
         </div>
       </div>

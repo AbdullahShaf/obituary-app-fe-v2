@@ -85,10 +85,17 @@ export const SelectDropdown = ({
     }),
   };
 
-  const handleChange = (selectedOption) => {    
+  const handleChange = (selectedOption) => {
     onSelect({ place: selectedOption.value });
   };
+  const customFilter = (candidate, input) => {
+    // Convert both candidate (option) and input to lowercase for case-insensitive comparison
+    const lowerCaseInput = input.toLowerCase();
+    const lowerCaseLabel = candidate.label.toLowerCase();
 
+    // Check if the label starts with the input string
+    return lowerCaseLabel.startsWith(lowerCaseInput);
+  };
   return (
     <div className={`dropdown ${getContainerClass()}`}>
       <Select
@@ -98,10 +105,11 @@ export const SelectDropdown = ({
         onChange={handleChange}
         placeholder={label}
         styles={customStyles}
-        isSearchable={true} 
+        isSearchable={true}
         components={{
           IndicatorSeparator: () => null, // This is to remove the verivcal line
         }}
+        filterOption={customFilter}
       />
     </div>
   );

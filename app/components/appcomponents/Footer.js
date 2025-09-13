@@ -320,17 +320,17 @@ export default function Footer() {
                           Politika zasebnosti
                         </a>
                       </li>
-                      <li className="flex h-[24px] items-center mt-4">
+                      {/* <li className="flex h-[24px] items-center mt-4">
                         <a
                           href="#"
                           className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[16px]"
                         >
                           Politika varovanja osebnih podatkov
                         </a>
-                      </li>
+                      </li> */}
                       <li className="flex h-[24px] items-center mt-4">
                         <a
-                          href="#"
+                          href="/piskotki"
                           className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[16px]"
                         >
                           Piškotki
@@ -386,17 +386,17 @@ export default function Footer() {
                     </div>
                   </div>
                   <div className="flex justify-between items-center mt-2">
-                    <div className="flex items-center h-6 ">
+                    {/* <div className="flex items-center h-6 ">
                       <a
                         href="#"
                         className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
                       >
                         Politika varovanja osebnih podatkov
                       </a>
-                    </div>
+                    </div> */}
                     <div className="flex items-center h-6 ">
                       <a
-                        href="#"
+                        href="/piskotki"
                         className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
                       >
                         Piškotki
@@ -429,17 +429,17 @@ export default function Footer() {
                       Politika zasebnosti
                     </a>
                   </div>
-                  <div className="flex items-center h-6 ">
+                  {/* <div className="flex items-center h-6 ">
                     <a
                       href="#"
                       className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
                     >
                       Politika varovanja osebnih podatkov
                     </a>
-                  </div>
+                  </div> */}
                   <div className="flex items-center h-6 ">
                     <a
-                      href="#"
+                      href="/piskotki"
                       className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
                     >
                       Piškotki
@@ -574,7 +574,7 @@ export function TermsAndCond() {
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full"></div>
           <Link href="/politika-zasebnosti" className="text-[#DAEBF1] ">Politika zasebnosti</Link>
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full"></div>
-          <Link href="/" className="text-[#DAEBF1] ">Piškotki</Link>
+          <Link href="/piskotki" className="text-[#DAEBF1] ">Piškotki</Link>
         </div>
       </div>
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] mx-auto bg-[#D4D4D4] h-[1px] mt-[18px] mobile:hidden"></div>

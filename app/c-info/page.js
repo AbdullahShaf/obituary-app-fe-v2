@@ -115,11 +115,7 @@ export default function Faq1() {
               <br />
               20€ na mesec - občine z nad 20.000 prebivalcev
               <br />
-              30€ na mesec v Ljubljani -&nbsp;
-              <span className="text-[14px]">
-                (op. vse tukaj navedene cene so brez vključenega DDV in brez
-                upoštevanja popustov)
-              </span>
+              30€ na mesec v Ljubljani
               <br />
               <br />
               <span className="text-[14px]">

@@ -80,7 +80,7 @@ export default function Tablet() {
             </div>
             <div>
                 <p className="font-medium text-[16px] leading-[27px] tracking-[0]">Spremembe politike</p>
-                <p className="font-light text-[16px] leading-[27px] tracking-[0]">o politiko lahko občasno posodobimo. Datum zadnje posodobitve je vedno naveden na vrhu strani.</p>
+                <p className="font-light text-[16px] leading-[27px] tracking-[0]">To politiko lahko občasno posodobimo. Datum zadnje posodobitve je vedno naveden na vrhu strani.</p>
             </div>
         </div>
     );

@@ -103,7 +103,7 @@ export default function Mobile() {
             </div>
             <div>
                 <p className="font-medium text-[14px] leading-[21px] tracking-[0]">Spremembe politike</p>
-                <p className="font-light text-[14px] leading-[21px] tracking-[0]">o politiko lahko občasno posodobimo. Datum zadnje posodobitve je vedno naveden na vrhu strani.</p>
+                <p className="font-light text-[14px] leading-[21px] tracking-[0]">To politiko lahko občasno posodobimo. Datum zadnje posodobitve je vedno naveden na vrhu strani.</p>
             </div>
 
         </div>

@@ -75,7 +75,7 @@ export default function Desktop() {
 
             <div>
                 <p className="font-medium text-[16px] leading-[27px] tracking-[0]">Kontakt</p>
-                <p className="font-light text-[16px] leading-[27px] tracking-[0]">Splatna stran: osmrtnica.com</p>
+                <p className="font-light text-[16px] leading-[27px] tracking-[0]">Spletna stran: osmrtnica.com</p>
                 <p className="font-light text-[16px] leading-[27px] tracking-[0] mb-6">E-naslov: info@osmrtnica.com</p>
             </div>
             <div>

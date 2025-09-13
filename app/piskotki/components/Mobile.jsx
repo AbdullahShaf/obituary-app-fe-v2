@@ -92,7 +92,7 @@ export default function Mobile() {
                     <li>ugovora,</li>
                     <li>pritožbe pri nadzornem organu za varstvo osebnih podatkov.</li>
                 </ul>
-                <p className="font-light text-[14px] leading-[21px] tracking-[0] mb-6">Za uveljavljanje pravic nas lahko kontaktirate preko spodaj navedenih podatkov.,</p>
+                <p className="font-light text-[14px] leading-[21px] tracking-[0] mb-6">Za uveljavljanje pravic nas lahko kontaktirate preko spodaj navedenih podatkov.</p>
             </div>
 
 

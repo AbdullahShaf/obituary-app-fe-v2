@@ -45,35 +45,6 @@ function Header({ onMenuCLick, from, isMegaMenuVisible }) {
                 className="box-border h-[22px] w-[182.76px] desktop:w-[255.31px] desktop:h-[32px]"
               />
             </Link>
-            {/* <Link href={"/loginpage"}> */}
-            <button
-              className=" hidden tablet:block desktop:block rounded-full hover:bg-gray-100 active:bg-gray-200  transition duration-200 ease-in-out  transform-gpu active:scale-95"
-              onClick={() => {
-                if (windowWidth <= 600) {
-                  setShowCloseButton(!showCloseButton);
-                  onMenuCLick();
-                }
-              }}
-            >
-              {showCloseButton === false && (
-                <Image
-                  src={iconMenu}
-                  className="
-              h-5 w-6 tablet:h-8 tablet:w-8 desktop:h-8 desktop:w-8 
-              "
-                />
-              )}
-
-              {showCloseButton === true && (
-                <Image
-                  src={"/cancle_icon.png"}
-                  className=""
-                  width={40}
-                  height={40}
-                />
-              )}
-            </button>
-            {/* </Link> */}
             <SideMenu />
           </div>
         </div>

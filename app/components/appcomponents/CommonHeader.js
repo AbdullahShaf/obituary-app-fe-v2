@@ -159,7 +159,7 @@ function CommonHeader({ currentPage }) {
         )}
 
         <div className="flex w-full justify-between">
-          <div className="flex w-full h-[68px] tablet:w-[744px] mx-auto tablet:h-[80px] px-5 tablet:px-6 desktop:w-[1200px] desktop:h-[92.02px] desktop:px-[12px]">
+          <div className="flex w-full h-[68px] mx-auto tablet:h-[80px] px-5 tablet:px-6 desktop:w-[1200px] desktop:h-[92.02px] desktop:px-[12px]">
             <div className="flex justify-between items-center w-full h-full">
               {/* Logo */}
               <Link href="/" className="flex">

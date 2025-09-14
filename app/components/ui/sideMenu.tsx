@@ -15,7 +15,6 @@ const roboto = Roboto_Flex({
 
 export default function SideMenu() {
   const [isOpen, setIsOpen] = useState(false);
-  const [showSubmenu, setShowSubmenu] = useState(true);
 
   const pathName = usePathname();
 
@@ -97,48 +96,7 @@ export default function SideMenu() {
             Pogrebna podjetja
           </a>
 
-          <div>
-            <button
-              onClick={() => setShowSubmenu(!showSubmenu)}
-              className="w-full flex items-center justify-between px-4 py-2 text-[18px] leading-[1.8] hover:text-indigo-300"
-            >
-              <h2>Ostale strani</h2>
-              {showSubmenu ? <FiChevronUp /> : <FiChevronDown />}
-            </button>
-
-            {showSubmenu && (
-              <div
-                className="mt-2 space-y-2 py-2"
-                style={{ backgroundColor: "#05202f" }}
-              >
-                <a
-                  href="https://osmrtnica.com/zalna-stran"
-                  className="block hover:text-indigo-300 ml-6 text-[18px] leading-[1.8]"
-                >
-                  Žalna stran
-                </a>
-                <a
-                  href="https://dev111.osmrtnica.com/spominska"
-                  className="block hover:text-indigo-300 ml-6 text-[18px] leading-[1.8]"
-                >
-                  Spominska stran
-                </a>
-                <a
-                  href="https://osmrtnica.com/splosni-pogoji"
-                  className="block hover:text-indigo-300 ml-6 text-[18px] leading-[1.8]"
-                >
-                  Splošni pogoji in drobni tisk
-                </a>
-                <a
-                  href="https://osmrtnica.com/"
-                  className="block hover:text-indigo-300 ml-6 text-[18px] leading-[1.8]"
-                >
-                  Kontaktne informacije
-                </a>
-              </div>
-            )}
-          </div>
-
+          <div className="h-0.5 bg-transparent mx-4" />
           <a
             href="https://osmrtnica.com/registracija"
             className="block border-white/20 hover:text-indigo-300 ml-4 text-[18px] leading-[1.8]"

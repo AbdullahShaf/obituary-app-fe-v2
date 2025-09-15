@@ -64,9 +64,6 @@ const Carousel = () => {
         setObituaries([]);
       }
     };
-    if(!selectedCity){
-      return;
-    }
     fetchFunerals();
   }, [currentDate, selectedCity, selectedRegion]);
 

@@ -10,7 +10,7 @@ import Image from "next/image";
 import { toast } from "react-hot-toast";
 import obituaryService from "@/services/obituary-service";
 import regionsAndCities from "@/utils/regionAndCities";
-import {SelectDropdown} from "./SelectDropdown";
+import { SelectDropdown } from "./SelectDropdown";
 
 const ObituaryListComponent = ({ city }) => {
   const router = useRouter();
@@ -21,7 +21,8 @@ const ObituaryListComponent = ({ city }) => {
   const [selectedRegion, setSelectedRegion] = useState(searchParams.get('region') || null);
   const [searchTerm, setSearchTerm] = useState('');
   const [obituaries, setObituaries] = useState([]);
-
+  const defaultCities = Object.values(regionsAndCities).flat().sort((a, b) => a.localeCompare(b, "sl"));
+  const [allCities, setAllCities] = useState(defaultCities)
   // Dropdown options
   const allRegionsOption = {
     place: "- Pokaži vse regije -",
@@ -42,10 +43,14 @@ const ObituaryListComponent = ({ city }) => {
     })),
   ];
 
-  // City options - show all cities from all regions (independent of region selection)
-  const allCities = Object.values(regionsAndCities)
-    .flat()
-    .sort((a, b) => a.localeCompare(b, "sl")); // Sort alphabetically
+  useEffect(() => {
+    if (!selectedRegion) {
+      return setAllCities(defaultCities);
+    }
+    const filteredCities = Object.values(regionsAndCities[selectedRegion])
+      .sort((a, b) => a.localeCompare(b, "sl"));
+    setAllCities(filteredCities)
+  }, [selectedRegion])
 
   const cityOptions = [
     allCitiesOption,

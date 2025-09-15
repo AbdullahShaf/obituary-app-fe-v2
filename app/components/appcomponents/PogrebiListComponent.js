@@ -10,7 +10,7 @@ import Image from "next/image";
 import { toast } from "react-hot-toast";
 import obituaryService from "@/services/obituary-service";
 import regionsAndCities from "@/utils/regionAndCities";
-import {SelectDropdown} from "./SelectDropdown";
+import { SelectDropdown } from "./SelectDropdown";
 
 const ObituaryListComponent = ({ city }) => {
   const router = useRouter();
@@ -43,9 +43,8 @@ const ObituaryListComponent = ({ city }) => {
   ];
 
   // City options - show all cities from all regions (independent of region selection)
-  const allCities = Object.values(regionsAndCities)
-    .flat()
-    .sort((a, b) => a.localeCompare(b, "sl")); // Sort alphabetically
+  const allCities = selectedRegion ? Object.values(regionsAndCities[selectedRegion])
+    .sort((a, b) => a.localeCompare(b, "sl")) : []; // Sort alphabetically
 
   const cityOptions = [
     allCitiesOption,
@@ -191,6 +190,7 @@ const ObituaryListComponent = ({ city }) => {
 
             {/* City Dropdown */}
             <SelectDropdown
+              isDisabled={selectedRegion ? false : true}
               data={cityOptions}
               label={"Občina"}
               isFromNotification={false}
@@ -225,6 +225,7 @@ const ObituaryListComponent = ({ city }) => {
 
             {/* City Dropdown */}
             <SelectDropdown
+              isDisabled={selectedRegion ? false : true}
               data={cityOptions}
               label={"Mesto"}
               isFromNotification={false}
@@ -282,6 +283,7 @@ const ObituaryListComponent = ({ city }) => {
 
             {/* City Dropdown */}
             <SelectDropdown
+              isDisabled={selectedRegion ? false : true}
               data={cityOptions}
               label={"Mesto"}
               isFromNotification={false}

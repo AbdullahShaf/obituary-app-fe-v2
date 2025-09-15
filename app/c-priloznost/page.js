@@ -155,17 +155,22 @@ export default function Faq1() {
               </ul>
 
               <p className="font-light text-[16px] mt-12">
-                <span className="underline underline-offset-2 text-stone-800 font-bold">DODATNO</span>, ne glede na čas pridružitve:
+                <span className="underline underline-offset-2 text-stone-800 font-bold">DODATNO</span>, ne glede na čas pridružitve - <span className="underline underline-offset-2 text-stone-800 font-bold">prva pridružena cvetličarna </span> v posamezni občini:
               </p>
 
               <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
                 <li className="pl-4">
-                  Prva pridružena cvetličarna v posamezni občini prejme brezplačno še <span className="text-[#0A85C2] font-bold">šest mesecev </span>
-                  <span className="text-[#0A85C2] font-bold pl-5">brezplačnega oglaševanja</span> na notranjih straneh v svoji občini. In druga tri mesece.
+                  prejme brezplačno še <span className="text-[#0A85C2] font-bold">šest mesecev brezplačnega oglaševanja</span> na notranjih straneh v svoji 
+                  <p className="pl-5">občini. In druga pridružena prejme tri mesece brezplačno!</p>
+                </li>
+                <li className="pl-5">
+                  <span className="text-[#0A85C2] font-bold">Še ena dodatna občina</span> brezplačno do konca leta <span className="text-[#0A85C2] font-bold">!!!</span> <span className="text-[#6D778E] mt-1 text-[14px] font-light">(kjer se vaša cvetličarna pojavlja med </span>
+                  <span className="text-[#6D778E] font-light mt-1 text-[14px] pl-5">lokalnimi v drugem kraju)</span>
                 </li>
               </ul>
 
-              <p className="mt-6">Splača se biti med prvimi.</p>
+              <p className="mt-6 mb-5">Splača se biti med prvimi.</p>
+              <p  className="text-[#6D778E] font-light mt-1 text-[14px]">(in da ponovimo - odstop od letne naročnine je možen kadarkoli, brez navedbe razloga in neizkoriščeni meseci bodo povrnjeni nazaj). To je BREZ RIZIKA! </p>
             </div>
           </section>
 
@@ -359,17 +364,25 @@ export default function Faq1() {
               </ul>
 
                <p className="font-light text-[16px] mt-12">
-                <span className="underline underline-offset-2 text-stone-800 font-bold">DODATNO</span>, ne glede na čas pridružitve:
+                <span className="underline underline-offset-2 text-stone-800 font-bold">DODATNO</span>, ne glede na čas pridružitve - <span className="underline underline-offset-2 text-stone-800 font-bold">prva pridružena cvetličarna </span> v posamezni občini:
               </p>
 
               <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
                 <li className="pl-4">
-                  Prva pridružena cvetličarna v posamezni <span className="pl-5">občini prejme brezplačno še </span><span className="text-[#0A85C2] font-bold">šest mesecev </span>
-                  <span className="text-[#0A85C2] font-bold pl-5">brezplačnega oglaševanja</span> na notranjih <span className="pl-5">straneh v svoji občini. In druga tri mesece.</span>
+prejme brezplačno še <span  className="text-[#0A85C2] font-bold">šest mesecev <br/><span className="pl-5">brezplačnega oglaševanja </span></span>na notranjih <span className="pl-5">straneh v svoji občini. In druga pridružena</span> <span className="pl-5">prejme tri mesece brezplačno!</span>
+
+                  {/* Prva pridružena cvetličarna v posamezni <span className="pl-5">občini prejme brezplačno še </span><span className="text-[#0A85C2] font-bold">šest mesecev </span>
+                  <span className="text-[#0A85C2] font-bold pl-5">brezplačnega oglaševanja</span> na notranjih <span className="pl-5">straneh v svoji občini. In druga tri mesece.</span> */}
+                </li>
+                <li className="pl-5">
+                  <span className="text-[#0A85C2] font-bold">Še ena dodatna občina</span> brezplačno do <span className="pl-5">konca leta </span><span className="text-[#0A85C2] font-bold">!!!</span> <span className="text-[#6D778E] mt-1 text-[14px] font-light">(kjer se vaša cvetličarna </span><br/>
+                  <span className="text-[#6D778E] font-light mt-1 text-[14px] pl-5"> pojavlja med lokalnimi v drugem kraju)</span>
                 </li>
               </ul>
 
-              <p className="mt-6 mb-10">Splača se biti med prvimi.</p>
+              <p className="mt-6 mb-6">Splača se biti med prvimi.</p>
+                            <p  className="text-[#6D778E] font-light mt-1 text-[14px] mb-10">(in da ponovimo - odstop od letne naročnine je možen kadarkoli, brez navedbe razloga in neizkoriščeni meseci bodo povrnjeni nazaj). To je BREZ RIZIKA! </p>
+
             </div>
           </section>
 

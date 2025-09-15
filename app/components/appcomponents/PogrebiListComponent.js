@@ -21,7 +21,8 @@ const ObituaryListComponent = ({ city }) => {
   const [selectedRegion, setSelectedRegion] = useState(searchParams.get('region') || null);
   const [searchTerm, setSearchTerm] = useState('');
   const [obituaries, setObituaries] = useState([]);
-
+  const defaultCities = Object.values(regionsAndCities).flat().sort((a, b) => a.localeCompare(b, "sl"));
+  const [allCities, setAllCities] = useState(defaultCities)
   // Dropdown options
   const allRegionsOption = {
     place: "- Pokaži vse regije -",
@@ -42,9 +43,14 @@ const ObituaryListComponent = ({ city }) => {
     })),
   ];
 
-  // City options - show all cities from all regions (independent of region selection)
-  const allCities = selectedRegion ? Object.values(regionsAndCities[selectedRegion])
-    .sort((a, b) => a.localeCompare(b, "sl")) : []; // Sort alphabetically
+  useEffect(() => {
+    if (!selectedRegion) {
+      return setAllCities(defaultCities);
+    }
+    const filteredCities = Object.values(regionsAndCities[selectedRegion])
+      .sort((a, b) => a.localeCompare(b, "sl"));
+    setAllCities(filteredCities)
+  }, [selectedRegion])
 
   const cityOptions = [
     allCitiesOption,
@@ -190,7 +196,6 @@ const ObituaryListComponent = ({ city }) => {
 
             {/* City Dropdown */}
             <SelectDropdown
-              isDisabled={selectedRegion ? false : true}
               data={cityOptions}
               label={"Občina"}
               isFromNotification={false}
@@ -225,7 +230,6 @@ const ObituaryListComponent = ({ city }) => {
 
             {/* City Dropdown */}
             <SelectDropdown
-              isDisabled={selectedRegion ? false : true}
               data={cityOptions}
               label={"Mesto"}
               isFromNotification={false}
@@ -283,7 +287,6 @@ const ObituaryListComponent = ({ city }) => {
 
             {/* City Dropdown */}
             <SelectDropdown
-              isDisabled={selectedRegion ? false : true}
               data={cityOptions}
               label={"Mesto"}
               isFromNotification={false}

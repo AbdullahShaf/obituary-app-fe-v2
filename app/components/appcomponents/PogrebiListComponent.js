@@ -44,7 +44,7 @@ const ObituaryListComponent = ({ city }) => {
   ];
 
   useEffect(() => {
-    if (!selectedRegion) {
+    if (!selectedRegion || selectedRegion === "- Pokaži vse regije -") {
       return setAllCities(defaultCities);
     }
     const filteredCities = Object.values(regionsAndCities[selectedRegion])
@@ -62,17 +62,25 @@ const ObituaryListComponent = ({ city }) => {
 
   // Update URL with query parameters
   const updateURL = (city, region, search) => {
-    const params = new URLSearchParams();
-    console.log({ city, region, search });
-
-    if (city && (city !== "allCities" || city !== "- Pokaži vse občine -")) params.set('city', city);
-    if (region && (region !== "allRegions" || region !== "- Pokaži vse regije -")) params.set('region', region);
-    if (search) params.set('search', search);
-
+    const params = new URLSearchParams(window.location.search);
+    if (city && city !== "allCities" && city !== "- Pokaži vse občine -") {
+      params.set("city", city);
+    } else {
+      params.delete("city");
+    }
+    if (region && region !== "allRegions" && region !== "- Pokaži vse regije -") {
+      params.set("region", region);
+    } else {
+      params.delete("region");
+    }
+    if (search) {
+      params.set("search", search);
+    } else {
+      params.delete("search");
+    }
     const queryString = params.toString();
     const newURL = queryString ? `?${queryString}` : window.location.pathname;
-
-    router.push(newURL, { shallow: true });
+    router.replace(newURL, { scroll: false });
   };
 
   // Handle region selection

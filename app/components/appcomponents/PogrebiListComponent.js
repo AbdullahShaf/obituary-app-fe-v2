@@ -17,7 +17,7 @@ const ObituaryListComponent = ({ city }) => {
   const searchParams = useSearchParams();
 
   // Initialize state from URL params
-  const [selectedCity, setSelectedCity] = useState(searchParams.get('city') || city || "Ljubljana");
+  const [selectedCity, setSelectedCity] = useState(searchParams.get('city') || city || "Celje");
   const [selectedRegion, setSelectedRegion] = useState(searchParams.get('region') || null);
   const [searchTerm, setSearchTerm] = useState('');
   const [obituaries, setObituaries] = useState([]);
@@ -123,7 +123,7 @@ const ObituaryListComponent = ({ city }) => {
   // Set default city in URL if none is specified
   useEffect(() => {
     if (!searchParams.get('city') && !city) {
-      updateURL("Ljubljana", selectedRegion, searchTerm);
+      updateURL("Celje", selectedRegion, searchTerm);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

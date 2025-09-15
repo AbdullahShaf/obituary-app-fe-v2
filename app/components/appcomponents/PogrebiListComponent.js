@@ -10,18 +10,19 @@ import Image from "next/image";
 import { toast } from "react-hot-toast";
 import obituaryService from "@/services/obituary-service";
 import regionsAndCities from "@/utils/regionAndCities";
-import {SelectDropdown} from "./SelectDropdown";
+import { SelectDropdown } from "./SelectDropdown";
 
 const ObituaryListComponent = ({ city }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   // Initialize state from URL params
-  const [selectedCity, setSelectedCity] = useState(searchParams.get('city') || city || "Ljubljana");
+  const [selectedCity, setSelectedCity] = useState(searchParams.get('city') || city || "Celje");
   const [selectedRegion, setSelectedRegion] = useState(searchParams.get('region') || null);
   const [searchTerm, setSearchTerm] = useState('');
   const [obituaries, setObituaries] = useState([]);
-
+  const defaultCities = Object.values(regionsAndCities).flat().sort((a, b) => a.localeCompare(b, "sl"));
+  const [allCities, setAllCities] = useState(defaultCities)
   // Dropdown options
   const allRegionsOption = {
     place: "- Pokaži vse regije -",
@@ -42,10 +43,14 @@ const ObituaryListComponent = ({ city }) => {
     })),
   ];
 
-  // City options - show all cities from all regions (independent of region selection)
-  const allCities = Object.values(regionsAndCities)
-    .flat()
-    .sort((a, b) => a.localeCompare(b, "sl")); // Sort alphabetically
+  useEffect(() => {
+    if (!selectedRegion || selectedRegion === "- Pokaži vse regije -") {
+      return setAllCities(defaultCities);
+    }
+    const filteredCities = Object.values(regionsAndCities[selectedRegion])
+      .sort((a, b) => a.localeCompare(b, "sl"));
+    setAllCities(filteredCities)
+  }, [selectedRegion])
 
   const cityOptions = [
     allCitiesOption,
@@ -57,32 +62,47 @@ const ObituaryListComponent = ({ city }) => {
 
   // Update URL with query parameters
   const updateURL = (city, region, search) => {
-    const params = new URLSearchParams();
-
-    if (city && city !== "allCities") params.set('city', city);
-    if (region && region !== "allRegions") params.set('region', region);
-    if (search) params.set('search', search);
-
+    const params = new URLSearchParams(window.location.search);
+    if (city && city !== "allCities" && city !== "- Pokaži vse občine -") {
+      params.set("city", city);
+    } else {
+      params.delete("city");
+    }
+    if (!city) {
+      setSelectedCity('');
+      params.delete("city");
+    }
+    if (region && region !== "allRegions" && region !== "- Pokaži vse regije -") {
+      params.set("region", region);
+    } else {
+      params.delete("region");
+    }
+    if (search) {
+      params.set("search", search);
+    } else {
+      params.delete("search");
+    }
     const queryString = params.toString();
     const newURL = queryString ? `?${queryString}` : window.location.pathname;
-
-    router.push(newURL, { shallow: true });
+    router.replace(newURL, { scroll: false });
   };
 
   // Handle region selection
   const handleRegionSelect = (item) => {
-    if (item.id === "allRegions") {
+    if (item.id === "allRegions" || item.place === "- Pokaži vse regije -") {
       setSelectedRegion(null);
-      updateURL(selectedCity, null, searchTerm); // Keep selected city
+      updateURL('', null, searchTerm); // selectedCity
     } else {
       setSelectedRegion(item.place);
-      updateURL(selectedCity, item.place, searchTerm); // Keep selected city
+      updateURL('', item.place, searchTerm); // selectedCity
     }
   };
 
   // Handle city selection
   const handleCitySelect = (item) => {
-    if (item.id === "allCities") {
+    console.log("sssss", item);
+
+    if (item.id === "allCities" || item.place === "- Pokaži vse občine -") {
       setSelectedCity(null);
       updateURL(null, selectedRegion, searchTerm);
     } else {
@@ -117,11 +137,11 @@ const ObituaryListComponent = ({ city }) => {
 
   // Set default city in URL if none is specified
   useEffect(() => {
-    if (!searchParams.get('city') && !city) {
-      updateURL("Ljubljana", selectedRegion, searchTerm);
+    if (!searchParams.get('city') && !city && !selectedRegion) {
+      updateURL("Celje", selectedRegion, searchTerm);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectedRegion]);
 
   // Fetch obituaries when filters change
   useEffect(() => {

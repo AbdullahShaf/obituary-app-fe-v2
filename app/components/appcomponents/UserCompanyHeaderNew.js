@@ -40,7 +40,7 @@ function UserCompanyHeaderNew({
       <header className="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 ">
         <div className=" flex w-full justify-center">
           {/* 17 October 2024 */}
-          <div className="flex w-full h-[68px] tablet:w-[744px] mobile:w-[360px] mobile:px-0 mx-auto tablet:h-[80px] px-4 tablet:px-6 desktop:w-[1200px] desktop:h-[92.02px] desktop:px-[18px]">
+          <div className="flex w-full h-[68px] tablet:w-[744px] mobile:px-5 mx-auto tablet:h-[80px] px-4 tablet:px-6 desktop:w-[1200px] desktop:h-[92.02px] desktop:px-[18px]">
             <div className="flex items-center gap-3 justify-between w-full mx-5">
               <Link href="/" className="flex">
                 <Image

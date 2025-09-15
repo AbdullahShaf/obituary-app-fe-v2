@@ -273,17 +273,17 @@ export default function LoginFooter() {
                   </div>
                 </div>
                 <div className="flex justify-between items-center mt-2">
-                  <div className="flex items-center h-6 ">
+                  {/* <div className="flex items-center h-6 ">
                     <a
                       href="#"
                       className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
                     >
                       Politika varovanja osebnih podatkov
                     </a>
-                  </div>
+                  </div> */}
                   <div className="flex items-center h-6 ">
                     <a
-                      href="#"
+                      href="/piskotki"
                       className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
                     >
                       Piškotki
@@ -316,17 +316,17 @@ export default function LoginFooter() {
                     Politika zasebnosti
                   </a>
                 </div>
-                <div className="flex items-center h-6 ">
+                {/* <div className="flex items-center h-6 ">
                   <a
                     href="#"
                     className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
                   >
                     Politika varovanja osebnih podatkov
                   </a>
-                </div>
+                </div> */}
                 <div className="flex items-center h-6 ">
                   <a
-                    href="#"
+                    href="/piskotki"
                     className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
                   >
                     Piškotki
@@ -350,9 +350,9 @@ export default function LoginFooter() {
               <div>Splošni pogoji poslovanja</div>
 
               <div>Politika zasebnosti</div>
-              <div>
+              {/* <div>
                 Politika varovanja osebnih podatkov
-              </div>
+              </div> */}
               <div>
                 Piškotki
               </div>

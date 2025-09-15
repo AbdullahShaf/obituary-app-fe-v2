@@ -41,7 +41,7 @@ const Floristspromo = () => {
             <div className="flex flex-col w-full mt-[10px]">
               <div className="text-[32px] mobile:text-[24px] text-[#3C3E41] font-light text-center leading-[48px]">
                 Uradna otvoritev je
-                <br /> 5. septembra
+                <br /> 15. septembra
               </div>
               <div className="my-6 text-[18px] hidden mobile:block mobile:text-[18px] text-[#3C3E41] font-bold font-variation-customOpt24 text-center leading-[32px]">
                 Izdelajte svojo spletno stran še pravočasno

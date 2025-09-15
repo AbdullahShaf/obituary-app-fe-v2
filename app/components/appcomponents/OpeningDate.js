@@ -33,7 +33,7 @@ const OpeningDate = () => {
               <div className="flex  h-[174px] flex-col justify-between">
                 <div className="flex flex-col w-full h-[102px]">
                   <div className="text-[32px] text-[#3C3E41] font-variation-customOpt40 text-center mt-[-5px]">
-                    Uradna otvoritev je 5. septembra
+                    Uradna otvoritev je 15. septembra
                   </div>
                   <div className="text-[18px] text-[#3C3E41] font-bold mt-[3px] font-variation-customOpt24 text-center">
                     Izdelajte svojo spletno stran še pravočasno
@@ -59,7 +59,7 @@ const OpeningDate = () => {
             <div className="flex w-[478px] h-[174px] flex-col justify-between">
               <div className="flex flex-col w-full h-[102px]">
                 <div className="text-[32px] text-[#3C3E41] font-variation-customOpt40 text-left mt-[-5px]">
-                  Uradna otvoritev je 5. septembra
+                  Uradna otvoritev je 15. septembra
                 </div>
                 <div className="text-[18px] text-[#3C3E41] font-bold mt-[5px] font-variation-customOpt24 text-left">
                   Izdelajte svojo spletno stran še pravočasno
@@ -80,7 +80,7 @@ const OpeningDate = () => {
             <div className="flex  h-[195px] flex-col justify-between">
               <div className="flex flex-col w-full h-[102px]">
                 <div className="text-[24px] text-[#3C3E41] font-variation-customOpt28 text-center mt-[-5px] leading-[48px]">
-                  Uradna otvoritev je 5. septembra
+                  Uradna otvoritev je 15. septembra
                 </div>
                 <div className="text-[16px] text-[#3C3E41] font-bold mt-[2px] font-variation-customOpt20wght400 text-center leading-[48px]">
                   Izdelajte svojo spletno stran še pravočasno

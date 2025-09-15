@@ -50,7 +50,7 @@ const TopBar = ({
 
   return (
     <div className="flex w-full h-[45px] flex-col items-center justify-between bg-[#414141] ">
-      <div className=" w-full desktop:w-[1200px] mobile:px-[24px] my-auto flex flex-row justify-between">
+      <div className=" w-full desktop:w-[1200px] mobile:px-[20px] my-auto flex flex-row justify-between">
         <div className=" w-full z-0  flex  flex-row items-center mobile:justify-between ">
           <div className="flex desktop:pl-[23px] tablet:pl-[23px] flex-row items-center">
             {/* 24 October 2024 /keeperpromo */}

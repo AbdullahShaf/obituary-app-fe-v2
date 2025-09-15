@@ -15,6 +15,7 @@ import {
   LocalQuickReviewModal,
 } from "@/app/components/appcomponents/LocalQuickReview";
 import SideMenu from "../ui/sideMenu";
+import { shouldShowBack } from "@/utils/navigationUtils";
 const headerLinkSets = {
   "/osmrtnice": [
     { label: "Osmrtnice", path: "/osmrtnice", active: false },
@@ -62,12 +63,12 @@ const headerLinkSets = {
   "/splosni-pogoji": [
     { label: "Splošni pogoji", path: "/splosni-pogoji", active: false },
     { label: "Politika zasebnosti", path: "/politika-zasebnosti", active: false },
-    { label: "Piškotki", path: "#", active: false },
+    { label: "Piškotki", path: "/piskotki", active: false },
   ],
   "/politika-zasebnosti": [
     { label: "Splošni pogoji", path: "/splosni-pogoji", active: false },
     { label: "Politika zasebnosti", path: "/politika-zasebnosti", active: false },
-    { label: "Piškotki", path: "#", active: false },
+    { label: "Piškotki", path: "/piskotki", active: false },
   ],
 };
 
@@ -88,6 +89,8 @@ function CommonHeader({ currentPage }) {
   // User state
   const [user, setUser] = useState(null);
   const [isUserLoaded, setIsUserLoaded] = useState(false);
+
+  const canShowBack = shouldShowBack(pathname)
 
   // Check user authentication on component mount
   useEffect(() => {
@@ -156,7 +159,7 @@ function CommonHeader({ currentPage }) {
         )}
 
         <div className="flex w-full justify-between">
-          <div className="flex w-full h-[68px] tablet:w-[744px] mobile:w-[360px] mx-auto tablet:h-[80px] px-0 tablet:px-6 desktop:w-[1200px] desktop:h-[92.02px] desktop:px-[12px]">
+          <div className="flex w-full h-[68px] tablet:w-[744px] mx-auto tablet:h-[80px] px-5 tablet:px-6 desktop:w-[1200px] desktop:h-[92.02px] desktop:px-[12px]">
             <div className="flex justify-between items-center w-full h-full">
               {/* Logo */}
               <Link href="/" className="flex">
@@ -211,17 +214,20 @@ function CommonHeader({ currentPage }) {
                 </button> */}
 
                 {/* Back Button */}
-                <button
-                  onClick={() => router.back()}
-                  className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200 "
-                  title="Nazaj"
-                >
-                  <Image
-                    src={backIcon}
-                    alt="Back"
-                    className="h-8 w-8 mobile:h-7 mobile:w-7"
-                  />
-                </button>
+                {canShowBack && (
+                  <button
+                    onClick={() => router.back()}
+                    className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200 "
+                    title="Nazaj"
+                  >
+                    <Image
+                      src="/back.svg"
+                      alt="Back"
+                      height={28}
+                      width={28}
+                    />
+                  </button>
+                )}
                 <SideMenu />
               </div>
             </div>

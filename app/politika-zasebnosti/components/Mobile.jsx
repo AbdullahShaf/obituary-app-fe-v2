@@ -6,7 +6,7 @@ import React from "react";
 const linksToRender = [
     { label: "Splošni pogoji", path: "/splosni-pogoji", active: false },
     { label: "Politika zasebnosti", path: "/politika-zasebnosti", active: false },
-    { label: "Piškotki", path: "/", active: false }
+    { label: "Piškotki", path: "/piskotki", active: false }
 ];
 
 export const Mobile = () => {

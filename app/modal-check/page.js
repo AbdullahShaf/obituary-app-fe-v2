@@ -26,13 +26,17 @@ const MemoryPage = ({ params }) => {
   const [isShowModal4, setIsShowModal4] = useState(false);
   const [isShowModal5, setIsShowModal5] = useState(false);
   const [isShowModal6, setIsShowModal6] = useState(false);
-  const [isShowModal7, setIsShowModal7] = useState(false);
-  const [isShowModal8, setIsShowModal8] = useState(false);
   const [memoryPopupOpen, setMemoryPopupOpen] = useState(false);
   const [infoPopupOpen, setInfoPopupOpen] = useState(false);
 
-  console.log("isShowModal7", isShowModal7);
-  console.log("isShowModal8", isShowModal8);
+  const [isPopUP1, setIsPopUP1] = useState(false);
+  const [isPopUP2, setIsPopUP2] = useState(false);
+  const [isPopUP3, setIsPopUP3] = useState(false);
+  const [isPopUP4, setIsPopUP4] = useState(false);
+  const [isPopUP5, setIsPopUP5] = useState(false);
+  const [isPopUP6, setIsPopUP6] = useState(false);
+  const [isPopUP7, setIsPopUP7] = useState(false);
+  const [isPopUP8, setIsPopUP8] = useState(false);
   return (
     <Layout
       from={"3"}
@@ -40,45 +44,59 @@ const MemoryPage = ({ params }) => {
       forFooter={"memorypage"}
     >
       <div className="bg-white w-full min-h-screen flex items-center justify-center px-4">
-        <Modal
-          onClose={() => setIsShowModal1(false)}
-          open={isShowModal1}
-          index={1}
+        {/* Modals */}
+        <ModalNew
+          isShowModal={isShowModal1}
+          setIsShowModal={setIsShowModal1}
+          select_id={select_id}
+          set_Id={setSelect_Id}
         />
-        <Modal
-          onClose={() => setIsShowModal2(false)}
-          open={isShowModal2}
-          index={2}
+
+        <ModalNew2
+          isShowModal={isShowModal2}
+          setIsShowModal={setIsShowModal2}
+          select_id={select_id}
+          set_Id={setSelect_Id}
         />
-        <Modal
-          onClose={() => setIsShowModal3(false)}
-          open={isShowModal3}
-          index={3}
+
+        <ModalNew3
+          isShowModal={isShowModal3}
+          setIsShowModal={setIsShowModal3}
+          select_id={select_id}
+          set_Id={setSelect_Id}
         />
-        <Modal
-          onClose={() => setIsShowModal4(false)}
-          open={isShowModal4}
-          index={4}
+
+        <ModalNew4
+          isShowModal={isShowModal4}
+          setIsShowModal={setIsShowModal4}
+          select_id={select_id}
+          set_Id={setSelect_Id}
         />
-        <Modal
-          onClose={() => setIsShowModal5(false)}
-          open={isShowModal5}
-          index={5}
+
+        <ModalNew5
+          isShowModal={isShowModal5}
+          setIsShowModal={setIsShowModal5}
+          select_id={select_id}
+          set_Id={setSelect_Id}
         />
-        <Modal
-          onClose={() => setIsShowModal6(false)}
-          open={isShowModal6}
-          index={6}
+        <ModalNew6
+          isShowModal={isShowModal6}
+          setIsShowModal={setIsShowModal6}
+          select_id={select_id}
+          set_Id={setSelect_Id}
         />
-        <Modal
-          onClose={() => setIsShowModal7(false)}
-          open={isShowModal7}
-          index={7}
+
+        <MemoryModal
+          isOpen={memoryPopupOpen}
+          onClose={() => setMemoryPopupOpen(false)}
         />
-        <Modal
-          onClose={() => setIsShowModal8(false)}
-          open={isShowModal8}
-          index={8}
+        <InfoModal
+          icon={"/giftbox.svg"}
+          heading={"Company's name"}
+          text={"ti podarja digitalno kartico"}
+          name={"Name Lastname"}
+          isOpen={infoPopupOpen}
+          onClose={() => setInfoPopupOpen(false)}
         />
 
         {/* Button Box */}
@@ -126,16 +144,86 @@ const MemoryPage = ({ params }) => {
               Modal 6
             </button>
             <button
-              onClick={() => setIsShowModal7(true)}
+              onClick={() => setMemoryPopupOpen(true)}
               className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
             >
               Modal 7
             </button>
             <button
-              onClick={() => setIsShowModal8(true)}
+              onClick={() => setInfoPopupOpen(true)}
               className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
             >
               Modal 8
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white w-full min-h-screen flex items-center justify-center px-4">
+        <Modal onClose={() => setIsPopUP1(false)} open={isPopUP1} index={1} />
+        <Modal onClose={() => setIsPopUP2(false)} open={isPopUP2} index={2} />
+        <Modal onClose={() => setIsPopUP3(false)} open={isPopUP3} index={3} />
+        <Modal onClose={() => setIsPopUP4(false)} open={isPopUP4} index={4} />
+        <Modal onClose={() => setIsPopUP5(false)} open={isPopUP5} index={5} />
+        <Modal onClose={() => setIsPopUP6(false)} open={isPopUP6} index={6} />
+        <Modal onClose={() => setIsPopUP7(false)} open={isPopUP7} index={7} />
+        <Modal onClose={() => setIsPopUP8(false)} open={isPopUP8} index={8} />
+
+        {/* Button Box */}
+        <div className="bg-zinc-400 shadow-md rounded-xl p-8 w-full max-w-md space-y-4 text-center">
+          <h1 className="text-2xl font-semibold text-gray-800">
+            Choose a Popup
+          </h1>
+
+          <div className="grid gap-4">
+            <button
+              onClick={() => setIsPopUP1(true)}
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+            >
+              Popup 1
+            </button>
+            <button
+              onClick={() => setIsPopUP2(true)}
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+            >
+              Popup 2
+            </button>
+            <button
+              onClick={() => setIsPopUP3(true)}
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+            >
+              Popup 3
+            </button>
+            <button
+              onClick={() => setIsPopUP4(true)}
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+            >
+              Popup 4
+            </button>
+
+            <button
+              onClick={() => setIsPopUP5(true)}
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+            >
+              Popup 5
+            </button>
+            <button
+              onClick={() => setIsPopUP6(true)}
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+            >
+              Popup 6
+            </button>
+            <button
+              onClick={() => setIsPopUP7(true)}
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+            >
+              Popup 7
+            </button>
+            <button
+              onClick={() => setIsPopUP8(true)}
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+            >
+              Popup 8
             </button>
           </div>
         </div>

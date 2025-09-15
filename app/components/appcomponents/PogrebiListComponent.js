@@ -180,7 +180,7 @@ const ObituaryListComponent = ({ city }) => {
             </div>
 
             {/* Region Dropdown */}
-            <SelectDropdown
+            <Dropdown
               label={"Regija"}
               isFromNotification={false}
               isFromFlower={false}
@@ -190,7 +190,7 @@ const ObituaryListComponent = ({ city }) => {
             />
 
             {/* City Dropdown */}
-            <SelectDropdown
+            <Dropdown
               data={cityOptions}
               label={"Občina"}
               isFromNotification={false}
@@ -214,7 +214,7 @@ const ObituaryListComponent = ({ city }) => {
           <div className="w-[600px] h-[112px] columns-2 flex flex-wrap flex-row gap-4 mt-[63px] mb-[53px]">
 
             {/* Region Dropdown */}
-            <SelectDropdown
+            <Dropdown
               label={"Regija"}
               isFromNotification={false}
               isFromFlower={false}
@@ -224,7 +224,7 @@ const ObituaryListComponent = ({ city }) => {
             />
 
             {/* City Dropdown */}
-            <SelectDropdown
+            <Dropdown
               data={cityOptions}
               label={"Mesto"}
               isFromNotification={false}
@@ -270,7 +270,7 @@ const ObituaryListComponent = ({ city }) => {
             </div>
 
             {/* Region Dropdown */}
-            <SelectDropdown
+            <Dropdown
               label={"Regija"}
               isFromNotification={false}
               isFromFlower={false}
@@ -281,7 +281,7 @@ const ObituaryListComponent = ({ city }) => {
             />
 
             {/* City Dropdown */}
-            <SelectDropdown
+            <Dropdown
               data={cityOptions}
               label={"Mesto"}
               isFromNotification={false}

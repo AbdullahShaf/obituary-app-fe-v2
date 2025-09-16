@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 import obituaryService from "@/services/obituary-service";
 import { useRouter } from "next/navigation";
+import Modal from "../ui/model";
 
 const MemorialPageTopComp = ({
   set_Id,
@@ -79,7 +80,7 @@ const MemorialPageTopComp = ({
   const truncateURL = (url, maxLength) => {
     return url.length > maxLength ? `${url.slice(0, maxLength)}...` : url;
   };
-const formatObituaryDate = (dateString) => {
+  const formatObituaryDate = (dateString) => {
     if (!dateString) return ""; // If date doesn't exist
 
     const date = new Date(dateString);
@@ -155,6 +156,13 @@ const formatObituaryDate = (dateString) => {
 
   //obituary text setting
   const [showFullObituaryText, setShowFullObituaryText] = useState(false);
+  const [isPopUP1, setIsPopUP1] = useState(false);
+  const [isPopUP2, setIsPopUP2] = useState(false);
+
+  const [isPopUP3, setIsPopUP3] = useState(false);
+  const [isPopUP4, setIsPopUP4] = useState(false);
+  const [isPopUP5, setIsPopUP5] = useState(false);
+  const [isPopUP6, setIsPopUP6] = useState(false);
 
   const toggleObituaryText = () => {
     setShowFullObituaryText((prev) => !prev);
@@ -628,11 +636,9 @@ const formatObituaryDate = (dateString) => {
                                     </p>
                                     <p className="text-[#414141] text-[14px] font-normal leading-[16.41px]">
                                       {(() => {
-                                        const formattedText = `${formatTitleCase(
+                                        const formattedText = `${
                                           data?.Cemetry?.name || "Pokopalisce"
-                                        )}, ${formatTitleCase(
-                                          data?.funeralLocation || ""
-                                        )}`;
+                                        }, ${data?.funeralLocation || ""}`;
 
                                         return formattedText.length > 50
                                           ? `${formattedText.slice(0, 50)}...`
@@ -676,15 +682,11 @@ const formatObituaryDate = (dateString) => {
                                     <p className="text-[#414141] text-[14px] font-normal leading-[16.41px]">
                                       {item.details.eventLocation
                                         ? item.details.eventLocation.length > 50
-                                          ? `${formatTitleCase(
-                                              item.details.eventLocation.slice(
-                                                0,
-                                                50
-                                              )
+                                          ? `${item.details.eventLocation.slice(
+                                              0,
+                                              50
                                             )}...`
-                                          : formatTitleCase(
-                                              item.details.eventLocation
-                                            )
+                                          : item.details.eventLocation
                                         : ""}
                                     </p>
                                   </div>
@@ -739,9 +741,9 @@ const formatObituaryDate = (dateString) => {
                     <div className="text-[20px] text-[#1E2125] font-variation-customOpt20 font-normal desktop:mt-[2px] ">
                       Prižgi svečko v spomin
                     </div>
-                    <div className="hidden  tablet:flex desktop:flex text-[12px] text-[#1E2125] font-normal mt-[10px]">
+                    {/* <div className="hidden  tablet:flex desktop:flex text-[12px] text-[#1E2125] font-normal mt-[10px]">
                       Skupno ta teden: {data?.currentWeekVisits}
-                    </div>
+                    </div> */}
                     {/* <div className="flex tablet:hidden desktop:hidden self-end text-[12px] text-[#1E2125] font-normal mt-[-10px] ">
                       Skupno ta teden: {data?.currentWeekVisits}
                     </div> */}
@@ -774,11 +776,11 @@ const formatObituaryDate = (dateString) => {
                           Skupno svečk: {data?.totalCandles}
                         </p>
                       </div>
-                      <div className="flex h-[29px] tablet:h-[40]  desktop:h-[40px]">
+                      {/* <div className="flex h-[29px] tablet:h-[40]  desktop:h-[40px]">
                         <p className="text-[#1E2125] text-[16px] font-variation-customOpt16 font-normal ">
                           Skupno obiskov: {data?.totalVisits}
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -914,24 +916,242 @@ const formatObituaryDate = (dateString) => {
                     />
                   </div>
                 </div> */}
+                
 
-                <div
-                  onClick={() => {
-                    // set_Id("error_report"), openCandleModal();
-                    router.push("/kontakt");
-                  }}
-                  className="flex cursor-pointer self-end mt-4 tablet:mt-6 desktop:mt-6 h-[15px] desktop:h-[16px] items-center desktop:pr-[20px]"
+
+            <div className="grid grid-cols-2 tabletUserAcc:grid-cols-1 mobileUserAcc:grid-cols-1 gap-4">
+              <div className="flex items-center gap-[20px]">
+                      <h4
+                className="text-[#2c7ba3] text-[20px] font-medium pb-2 flex items-center cursor-pointer hover:text-[#1d5a78] transition-colors"
+                style={{
+                  fontVariationSettings: "'wdth' 50,'opsz' 26",
+                }}
+                // onClick={() => setIsPrivilegijiExpanded(!isPrivilegijiExpanded)}
+              >
+                Privilegiji
+                <svg
+                  className={`ml-2 w-5 h-5 transition-transform ${true ? "rotate-180" : ""
+                    }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <Image
-                    src={"/flag.png"}
-                    alt="Slika"
-                    width={13}
-                    height={13}
-                    className=""
-                  />
-                  <p className="text-[12px] text-[#414141] font-variation-customOpt12 font-normal ml-[10px] ">
-                    Sporoči napake
-                  </p>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 9l-7 7-7-7"
+                  ></path>
+                </svg>
+              </h4>
+              <button
+                    onClick={() => setIsPopUP3(true)}
+                    className="text-[#EB1D1D] outline-none"
+                    title="Help"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 55 55"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g filter="url(#filter0_d_8894_2304)">
+                        <path
+                          d="M27.5 3.91667C38.2983 3.91667 47.0833 12.7018 47.0833 23.5C47.0833 34.2983 38.2983 43.0833 27.5 43.0833C16.7018 43.0833 7.91667 34.2983 7.91667 23.5C7.91667 12.7018 16.7018 3.91667 27.5 3.91667ZM27.5 0C14.5221 0 4 10.5221 4 23.5C4 36.4779 14.5221 47 27.5 47C40.4779 47 51 36.4779 51 23.5C51 10.5221 40.4779 0 27.5 0ZM29.9479 33.2917C29.9479 34.6429 28.8532 35.7396 27.5 35.7396C26.1507 35.7396 25.0521 34.6429 25.0521 33.2917C25.0521 31.9404 26.1507 30.8438 27.5 30.8438C28.8532 30.8438 29.9479 31.9404 29.9479 33.2917ZM32.6759 13.7122C31.4852 12.5059 29.709 11.842 27.6802 11.842C23.411 11.842 20.6497 14.8775 20.6497 19.5775H24.588C24.588 16.6674 26.2114 15.6353 27.5999 15.6353C28.8415 15.6353 30.1594 16.4598 30.271 18.0363C30.3925 19.695 29.5073 20.537 28.3871 21.6024C25.622 24.2324 25.571 25.5053 25.5828 28.3939H29.5093C29.4838 27.0935 29.568 26.038 31.3403 24.1286C32.6661 22.699 34.315 20.9209 34.3483 18.2105C34.3698 16.401 33.7921 14.8442 32.6759 13.7122Z"
+                          fill="#EB1D1D"
+                        />
+                      </g>
+                      <defs>
+                        <filter
+                          id="filter0_d_8894_2304"
+                          x="0"
+                          y="0"
+                          width="55"
+                          height="55"
+                          filterUnits="userSpaceOnUse"
+                          colorInterpolationFilters="sRGB"
+                        >
+                          <feFlood
+                            floodOpacity="0"
+                            result="BackgroundImageFix"
+                          />
+                          <feColorMatrix
+                            in="SourceAlpha"
+                            type="matrix"
+                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                            result="hardAlpha"
+                          />
+                          <feOffset dy="4" />
+                          <feGaussianBlur stdDeviation="2" />
+                          <feComposite in2="hardAlpha" operator="out" />
+                          <feColorMatrix
+                            type="matrix"
+                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                          />
+                          <feBlend
+                            mode="normal"
+                            in2="BackgroundImageFix"
+                            result="effect1_dropShadow_8894_2304"
+                          />
+                          <feBlend
+                            mode="normal"
+                            in="SourceGraphic"
+                            in2="effect1_dropShadow_8894_2304"
+                            result="shape"
+                          />
+                        </filter>
+                      </defs>
+                    </svg>
+                  </button>
+              </div>
+
+              <div className="flex items-center gap-[12px]">
+                <button
+                    onClick={() => setIsPopUP5(true)}
+                    className="text-[#EB1D1D] outline-none"
+                    title="Help"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 55 55"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g filter="url(#filter0_d_8894_2304)">
+                        <path
+                          d="M27.5 3.91667C38.2983 3.91667 47.0833 12.7018 47.0833 23.5C47.0833 34.2983 38.2983 43.0833 27.5 43.0833C16.7018 43.0833 7.91667 34.2983 7.91667 23.5C7.91667 12.7018 16.7018 3.91667 27.5 3.91667ZM27.5 0C14.5221 0 4 10.5221 4 23.5C4 36.4779 14.5221 47 27.5 47C40.4779 47 51 36.4779 51 23.5C51 10.5221 40.4779 0 27.5 0ZM29.9479 33.2917C29.9479 34.6429 28.8532 35.7396 27.5 35.7396C26.1507 35.7396 25.0521 34.6429 25.0521 33.2917C25.0521 31.9404 26.1507 30.8438 27.5 30.8438C28.8532 30.8438 29.9479 31.9404 29.9479 33.2917ZM32.6759 13.7122C31.4852 12.5059 29.709 11.842 27.6802 11.842C23.411 11.842 20.6497 14.8775 20.6497 19.5775H24.588C24.588 16.6674 26.2114 15.6353 27.5999 15.6353C28.8415 15.6353 30.1594 16.4598 30.271 18.0363C30.3925 19.695 29.5073 20.537 28.3871 21.6024C25.622 24.2324 25.571 25.5053 25.5828 28.3939H29.5093C29.4838 27.0935 29.568 26.038 31.3403 24.1286C32.6661 22.699 34.315 20.9209 34.3483 18.2105C34.3698 16.401 33.7921 14.8442 32.6759 13.7122Z"
+                          fill="#EB1D1D"
+                        />
+                      </g>
+                      <defs>
+                        <filter
+                          id="filter0_d_8894_2304"
+                          x="0"
+                          y="0"
+                          width="55"
+                          height="55"
+                          filterUnits="userSpaceOnUse"
+                          colorInterpolationFilters="sRGB"
+                        >
+                          <feFlood
+                            floodOpacity="0"
+                            result="BackgroundImageFix"
+                          />
+                          <feColorMatrix
+                            in="SourceAlpha"
+                            type="matrix"
+                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                            result="hardAlpha"
+                          />
+                          <feOffset dy="4" />
+                          <feGaussianBlur stdDeviation="2" />
+                          <feComposite in2="hardAlpha" operator="out" />
+                          <feColorMatrix
+                            type="matrix"
+                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                          />
+                          <feBlend
+                            mode="normal"
+                            in2="BackgroundImageFix"
+                            result="effect1_dropShadow_8894_2304"
+                          />
+                          <feBlend
+                            mode="normal"
+                            in="SourceGraphic"
+                            in2="effect1_dropShadow_8894_2304"
+                            result="shape"
+                          />
+                        </filter>
+                      </defs>
+                    </svg>
+                  </button>
+                  <p className="text-[#3C3E41] text-xs">Naronina kasneje in priloznost za prve</p>
+              </div>
+            </div>
+
+
+                <div className="flex items-end flex-col-reverse self-end mt-4 tablet:mt-6 desktop:pr-[20px] desktop:mt-6 gap-3 tablet:gap-4 desktop:gap-4">
+                  <button
+                    onClick={() => setIsPopUP1(true)}
+                    className="text-[#EB1D1D] text-xl outline-none"
+                    title="Help"
+                  >
+                    <svg
+                      width="55"
+                      height="55"
+                      viewBox="0 0 55 55"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g filter="url(#filter0_d_8894_2304)">
+                        <path
+                          d="M27.5 3.91667C38.2983 3.91667 47.0833 12.7018 47.0833 23.5C47.0833 34.2983 38.2983 43.0833 27.5 43.0833C16.7018 43.0833 7.91667 34.2983 7.91667 23.5C7.91667 12.7018 16.7018 3.91667 27.5 3.91667ZM27.5 0C14.5221 0 4 10.5221 4 23.5C4 36.4779 14.5221 47 27.5 47C40.4779 47 51 36.4779 51 23.5C51 10.5221 40.4779 0 27.5 0ZM29.9479 33.2917C29.9479 34.6429 28.8532 35.7396 27.5 35.7396C26.1507 35.7396 25.0521 34.6429 25.0521 33.2917C25.0521 31.9404 26.1507 30.8438 27.5 30.8438C28.8532 30.8438 29.9479 31.9404 29.9479 33.2917ZM32.6759 13.7122C31.4852 12.5059 29.709 11.842 27.6802 11.842C23.411 11.842 20.6497 14.8775 20.6497 19.5775H24.588C24.588 16.6674 26.2114 15.6353 27.5999 15.6353C28.8415 15.6353 30.1594 16.4598 30.271 18.0363C30.3925 19.695 29.5073 20.537 28.3871 21.6024C25.622 24.2324 25.571 25.5053 25.5828 28.3939H29.5093C29.4838 27.0935 29.568 26.038 31.3403 24.1286C32.6661 22.699 34.315 20.9209 34.3483 18.2105C34.3698 16.401 33.7921 14.8442 32.6759 13.7122Z"
+                          fill="#EB1D1D"
+                        />
+                      </g>
+                      <defs>
+                        <filter
+                          id="filter0_d_8894_2304"
+                          x="0"
+                          y="0"
+                          width="55"
+                          height="55"
+                          filterUnits="userSpaceOnUse"
+                          colorInterpolationFilters="sRGB"
+                        >
+                          <feFlood
+                            floodOpacity="0"
+                            result="BackgroundImageFix"
+                          />
+                          <feColorMatrix
+                            in="SourceAlpha"
+                            type="matrix"
+                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                            result="hardAlpha"
+                          />
+                          <feOffset dy="4" />
+                          <feGaussianBlur stdDeviation="2" />
+                          <feComposite in2="hardAlpha" operator="out" />
+                          <feColorMatrix
+                            type="matrix"
+                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                          />
+                          <feBlend
+                            mode="normal"
+                            in2="BackgroundImageFix"
+                            result="effect1_dropShadow_8894_2304"
+                          />
+                          <feBlend
+                            mode="normal"
+                            in="SourceGraphic"
+                            in2="effect1_dropShadow_8894_2304"
+                            result="shape"
+                          />
+                        </filter>
+                      </defs>
+                    </svg>
+                  </button>
+                  <div
+                    onClick={() => {
+                      // set_Id("error_report"), openCandleModal();
+                      router.push("/kontakt");
+                    }}
+                    className="flex cursor-pointer h-[15px] desktop:h-[16px] items-center"
+                  >
+                    <Image
+                      src={"/flag.png"}
+                      alt="Slika"
+                      width={13}
+                      height={13}
+                      className=""
+                    />
+                    <p className="text-[12px] text-[#414141] font-variation-customOpt12 font-normal ml-[10px] ">
+                      Sporoči napake
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1325,6 +1545,53 @@ const formatObituaryDate = (dateString) => {
           />
         </div>
       </div>
+
+      <Modal
+        index={1}
+        open={isPopUP1}
+        onClose={() => setIsPopUP1(false)}
+        onFooterClick={() => {
+          setIsPopUP1(false);
+          setIsPopUP2(true);
+        }}
+      />
+      <Modal
+        index={2}
+        open={isPopUP2}
+        onClose={() => setIsPopUP2(false)}
+        onFooterClick={() => {
+          router.push("/spominska");
+        }}
+      />
+
+      <Modal
+        index={3}
+        open={isPopUP3}
+        onClose={() => setIsPopUP3(false)}
+        onFooterClick={() => {
+          setIsPopUP3(false);
+          setIsPopUP4(true);
+        }}
+      />
+      <Modal
+        index={4}
+        open={isPopUP4}
+        onClose={() => setIsPopUP4(false)}
+      />
+      <Modal
+        index={5}
+        open={isPopUP5}
+        onClose={() => setIsPopUP5(false)}
+        onFooterClick={() => {
+          setIsPopUP5(false);
+          setIsPopUP6(true);
+        }}
+      />
+      <Modal
+        index={6}
+        open={isPopUP6}
+        onClose={() => setIsPopUP6(false)}
+      />
     </div>
   );
 };

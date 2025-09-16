@@ -1,8 +1,10 @@
+import Link from "next/link";
 import React from "react";
 type ModalIndex = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 interface ModalProps {
   open: boolean;
   onClose: () => void;
+  onFooterClick?: () => void;
   children?: React.ReactNode;
   index: ModalIndex;
 }
@@ -112,7 +114,7 @@ export const modelData: Record<
           </p>
           <p className="mt-2 tab:mt-0">
             Klikni &gt;&gt;&gt;{" "}
-            <span className="text-[#0A85C2]">DODAJ TRGOVINO</span>
+            <span>DODAJ CVETLIČARNO</span>
           </p>
           <p className="text-[#A6ABBD] text-[11px] tab:text-sm tab:text-right">
             (brez skrbi; lahko poskusiš testno in trgovino takoj nato izbrišeš)
@@ -184,9 +186,11 @@ export const modelData: Record<
               računu na transakcijski račun.
             </p>
           </div>
-          <div className="text-[#0A85C2]  text-base mt-8  ">
-            PRILOŽNOST ZA PRVE{" "}
-          </div>
+          <Link href="https://osmrtnica.com/c-priloznost">
+            <div className="text-[#0A85C2]  text-base mt-8  ">
+              PRILOŽNOST ZA PRVE{" "}
+            </div>
+          </Link>
         </div>
       </div>
     ),
@@ -297,9 +301,11 @@ export const modelData: Record<
             {" "}
             Preglejte ugodnosti za cvetličarne - splača se biti med prvimi.
           </p>
+          <Link href="https://osmrtnica.com/p-info">
           <p className="text-[#0A85C2]  text-base tab:mt-14 mt-20 text-right">
             več informacij{" "}
           </p>
+          </Link>
         </div>
       </div>
     ),
@@ -307,7 +313,13 @@ export const modelData: Record<
   },
 };
 
-const Modal: React.FC<ModalProps> = ({ open, onClose, index, children }) => {
+const Modal: React.FC<ModalProps> = ({
+  open,
+  onClose,
+  index,
+  onFooterClick,
+  children,
+}) => {
   if (!open) return null;
 
   return (
@@ -420,7 +432,12 @@ const Modal: React.FC<ModalProps> = ({ open, onClose, index, children }) => {
         </div>
         {/* Footer / Navigation */}
 
-        <div className="  tab:mx-[90px] mx-4 tab:mb-[45px] mb-5  flex items-center justify-between  text-gray-500">
+        <div
+          onClick={onFooterClick}
+          className={`tab:mx-[90px] mx-4 tab:mb-[45px] mb-5  flex items-center justify-between  text-gray-500 ${
+            onFooterClick ? "cursor-pointer" : ""
+          }`}
+        >
           {modelData[index]?.footer}
         </div>
       </div>

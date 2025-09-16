@@ -7,6 +7,7 @@ import packageService from "@/services/pacakge-service";
 import toast from "react-hot-toast";
 import CompanyPreview from "../components/company-preview";
 import { useSession } from "next-auth/react";
+import companyService from "@/services/company-service";
 
 export default function Step3({
   data,
@@ -41,14 +42,39 @@ export default function Step3({
     },
   ]);
   const [companyId, setCompanyId] = useState(null);
-const { data: session } = useSession();
+  const { data: session } = useSession();
   const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   useEffect(() => {
     if (data && data !== null) {
       setCompanyId(data.id);
 
-      if (data.packages && data.packages.length > 0) {
-        const updatedPackages = data.packages.map((item, index) => ({
+      // if (data.packages && data.packages.length > 0) {
+      //   const updatedPackages = data.packages.map((item, index) => ({
+      //     ...item,
+      //     index: index + 1,
+      //   }));
+      //   const paddedPackages = [...updatedPackages];
+
+      //   while (paddedPackages.length < 4) {
+      //     paddedPackages.push({
+      //       index: paddedPackages.length + 1,
+      //       title: "",
+      //       price: "",
+      //       image: null,
+      //     });
+      //   }
+
+      //   setPackages(paddedPackages);
+      // }
+    }
+  }, [data]);
+
+  // Refactor--------
+  const fetchPackages = async () => {
+    try {
+      const response = await companyService.companyAdditionalData({ companyId, table: "packages" });
+      if (response && response?.length > 0) {
+        const updatedPackages = response.map((item, index) => ({
           ...item,
           index: index + 1,
         }));
@@ -65,8 +91,20 @@ const { data: session } = useSession();
 
         setPackages(paddedPackages);
       }
+      console.log('response', response);
+    } catch (error) {
+      console.error('Failed to fetch packages data:', error);
     }
-  }, [data]);
+  }
+
+  useEffect(() => {
+    if (companyId) {
+      fetchPackages();
+    }
+  }, [companyId])
+  // ----------
+
+
   const addSliderBlock = () => {
     if (packages?.length >= 4) {
       toast.error("Dodate lahko največ 4 paketov");
@@ -87,6 +125,7 @@ const { data: session } = useSession();
     updatedPackages[index] = updatedPackage;
     setPackages(updatedPackages);
   };
+console.log("pakages",packages);
 
   const handleSubmit = async () => {
     try {
@@ -210,7 +249,7 @@ const { data: session } = useSession();
         <div className="space-y-[8px]">
           <div className="flex items-center gap-[8px] justify-between w-full">
             <button
-              // onClick={handleSubmit}
+              onClick={handleSubmit}
               className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
             >
               Shrani
@@ -218,18 +257,18 @@ const { data: session } = useSession();
             <div className="flex items-center gap-[8px]">
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                // onClick={() => handleStepChange(2)}
+                onClick={() => handleStepChange(2)}
               >
                 Nazaj
               </button>
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                // onClick={async () => {
-                //   const success = await handleSubmit();
-                //   if (success) {
-                //     handleStepChange(4);
-                //   }
-                // }}
+                onClick={async () => {
+                  const success = await handleSubmit();
+                  if (success) {
+                    handleStepChange(4);
+                  }
+                }}
               >
                 Naslednji korak
               </button>

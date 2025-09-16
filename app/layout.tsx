@@ -7,6 +7,7 @@ import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import { SessionProvider } from "next-auth/react";
 import Script from "next/script";
+import PlausibleProvider from 'next-plausible'
 import SideMenu from "./components/ui/sideMenu";
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -26,10 +27,6 @@ export default function RootLayout({
           src="https://cdn-cookieyes.com/client_data/4ea35c9889e0f2f54d3cfc92/script.js"
           strategy="afterInteractive"
         />
-        <Script
-          defer data-domain="osmrtnica.com"
-          src="https://plausible.io/js/script.js"
-        />
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400&display=swap"
           rel="stylesheet"
@@ -38,23 +35,25 @@ export default function RootLayout({
       <body
         className={`${robotoFlex.className} ${sourceSerif.variable} ${greatVibes.variable}`}
       >
-        <SessionProvider>
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              style: {
-                margin: "15px",
-                background: "#828282",
-                color: "#fff",
-                fontSize: "15px",
-                width: "340px",
-              },
-              className: "text-base",
-              duration: 3000,
-            }}
-          />
-          {children}
-        </SessionProvider>
+        <PlausibleProvider domain="osmrtnica.com">
+          <SessionProvider>
+            <Toaster
+              position="top-right"
+              toastOptions={{
+                style: {
+                  margin: "15px",
+                  background: "#828282",
+                  color: "#fff",
+                  fontSize: "15px",
+                  width: "340px",
+                },
+                className: "text-base",
+                duration: 3000,
+              }}
+            />
+            {children}
+          </SessionProvider>
+        </PlausibleProvider>
       </body>
     </html>
   );

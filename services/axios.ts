@@ -38,7 +38,7 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response.status === 401) {
-      toast.error("Token Expired Please Relogin!");
+      // toast.error("Token Expired Please Relogin!");
       // if (window.location.pathname !== "/registrationpage") {
       //   window.location.href = "/registrationpage";
       // }

@@ -9,6 +9,9 @@ import FuneralCompanyPreview from "../components/funeral-company-preview";
 import RichTexEditor from "@/app/components/form/rich-editor";
 import { useAuth } from "@/hooks/useAuth";
 import { useSession } from "next-auth/react";
+import { Loader } from "@/utils/Loader";
+import { useApi } from "@/hooks/useApi";
+import companyService from "@/services/company-service";
 
 const defaultFaqs = [
   {
@@ -34,14 +37,37 @@ const defaultFaqs = [
 ];
 
 export default function Step5({ data, onChange, handleStepChange }) {
-  const [faqs, setFaqs] = useState(() => {
-    return data?.faqs?.length > 0 ? data?.faqs : defaultFaqs;
-  });
+  const [faqs, setFaqs] = useState(defaultFaqs
+    // () => {
+    // return data?.faqs?.length > 0 ? data?.faqs : defaultFaqs;}
+  );
 
   const [companyId, setCompanyId] = useState(data?.id);
-const { data: session } = useSession();
+  const { data: session } = useSession();
+  const { isLoading, trigger: createFaq } = useApi(faqService.createFaq);
+
   const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const { user } = useAuth();
+
+ // Refactor--------
+  const fetchFaqs = async () => {
+    try {
+      const response = await companyService.companyAdditionalData({ companyId, table: "faqs" });
+       if (response && response.length > 0) {
+        setFaqs(response);
+      }
+      console.log('fetchFaqs', response);
+    } catch (error) {
+      console.error('Failed to fetch faqs data:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (companyId) {
+      fetchFaqs();
+    }
+  }, [companyId])
+  // ----------
 
   const handleFaqChange = (index, updatedFaq) => {
     const updatedFaqs = [...faqs];
@@ -100,7 +126,7 @@ const { data: session } = useSession();
         companyId,
         faqs: faqsToSend,
       };
-      const response = await faqService.createFaq(payload);
+      const response = await createFaq(payload);
       const updatedCompany = { ...data, faqs: response.faqs };
       onChange(updatedCompany);
       setFaqs(response.faqs);
@@ -146,6 +172,8 @@ const { data: session } = useSession();
 
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
         {companyAndCity}
       </div>
@@ -168,7 +196,7 @@ const { data: session } = useSession();
             {companyId && <FuneralCompanyPreview company={data} />}
           </div>
           <div className="space-y-[8px]">
-            {faqs.map((block, index) => (
+            {faqs?.map((block, index) => (
               <SliderBlock
                 key={`faq-${block.id || index + 1}`}
                 index={block.index || index + 1}
@@ -200,7 +228,7 @@ const { data: session } = useSession();
           <div className="flex items-center gap-[8px] justify-between w-full">
             <button
               type="button"
-              // onClick={handleSubmit}
+              onClick={handleSubmit}
               className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
             >
               Shrani
@@ -208,18 +236,18 @@ const { data: session } = useSession();
             <div className="flex items-center gap-[8px]">
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                // onClick={() => handleStepChange(4)}
+                onClick={() => handleStepChange(4)}
               >
                 Nazaj
               </button>
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                // onClick={async () => {
-                //   const success = await handleSubmit();
-                //   if (success) {
-                //     handleStepChange(6);
-                //   }
-                // }}
+                onClick={async () => {
+                  const success = await handleSubmit();
+                  if (success) {
+                    handleStepChange(6);
+                  }
+                }}
               >
                 Naslednji korak
               </button>

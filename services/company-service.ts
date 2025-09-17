@@ -103,10 +103,16 @@ const updateCompany = async (formData: FormData, id: String) => {
   return response.data;
 };
 
+const companyAdditionalData = async ({ companyId, table }: { companyId: number; table: string }) => {  
+  const endpoint = `/company/additional-data/${companyId}?table=${table}`;
+  const response = await axios.get(endpoint);
+  return response.data?.data;
+};
+
 const companyService = {
   createCompany,
   getFuneralCompany, getFuneralCompanyBySlug,
-  updateCompany,
+  updateCompany,companyAdditionalData,
   getFloristCompany,
   getCompleteCompany, getFloristCompanyBySlug,
   getCompanies,

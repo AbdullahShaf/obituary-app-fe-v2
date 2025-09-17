@@ -12,7 +12,13 @@ import { toast } from "react-hot-toast";
 import companyService from "@/services/company-service";
 import CompanyPreview from "../components/company-preview";
 import { useSession } from "next-auth/react";
-
+import { useApi } from "@/hooks/useApi";
+import { Loader } from "@/utils/Loader";
+import { RenderImage } from "@/utils/ImageViewerModal";
+const getNumberWord = (num) => {
+  const words = ["one", "two", "three"];
+  return words[num - 1] || "";
+};
 export default function Step4({
   data,
   onChange,
@@ -32,7 +38,9 @@ export default function Step4({
   const [showBackground, setShowBackground] = useState(
     data?.showBoxBackground || false
   );
-const { data: session } = useSession();
+  const { isLoading, trigger: update } = useApi(companyService.updateCompany);
+
+  const { data: session } = useSession();
   const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const addSliderBlock = () => {
     setBoxes([...boxes, { index: boxes.length + 1 }]);
@@ -77,7 +85,7 @@ const { data: session } = useSession();
         console.log(`${key}:`, value);
       }
       if (nonEmptyBoxes.length > 0) {
-        const response = await companyService.updateCompany(
+        const response = await update(
           formData,
           companyId
         );
@@ -91,7 +99,7 @@ const { data: session } = useSession();
       console.error("Error:", error);
       toast.error(
         error?.response?.data?.error ||
-          "Failed to update company. Please try again."
+        "Failed to update company. Please try again."
       );
       return false;
     }
@@ -112,10 +120,7 @@ const { data: session } = useSession();
   //   onChange(response.company);
   // };
 
-  const getNumberWord = (num) => {
-    const words = ["one", "two", "three"];
-    return words[num - 1] || "";
-  };
+
 
   useEffect(() => {
     if (data && data !== null) {
@@ -148,6 +153,8 @@ const { data: session } = useSession();
   };
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
         {companyAndCity}
       </div>
@@ -172,13 +179,14 @@ const { data: session } = useSession();
             )}
           </div>
           <div className="space-y-[8px]">
-            {boxes.map((block) => (
+            {boxes.map((block, i) => (
               <SliderBlock
                 key={block.index}
                 index={block.index}
                 title={`Okvir ${block.index}`}
                 box={block}
                 onChange={handleBoxChange}
+                savedIcon={data?.[`box_${getNumberWord(i + 1)}_icon`]}
               />
             ))}
             {boxes.length < 2 && (
@@ -217,6 +225,8 @@ const { data: session } = useSession();
                 inputId={"boxes-bg-image"}
                 disabled={true}
               />
+              <RenderImage src={data?.boxBackgroundImage} alt={"img"} label={""} />
+
               <div className="flex items-center justify-center gap-[22px] py-[9px]">
                 <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
                   Prikaži obstoječ dizajn
@@ -237,7 +247,7 @@ const { data: session } = useSession();
           <div className="flex items-center gap-[8px] justify-between w-full">
             <button
               type="button"
-              // onClick={handleSubmit}
+              onClick={handleSubmit}
               className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
             >
               Shrani
@@ -245,18 +255,18 @@ const { data: session } = useSession();
             <div className="flex items-center gap-[8px]">
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                // onClick={() => handleStepChange(3)}
+                onClick={() => handleStepChange(3)}
               >
                 Nazaj
               </button>
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                // onClick={async () => {
-                //   const success = await handleSubmit();
-                //   if (success) {
-                //     handleStepChange(5);
-                //   }
-                // }}
+                onClick={async () => {
+                  const success = await handleSubmit();
+                  if (success) {
+                    handleStepChange(5);
+                  }
+                }}
               >
                 Naslednji korak
               </button>
@@ -275,7 +285,7 @@ const { data: session } = useSession();
   );
 }
 
-function SliderBlock({ index, title, box, onChange }) {
+function SliderBlock({ index, title, box, onChange, savedIcon }) {
   const [isDefaultOpen, setIsDefaultOpen] = useState(index === 1);
   const handleChange = (e) => {
     onChange(index - 1, { ...box, [e.target.name]: e.target.value });
@@ -297,6 +307,8 @@ function SliderBlock({ index, title, box, onChange }) {
             Za prvo silo smo nekaj slik že dodali. Svoje prilepi čimprej.
           </div>
           <IconSelectorStep4 setBoxIcon={handleImageChange} />
+
+          <RenderImage src={savedIcon} alt={"img"} label={""} />
         </div>
         <div className="space-y-[8px]">
           <div className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">

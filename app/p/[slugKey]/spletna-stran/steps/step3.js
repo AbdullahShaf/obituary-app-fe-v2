@@ -12,6 +12,10 @@ import Link from "next/link";
 import FuneralCompanyPreview from "../components/funeral-company-preview";
 import { useAuth } from "@/hooks/useAuth";
 import { useSession } from "next-auth/react";
+import { useApi } from "@/hooks/useApi";
+import { Loader } from "@/utils/Loader";
+import companyService from "@/services/company-service";
+import { RenderImage } from "@/utils/ImageViewerModal";
 
 export default function Step3({ data, onChange, handleStepChange }) {
   const [cemetries, setCemetries] = useState([
@@ -24,21 +28,48 @@ export default function Step3({ data, onChange, handleStepChange }) {
   ]);
   const [companyId, setCompanyId] = useState(null);
   const { user } = useAuth();
-const { data: session } = useSession();
+  const { data: session } = useSession();
+  const { isLoading, trigger: createCemetry } = useApi(cemetryService.createCemetry);
+
   const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   useEffect(() => {
     if (data && data !== null) {
       setCompanyId(data.id);
 
-      if (data.cemeteries && data.cemeteries.length > 0) {
-        const updatedCemetries = data.cemeteries.map((cemetry, index) => ({
+      // if (data.cemeteries && data.cemeteries.length > 0) {
+      //   const updatedCemetries = data.cemeteries.map((cemetry, index) => ({
+      //     ...cemetry,
+      //     index: index + 1,
+      //   }));
+      //   setCemetries(updatedCemetries);
+      // }
+    }
+  }, [data]);
+
+  // Refactor--------
+  const fetchCemeteries = async () => {
+    try {
+      const response = await companyService.companyAdditionalData({ companyId, table: "cementry" });
+      if (response && response.length > 0) {
+        const updatedCemetries = response.map((cemetry, index) => ({
           ...cemetry,
           index: index + 1,
         }));
         setCemetries(updatedCemetries);
       }
+      console.log('response', response);
+    } catch (error) {
+      console.error('Failed to fetch packages data:', error);
     }
-  }, [data]);
+  }
+
+  useEffect(() => {
+    if (companyId) {
+      fetchCemeteries();
+    }
+  }, [companyId])
+  // ----------
+
   const addSliderBlock = () => {
     setCemetries([
       ...cemetries,
@@ -112,7 +143,7 @@ const { data: session } = useSession();
         console.log(`${pair[0]}:`, pair[1]);
       }
       if (nonEmptyCemeteries.length > 0) {
-        const response = await cemetryService.createCemetry(formData);
+        const response = await createCemetry(formData);
         const updateCompany = {
           ...data,
           cemeteries: response.cemeteries,
@@ -151,6 +182,8 @@ const { data: session } = useSession();
 
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
         {companyAndCity}
       </div>
@@ -214,7 +247,7 @@ const { data: session } = useSession();
           <div className="flex items-center gap-[8px] justify-between w-full">
             <button
               type="button"
-              // onClick={handleSubmit}
+              onClick={handleSubmit}
               className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
             >
               Shrani
@@ -222,18 +255,18 @@ const { data: session } = useSession();
             <div className="flex items-center gap-[8px]">
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                // onClick={() => handleStepChange(2)}
+                onClick={() => handleStepChange(2)}
               >
                 Nazaj
               </button>
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                // onClick={async () => {
-                //   const success = await handleSubmit();
-                //   if (success) {
-                //     handleStepChange(4);
-                //   }
-                // }}
+                onClick={async () => {
+                  const success = await handleSubmit();
+                  if (success) {
+                    handleStepChange(4);
+                  }
+                }}
               >
                 Naslednji korak
               </button>
@@ -257,6 +290,12 @@ const { data: session } = useSession();
 
 function SliderBlock({ index, title, cemetery, onChange, handleDelete }) {
   const [isDefaultOpen, setIsDefaultOpen] = useState(index === 1);
+  const [savedImage, setSavedImage] = useState("");
+  useEffect(()=>{
+    if(typeof cemetery?.image ==="string" && cemetery?.image){
+      setSavedImage(cemetery?.image)
+    }
+  },[cemetery])
   const handleChange = (e) => {
     onChange(index - 1, { ...cemetery, [e.target.name]: e.target.value });
   };
@@ -267,6 +306,7 @@ function SliderBlock({ index, title, cemetery, onChange, handleDelete }) {
       index={index}
       hasDeleteButton={index !== 1 && true}
       onDelete={() => handleDelete(cemetery)}
+      className=""
     >
       <div className="space-y-[16px]">
         <div className="space-y-[8px]">
@@ -291,6 +331,8 @@ function SliderBlock({ index, title, cemetery, onChange, handleDelete }) {
               onChange(index - 1, updated);
             }}
           />
+          <RenderImage src={savedImage} alt={"img"} label={""} />
+
         </div>
         <div className="space-y-[8px] pt-[22px]">
           <label className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">

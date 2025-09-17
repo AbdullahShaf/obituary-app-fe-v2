@@ -18,6 +18,9 @@ export default function SpletnaStran() {
   const [render, setRender] = useState(false);
 
   const handleStepChange = (step) => {
+    if (user) {
+      getCompany();
+    }
     setStep(step);
   };
 
@@ -43,8 +46,10 @@ export default function SpletnaStran() {
     }
   };
   const handleCompanyChange = (data) => {
-    setRender(!render);
-    setCompany(data);
+    getCompany();
+
+    // setRender(!render);
+    // setCompany(data);
   };
   const steps = [
     {

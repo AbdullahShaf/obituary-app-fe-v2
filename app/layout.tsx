@@ -7,6 +7,7 @@ import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import { SessionProvider } from "next-auth/react";
 import Script from "next/script";
+import PlausibleProvider from 'next-plausible'
 import SideMenu from "./components/ui/sideMenu";
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -34,23 +35,25 @@ export default function RootLayout({
       <body
         className={`${robotoFlex.className} ${sourceSerif.variable} ${greatVibes.variable}`}
       >
-        <SessionProvider>
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              style: {
-                margin: "15px",
-                background: "#828282",
-                color: "#fff",
-                fontSize: "15px",
-                width: "340px",
-              },
-              className: "text-base",
-              duration: 3000,
-            }}
-          />
-          {children}
-        </SessionProvider>
+        <PlausibleProvider domain="osmrtnica.com">
+          <SessionProvider>
+            <Toaster
+              position="top-right"
+              toastOptions={{
+                style: {
+                  margin: "15px",
+                  background: "#828282",
+                  color: "#fff",
+                  fontSize: "15px",
+                  width: "340px",
+                },
+                className: "text-base",
+                duration: 3000,
+              }}
+            />
+            {children}
+          </SessionProvider>
+        </PlausibleProvider>
       </body>
     </html>
   );

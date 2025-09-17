@@ -30,7 +30,7 @@ const OfficialOpening = () => {
           <div className="h-full w-full  flex flex-col justify-center items-center">
             <div className=" h-[174px] flex flex-col items-center mobile:items-end">
               <h1 className="text-[32px] text-center leading-[48px] font-variation-customOpt40 font-normal text-[#3C3E41]">
-                Uradna otvoritev je 5. septembra
+                Uradna otvoritev je 15. septembra
               </h1>
 
               <p className="text-[18px] leading-[48px] font-variation-customOpt24 font-bold text-[#3C3E41]">

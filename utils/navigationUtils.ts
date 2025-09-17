@@ -60,3 +60,7 @@ export const redirectToRoleBasedRoute = (role: string, slugKey: string, isDeskto
     }
   }
 }; 
+
+export const shouldShowBack = (pathName: string) => {
+  return pathName !== '/'
+}

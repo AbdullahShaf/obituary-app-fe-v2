@@ -53,7 +53,7 @@ const FuneralsCompanyBanner = ({ data }) => {
             <div>
               <img
                 key={`${data?.id}-logo`}
-                src={data?.logo || ""}
+                src={data?.company_logo || ""}
                 alt="App Logo"
                 // width={1000}
                 // height={1000}

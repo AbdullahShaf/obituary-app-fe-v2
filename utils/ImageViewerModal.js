@@ -48,7 +48,7 @@ export const RenderImage = ({ src, alt, label, className }) => {
         <img
           src={src}
           alt={alt}
-          className="max-w-full max-h-full rounded-lg shadow-lg"
+          className="max-w-full max-h-[10rem] rounded-lg shadow-lg"
         />
       </div>
     </>

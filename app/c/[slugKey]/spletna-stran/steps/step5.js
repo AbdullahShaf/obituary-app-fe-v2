@@ -9,10 +9,6 @@ import slideService from "@/services/slides-service";
 import toast from "react-hot-toast";
 import CompanyPreview from "../components/company-preview";
 import { useSession } from "next-auth/react";
-import companyService from "@/services/company-service";
-import { useApi } from "@/hooks/useApi";
-import { Loader } from "@/utils/Loader";
-import { RenderImage } from "@/utils/ImageViewerModal";
 
 export default function Step5({
   data,
@@ -30,9 +26,8 @@ export default function Step5({
     },
   ]);
   const [companyId, setCompanyId] = useState(null);
-  const { data: session } = useSession();
-  const { isLoading, trigger } = useApi(slideService.createSlide);
-
+  const [isLoading, setIsLoading] = useState(false);
+const { data: session } = useSession();
   const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const addSliderBlock = () => {
     setSlides([
@@ -108,7 +103,7 @@ export default function Step5({
       }
 
       if (nonEmptySlides.length > 0) {
-        const response = await trigger(formData);
+        const response = await slideService.createSlide(formData);
         const updatedCompany = { ...data, slides: response.slides };
         onChange(updatedCompany);
         toast.success("Florist Slides Updated Successfully");
@@ -121,46 +116,18 @@ export default function Step5({
   };
 
   useEffect(() => {
-    setCompanyId(data?.id);
+    setCompanyId(data.id);
 
-    // if (data.slides && data.slides.length > 0) {
-    //   const updatedSlides = data.slides.map((slide, index) => ({
-    //     ...slide,
-    //     index: index + 1,
-    //   }));
-    //   setSlides(updatedSlides);
-    // }
+    if (data.slides && data.slides.length > 0) {
+      const updatedSlides = data.slides.map((slide, index) => ({
+        ...slide,
+        index: index + 1,
+      }));
+      setSlides(updatedSlides);
+    }
   }, [data]);
-  console.log('sssssssssss');
-
-  // Refactor--------
-  const fetchSlides = async () => {
-    try {
-      const response = await companyService.companyAdditionalData({ companyId, table: "slides" });
-      if (response && response?.length > 0) {
-        const updatedSlides = response.map((slide, index) => ({
-          ...slide,
-          index: index + 1,
-        }));
-        setSlides(updatedSlides);
-      }
-      console.log('slidesresponse', response);
-    } catch (error) {
-      console.error('Failed to fetch slides data:', error);
-    }
-  }
-
-  useEffect(() => {
-    if (companyId) {
-
-      fetchSlides();
-    }
-  }, [companyId])
-  // --------------------
   return (
     <>
-      {isLoading && <Loader />}
-
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
         {companyAndCity}
       </div>
@@ -222,7 +189,7 @@ export default function Step5({
           <div className="flex items-center gap-[8px] justify-between w-full">
             <button
               type="button"
-              onClick={handleSubmit}
+              // onClick={handleSubmit}
               className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
             >
               Shrani
@@ -230,18 +197,18 @@ export default function Step5({
             <div className="flex items-center gap-[8px]">
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                onClick={() => handleStepChange(4)}
+                // onClick={() => handleStepChange(4)}
               >
                 Nazaj
               </button>
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                onClick={async () => {
-                  const success = await handleSubmit();
-                  if (success) {
-                    handleStepChange(6);
-                  }
-                }}
+                // onClick={async () => {
+                //   const success = await handleSubmit();
+                //   if (success) {
+                //     handleStepChange(6);
+                //   }
+                // }}
               >
                 Naslednji korak
               </button>
@@ -262,15 +229,10 @@ export default function Step5({
 
 function SliderBlock({ index, title, slide, onChange }) {
   const [isDefaultOpen, setIsDefaultOpen] = useState(index === 1);
-  const [savedImage, setSavedImage] = useState("");
   const handleChange = (e) => {
     onChange(index - 1, { ...slide, [e.target.name]: e.target.value });
   };
-  useEffect(() => {
-    if (typeof slide?.image === "string" && slide?.image) {
-      setSavedImage(slide?.image);
-    }
-  }, [slide])
+
   return (
     <OpenableBlock isDefaultOpen={isDefaultOpen} title={title} index={index}>
       <div className="space-y-[16px]">
@@ -285,7 +247,6 @@ function SliderBlock({ index, title, slide, onChange }) {
             }}
             inputId={`slide-${index}-upload`}
           />
-          <RenderImage src={savedImage} alt={"img"} label={""} />
         </div>
         <div className="space-y-[8px]">
           <label className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">

@@ -21,10 +21,10 @@ const CompanyPreview = ({ companyData, setIsRender }: Props) => {
   return (
     <>
       <button
-        onClick={() => {
-          setOpenModal(true);
-          setIsRender(true);
-        }}
+        // onClick={() => {
+        //   setOpenModal(true);
+        //   setIsRender(true);
+        // }}
       >
         <div className="inline-flex gap-[8px] cursor-pointer">
           <span className="text-[14px] text-[#3C3E41] leading-[24px]">

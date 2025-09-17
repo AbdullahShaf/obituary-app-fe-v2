@@ -10,9 +10,6 @@ import FuneralCompanyPreview from "../components/funeral-company-preview";
 import { useAuth } from "@/hooks/useAuth";
 import { useSession } from "next-auth/react";
 import InfoModal from "@/app/components/appcomponents/InfoModal";
-import { Loader } from "@/utils/Loader";
-import { useApi } from "@/hooks/useApi";
-import { ImageViewerModal, RenderImage } from "@/utils/ImageViewerModal";
 
 export default function Step1({ data, onChange, handleStepChange }) {
   const [openedBlock, setOpenedBlock] = useState(1);
@@ -29,9 +26,6 @@ export default function Step1({ data, onChange, handleStepChange }) {
 
   const { user } = useAuth();
   const { data: session } = useSession();
-  const { isLoading: isCreating, trigger: create } = useApi(companyService.createCompany);
-  const { isLoading: isUpdating, trigger: update } = useApi(companyService.updateCompany);
-
   const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`
   useEffect(() => {
     if (data && data !== null) {
@@ -94,7 +88,7 @@ export default function Step1({ data, onChange, handleStepChange }) {
           background instanceof File;
 
         if (hasChanges) {
-          response = await update(formData, companyId);
+          response = await companyService.updateCompany(formData, companyId);
           onChange(response.company);
           toast.success("Changes Applied Successfully");
         } else {
@@ -102,7 +96,7 @@ export default function Step1({ data, onChange, handleStepChange }) {
           return true;
         }
       } else {
-        response = await create(formData, "funeral");
+        response = await companyService.createCompany(formData, "funeral");
 
         toast.success("Company Created Successfully");
       }
@@ -121,8 +115,6 @@ export default function Step1({ data, onChange, handleStepChange }) {
 
   return (
     <>
-      {(isCreating || isUpdating) && <Loader />}
-
       <InfoModal
         icon={"/giftbox.svg"}
         heading={"V pripravi"}
@@ -161,7 +153,6 @@ export default function Step1({ data, onChange, handleStepChange }) {
               index={1}
               openBlock={openedBlock === 1}
               handleOpenBlock={() => setOpenedBlock(1)}
-              className=""
             >
               <div className="space-y-[8px]">
                 <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
@@ -172,7 +163,6 @@ export default function Step1({ data, onChange, handleStepChange }) {
                   setFile={(file) => setLogo(file)}
                   inputId="logo-upload"
                 />
-                <RenderImage src={data?.company_logo} alt={"img"} label={""} />
               </div>
               <div className="space-y-[8px]">
                 <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
@@ -218,8 +208,6 @@ export default function Step1({ data, onChange, handleStepChange }) {
                   setFile={(file) => setBackground(file)}
                   inputId="background-upload"
                 />
-                <RenderImage src={data?.background} alt={"img"} label={""} />
-
               </div>
             </OpenableBlock>
             <OpenableBlock
@@ -297,7 +285,7 @@ export default function Step1({ data, onChange, handleStepChange }) {
           )}
           <div className="flex items-center gap-[8px] justify-between w-full">
             <button
-              onClick={handleSubmit}
+              // onClick={handleSubmit}
               className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
             >
               Shrani
@@ -305,26 +293,26 @@ export default function Step1({ data, onChange, handleStepChange }) {
             <div className="flex items-center gap-[8px]">
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                onClick={() => {
-                  handleStepChange(1);
-                  setOpenedBlock(1);
-                }}
+              // onClick={() => {
+              //   handleStepChange(1);
+              //   setOpenedBlock(1);
+              // }}
               >
                 Nazaj
               </button>
               <button
                 className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                onClick={async () => {
-                  if (openedBlock === 1) {
-                    setOpenedBlock(2);
-                  } else {
-                    const success = await handleSubmit();
-                    console.log(success, "=============");
-                    if (success) {
-                      handleStepChange(2);
-                    }
-                  }
-                }}
+              // onClick={async () => {
+              //   if (openedBlock === 1) {
+              //     setOpenedBlock(2);
+              //   } else {
+              //     const success = await handleSubmit();
+              //     console.log(success, "=============");
+              //     if (success) {
+              //       handleStepChange(2);
+              //     }
+              //   }
+              // }}
               >
                 Naslednji korak
               </button>

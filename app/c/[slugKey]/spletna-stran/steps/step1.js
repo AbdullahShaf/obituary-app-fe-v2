@@ -11,9 +11,7 @@ import toast from "react-hot-toast";
 import CompanyPreview from "../components/company-preview";
 import { useSession } from "next-auth/react";
 import InfoModal from "@/app/components/appcomponents/InfoModal";
-import { useApi } from "@/hooks/useApi";
-import { Loader } from "@/utils/Loader";
-import { RenderImage } from "@/utils/ImageViewerModal";
+
 export default function Step1({
   data,
   onChange,
@@ -30,8 +28,6 @@ export default function Step1({
   const [glassFrameState, setGlassFrameState] = useState(false);
   const [user, setUser] = useState(null);
   const [showNotifyCard, setShowNotifyCard] = useState(true);
-  const { isLoading: isCreating, trigger: create } = useApi(companyService.createCompany);
-  const { isLoading: isUpdating, trigger: update } = useApi(companyService.updateCompany);
 
   const { data: session } = useSession();
   const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
@@ -75,14 +71,14 @@ export default function Step1({
           selectedImage instanceof File;
 
         if (hasChanges) {
-          response = await update(formData, companyId);
+          response = await companyService.updateCompany(formData, companyId);
 
           toast.success("Changes Applied Successfully");
         } else {
           return true;
         }
       } else {
-        response = await create(formData, "florist");
+        response = await companyService.createCompany(formData, "florist");
 
         toast.success("Podjetje je ustvarjeno");
       }
@@ -113,7 +109,6 @@ export default function Step1({
 
   return (
     <>
-      {(isCreating || isUpdating) && <Loader />}
       <InfoModal
         icon={"/giftbox.svg"}
         heading={"V pripravi"}
@@ -196,7 +191,6 @@ export default function Step1({
                 index={2}
                 openBlock={openedBlock === 2}
                 handleOpenBlock={() => setOpenedBlock(2)}
-                className=""
               >
                 <div className="space-y-[8px]">
                   <span className="text-[14px] text-[#3C3E41] font-normal leading-[24px]">
@@ -217,7 +211,6 @@ export default function Step1({
                     setFile={(file) => setSelectedImage(file)}
                     inputId="florist-company-picture"
                   />
-                  <RenderImage src={data?.background} alt={"img"} label={""} />
                 </div>
                 <div className="text-center text-[14px] leading-[24px] text-[#3C3E41] pt-[5px] pb-[10px]">
                   --------------
@@ -294,7 +287,7 @@ export default function Step1({
             <div className="flex items-center gap-[8px] justify-between w-full">
               <button
                 type="button"
-                onClick={handleSave}
+                // onClick={handleSave}
                 className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
               >
                 Shrani
@@ -303,19 +296,19 @@ export default function Step1({
                 <button
                   type="button"
                   className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                  onClick={() => handleStepChange(1)}
+                // onClick={() => handleStepChange(1)}
                 >
                   Nazaj
                 </button>
                 <button
                   type="button"
                   className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                  onClick={async () => {
-                    const success = await handleSave();
-                    if (success) {
-                      handleStepChange(2);
-                    }
-                  }}
+                // onClick={async () => {
+                //   const success = await handleSave();
+                //   if (success) {
+                //     handleStepChange(2);
+                //   }
+                // }}
                 >
                   Naslednji korak
                 </button>

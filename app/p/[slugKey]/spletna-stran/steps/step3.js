@@ -290,6 +290,12 @@ export default function Step3({ data, onChange, handleStepChange }) {
 
 function SliderBlock({ index, title, cemetery, onChange, handleDelete }) {
   const [isDefaultOpen, setIsDefaultOpen] = useState(index === 1);
+  const [savedImage, setSavedImage] = useState("");
+  useEffect(()=>{
+    if(typeof cemetery?.image ==="string" && cemetery?.image){
+      setSavedImage(cemetery?.image)
+    }
+  },[cemetery])
   const handleChange = (e) => {
     onChange(index - 1, { ...cemetery, [e.target.name]: e.target.value });
   };
@@ -325,7 +331,7 @@ function SliderBlock({ index, title, cemetery, onChange, handleDelete }) {
               onChange(index - 1, updated);
             }}
           />
-          <RenderImage src={cemetery?.image} alt={"img"} label={""} />
+          <RenderImage src={savedImage} alt={"img"} label={""} />
 
         </div>
         <div className="space-y-[8px] pt-[22px]">

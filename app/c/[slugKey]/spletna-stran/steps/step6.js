@@ -204,6 +204,11 @@ export default function Step6({
       fetchShops();
     }
   }, [companyId])
+
+  function handleSave(){
+    handleBCSubmit();
+    handleShopSubmit();
+  }
   // --------------------
 
   return (
@@ -374,7 +379,7 @@ export default function Step6({
               <div className="flex items-center gap-[8px]">
                 <button
                   type="button"
-                  onClick={handleShopSubmit}
+                  onClick={handleSave}
                   className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
                 >
                   Shrani
@@ -411,7 +416,7 @@ export default function Step6({
               <div className="flex items-center gap-[8px] justify-between w-full">
                 <button
                   type="button"
-                  onClick={handleBCSubmit}
+                  onClick={handleSave}
                   className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
                 >
                   Shrani

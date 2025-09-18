@@ -22,7 +22,7 @@ console.log('company',company);
   return (
     <>
       <button 
-      // onClick={() => setOpenModal(true)}
+      onClick={() => setOpenModal(true)}
       >
         <div className="inline-flex gap-[8px] cursor-pointer">
           <span className="text-[14px] text-[#3C3E41] leading-[24px]">

@@ -17,11 +17,15 @@ export default function SpletnaStran() {
   const [company, setCompany] = useState(null);
   const [isRender, setIsRender] = useState(false);
   const handleStepChange = (step) => {
+    if (user) {
+      getCompany();
+    }
     setStep(step);
     console.log(step);
   };
   const handleCompanyChange = (data) => {
-    setCompany(data);
+    getCompany();
+    // setCompany(data);
   };
   console.log('>>>>>>>>>>> company', company);
   useEffect(() => {
@@ -33,7 +37,7 @@ export default function SpletnaStran() {
 
   const getCompany = async () => {
     try {
-      const response = await companyService.getFloristCompany({ id: user.id });
+      const response = await companyService.getFloristCompany({ userId: user.id });
 
       if (response.company === null) {
         return;

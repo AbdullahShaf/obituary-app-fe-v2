@@ -12,7 +12,7 @@ export default function OpenableBlock({
   helpText = "",
   openBlock,
   handleOpenBlock,
-  onDelete,
+  onDelete,className = "max-h-[600px]"
 }) {
   const [isOpen, setIsOpen] = useState(isDefaultOpen);
 
@@ -93,7 +93,7 @@ export default function OpenableBlock({
         <div
           className={`${
             isOpen
-              ? "py-[16px] space-y-[8px] max-h-[600px]"
+              ? `py-[16px] space-y-[8px] ${className}`
               : "py-[0] space-y-[8px] max-h-[0px] overflow-hidden"
           } transition-all duration-300 px-[16px]`}
         >

@@ -10,6 +10,9 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import CompanyPreview from "../components/company-preview";
 import { useSession } from "next-auth/react";
+import { Loader } from "@/utils/Loader";
+import { useApi } from "@/hooks/useApi";
+import { RenderImage } from "@/utils/ImageViewerModal";
 
 export default function Step6({
   data,
@@ -38,6 +41,9 @@ export default function Step6({
   const [instagram, setInstagram] = useState("");
   const [facebook, setFacebook] = useState("");
   const { data: session } = useSession();
+  const { isLoading, trigger: updateCompany } = useApi(companyService.updateCompany);
+  const { isLoading: isShopCreating, trigger: createShop } = useApi(shopService.createShop);
+
   const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const addSliderBlock = () => {
     setShops([
@@ -76,7 +82,7 @@ export default function Step6({
       if (logo) formData.append("logo", logo);
       if (instagram) formData.append("instagram", instagram);
 
-      const response = await companyService.updateCompany(formData, companyId);
+      const response = await updateCompany(formData, companyId);
       onChange(response.company);
       toast.success("Podatki so shranjeni");
       router.refresh();
@@ -127,7 +133,7 @@ export default function Step6({
         allowStatus: send ?? ''
       };
       await handlePublish();
-      const response = await shopService.createShop(payload);
+      const response = await createShop(payload);
       // onChange({
       //   ...data,
       //   shops: response.shops,
@@ -149,7 +155,7 @@ export default function Step6({
       const formData = new FormData();
       formData.append("status", "DRAFT");
 
-      const response = await companyService.updateCompany(formData, companyId);
+      const response = await updateCompany(formData, companyId);
       onChange(response.company);
       console.log(response);
     } catch (error) {
@@ -166,18 +172,49 @@ export default function Step6({
     setInstagram(data.instagram);
     setLogo(data.logo);
 
-    if (data?.shops && data?.shops?.length > 0) {
-      console.log(data.shops, "===================");
-      const updatedShops = data.shops.map((shop, index) => ({
-        ...shop,
-        index: index + 1,
-      }));
-      setShops(updatedShops);
-    }
+    // if (data?.shops && data?.shops?.length > 0) {
+    //   console.log(data.shops, "===================");
+    //   const updatedShops = data.shops.map((shop, index) => ({
+    //     ...shop,
+    //     index: index + 1,
+    //   }));
+    //   setShops(updatedShops);
+    // }
   }, [data]);
+
+  // Refactor--------
+  const fetchShops = async () => {
+    try {
+      const response = await companyService.companyAdditionalData({ companyId, table: "shops" });
+      if (response && response?.length > 0) {
+        const updatedShops = response.map((shop, index) => ({
+          ...shop,
+          index: index + 1,
+        }));
+        setShops(updatedShops);
+      }
+    } catch (error) {
+      console.error('Failed to fetch shops data:', error);
+    }
+  }
+
+  useEffect(() => {
+
+    if (companyId) {
+      fetchShops();
+    }
+  }, [companyId])
+
+  function handleSave(){
+    handleBCSubmit();
+    handleShopSubmit();
+  }
+  // --------------------
 
   return (
     <>
+      {(isLoading || isShopCreating) && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
         {companyAndCity}
       </div>
@@ -234,6 +271,7 @@ export default function Step6({
                     setFile={(file) => setLogo(file)}
                     inputId="logo-upload"
                   />
+                  <RenderImage src={data?.logo} alt={"img"} label={""} />
                 </div>
                 <div className="space-y-[8px]">
                   <label className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
@@ -341,34 +379,34 @@ export default function Step6({
               <div className="flex items-center gap-[8px]">
                 <button
                   type="button"
-                  // onClick={handleShopSubmit}
+                  onClick={handleSave}
                   className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
                 >
                   Shrani
                 </button>
                 <button
                   className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                  // onClick={() => {
-                  //   if (openBlock === 1) {
-                  //     handleStepChange(5);
-                  //   } else {
-                  //     setOpenBlock(1);
-                  //   }
-                  // }}
+                  onClick={() => {
+                    if (openBlock === 1) {
+                      handleStepChange(5);
+                    } else {
+                      setOpenBlock(1);
+                    }
+                  }}
                 >
                   Nazaj
                 </button>
               </div>
               <button
                 className="bg-gradient-to-b from-[#F916D6] to-[#9D208A] text-[#FFFFFF] font-semibold leading-[24px] text-[20px] py-[12px] px-[66px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                // onClick={() => {
-                //   if (openBlock === 1) {
-                //     setOpenBlock(2);
-                //   } else {
-                //     handleShopSubmit('send');
-                //     handleStepChange(6);
-                //   }
-                // }}
+                onClick={() => {
+                  if (openBlock === 1) {
+                    setOpenBlock(2);
+                  } else {
+                    handleShopSubmit('send');
+                    handleStepChange(6);
+                  }
+                }}
               >
                 Objavi
               </button>
@@ -378,7 +416,7 @@ export default function Step6({
               <div className="flex items-center gap-[8px] justify-between w-full">
                 <button
                   type="button"
-                  // onClick={handleBCSubmit}
+                  onClick={handleSave}
                   className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
                 >
                   Shrani
@@ -386,20 +424,20 @@ export default function Step6({
                 <div className="flex items-center gap-[8px]">
                   <button
                     className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                    // onClick={() => handleStepChange(5)}
+                    onClick={() => handleStepChange(5)}
                   >
                     Nazaj
                   </button>
                   <button
                     className="bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] text-[#1E2125] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px] shadow-[5px_5px_10px_0px_rgba(194,194,194,0.5)]"
-                    // onClick={async () => {
-                    //   if (openBlock === 1) {
-                    //     const success = await handleBCSubmit();
-                    //     if (success) {
-                    //       setOpenBlock(2);
-                    //     }
-                    //   }
-                    // }}
+                    onClick={async () => {
+                      if (openBlock === 1) {
+                        const success = await handleBCSubmit();
+                        if (success) {
+                          setOpenBlock(2);
+                        }
+                      }
+                    }}
                   >
                     Naslednji korak
                   </button>

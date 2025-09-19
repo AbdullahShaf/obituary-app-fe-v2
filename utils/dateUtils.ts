@@ -52,3 +52,13 @@ export function formatDayAndTimeSlovenian(
   });
   return { dayName, time };
 }
+
+
+
+export const formatDate = (timestamp: string, options: Intl.DateTimeFormatOptions = {
+  weekday: "long",
+  month: "2-digit",
+  day: "2-digit",
+}) => {
+  return new Date(timestamp).toLocaleString("sl-SI", options);
+};

@@ -36,6 +36,20 @@ const getObituary = async (queryParams?: {
   }
 };
 
+const getCompanyPageObituary = async (queryParams?: {
+  city?: string;
+  userId?: string;
+}) => {
+  try {
+    const endpoint = "/obituary/company-page";
+    const response = await axios.get(endpoint, { params: queryParams });
+    return response.data;
+  } catch (error: unknown) {
+    console.error("Error fetching obituaries:", error);
+    throw new Error("Network error or no response");
+  }
+};
+
 //memory
 const getMemory = async (queryParams?: { slugKey?: string }) => {
   try {
@@ -65,6 +79,25 @@ const getFunerals = async (queryParams?: {
     throw new Error("Network error or no response");
   }
 };
+
+const getCompanyPageFunerals = async (queryParams?: {
+  city?: string;
+  region?: string;
+  id?: string;
+  startDate?: string;
+  endDate?: string;
+}) => {
+  try {
+    const endpoint = "/obituary/company-page/funerals";
+
+    const response = await axios.get(endpoint, { params: queryParams });
+    return response.data;
+  } catch (error: unknown) {
+    console.error("Error fetching obituaries:", error);
+    throw new Error("Network error or no response");
+  }
+};
+
 const updateObituary = async (
   id: string,
   formData: FormData,
@@ -367,9 +400,9 @@ const obituaryService = {
   getObituaryById,
   createObituary,
   getGiftLogs,
-  getObituary,
+  getObituary, getCompanyPageObituary,
   getMemory,
-  getFunerals,
+  getFunerals,getCompanyPageFunerals,
   updateObituary,
   updateObituaryVisits,
   createSorrowBook,

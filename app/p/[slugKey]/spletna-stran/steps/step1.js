@@ -172,7 +172,7 @@ export default function Step1({ data, onChange, handleStepChange }) {
                   setFile={(file) => setLogo(file)}
                   inputId="logo-upload"
                 />
-                <RenderImage src={data?.company_logo} alt={"img"} label={""} />
+                {/* <RenderImage src={data?.company_logo} alt={"img"} label={""} /> */}
               </div>
               <div className="space-y-[8px]">
                 <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">

@@ -8,21 +8,24 @@ import LastObituariesList from "@/app/components/appcomponents/LastObituariesLis
 import Layout from "@/app/components/appcomponents/Layout";
 import Pride from "@/app/components/appcomponents/Pride";
 import BaseModal from "@/app/components/ui/base-modal";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
-
+import { CompanyPageFunerals } from "@/app/components/appcomponents/CompanyPageFunerals"
 type Props = {
   company: any;
 };
 
 const FuneralCompanyPreview = ({ company }: Props) => {
   const [openModal, setOpenModal] = useState(false);
-console.log('company',company);
+  const { data: session } = useSession();
+  const sessionData = session?.user?.me;
+
 
   return (
     <>
-      <button 
-      onClick={() => setOpenModal(true)}
+      <button
+        onClick={() => setOpenModal(true)}
       >
         <div className="inline-flex gap-[8px] cursor-pointer">
           <span className="text-[14px] text-[#3C3E41] leading-[24px]">
@@ -53,11 +56,12 @@ console.log('company',company);
               key={`${company?.id}-banner`}
               data={company}
             />
-            <LastObituariesList key={`${company?.id}-last-obituaries`} />
-            <FuneralInFewDays
+            <LastObituariesList key={`${company?.id}-last-obituaries`} city={(sessionData as any)?.city} userId={sessionData?.id} />
+            {/* <FuneralInFewDays
               key={`${company?.id}-funeral-in-few-days`}
               data={company}
-            />
+            /> */}
+            <CompanyPageFunerals city={(sessionData as any)?.city} userId={sessionData?.id} />
             <Cemeteries key={`${company?.id}-cemeteries`} data={company} />
             <Pride key={`${company?.id}-pride`} data={company} />
             <FrequentlyAskedQuestionView

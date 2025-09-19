@@ -12,6 +12,7 @@ import { FrequentlyAskedQuestionView } from "@/app/components/appcomponents/Freq
 
 import companyService from "@/services/company-service";
 import { AccessDenied } from "./AccessDenied"
+import { CompanyPageFunerals } from "@/app/components/appcomponents/CompanyPageFunerals";
 export default function FuneralPage() {
     const params = useParams();
     const [company, setCompany] = useState(null);
@@ -56,11 +57,12 @@ export default function FuneralPage() {
                                     key={`${company?.id}-banner`}
                                     data={company}
                                 />
-                                <ObitList key={`${company?.id}-last-obituaries`} userId={company?.userId} />
-                                <FuneralInFewDays
+                                <ObitList key={`${company?.id}-last-obituaries`} city={company?.city} userId={company?.userId} />
+                                {/* <FuneralInFewDays
                                     key={`${company?.id}-funeral-in-few-days`}
                                     data={company}
-                                />
+                                /> */}
+                                <CompanyPageFunerals city={company?.city} userId={company?.userId} />
                                 <Cemeteries key={`${company?.id}-cemeteries`} data={company} />
                                 <Pride key={`${company?.id}-pride`} data={company} />
                                 <FrequentlyAskedQuestionView

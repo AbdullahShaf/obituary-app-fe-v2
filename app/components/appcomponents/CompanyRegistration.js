@@ -125,7 +125,7 @@ const CompanyRegistration = ({ set_Id, setModal }) => {
 
     // const passwordRegex =
     //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&/()@?=*])[A-Za-z\d@!"#$%&/()?=*]{8,}$/;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&/()@?=*\\-])[^\s]{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[^\s]{8,}$/;
 
     if (!passwordRegex.test(inputValuePassword)) {
       toast.error(

@@ -221,92 +221,93 @@ const FuneralBlock = ({ item, index, obituaryCount }) => {
 
   return (
     <div
-      className={`${
-        index === 0
+      className={`${index === 0
           ? "flex mt-0 w-full"
           : "flex mt-6 tablet:mt-6 desktop:mt-8 w-full"
-      }`}
+        }`}
     >
-      <button
-        onClick={handleClick}
-        className="flex flex-col tablet:flex-row desktop:flex-row w-[276px] h-[259px] pl-[11px] pr-[11px] py-[11px] tablet:w-[600px] tablet:h-[170px] tablet:pl-[28px] tablet:py-[21px] desktop:w-[762px] desktop:h-[200px] desktop:pl-[28px] desktop:pr-[27px] desktop:py-[26px] border-2 border-white shadow-custom-light-dark-box bg-[#EBF0F4] rounded-lg hover:bg-[#E1E6EA] transition-colors cursor-pointer"
-      >
-        <div className="rounded-xl mr-[0px] tablet:mr-[40px] desktop:mr-[36px] shadow-custom-light-dark-box-image bg-gradient-to-br p-1 from-[#E3E8EC] to-[#FFFFFF]">
-          {item?.CompanyPage?.logo || item?.logo ? (
-            <img
-              src={item.logo || item.CompanyPage.logo}
-              alt={`${item?.CompanyPage?.name || item?.name || "Company"} logo`}
-              className="
+      {item?.CompanyPage?.name && item?.CompanyPage?.email ? (
+        <button
+          onClick={handleClick}
+          className="flex flex-col tablet:flex-row desktop:flex-row w-[276px] h-[259px] pl-[11px] pr-[11px] py-[11px] tablet:w-[600px] tablet:h-[170px] tablet:pl-[28px] tablet:py-[21px] desktop:w-[762px] desktop:h-[200px] desktop:pl-[28px] desktop:pr-[27px] desktop:py-[26px] border-2 border-white shadow-custom-light-dark-box bg-[#EBF0F4] rounded-lg hover:bg-[#E1E6EA] transition-colors cursor-pointer"
+        >
+          <div className="rounded-xl mr-[0px] tablet:mr-[40px] desktop:mr-[36px] shadow-custom-light-dark-box-image bg-gradient-to-br p-1 from-[#E3E8EC] to-[#FFFFFF]">
+            {item?.CompanyPage?.logo || item?.logo ? (
+              <img
+                src={item.logo || item.CompanyPage.logo}
+                alt={`${item?.CompanyPage?.name || item?.name || "Company"} logo`}
+                className="
                 object-cover
                 h-[99px] w-[245px]
                 tablet:h-[113px] tablet:w-[180px] 
                 desktop:h-[140px] desktop:w-[230px]
                 bg-cover rounded-lg"
-              onError={(e) => {
-                e.target.style.display = "none";
-                const fallback =
-                  e.target.parentNode.querySelector(".fallback-logo");
-                if (fallback) fallback.style.display = "flex";
+                onError={(e) => {
+                  e.target.style.display = "none";
+                  const fallback =
+                    e.target.parentNode.querySelector(".fallback-logo");
+                  if (fallback) fallback.style.display = "flex";
+                }}
+              />
+            ) : null}
+
+            <div
+              className="fallback-logo flex items-center justify-center h-[99px] w-[245px] tablet:h-[113px] tablet:w-[180px] desktop:h-[140px] desktop:w-[230px] bg-gray-200 rounded-lg text-gray-500 text-sm"
+              style={{
+                display: item?.CompanyPage?.logo || item?.logo ? "none" : "flex",
               }}
-            />
-          ) : null}
-
-          <div
-            className="fallback-logo flex items-center justify-center h-[99px] w-[245px] tablet:h-[113px] tablet:w-[180px] desktop:h-[140px] desktop:w-[230px] bg-gray-200 rounded-lg text-gray-500 text-sm"
-            style={{
-              display: item?.CompanyPage?.logo || item?.logo ? "none" : "flex",
-            }}
-          >
-            {item?.CompanyPage?.name || item?.name || "Company"}
+            >
+              {item?.CompanyPage?.name || item?.name || "Company"}
+            </div>
           </div>
-        </div>
 
-        <div className="flex items-start flex-col mt-5 tablet:mt-0 desktop:mt-1 w-[245px] ml-[2.5px] tablet:ml-0 desktop:ml-0 tablet:w-[310px] desktop:w-[433px] tablet:pr-[10px]">
-          <div className="flex flex-1 flex-col w-full">
-            <div className="flex justify-between h-[19px] mobile:items-center tablet:h-7 desktop:h-7 w-full desktop:pr-[10px]">
-              <div className="flex items-center h-full">
-                <div className="font-variation-customOpt16 desktop:font-variation-customOpt24 tablet:font-variation-customOpt24 font-semibold tablet:font-normal desktop:font-normal text-left desktop:text-[24px] tablet:text-[24px] text-[16px] text-[#1E2125] leading-[28.13px]">
-                  {item?.CompanyPage?.name || item?.name}
+          <div className="flex items-start flex-col mt-5 tablet:mt-0 desktop:mt-1 w-[245px] ml-[2.5px] tablet:ml-0 desktop:ml-0 tablet:w-[310px] desktop:w-[433px] tablet:pr-[10px]">
+            <div className="flex flex-1 flex-col w-full">
+              <div className="flex justify-between h-[19px] mobile:items-center tablet:h-7 desktop:h-7 w-full desktop:pr-[10px]">
+                <div className="flex items-center h-full">
+                  <div className="font-variation-customOpt16 desktop:font-variation-customOpt24 tablet:font-variation-customOpt24 font-semibold tablet:font-normal desktop:font-normal text-left desktop:text-[24px] tablet:text-[24px] text-[16px] text-[#1E2125] leading-[28.13px]">
+                    {item?.CompanyPage?.name || item?.name}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="flex items-center h-[16px] tablet:h-6 desktop:h-6 mt-[10px] tablet:mt-4 desktop:mt-4">
-              <p className="flex font-variation-customOpt12 tablet:font-variation-customOpt16 desktop:font-variation-customOpt16 font-normal text-left desktop:text-[16px] tablet:text-[16px] text-[12px] text-[#414141] leading-[24px]">
-                {item?.CompanyPage?.address ||
-                  `${item?.city || ""}, ${item?.region || ""}`}
-              </p>
-            </div>
-
-            <div className="flex items-center h-[16px] tablet:h-6 desktop:h-6 mt-1 desktop:mt-2">
-              <p className="font-variation-customOpt12 tablet:font-variation-customOpt16 desktop:font-variation-customOpt16 font-normal text-left desktop:text-[16px] tablet:text-[16px] text-[12px] text-[#414141] leading-[24px]">
-                {item?.CompanyPage?.website ||
-                  item?.CompanyPage?.highlightText ||
-                  item?.email ||
-                  ""}
-              </p>
-            </div>
-
-            <div className="flex w-full h-[30px] tablet:h-6 justify-between mt-[10px] tablet:mt-[2px] desktop:mt-2 tablet:pr-2">
-              <div className="flex items-center h-[16px] tablet:h-6 desktop:h-6 tablet:mt-1 desktop:mt-2">
-                <p className="font-variation-customOpt14 tablet:font-variation-customOpt16 desktop:font-variation-customOpt20 font-normal text-left desktop:text-[20px] tablet:text-[16px] text-[14px] text-[#414141] leading-[24px]">
-                  {obituaryCount} osmrtnic
+              <div className="flex items-center h-[16px] tablet:h-6 desktop:h-6 mt-[10px] tablet:mt-4 desktop:mt-4">
+                <p className="flex font-variation-customOpt12 tablet:font-variation-customOpt16 desktop:font-variation-customOpt16 font-normal text-left desktop:text-[16px] tablet:text-[16px] text-[12px] text-[#414141] leading-[24px]">
+                  {item?.CompanyPage?.address ||
+                    `${item?.city || ""}, ${item?.region || ""}`}
                 </p>
               </div>
-              <div className="flex mt-[16px] tablet:mt-0 h-[14px] tablet:h-6 desktop:h-6 desktop:w-[92px] justify-end items-center desktop:mt-4">
-                <div className="text-[#1E2125] font-normal text-[12px] tablet:text-[14px] desktop:text-[14px]">
-                  Odpri
+
+              <div className="flex items-center h-[16px] tablet:h-6 desktop:h-6 mt-1 desktop:mt-2">
+                <p className="font-variation-customOpt12 tablet:font-variation-customOpt16 desktop:font-variation-customOpt16 font-normal text-left desktop:text-[16px] tablet:text-[16px] text-[12px] text-[#414141] leading-[24px]">
+                  {item?.CompanyPage?.website ||
+                    item?.CompanyPage?.highlightText ||
+                    item?.email ||
+                    ""}
+                </p>
+              </div>
+
+              <div className="flex w-full h-[30px] tablet:h-6 justify-between mt-[10px] tablet:mt-[2px] desktop:mt-2 tablet:pr-2">
+                <div className="flex items-center h-[16px] tablet:h-6 desktop:h-6 tablet:mt-1 desktop:mt-2">
+                  <p className="font-variation-customOpt14 tablet:font-variation-customOpt16 desktop:font-variation-customOpt20 font-normal text-left desktop:text-[20px] tablet:text-[16px] text-[14px] text-[#414141] leading-[24px]">
+                    {obituaryCount} osmrtnic
+                  </p>
                 </div>
-                <img
-                  src="/icon_arrowright.png"
-                  alt="Arrow icon to view company details"
-                  className="h-4 w-4 tablet:h-6 desktop:h-6 tablet:w-6 desktop:w-6 ml-1"
-                />
+                <div className="flex mt-[16px] tablet:mt-0 h-[14px] tablet:h-6 desktop:h-6 desktop:w-[92px] justify-end items-center desktop:mt-4">
+                  <div className="text-[#1E2125] font-normal text-[12px] tablet:text-[14px] desktop:text-[14px]">
+                    Odpri
+                  </div>
+                  <img
+                    src="/icon_arrowright.png"
+                    alt="Arrow icon to view company details"
+                    className="h-4 w-4 tablet:h-6 desktop:h-6 tablet:w-6 desktop:w-6 ml-1"
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </button>
+        </button>
+      ) : null}
     </div>
   );
 };

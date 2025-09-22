@@ -209,7 +209,7 @@ function HomeContent(props) {
       document.body.style.overflow = "auto";
     };
   }, [showMegaMenu]);
-  console.log(obituaries, "is obituary");
+  console.log("------------DEPLOYMENT TESTING------------");
   return (
     <Layout
       isMegaMenuVisible={showMegaMenu}

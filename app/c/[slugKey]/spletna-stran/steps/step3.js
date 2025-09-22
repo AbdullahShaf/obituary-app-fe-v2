@@ -190,7 +190,7 @@ export default function Step3({
           ...data,
           packages: response.packages,
         };
-
+        fetchPackages();
         onChange(updatedCompany);
         toast.success("Packages Updated Successfully");
       }

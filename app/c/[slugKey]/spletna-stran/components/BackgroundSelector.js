@@ -136,14 +136,14 @@ export function IconSelectorStep4({ setBoxIcon }) {
       }
     }
 
-    setSelectedBackgrounds(updatedSelection);
+    setSelectedBackgrounds([background.id]);
 
     // Pass selected images to parent
     const selectedImages = backgrounds
       .filter((bg) => updatedSelection.includes(bg.id))
       .map((bg) => bg.image);
 
-    setBoxIcon("icon", selectedImages);
+    setBoxIcon("icon", [background.image]);
   };
 
   const backgrounds = [

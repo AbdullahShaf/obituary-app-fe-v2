@@ -110,6 +110,7 @@ export default function Step5({
       if (nonEmptySlides.length > 0) {
         const response = await trigger(formData);
         const updatedCompany = { ...data, slides: response.slides };
+        fetchSlides();
         onChange(updatedCompany);
         toast.success("Florist Slides Updated Successfully");
       }
@@ -131,7 +132,6 @@ export default function Step5({
     //   setSlides(updatedSlides);
     // }
   }, [data]);
-  console.log('sssssssssss');
 
   // Refactor--------
   const fetchSlides = async () => {

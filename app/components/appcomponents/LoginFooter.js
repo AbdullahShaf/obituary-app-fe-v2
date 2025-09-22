@@ -257,7 +257,7 @@ export default function LoginFooter() {
                 <div className="flex justify-between items-center ">
                   <div className="flex items-center h-6 ">
                     <a
-                      href="#"
+                      href="/splosni-pogoji"
                       className=" text-[#414141] font-normal   hover:text-blue-500 transition duration-200 text-[13px]"
                     >
                       Splošni pogoji poslovanja
@@ -265,7 +265,7 @@ export default function LoginFooter() {
                   </div>
                   <div className="flex items-center h-6 ">
                     <a
-                      href="#"
+                      href="/politika-zasebnosti"
                       className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
                     >
                       Politika zasebnosti
@@ -302,7 +302,7 @@ export default function LoginFooter() {
               <div className=" h-full w-[596px] flex  space-x-[18px] flex-row ">
                 <div className="flex items-center h-6 ">
                   <a
-                    href="#"
+                    href="/splosni-pogoji"
                     className=" text-[#414141] font-normal   hover:text-blue-500 transition duration-200 text-[13px]"
                   >
                     Splošni pogoji poslovanja
@@ -310,7 +310,7 @@ export default function LoginFooter() {
                 </div>
                 <div className="flex items-center h-6 ">
                   <a
-                    href="#"
+                    href="/politika-zasebnosti"
                     className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
                   >
                     Politika zasebnosti

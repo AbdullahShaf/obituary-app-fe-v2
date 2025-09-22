@@ -9,7 +9,7 @@ import { useState } from "react";
 
 import regionsAndCities from "@/utils/regionAndCities";
 import shopService from "@/services/shop-service";
-import {SelectDropdown} from "./SelectDropdown";
+import { SelectDropdown } from "./SelectDropdown";
 
 const FloristList = () => {
   const router = useRouter();
@@ -191,19 +191,16 @@ const FloristList = () => {
                             setSelectedCity(language);
                             updateUrlParams(language);
                           }}
-                          className={`border border-[#C3C6C8] rounded-sm text-[#3C3E41] mobile:mt-[16px] hover:bg-gray-100 transition-colors cursor-pointer ${
-                            index == languages.length - 1
-                              ? "ml-[0px]"
-                              : index == 5
+                          className={`border border-[#C3C6C8] rounded-sm text-[#3C3E41] mobile:mt-[16px] hover:bg-gray-100 transition-colors cursor-pointer ${index == languages.length - 1
+                            ? "ml-[0px]"
+                            : index == 5
                               ? "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
                               : "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
-                          } ${
-                            index < 6 ? "tablet:mb-[18px]" : "tablet:mb-[18px]"
-                          } ${
-                            selectedCity === language
+                            } ${index < 6 ? "tablet:mb-[18px]" : "tablet:mb-[18px]"
+                            } ${selectedCity === language
                               ? "bg-[#414141] text-white"
                               : "bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]"
-                          } text-[14px] mobile:text-[13px] font-extrabold tablet:font-bold mobile:font-bold italic leading-[16.41px] mobile:px-[6px] px-[7.5px] py-[4px]`}
+                            } text-[14px] mobile:text-[13px] font-extrabold tablet:font-bold mobile:font-bold italic leading-[16.41px] mobile:px-[6px] px-[7.5px] py-[4px]`}
                         >
                           {language}
                         </button>
@@ -247,7 +244,7 @@ const FloristList = () => {
 const FloristlistCom = ({ item, index }) => {
   return (
     <div className={`${index == 0 ? "flex mt-0 w-full" : "flex mt-8 w-full"}`}>
-      <Link
+      <div
         // href={`/floristdetails/${item.id}`}
         href={`#`}
         onClick={(e) => e.preventDefault()}
@@ -329,7 +326,7 @@ const FloristlistCom = ({ item, index }) => {
                   {item?.website || item?.email || "Kontakt"}
                 </p>
               </div>
-              <div className="flex h-4 desktop:w-[92px] justify-end items-center desktop:mt-3">
+              {item?.CompanyPage?.status === "PUBLISHED" && <Link href={`/cv/${item?.CompanyPage?.User?.slugKey}`} className="flex h-4 desktop:w-[92px] justify-end items-center desktop:mt-3">
                 <div className="text-[#1E2125] text-[14px] ">Odpri</div>
                 <Image
                   src={"/icon_arrowright.png"}
@@ -338,9 +335,9 @@ const FloristlistCom = ({ item, index }) => {
                   height={24}
                   className=""
                 />
-              </div>
+              </Link>}
             </div>
-            <div className="flex desktop:hidden tablet:hidden w-full mt-1 h-[14px] justify-end items-center">
+            {item?.CompanyPage?.status === "PUBLISHED" && <Link href={`/cv/${item?.CompanyPage?.User?.slugKey}`} className="flex desktop:hidden tablet:hidden w-full mt-1 h-[14px] justify-end items-center">
               <div className="text-[#1E2125] text-[12px] ">Odpri</div>
               <Image
                 src={"/icon_arrowright.png"}
@@ -349,10 +346,10 @@ const FloristlistCom = ({ item, index }) => {
                 height={20}
                 className=""
               />
-            </div>
+            </Link>}
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 };

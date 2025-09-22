@@ -6,6 +6,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import regionsAndCities from "@/utils/regionAndCities";
 import companyService from "@/services/company-service";
 import obituaryService from "@/services/obituary-service";
+import Link from "next/link";
 
 const FuneralList = () => {
   const router = useRouter();
@@ -293,7 +294,7 @@ const FuneralBlock = ({ item, index, obituaryCount }) => {
                     {obituaryCount} osmrtnic
                   </p>
                 </div>
-                <div className="flex mt-[16px] tablet:mt-0 h-[14px] tablet:h-6 desktop:h-6 desktop:w-[92px] justify-end items-center desktop:mt-4">
+                {item?.CompanyPage?.status === "PUBLISHED" && <Link href={`/pp/${item?.CompanyPage?.User?.slugKey}`} className="flex mt-[16px] tablet:mt-0 h-[14px] tablet:h-6 desktop:h-6 desktop:w-[92px] justify-end items-center desktop:mt-4">
                   <div className="text-[#1E2125] font-normal text-[12px] tablet:text-[14px] desktop:text-[14px]">
                     Odpri
                   </div>
@@ -302,7 +303,7 @@ const FuneralBlock = ({ item, index, obituaryCount }) => {
                     alt="Arrow icon to view company details"
                     className="h-4 w-4 tablet:h-6 desktop:h-6 tablet:w-6 desktop:w-6 ml-1"
                   />
-                </div>
+                </Link>}
               </div>
             </div>
           </div>

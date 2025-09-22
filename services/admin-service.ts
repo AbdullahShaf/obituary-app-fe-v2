@@ -81,9 +81,9 @@ const adminService = {
   },
 
   // PATCH Approve company's request
-  approveCompanyRequest: async (id: string) => {
+  approveCompanyRequest: async (id: string, status: "DRAFT" | "PUBLISHED") => {
     try {
-      const response = await axios.patch(`/admin/approve-request/${id}`);
+      const response = await axios.patch(`/admin/approve-request/${id}`, {status});
       return response;
     } catch (error) {
       console.error("Error in aprroval:", error);
@@ -101,7 +101,7 @@ const adminService = {
     }
   },
 
-   // Get contacts
+  // Get contacts
   getContacts: async () => {
     try {
       const response = await axios.get("/admin/contact-list");

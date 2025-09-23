@@ -64,6 +64,13 @@ const footerLinkSets = {
     { label: "Pogrebna", path: "/resitve-za-pogrebna-podjetja ", showOnMobile: true },
     { label: "Priložnost", path: "/p-priloznost ", showOnMobile: true },
   ],
+  "/vodic": [
+    { label: "Začetna", path: "/", showOnMobile: false },
+    { label: "Osmrtnice", path: "/osmrtnice ", showOnMobile: true },
+    { label: "Pogrebi", path: "/pogrebi ", showOnMobile: true },
+    { label: "Spominske", path: "/osmrtnice ", showOnMobile: true },
+    { label: "Cvetličarne", path: "/cvetlicarne  ", showOnMobile: true },
+  ]
 };
 
 function useIsMobile() {

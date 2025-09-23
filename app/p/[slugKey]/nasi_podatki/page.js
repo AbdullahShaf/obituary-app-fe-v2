@@ -136,7 +136,7 @@ export default function AccountSettings() {
               <span className="uppercase">geslo:</span>
               <span className="text-[#3C3E41]">**************</span>
             </div>
-            <div className="flex items-center gap-[12px]">
+            {/* <div className="flex items-center gap-[12px]">
               <button
                 onClick={handleModalVisibility}
                 className="inline-flex items-center gap-3"
@@ -152,7 +152,7 @@ export default function AccountSettings() {
               </button>
 
               <span className="text-[#3C3E41]"></span>
-            </div>
+            </div> */}
           </div>
         </div>
         <hr className="my-[28px]" />

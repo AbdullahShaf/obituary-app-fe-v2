@@ -58,7 +58,7 @@ const Obituaries = () => {
     } catch (error) {
       console.error("Error fetching obituaries:", error);
       setError("Failed to fetch obituaries");
-      toast.error("Failed to load obituaries");
+      // toast.error("Failed to load obituaries");
     } finally {
       setLoading(false);
     }

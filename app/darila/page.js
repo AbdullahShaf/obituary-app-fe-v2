@@ -66,7 +66,7 @@ const FloristsGifts = () => {
       console.log(response);
     } catch (error) {
       console.log('>>>>>>>>> error', error);
-      toast.error(error?.data?.error ?? "Some Error Occured");
+      // toast.error(error?.data?.error ?? "Some Error Occured");
     }
   };
 

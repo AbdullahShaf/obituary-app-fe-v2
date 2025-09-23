@@ -267,7 +267,7 @@ const AddObituary = ({ set_Id, setModal }) => {
       formData
     );
     if (response.error) {
-      toast.error(response.error || "Failed to upload template cards.");
+      // toast.error(response.error || "Failed to upload template cards.");
       return;
     }
     toast.success("Template cards uploaded successfully!");

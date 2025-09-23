@@ -208,7 +208,7 @@ const AddFuneralModal = ({ setModalVisible }) => {
       formData
     );
     if (response.error) {
-      toast.error(response.error || "Failed to upload template cards.");
+      // toast.error(response.error || "Failed to upload template cards.");
       return;
     }
     // toast.success("Template cards uploaded successfully!");
@@ -262,9 +262,9 @@ const AddFuneralModal = ({ setModalVisible }) => {
       // }
 
       if (response?.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Something went wrong. Please try again!"
+        // );
         return;
       }
     } catch (error) {

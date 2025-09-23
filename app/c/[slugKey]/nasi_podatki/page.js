@@ -105,16 +105,16 @@ export default function AccountSettings() {
           toast.success("City updated and session refreshed!");
           setSelectedCity(item);
         } else {
-          toast.error("Failed to update city");
+          // toast.error("Failed to update city");
         }
       } catch (error) {
-        toast.error("Error updating city");
+        // toast.error("Error updating city");
       } finally {
         setLoading(false);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error Updating City");
+      // toast.error("Error Updating City");
     }
   };
 
@@ -183,7 +183,7 @@ export default function AccountSettings() {
               <span className="uppercase">geslo:</span>
               <span className="text-[#3C3E41]">**************</span>
             </div>
-            <div className="flex items-center gap-[12px]">
+            {/* <div className="flex items-center gap-[12px]">
               <button
                 onClick={handleModalVisibility}
                 className="inline-flex items-center gap-3"
@@ -199,7 +199,7 @@ export default function AccountSettings() {
               </button>
 
               <span className="text-[#3C3E41]"></span>
-            </div>
+            </div> */}
           </div>
         </div>
         <hr className="my-[28px]" />

@@ -124,7 +124,7 @@ const AddObituary = ({ set_Id, setModal }) => {
         setDeathDate(response.deathDate ? new Date(response.deathDate) : null);
       } catch (err) {
         console.error("Error setting birth/death dates:", err);
-        toast.error("Failed to parse birth or death date.");
+        // toast.error("Failed to parse birth or death date.");
       }
 
       try {

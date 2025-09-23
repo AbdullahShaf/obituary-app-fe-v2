@@ -47,9 +47,9 @@ const MemoryPageContent = ({ params }) => {
       const response = await obituaryService.getMemory({ slugKey: slugKey });
 
       if (response.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Something went wrong. Please try again!"
+        // );
         return;
       }
 
@@ -128,9 +128,9 @@ const MemoryPageContent = ({ params }) => {
     } catch (error) {
       console.error("Error fetching memory:", error);
       if (error?.response?.status === 404) {
-        toast.error(`No ${type} memory exists`);
+        // toast.error(`No ${type} memory exists`);
       } else {
-        toast.error("Something went wrong.");
+        // toast.error("Something went wrong.");
       }
     }
   };

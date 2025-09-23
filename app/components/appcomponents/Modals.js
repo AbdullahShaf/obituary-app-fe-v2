@@ -131,7 +131,7 @@ const Modals = ({
       toast.success("Keeper Assigned Successfully");
       console.log(response);
     } catch (error) {
-      toast.error("Some Error Occured");
+      // toast.error("Some Error Occured");
     }
   };
   useEffect(() => {
@@ -181,9 +181,9 @@ const Modals = ({
         toast.error("You are already in the Book of Sorrow.");
         closeModal();
       } else {
-        toast.error(
-          error.data?.message || "Error Creating Sorrow Book. Please try again."
-        );
+        // toast.error(
+        //   error.data?.message || "Error Creating Sorrow Book. Please try again."
+        // );
       }
     }
   };
@@ -237,7 +237,7 @@ const Modals = ({
       closeModal();
     } catch (error) {
       console.error(`Failed to create Dedication`, error);
-      toast.error("Error Creating Dedication");
+      // toast.error("Error Creating Dedication");
     }
   };
 
@@ -287,7 +287,7 @@ const Modals = ({
       closeModal();
     } catch (error) {
       console.error(`Failed to add  photo`, error);
-      toast.error("Error Adding Photo");
+      // toast.error("Error Adding Photo");
     }
     finally {
       setName('');
@@ -351,9 +351,9 @@ const Modals = ({
         toast.error("You can only add a condolence once every 24 hours.");
         closeModal();
       } else {
-        toast.error(
-          error.data?.message || "Error Creating Condolence. Please try again."
-        );
+        // toast.error(
+        //   error.data?.message || "Error Creating Condolence. Please try again."
+        // );
       }
     }
   };
@@ -389,7 +389,7 @@ const Modals = ({
       closeModal();
     } catch (error) {
       console.error(`Failed to submit report`, error);
-      toast.error("Error submitting report");
+      // toast.error("Error submitting report");
     }
   };
 
@@ -783,7 +783,7 @@ const Modals = ({
       setIsShowModal(false);
       toast.success("Request submitted successfully");
     } catch (err) {
-      toast.error("Some error occured");
+      // toast.error("Some error occured");
     }
   };
 

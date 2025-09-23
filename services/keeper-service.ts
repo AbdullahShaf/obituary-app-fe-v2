@@ -16,7 +16,7 @@ const assignKeeper = async (data: any) => {
       throw error.response;
     } else {
       console.error("Network error:", error);
-      throw new Error("Network error or no response");
+      // throw new Error("Network error or no response");
     }
   }
 };

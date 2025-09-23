@@ -25,7 +25,7 @@ const Layout = ({
   from,
   forFooter,
   isMegaMenuVisible,
-  megaMenu,
+  megaMenu,showHamburger=true,
   data = {},
   onChangeMemory = () => {},
   currentPage = "",
@@ -75,12 +75,14 @@ const Layout = ({
           handleCloseModal={isModalLayout ? handleCloseModal : undefined}
           data={data}
           from={5}
+          showHamburger={showHamburger}
         />
       ) : from == "7" ? (
         <Header7
           handleCloseModal={isModalLayout ? handleCloseModal : undefined}
           data={data}
           from={7}
+          showHamburger={showHamburger}
         />
       ) : from == "3" ? (
         <MemoryHeader onChange={onChangeMemory} />

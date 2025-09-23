@@ -49,6 +49,7 @@ export default function FuneralPage() {
                             forFooter={"company"}
                             isMegaMenuVisible={undefined}
                             megaMenu={undefined}
+                            showHamburger={false}
                         >
                             <div className="flex flex-col mx-auto w-full bg-[#F5F7F9]">
                                 <FuneralsCompanyBanner

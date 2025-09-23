@@ -6,6 +6,7 @@ import Image from "next/image";
 import adminService from "../../../services/admin-service";
 import { toast } from "react-hot-toast";
 import NotesModal from "../../components/NotesModal";
+import {TOAST_MESSAGE} from "../../../utils/toastMessage";
 
 const Obituaries = () => {
   const [screen, setScreen] = useState(1);
@@ -50,7 +51,7 @@ const Obituaries = () => {
     } catch (error) {
       console.error("Error fetching users:", error);
       setError("Failed to fetch users");
-      toast.error("Failed to load users");
+      toast.error(TOAST_MESSAGE.FAILED_TO_LOAD_USERS);
     } finally {
       setLoading(false);
     }
@@ -69,11 +70,11 @@ const Obituaries = () => {
               : user
           )
         );
-        toast.success(currentBlockedStatus ? "User unblocked successfully" : "User blocked successfully");
+        toast.success(currentBlockedStatus ? TOAST_MESSAGE.USER_UNBLOCKED_SUCCESSFULLY : TOAST_MESSAGE.USER_BLOCKED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error blocking/unblocking user:", error);
-      toast.error("Failed to block/unblock user");
+      toast.error(TOAST_MESSAGE.FAILED_TO_BLOCK_UNBLOCK_USER);
     }
   };
 
@@ -90,11 +91,11 @@ const Obituaries = () => {
               : user
           )
         );
-        toast.success("Notes updated successfully");
+        toast.success(TOAST_MESSAGE.NOTES_UPDATED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error updating notes:", error);
-      toast.error("Failed to update notes");
+      toast.error(TOAST_MESSAGE.FAILED_TO_UPDATE_NOTES);
     }
   };
 
@@ -109,11 +110,11 @@ const Obituaries = () => {
       if (response.success) {
         // Remove user from local state
         setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
-        toast.success("User deleted successfully");
+        toast.success(TOAST_MESSAGE.USER_DELETED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error deleting user:", error);
-      toast.error("Failed to delete user");
+      toast.error(TOAST_MESSAGE.FAILED_TO_DELETE_USER);
     }
   };
 

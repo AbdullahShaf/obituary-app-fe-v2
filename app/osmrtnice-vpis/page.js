@@ -18,7 +18,7 @@ const Obituaryform = () => {
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      toast.error("You must be logged in to access this page.");
+      toast.error("Za ogled strani moraš biti prijavljen");
       router.push("/registracija");
       return;
     }
@@ -27,14 +27,14 @@ const Obituaryform = () => {
     // Temporarily commented
     // Check if user has permission to create obituaries
     if (!isLoading && !isAuthenticated && !user.createObituaryPermission) {
-      toast.error("You don't have permission to create obituaries.");
+      toast.error("Nimaš dovoljenja za objavo osmrtnic");
       router.push("/");
       return;
     }
 
    
     if (!isLoading && !isAuthenticated &&!user.createObituaryPermission) {
-      toast.error("You don't have permission to create obituaries.");
+      toast.error("Nimaš dovoljenja za objavo osmrtnic");
       router.push("/");
       return;
     }

@@ -108,7 +108,7 @@ export default function Step5({ data, onChange, handleStepChange }) {
     );
 
     if (hasEmpty) {
-      toast.error("Please fill in all FAQ questions and answers.");
+      toast.error("Nekaj manjka. Preveri še enkrat");
       return false;
     }
 
@@ -130,7 +130,7 @@ export default function Step5({ data, onChange, handleStepChange }) {
       const updatedCompany = { ...data, faqs: response.faqs };
       onChange(updatedCompany);
       setFaqs(response.faqs);
-      toast.success("Faq's Updated Successfully");
+      toast.success("Posodobljeno");
       return true;
     } catch (error) {
       console.log("Error while submitting form:", error);
@@ -164,7 +164,7 @@ export default function Step5({ data, onChange, handleStepChange }) {
       setFaqs(faqs);
       const updatedCompany = { ...data, faqs: faqs };
       onChange(updatedCompany);
-      toast.success("Faq's Deleted Successfully");
+      toast.success("Izbrisano");
     } catch (err) {
       console.error("Failed to delete FAQ", err);
     }

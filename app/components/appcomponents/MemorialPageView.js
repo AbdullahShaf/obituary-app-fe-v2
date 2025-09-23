@@ -16,9 +16,9 @@ const MemorialPageView = () => {
       const response = await obituaryService.getObituary(queryParams);
 
       if (response.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Prišlo je do napake."
+        // );
         return;
       }
 

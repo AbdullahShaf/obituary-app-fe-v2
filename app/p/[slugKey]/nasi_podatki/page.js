@@ -70,7 +70,7 @@ export default function AccountSettings() {
       const response = await userService.updateMyUser(payload);
       if (response) {
         await refreshUserSession();
-        toast.success("City Updated Successfully");
+        toast.success("Občina je bila posodobljena");
         setSelectedCity(item);
         const updated = columnName
           ? { [columnName]: null }
@@ -81,11 +81,11 @@ export default function AccountSettings() {
           ...updated,
         }));
       } else {
-        toast.error("Error Updating City");
+        // toast.error("Prišlo je do napake pri posodabljanju občine.");
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error Updating City");
+      // toast.error("Prišlo je do napake pri posodabljanju občine.");
     }
   };
 
@@ -136,7 +136,7 @@ export default function AccountSettings() {
               <span className="uppercase">geslo:</span>
               <span className="text-[#3C3E41]">**************</span>
             </div>
-            <div className="flex items-center gap-[12px]">
+            {/* <div className="flex items-center gap-[12px]">
               <button
                 onClick={handleModalVisibility}
                 className="inline-flex items-center gap-3"
@@ -152,7 +152,7 @@ export default function AccountSettings() {
               </button>
 
               <span className="text-[#3C3E41]"></span>
-            </div>
+            </div> */}
           </div>
         </div>
         <hr className="my-[28px]" />

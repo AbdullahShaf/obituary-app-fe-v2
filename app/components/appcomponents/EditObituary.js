@@ -83,7 +83,7 @@ const AddObituary = ({ set_Id, setModal }) => {
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      toast.error("You must be logged in to access this page.");
+      toast.error("Za ogled strani moraš biti prijavljen");
       router.push("/registracija");
     } else {
       const parsedUser = JSON.parse(storedUser);
@@ -124,7 +124,7 @@ const AddObituary = ({ set_Id, setModal }) => {
         setDeathDate(response.deathDate ? new Date(response.deathDate) : null);
       } catch (err) {
         console.error("Error setting birth/death dates:", err);
-        toast.error("Failed to parse birth or death date.");
+        // toast.error("Failed to parse birth or death date.");
       }
 
       try {
@@ -302,7 +302,7 @@ const AddObituary = ({ set_Id, setModal }) => {
     const fullNameLength =
       (inputValueName?.length || 0) + (inputValueSirName?.length || 0);
     if (fullNameLength > 25) {
-      toast.error("Full name (Name + Surname) must not exceed 25 characters.");
+      toast.error("Ima in priimek ne smeta presegati 25 znakov");
 
       return false;
     }
@@ -317,7 +317,7 @@ const AddObituary = ({ set_Id, setModal }) => {
       !birthDate ||
       !deathDate
     ) {
-      toast.error("All fields are mandatory.");
+      toast.error("Vsa polja so obvezna");
       return false;
     }
 
@@ -386,11 +386,11 @@ const AddObituary = ({ set_Id, setModal }) => {
       let response;
 
       response = await obituaryService.updateObituary(id, formData);
-      toast.success("Obituary updated successfully!");
+      toast.success("Osmrtnica je bila posodobljena");
 
       if (response?.error) {
         toast.error(
-          response.error || "Something went wrong. Please try again!"
+          response.error || "Prišlo je do napake. Poskusi znova."
         );
         return;
       }
@@ -411,12 +411,12 @@ const AddObituary = ({ set_Id, setModal }) => {
       );
     } catch (error) {
       if (error?.response?.status === 404) {
-        toast.error("You cannot update other company's obituary");
+        toast.error("Podatke na osmrtnici lahko posodobi samo podjetje, ki jih je vneslo");
       } else {
         console.error("Error creating obituary:", error);
         toast.error(
           error?.response?.data?.error ||
-            "Failed to create obituary. Please try again."
+            "Prišlo je do napake."
         );
       }
     } finally {

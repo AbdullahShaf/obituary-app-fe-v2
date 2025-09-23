@@ -11,6 +11,7 @@ import companyService from "@/services/company-service";
 import { useApi } from "@/hooks/useApi";
 import { Loader } from "@/utils/Loader";
 import { RenderImage } from "@/utils/ImageViewerModal";
+import { TOAST_MESSAGE } from "../../../../../utils/toastMessage";
 
 export default function Step3({
   data,
@@ -113,7 +114,7 @@ export default function Step3({
 
   const addSliderBlock = () => {
     if (packages?.length >= 4) {
-      toast.error("Dodate lahko največ 4 paketov");
+      toast.error(TOAST_MESSAGE.YOU_CAN_ADD_4_PACKAGES);
       return;
     }
     setPackages([
@@ -192,7 +193,7 @@ export default function Step3({
         };
         fetchPackages();
         onChange(updatedCompany);
-        toast.success("Packages Updated Successfully");
+        toast.success(TOAST_MESSAGE.PACKAGES_UPDATED_SUCCESSFULLY);
       }
 
       return true;

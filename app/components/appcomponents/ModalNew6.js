@@ -72,12 +72,12 @@ export default function ModalNew6({
       }
 
       await shopService.createShop(formData);
-      toast.success("Trgovine so ustvarjene, podjetje je poslano za odobritev");
+      toast.success("Vnos je uspel");
       setIsShowModal(false);
       onChange(null);
       resetForm();
     } catch (error) {
-      toast.error("Napaka pri shranjevanju podatkov");
+      toast.error("Napaka pri shranjevanju podatkov.");
     }
   }
 

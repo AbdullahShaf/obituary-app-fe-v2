@@ -98,9 +98,9 @@ const PostConfirmation = () => {
       const response = await obituaryService.fetchPendingPosts();
 
       if (response.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Prišlo je do napake."
+        // );
         return;
       }
       console.log(response);
@@ -123,12 +123,12 @@ const PostConfirmation = () => {
       const response = await obituaryService.changePostStatus(postData);
 
       if (response.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Prišlo je do napake."
+        // );
         return;
       }
-      toast.success("Post Approved");
+      toast.success("Potrjeno");
 
       const approvedPost = pendingPosts.find((post) => post.id === logId);
       if (approvedPost) {
@@ -141,7 +141,7 @@ const PostConfirmation = () => {
       console.log(response);
     } catch (err) {
       console.error("Error Fetching Pending Posts:", err);
-      toast.error(err.message || "Failed To Pending Posts:");
+      // toast.error(err.message || "Failed To Pending Posts:");
     }
   };
 
@@ -173,15 +173,15 @@ const PostConfirmation = () => {
 
       if (response.error) {
         toast.error(
-          response.error || "Something went wrong. Please try again!"
+          response.error || "Prišlo je do napake. Poskusi znova."
         );
         return;
       }
-      toast.success("Keeper Assigned");
+      toast.success("Skrbnik dodeljen");
       console.log(response);
     } catch (err) {
       console.error("Error Assgining Keeper", err);
-      toast.error(err.message || "Error Assgining Keeper");
+      toast.error(err.message || "Prišlo je do napake.");
     }
   };
 

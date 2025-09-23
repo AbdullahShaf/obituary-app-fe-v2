@@ -167,9 +167,9 @@ function HomeContent(props) {
       const response = await obituaryService.getObituary(queryParams);
 
       if (response.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Prišlo je do napake."
+        // );
         return;
       }
 
@@ -181,7 +181,7 @@ function HomeContent(props) {
       setObituaries(sortedObituaries);
     } catch (err) {
       console.error("Error fetching obituary:", err);
-      toast.error(err.message || "Failed to fetch obituary.");
+      // toast.error(err.message || "Failed to fetch obituary.");
     }
   };
 

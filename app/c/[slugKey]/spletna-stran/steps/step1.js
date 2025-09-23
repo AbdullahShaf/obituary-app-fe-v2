@@ -14,6 +14,7 @@ import InfoModal from "@/app/components/appcomponents/InfoModal";
 import { useApi } from "@/hooks/useApi";
 import { Loader } from "@/utils/Loader";
 import { RenderImage } from "@/utils/ImageViewerModal";
+import { TOAST_MESSAGE } from "../../../../../utils/toastMessage";
 export default function Step1({
   data,
   onChange,
@@ -77,14 +78,14 @@ export default function Step1({
         if (hasChanges) {
           response = await update(formData, companyId);
 
-          toast.success("Changes Applied Successfully");
+          toast.success(TOAST_MESSAGE.CHANGES_APPLIED_SUCCESSFULLY);
         } else {
           return true;
         }
       } else {
         response = await create(formData, "florist");
 
-        toast.success("Podjetje je ustvarjeno");
+        toast.success(TOAST_MESSAGE.COMPANY_IS_CREATED);
       }
 
       onChange(response.company);

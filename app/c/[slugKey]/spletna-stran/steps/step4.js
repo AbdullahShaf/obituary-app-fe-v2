@@ -15,6 +15,7 @@ import { useSession } from "next-auth/react";
 import { useApi } from "@/hooks/useApi";
 import { Loader } from "@/utils/Loader";
 import { RenderImage } from "@/utils/ImageViewerModal";
+import { TOAST_MESSAGE } from "../../../../../utils/toastMessage";
 const getNumberWord = (num) => {
   const words = ["one", "two", "three"];
   return words[num - 1] || "";
@@ -91,7 +92,7 @@ export default function Step4({
         );
         onChange(response.company);
 
-        toast.success("Company updated Successfully");
+        toast.success(TOAST_MESSAGE.COMPANY_UPDATED_SUCCESSFULLY);
       }
 
       return true;
@@ -99,7 +100,7 @@ export default function Step4({
       console.error("Error:", error);
       toast.error(
         error?.response?.data?.error ||
-        "Failed to update company. Please try again."
+        TOAST_MESSAGE.FAILED_TO_UPDATE_COMPANY_TRY_AGAIN
       );
       return false;
     }

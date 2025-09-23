@@ -13,6 +13,7 @@ import { useSession } from "next-auth/react";
 import { Loader } from "@/utils/Loader";
 import { useApi } from "@/hooks/useApi";
 import { RenderImage } from "@/utils/ImageViewerModal";
+import {TOAST_MESSAGE} from "../../../../../utils/toastMessage"
 const defaultShop = [
     {
       index: 1,
@@ -84,7 +85,7 @@ export default function Step6({
 
       const response = await updateCompany(formData, companyId);
       onChange(response.company);
-      toast.success("Podatki so shranjeni");
+      toast.success(TOAST_MESSAGE.DATA_SAVED);
       router.refresh();
       console.log(response);
       return true;
@@ -105,7 +106,7 @@ export default function Step6({
     );
 
     if (hasEmpty) {
-      toast.error("Vpišite vse podatke o trgovini");
+      toast.error(TOAST_MESSAGE.ENTER_ALL_STORE_DATA);
       return false;
     }
 
@@ -139,7 +140,7 @@ export default function Step6({
       //   shops: response.shops,
       // });
       fetchShops();
-      toast.success("Poslano v potrditev");
+      toast.success(TOAST_MESSAGE.SENT_FOR_APPROVAL);
       // router.push(`/floristdetails/${companyId}`);
 
       console.log(response);
@@ -492,12 +493,12 @@ function SliderBlock({
       const response = await deleteShop(shop?.id);
 
       if (response.status === 200) {
-        toast.success("Shop deleted successfully.");
+        toast.success(TOAST_MESSAGE.SHOP_DELETED_SUCCESSFULLY);
         refetch();
 
       }
     } catch (error) {
-      toast.error("Error deleting florist shop.");
+      toast.error(TOAST_MESSAGE.ERROR_DELETING_FLORIST_SHOP);
     } finally {
     }
   };

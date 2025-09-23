@@ -60,14 +60,13 @@ const Carousel = ({ search, city, userId }) => {
                 endDate: formattedDate
             };
             if (search) queryParams.search = search;
-            console.log('queryParams', queryParams);
 
             const response = await obituaryService.getCompanyPageFunerals(queryParams);
 
             if (response.error) {
-                toast.error(
-                    response.error || "Something went wrong. Please try again!"
-                );
+                // toast.error(
+                //     response.error || "Prišlo je do napake."
+                // );
                 return;
             }
             console.log(response.obituaries, "----------------");

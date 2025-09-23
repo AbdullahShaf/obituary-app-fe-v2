@@ -212,7 +212,7 @@ const AddObituary = ({ set_Id, setModal }) => {
     const fullNameLength =
       (inputValueName?.length || 0) + (inputValueSirName?.length || 0);
     if (fullNameLength > 25) {
-      toast.error("Full name (Name + Surname) must not exceed 25 characters.");
+      toast.error("Ima in priimek ne smeta presegati 25 znakov");
 
       return false;
     }
@@ -227,17 +227,17 @@ const AddObituary = ({ set_Id, setModal }) => {
       !birthDate ||
       !deathDate
     ) {
-      toast.error("All fields are mandatory.");
+      toast.error("Vsa polja so obvezna");
       return false;
     }
 
     if (!isDeathReportConfirmed) {
-      toast.error("You must confirm the death report exists.");
+      toast.error("Potrditi moraš, da mrliški list obstaja.");
       return false;
     }
 
     if (!uploadedDeathReport && user?.role !== "funeral_company") {
-      toast.error("Death report is mandatory for non-funeral company users.");
+      toast.error("Dodati moraš mrliški list");
       return false;
     }
 
@@ -267,10 +267,10 @@ const AddObituary = ({ set_Id, setModal }) => {
       formData
     );
     if (response.error) {
-      toast.error(response.error || "Failed to upload template cards.");
+      // toast.error(response.error || "Failed to upload template cards.");
       return;
     }
-    toast.success("Template cards uploaded successfully!");
+    toast.success("Digitalne katerice so dodane");
     setLoading(false);
     // Temporarily commented
     router.push(`/m/${obituaryResponse.slugKey}`);
@@ -289,7 +289,7 @@ const handleSubmit = async () => {
   const currentUser = isAuthenticated ? user : {};
 
   if (!currentUser.createObituaryPermission) {
-    toast.error("You don't have permission to create obituaries.");
+    toast.error("Nimaš dovoljenja za objavo osmrtnic");
     return;
   }
 
@@ -376,14 +376,14 @@ const handleSubmit = async () => {
     let response;
     if (dataExists) {
       response = await obituaryService.updateObituary(user.id, formData);
-      toast.success("Obituary updated successfully!");
+      toast.success("Osmrtnica je bila posodobljena");
     } else {
       response = await obituaryService.createObituary(formData);
-      toast.success("Obituary created successfully!");
+      toast.success("Osmrtnica je bila uspešno dodana");
     }
 
     if (response.error) {
-      toast.error(response.error || "Something went wrong. Please try again!");
+      toast.error(response.error || "Prišlo je do napake. Poskusi znova.");
       return;
     }
 
@@ -403,7 +403,7 @@ const handleSubmit = async () => {
     console.error("Error creating obituary:", error);
     toast.error(
       error?.response?.data?.error ||
-        "Failed to create obituary. Please try again."
+        "Prišlo je do napake."
     );
   } finally {
     setLoading(false);

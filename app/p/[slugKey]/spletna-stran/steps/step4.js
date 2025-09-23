@@ -42,7 +42,7 @@ export default function Step4({ data, onChange, handleStepChange }) {
       !secondaryImage ||
       !companyId
     ) {
-      toast.error("All fields are mandatory.");
+      toast.error("Vsa polja so obvezna");
       return false;
     }
 
@@ -78,14 +78,14 @@ export default function Step4({ data, onChange, handleStepChange }) {
 
       const response = await update(formData, companyId);
       onChange(response.company);
-      toast.success("Company Updated Successfully");
+      toast.success("Posodobljeno");
       console.log(response);
       return true;
     } catch (error) {
       console.error("Error:", error);
       toast.error(
         error?.response?.data?.error ||
-        "Failed to update company. Please try again."
+        "Prišlo je do napake. Ni bilo posodobljeno. Poskusi znova."
       );
       return false;
     }

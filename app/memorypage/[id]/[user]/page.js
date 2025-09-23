@@ -49,9 +49,9 @@ const MemoryPage = ({ params }) => {
       const response = await obituaryService.getMemory({ id });
 
       if (response.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Prišlo je do napake."
+        // );
         return;
       }
       console.log("MemoryPage obituary data:", response.obituary);
@@ -65,9 +65,9 @@ const MemoryPage = ({ params }) => {
         });
 
         if (visitRespone.error) {
-          toast.error(
-            visitRespone.error || "Something went wrong. Please try again!"
-          );
+          // toast.error(
+          //   visitRespone.error || "Prišlo je do napake."
+          // );
           return;
         }
 
@@ -86,7 +86,7 @@ const MemoryPage = ({ params }) => {
       }
     } catch (err) {
       console.error("Error fetching obituary:", err);
-      toast.error(err.message || "Failed to fetch obituary.");
+      // toast.error(err.message || "Failed to fetch obituary.");
     }
   };
 
@@ -121,9 +121,9 @@ const MemoryPage = ({ params }) => {
     } catch (error) {
       console.error("Error fetching memory:", error);
       if (error?.response?.status === 404) {
-        toast.error(`No ${type} memory exists`);
+        // toast.error(`No ${type} memory exists`);
       } else {
-        toast.error("Something went wrong.");
+        // toast.error("Prišlo je do napake.");
       }
     }
   };

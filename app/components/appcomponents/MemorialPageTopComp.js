@@ -70,10 +70,10 @@ const MemorialPageTopComp = ({
     navigator.clipboard
       .writeText(currentURL) // Copy to clipboard
       .then(() => {
-        toast.success("URL copied to clipboard!"); // Show success toast
+        toast.success("Kopirano"); // Show success toast
       })
       .catch(() => {
-        toast.error("Failed to copy the URL."); // Show error toast in case of failure
+        toast.error("Kopiranje ni uspelo"); // Show error toast in case of failure
       });
   };
 
@@ -122,7 +122,7 @@ const MemorialPageTopComp = ({
       const response = await obituaryService.burnCandle(data?.id, candleData);
 
       if (response?.candle?.id) {
-        toast.success("Candle Burnt Successfully");
+        toast.success("Svečka je prižgana");
         openCandleModal();
         set_Id("3");
 
@@ -144,11 +144,11 @@ const MemorialPageTopComp = ({
       if (error.status === 409) {
         openCandleModal();
         set_Id("3");
-        toast.error("You can only burn one candle per 24 hours.");
+        toast.error("Vsakih 24 ur lahko prižgeš eno svečko");
       } else {
-        toast.error(
-          error.data?.message || "Error burning candle. Please try again."
-        );
+        // toast.error(
+        //   error.data?.message || "Error burning candle. Please try again."
+        // );
       }
     }
   };

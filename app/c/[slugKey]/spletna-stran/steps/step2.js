@@ -15,6 +15,7 @@ import { useSession } from "next-auth/react";
 import { useApi } from "@/hooks/useApi";
 import { Loader } from "@/utils/Loader";
 import { RenderImage } from "@/utils/ImageViewerModal";
+import {TOAST_MESSAGE} from "../../../../../utils/toastMessage"
 const getNumberWord = (num) => {
   const words = ["one", "two", "three"];
   return words[num - 1] || "";
@@ -110,7 +111,7 @@ export default function Step2({
       //   return;
       // }
       if (!offers.length) {
-        toast.error("Dodajte vsaj eno ponudbo");
+        toast.error(TOAST_MESSAGE.ADD_ATLEAST_ONE_OFFER);
         return;
       }
       const formData = new FormData();
@@ -134,14 +135,14 @@ export default function Step2({
       }
       const response = await update(formData, companyId);
       onChange(response.company);
-      toast.success("Podatki so shranjeni");
+      toast.success(TOAST_MESSAGE.DATA_SAVED);
       console.log(response);
       return true;
     } catch (error) {
       console.error("Error:", error);
       toast.error(
         error?.response?.data?.error ||
-        "Podatki niso shranjeni. Poskusite znova."
+        TOAST_MESSAGE.DATA_NOT_SAVED_TRY_AGAIN
       );
       return false;
     }

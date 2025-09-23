@@ -95,7 +95,7 @@ export default function Step3({ data, onChange, handleStepChange }) {
       // );
 
       // if (incompleteCemetries) {
-      //   toast.error("Each CEmetery must have an name,address and image");
+      //   toast.error("Pokopališče mora imeti ime, naslov in sliko");
       //   return false;
       // }
       const formData = new FormData();
@@ -150,19 +150,19 @@ export default function Step3({ data, onChange, handleStepChange }) {
         };
         onChange(updateCompany);
         setCemetries(response.cemeteries);
-        toast.success("Cemetries Updated Successfully");
+        toast.success("Posodobljeno");
       }
       return true;
     } catch (error) {
       console.log(error);
-      toast.error("Some Error Occured");
+      toast.error("Prišlo je do napake.");
       return false;
     }
   };
 
   const handleDeleteCemtery = async (cemetery) => {
     if (!cemetery?.id) {
-      toast.error("Cemetery is not saved yet.");
+      toast.error("Pokopališče ni shranjeno");
       return;
     }
     console.log("Deleting cemetery with ID:", cemetery?.id);
@@ -174,7 +174,7 @@ export default function Step3({ data, onChange, handleStepChange }) {
         cemeteries: cemeteries,
       };
       onChange(updateCompany);
-      toast.success("Cemetery deleted successfully");
+      toast.success("Pokopališče je bilo izbrisano");
     } catch (err) {
       console.error("Failed to delete Cemetery", err);
     }

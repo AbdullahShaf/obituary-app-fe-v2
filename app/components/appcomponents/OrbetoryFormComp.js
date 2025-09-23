@@ -135,14 +135,14 @@ const OrbetoryFormComp = ({
       formData.append(`email`, email);
 
       const response = await cardService.assignCard(formData);
-      toast.success("Card is sent to user");
+      toast.success("Kartica je bila poslana uporabniku");
     } catch (error) {
       if (error?.response?.status === 404) {
-        toast.error("No Such User Found");
+        toast.error("Ne obstaja");
       } else if (error?.response?.status === 409) {
-        toast.error("User already has this card");
+        toast.error("Uporabnik že ima to kartico");
       } else {
-        toast.error("Some Error Occured");
+        toast.error("Prišlo je do napake.");
       }
     }
   };
@@ -193,15 +193,15 @@ const OrbetoryFormComp = ({
   };
   const validateData = () => {
     if (!selectedObituary) {
-      toast.error("Please select an obituary.");
+      toast.error("Izberi osmrtnico");
       return false;
     }
     if (!cardSelected) {
-      toast.error("Please select a card.");
+      toast.error("Izberi kartico");
       return false;
     }
     if (!email || !email.trim()) {
-      toast.error("Please enter an email.");
+      toast.error("Dodaj e-naslov uporabnika, ki ga je uporabil pri registraciji");
       return false;
     }
     return true;

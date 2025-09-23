@@ -24,12 +24,12 @@ export function useAuth() {
       console.log("login", result);
 
       if (result?.error) {
-        toast.error("Invalid credentials");
+        toast.error("Napačni vnos");
         return { success: false, error: result.error };
       }
 
       if (result?.ok) {
-        toast.success("Login successful!");
+        toast.success("Prijava je uspela");
 
         // Wait for session to update, then redirect
         setTimeout(() => {
@@ -48,7 +48,7 @@ export function useAuth() {
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast.error("Login failed");
+      toast.error("Prijava ni uspela");
       return { success: false, error: "Login failed" };
     }
   };
@@ -62,7 +62,7 @@ export function useAuth() {
       });
 
       if (result?.error) {
-        toast.error("Invalid credentials");
+        toast.error("Napačni vnos");
         return { success: false, error: result.error };
       }
 
@@ -86,7 +86,7 @@ export function useAuth() {
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast.error("Login failed");
+      toast.error("Prijava ni uspela");
       return { success: false, error: "Login failed" };
     }
   };
@@ -95,7 +95,7 @@ export function useAuth() {
     try {
       await signOut({ redirect: false });
       router.push("/");
-      toast.success("Logout successful!");
+      toast.success("Odjava je uspela");
     } catch (error) {
       console.error("Logout error:", error);
       toast.error("Logout failed");

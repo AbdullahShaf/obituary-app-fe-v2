@@ -13,6 +13,7 @@ import companyService from "@/services/company-service";
 import { useApi } from "@/hooks/useApi";
 import { Loader } from "@/utils/Loader";
 import { RenderImage } from "@/utils/ImageViewerModal";
+import {TOAST_MESSAGE} from "../../../../../utils/toastMessage"
 const defaultSlide = [
   {
     index: 1,
@@ -65,7 +66,7 @@ export default function Step5({
       //   return;
       // }
       if (!companyId) {
-        toast.error("Company is not ready. Please try again in a moment.");
+        toast.error(TOAST_MESSAGE.COMPANY_NOT_READY_TRY_AGAIN);
         return false;
       }
       const formData = new FormData();
@@ -112,7 +113,7 @@ export default function Step5({
         const updatedCompany = { ...data, slides: response.slides };
         fetchSlides();
         onChange(updatedCompany);
-        toast.success("Florist Slides Updated Successfully");
+        toast.success(TOAST_MESSAGE.FLORIST_SLIDES_UPDATED_SUCCESSFULLY);
       }
       return true;
     } catch (error) {
@@ -290,12 +291,12 @@ function SliderBlock({ index, title, slide, onChange, refetch }) {
 
       if (response.success) {
         setSavedImage("")
-        toast.success("Shop deleted successfully.");
+        toast.success(TOAST_MESSAGE.SHOP_DELETED_SUCCESSFULLY);
         refetch();
 
       }
     } catch (error) {
-      toast.error("Error deleting florist slide.");
+      toast.error(TOAST_MESSAGE.ERROR_DELETING_FLORIST_SLIDES);
     } finally {
     }
   };

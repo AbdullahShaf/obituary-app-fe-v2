@@ -50,7 +50,7 @@ export default function Step1({ data, onChange, handleStepChange }) {
 
   const validateFields = () => {
     if (!heading || !logo || !background) {
-      toast.error("All fields are mandatory.");
+      toast.error("Vsa polja so obvezna");
       return false;
     }
 
@@ -96,15 +96,15 @@ export default function Step1({ data, onChange, handleStepChange }) {
         if (hasChanges) {
           response = await update(formData, companyId);
           onChange(response.company);
-          toast.success("Changes Applied Successfully");
+          toast.success("Posodobljeno");
         } else {
-          // toast.error("No Changes Found");
+          // toast.error("Ni sprememb");
           return true;
         }
       } else {
         response = await create(formData, "funeral");
 
-        toast.success("Company Created Successfully");
+        toast.success("Uspešno izdelano");
       }
 
       onChange(response.company);
@@ -113,7 +113,7 @@ export default function Step1({ data, onChange, handleStepChange }) {
       console.error("Error Creating Funeral Company:", error);
       toast.error(
         error?.response?.data?.error ||
-        "Failed to create company. Please try again."
+        "Napaka pri dodajanju podjetja. Poskusi znova"
       );
       return false;
     }

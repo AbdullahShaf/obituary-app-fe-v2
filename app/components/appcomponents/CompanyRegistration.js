@@ -113,13 +113,13 @@ const CompanyRegistration = ({ set_Id, setModal }) => {
       !inputValueCompany ||
       !inputValueFlowerShop
     ) {
-      toast.error("All fields are required");
+      toast.error("Vsa polja so obvezna");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(inputValueEmail)) {
-      toast.error("Please enter a valid email address");
+      toast.error("Napaka pri vnosu e-naslova");
       return;
     }
 
@@ -129,13 +129,13 @@ const CompanyRegistration = ({ set_Id, setModal }) => {
 
     if (!passwordRegex.test(inputValuePassword)) {
       toast.error(
-        "Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, and one number"
+        "Geslo mora imeti vsaj 8 znakov in vsebovati vsaj eno veliko črko, številko, znak"
       );
       return;
     }
 
     if (inputValuePassword !== inputValueConfirmPassword) {
-      toast.error("Passwords do not match!");
+      toast.error("Geslo se ne ujema!");
       return;
     }
 
@@ -154,18 +154,18 @@ const CompanyRegistration = ({ set_Id, setModal }) => {
 
       if (response.error) {
         toast.error(
-          response.error || "Something went wrong. Please try again!"
+          response.error || "Prišlo je do napake. Poskusi znova."
         );
         return;
       }
 
       toast.success(
-        response.message || "Registration successful! You can now log in."
+        response.message || "Registracija je uspela! Lahko se prijaviš."
       );
 
       router.push("/registracija");
     } catch (error) {
-      toast.error("Registration failed. Please try again.");
+      toast.error("Registracija ni uspela. Poskusi znova.");
     }
   };
 

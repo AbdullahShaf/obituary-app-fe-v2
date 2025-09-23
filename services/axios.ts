@@ -38,8 +38,9 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response.status === 401) {
-      // toast.error("Token Expired Please Relogin!");
-      if (window.location.pathname !== "/registracija" && window.location.pathname !== "/" && !window.location.pathname.startsWith("/m/")) {
+      // toast.error("Ponovno se prijavi");
+      // if (window.location.pathname !== "/registracija" && window.location.pathname !== "/" && !window.location.pathname.startsWith("/m/")) {
+      if (window.location.pathname.startsWith("/u/") || window.location.pathname.startsWith("/c/") || window.location.pathname.startsWith("/p/")) {
         window.location.href = "/registracija";
       }
     } else if (error.response.status === 403) {

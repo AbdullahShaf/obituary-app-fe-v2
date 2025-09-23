@@ -57,7 +57,7 @@ export default function Step6({ data, onChange, handleStepChange }) {
       !emergencyPhone ||
       !companyId
     ) {
-      toast.error("All fields are mandatory.");
+      toast.error("Vsa polja so obvezna");
       return false;
     }
 
@@ -86,14 +86,14 @@ export default function Step6({ data, onChange, handleStepChange }) {
 
       const response = await update(formData, companyId);
       onChange(response.company);
-      toast.success("Company Updated Successfully");
+      toast.success("Posodobljeno");
       console.log(response);
       return true;
     } catch (error) {
       console.error("Error:", error);
       toast.error(
         error?.response?.data?.error ||
-        "Failed to update company. Please try again."
+        "Prišlo je do napake. Ni bilo posodobljeno. Poskusi znova."
       );
       return false;
     }
@@ -102,7 +102,7 @@ export default function Step6({ data, onChange, handleStepChange }) {
   const handlePublish = async (send = '') => {
     try {
       if (data && data.status === "SENT_FOR_APPROVAL") {
-        toast.error("Company is already sent for approval");
+        toast.error("Poslano v potrditev");
         return false;
       }
       const formData = new FormData();

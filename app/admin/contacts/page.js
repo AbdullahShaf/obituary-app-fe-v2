@@ -12,6 +12,7 @@ import {
   ModalFooter,
 } from "@nextui-org/react";
 import cancle_icon from "@/public/cancle_icon.png";
+import { TOAST_MESSAGE } from "../../../utils/toastMessage";
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([]);
@@ -54,7 +55,7 @@ const ContactList = () => {
     } catch (error) {
       console.error("Error fetching contacts:", error);
       setError("Failed to fetch contacts");
-      toast.error("Failed to load contacts");
+      toast.error(TOAST_MESSAGE.FAILED_LOAD_CONTACTS);
     } finally {
       setLoading(false);
     }

@@ -16,7 +16,7 @@ const getCemeteries = async (queryParams?: {}) => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error fetching obituaries:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 

@@ -105,12 +105,12 @@ const Modals = ({
 
   const handleKeeperAssignment = async () => {
     if (!isKeeper()) {
-      toast.error("Only Keeper is allowed to invite other keeper");
+      toast.error("Samo Skrbnik lahko povabi novega Skrbnika");
       return;
     }
 
     if (keeperEmail.trim() === "") {
-      toast.error("Please Enter Email");
+      toast.error("Dodaj e-mail");
       return;
     }
 
@@ -128,10 +128,10 @@ const Modals = ({
       console.log(formData);
 
       const response = await keeperService.assignKeeper(formData);
-      toast.success("Keeper Assigned Successfully");
+      toast.success("Registracija Skrbnika je uspela");
       console.log(response);
     } catch (error) {
-      toast.error("Some Error Occured");
+      // toast.error("Prišlo je do napake.");
     }
   };
   useEffect(() => {
@@ -140,12 +140,12 @@ const Modals = ({
   // add sorrow book
   const addSorrowBook = async () => {
     if (!name || name.trim() === "") {
-      toast.error("Please enter a name before submitting.");
+      toast.error("Dodaj ime");
       return;
     }
 
     if (!user) {
-      toast.error("You must log in to enter your name in list of sorrow book.");
+      toast.error("Za vpis v Žalno knjigo je potrebna prijava");
       return;
     }
     if (isCompany()) {
@@ -171,19 +171,19 @@ const Modals = ({
 
       const updatedSorrowBooks = [...data.SorrowBooks, response];
       updateObituary({ ["SorrowBooks"]: updatedSorrowBooks });
-      toast.success("Sorrow Book Created Successfully");
+      toast.success("Uspešno dodano");
       updateObituary();
       closeModal();
     } catch (error) {
       console.error("Failed to create SorrowBook:", error);
 
       if (error.status === 409) {
-        toast.error("You are already in the Book of Sorrow.");
+        toast.error("To je žalna knjiga");
         closeModal();
       } else {
-        toast.error(
-          error.data?.message || "Error Creating Sorrow Book. Please try again."
-        );
+        // toast.error(
+        //   error.data?.message || "Error Creating Sorrow Book. Please try again."
+        // );
       }
     }
   };
@@ -193,11 +193,11 @@ const Modals = ({
   const [message, setMessage] = useState(null);
   const addDedication = async () => {
     if (!title?.trim() || !message?.trim() || !name?.trim()) {
-      toast.error("Please fill in all required fields before submitting.");
+      toast.error("Izpolni vsa polja");
       return;
     }
     if (!user) {
-      toast.error("You must log in to add dedication.");
+      toast.error("Za dodajanje Posvetila, Zahvale, zgodb je potrebna prijava");
       return;
     }
     if (isCompany()) {
@@ -206,7 +206,7 @@ const Modals = ({
     }
 
     if (!memoryHasKeeper()) {
-      toast.error("Current Memory has no keeper! You cannot proceed");
+      toast.error("Ta žalna stran še nima svojega Skrbnika. Skrbnik bi ta vnos moral potrditi.");
       return;
     }
     const dedicationData = {
@@ -227,9 +227,9 @@ const Modals = ({
       if (isKeeper()) {
         const updatedDedication = [...data.Dedications, response];
         updateObituary({ ["Dedications"]: updatedDedication });
-        toast.success("Dedication Created Successfully");
+        toast.success("Posvetilo je bilo ustvarjeno");
       } else {
-        toast.success("Dedication Sent to Keeper for review!");
+        toast.success("Posvetilo je bilo poslano Skrbniku v potrditev");
       }
       emptyField("name");
       emptyField("message");
@@ -237,14 +237,14 @@ const Modals = ({
       closeModal();
     } catch (error) {
       console.error(`Failed to create Dedication`, error);
-      toast.error("Error Creating Dedication");
+      // toast.error("Error Creating Dedication");
     }
   };
 
   //add photo
   const addPhoto = async () => {
     if (!user) {
-      toast.error("You must log in to add photo.");
+      toast.error("Za dodajanje slik je potrebna prijava");
       return;
     }
 
@@ -254,15 +254,15 @@ const Modals = ({
     }
 
     if (!memoryHasKeeper()) {
-      toast.error("Current Memory has no keeper! You cannot add photo");
+      toast.error("Ta žalna stran še nima svojega Skrbnika. Skrbnik bi ta vnos slike moral potrditi.");
       return;
     }
     if (!uploadedPicture) {
-      toast.error("No image selected!");
+      toast.error("Dodaj sliko");
       return;
     }
     if (!name || name.trim() === "") {
-      toast.error("Please enter a name before submitting.");
+      toast.error("Dodaj ime");
       return;
     }
     const formData = new FormData();
@@ -280,14 +280,14 @@ const Modals = ({
       if (isKeeper()) {
         const updatedPhoto = [...data.Photos, response];
         updateObituary({ ["Photos"]: updatedPhoto });
-        toast.success("Photo Added Successfully!");
+        toast.success("Slika je bila dodana");
       } else if (!isKeeper()) {
-        toast.success("Photo Sent to Keeper for review!");
+        toast.success("Slika je bila poslano Skrbniku v potrditevCondolence Created Successfully");
       }
       closeModal();
     } catch (error) {
       console.error(`Failed to add  photo`, error);
-      toast.error("Error Adding Photo");
+      // toast.error("Error Adding Photo");
     }
     finally {
       setName('');
@@ -297,7 +297,7 @@ const Modals = ({
   //add condolence
   const addCondolence = async () => {
     if (!user) {
-      toast.error("You must log in to add condolence.");
+      toast.error("Za dodajanje sožalja je potrebna prijava");
       return;
     }
     if (isCompany()) {
@@ -306,10 +306,10 @@ const Modals = ({
     }
 
     if (!name?.trim()) {
-      toast.error("Please enter name before submitting.");
+      toast.error("Dodaj ime");
       return;
     } else if (!memoryHasKeeper() && !placeholderName?.trim()) {
-      toast.error("Please select a message.");
+      toast.error("Izberi sporočilo");
       return;
     }
 
@@ -341,26 +341,26 @@ const Modals = ({
       if (isKeeper() || !isCustomMessage) {
         const updatedCondolences = [...data.Condolences, response];
         updateObituary({ ["Condolences"]: updatedCondolences });
-        toast.success("Condolence Created Successfully");
+        toast.success("Sožalje je bilo ustvarjeno");
       } else if (!isKeeper()) {
-        toast.success("Condolence Sent to Keeper for review!");
+        toast.success("Sožalje je bilo poslano Skrbniku v potrditev");
       }
       closeModal();
     } catch (error) {
       if (error.status === 409) {
-        toast.error("You can only add a condolence once every 24 hours.");
+        toast.error("Vsakih 24 ur lahko dodaš samo eno sožalje.");
         closeModal();
       } else {
-        toast.error(
-          error.data?.message || "Error Creating Condolence. Please try again."
-        );
+        // toast.error(
+        //   error.data?.message || "Prišlo je do napake."
+        // );
       }
     }
   };
 
   const addReport = async () => {
     if (!user) {
-      toast.error("You must log in to update.");
+      toast.error("Potrebno je biti prijavljen");
       return;
     }
     if (isCompany()) {
@@ -369,7 +369,7 @@ const Modals = ({
     }
 
     if (!name?.trim() || !message?.trim()) {
-      toast.error("Please enter complete details before submitting.");
+      toast.error("Dodaj vse podatke");
       return;
     }
 
@@ -389,7 +389,7 @@ const Modals = ({
       closeModal();
     } catch (error) {
       console.error(`Failed to submit report`, error);
-      toast.error("Error submitting report");
+      // toast.error("Napaka pri pošiljanju");
     }
   };
 
@@ -429,7 +429,7 @@ const Modals = ({
   };
   const updateMemory = async (field, value, allow) => {
     if (!user) {
-      toast.error("You must log in to update.");
+      toast.error("Potrebno je biti prijavljen");
       return;
     }
     if (isCompany()) {
@@ -438,7 +438,7 @@ const Modals = ({
     }
 
     if (!isKeeper()) {
-      toast.error("Only keepers can update!");
+      toast.error("Samo Skrbnik lahko to dopolni, spreminja");
       return;
     }
     if (field === "events") {
@@ -454,7 +454,7 @@ const Modals = ({
       );
 
       if (!isValidEvent) {
-        toast.error("Please fill in all event details.");
+        toast.error("Dodaj vse podatke");
         return;
       }
 
@@ -467,12 +467,12 @@ const Modals = ({
       value = JSON.stringify(updatedEvents);
     } else if (field === "picture") {
       if (!value) {
-        toast.error("No image selected!");
+        toast.error("Dodaj sliko");
         return;
       }
     } else {
       if (!value.trim() && field !== "symbol") {
-        toast.error(`${field} field is empty`);
+        toast.error(`${field} Polje je prazno`);
         return;
       }
     }
@@ -485,7 +485,7 @@ const Modals = ({
     try {
       const response = await obituaryService.updateObituary(data.id, formData, allow);
       console.log(`${field} updated successfully!`, response);
-      toast.success(`${field} updated successfully!`);
+      toast.success(`${field} Posodobljeno`);
 
       if (field === "picture") {
         setUploadedImage(URL.createObjectURL(value));
@@ -501,7 +501,7 @@ const Modals = ({
       closeModal();
     } catch (error) {
       console.error(`Failed to update ${field}:`, error);
-      toast.error(`Failed to update ${field}`);
+      toast.error(`Napaka pri posodabljanju ${field}`);
     }
   };
 
@@ -771,7 +771,7 @@ const Modals = ({
   const submitNotification = async () => {
     try {
       if (!emails.length || !notifyMessage) {
-        toast.error("Fill all details");
+        toast.error("Izpolni vsa polja.");
         return;
       }
 
@@ -781,9 +781,9 @@ const Modals = ({
         obituaryId: data.id,
       });
       setIsShowModal(false);
-      toast.success("Request submitted successfully");
+      toast.success("Poslano");
     } catch (err) {
-      toast.error("Some error occured");
+      // toast.error("Prišlo je do napake.");
     }
   };
 

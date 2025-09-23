@@ -4,8 +4,11 @@ import iconMenu from "@/public/icon_menu_black.png";
 import back_icon from "@/public/back_icon.png";
 import telephone_icon from "@/public/telephone_icon.png";
 import classNames from "classnames";
+import { useRouter } from "next/navigation";
 
-function ObituaryHeader({ from, data, handleCloseModal }) {
+function ObituaryHeader({ from, data, handleCloseModal, showHamburger= true }) {
+    const router = useRouter();
+
   return (
     <header
       key={data?.id}
@@ -26,7 +29,7 @@ function ObituaryHeader({ from, data, handleCloseModal }) {
                      "
           >
             <div className="flex items-center h-full">
-              <div className="flex flex-col">
+              <div className="flex flex-col" onClick={() => router.back()} >
                 <Image
                   src={back_icon}
                   className="
@@ -94,14 +97,14 @@ function ObituaryHeader({ from, data, handleCloseModal }) {
                     className="w-[40px] h-[40px] desktop:w-[50px] desktop:h-[50px]"
                   />
                 </button>
-              ) : (
+              ) : showHamburger ? (
                 <Image
                   src={iconMenu}
                   className="
                   h-5 w-6 tablet:h-[26.67px] tablet:w-[32px] desktop:h-[26.67px] desktop:w-[30.73px] 
                    "
                 />
-              )}
+              ): null}
             </div>
           </div>
         </div>

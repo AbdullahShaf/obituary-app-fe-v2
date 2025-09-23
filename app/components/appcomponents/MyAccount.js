@@ -148,7 +148,7 @@ const MyAccount = () => {
         }
       }
     } catch (e) {
-      toast.error("Napaka pri pridobivanju kartic.");
+      // toast.error("Napaka pri pridobivanju kartic.");
       console.error("getAllCards failed:", e);
     }
   };

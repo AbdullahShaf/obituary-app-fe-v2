@@ -54,7 +54,7 @@ const ContactFormPage = () => {
     } catch (err) {
       resetForm();
       setLoading(false);
-      toast.error('Some error occured');
+      // toast.error('Some error occured');
     }
   }
 

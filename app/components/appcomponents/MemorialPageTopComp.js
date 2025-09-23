@@ -146,9 +146,9 @@ const MemorialPageTopComp = ({
         set_Id("3");
         toast.error("You can only burn one candle per 24 hours.");
       } else {
-        toast.error(
-          error.data?.message || "Error burning candle. Please try again."
-        );
+        // toast.error(
+        //   error.data?.message || "Error burning candle. Please try again."
+        // );
       }
     }
   };

@@ -98,9 +98,9 @@ const PostConfirmation = () => {
       const response = await obituaryService.fetchPendingPosts();
 
       if (response.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Something went wrong. Please try again!"
+        // );
         return;
       }
       console.log(response);
@@ -123,9 +123,9 @@ const PostConfirmation = () => {
       const response = await obituaryService.changePostStatus(postData);
 
       if (response.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Something went wrong. Please try again!"
+        // );
         return;
       }
       toast.success("Post Approved");
@@ -141,7 +141,7 @@ const PostConfirmation = () => {
       console.log(response);
     } catch (err) {
       console.error("Error Fetching Pending Posts:", err);
-      toast.error(err.message || "Failed To Pending Posts:");
+      // toast.error(err.message || "Failed To Pending Posts:");
     }
   };
 

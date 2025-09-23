@@ -81,11 +81,11 @@ export default function AccountSettings() {
           ...updated,
         }));
       } else {
-        toast.error("Error Updating City");
+        // toast.error("Error Updating City");
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error Updating City");
+      // toast.error("Error Updating City");
     }
   };
 

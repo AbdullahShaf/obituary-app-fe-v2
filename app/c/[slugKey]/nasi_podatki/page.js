@@ -105,16 +105,16 @@ export default function AccountSettings() {
           toast.success("City updated and session refreshed!");
           setSelectedCity(item);
         } else {
-          toast.error("Failed to update city");
+          // toast.error("Failed to update city");
         }
       } catch (error) {
-        toast.error("Error updating city");
+        // toast.error("Error updating city");
       } finally {
         setLoading(false);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error Updating City");
+      // toast.error("Error Updating City");
     }
   };
 

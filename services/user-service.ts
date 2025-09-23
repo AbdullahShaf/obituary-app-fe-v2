@@ -25,7 +25,7 @@ const getMyUser = async () => {
     const response = await axios.get(endpoint);
     return response.data;
   } catch (error: unknown) {
-    return new Error("Network error or no response");
+    // return new Error("Network error or no response");
   }
 };
 
@@ -43,7 +43,7 @@ const updateMyUser = async (userData: {
     const response = await axios.patch(endpoint, userData);
     return response.data;
   } catch (error: unknown) {
-    return new Error("Network error or no response");
+    // return new Error("Network error or no response");
   }
 };
 
@@ -59,7 +59,7 @@ const updateUserAndCompany = async (formData: FormData, id: string) => {
 
     return response.data;
   } catch (error: unknown) {
-    return new Error("Network error or no response");
+    // return new Error("Network error or no response");
   }
 };
 
@@ -70,7 +70,7 @@ const deleteMyUser = async () => {
     const response = await axios.delete(endpoint);
     return response.data;
   } catch (error: unknown) {
-    return new Error("Network error or no response");
+    // return new Error("Network error or no response");
   }
 };
 
@@ -93,7 +93,7 @@ const getMyCards = async () => {
     const response = await axios.get(endpoint);
     return response.data;
   } catch (error: unknown) {
-    return new Error("Network error or no response");
+    // return new Error("Network error or no response");
   }
 };
 
@@ -114,7 +114,7 @@ const getMyKeeperStatus = async () => {
     const response = await axios.get(endpoint);
     return response.data;
   } catch (error: unknown) {
-    return new Error("Network error or no response");
+    // return new Error("Network error or no response");
   }
 };
 
@@ -155,7 +155,7 @@ const getMyKeeperNotifications = async () => {
     const response = await axios.get(endpoint);
     return response.data;
   } catch (error: unknown) {
-    return new Error("Network error or no response");
+    // return new Error("Network error or no response");
   }
 };
 

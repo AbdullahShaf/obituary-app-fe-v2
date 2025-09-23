@@ -31,9 +31,9 @@ const LastObituariesList = ({ city = "", userId }) => {
       const response = await obituaryService.getCompanyPageObituary(payload);
 
       if (response.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Something went wrong. Please try again!"
+        // );
         return;
       }
 

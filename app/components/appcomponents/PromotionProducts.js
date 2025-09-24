@@ -3,22 +3,23 @@
 import React, { useEffect, useState } from "react";
 import { FaChevronDown as ChevronDown } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 
 const DigitalMobiCard = () => {
   return (
-    <div className="grid grid-cols-12 tablet:gap-0 mobile:gap-[30px] items-start mobile:items-center justify-normal mobile:justify-center desktop:gap-[80px] w-full h-full">
+    <div className="grid grid-cols-12 gap-[20px] items-center justify-normal desktop:gap-[80px] w-full h-full">
       <div className="col-span-4 mobile:col-span-12 w-full">
         <Image
           src="/digital-mobi.png"
           alt="admin-benefit-1"
-          className="w-[200px] desktop:w-[235px] h-auto shrink-0 mx-auto"
+          className="w-[250px] desktop:w-[300px] h-auto shrink-0 mx-auto mobile:hidden"
           width={281}
           height={221}
         />
       </div>
-      <div className="col-span-8 mobile:col-span-12 flex flex-col items-start justify-between gap-[33px]">
+      <div className="col-span-8 mobile:col-span-12 flex flex-col items-start gap-[43px] w-full mobile:gap-[22px]">
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px]">
             → UPORABA
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] ml-[22px]">
@@ -36,8 +37,16 @@ const DigitalMobiCard = () => {
             (npr. kartico sožalja).
           </p>
         </div>
+
+        <Image
+          src="/digital-mobi.png"
+          alt="admin-benefit-1"
+          className="w-[150px] h-auto shrink-0 self-center mx-auto hidden mobile:block"
+          width={150}
+          height={221}
+        />
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
+          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px]">
             <span className="text-[#EB1D1D]">→ ZAKAJ</span> SPLOH PROMOVIRATI?
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] ml-[22px]">
@@ -66,17 +75,17 @@ const DigitalMobiCard = () => {
 
 const AdministratorCard = () => {
   return (
-    <div className="grid grid-cols-12 tablet:gap-0 mobile:gap-[30px] items-start mobile:items-center justify-normal mobile:justify-center desktop:gap-[80px] w-full h-full">
+    <div className="grid grid-cols-12  gap-[20px] items-start mobile:items-center justify-normal mobile:justify-center desktop:gap-[80px] w-full h-full">
       <div className="col-span-4 mobile:col-span-12 w-full">
         <Image
           src="/iphone-x-7.png"
           alt="admin-benefit-1"
-          className="w-[200px] desktop:w-[235px] h-auto mx-auto shrink-0"
+          className="w-[250px] desktop:w-[300px] h-auto shrink-0 mx-auto mobile:hidden"
           width={281}
           height={221}
         />
       </div>
-      <div className="col-span-8 mobile:col-span-12 flex flex-col items-start justify-between gap-[33px]">
+      <div className="col-span-8 mobile:col-span-12 flex flex-col items-start justify-between gap-[43px] mobile:gap-[22px]">
         <div>
           <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
             → UPORABA
@@ -96,6 +105,15 @@ const AdministratorCard = () => {
             osebno poznanstvo)
           </p>
         </div>
+
+        <Image
+          src="/iphone-x-7.png"
+          alt="admin-benefit-1"
+          className="w-[150px] h-auto shrink-0 self-center mx-auto hidden mobile:block"
+          width={150}
+          height={221}
+        />
+
         <div>
           <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
             <span className="text-[#EB1D1D]">→ ZAKAJ</span> SPLOH PROMOVIRATI?
@@ -126,17 +144,17 @@ const AdministratorCard = () => {
 
 const QRCodeInfo = () => {
   return (
-    <div className="grid grid-cols-12 tablet:gap-0 mobile:gap-[30px] items-start mobile:items-center justify-normal mobile:justify-center desktop:gap-[80px] w-full h-full">
+    <div className="grid grid-cols-12 gap-[20px] items-start mobile:items-center justify-normal mobile:justify-center desktop:gap-[80px] w-full h-full">
       <div className="col-span-4 mobile:col-span-12 w-full">
         <Image
           src="/qr-code.png"
           alt="admin-benefit-1"
-          className="w-[320px] tablet:w-[200px] desktop:w-[235px] h-auto mx-auto shrink-0"
+          className="w-[250px] desktop:w-[300px] h-auto shrink-0 mx-auto mobile:hidden"
           width={281}
           height={221}
         />
       </div>
-      <div className="col-span-8 mobile:col-span-12 flex flex-col items-start justify-between gap-[33px]">
+      <div className="col-span-8 mobile:col-span-12 flex flex-col items-start justify-between gap-[43px] mobile:gap-[22px]">
         <div>
           <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
             → UPORABA
@@ -152,13 +170,21 @@ const QRCodeInfo = () => {
         </div>
         <div>
           <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
-            → KOMU JE NAMENJENO
+            → ZA KOGA
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px]">
             Vsem. Kode so tudi za davno preminule. → Pomeni, da je vsak, ki
             stopi v trgovino tudi potencialna stranka.
           </p>
         </div>
+
+        <Image
+          src="/qr-code.png"
+          alt="admin-benefit-1"
+          className="w-[251px] h-auto shrink-0 self-center mx-auto hidden mobile:block"
+          width={150}
+          height={221}
+        />
         <div>
           <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
             <span className="text-[#EB1D1D]">→ ZAKAJ</span> SPLOH PROMOVIRATI?
@@ -185,17 +211,17 @@ const QRCodeInfo = () => {
 
 const PublishingObituaries = () => {
   return (
-    <div className="grid grid-cols-12 tablet:gap-0 mobile:gap-[30px] items-start mobile:items-center justify-normal mobile:justify-center desktop:gap-[80px] w-full h-full">
+    <div className="grid grid-cols-12 gap-[20px] items-start mobile:items-center justify-normal mobile:justify-center desktop:gap-[80px] w-full h-full">
       <div className="col-span-4 mobile:col-span-12 w-full">
         <Image
           src="/prva-c.png"
           alt="admin-benefit-1"
-          className="w-[200px] desktop:w-[235px] h-auto mx-auto shrink-0"
+          className="w-[250px] desktop:w-[300px] h-auto shrink-0 mx-auto mobile:hidden"
           width={281}
           height={221}
         />
       </div>
-      <div className="col-span-8 mobile:col-span-12 flex flex-col items-start justify-between gap-[33px]">
+      <div className="col-span-8 mobile:col-span-12 flex flex-col items-start justify-between gap-[43px] mobile:gap-[22px]">
         <div>
           <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
             → UPORABA
@@ -214,6 +240,13 @@ const PublishingObituaries = () => {
             Najbližnji pokojniku (potrebno je priložiti mrliški list)
           </p>
         </div>
+        <Image
+          src="/prva-c.png"
+          alt="admin-benefit-1"
+          className="w-[150px] h-auto shrink-0 self-center mx-auto hidden mobile:block"
+          width={150}
+          height={221}
+        />
         <div>
           <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
             <span className="text-[#EB1D1D]">→ ZAKAJ</span> SPLOH PROMOVIRATI?
@@ -244,7 +277,7 @@ const PublishingObituaries = () => {
 const UniqueFeature = () => {
   return (
     <div className="text-center space-y-[80px] px-[10px] desktop:px-[100px]">
-      <div className="space-y-2">
+      <div className="space-y-4">
         <p className="text-[20px] font-[400] text-[#3090D5] leading-normal mb-2">
           DIGITALNI PRODUKTI
         </p>
@@ -252,10 +285,10 @@ const UniqueFeature = () => {
           Edinstvena priložnost za <span className="font-[800]">močno</span>{" "}
           promocijo
         </h4>
-        <p className="desktop:text-[24px] text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5">
+        <p className="text-[24px] mobile:text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5">
           cvetličarne, ki je ne omogoča nobena druga rešitev
         </p>
-        <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+        <p className="text-[18px] mobile:text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leadin-[24px] flex flex-col gap-1.5">
           Izkoristite to zelo učinkovito orodje za vašo promocijo!
         </p>
       </div>
@@ -306,16 +339,19 @@ const UniqueFeature = () => {
         </p>
       </div>
 
-      <div className="space-y-2">
-        <h4 className="desktop:text-[40px] tablet:text-[36px] mobile:text-[24px] font-[400] text-[#3C3E41] mobile:leading-[28px] leading-[48px]">
+      <div className="space-y-4">
+        <h4 className="desktop:text-[40px] tablet:text-[34px] mobile:text-[24px] font-[400] text-[#3C3E41] mobile:leading-[28px] leading-[48px]">
           Zdaj na začetku je pravi trenutek in učinek največji
         </h4>
-        <p className="desktop:text-[24px] text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5">
+        <p className="text-[24px] mobile:text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5">
           in hkrati priložnost za izkoriščenje vseh dodatnih ugodnosti
         </p>
-        <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px]">
+        <p className="text-[18px] mobile:text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leadin-[24px] flex items-center justify-center gap-1.5">
           ki jih omogoča otvoritvena akcija. Oglejte si jih{" "}
-          <span className="underline text-[#3090D5]">tukaj</span>.
+          <span className="underline text-[#3090D5]">
+            <Link href="/c-priloznost">tukaj</Link>
+          </span>
+          .
         </p>
       </div>
 
@@ -405,7 +441,7 @@ function PromotionProducts() {
                   />
                 </button>
                 {visibleIndexes[index] && (
-                  <div className="py-12 w-full">{product?.answer}</div>
+                  <div className="py-12 mobile:py-6 w-full">{product?.answer}</div>
                 )}
               </React.Fragment>
             ))

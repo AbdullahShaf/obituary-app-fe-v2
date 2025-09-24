@@ -148,7 +148,7 @@ function DriverPage() {
                         <Link href="/registracija">(tukaj)</Link>. Na strani Moj
                         račun lahko že takoj dodate svojo cvetličarno in na
                         seznamu lokalnih cvetličarn bo objavljena takoj{" "}
-                        <Link href="/registracija">(tukaj)</Link>
+                        <Link href="/cvetlicarne?city=Ljubljana">(tukaj)</Link>
                       </span>
                       <span className="hidden tablet:block">
                         Če imate več cvetličarn, dodate vsako posebej. Prikazane

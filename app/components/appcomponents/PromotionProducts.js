@@ -19,7 +19,7 @@ const DigitalMobiCard = () => {
       </div>
       <div className="col-span-8 mobile:col-span-12 flex flex-col items-start gap-[43px] w-full mobile:gap-[22px]">
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px]">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px]">
             → UPORABA
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] ml-[22px]">
@@ -28,7 +28,7 @@ const DigitalMobiCard = () => {
           </p>
         </div>
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
             → ZA KOGA
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] ml-[22px]">
@@ -46,7 +46,7 @@ const DigitalMobiCard = () => {
           height={221}
         />
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px]">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px]">
             <span className="text-[#EB1D1D]">→ ZAKAJ</span> SPLOH PROMOVIRATI?
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] ml-[22px]">
@@ -59,10 +59,10 @@ const DigitalMobiCard = () => {
           </p>
         </div>
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
             <span className="text-[#EB1D1D]">→ 1 MINUTA</span> VAŠEGA ČASA
           </p>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5 ml-[22px]">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5 ml-[22px]">
             Za izpolniti so 3 polja (katera osmrtnica, katera kartica,
             uporabnikov email). Vse je avtomatizirano; uporabnik dobi kartico na
             svoj račun in jo lahko takoj pošlje naprej.
@@ -87,7 +87,7 @@ const AdministratorCard = () => {
       </div>
       <div className="col-span-8 mobile:col-span-12 flex flex-col items-start justify-between gap-[43px] mobile:gap-[22px]">
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
             → UPORABA
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] ml-[22px]">
@@ -97,7 +97,7 @@ const AdministratorCard = () => {
           </p>
         </div>
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
             → KOMU JE NAMENJENO
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] ml-[22px]">
@@ -115,7 +115,7 @@ const AdministratorCard = () => {
         />
 
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
             <span className="text-[#EB1D1D]">→ ZAKAJ</span> SPLOH PROMOVIRATI?
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] ml-[22px]">
@@ -126,10 +126,10 @@ const AdministratorCard = () => {
           </p>
         </div>
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
             <span className="text-[#EB1D1D]">→ 1 MINUTA</span> VAŠEGA ČASA
           </p>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5 ml-[22px]">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5 ml-[22px]">
             In vaš klient postane skrbnik spominske strani. Brezplačno dobi
             nekaj koristnega in želenega v težkih trenutkih, ki jih trenutno
             preživlja. Nekaj, kar ohranja vez s pokojnim in istočasno zbližuje
@@ -156,7 +156,7 @@ const QRCodeInfo = () => {
       </div>
       <div className="col-span-8 mobile:col-span-12 flex flex-col items-start justify-between gap-[43px] mobile:gap-[22px]">
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
             → UPORABA
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px]">
@@ -169,7 +169,7 @@ const QRCodeInfo = () => {
           </p>
         </div>
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
             → ZA KOGA
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px]">
@@ -186,10 +186,10 @@ const QRCodeInfo = () => {
           height={221}
         />
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
             <span className="text-[#EB1D1D]">→ ZAKAJ</span> SPLOH PROMOVIRATI?
           </p>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
             QR kode na spomenikih so popolna novost na trgu in tako zanimiva in
             uporabna, da se o njej zelo govori - in s tem tudi o vas, ki to
             omogočate. Pomeni močno reklamo najboljše vrste za cvetličarne, ki
@@ -223,7 +223,7 @@ const PublishingObituaries = () => {
       </div>
       <div className="col-span-8 mobile:col-span-12 flex flex-col items-start justify-between gap-[43px] mobile:gap-[22px]">
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
             → UPORABA
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] ml-[22px]">
@@ -233,7 +233,7 @@ const PublishingObituaries = () => {
           </p>
         </div>
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
             → ZA KOGA
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] ml-[22px]">
@@ -248,10 +248,10 @@ const PublishingObituaries = () => {
           height={221}
         />
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
             <span className="text-[#EB1D1D]">→ ZAKAJ</span> SPLOH PROMOVIRATI?
           </p>
-          <p className="desktop:text-[18px] tablet:text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5 ml-[22px]">
+          <p className="tablet:text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5 ml-[22px]">
             Mnogi žalujoči čutijo dolžnost objaviti osmrtnico v različnih
             medijih, tudi tiskanih in radiu in v številnih občinah pogrebna
             podjetja zamujajo pri objavah oziroma jih izvajajo šele, ko je znan
@@ -265,7 +265,7 @@ const PublishingObituaries = () => {
           </p>
         </div>
         <div>
-          <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
+          <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
             <span className="text-[#EB1D1D]">→ 2 MINUTI</span> VAŠEGA ČASA
           </p>
         </div>
@@ -276,91 +276,146 @@ const PublishingObituaries = () => {
 
 const UniqueFeature = () => {
   return (
-    <div className="text-center space-y-[80px] px-[10px] desktop:px-[100px]">
+    <div className="text-center space-y-[80px] mobile:px-0 tablet:px-[10px] desktop:px-[100px] w-full">
       <div className="space-y-4">
-        <p className="text-[20px] font-[400] text-[#3090D5] leading-normal mb-2">
+        <p className="text-[20px] mobile:text-[14px] font-[400] text-[#3090D5] leading-normal mb-2">
           DIGITALNI PRODUKTI
         </p>
         <h4 className="desktop:text-[40px] tablet:text-[36px] mobile:text-[24px] font-[400] text-[#3C3E41] mobile:leading-[28px] leading-[48px]">
-          Edinstvena priložnost za <span className="font-[800]">močno</span>{" "}
-          promocijo
+          Edinstvena priložnost za <br className="hidden mobile:block" />{" "}
+          <span className="inline mobile:flex items-center justify-center gap-1.5">
+            <span className="font-[800]">močno</span> promocijo{" "}
+            <span className="hidden mobile:block">cvetličarne</span>
+          </span>
         </h4>
-        <p className="text-[24px] mobile:text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5">
+        <p className="text-[24px] mobile:text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5 mobile:hidden">
           cvetličarne, ki je ne omogoča nobena druga rešitev
         </p>
         <p className="text-[18px] mobile:text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leading-[24px] flex flex-col gap-1.5">
-          Izkoristite to zelo učinkovito orodje za vašo promocijo!
+          <span className="block mobile:hidden">
+            Izkoristite to zelo učinkovito orodje za vašo promocijo!
+          </span>
+          <span className="hidden mobile:block">
+            ki je ne omogoča nobena druga rešitev
+          </span>
         </p>
       </div>
 
       <div className="space-y-8 text-left">
         <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
-          Biti na seznamu cvetličarn, ko uporabniki prav to storitev iščejo ali
-          imeti predstavitveno stran, <br /> ki vodi obiskovalce na vaše strani,
-          je dobrodošlo in koristno. Lahko pa je bistveno več od tega.
+          Biti na seznamu cvetličarn, ko uporabniki prav{" "}
+          <br className="hidden mobile:block" /> to storitev iščejo ali imeti
+          predstavitveno stran, <br /> ki vodi obiskovalce na vaše strani, je
+          dobrodošlo <br className="hidden mobile:block" /> in koristno. Lahko
+          pa je bistveno več od tega.
         </p>
 
-        <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+        <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leading-[24px] flex flex-col gap-1.5">
           Samo naše rešitve omogočajo
-          <ul className="list-disc marker:text-[#EB1D1D] ml-4">
+          <ul className="list-disc marker:text-[#EB1D1D] ml-4 mobile:ml-0">
             <li>
-              najboljšo možno promocijo od ust do ust, ki je hkrati najcenejša.
+              <span className="inline mobile:flex items-center gap-2">
+                <div className="size-[2.5px] bg-[#EB1D1D] hidden mobile:inline" />{" "}
+                najboljšo možno promocijo od ust do ust, ki je
+              </span>
+              hkrati najcenejša.
             </li>
             <li>
-              ustvarja ‘wow’ učinek, preseneti, osupne, ostane v spominu,
-              postane tema pogovorov,
+              <span className="inline mobile:flex items-center gap-2">
+                <div className="size-[2.5px] bg-[#EB1D1D] hidden mobile:inline" />
+                ustvarja ‘wow’ učinek, preseneti, osupne, ostane{" "}
+              </span>{" "}
+              v spominu, postane tema pogovorov,
             </li>
             <li>
-              omogoča obuditev zbledelih spominov, za kar vam bodo mnogi ostali
-              dolgo iskreno hvaležni,{" "}
+              <span className="inline mobile:flex items-center gap-2">
+                <div className="size-[2.5px] bg-[#EB1D1D] hidden mobile:inline" />
+                omogoča obuditev zbledelih spominov, za kar{" "}
+              </span>{" "}
+              vam bodo mnogi ostali dolgo iskreno hvaležni,{" "}
             </li>
             <li>
-              in tesnejše povezovanje generacij in rodbin med seboj, kar je
-              neprecenljivo.
+              <span className="inline mobile:flex items-center gap-2">
+                <div className="size-[2.5px] bg-[#EB1D1D] hidden mobile:inline" />
+                in tesnejše povezovanje generacij in{" "}
+              </span>{" "}
+              rodbin med seboj, kar je neprecenljivo.
             </li>
             <li>
-              ustvarja veliko konkurenčno prednost v primerjavi s cvetličarno,
-              ki ni vključena v naš sistem.
+              <span className="inline mobile:flex items-center gap-2">
+                <div className="size-[2.5px] bg-[#EB1D1D] hidden mobile:inline" />
+                ustvarja veliko konkurenčno prednost v{" "}
+              </span>{" "}
+              primerjavi s cvetličarno, ki ni vključena v naš{" "}
+              <br className="hidden mobile:block" /> sistem.
             </li>
           </ul>
         </p>
 
         <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
-          To so prave koristi za podjetje. Ponuja en kup orodij za privabljanje
-          novih klientov in poglabljanje vezi z obstoječimi; daje možnost biti
-          na pravem mestu, ko vas stranke potrebujejo. Prinaša tisto, kar drugi
-          ne → rešitev.
+          To so prave koristi za podjetje. Ponuja en kup{" "}
+          <br className="hidden mobile:block" /> orodij za privabljanje novih
+          klientov in <br className="hidden mobile:block" /> poglabljanje vezi z
+          obstoječimi; daje možnost <br className="hidden mobile:block" /> biti
+          na pravem mestu, ko vas stranke <br className="hidden mobile:block" />{" "}
+          potrebujejo. Prinaša tisto, kar drugi ne → rešitev.
         </p>
 
         <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
-          Vsako darilo, ki ga boste podarili strankam šteje, je koristno,
-          prinaša podjetju veliko več, kot tista minuta, ki je za to potrebna.
-          Je uporabno orodje, most, ki zbližuje vaše podjetje in potrošnike.
+          Vsako darilo, ki ga boste podarili strankam{" "}
+          <br className="hidden mobile:block" /> šteje, je koristno, prinaša
+          podjetju veliko več, kot tista <br className="hidden mobile:block" />{" "}
+          minuta, ki je za to potrebna. Je uporabno{" "}
+          <br className="hidden mobile:block" /> orodje, most, ki zbližuje vaše
+          podjetje in <br className="hidden mobile:block" /> potrošnike.
         </p>
       </div>
 
       <div className="space-y-4">
-        <h4 className="desktop:text-[40px] tablet:text-[34px] mobile:text-[24px] font-[400] text-[#3C3E41] mobile:leading-[28px] leading-[48px]">
+        <h4 className="desktop:text-[40px] tablet:text-[32px] mobile:text-[24px] font-[400] text-[#3C3E41] mobile:leading-[28px] leading-[48px]">
           Zdaj na začetku je pravi trenutek in učinek največji
         </h4>
         <p className="text-[24px] mobile:text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5">
           in hkrati priložnost za izkoriščenje vseh dodatnih ugodnosti
         </p>
         <p className="text-[18px] mobile:text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leading-[24px] flex items-center justify-center gap-1.5">
-          ki jih omogoča otvoritvena akcija. Oglejte si jih{" "}
-          <span className="underline text-[#3090D5]">
-            <Link href="/c-priloznost">tukaj</Link>
+          <span className="inline mobile:hidden">
+            ki jih omogoča otvoritvena akcija. Oglejte si jih{" "}
+            <span className="underline text-[#3090D5]">
+              <Link href="/c-priloznost">tukaj</Link>
+            </span>
+            .
           </span>
-          .
+
+          <span className="hidden mobile:inline">
+            in hkrati priložnost za vse dodatne ugodnosti, <br />
+            ki jih omogoča otvoritvena akcija{" "}
+            <span className="underline text-[#3090D5]"> (tukaj)</span>
+          </span>
         </p>
       </div>
 
-      <p className="text-[16px] mobile:text-[14px] leading-[27px] mobile:leading-[24px] font-[400] text-[#3C3E41]">
-        V primeru, da se konec oktobra ne odločite za nadaljevanje, se dostop do
-        vaše strani prekine in enako privilegiji, vaša cvetličarna pa vseeno
-        ostane brezplačno na listi lokalnih cvetličarn, vendar brez kontaktnih
-        informacij.
-      </p>
+      <div className="flex flex-col gap-y-4">
+        <p className="text-[16px] mobile:text-[14px] leading-[27px] mobile:leading-[24px] font-[400] text-[#3C3E41]">
+          <span className="block mobile:hidden">
+            V primeru, da se konec oktobra ne odločite za nadaljevanje, se
+            dostop do vaše strani prekine in enako privilegiji, vaša cvetličarna
+            pa vseeno ostane brezplačno na listi lokalnih cvetličarn, vendar
+            brez kontaktnih informacij.
+          </span>
+          <span className="hidden mobile:block">
+            V primeru, da se konec oktobra ne odločite za nadaljnje <br />{" "}
+            sodelovanje, se dostop do vaše strani prekine in enako <br />{" "}
+            privilegiji, vaša cvetličarna pa vseeno ostane brezplačno <br /> na
+            listi lokalnih, vendar brez kontaktnih informacij.
+          </span>
+        </p>
+
+        <p className="text-[16px] mobile:text-[14px] leading-[27px] mobile:leading-[24px] font-[400] text-[#3C3E41] hidden mobile:inline">
+          Izgubiti ne morete, če se pridružite, pa četudi <br /> samo za en
+          mesec.
+        </p>
+      </div>
     </div>
   );
 };
@@ -441,7 +496,9 @@ function PromotionProducts() {
                   />
                 </button>
                 {visibleIndexes[index] && (
-                  <div className="py-12 mobile:py-6 w-full">{product?.answer}</div>
+                  <div className="py-12 mobile:py-6 w-full">
+                    {product?.answer}
+                  </div>
                 )}
               </React.Fragment>
             ))

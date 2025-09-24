@@ -130,7 +130,7 @@ export function FAQHeader() {
                   VODIČ
                 </Link>
                 <Image
-                  src={"/faq_header_top.png"}
+                  src={"/ico_arrow.png"}
                   alt="Menu"
                   width={26}
                   height={28}

@@ -41,7 +41,7 @@ function DriverPage() {
     <div className="bg-[#F9EBD4] tablet:bg-[#F9EBD4] mobile:bg-[#F9EBD4] min-h-[100vh]">
       <FAQHeader />
       <div className="flex w-full flex-col  bg-[#D4E6F9]">
-        <div className="bg[#D4E6F9] h-[72px] tablet:h-[80px] desktop:h-[92.02px] desktop:-mt-10 tablet:-mt-3 mobile:-mt-2.5" />
+        <div className="bg[#E0E9F3CC] h-[72px] tablet:h-[80px] desktop:h-[92.02px] desktop:-mt-10 tablet:-mt-3 mobile:-mt-2.5" />
 
         <div className="mobile:flex items-center justify-between hidden h-[30px] bg-[#36556C] px-3">
           <Link href="/c-faq">KAKO ZAČETI</Link>
@@ -50,9 +50,9 @@ function DriverPage() {
         </div>
 
         {/* Hero section */}
-        <div className="relative bg-[#D4E6F9] desktop:min-h-[485px] tablet:min-h-[400px] mobile:min-h-[400px] py-[30px] mobile:py-[20px] tablet:py-[25px]">
+        <div className="relative bg-[#E0E9F3CC] desktop:min-h-[485px] tablet:min-h-[400px] mobile:min-h-[400px] py-[30px] mobile:py-[20px] tablet:py-[25px]">
           <div className="relative max-w-[1200px] w-full flex mx-auto justify-center items-center">
-            <div className="relative desktop:max-w-[1400px] desktop:px-[30px] tablet:px-[10px] mobile:px-[15px] desktop:w-full tablet:w-full mx-auto flex flex-col items-center">
+            <div className="relative desktop:max-w-[1400px] desktop:px-[30px] tablet:px-[10px] mobile:px-0 desktop:w-full tablet:w-full mx-auto flex flex-col items-center">
               <div className="relative w-full flex flex-col items-center gap-[30px] mobile:gap-[20px] tablet:gap-[25px]">
                 <div
                   className="text-center desktop:w-[1000px] tablet:w-full mobile:w-full desktop:flex-shrink-0 tablet:mx-auto mobile:mx-auto desktop:mt-[98.84px] 
@@ -67,20 +67,28 @@ function DriverPage() {
                   </p>
 
                   <p className="mt-[16px] mobile:mt-[12px] tablet:mt-[15px] text-[#3C3E41] tablet:text-center mobile:text-center text-[18px] mobile:text-[16px] tablet:text-[17px] leading-[27px] mobile:leading-[24px] tablet:leading-[25px] font-variation-customOpt18">
-                    Vse našteto je brezplačno in traja do konca oktobra.
-                    <br />
-                    Najkasneje do takrat se vaši privilegiji bodisi avtomatsko
-                    ukinejo ali pa se sklene naročnina.
+                    Vse našteto je brezplačno in traja{" "}
+                    <br className="hidden mobile:block" /> do konca oktobra.
+                    <br className="block mobile:hidden" />
+                    Najkasneje do takrat <br className="hidden mobile:block" />{" "}
+                    se vaši privilegiji bodisi avtomatsko ukinejo{" "}
+                    <br className="hidden mobile:block" /> ali pa se sklene
+                    naročnina.
                   </p>
 
                   <p className="mt-[28px] mobile:mt-[16px] tablet:mt-[20px] text-[#3C3E41] tablet:text-center mobile:text-center text-[18px] mobile:text-[16px] tablet:text-[16px] leading-[27px] mobile:leading-[24px] tablet:leading-[25px] font-variation-customOpt18 mb-[20px] mobile:mb-[15px] tablet:mb-[18px]">
-                    Prvi naročniki (to je ti, ki se odločajo že zdaj v prvem
-                    valu) <br className="hidden tablet:block mobile:hidden" />{" "}
-                    imajo cel kup dodatnih ugodnosti in konkurenčnih prednosti{" "}
-                    <br className="block tablet:hidden mobile:hidden" /> v
+                    Prvi naročniki (to je ti, ki se odločajo že{" "}
+                    <br className="hidden mobile:block" /> zdaj v prvem valu){" "}
+                    <br className="hidden tablet:block mobile:hidden" /> imajo
+                    cel kup dodatnih <br className="hidden mobile:block" />{" "}
+                    ugodnosti in konkurenčnih prednosti{" "}
+                    <br className="block tablet:hidden mobile:hidden" /> v{" "}
+                    <br className="hidden mobile:block" />
                     primerjavi s kasneje pridruženimi{" "}
+                    <br className="hidden mobile:block" />
                     <br className="hidden tablet:block mobile:hidden" /> (in
-                    privilegije lahko bolje izkoristijo že na začetku, ko so
+                    privilegije lahko bolje izkoristijo že na{" "}
+                    <br className="hidden mobile:block" /> začetku, ko so
                     najbolj oglaševalsko odmevni).
                   </p>
                 </div>
@@ -91,14 +99,14 @@ function DriverPage() {
         </div>
 
         {/* List of local florists */}
-        <div className="bg-[#F9EBD466]">
-          <div className="relative max-w-[1029px] tablet:max-w-[740px] py-[125px] tablet:py-[95px] mobile:py-[60px] px-[10px] w-full mx-auto">
+        <div className="bg-[#F1EEE7]">
+          <div className="relative max-w-[1029px] tablet:max-w-[740px] py-[125px] tablet:py-[95px] mobile:py-[60px] px-[10px] mobile:px-1.5 w-full mx-auto">
             <div className="space-y-4">
               <h1 className="text-left desktop:text-[32px] flex desktop:flex-row flex-col desktop:items-start items-center gap-x-2 font-[400] text-[#3C3E41] desktop:leading-[32px] text-[28px] leading-[40px]">
                 <span className="block mobile:text-center">
                   Vpis na seznam lokalnih cvetličarn{" "}
                 </span>
-                <span className="text-left text-[20px] font-[400] leading-[32px] desktop:ext-[28px] mobile:leading-[40px] block">
+                <span className="text-left text-[20px] font-[400] leading-[32px] desktop:text-[28px] mobile:leading-[40px] block">
                   (predviden čas:{" "}
                   <span className="text-[#EB1D1D]">1 minuta</span>)
                 </span>
@@ -137,10 +145,9 @@ function DriverPage() {
                       {/* Tablet */}
                       <span className="hidden tablet:block">
                         Najprej registrirajte svoje podjetje{" "}
-                        <Link href="/registracija">(tukaj)</Link>.
-                        Na strani Moj račun lahko že takoj dodate svojo
-                        cvetličarno in na seznamu lokalnih cvetličarn bo
-                        objavljena takoj{" "}
+                        <Link href="/registracija">(tukaj)</Link>. Na strani Moj
+                        račun lahko že takoj dodate svojo cvetličarno in na
+                        seznamu lokalnih cvetličarn bo objavljena takoj{" "}
                         <Link href="/registracija">(tukaj)</Link>
                       </span>
                       <span className="hidden tablet:block">
@@ -151,15 +158,19 @@ function DriverPage() {
 
                       {/* Mobile */}
                       <span className="hidden mobile:block">
-                        Registriraj se{" "}
-                        <Link href="/registracija">(tukaj)</Link>{" "}
-                        in takoj lahko na strani Moj račun dodaš svojo
-                        cvetličarno in na seznamu lokalnih bo objavljena takoj{" "}
+                        Registriraj se <Link href="/registracija">(tukaj)</Link>{" "}
+                        in takoj lahko na strani Moj{" "}
+                        <br className="hidden mobile:block" /> račun dodaš svojo
+                        cvetličarno in na seznamu{" "}
+                        <br className="hidden mobile:block" /> lokalnih bo
+                        objavljena takoj{" "}
                         <Link href="/registracija">(tukaj)</Link>.
                       </span>
                       <span className="hidden mobile:block">
-                        Če imate več cvetličarn, dodate vsako posebej. Prikazane
-                        bodo vsaka posebej. Enako, če želite oglaševati v več
+                        Če imate več cvetličarn, dodate vsako posebej.{" "}
+                        <br className="hidden mobile:block" /> Prikazane bodo
+                        vsaka posebej. Enako, če želite{" "}
+                        <br className="hidden mobile:block" /> oglaševati v več
                         občinah.
                       </span>
                     </p>
@@ -208,14 +219,18 @@ function DriverPage() {
 
                     {/* Mobile */}
                     <span className="hidden mobile:block">
-                      Istočasno bo omogočeno tudi objavljanje vaše trgovine na
-                      vseh lokalnih osmrtnicah.
+                      Istočasno bo omogočeno tudi objavljanje vaše{" "}
+                      <br className="hidden mobile:block" /> trgovine na vseh
+                      lokalnih osmrtnicah.
                     </span>
                     <span className="hidden mobile:block">
-                      In ne samo to - v kolikor je cvetličarna sama vnesla
-                      osmrtnico, potem je posebej poudarjena in na prvem mestu
-                      med lokalnimi cvetličarnami. Torej, zagotovljena je večja
-                      vidnost.
+                      In ne samo to - v kolikor je cvetličarna sama{" "}
+                      <br className="hidden mobile:block" /> vnesla osmrtnico,
+                      potem je posebej poudarjena{" "}
+                      <br className="hidden mobile:block" /> in na prvem mestu
+                      med lokalnimi cvetličarnami.{" "}
+                      <br className="hidden mobile:block" /> Torej, zagotovljena
+                      je večja vidnost.
                     </span>
                   </p>
                 </div>
@@ -262,18 +277,22 @@ function DriverPage() {
                   </h3>
                   <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
                     <span>
-                      Obstoječ tekst in slike zamenjate s svojimi. Svojo stran
-                      lahko kasneje dopolnjujete, spreminjate, prilagajate
+                      Obstoječ tekst in slike zamenjate s svojimi. Svojo{" "}
+                      <br className="hidden mobile:block" /> stran lahko kasneje
+                      dopolnjujete, spreminjate, prilagajate{" "}
+                      <br className="hidden mobile:block" />
                       vsebino praznikom ali trenutnemu navdihu.
                     </span>
                     <span>
-                      Predloga, na podlagi katere svojo stran izdelate, je{" "}
+                      Predloga, na podlagi katere svojo stran izdelate,{" "}
+                      <br className="hidden mobile:block" /> je{" "}
                       <span className="underline text-[#0A85C2]">tukaj</span>.
-                    </span>
-                    <span>
-                      Vaša stran bo objavljena na naslovu
+                      <br className="hidden mobile:block" /> Vaša stran bo
+                      objavljena na naslovu{" "}
+                      <br className="hidden mobile:block" />
                       osmrtnica.com/nasa-cvetlicarna
                     </span>
+                    <span></span>
                   </p>
                 </div>
 

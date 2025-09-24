@@ -31,6 +31,22 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+async function handle401() {
+  localStorage.clear();
+  sessionStorage.clear();
+
+  // Clear all cookies
+  document.cookie.split(";").forEach((cookie) => {
+    const name = cookie.split("=")[0].trim();
+    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
+  });
+
+  // Try to clear the cache (optional and limited)
+  if ('caches' in window) {
+    const cacheNames = await caches.keys();
+    await Promise.all(cacheNames.map((name) => caches.delete(name)));
+  }
+}
 
 axiosInstance.interceptors.response.use(
   (response) => {
@@ -41,6 +57,7 @@ axiosInstance.interceptors.response.use(
       // toast.error("Ponovno se prijavi");
       // if (window.location.pathname !== "/registracija" && window.location.pathname !== "/" && !window.location.pathname.startsWith("/m/")) {
       if (window.location.pathname.startsWith("/u/") || window.location.pathname.startsWith("/c/") || window.location.pathname.startsWith("/p/")) {
+        handle401();
         window.location.href = "/registracija";
       }
     } else if (error.response.status === 403) {

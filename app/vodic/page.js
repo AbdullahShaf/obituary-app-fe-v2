@@ -6,41 +6,41 @@ import PromotionProducts from "../components/appcomponents/PromotionProducts";
 import { FooterForFaq2 } from "../components/appcomponents/Footer";
 import Link from "next/link";
 
-function TestPage() {
+function DriverPage() {
   const faqData = {
     faqs: [
       {
         question: "V enem stavku - kako dodam cvetličarno med lokalne?",
-        answer: `Registriraj se → na strani Moj Račun klikni Dodaj cvetličarno → izpolni obrazec. Cvetličarna bo dodana takoj.`,
+        answer: `Registriraj se → na strani Moj Račun klikni Dodaj cvetličarno → izpolni obrazec. Cvetličarna bo dodana takoj.`
       },
       {
         question:
           "Ne želim svoje strani, digitalnih produktov, samo vpis med lokalne",
-        answer: `Seveda, niste edini. Stran ni potrebno izdelati/objaviti in digitalnih produktov ni potrebno omenjati.     `,
+        answer: `Seveda, niste edini. Stran ni potrebno izdelati/objaviti in digitalnih produktov ni potrebno omenjati.     `
       },
       {
         question: "Smo cvetličarna. Zakaj bi mi dodajali osmrtnice?",
-        answer: `To je zgolj ena od možnosti, ki jih ponujamo cvetličarnam. Mnoge tega ne potrebujejo in se za to možnost ne bodo odločile.      `,
+        answer: `To je zgolj ena od možnosti, ki jih ponujamo cvetličarnam. Mnoge tega ne potrebujejo in se za to možnost ne bodo odločile.      `
       },
       {
         question: "Zanima me samo brezplačno.",
         answer:
-          "Sredi oktobra vas bomo pozvali k sklenitvi naročnine in če se za to ne odločite, potem enostavo počakajte in konec oktobra bodo preostali privilegiji umaknjeni, vaša cvetličarna pa bo še naprej ostala brezplačno na listi lokalnih cvetličarn, a brez kontaktnih informacij in pojavljala se bo na spodnjem delu.      ",
+          "Sredi oktobra vas bomo pozvali k sklenitvi naročnine in če se za to ne odločite, potem enostavo počakajte in konec oktobra bodo preostali privilegiji umaknjeni, vaša cvetličarna pa bo še naprej ostala brezplačno na listi lokalnih cvetličarn, a brez kontaktnih informacij in pojavljala se bo na spodnjem delu.      "
       },
       {
         question: "Kakšna bo cena po koncu promocije?",
         answer: `10€ mesečno za manjše kraje
                 20€ mesečno za občine nad 20.000 prebivalcev
                 30€ mesečno v Ljubljani
-                V primeru letnega plačila se obračuna samo deset mesecev, zadnja dva meseca sta brezplačno. V primeru prekinitve pogodbe, vrnemo vnaprej plačane mesece nazaj.   `,
-      },
-    ],
+                V primeru letnega plačila se obračuna samo deset mesecev, zadnja dva meseca sta brezplačno. V primeru prekinitve pogodbe, vrnemo vnaprej plačane mesece nazaj.   `
+      }
+    ]
   };
 
   return (
     <div className="bg-[#F9EBD4] tablet:bg-[#F9EBD4] mobile:bg-[#F9EBD4] min-h-[100vh]">
       <FAQHeader />
-      <div className="flex w-full flex-col  bg-gradient-to-br from-[#ECF0F3] to-[#F2F6F9]">
+      <div className="flex w-full flex-col  bg-[#D4E6F9]">
         <div className="bg[#D4E6F9] h-[72px] tablet:h-[80px] desktop:h-[92.02px] desktop:-mt-10 tablet:-mt-3 mobile:-mt-2.5" />
 
         <div className="mobile:flex items-center justify-between hidden h-[30px] bg-[#36556C] px-3">
@@ -62,10 +62,7 @@ function TestPage() {
                     Preprosti vodič
                   </h1>
 
-                  <p
-                    className="text-[24px] mobile:text-[20px] tablet:text-[22px] mobile:text-center tablet:text-center mobile:leading-[28px] tablet:leading-[30px] leading-[48px] mobile:mt-[12px] tablet:mt-[15px] mt-[5px] font-bold mobile:font-variation-customOpt24
-                         font-variation-customOpt24 text-[#3C3E41]"
-                  >
+                  <p className="text-[24px] mobile:text-[20px] tablet:text-[22px] mobile:text-center tablet:text-center mobile:leading-[28px] tablet:leading-[30px] leading-[48px] mobile:mt-[12px] tablet:mt-[15px] mt-[5px] font-bold mobile:font-variation-customOpt24 font-variation-customOpt24 text-[#3C3E41]">
                     za cvetličarne
                   </p>
 
@@ -106,8 +103,12 @@ function TestPage() {
                   <span className="text-[#EB1D1D]">1 minuta</span>)
                 </span>
               </h1>
-              <p className="hidden desktop:flex desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex-col gap-1.5">
-                Najprej registrirajte svoje podjetje (tukaj).
+              <p className="hidden desktop:flex desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] gap-1.5">
+                Najprej registrirajte svoje podjetje
+                <span>
+                  <Link href="/registracija">(tukaj)</Link>
+                </span>
+                .
               </p>
             </div>
 
@@ -120,15 +121,46 @@ function TestPage() {
                       lokalnih cvetličarn
                     </h3>
                     <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
-                      <span>
+                      {/* Desktop */}
+                      <span className="hidden desktop:block">
                         Na strani Moj račun lahko že takoj dodate svojo
                         cvetličarno in na seznamu lokalnih cvetličarn bo
-                        objavljena takoj (tukaj)
+                        objavljena takoj{" "}
+                        <Link href="/cvetlicarne?city=Ljubljana">(tukaj)</Link>
                       </span>
-                      <span>
+                      <span className="hidden desktop:block">
                         Če imate več cvetličarn, dodate vsako posebej. Prikazane
                         bodo vsaka posebej. Enako, če želite oglaševati svoje
                         storitve v več občinah.
+                      </span>
+
+                      {/* Tablet */}
+                      <span className="hidden tablet:block">
+                        Najprej registrirajte svoje podjetje{" "}
+                        <Link href="/registracija">(tukaj)</Link>.
+                        Na strani Moj račun lahko že takoj dodate svojo
+                        cvetličarno in na seznamu lokalnih cvetličarn bo
+                        objavljena takoj{" "}
+                        <Link href="/registracija">(tukaj)</Link>
+                      </span>
+                      <span className="hidden tablet:block">
+                        Če imate več cvetličarn, dodate vsako posebej. Prikazane
+                        bodo vsaka posebej. Enako, če želite oglaševati v več
+                        občinah.
+                      </span>
+
+                      {/* Mobile */}
+                      <span className="hidden mobile:block">
+                        Registriraj se{" "}
+                        <Link href="/registracija">(tukaj)</Link>{" "}
+                        in takoj lahko na strani Moj račun dodaš svojo
+                        cvetličarno in na seznamu lokalnih bo objavljena takoj{" "}
+                        <Link href="/registracija">(tukaj)</Link>.
+                      </span>
+                      <span className="hidden mobile:block">
+                        Če imate več cvetličarn, dodate vsako posebej. Prikazane
+                        bodo vsaka posebej. Enako, če želite oglaševati v več
+                        občinah.
                       </span>
                     </p>
                   </div>
@@ -146,16 +178,43 @@ function TestPage() {
                     na lokalnih osmrtnicah
                   </h3>
                   <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
-                    <span>
+                    {/* Desktop */}
+                    <span className="hidden desktop:block">
                       Istočasno z vnosom na seznam lokalnih cvetličarn bo
                       omogočeno tudi objavljanje vaše trgovine na vseh lokalnih
                       osmrtnicah.
                     </span>
-                    <span>
+                    <span className="hidden desktop:block">
                       In ne samo to - v kolikor je cvetličarna sama vnesla
                       osmrtnico (se pravi, če še prej ni bila objavljena), potem
                       je ta cvetličarna posebej poudarjena in na prvem mestu med
                       lokalnimi cvetličarnami. Torej, zagotovljena je večja
+                      vidnost.
+                    </span>
+
+                    {/* Tablet */}
+                    <span className="hidden tablet:block">
+                      Istočasno z vnosom na seznam lokalnih cvetličarn bo
+                      omogočeno tudi objavljanje vaše trgovine na vseh lokalnih
+                      osmrtnicah.
+                    </span>
+                    <span className="hidden tablet:block">
+                      In ne samo to - v kolikor je cvetličarna sama vnesla
+                      osmrtnico (se pravi, če še prej ni bila objavljena), potem
+                      je ta cvetličarna posebej poudarjena in na prvem mestu med
+                      lokalnimi cvetličarnami. Torej, zagotovljena je večja
+                      vidnost.
+                    </span>
+
+                    {/* Mobile */}
+                    <span className="hidden mobile:block">
+                      Istočasno bo omogočeno tudi objavljanje vaše trgovine na
+                      vseh lokalnih osmrtnicah.
+                    </span>
+                    <span className="hidden mobile:block">
+                      In ne samo to - v kolikor je cvetličarna sama vnesla
+                      osmrtnico, potem je posebej poudarjena in na prvem mestu
+                      med lokalnimi cvetličarnami. Torej, zagotovljena je večja
                       vidnost.
                     </span>
                   </p>
@@ -179,7 +238,7 @@ function TestPage() {
               <div className="hidden desktop:block w-[235px]" />
               <h1 className="mobile:text-center text-left desktop:text-[32px] font-[400] text-[#3C3E41] desktop:leading-[32px] text-[28px] leading-[40px] flex items-center desktop:items-start gap-x-2 flex-row mobile:flex-col">
                 <span className="block">Lastna spletna stran </span>
-                <span className="text-left text-[20px] font-[400] leading-[32px] mobile:text-[28px] mobile:leading-[40px] block">
+                <span className="text-left text-[20px] font-[400] leading-[32px] desktop:ext-[28px] mobile:leading-[40px] block">
                   (predviden čas:{" "}
                   <span className="text-[#EB1D1D]">20 - 30 minut</span>)
                 </span>
@@ -190,7 +249,7 @@ function TestPage() {
               <Image
                 src="/vector.png"
                 alt="admin-benefit-1"
-                className="w-[180px] desktop:w-[235px] shrink-0 mobile:block mt-[20px] tablet:mt-[55px] mobile:mt-[55px]"
+                className="w-[180px] desktop:w-[235px] shrink-0 mt-[20px] tablet:mt-[55px] mobile:hidden"
                 width={281}
                 height={221}
               />
@@ -218,6 +277,14 @@ function TestPage() {
                   </p>
                 </div>
 
+                <Image
+                  src="/vector.png"
+                  alt="admin-benefit-1"
+                  className="w-[187px] shrink-0 mx-auto hidden mobile:block"
+                  width={281}
+                  height={221}
+                />
+
                 <p className="text-[14px] font-[400] text-[#6D778E] leading-[27px] flex flex-col gap-1.5">
                   Lastna stran je uporabno informacijsko okno za manjše, ki
                   svoje spletne strani strani še nimajo in velike, katerim bo
@@ -236,15 +303,17 @@ function TestPage() {
         {/* Secton Four */}
         <div className="bg-[#E7F0FA]">
           <div className="relative max-w-[1029px] tablet:max-w-[740px] desktop:py-[125px] py-[75px] px-[10px] space-y-[60px] w-full mx-auto">
-            <div className="space-y-4">
-              <h1 className="text-left text-[32px] font-[400] text-[#3C3E41] leading-[32px] mobile:text-[28px] mobile:leading-[40px]">
+            <div className="text-left mobile:text-center space-y-3 desktop:space-y-4">
+              <h1 className="text-[32px] leading-[32px] tablet:text-[28px] tablet:leading-[28px] mobile:text-[24px] mobile:leading-[24px] font-[400] text-[#3C3E41] ">
                 Produkti za vašo promocijo{" "}
-                <span className="text-left text-[20px] font-[400] leading-[32px] mobile:text-[28px] mobile:leading-[40px]">
+                <br className="hidden mobile:block" />
+                <span className="desktop:text-[20px] desktop:leading-[32px] text-[18px] tablet:leading-[28px] mobile:leading-[24px] font-[400]">
                   (predviden čas:{" "}
                   <span className="text-[#EB1D1D]">1 minuta</span>)
                 </span>
               </h1>
-              <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+
+              <p className="desktop:text-[20px] leading-[48px] text-[16px] mobile:leading-[24px] font-[400] text-[#3C3E41] flex flex-col gap-1.5">
                 Dodatne možnosti za tiste, ki bodo to želeli izkoristiti -
                 Brezplačna darila za vaše stranke
               </p>
@@ -264,4 +333,4 @@ function TestPage() {
   );
 }
 
-export default TestPage;
+export default DriverPage;

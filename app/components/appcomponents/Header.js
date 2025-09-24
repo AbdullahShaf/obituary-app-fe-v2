@@ -57,6 +57,22 @@ function Header({ onMenuCLick, from, isMegaMenuVisible }) {
 }
 
 export function FAQHeader() {
+    const [windowWidth, setWindowWidth] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth : 0
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <header className="flex flex-col fixed h-[92px] mobile:h-[55px] tablet:h-[80px] left-0 right-0 shadow-md z-50 bg-[#FFFFFF] px-5">
@@ -101,23 +117,28 @@ export function FAQHeader() {
               />
             </Link>
           </div>
-          <Link
-            href={"/resitve-za-cvetlicarne"}
-            className="hidden mobile:flex space-x-6 items-center"
-          >
+          {/* {windowWidth > 0 && windowWidth < 600 && ( */}
+          <div className="desktop:hidden tablet:hidden flex">
             <Link
-              href={"/vodic"}
-              className="flex text-[18px] leading-[24px] font-[400] text-white bg-[#083545]  mobile:w-[72px] rounded-[2px] py-[5px] text-center items-center justify-center"
+              href={"/resitve-za-cvetlicarne"}
             >
-              VODIČ
+              <div className="flex space-x-6 items-center">
+                <Link
+                  href={"/vodic"}
+                  className="flex text-[18px] leading-[24px] font-[400] text-white bg-[#083545]  mobile:w-[72px] rounded-[2px] py-[5px] text-center items-center justify-center"
+                >
+                  VODIČ
+                </Link>
+                <Image
+                  src={"/faq_header_top.png"}
+                  alt="Menu"
+                  width={26}
+                  height={28}
+                />
+              </div>
             </Link>
-            <Image
-              src={"/faq_header_top.png"}
-              alt="Menu"
-              width={26}
-              height={28}
-            />
-          </Link>
+          </div>
+          {/* )} */}
         </div>
       </header>
     </>

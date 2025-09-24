@@ -288,7 +288,7 @@ const UniqueFeature = () => {
         <p className="text-[24px] mobile:text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5">
           cvetličarne, ki je ne omogoča nobena druga rešitev
         </p>
-        <p className="text-[18px] mobile:text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leadin-[24px] flex flex-col gap-1.5">
+        <p className="text-[18px] mobile:text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leading-[24px] flex flex-col gap-1.5">
           Izkoristite to zelo učinkovito orodje za vašo promocijo!
         </p>
       </div>
@@ -346,7 +346,7 @@ const UniqueFeature = () => {
         <p className="text-[24px] mobile:text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5">
           in hkrati priložnost za izkoriščenje vseh dodatnih ugodnosti
         </p>
-        <p className="text-[18px] mobile:text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leadin-[24px] flex items-center justify-center gap-1.5">
+        <p className="text-[18px] mobile:text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leading-[24px] flex items-center justify-center gap-1.5">
           ki jih omogoča otvoritvena akcija. Oglejte si jih{" "}
           <span className="underline text-[#3090D5]">
             <Link href="/c-priloznost">tukaj</Link>

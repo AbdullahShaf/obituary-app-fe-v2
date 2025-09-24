@@ -172,12 +172,12 @@ export const FrequentlyAskedQuestionView2 = ({ from, data }) => {
                         [index]: !prev[index],
                       }))
                     }
-                    className={`flex w-full justify-between items-center h-[48px] border-t border-t-[#D4D4D4] px-3 mobile:px-0 ${
+                    className={`flex w-full justify-between items-center h-[48px] border-t border-t-[#D4D4D4] px-3 mobile:px-1 mobile:py-1 ${
                       visibleIndexes[index] ? "bg-[#083545]" : ""
                     }`}
                   >
                     <div
-                      className={`flex font-variation-customOpt16 font-normal text-[18px] leading-6 text-[#1E2125] text-center ${
+                      className={`flex font-variation-customOpt16 font-normal text-[18px] leading-6 text-[#1E2125] text-center mobile:text-left ${
                         visibleIndexes[index] ? "text-[#FFFFFF]" : ""
                       }`}
                     >
@@ -198,7 +198,7 @@ export const FrequentlyAskedQuestionView2 = ({ from, data }) => {
                     <div
                       key={index}
                       dangerouslySetInnerHTML={{ __html: faq.answer }}
-                      className="text-[#1E2125] w-full prose mt-3 mb-6 px-6 whitespace-pre-line"
+                      className="text-[#1E2125] w-full prose mt-3 mb-6 desktop:px-6 whitespace-pre-line"
                     ></div>
                   )}
                 </React.Fragment>

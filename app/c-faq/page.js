@@ -41,15 +41,12 @@ export default function Faq2() {
     return (
       <div className="bg-[#F9EBD4] tablet:bg-[#F9EBD4] mobile:bg-[#F9EBD4] min-h-[100vh]">
         <FAQHeader />
-        <div className="w-full hidden mobile:flex gap-[16px] absolute top-[80px] left-0 right-0 justify-center items-center">
-          <Link href={"/c-priloznost"} className="w-[140px] h-[35px] flex items-center justify-center rounded-[2px] text-[14px] text-[#FFFFFF]" 
-          style={{background: "linear-gradient(180deg, #0D94E8 4.81%, #1860A3 100%)", border: "2px solid #6D778E"}}>
-          PRILOŽNOST
-          </Link>
-          <Link href={"/c-info"} className="w-[140px] h-[35px] flex items-center justify-center rounded-[2px] text-[14px] text-[#6D778E]" 
-          style={{border: "2px solid #6D778E"}}>
-          CENIK
-          </Link>
+        <div className="w-full hidden mobile:flex gap-[16px] absolute top-[60px] left-0 right-0">
+          <div className="mobile:flex items-center justify-between hidden h-[30px] bg-[#36556C] px-3 w-full">
+            <Link href="/c-faq">KAKO ZAČETI</Link>
+            <Link href="/c-info">CENIK</Link>
+            <Link href="/c-priloznost">PRILOŽNOST</Link>
+          </div>
         </div>
         <div className="flex flex-col items-center justify-center pt-[200px] w-[700px] mx-auto mobile:w-[350px] min-h-[calc(100vh-55px)]">
           <Image src={"/faq_page_icon.png"} alt="FAQ" className="mobile:w-[78px] mobile:h-[78px]" width={94} height={94} />

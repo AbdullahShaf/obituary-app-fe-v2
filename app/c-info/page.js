@@ -15,24 +15,12 @@ export default function Faq1() {
         </h1>
       </div>
 
-      <div className="w-full hidden mobile:flex gap-[16px] absolute top-[80px] left-0 right-0 justify-center items-center">
-        <Link
-          href={"/c-priloznost"}
-          className="w-[140px] h-[35px] flex items-center justify-center rounded-[2px] text-[14px] text-[#FFFFFF]"
-          style={{
-            background: "linear-gradient(180deg, #0D94E8 4.81%, #1860A3 100%)",
-            border: "2px solid #6D778E",
-          }}
-        >
-          PRILOŽNOST
-        </Link>
-        <Link
-          href={"/c-info"}
-          className="w-[140px] h-[35px] flex items-center justify-center rounded-[2px] text-[14px] text-[#6D778E]"
-          style={{ border: "2px solid #6D778E" }}
-        >
-          CENIK
-        </Link>
+      <div className="w-full hidden mobile:flex gap-[16px] absolute top-[60px] left-0 right-0">
+        <div className="mobile:flex items-center justify-between hidden h-[30px] bg-[#36556C] px-3 w-full">
+          <Link className="text-white" href="/c-faq">KAKO ZAČETI</Link>
+          <Link className="text-white" href="/c-info">CENIK</Link>
+          <Link className="text-white" href="/c-priloznost">PRILOŽNOST</Link>
+        </div>
       </div>
 
       <div className="flex flex-col items-center pt-[200px] w-full px-4 max-w-[720px] mx-auto">

@@ -70,6 +70,11 @@ const headerLinkSets = {
     { label: "Politika zasebnosti", path: "/politika-zasebnosti", active: false },
     { label: "Piškotki", path: "/piskotki", active: false },
   ],
+  "/vodic": [
+    { label: "Cvetličarne", path: "/cvetlicarne", active: false },
+    { label: "Preprosti vodič", path: "/vodic", active: true },
+    { label: "Pogrebna podjetja", path: "/pogrebna-p", active: false }
+  ]
 };
 
 function CommonHeader({ currentPage }) {

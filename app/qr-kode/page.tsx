@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description:
       "Sodobni in trajni način ohranjanja spomina - QR kode za nagrobnike.",
     type: "website",
-    url: "/qr-kode-za-nagrobnike",
+    url: "/qr-kode",
   },
 };
 
@@ -651,8 +651,8 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                           <path d="M16.9184 10.9991L26.935 0.578125L29.7969 3.55555L16.9184 16.9539L4.04017 3.55555L6.90201 0.578125L16.9184 10.9991Z" fill="#3C3E41"/>
                           </g>
                           <defs>
-                          <filter id="filter0_d_9053_55410" x="0.0390625" y="0.578125" width="33.7578" height="24.375" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                          <filter id="filter0_d_9053_55410" x="0.0390625" y="0.578125" width="33.7578" height="24.375" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                          <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                           <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                           <feOffset dy="4"/>
                           <feGaussianBlur stdDeviation="2"/>

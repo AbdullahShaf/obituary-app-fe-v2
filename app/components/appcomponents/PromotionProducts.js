@@ -496,7 +496,7 @@ function PromotionProducts() {
                   />
                 </button>
                 {visibleIndexes[index] && (
-                  <div className="py-12 mobile:py-6 w-full">
+                  <div className="py-12 mobile:py-0 w-full">
                     {product?.answer}
                   </div>
                 )}

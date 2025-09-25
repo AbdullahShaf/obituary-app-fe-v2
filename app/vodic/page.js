@@ -43,10 +43,12 @@ function DriverPage() {
       <div className="flex w-full flex-col  bg-[#D4E6F9]">
         <div className="bg-[#E0E9F3CC] h-[72px] tablet:h-[80px] desktop:h-[92.02px] desktop:-mt-10 tablet:-mt-3 mobile:-mt-2.5" />
 
-        <div className="mobile:flex items-center justify-between hidden h-[30px] bg-[#36556C] px-3">
-          <Link href="/c-faq">KAKO ZAČETI</Link>
-          <Link href="/c-info">CENIK</Link>
-          <Link href="/c-priloznost">PRILOŽNOST</Link>
+        <div className="bg-[#36556C]">
+          <div className="mobile:flex items-center justify-between hidden h-[30px] bg-[#36556C] px-3 mobile:max-w-[348px] mx-auto">
+            <Link href="/c-faq">KAKO ZAČETI</Link>
+            <Link href="/c-info">CENIK</Link>
+            <Link href="/c-priloznost">PRILOŽNOST</Link>
+          </div>
         </div>
 
         {/* Hero section */}
@@ -56,17 +58,31 @@ function DriverPage() {
               <div className="relative w-full flex flex-col items-center gap-[30px] mobile:gap-[20px] tablet:gap-[25px]">
                 <div
                   className="text-center desktop:w-[1000px] tablet:w-full mobile:w-full desktop:flex-shrink-0 tablet:mx-auto mobile:mx-auto desktop:mt-[98.84px] 
-                    tablet:mt-[40px] mobile:mt-[20px] flex flex-col mobile:items-center tablet:items-center desktop:px-0 tablet:px-[10px] mobile:px-[15px]"
+                    tablet:mt-[40px] mobile:mt-[20px] flex flex-col mobile:items-center tablet:items-center desktop:px-0 tablet:px-[10px] mobile:px-0"
                 >
-                  <h1 className="text-[#3C3E41] text-[40px] desktop:whitespace-nowrap mobile:text-[28px] tablet:text-[32px] mobile:text-center tablet:text-center leading-[48px] mobile:leading-[34px] tablet:leading-[38px] mobile:font-variation-customOpt28 font-variation-customOpt40">
+                  <h1 className="text-[#3C3E41] text-[40px] desktop:whitespace-nowrap mobile:text-[28px] tablet:text-[32px] mobile:text-center tablet:text-center leading-[48px] mobile:leading-[48px] tablet:leading-[38px] mobile:font-variation-customOpt28 font-variation-customOpt40">
                     Preprosti vodič
                   </h1>
 
-                  <p className="text-[24px] mobile:text-[20px] tablet:text-[22px] mobile:text-center tablet:text-center mobile:leading-[28px] tablet:leading-[30px] leading-[48px] mobile:mt-[12px] tablet:mt-[15px] mt-[5px] font-bold mobile:font-variation-customOpt24 font-variation-customOpt24 text-[#3C3E41]">
+                  <p className="text-[24px] mobile:text-[20px] tablet:text-[22px] mobile:text-center tablet:text-center mobile:leading-[28px] tablet:leading-[30px] leading-[48px] tablet:mt-[15px] font-bold mobile:font-variation-customOpt24 font-variation-customOpt24 text-[#3C3E41]">
                     za cvetličarne
                   </p>
 
-                  <p className="mt-[16px] mobile:mt-[12px] tablet:mt-[15px] text-[#3C3E41] tablet:text-center mobile:text-center text-[18px] mobile:text-[16px] tablet:text-[17px] leading-[27px] mobile:leading-[24px] tablet:leading-[25px] font-variation-customOpt18">
+                  <div className="mt-10 text-[#3C3E41] tablet:text-center mobile:text-center text-[18px] tablet:text-[17px] leading-[27px] mobile:leading-[24px] tablet:leading-[25px] font-variation-customOpt18 mobile:max-w-[337px] mobile:mx-auto mobile:text-[18px]">
+                    <p className="mobile:hidden">Vse našteto je brezplačno in traja do konca oktobra.</p>
+                    <p className="mobile:hidden">Najkasneje do takrat se vaši privilegiji bodisi avtomatsko ukinejo ali pa se sklene naročnina.</p>
+                    <p className="hidden mobile:block">Vse spodaj našteto je brezplačno in traja do konca oktobra. Najkasneje do takrat    se vaši privilegiji bodisi avtomatsko ukinejo ali pa se sklene naročnina.</p>
+                    <div className="mt-10">
+                      <p className="hidden mobile:block">Prvi naročniki (to je ti, ki se odločajo že zdaj v prvem valu) imajo precej dodatnih ugodnosti in konkurenčnih prednosti v primerjavi s kasneje pridruženimi (in privilegije lahko bolje izkoristijo že na začetku, ko so bolj oglaševalsko odmevni).</p>
+                      <p className="desktop:hidden mobile:hidden">Prvi naročniki (to je ti, ki se odločajo že zdaj v prvem valu)</p>
+                      <p className="desktop:hidden mobile:hidden">imajo precej dodatnih ugodnosti in konkurenčnih prednosti v primerjavi s kasneje pridruženimi</p>
+                      <p className="desktop:hidden mobile:hidden">(in privilegije lahko bolje izkoristijo že na začetku, ko so najbolj oglaševalsko odmevni).</p>
+                      <p className="hidden desktop:block">Prvi naročniki (to je ti, ki se odločajo že zdaj v prvem valu) imajo cel kup dodatnih ugodnosti in konkurenčnih prednosti </p>
+                      <p className="hidden desktop:block">v primerjavi s kasneje pridruženimi (in privilegije lahko bolje izkoristijo že na začetku, ko so najbolj oglaševalsko odmevni).</p>
+                    </div>
+                  </div>
+
+                  {/* <p className="mt-[16px] mobile:mt-[32px] tablet:mt-[15px] text-[#3C3E41] tablet:text-center mobile:text-center text-[18px] mobile:text-[16px] tablet:text-[17px] leading-[27px] mobile:leading-[24px] tablet:leading-[25px] font-variation-customOpt18">
                     Vse našteto je brezplačno in traja{" "}
                     <br className="hidden mobile:block" /> do konca oktobra.
                     <br className="block mobile:hidden" />
@@ -90,7 +106,7 @@ function DriverPage() {
                     privilegije lahko bolje izkoristijo že na{" "}
                     <br className="hidden mobile:block" /> začetku, ko so
                     najbolj oglaševalsko odmevni).
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
@@ -100,13 +116,13 @@ function DriverPage() {
 
         {/* List of local florists */}
         <div className="bg-[#F1EEE7]">
-          <div className="relative max-w-[1029px] tablet:max-w-[740px] py-[125px] tablet:py-[95px] mobile:py-[60px] px-[10px] mobile:px-1.5 w-full mx-auto">
+          <div className="relative max-w-[1029px] tablet:max-w-[740px] py-[125px] mobile:max-w-[348px]  tablet:py-[95px] mobile:py-[60px] px-[10px] mobile:px-0 w-full mx-auto">
             <div className="space-y-4">
-              <h1 className="text-left desktop:text-[32px] flex desktop:flex-row flex-col desktop:items-start items-center gap-x-2 font-[400] text-[#3C3E41] desktop:leading-[32px] text-[28px] leading-[40px]">
+              <h1 className="text-left desktop:text-[32px] flex desktop:flex-row flex-col desktop:items-start items-center gap-x-2 font-[400] text-[#3C3E41] desktop:leading-[32px] text-[28px] leading-[40px] mobile:text-[24px]">
                 <span className="block mobile:text-center">
-                  Vpis na seznam lokalnih cvetličarn{" "}
+                  Vpis med lokalne cvetličarne
                 </span>
-                <span className="text-left text-[20px] font-[400] leading-[32px] desktop:text-[28px] mobile:leading-[40px] block">
+                <span className="text-left text-[18px] font-[400] leading-[32px] desktop:text-[28px] mobile:leading-[40px] block">
                   (predviden čas:{" "}
                   <span className="text-[#EB1D1D]">1 minuta</span>)
                 </span>
@@ -122,11 +138,11 @@ function DriverPage() {
 
             <div className="flex gap-[70px] desktop:gap-[100px] items-center">
               <div className="space-y-[70px] tablet:space-y-[60px] mobile:space-y-[60px] mt-[100px] tablet:mt-[55px] mobile:mt-[55px]">
-                <div className="flex gap-[70px] items-center w-full">
-                  <div className="space-y-[10px]">
+                <div className="flex desktop:gap-[70px] items-center w-full">
+                  <div className="space-y-[10px] w-full">
                     <h3 className="text-[20px] desktop:text-[24px] font-[700] text-[#3C3E41] leading-[48px]">
-                      <span className="text-[#EB1D1D]">1.</span> Vpis na seznam
-                      lokalnih cvetličarn
+                      <span className="text-[#EB1D1D]">1.</span> <span className="inline-block mobile:hidden">Vpis na seznam lokalnih cvetličarn</span>
+                      <span className="hidden mobile:inline-block text-[18px] mobile:font-[600]">Vpis na seznam </span>
                     </h3>
                     <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
                       {/* Desktop */}
@@ -184,9 +200,8 @@ function DriverPage() {
                   />
                 </div>
                 <div className="space-y-[10px]">
-                  <h3 className="text-[20px] desktop:text-[24px] font-[700] text-[#3C3E41] leading-[48px]">
-                    <span className="text-[#EB1D1D]">2.</span> Vaša cvetličarna
-                    na lokalnih osmrtnicah
+                  <h3 className="mobile:text-[18px] text-[20px] desktop:text-[24px] mobile:font-[600] font-[700] text-[#3C3E41] leading-[48px]">
+                    <span className="text-[#EB1D1D]">2.</span><span>Vaša cvetličarna na lokalnih osmrtnicah</span>
                   </h3>
                   <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
                     {/* Desktop */}
@@ -252,8 +267,8 @@ function DriverPage() {
             <div className="flex desktop:flex-row flex-col gap-[100px] desktop:items-center">
               <div className="hidden desktop:block w-[235px]" />
               <h1 className="mobile:text-center text-left desktop:text-[32px] font-[400] text-[#3C3E41] desktop:leading-[32px] text-[28px] leading-[40px] flex items-center desktop:items-start gap-x-2 flex-row mobile:flex-col">
-                <span className="block">Lastna spletna stran </span>
-                <span className="text-left text-[20px] font-[400] leading-[32px] desktop:ext-[28px] mobile:leading-[40px] block">
+                <span className="block mobile:text-[24px]">Lastna spletna stran </span>
+                <span className="text-left text-[20px] font-[400] leading-[32px] desktop:ext-[28px] mobile:leading-[40px] block mobile:text-[18px]">
                   (predviden čas:{" "}
                   <span className="text-[#EB1D1D]">20 - 30 minut</span>)
                 </span>
@@ -269,13 +284,13 @@ function DriverPage() {
                 height={221}
               />
 
-              <div className="space-y-[60px] tablet:space-y-[60px] mobile:space-y-[60px] mt-[20px] tablet:mt-[55px] mobile:mt-[55px]">
+              <div className="space-y-[60px] tablet:space-y-[60px] mobile:space-y-[60px] mt-[20px] tablet:mt-[55px] mobile:mt-[12px] mobile:max-w-[348px]">
                 <div className="space-y-[10px]">
-                  <h3 className="text-[20px] desktop:text-[24px] font-[700] text-[#3C3E41] leading-[48px]">
+                  <h3 className="text-[20px] desktop:text-[24px] font-[700] text-[#3C3E41] leading-[48px] mobile:text-[18px]">
                     <span className="text-[#EB1D1D]">3.</span> Ustvarite si jo
                     sami - enostavno je!
                   </h3>
-                  <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
+                  <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5 mobile:hidden">
                     <span>
                       Obstoječ tekst in slike zamenjate s svojimi. Svojo{" "}
                       <br className="hidden mobile:block" /> stran lahko kasneje
@@ -293,6 +308,14 @@ function DriverPage() {
                       osmrtnica.com/nasa-cvetlicarna
                     </span>
                     <span></span>
+                  </p>
+                  <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex-col gap-1.5 hidden mobile:flex">
+                    <span>
+                     Obstoječ tekst in slike zamenjate s svojimi. Svojo stran lahko kasneje spreminjate, prilagajate vsebino praznikom ali trenutnemu navdihu. 
+                    </span>
+                    <span>
+                    Predloga, na podlagi katere svojo stran izdelate, je tukaj. Vaša stran bo objavljena na strani osmrtnica.com/nasa-cvetlicarna
+                    </span>
                   </p>
                 </div>
 
@@ -321,12 +344,12 @@ function DriverPage() {
 
         {/* Secton Four */}
         <div className="bg-[#E7F0FA]">
-          <div className="relative max-w-[1029px] tablet:max-w-[740px] desktop:py-[125px] py-[75px] px-[10px] space-y-[60px] w-full mx-auto">
+          <div className="relative max-w-[1029px] tablet:max-w-[740px] desktop:py-[125px] py-[75px] px-[10px] mobile:space-y-8 space-y-[60px] w-full mx-auto mobile:max-w-[348px] mobile:px-0">
             <div className="text-left mobile:text-center space-y-3 desktop:space-y-4">
               <h1 className="text-[32px] leading-[32px] tablet:text-[28px] tablet:leading-[28px] mobile:text-[24px] mobile:leading-[24px] font-[400] text-[#3C3E41] ">
                 Produkti za vašo promocijo{" "}
                 <br className="hidden mobile:block" />
-                <span className="desktop:text-[20px] desktop:leading-[32px] text-[18px] tablet:leading-[28px] mobile:leading-[24px] font-[400]">
+                <span className="mobile:mt-2 mobile:block desktop:text-[20px] desktop:leading-[32px] text-[18px] tablet:leading-[28px] mobile:leading-[24px] font-[400] mobile:text-[18px]">
                   (predviden čas:{" "}
                   <span className="text-[#EB1D1D]">1 minuta</span>)
                 </span>

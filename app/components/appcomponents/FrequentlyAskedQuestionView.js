@@ -150,7 +150,7 @@ export const FrequentlyAskedQuestionView2 = ({ from, data }) => {
   }, [data]);
   return (
     <div
-      className={`overflow-hidden relative flex items-center max-w-[1920px] tablet:max-w-[600px] mobile:max-w-[400px] w-full mx-auto `}
+      className={`overflow-hidden relative flex items-center max-w-[1920px] tablet:max-w-[600px] mobile:max-w-[348px] w-full mx-auto `}
     >
       <div
         className={`h-full max-w-[1920px] mx-auto w-full flex py-[65px] desktop:py-[105px] tablet:py-[75px]  justify-center overflow-hidden `}

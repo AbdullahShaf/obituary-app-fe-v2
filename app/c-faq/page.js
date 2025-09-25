@@ -42,10 +42,12 @@ export default function Faq2() {
       <div className="bg-[#F9EBD4] tablet:bg-[#F9EBD4] mobile:bg-[#F9EBD4] min-h-[100vh]">
         <FAQHeader />
         <div className="w-full hidden mobile:flex gap-[16px] absolute top-[60px] left-0 right-0">
-          <div className="mobile:flex items-center justify-between hidden h-[30px] bg-[#36556C] px-3 w-full">
-            <Link href="/c-faq">KAKO ZAČETI</Link>
-            <Link href="/c-info">CENIK</Link>
-            <Link href="/c-priloznost">PRILOŽNOST</Link>
+          <div className="bg-[#36556C]">
+            <div className="mobile:flex items-center justify-between hidden h-[30px] bg-[#36556C] px-3 mobile:max-w-[348px] mx-auto">
+              <Link href="/c-faq">KAKO ZAČETI</Link>
+              <Link href="/c-info">CENIK</Link>
+              <Link href="/c-priloznost">PRILOŽNOST</Link>
+            </div>
           </div>
         </div>
         <div className="flex flex-col items-center justify-center pt-[200px] w-[700px] mx-auto mobile:w-[350px] min-h-[calc(100vh-55px)]">

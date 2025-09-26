@@ -878,7 +878,7 @@ const MemorialPageTopComp = ({
                   </div>
                 </div>
 
-                {/* <div
+                <div
                   className="flex-col
                             mt-[24px]
                             mobile:mt-[28px]
@@ -909,7 +909,7 @@ const MemorialPageTopComp = ({
                       className=""
                     />
                   </div>
-                </div> */}
+                </div>
 
                 <div className="flex items-end flex-col-reverse self-end mt-4 tablet:mt-6 desktop:pr-[20px] desktop:mt-6 gap-3 tablet:gap-4 desktop:gap-4">
                   <button

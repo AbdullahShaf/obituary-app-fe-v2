@@ -35,10 +35,17 @@ const headerLinkSets = {
     { label: "Pogrebna podjetja", path: "/pogrebna-p", active: false },
   ],
   "/zalna-stran": [
+    { label: "QR kode", path: "/qr-kode", active: false },
+    { label: "Žalna stran", path: "/zalna-stran", active: false },
+    { label: " Spominska", path: "/spominska", active: false },
+  ],
+  "/qr-kode": [
+    { label: "QR kode", path: "/qr-kode", active: false },
     { label: "Žalna stran", path: "/zalna-stran", active: false },
     { label: " Spominska", path: "/spominska", active: false },
   ],
   "/spominska": [
+    { label: "QR kode", path: "/qr-kode", active: false },
     { label: "Žalna stran", path: "/zalna-stran", active: false },
     { label: " Spominska", path: "/spominska", active: false },
   ],

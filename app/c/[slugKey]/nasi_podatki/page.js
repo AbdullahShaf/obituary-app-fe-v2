@@ -605,7 +605,7 @@ export default function AccountSettings() {
             </div>
             <div className="flex items-center gap-[12px]">
               <span className="uppercase">do:</span>
-              <span className="text-[#3C3E41]">10.10.2025</span>
+              {/* <span className="text-[#3C3E41]">10.10.2025</span> */}
             </div>
           </div>
         </div>

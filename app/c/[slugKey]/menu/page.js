@@ -9,6 +9,7 @@ import ButtonWhiteBG, {
 import obituaryService from "@/services/obituary-service";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import toast from "react-hot-toast";
 
 export default function Funeral() {
   const { user } = useAuth();
@@ -65,7 +66,13 @@ export default function Funeral() {
   const toggleMobileSidebar = () => {
     setIsMobilSideBarOpen(!isMobilSideBarOpen);
   };
-  
+
+  function mobileToast(e) {
+    e.preventDefault(); // prevents navigation and scrolling
+
+    toast.success("V pripravi. Prosimo, da uporabite tablico ali računalnik za dostop do te strani.")
+  }
+
   return (
     <div
       ref={gotoTopRef}
@@ -88,7 +95,7 @@ export default function Funeral() {
           alt="funeral banner"
           className="w-full h-full object-cover absolute top-0 left-0 z-0"
         />
-        <div className="relative z-10 mobile:mt-12 desktopUserAcc:pt-16 tabletUserAcc:pt-0">
+        <div className="relative z-10 mobile:mt-12 tablet:mt-12 desktopUserAcc:pt-16 tabletUserAcc:pt-0">
           <div className="w-full tabletUserAcc:max-w-[620px] desktopUserAcc:w-[620px] mobileUserAcc:max-w-[310px] text-[16px]">
             <div
               className="text-[#0A85C2] text-[32px] leading-[38px] font-semibold mb-5"
@@ -328,7 +335,8 @@ export default function Funeral() {
               <div className="text-[#2198D3] mt-4 text-[14px] leading-[24px] font-variation-customOpt14 font-semibold hidden mobile:block">
                 MESEČNI PREGLED IN STATISTIKE
               </div>
-              <Link href={"/c" + `/${user?.slugKey}` + "/nase_osmrtnice"} className="hidden mobile:block">
+              {/* <Link href={"/c" + `/${user?.slugKey}` + "/nase_osmrtnice"} className="hidden mobile:block"> */}
+              <Link href={""} onClick={mobileToast} className="hidden mobile:block">
                 <div className="mt-[8px]">
                   <ButtonWhiteBGCap
                     placeholderImg={"/ico_pregled.png"}
@@ -338,7 +346,8 @@ export default function Funeral() {
                   />
                 </div>
               </Link>
-              <Link href={"/c" + `/${user?.slugKey}` + "/nase_spominske"} className="hidden mobile:block">
+              {/* <Link href={"/c" + `/${user?.slugKey}` + "/nase_spominske"} className="hidden mobile:block"> */}
+              <Link href={""} onClick={mobileToast} className="hidden mobile:block">
                 <div className="mt-[8px]">
                   <ButtonWhiteBGCap
                     placeholderImg={"/user/spominske.png"}
@@ -348,7 +357,8 @@ export default function Funeral() {
                   />
                 </div>
               </Link>
-              <Link href={"/c" + `/${user?.slugKey}` + "/nasa_darila"} className="hidden mobile:block">
+              {/* <Link href={"/c" + `/${user?.slugKey}` + "/nasa_darila"} className="hidden mobile:block"> */}
+              <Link href={""} onClick={mobileToast} className="hidden mobile:block">
                 <div className="mt-[8px]">
                   <ButtonWhiteBGCap
                     placeholderImg={"/user/mobi_predloge.png"}

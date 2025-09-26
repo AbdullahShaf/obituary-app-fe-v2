@@ -210,7 +210,8 @@ const CompanyRegistration = ({ set_Id, setModal }) => {
             }`}
         >
           <button
-            onClick={() => setActiveDivType("PogrebnaPodjetja")}
+            // onClick={() => setActiveDivType("PogrebnaPodjetja")}
+            onClick={() => toast.success("V pripravi")}
             className="px-[25px] py-[12px] h-full w-full "
           >
             {strings.PogrebnaPodjetja}

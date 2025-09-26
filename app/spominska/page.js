@@ -13,7 +13,12 @@ import OpeningPromotion from "../components/appcomponents/OpeningPromotion";
 import AdminBenefits from "../components/appcomponents/AdminBenefits";
 import EverythingIsFree from "../components/appcomponents/EverythingIsFree";
 import CommonFooter from "../components/appcomponents/CommonFooter";
-
+import Image from "next/image";
+import footer_logo from "@/public/qr-kode/footer_logo.svg";
+import facebook_icon from "@/public/qr-kode/facebook_icon.svg";
+import twitter_icon from "@/public/qr-kode/twitter_icon.svg";
+import linnked_in_icons from "@/public/qr-kode/linnked_in_icons.svg";
+import instagram_icon from "@/public/qr-kode/instagram_icon.svg";
 const Keeperpromo = () => {
   const faqData = {
     faqs: [
@@ -78,6 +83,28 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
         <FrequentlyAskedQuestionView2 data={faqData} />
         {/* </div> */}
         <EverythingIsFree />
+        <div className="mobile_navbar">
+            <div className="mobile_navbar_inner">
+              <ul>
+                <li>
+                  <a href="/qr-kode">
+                    QR KODE
+                  </a>
+                </li>
+                <li>
+                  <a href="/zalna-stran">
+                    ŽALNA STRAN
+                  </a>
+                </li>
+                <li>
+                  <a href="/spominska">
+                    SPOMINSKA
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
         <CommonFooter currentPage="/spominska" />
       </div>
     </Layout>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import omr from "@/public/omr.png";
 import back_icon from "@/public/back_icon.png";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import ButtonWhiteBG from "./buttonwhitebg";
 import ButtonLightGreen from "./buttonLightGreen";
@@ -27,7 +27,7 @@ function UserAccountHeaderNew({
   const { data: session } = useSession();
   const isGhost = session?.user?.me?.isGhost;
   const adminId = session?.user?.me?.adminId;
-
+  const pathname = usePathname();
   const [isButtonHide, setIsButtonHide] = useState(false);
 
   return (
@@ -64,7 +64,7 @@ function UserAccountHeaderNew({
                   <div>Ghost Login</div>
                   <button>Back to admin</button>
                 </> :
-                    <div className="flex items-center gap-[35px]">
+                  <div className="flex items-center gap-[35px]">
                     <div className="flex hidden tabletUserAcc:hidden mobileUserAcc:hidden items-center gap-2">
                       <img
                         src="/bell_icon.png"
@@ -346,7 +346,7 @@ function UserAccountHeaderNew({
       </div>
 
       {company ? (
-        <div className={`${noFooterOnMobile ? "mobileUserAcc:hidden" : ""}`}>
+        <div className={`${noFooterOnMobile ? "mobileUserAcc:hidden" : ""} ${pathname?.startsWith("/c/") ? "tabletUserAcc:hidden":""}`}>
           <CompanyFooterMobile setIsMobilSideBarOpen={setIsMobilSideBarOpen} />
         </div>
       ) : (

@@ -208,7 +208,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
             </ul>
           </div>
           {/* Banner */}
-          <section className="banner_wrapper">
+          <section className="banner_wrapper desktop:mt-[-0.5rem]">
             <div className="autoContent">
               <div className="banner_inner">
                 <div className="banner_left">

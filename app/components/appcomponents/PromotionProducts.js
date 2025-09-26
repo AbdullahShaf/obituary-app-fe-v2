@@ -23,8 +23,7 @@ const DigitalMobiCard = () => {
             → UPORABA
           </p>
           <p className="text-[16px] font-[400] text-[#3C3E41] leading-[27px] ml-[22px]">
-            Enostavno in uporabno za vse: izbere sliko → izbere številko v
-            imeniku → pošlje drugim
+            Enostavno in uporabno za vse: izbere sliko → izbere katero kartico → pošlje drugim
           </p>
         </div>
         <div>
@@ -77,12 +76,12 @@ const AdministratorCard = () => {
   return (
     <div className="grid grid-cols-12  gap-[20px] items-start mobile:items-center justify-normal mobile:justify-center desktop:gap-[80px] w-full h-full">
       <div className="col-span-4 mobile:col-span-12 w-full">
-        <Image
+        <img
           src="/iphone-x-7.png"
           alt="admin-benefit-1"
           className="w-[250px] desktop:w-[300px] h-auto shrink-0 mx-auto mobile:hidden"
-          width={281}
-          height={221}
+          // width={281}
+          // height={221}
         />
       </div>
       <div className="col-span-8 mobile:col-span-12 flex flex-col items-start justify-between gap-[43px] mobile:gap-[22px]">
@@ -477,7 +476,7 @@ function PromotionProducts() {
                   className={`flex w-full justify-between items-center tablet:h-[58px] desktop:h-[78px] mobile:px-0`}
                 >
                   <div
-                    className={`flex font-variation-customOpt16 font-normal text-[18px] leading-6 text-[#1E2125] text-center 
+                    className={`flex font-variation-customOpt16 font-normal  text-[18px] leading-6 text-[#1E2125] text-center 
                     `}
                   >
                     <h3 className="text-[20px] desktop:text-[24px] font-[700] text-[#3C3E41] leading-[48px]">
@@ -496,7 +495,7 @@ function PromotionProducts() {
                   />
                 </button>
                 {visibleIndexes[index] && (
-                  <div className="py-12 mobile:py-0 w-full">
+                  <div className="py-12 mobile:py-0 w-full mobile:mb-[35px]">
                     {product?.answer}
                   </div>
                 )}

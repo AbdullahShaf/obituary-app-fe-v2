@@ -95,7 +95,7 @@ export default function Faq1() {
 
               <p className="font-light text-[16px] mt-12">
                 Cvetličarne, ki pristopijo{" "}
-                <span className="font-bold underline">do 25. septembra</span>{" "}
+                <span className="font-bold underline">do 30. septembra</span>{" "}
                 prejmejo dodatno še
               </p>
 
@@ -286,7 +286,7 @@ export default function Faq1() {
 
               <p className="font-light text-[16px] mt-12">
                 Cvetličarne, ki pristopijo{" "}
-                <span className="font-bold underline">do 25. septembra</span>{" "}
+                <span className="font-bold underline">do 30. septembra</span>{" "}
                 prejmejo dodatno še
               </p>
 

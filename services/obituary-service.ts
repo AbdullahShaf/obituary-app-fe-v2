@@ -396,13 +396,24 @@ const getSingleObituaryById = async (id: any) => {
   return response.data || null;
 };
 
+const generateQR = async ({id, slugKey}:{id: string, slugKey: string}) => {
+  try {
+    const endpoint = `/obituary/generate-qr`;
+    const response = await axios.post(endpoint, { id, slugKey });
+    return response.data;
+  } catch (error: unknown) {
+    console.error("Error generate-qr:", error);
+    // throw error;
+  }
+};
+
 const obituaryService = {
-  getObituaryById,
+  getObituaryById,generateQR,
   createObituary,
   getGiftLogs,
   getObituary, getCompanyPageObituary,
   getMemory,
-  getFunerals,getCompanyPageFunerals,
+  getFunerals, getCompanyPageFunerals,
   updateObituary,
   updateObituaryVisits,
   createSorrowBook,

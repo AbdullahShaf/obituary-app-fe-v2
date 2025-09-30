@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import obituaryService from "@/services/obituary-service";
 import { useRouter } from "next/navigation";
 import Modal from "../ui/model";
+import { QrModal } from "./QrModal";
 
 const MemorialPageTopComp = ({
   set_Id,
@@ -22,6 +23,7 @@ const MemorialPageTopComp = ({
   const [limitedCondolances, setLimitedCondolances] = useState([]);
   const [currentCount, setCurrentCount] = useState(0);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [showQr, setShowQr] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
@@ -184,11 +186,26 @@ const MemorialPageTopComp = ({
     }
   }, [data, data?.Condolances, maxCondolances]);
 
+  async function handleQr() {
+
+    if (!data?.qr_code) {
+      const response = await obituaryService.generateQR({ id: data.id, slugKey: data.slugKey });
+
+      if (response?.success) {
+        data.qr_code = response.qr_code;
+        setShowQr(response.qr_code);
+      }
+    } else if (data?.id && data?.qr_code) {
+      setShowQr(data?.qr_code);
+    }
+  }
+
   return (
     <div
       id="memoryPageTop"
       className="flex flex-col w-full items-center  justify-center"
     >
+      {showQr && <QrModal isShowModal={showQr} setIsShowModal={setShowQr} data={data} />}
       <div
         className="bg-[#ecf0f3]   w-full flex justify-center 
       mt-[53px] tablet:mt-[60px]   pt-[60px] relative"
@@ -500,14 +517,14 @@ const MemorialPageTopComp = ({
                   [
                     ...(data?.funeralTimestamp
                       ? [
-                          {
-                            type: "funeral",
-                            timestamp: new Date(
-                              data?.funeralTimestamp
-                            ).getTime(),
-                            details: data,
-                          },
-                        ]
+                        {
+                          type: "funeral",
+                          timestamp: new Date(
+                            data?.funeralTimestamp
+                          ).getTime(),
+                          details: data,
+                        },
+                      ]
                       : []),
                     ...(Array.isArray(parsedEvents) ? parsedEvents : [])
                       .filter((event) => {
@@ -551,14 +568,14 @@ const MemorialPageTopComp = ({
                       {[
                         ...(data?.funeralTimestamp
                           ? [
-                              {
-                                type: "funeral",
-                                timestamp: new Date(
-                                  data?.funeralTimestamp
-                                ).getTime(),
-                                details: data,
-                              },
-                            ]
+                            {
+                              type: "funeral",
+                              timestamp: new Date(
+                                data?.funeralTimestamp
+                              ).getTime(),
+                              details: data,
+                            },
+                          ]
                           : []),
                         ...(Array.isArray(parsedEvents) ? parsedEvents : [])
                           .filter((event) => {
@@ -598,9 +615,9 @@ const MemorialPageTopComp = ({
                             .getHours()
                             .toString()
                             .padStart(2, "0")}:${date
-                            .getMinutes()
-                            .toString()
-                            .padStart(2, "0")}`;
+                              .getMinutes()
+                              .toString()
+                              .padStart(2, "0")}`;
 
                           if (item.type === "funeral") {
                             return (
@@ -630,9 +647,8 @@ const MemorialPageTopComp = ({
                                     </p>
                                     <p className="text-[#414141] text-[14px] font-normal leading-[16.41px]">
                                       {(() => {
-                                        const formattedText = `${
-                                          data?.Cemetry?.name || "Pokopalisce"
-                                        }, ${data?.funeralLocation || ""}`;
+                                        const formattedText = `${data?.Cemetry?.name || "Pokopalisce"
+                                          }, ${data?.funeralLocation || ""}`;
 
                                         return formattedText.length > 50
                                           ? `${formattedText.slice(0, 50)}...`
@@ -664,8 +680,8 @@ const MemorialPageTopComp = ({
                                     <div className="text-[#1E2125] text-[20px] font-medium">
                                       {item.details.eventName
                                         ? formatTitleCase(
-                                            item.details.eventName
-                                          )
+                                          item.details.eventName
+                                        )
                                         : ""}
                                     </div>
                                   </div>
@@ -677,9 +693,9 @@ const MemorialPageTopComp = ({
                                       {item.details.eventLocation
                                         ? item.details.eventLocation.length > 50
                                           ? `${item.details.eventLocation.slice(
-                                              0,
-                                              50
-                                            )}...`
+                                            0,
+                                            50
+                                          )}...`
                                           : item.details.eventLocation
                                         : ""}
                                     </p>
@@ -715,11 +731,10 @@ const MemorialPageTopComp = ({
                   flex-col pt-4 pl-[22px] pr-[18px] w-[100%]                       
                   desktop:w-[517px] ${screenWidth < 740 ? "w-[330px]" : (screenWidth >= 740 && screenWidth <= 1024) ? "w-[550px]" : ""} desktop:pl-[22px] desktop:pr-[14px]
                   bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]
-                  ${
-                    parsedEvents.length === 90
+                  ${parsedEvents.length === 90
                       ? "desktop:mt-2"
                       : "desktop:mt-[24px]"
-                  }
+                    }
                   `}
                   style={{
                     background:
@@ -780,11 +795,10 @@ const MemorialPageTopComp = ({
                 </div>
 
                 <div
-                  className={`flex self-end ${
-                    parsedEvents.length === 90
-                      ? "tablet:mt-2 desktop:mt-[10px] mobile:mt-[10px]"
-                      : "tablet:mt-4 desktop:mt-[28px] mobile:mt-[28px]"
-                  } desktop:h-[0px] items-center desktop:pr-[20px]`}
+                  className={`flex self-end ${parsedEvents.length === 90
+                    ? "tablet:mt-2 desktop:mt-[10px] mobile:mt-[10px]"
+                    : "tablet:mt-4 desktop:mt-[28px] mobile:mt-[28px]"
+                    } desktop:h-[0px] items-center desktop:pr-[20px]`}
                 >
                   {false && (
                     <>
@@ -893,7 +907,8 @@ const MemorialPageTopComp = ({
                     boxShadow:
                       "-5px -5px 10px 0px #FFFFFF, 5px 5px 10px 0px #C2C2C280",
                   }}
-                  onClick={()=>toast.success("Kmalu")}
+                  // onClick={()=>toast.success("Kmalu")}
+                  onClick={handleQr}
                 >
                   <div className="text-[20px] text-[#1E2125] font-variation-customOpt20 font-normal  w-full">
                     QR koda do te strani
@@ -1380,7 +1395,7 @@ const MemorialPageTopComp = ({
             alt="Slika"
             width={74}
             height={74}
-            // className="mt-[24px] mb-[71px] mx-auto"
+          // className="mt-[24px] mb-[71px] mx-auto"
           />
         </div>
       </div>

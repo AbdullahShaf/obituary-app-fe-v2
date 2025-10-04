@@ -288,6 +288,7 @@ const AddObituary = ({ set_Id, setModal }) => {
 const handleSubmit = async () => {
   const currentUser = isAuthenticated ? user : {};
 
+  // Temporarily commented
   if (!currentUser.createObituaryPermission) {
     toast.error("Nimaš dovoljenja za objavo osmrtnic");
     return;

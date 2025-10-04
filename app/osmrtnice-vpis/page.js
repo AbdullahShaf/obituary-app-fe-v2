@@ -12,7 +12,7 @@ import { useAuth } from "@/hooks/useAuth";
 const Obituaryform = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [select_id, setSelect_Id] = useState("");
-  
+
   const router = useRouter();
   const { user, isAuthenticated, isLoading } = useAuth();
 
@@ -32,7 +32,7 @@ const Obituaryform = () => {
       return;
     }
 
-   
+    // Temporarily commented
     if (!isLoading && !isAuthenticated &&!user.createObituaryPermission) {
       toast.error("Nimaš dovoljenja za objavo osmrtnic");
       router.push("/");

@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import obituaryService from "@/services/obituary-service";
 import { useRouter } from "next/navigation";
 import Modal from "../ui/model";
+import { QrModal } from "./QrModal";
 
 const MemorialPageTopComp = ({
   set_Id,
@@ -22,14 +23,15 @@ const MemorialPageTopComp = ({
   const [limitedCondolances, setLimitedCondolances] = useState([]);
   const [currentCount, setCurrentCount] = useState(0);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [showQr, setShowQr] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Cleanup on unmount
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const defaultMessage = {
@@ -101,14 +103,7 @@ const MemorialPageTopComp = ({
   const formattedDeathDate = formatObituaryDate(data?.deathDate);
 
   const formatTitleCase = (str) => {
-    return str
-      .split(" ")
-      .map(
-        (word) =>
-          word.charAt(0).toLocaleUpperCase("sl") +
-          word.slice(1).toLocaleLowerCase("sl")
-      )
-      .join(" ");
+    return str;
   };
   const burnCandle = async () => {
     // if (!user) {
@@ -184,11 +179,30 @@ const MemorialPageTopComp = ({
     }
   }, [data, data?.Condolances, maxCondolances]);
 
+  async function handleQr() {
+    if (!data?.qr_code) {
+      const response = await obituaryService.generateQR({
+        id: data.id,
+        slugKey: data.slugKey,
+      });
+
+      if (response?.success) {
+        data.qr_code = response.qr_code;
+        setShowQr(response.qr_code);
+      }
+    } else if (data?.id && data?.qr_code) {
+      setShowQr(data?.qr_code);
+    }
+  }
+
   return (
     <div
       id="memoryPageTop"
       className="flex flex-col w-full items-center  justify-center"
     >
+      {showQr && (
+        <QrModal isShowModal={showQr} setIsShowModal={setShowQr} data={data} />
+      )}
       <div
         className="bg-[#ecf0f3]   w-full flex justify-center 
       mt-[53px] tablet:mt-[60px]   pt-[60px] relative"
@@ -425,7 +439,13 @@ const MemorialPageTopComp = ({
                   className={`flex-col 
                   pt-4 w-[100%] mobile:px-[21px] mobile:pb-[19px]
                   tablet:px-[22px] tablet:pb-[15px]
-                  ${screenWidth < 740 ? "w-[330px]" : (screenWidth >= 740 && screenWidth <= 1024) ? "w-[550px]" : ""}
+                  ${
+                    screenWidth < 740
+                      ? "w-[330px]"
+                      : screenWidth >= 740 && screenWidth <= 1024
+                      ? "w-[550px]"
+                      : ""
+                  }
                   desktop:w-[517px] desktop:pl-[22px] desktop:pr-[17px] bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]`}
                   style={{
                     background:
@@ -534,7 +554,13 @@ const MemorialPageTopComp = ({
                       className={`flex-col w-[100%] pt-4 
                       mobile:px-[21px]  mobile:pb-[25px] 
                       tablet:pb-[23px]  tablet:px-[22px]                          
-                      desktop:w-[517px] ${screenWidth < 740 ? "w-[330px]" : (screenWidth >= 740 && screenWidth <= 1024) ? "w-[550px]" : ""}  desktop:pb-[14px] desktop:pl-[22px] desktop:pr-[17px] shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF] mb-[28px]`}
+                      desktop:w-[517px] ${
+                        screenWidth < 740
+                          ? "w-[330px]"
+                          : screenWidth >= 740 && screenWidth <= 1024
+                          ? "w-[550px]"
+                          : ""
+                      }  desktop:pb-[14px] desktop:pl-[22px] desktop:pr-[17px] shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF] mb-[28px]`}
                       style={{
                         background:
                           "linear-gradient(113.63deg, #E3E8EC 0%, #FFFFFF 100%)",
@@ -713,7 +739,13 @@ const MemorialPageTopComp = ({
                 <div
                   className={`
                   flex-col pt-4 pl-[22px] pr-[18px] w-[100%]                       
-                  desktop:w-[517px] ${screenWidth < 740 ? "w-[330px]" : (screenWidth >= 740 && screenWidth <= 1024) ? "w-[550px]" : ""} desktop:pl-[22px] desktop:pr-[14px]
+                  desktop:w-[517px] ${
+                    screenWidth < 740
+                      ? "w-[330px]"
+                      : screenWidth >= 740 && screenWidth <= 1024
+                      ? "w-[550px]"
+                      : ""
+                  } desktop:pl-[22px] desktop:pr-[14px]
                   bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]
                   ${
                     parsedEvents.length === 90
@@ -811,7 +843,13 @@ const MemorialPageTopComp = ({
                             py-4      
                             pl-[21px] pr-[28px]
                             w-[100%] tablet:px-4 
-                            desktop:w-[517px] ${screenWidth < 740 ? "w-[330px]" : (screenWidth >= 740 && screenWidth <= 1024) ? "w-[550px]" : ""} desktop:pl-[22px] desktop:pr-[17px] shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]`}
+                            desktop:w-[517px] ${
+                              screenWidth < 740
+                                ? "w-[330px]"
+                                : screenWidth >= 740 && screenWidth <= 1024
+                                ? "w-[550px]"
+                                : ""
+                            } desktop:pl-[22px] desktop:pr-[17px] shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]`}
                   style={{
                     background:
                       "linear-gradient(113.63deg, #E3E8EC 0%, #FFFFFF 100%)",
@@ -884,7 +922,7 @@ const MemorialPageTopComp = ({
                             mobile:mt-[28px]
                             py-4      
                             pl-[21px] pr-[28px]
-                            w-[100%] tablet:px-4 
+                            w-[100%] mobile:w-[330px] tablet:w-[550px] tablet:px-4 
                             desktop:w-[517px] sm:w-[517px] desktop:pl-[22px] desktop:pr-[17px]
                              shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]"
                   style={{
@@ -893,7 +931,8 @@ const MemorialPageTopComp = ({
                     boxShadow:
                       "-5px -5px 10px 0px #FFFFFF, 5px 5px 10px 0px #C2C2C280",
                   }}
-                  onClick={()=>toast.success("Kmalu")}
+                  // onClick={()=>toast.success("Kmalu")}
+                  onClick={handleQr}
                 >
                   <div className="text-[20px] text-[#1E2125] font-variation-customOpt20 font-normal  w-full">
                     QR koda do te strani

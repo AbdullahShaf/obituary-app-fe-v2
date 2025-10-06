@@ -168,10 +168,13 @@ const ObituaryListComponent = ({ city }) => {
 
       let sortedObituaries = response.obituaries;
 
-      if(selectedName.length){
+      if (selectedName.length) {
         const temp = sortedObituaries;
-        if(sortedObituaries.length>0){
-          sortedObituaries = temp.filter(obituaries => obituaries.name.startsWith(selectedName) || obituaries.sirName.startsWith(selectedName) );
+        if (sortedObituaries.length > 0) {
+          sortedObituaries = temp.filter(obituaries =>
+            obituaries.name.toLowerCase().startsWith(selectedName.toLowerCase()) ||
+            obituaries.sirName.toLowerCase().startsWith(selectedName.toLowerCase())
+          );
         }
       }
 

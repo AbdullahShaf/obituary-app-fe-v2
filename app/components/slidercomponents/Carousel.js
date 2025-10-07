@@ -60,27 +60,28 @@ const Carousel = () => {
         console.log("Sending params for funerals:", queryParams);
 
         const result = await obituaryService.getFunerals(queryParams);
-      
+
         /**
          * Filter obituaries based on selectedName
          */
         if (selectedName) {
+          const rawName = selectedName.trim().toLowerCase();
           const temp = result.obituaries || [];
           let tempObituaries = [];
           if (temp.length > 0) {
             // {item.name} {item.sirName}
             tempObituaries = temp.filter(
               (obituaries) =>
-                obituaries.name.startsWith(selectedName) || obituaries.sirName.startsWith(selectedName)
-                // obituaries.name.includes(selectedName) ||
-                // obituaries.sirName.includes(selectedName)
+                obituaries.name.toLowerCase().startsWith(rawName) ||
+                obituaries.sirName.toLowerCase().startsWith(rawName)
+              // obituaries.name.includes(selectedName) ||
+              // obituaries.sirName.includes(selectedName)
             );
           }
           setObituaries(tempObituaries);
         } else {
           setObituaries(result.obituaries || []);
         }
-
       } catch (error) {
         console.error("Error fetching funerals:", error);
         setObituaries([]);

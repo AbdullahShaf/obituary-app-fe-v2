@@ -20,7 +20,7 @@ const Funeralpromo = () => {
                 <Ownwebsite />
                 <Indispensable />
                 <FreePrice />
-                <OpeningDate />
+                {/* <OpeningDate /> */}
                 <KickStart cUrl="/p-faq" />
                 {/* <div className="flex w-full bg-[#F8F7F4] mobile:bg-gradient-to-b mobile:from-[#E6EBFA] mobile:to-[#E2EEFC]" >
                 <FrequentlyAskedQuestionView from={"7"} />

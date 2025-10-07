@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Layout from "@/app/components/appcomponents/Layout";
 import ObituaryCard from "@/app/components/appcomponents/ObituaryCard";
@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   LocalQuickReview,
-//   LocalQuickReviewModal,
+  //   LocalQuickReviewModal,
 } from "@/app/components/appcomponents/LocalQuickReview";
 import MegaMenu from "@/app/components/appcomponents/MegaMenuMain";
 import obituaryService from "@/services/obituary-service";
@@ -90,17 +90,39 @@ export default function HomeContent(props) {
     })),
   ];
 
-  // Prepare city options (independent of region)
-  const cityOptions = [
-    { place: "- Pokaži vse občine -", id: "allCities" },
-    ...Object.values(regionsAndCities)
-      .flat()
-      .map((city) => ({
-        place: city,
-        id: city,
-      }))
-      .sort((a, b) => a.place.localeCompare(b.place, "sl")),
-  ];
+  // // Prepare city options (independent of region)
+  // const cityOptions = [
+  //   { place: "- Pokaži vse občine -", id: "allCities" },
+  //   ...Object.values(regionsAndCities)
+  //     .flat()
+  //     .map((city) => ({
+  //       place: city,
+  //       id: city,
+  //     }))
+  //     .sort((a, b) => a.place.localeCompare(b.place, "sl")),
+  // ];
+
+  // Prepare city options (dependent on region)
+  const allCitiesOption = { place: " - Pokaži vse občine - ", id: "allCities" };
+  const cityOptions =
+    selectedRegion && selectedRegion !== "allRegions"
+      ? [
+          allCitiesOption,
+          ...regionsAndCities[selectedRegion].map((city) => ({
+            place: city,
+            id: city,
+          })),
+        ]
+      : [
+          allCitiesOption,
+          ...Object.values(regionsAndCities)
+            .flat()
+            .map((city) => ({
+              place: city,
+              id: city,
+            }))
+            .sort((a, b) => a.place.localeCompare(b.place, "sl")),
+        ];
 
   // Handle region select
   const handleRegionSelect = (item) => {
@@ -110,8 +132,13 @@ export default function HomeContent(props) {
       return;
     }
     setSelectedRegion(item.place);
-    updateParams(selectedCity, item.place);
+    updateParams(selectedCity, item.place, name);
   };
+
+  const handleNameChange = (name)=>{
+    setName(name);
+    updateParams(selectedCity, selectedRegion, name);
+  }
 
   // Handle city select
   const handleCitySelect = (item) => {
@@ -121,7 +148,7 @@ export default function HomeContent(props) {
       return;
     }
     setSelectedCity(item.place);
-    updateParams(item.place, selectedRegion);
+    updateParams(item.place, selectedRegion, name);
   };
 
   // Handler for florist city dropdown
@@ -136,7 +163,7 @@ export default function HomeContent(props) {
   };
 
   // Update URL params - improved version
-  const updateParams = (city, region) => {
+  const updateParams = (city, region, name="") => {
     const params = new URLSearchParams();
 
     // Keep existing florist city if it exists
@@ -148,14 +175,15 @@ export default function HomeContent(props) {
     // Add city and region if they exist
     if (city) params.set("city", city);
     if (region) params.set("region", region);
+    if(name.length>0) params.set("search",name);
 
     const queryString = params.toString();
-    router.replace(queryString ? `/?${queryString}` : "/");
+    router.replace(queryString ? `/?${queryString}` : "/", { scroll: false });
   };
 
   useEffect(() => {
     fetchObituary();
-  }, [selectedCity, selectedRegion]);
+  }, [selectedCity, selectedRegion, name]);
 
   const fetchObituary = async () => {
     try {
@@ -173,8 +201,16 @@ export default function HomeContent(props) {
         // );
         return;
       }
+      let tempObituaries = response.obituaries;
 
-      const sortedObituaries = response.obituaries.sort(
+      if(name){
+        const temp = tempObituaries;
+        const rawName = name.trim().toLowerCase();
+        if(temp.length>0){
+          tempObituaries = temp.filter(obituaries => obituaries.name.toLowerCase().startsWith(rawName) || obituaries.sirName.toLowerCase().startsWith(rawName))
+        }
+      }
+      const sortedObituaries = tempObituaries.sort(
         (a, b) =>
           new Date(b.deathDate).getTime() - new Date(a.deathDate).getTime()
       );
@@ -272,7 +308,7 @@ export default function HomeContent(props) {
                     backgroundColor: "white",
                     fontVariationSettings: "'opsz' 16",
                   }}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => handleNameChange(e.target.value)}
                 />
               </div>
 

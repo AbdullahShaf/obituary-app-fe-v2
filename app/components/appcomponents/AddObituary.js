@@ -224,7 +224,7 @@ const AddObituary = ({ set_Id, setModal }) => {
       !selectedRegion ||
       !selectedCity ||
       !inputValueGender ||
-      !birthDate ||
+      // !birthDate ||
       !deathDate
     ) {
       toast.error("Vsa polja so obvezna");
@@ -350,7 +350,7 @@ const handleSubmit = async () => {
     formData.append("region", selectedRegion);
     formData.append("city", selectedCity);
     formData.append("gender", inputValueGender);
-    formData.append("birthDate", formattedBirthDate);
+    formData.append("birthDate", formattedBirthDate?formattedBirthDate:"");
     formData.append("deathDate", formattedDeathDate);
     formData.append("funeralLocation", selectedCity);
 

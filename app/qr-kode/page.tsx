@@ -236,7 +236,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
           {/* how it works */}
 
           <section className="how_it_works">
-            <div className="autoContent">
+            <div className="autoContent"> 
               <div className="how_it_works_inner">
                 <div className="how_it_works_heading">
                   <h2>Kako deluje</h2>

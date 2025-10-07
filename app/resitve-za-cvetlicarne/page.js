@@ -33,7 +33,7 @@ const Floristspromo = () => {
         {/* <div className="flex w-full mobile:bg-[#E0E9F3] bg-[#FFFFFF]">
                     <FrequentlyAskedQuestionView from={"8"} />
                 </div> */}
-        <OfficialOpening />
+        {/* <OfficialOpening /> */}
         <KickStart showButton={true} />
 
         <div className="mobile:flex w-full flex-col items-center hidden bg-transparent pt-[85px] pb-[100px]">

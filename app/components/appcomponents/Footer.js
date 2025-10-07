@@ -79,7 +79,7 @@ export default function Footer() {
           </div>
           <div className="inline-flex gap-[30px] mobile:gap-[16px]">
             <Link href="/" className="text-[#1860A3] underline w-[65px] text-[14px]">Pišite nam</Link>
-            <Link href="/" className="">
+            <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" target="_blank" className="">
               <Image src={"/promo_footer_facebook.png"} width={18} height={18} alt="Facebook Icon" />
             </Link>
             <Link href="/" className="">
@@ -139,7 +139,7 @@ export default function Footer() {
                           whiteSpace: "nowrap", // Prevents text from wrapping
                         }}
                       >
-                        Naj spomin nanje ne ugasne.
+                        Naj spomin nanje ne zbledi.
                       </h>
                     </div>
                     <div className="flex desktop:hidden  mobile:h-[25px] items-center">
@@ -153,13 +153,14 @@ export default function Footer() {
                           whiteSpace: "nowrap", // Prevents text from wrapping
                         }}
                       >
-                        Naj spomin nanje ne ugasne.
+                        Naj spomin nanje ne zbledi.
                       </h>
                     </div>
                   </div>
                   <a
-                    href="#"
+                    href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
                     className="hidden tablet:flex desktop:flex items-center text-gray-600 mobile:mt-[75px] tablet:mt-[73px] desktop:mt-[50px] hover:text-blue-500 transition duration-200 "
+                    target="_blank"
                   >
                     <div className="rounded-lg shadow-custom-light-dark bg-gradient-to-br from-gray-300 to-white p-[6px] transition duration-300 hover:scale-105 active:scale-95">
                       <Image
@@ -230,69 +231,66 @@ export default function Footer() {
                           </div>
                         </Link>
                       </li>
-                      <li className="flex tablet:hidden desktop:hidden mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
+                      {/* <li className="flex tablet:hidden desktop:hidden mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
                         <a
-                          href="#"
+                          href="/kontakt"
                           className="text-[#414141] font-normal   hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
                         >
                           Partnerji
                         </a>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                   <div className="ml-[52px] tablet:ml-[51.75px] desktop:ml-[103.75px]  ">
-                    <div className="h-[19px] flex items-center ">
+                    <div className="h-[19px] tablet:hidden mobile:hidden flex items-center ">
                       <h3 className="font-semibold text-[#ACAAAA]  text-[16px]">
                         Koristne povezave
                       </h3>
                     </div>
+                    <div className="h-[19px] tablet:visible desktop:hidden mobile:visible flex items-center ">
+                      <h3 className="font-semibold text-[#ACAAAA]  text-[16px]">
+                        Drugo
+                      </h3>
+                    </div>
                     <ul className="mt-[24px] ">
-                      <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center">
-                        <a
-                          href="#"
-                          className=" text-[#414141] font-normal   hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
-                        >
-                          Pogosta vprašanja
-                        </a>
-                      </li>
-                      <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] mt-4 items-center">
-                        <a
-                          href="#"
-                          className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
-                        >
-                          Kaj storiti, ko se zgodi
-                        </a>
-                      </li>
                       <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
                         <a
-                          href="#"
-                          className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
-                        >
-                          Kako oddati osmrtnico
-                        </a>
-                      </li>
-                      <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
-                        <a
-                          href="#"
+                          href="/kontakt"
                           className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
                         >
                           Kontakt
                         </a>
                       </li>
-                      <li className="hidden tablet:flex desktop:flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
+                      <li className="tablet:flex desktop:flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
                         <a
-                          href="#"
+                          href="/kontakt"
                           className="text-[#414141] font-normal   hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
                         >
                           Partnerji
                         </a>
                       </li>
-                      <li className="flex desktop:hidden mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
+                      <li className="tablet:flex desktop:hidden mobile:flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
                         <a
-                          href="#"
+                          href="/splosni-pogoji"
                           className="text-[#414141] font-normal   hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
                         >
-                          Povej naprej
+                          Splošni pogoji
+                        </a>
+                      </li>
+                      <li className="tablet:flex desktop:hidden mobile:flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
+                        <a
+                          href="/politika-zasebnosti"
+                          className="text-[#414141] font-normal   hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
+                        >
+                          Politika zasebnosti
+                        </a>
+                      </li>
+                      <li className="tablet:flex desktop:hidden mobile:flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
+                        <a
+                          href="/piskotki"
+                          className="text-[#414141] font-normal   hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
+                        >
+                          Piškotki
                         </a>
                       </li>
                     </ul>
@@ -309,7 +307,7 @@ export default function Footer() {
                           href="/splosni-pogoji"
                           className=" text-[#414141] font-normal   hover:text-blue-500 transition duration-200 text-[16px]"
                         >
-                          Splošni pogoji poslovanja
+                          Splošni pogoji
                         </a>
                       </li>
                       <li className="flex h-[24px] mt-4 items-center">
@@ -336,14 +334,6 @@ export default function Footer() {
                           Piškotki
                         </a>
                       </li>
-                      <li className="flex h-[24px] items-center mt-4">
-                        <a
-                          href="#"
-                          className="text-[#414141] font-normal   hover:text-blue-500 transition duration-200 text-[16px]"
-                        >
-                          Povej naprej
-                        </a>
-                      </li>
                     </ul>
                   </div>
                 </div>
@@ -353,8 +343,9 @@ export default function Footer() {
               <div className="flex flex-col  w-[311px] self-center ">
                 <div className="flex justify-center items-center h-[38px]   ">
                   <a
-                    href="#"
+                    href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
                     className="flex items-center text-gray-600  hover:text-blue-500 transition duration-200 "
+                    target="_blank"
                   >
                     <Image
                       src={mobFb}
@@ -366,14 +357,14 @@ export default function Footer() {
                     </h>
                   </a>
                 </div>
-                <div className=" flex flex-col mt-[23px] px-[6.5px] ">
+                <div className="hidden flex-col mt-[23px] px-[6.5px] ">
                   <div className="flex justify-between items-center ">
                     <div className="flex items-center h-6 ">
                       <a
                         href="/splosni-pogoji"
                         className=" text-[#414141] font-normal   hover:text-blue-500 transition duration-200 text-[13px]"
                       >
-                        Splošni pogoji poslovanja
+                        Splošni pogoji
                       </a>
                     </div>
                     <div className="flex items-center h-6 ">
@@ -410,15 +401,19 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <div className="flex mobile:hidden tablet:flex desktop:hidden h-[33px] tablet:w-[680px] justify-center  mt-[46px]  tablet:pl-[35px]">
-              <div className="w-[612px] h-[33px]  items-end pl-[6px]">
-                <div className=" h-full w-[596px] flex  space-x-[18px] flex-row ">
+            {/* micro links tablet */}
+            {/* <div className="flex mobile:hidden tablet:flex desktop:hidden h-[33px] tablet:w-[680px] justify-center  mt-[46px]  tablet:pl-[35px]"> */}
+            <div className="hidden">
+            <div className="flex mobile:hidden tablet:flex desktop:hidden h-[33px] tablet:w-[680px] justify-center  mt-[46px]  tablet:pr-[0px]">
+              {/* <div className="w-[612px] h-[33px]  items-end pl-[6px]"> */}
+              <div className="w-[612px] h-[33px]  items-end pr-[0px] flex justify-center">
+                <div className=" h-full w-[596px] flex  space-x-[18px] flex-row justify-end ">
                   <div className="flex items-center h-6 ">
                     <a
                       href="/splosni-pogoji"
                       className=" text-[#414141] font-normal   hover:text-blue-500 transition duration-200 text-[13px]"
                     >
-                      Splošni pogoji poslovanja
+                      Splošni pogoji
                     </a>
                   </div>
                   <div className="flex items-center h-6 ">
@@ -448,6 +443,7 @@ export default function Footer() {
                 </div>
               </div>
             </div>
+            </div>
             <div className="hidden desktop:flex desktop:mt-[92px] w-[680px] desktop:w-[1137px] pr-[1px] ">
               <div className="desktop:w-[427px] h-6 mt-[48px] flex  items-center ">
                 <div className="hidden desktop:flex font-variation-customOpt12 text-[12px] text-[#414141] ">
@@ -458,7 +454,7 @@ export default function Footer() {
                 <BottomSlider data={[{}, {}, {}]} />
               </div>
             </div>
-            <div className="hidden tablet:flex desktop:hidden w-[680px] pr-[1px] ">
+            <div className="hidden tablet:flex desktop:hidden w-[680px] pr-[1px] mt-[50px]">
               <div className="absolute z-50 mobile:ml-[40px] tablet:ml-[42px] w-[280px] h-4 desktop:w-[427px] desktop:h-6 desktop:mt-[48px] mt-[84px] flex  items-center ">
                 <div className="flex desktop:flex font-variation-customOpt12 text-[12px] text-[#414141] ">
                   © osmrtnica.com, 2025. Vse pravice pridržane.
@@ -509,7 +505,7 @@ export function FooterForFaq() {
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
           <Link href="/kontakt" className="text-[#A7C6E3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="/" className="">
+          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" className="" target="_blank">
             <Image src={"/promo_footer_facebook_white.png"} width={18} height={18} alt="Facebook Icon" />
           </Link>
           <Link href="/" className="">
@@ -547,7 +543,7 @@ export function FooterForFaq2() {
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
           <Link href="/kontakt" className="text-[#A7C6E3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="/" className="">
+          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" className="" target="_blank">
             <Image src={"/promo_footer_facebook_white.png"} width={18} height={18} alt="Facebook Icon" />
           </Link>
           <Link href="/" className="">
@@ -586,7 +582,7 @@ export function TermsAndCond() {
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
           <Link href="/kontakt" className="text-[#A7C6E3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="/" className="">
+          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" target="_blank" className="">
             <Image src={"/promo_footer_facebook_white.png"} width={18} height={18} alt="Facebook Icon" />
           </Link>
           <Link href="/" className="">

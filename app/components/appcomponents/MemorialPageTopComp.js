@@ -640,7 +640,11 @@ const MemorialPageTopComp = ({
                                       {day}
                                     </div>
                                     <div className="text-[#FFFFFF] text-[12px] tablet:text-[14px] desktop:text-[12px] font-normal">
-                                      {month}
+                                      {month === "Oct"
+                                        ? "Okt"
+                                        : month === "May"
+                                        ? "Maj"
+                                        : month}
                                     </div>
                                   </div>
                                 </div>
@@ -683,7 +687,11 @@ const MemorialPageTopComp = ({
                                       {day}
                                     </div>
                                     <div className="text-[#FFFFFF] text-[12px] tablet:text-[14px] desktop:text-[12px] font-normal">
-                                      {month}
+                                      {month === "Oct"
+                                        ? "Okt"
+                                        : month === "May"
+                                        ? "Maj"
+                                        : month}
                                     </div>
                                   </div>
                                 </div>

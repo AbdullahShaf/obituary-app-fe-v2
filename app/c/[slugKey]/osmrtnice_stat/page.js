@@ -14,7 +14,7 @@ export default function Obituaries() {
   useEffect(() => {
     setTimeout(() => {
       getMonthlyData();
-    }, 500)
+    }, 500);
   }, []);
 
   const getMonthlyData = async () => {
@@ -110,7 +110,11 @@ export default function Obituaries() {
                 {Object.entries(monthlyData).map(([month, data]) => (
                   <tr key={month} className="bg-white/40">
                     <td className="p-4 text-[16px] text-[#6D778E] border-t border-b border-l rounded-l border-[#A1B1D4] w-[100px]">
-                      {month}
+                      {month === "Oct"
+                        ? "Okt"
+                        : month === "May"
+                        ? "Maj"
+                        : month}
                     </td>
                     <td className="p-4 border-t border-b border-[#A1B1D4] text-[20px] text-center text-[#3C3E41]">
                       {data.obituaries.length}

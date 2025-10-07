@@ -82,7 +82,79 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
         {/* <div className="flex w-full mobile:bg-[#E0E9F3] bg-[#FFFFFF]"> */}
         <FrequentlyAskedQuestionView2 data={faqData} />
         {/* </div> */}
-        <EverythingIsFree />
+        {/* <EverythingIsFree /> */}
+                  <section className="everything_free_sec">
+            <div className="autoContent">
+              <div className="everything_free_inner">
+                <div className="everything_free_heading">
+                  <h2>VSE je brezplačno!</h2>
+                  <p>In brez odvečnih korakov </p>
+                </div>
+                <div className="everything_free_content">
+                  <div className="e_free_content_list">
+                    <div className="e_free_content_list_data">
+                      <div className="e_free_c_list_nbr">
+                        <strong className="number_1">01.</strong>
+                      </div>
+                      <div className="e_free_c_list_txt">
+                        <p>Pogrebno podjetje vam brezplačno izdela in objavi <span>osmrtnico</span>.</p>
+                        <small>(ko urejate dokumente za pokop)</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="e_free_content_list">
+                    <div className="e_free_content_list_data">
+                      <div className="e_free_c_list_nbr">
+                        <strong className="number_2">02.</strong>
+                      </div>
+                      <div className="e_free_c_list_txt">
+                        <p>Istočasno vam izdela brezplačno <span>žalno spominsko stran</span>.</p>
+                        <small>(ko urejate dokumente za pokop) </small>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="e_free_content_list">
+                    <div className="e_free_content_list_data">
+                      <div className="e_free_c_list_nbr">
+                        <strong className="number_3">03.</strong>
+                      </div>
+                      <div className="e_free_c_list_txt">
+                        <p>Vaša lokalna cvetličarna vam brezplačno podari <span>status Skrbnika</span> spominske strani.</p>
+                        <small>(ko se dogovarjate za cvetlično ureditev vežice; status Skrbnika je za cel prvi mesec) </small>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="e_free_content_list">
+                    <div className="e_free_content_list_data">
+                      <div className="e_free_c_list_nbr">
+                        <strong className="number_4">04.</strong>
+                      </div>
+                      <div className="e_free_c_list_txt">
+                        <p>Vaša lokalna cvetličarna vam brezplačno podari <span>mobi kartice</span> za pošiljanje naprej</p>
+                        <small>(ko se dogovarjate za cvetlično ureditev vežice) </small>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="e_free_content_list">
+                    <div className="e_free_content_list_data">
+                      <div className="e_free_c_list_nbr">
+                        <strong className="number_5">05.</strong>
+                      </div>
+                      <div className="e_free_c_list_txt">
+                        <p>Pogrebno podjetje vam brezplačno podari <span>QR kodo</span> za nagrobnik</p>
+                        <small>(digitalna koda je že na žalni / spominski strani; izdelate si jo sami) </small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="everything_free_content_text">
+                    <p>Ekskluzivno samo pri naših partnerjih. Poiščite jih! </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
         <div className="mobile_navbar">
             <div className="mobile_navbar_inner">
               <ul>

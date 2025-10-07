@@ -13,9 +13,9 @@ module.exports = {
   // Only include selected pages manually
   transform: async(config, path)=>{
     const allowedPaths = [
+      '/',
       '/cvetlicarne',                
       '/osmrtnice',
-      '/',
       '/pogrebna-p',
       '/registracija',
       '/primerjava',

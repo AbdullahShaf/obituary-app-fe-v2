@@ -29,8 +29,12 @@ const Card2 = ({ data = {}, cardRefs, index, cemetery }) => {
                 style={{ letterSpacing: "0px" }}
                 className="text-[#78600B] mx-auto mt-[16px] text-[18px] font-light"
               >
-                {formatToDottedDate(data?.birthDate)} -{" "}
-                {formatToDottedDate(data?.deathDate)}
+                {!data?.birthDate || data?.birthDate?.includes('1025') ? (
+                  <>{formatToDottedDate(data?.deathDate)}</>
+                ) : (
+                  <>{formatToDottedDate(data?.birthDate)} -{" "}
+                    {formatToDottedDate(data?.deathDate)}</>
+                )}
               </p>
             </div>
           </div>

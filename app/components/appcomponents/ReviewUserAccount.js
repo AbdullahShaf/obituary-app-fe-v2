@@ -173,7 +173,7 @@ const ReviewUserAccount = () => {
         Dodaj bližnjega ?
       </div>
 
-      <div className="flex mobileUserAcc:hidden w-[690px] tabletUserAcc:pl-[26px] tabletUserAcc:max-w-[660px] text-[#717B8C] text-[14px] font-normal font-variation-customOpt14 ">
+      <div className="flex max-w-[690px] tabletUserAcc:pl-[26px] tabletUserAcc:max-w-[660px] text-[#717B8C] text-[14px] font-normal font-variation-customOpt14 ">
         Enostavno je. Zgolj sodelujte na njegovi/njeni spominski strani in
         avtomatsko bo dodan/a med vaše bližnje na tej strani, prikazana bo
         statistika tiste spominske in nastavljeni bodo opomniki ob obletnicah,

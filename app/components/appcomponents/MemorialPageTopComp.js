@@ -299,7 +299,11 @@ const MemorialPageTopComp = ({
                     </div>
                     <div className="flex items-center justify-center mt-[14px] h-[21px] tablet:h-[23px] desktop:h-[20px] ">
                       <div className="text-[#1E2125] text-[18px] tablet:text-[20px] desktop:text-[20px] font-variation-customOpt18 tablet:font-variation-customOpt20 desktop:font-variation-customOpt20 font-normal">
-                        {formattedBirthDate} - {formattedDeathDate}
+                        {data?.birthDate?.includes('1025') ? (
+                          <>{formattedDeathDate}</>
+                        ) : (
+                          <>{formattedBirthDate} - {formattedDeathDate}</>
+                        )}
                       </div>
                     </div>
                     <div className="flex items-center justify-center mt-[14px] h-[21px] tablet:h-[23px] desktop:h-[20px] ">
@@ -439,13 +443,12 @@ const MemorialPageTopComp = ({
                   className={`flex-col 
                   pt-4 w-[100%] mobile:px-[21px] mobile:pb-[19px]
                   tablet:px-[22px] tablet:pb-[15px]
-                  ${
-                    screenWidth < 740
+                  ${screenWidth < 740
                       ? "w-[330px]"
                       : screenWidth >= 740 && screenWidth <= 1024
-                      ? "w-[550px]"
-                      : ""
-                  }
+                        ? "w-[550px]"
+                        : ""
+                    }
                   desktop:w-[517px] desktop:pl-[22px] desktop:pr-[17px] bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]`}
                   style={{
                     background:
@@ -520,14 +523,14 @@ const MemorialPageTopComp = ({
                   [
                     ...(data?.funeralTimestamp
                       ? [
-                          {
-                            type: "funeral",
-                            timestamp: new Date(
-                              data?.funeralTimestamp
-                            ).getTime(),
-                            details: data,
-                          },
-                        ]
+                        {
+                          type: "funeral",
+                          timestamp: new Date(
+                            data?.funeralTimestamp
+                          ).getTime(),
+                          details: data,
+                        },
+                      ]
                       : []),
                     ...(Array.isArray(parsedEvents) ? parsedEvents : [])
                       .filter((event) => {
@@ -554,13 +557,12 @@ const MemorialPageTopComp = ({
                       className={`flex-col w-[100%] pt-4 
                       mobile:px-[21px]  mobile:pb-[25px] 
                       tablet:pb-[23px]  tablet:px-[22px]                          
-                      desktop:w-[517px] ${
-                        screenWidth < 740
+                      desktop:w-[517px] ${screenWidth < 740
                           ? "w-[330px]"
                           : screenWidth >= 740 && screenWidth <= 1024
-                          ? "w-[550px]"
-                          : ""
-                      }  desktop:pb-[14px] desktop:pl-[22px] desktop:pr-[17px] shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF] mb-[28px]`}
+                            ? "w-[550px]"
+                            : ""
+                        }  desktop:pb-[14px] desktop:pl-[22px] desktop:pr-[17px] shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF] mb-[28px]`}
                       style={{
                         background:
                           "linear-gradient(113.63deg, #E3E8EC 0%, #FFFFFF 100%)",
@@ -577,14 +579,14 @@ const MemorialPageTopComp = ({
                       {[
                         ...(data?.funeralTimestamp
                           ? [
-                              {
-                                type: "funeral",
-                                timestamp: new Date(
-                                  data?.funeralTimestamp
-                                ).getTime(),
-                                details: data,
-                              },
-                            ]
+                            {
+                              type: "funeral",
+                              timestamp: new Date(
+                                data?.funeralTimestamp
+                              ).getTime(),
+                              details: data,
+                            },
+                          ]
                           : []),
                         ...(Array.isArray(parsedEvents) ? parsedEvents : [])
                           .filter((event) => {
@@ -624,9 +626,9 @@ const MemorialPageTopComp = ({
                             .getHours()
                             .toString()
                             .padStart(2, "0")}:${date
-                            .getMinutes()
-                            .toString()
-                            .padStart(2, "0")}`;
+                              .getMinutes()
+                              .toString()
+                              .padStart(2, "0")}`;
 
                           if (item.type === "funeral") {
                             return (
@@ -702,8 +704,8 @@ const MemorialPageTopComp = ({
                                     <div className="text-[#1E2125] text-[20px] font-medium">
                                       {item.details.eventName
                                         ? formatTitleCase(
-                                            item.details.eventName
-                                          )
+                                          item.details.eventName
+                                        )
                                         : ""}
                                     </div>
                                   </div>
@@ -715,9 +717,9 @@ const MemorialPageTopComp = ({
                                       {item.details.eventLocation
                                         ? item.details.eventLocation.length > 50
                                           ? `${item.details.eventLocation.slice(
-                                              0,
-                                              50
-                                            )}...`
+                                            0,
+                                            50
+                                          )}...`
                                           : item.details.eventLocation
                                         : ""}
                                     </p>
@@ -751,19 +753,17 @@ const MemorialPageTopComp = ({
                 <div
                   className={`
                   flex-col pt-4 pl-[22px] pr-[18px] w-[100%]                       
-                  desktop:w-[517px] ${
-                    screenWidth < 740
+                  desktop:w-[517px] ${screenWidth < 740
                       ? "w-[330px]"
                       : screenWidth >= 740 && screenWidth <= 1024
-                      ? "w-[550px]"
-                      : ""
-                  } desktop:pl-[22px] desktop:pr-[14px]
+                        ? "w-[550px]"
+                        : ""
+                    } desktop:pl-[22px] desktop:pr-[14px]
                   bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]
-                  ${
-                    parsedEvents.length === 90
+                  ${parsedEvents.length === 90
                       ? "desktop:mt-2"
                       : "desktop:mt-[24px]"
-                  }
+                    }
                   `}
                   style={{
                     background:
@@ -824,11 +824,10 @@ const MemorialPageTopComp = ({
                 </div>
 
                 <div
-                  className={`flex self-end ${
-                    parsedEvents.length === 90
+                  className={`flex self-end ${parsedEvents.length === 90
                       ? "tablet:mt-2 desktop:mt-[10px] mobile:mt-[10px]"
                       : "tablet:mt-4 desktop:mt-[28px] mobile:mt-[28px]"
-                  } desktop:h-[0px] items-center desktop:pr-[20px]`}
+                    } desktop:h-[0px] items-center desktop:pr-[20px]`}
                 >
                   {false && (
                     <>
@@ -855,13 +854,12 @@ const MemorialPageTopComp = ({
                             py-4      
                             pl-[21px] pr-[28px]
                             w-[100%] tablet:px-4 
-                            desktop:w-[517px] ${
-                              screenWidth < 740
-                                ? "w-[330px]"
-                                : screenWidth >= 740 && screenWidth <= 1024
-                                ? "w-[550px]"
-                                : ""
-                            } desktop:pl-[22px] desktop:pr-[17px] shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]`}
+                            desktop:w-[517px] ${screenWidth < 740
+                      ? "w-[330px]"
+                      : screenWidth >= 740 && screenWidth <= 1024
+                        ? "w-[550px]"
+                        : ""
+                    } desktop:pl-[22px] desktop:pr-[17px] shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]`}
                   style={{
                     background:
                       "linear-gradient(113.63deg, #E3E8EC 0%, #FFFFFF 100%)",
@@ -1431,7 +1429,7 @@ const MemorialPageTopComp = ({
             alt="Slika"
             width={74}
             height={74}
-            // className="mt-[24px] mb-[71px] mx-auto"
+          // className="mt-[24px] mb-[71px] mx-auto"
           />
         </div>
       </div>

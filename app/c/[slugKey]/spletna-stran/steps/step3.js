@@ -113,7 +113,7 @@ export default function Step3({
 
 
   const addSliderBlock = () => {
-    if (packages?.length >= 4) {
+    if (packages && packages?.length >= 4) {
       toast.error(TOAST_MESSAGE.YOU_CAN_ADD_4_PACKAGES);
       return;
     }

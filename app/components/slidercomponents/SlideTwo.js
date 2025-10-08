@@ -93,7 +93,7 @@ const SlideTwo = () => {
             </div>
             <div className="btn-container px-[89px]">
               <Link href={"/spominska"}>
-              <button class="px-[25px] py-[12px] w-[155px] rounded-[8px] mt-[47px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
+              <button className="px-[25px] py-[12px] w-[155px] rounded-[8px] mt-[47px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
                 Več o Skrbniku
               </button>
               </Link>
@@ -151,7 +151,7 @@ const SlideTwo = () => {
 
           <div className="btn-container text-center">
             <Link href={"/spominska"}>
-            <button class="px-[25px] py-[12px] rounded-[8px] mt-[44px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
+            <button className="px-[25px] py-[12px] rounded-[8px] mt-[44px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
               Več o Skrbniku
             </button>
             </Link>
@@ -185,7 +185,7 @@ const SlideTwo = () => {
 
           <div className="btn-container text-center mt-[22px]">
             <Link href={"/spominska"}>
-            <button class="px-[25px] py-[12px] rounded-[8px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
+            <button className="px-[25px] py-[12px] rounded-[8px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
               Več o Skrbniku
             </button>
             </Link>

@@ -29,7 +29,7 @@ const Cemeteries = ({ data }) => {
     setCompanyId(data.id);
     const customCemeteries = data?.cemeteries || [];
 
-    if (customCemeteries.length > 0) {
+    if (customCemeteries && customCemeteries.length > 0) {
       setCemeteries(customCemeteries);
     } else {
       setCemeteries(defaultCemeteries);
@@ -95,7 +95,7 @@ const Cemeteries = ({ data }) => {
 
           <div
             className={`overflow-auto scrollbar-hide mt-6 pl-[37px] tablet:pl-[40px] ${
-              cemeteries.length > 8 && "h-[214px]"
+              cemeteries && cemeteries.length > 8 && "h-[214px]"
             }`}
           >
             <ol className="list-decimal flex w-[324px] flex-col mobile:w-[294px]">

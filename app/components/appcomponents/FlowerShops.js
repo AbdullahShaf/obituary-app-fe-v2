@@ -39,7 +39,7 @@ import Link from "next/link";
 const FlowerShops = ({ setIsOpen, data, showShop }) => {
   console.log(">>>>>>>>>> data", data);
   useEffect(() => {
-    if (data?.floristShops?.length > 0) {
+    if (data && data.floristShops && data?.floristShops?.length > 0) {
       const firstShop = data.floristShops[0];
       setSelectedFloristShop(firstShop);
       getPackages(firstShop.companyId);
@@ -92,7 +92,7 @@ const FlowerShops = ({ setIsOpen, data, showShop }) => {
         </div>
       </div>
       <div className="w-full bg-[#F8EDE3]">
-        {data?.floristShops?.length > 0 && (
+        {data && data.floristShops && data?.floristShops?.length > 0 && (
           <div className="mx-auto jdmobile:w-[370px] jdtablet:w-[700px] jddesktop:w-[1280px] w-[400px] grid grid-cols-2 jdtablet:grid-cols-3 jddesktop:grid-cols-6 jdmobile:justify-center place-items-center items-end">
             {/* Sponsor Card */}
             {data?.Company &&

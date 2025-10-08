@@ -4,22 +4,28 @@ import { IconView } from "./Commonfunction";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import obituaryService from "@/services/obituary-service";
 
 function FooterMobile({ handleGoToTop, setIsMobilSideBarOpen }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isIconChange, setIsIconChange] = useState(false);
   const { user } = useAuth();
+  const [memories, setMemories] = useState([]);
 
-  // useEffect(() => {
-  //   if (
-  //     pathname == "/moji-prispevki" ||
-  //     pathname == "/pregled2" ||
-  //     pathname == "/potrditev-objave"
-  //   ) {
-  //     setIsIconChange(true);
-  //   }
-  // }, [pathname]);
+  const getKeeperMemory = async () => {
+    try {
+      const response = await obituaryService.getKeeperMemories();
+
+      setMemories(response.obituaries);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getKeeperMemory();
+  }, []);
 
   const parsedUser = user;
 
@@ -70,7 +76,7 @@ function FooterMobile({ handleGoToTop, setIsMobilSideBarOpen }) {
               <IconView iconPath={"/gototop.png"} name={"Na vrh"} />
             </div>
           ) : (
-            <Link href={`/u/${parsedUser?.slugKey}/pregled2`}>
+            <Link href={`${memories && memories?.length ? `/u/${parsedUser?.slugKey}/pregled2` : "#"}`}>
               <div>
                 <IconView
                   iconPath={"/icon_active_heart.png"}

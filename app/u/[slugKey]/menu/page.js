@@ -17,7 +17,8 @@ const UserAccountDashboard = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      if (window.innerWidth > 768) {
+      // if (window.innerWidth > 768) {
+      if (window.innerWidth > 1200) {
         if (!isLoading && isAuthenticated) {
           const parsedUser = user;
           console.log("parsedUser", parsedUser);

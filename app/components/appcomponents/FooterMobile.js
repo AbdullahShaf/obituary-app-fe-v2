@@ -38,12 +38,12 @@ function FooterMobile({ handleGoToTop, setIsMobilSideBarOpen }) {
       "
       >
         <div className=" hidden tabletUserAcc:flex ">
-          <button onClick={logout} className="w-full h-[52px] ">
+          <Link href={`/`} className="w-full h-[52px] ">
             <IconView
               iconPath={"/icon_sidebar_arrow.png"}
               name={"Na spletno stran"}
             />
-          </button>
+          </Link>
         </div>
 
         <div className="flex mobileUserAcc:w-full justify-between tabletUserAcc:gap-[60px]">

@@ -258,11 +258,13 @@ export default function Funeral() {
                 </Link>
               </div>
               <div className="mt-[8px]  mobileUserAcc:hidden">
-                <ButtonWhiteBG
-                  placeholderImg={"/ico_obletnice.png"}
-                  placeholderText={"NAZAJ NA SPLETNO STRAN"}
-                  isOpen={2}
-                />
+                <Link href={"/"}>
+                  <ButtonWhiteBG
+                    placeholderImg={"/ico_obletnice.png"}
+                    placeholderText={"NAZAJ NA SPLETNO STRAN"}
+                    isOpen={2}
+                  />
+                </Link>
               </div>
               <div className="mt-[8px]  mobileUserAcc:hidden">
                 <ButtonWhiteBG

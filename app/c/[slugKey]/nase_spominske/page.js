@@ -212,7 +212,7 @@ export default function Spominske() {
             </div>
           </div>
           <div className="mt-[36px] grid grid-cols-4 tabletUserAcc:grid-cols-3 mobileUserAcc:grid-cols-3 gap-[18px]">
-            {obituaries.length > 0
+            {obituaries && obituaries.length > 0
               ? obituaries.map((obituary, index) => (
                 <div
                   key={index}

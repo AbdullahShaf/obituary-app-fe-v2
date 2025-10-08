@@ -379,7 +379,7 @@ const Condolences = ({ set_Id, setModal, data }) => {
         </div>
 
         <div className="h-auto    tablet:mt-[52px] mobile:mt-[19px] flex flex-row justify-between tablet:justify-around my-[48px]">
-          {data?.length > 0 && (
+          {data && data?.length > 0 && (
             <PersonList
               currentSlide={currentSlide}
               setCurrentSlide={setCurrentSlide}
@@ -387,7 +387,7 @@ const Condolences = ({ set_Id, setModal, data }) => {
             />
           )}
         </div>
-        {data?.length > 1 && (
+        {data && data?.length > 1 && (
           <div className="hidden desktop:flex mt-10 ">
             <ProgressBar
               currentSlide={currentSlide - 1}
@@ -395,7 +395,7 @@ const Condolences = ({ set_Id, setModal, data }) => {
             />
           </div>
         )}
-        {data?.length > 1 && (
+        {data && data?.length > 1 && (
           <div className="hidden tablet:flex  ">
             <ProgressBar
               currentSlide={currentSlide - 1}

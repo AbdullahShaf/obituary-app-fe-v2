@@ -34,7 +34,7 @@ export const FrequentlyAskedQuestionView = ({ from, data }) => {
   useEffect(() => {
     const customFaq = data?.faqs || [];
 
-    if (customFaq.length > 0) {
+    if (customFaq && customFaq.length > 0) {
       setFaqs(customFaq);
     }
     // else if (customFaq.length > 0) {
@@ -144,7 +144,7 @@ export const FrequentlyAskedQuestionView2 = ({ from, data }) => {
   useEffect(() => {
     const customFaq = data?.faqs || [];
 
-    if (customFaq.length > 0) {
+    if (customFaq && customFaq.length > 0) {
       setFaqs(customFaq);
     }
   }, [data]);
@@ -216,7 +216,7 @@ export const FrequentlyAskedQuestionView3 = ({ from, data }) => {
   useEffect(() => {
     const customFaq = data?.faqs || [];
 
-    if (customFaq.length > 0) {
+    if (customFaq && customFaq.length > 0) {
       setFaqs(customFaq);
     }
   }, [data]);

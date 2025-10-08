@@ -47,7 +47,7 @@ const ContactList = () => {
       const response = await adminService.getContacts();
       console.log('response', response);
 
-      if (response?.data?.length) {
+      if (response && response.data && response?.data?.length) {
         setContacts(response?.data || []);
       } else {
         setError("Failed to fetch contacts");

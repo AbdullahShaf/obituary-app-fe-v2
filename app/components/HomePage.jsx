@@ -135,10 +135,10 @@ export default function HomeContent(props) {
     updateParams(selectedCity, item.place, name);
   };
 
-  const handleNameChange = (name)=>{
+  const handleNameChange = (name) => {
     setName(name);
     updateParams(selectedCity, selectedRegion, name);
-  }
+  };
 
   // Handle city select
   const handleCitySelect = (item) => {
@@ -163,7 +163,7 @@ export default function HomeContent(props) {
   };
 
   // Update URL params - improved version
-  const updateParams = (city, region, name="") => {
+  const updateParams = (city, region, name = "") => {
     const params = new URLSearchParams();
 
     // Keep existing florist city if it exists
@@ -175,7 +175,7 @@ export default function HomeContent(props) {
     // Add city and region if they exist
     if (city) params.set("city", city);
     if (region) params.set("region", region);
-    if(name.length>0) params.set("search",name);
+    if (name && name.length > 0) params.set("search", name);
 
     const queryString = params.toString();
     router.replace(queryString ? `/?${queryString}` : "/", { scroll: false });
@@ -203,11 +203,18 @@ export default function HomeContent(props) {
       }
       let tempObituaries = response.obituaries;
 
-      if(name){
+      if (name) {
         const temp = tempObituaries;
-        const rawName = name.trim().toLowerCase();
-        if(temp.length>0){
-          tempObituaries = temp.filter(obituaries => obituaries.name.toLowerCase().startsWith(rawName) || obituaries.sirName.toLowerCase().startsWith(rawName))
+        const rawName = decodeURIComponent(name).trim().toLowerCase();
+        console.log("Raw name for filtering:", rawName);
+        if (temp && temp.length > 0) {
+          tempObituaries = temp.filter((obituaries) => {
+            const fullName = `${obituaries.name} ${obituaries.sirName}`;
+            return (
+              fullName.toLowerCase().startsWith(rawName) ||
+              obituaries.sirName.toLowerCase().startsWith(rawName)
+            );
+          });
         }
       }
       const sortedObituaries = tempObituaries.sort(

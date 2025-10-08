@@ -65,7 +65,7 @@ const SlideOne = () => {
               </p>
               
               <Link href={"/zalna-stran"}>
-              <button class="shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] px-[25px] py-[12px] rounded-[8px] mt-[81px] max-w-[175px]">
+              <button className="shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] px-[25px] py-[12px] rounded-[8px] mt-[81px] max-w-[175px]">
                 Več o žalni strani
               </button>
               </Link>
@@ -100,7 +100,7 @@ const SlideOne = () => {
             />
           </div>        
           <Link href={"/zalna-stran"}>
-          <button class="px-[25px] rounded-[8px] py-[12px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
+          <button className="px-[25px] rounded-[8px] py-[12px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
             Več o žalni strani
           </button>
           </Link>
@@ -128,7 +128,7 @@ const SlideOne = () => {
             <img src="/mobile-cards/iPad Landscape.png" alt="iPad Landscape" className=" h-[613px]  object-fill" />
           </div >         
           <Link href={"/zalna-stran"}>
-          <button class="px-[25px] rounded-[8px] py-[12px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
+          <button className="px-[25px] rounded-[8px] py-[12px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
             Več o žalni strani
           </button>
           </Link>

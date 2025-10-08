@@ -189,7 +189,7 @@ const FuneralList = () => {
       {/* Results Section */}
       <div className="flex justify-center  w-[310px] tablet:w-[612px] desktop:w-[1088px] desktop:justify-between">
         <div className="w-full">
-          {companies?.length > 0 ? (
+          {companies && companies?.length > 0 ? (
             companies.map((item, index) => {
               return (
                 <FuneralBlock

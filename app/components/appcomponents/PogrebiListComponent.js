@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, Suspense } from "react";
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from "next/navigation";
 import Dropdown from "@/app/components/appcomponents/Dropdown";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import ObituaryCard from "@/app/components/appcomponents/ObituaryCard";
@@ -11,18 +11,27 @@ import { toast } from "react-hot-toast";
 import obituaryService from "@/services/obituary-service";
 import regionsAndCities from "@/utils/regionAndCities";
 import { SelectDropdown } from "./SelectDropdown";
+import { set } from "date-fns";
 
 const ObituaryListComponent = ({ city }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   // Initialize state from URL params
-  const [selectedCity, setSelectedCity] = useState(searchParams.get('city') || city || "Celje");
-  const [selectedRegion, setSelectedRegion] = useState(searchParams.get('region') || null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCity, setSelectedCity] = useState(
+    searchParams.get("city") || city || "Celje"
+  );
+  const [selectedRegion, setSelectedRegion] = useState(
+    searchParams.get("region") || null
+  );
+  const [searchTerm, setSearchTerm] = useState("");
   const [obituaries, setObituaries] = useState([]);
-  const defaultCities = Object.values(regionsAndCities).flat().sort((a, b) => a.localeCompare(b, "sl"));
-  const [allCities, setAllCities] = useState(defaultCities)
+  const defaultCities = Object.values(regionsAndCities)
+    .flat()
+    .sort((a, b) => a.localeCompare(b, "sl"));
+  const [allCities, setAllCities] = useState(defaultCities);
+  const [suggestion, setSuggestion] = useState([]);
+  const suggestionComponentRef = React.useRef(null);
   // Dropdown options
   const allRegionsOption = {
     place: "- Pokaži vse regije -",
@@ -31,7 +40,7 @@ const ObituaryListComponent = ({ city }) => {
 
   const allCitiesOption = {
     place: "- Pokaži vse občine -",
-    id: "allCities"
+    id: "allCities",
   };
 
   // Region options
@@ -44,13 +53,25 @@ const ObituaryListComponent = ({ city }) => {
   ];
 
   useEffect(() => {
+    document.addEventListener("click", function (event) {
+      if (
+        suggestionComponentRef.current &&
+        !suggestionComponentRef.current.contains(event.target)
+      ) {
+        setSuggestion([]);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     if (!selectedRegion || selectedRegion === "- Pokaži vse regije -") {
       return setAllCities(defaultCities);
     }
-    const filteredCities = Object.values(regionsAndCities[selectedRegion])
-      .sort((a, b) => a.localeCompare(b, "sl"));
-    setAllCities(filteredCities)
-  }, [selectedRegion])
+    const filteredCities = Object.values(regionsAndCities[selectedRegion]).sort(
+      (a, b) => a.localeCompare(b, "sl")
+    );
+    setAllCities(filteredCities);
+  }, [selectedRegion]);
 
   const cityOptions = [
     allCitiesOption,
@@ -69,10 +90,14 @@ const ObituaryListComponent = ({ city }) => {
       params.delete("city");
     }
     if (!city) {
-      setSelectedCity('');
+      setSelectedCity("");
       params.delete("city");
     }
-    if (region && region !== "allRegions" && region !== "- Pokaži vse regije -") {
+    if (
+      region &&
+      region !== "allRegions" &&
+      region !== "- Pokaži vse regije -"
+    ) {
       params.set("region", region);
     } else {
       params.delete("region");
@@ -91,10 +116,10 @@ const ObituaryListComponent = ({ city }) => {
   const handleRegionSelect = (item) => {
     if (item.id === "allRegions" || item.place === "- Pokaži vse regije -") {
       setSelectedRegion(null);
-      updateURL('', null, searchTerm); // selectedCity
+      updateURL("", null, searchTerm); // selectedCity
     } else {
       setSelectedRegion(item.place);
-      updateURL('', item.place, searchTerm); // selectedCity
+      updateURL("", item.place, searchTerm); // selectedCity
     }
   };
 
@@ -114,8 +139,32 @@ const ObituaryListComponent = ({ city }) => {
   // Handle search input change
   const handleSearchChange = (e) => {
     const value = e.target.value;
+    if (value && value.length > 0) {
+      if (obituaries && obituaries.length > 0) {
+        const temp = obituaries.filter((obit) => {
+          const raw =
+            obit.name.toLowerCase().trim() +
+            " " +
+            obit.sirName.toLowerCase().trim();
+          if (
+            (obit.name &&
+              obit.name.toLowerCase().startsWith(value.toLowerCase().trim())) ||
+            (obit.sirName &&
+              obit.sirName
+                .toLowerCase()
+                .startsWith(value.toLowerCase().trim())) ||
+            (raw && raw.toLowerCase().startsWith(value.toLowerCase().trim()))
+          ) {
+            return obit;
+          }
+        });
+        setSuggestion(temp);
+      }
+    } else {
+      setSuggestion([]);
+    }
     setSearchTerm(value);
-    updateURL(selectedCity, selectedRegion, value);
+    // updateURL(selectedCity, selectedRegion, value);
   };
 
   // Handle quick selection (for the quick select buttons)
@@ -132,12 +181,15 @@ const ObituaryListComponent = ({ city }) => {
 
   // Handle search/filter
   const handleSearch = () => {
+    if (selectedCity && selectedCity.length > 0) {
+      updateURL(selectedCity, selectedRegion, searchTerm);
+    }
     fetchObituary();
   };
 
   // Set default city in URL if none is specified
   useEffect(() => {
-    if (!searchParams.get('city') && !city && !selectedRegion) {
+    if (!searchParams.get("city") && !city && !selectedRegion) {
       updateURL("Celje", selectedRegion, searchTerm);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -156,7 +208,7 @@ const ObituaryListComponent = ({ city }) => {
       if (selectedRegion) queryParams.region = selectedRegion;
       if (searchTerm) queryParams.search = searchTerm;
 
-      console.log('Fetching with params:', queryParams);
+      console.log("Fetching with params:", queryParams);
 
       const response = await obituaryService.getObituary(queryParams);
 
@@ -183,20 +235,43 @@ const ObituaryListComponent = ({ city }) => {
     <div className="max-w-[1920px] w-full tablet:w-full mobile:w-full mx-auto flex flex-col items-center desktop:bg-[#F5F7F9] mobile:bg-white tablet:bg-white">
       {/* Main Container */}
       <div className="flex flex-col items-center w-full tablet:w-full mobile:w-full">
-
         {/* DESKTOP VERSION */}
         <div className="w-full hidden desktop:flex tablet:w-full mobile:w-full flex-col items-center">
           <div className="w-[777px] tablet:w-[600px] h-[48px] flex flex-row gap-4 mt-[69.07px] mb-[23.93px]">
-
             {/* Search Input */}
-            <div className="flex w-[227px] h-[48px] justify-center items-center">
+            <div className="flex relative w-[227px] h-[48px] justify-center items-center">
               <input
                 type="text"
                 placeholder="Išči po imenu"
                 value={searchTerm}
                 onChange={handleSearchChange}
-                className="bg-white border-[#7C7C7C] placeholder-[#7C7C7C] text-[16px] font-[400] leading-[24px] border rounded-lg shadow-sm flex flex-1 items-center justify-between h-full px-4 text-[#7C7C7C] focus:outline-none"
+                className="relative bg-white border-[#7C7C7C] placeholder-[#7C7C7C] text-[16px] font-[400] leading-[24px] border rounded-lg shadow-sm flex flex-1 items-center justify-between h-full px-4 text-[#7C7C7C] focus:outline-none"
               />
+              {suggestion && suggestion.length > 0 && (
+                <div
+                  className="absolute w-full top-[100%] z-[9999] bg-[#f1fffe] my-[8px] box-border rounded-[4px]"
+                  style={{
+                    boxShadow:
+                      "0 0 0 1px hsla(0, 0%, 0%, 0.1),0 4px 11px hsla(0, 0%, 0%, 0.1)",
+                  }}
+                  ref={suggestionComponentRef}
+                >
+                  <div className="max-h-[300px] py-[4px] relative overflow-y-auto css-qr46ko">
+                    {suggestion &&
+                      suggestion.length > 0 &&
+                      suggestion.map((obit, index) => (
+                        <div
+                          key={index}
+                          className="text-[#7d7d7d] py-[8px] px-[12px] cursor-pointer select-none bg-transparent hover:bg-[#6D778E] hover:text-white box-border rounded-[0.375rem]"
+                          onClick={() => {
+                            setSearchTerm(`${obit.name} ${obit.sirName}`);
+                            setSuggestion([]);
+                          }}
+                        >{`${obit.name} ${obit.sirName}`}</div>
+                      ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Region Dropdown */}
@@ -232,7 +307,6 @@ const ObituaryListComponent = ({ city }) => {
         {/* TABLET VERSION */}
         <div className="w-full tablet:w-full mobile:w-full tablet:flex hidden flex-col items-center">
           <div className="w-[600px] h-[112px] columns-2 flex flex-wrap flex-row gap-4 mt-[63px] mb-[53px]">
-
             {/* Region Dropdown */}
             <SelectDropdown
               label={"Regija"}
@@ -277,7 +351,6 @@ const ObituaryListComponent = ({ city }) => {
         {/* MOBILE VERSION */}
         <div className="w-full tablet:w-full mobile:w-full mobile:flex hidden flex-col items-center">
           <div className="w-[296px] h-[240px] flex-wrap flex flex-row gap-4 mt-[40px] mb-[42px]">
-
             {/* Search Input */}
             <div className="flex w-[296px] h-[48px] justify-center items-center">
               <input
@@ -294,7 +367,7 @@ const ObituaryListComponent = ({ city }) => {
               label={"Regija"}
               isFromNotification={false}
               isFromFlower={false}
-              isFrom={'pogrebi'}
+              isFrom={"pogrebi"}
               data={regionOptions}
               selectedValue={selectedRegion}
               onSelect={handleRegionSelect}
@@ -306,7 +379,7 @@ const ObituaryListComponent = ({ city }) => {
               label={"Mesto"}
               isFromNotification={false}
               isFromFlower={false}
-              isFrom={'pogrebi'}
+              isFrom={"pogrebi"}
               selectedValue={selectedCity}
               onSelect={handleCitySelect}
             />
@@ -323,7 +396,6 @@ const ObituaryListComponent = ({ city }) => {
 
         {/* Quick Selection remains the same... */}
         {/* ... rest of your existing quick selection code ... */}
-
       </div>
     </div>
   );

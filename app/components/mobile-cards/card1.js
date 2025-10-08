@@ -73,8 +73,13 @@ const Card1 = ({ data, cardRefs, index, cemetery }) => {
           </h5>
 
           <p className="text-[24px]">
-            {formatObituaryDate(data?.birthDate)} -{" "}
-            {formatObituaryDate(data?.deathDate)}
+
+            {data?.birthDate?.includes('1025') ? (
+              <>{formatObituaryDate(data?.deathDate)}</>
+            ) : (
+              <>{formatObituaryDate(data?.birthDate)} -{" "}
+                {formatObituaryDate(data?.deathDate)}</>
+            )}
           </p>
         </div>
 

@@ -120,7 +120,11 @@ const ObituaryCard = ({
                   desktop:font-variation-customOpt16 text-left desktop:mt-[16px] tablet:mt-[16px]  
                   desktop:text-[16px] tablet:text-[16px] mobile:text-[14px]  text-[#414141] leading-[24px]"
                 >
-                  {formattedBirthDate} – {formattedDeathDate} ({age} let)
+                  {data?.birthDate?.includes('1025') ? (
+                    <>{formattedDeathDate}</>
+                  ) : (
+                    <>{formattedBirthDate} – {formattedDeathDate} ({age} let)</>
+                  )}
                 </p>
                 <div
                   className="flex h-[18px] tablet:h-6 

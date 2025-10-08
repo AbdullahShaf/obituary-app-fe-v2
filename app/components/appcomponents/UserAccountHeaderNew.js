@@ -13,6 +13,7 @@ import CompanyFooterMobile from "./CompanyFooterMobile";
 import backIcon from "@/public/memory_header_left.png";
 import { useSession } from "next-auth/react";
 import { useAuth } from "@/hooks/useAuth";
+import toast from "react-hot-toast";
 
 function UserAccountHeaderNew({
   onMenuClick,
@@ -26,7 +27,7 @@ function UserAccountHeaderNew({
 }) {
   const router = useRouter();
   const { data: session } = useSession();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const isGhost = session?.user?.me?.isGhost;
   const adminId = session?.user?.me?.adminId;
   const pathname = usePathname();
@@ -113,10 +114,10 @@ function UserAccountHeaderNew({
                 />
               </div>
               <div className="absolute h-full overflow-auto  z-20 mobileUserAcc:bg-[#F1F5F8] flex flex-row justify-center gap-x-[30px] left-[0px] right-[0px]  "
-              style={{
-                backgroundImage: 'url("/reg_user_tablica.avif")',
-                backgroundSize: 'cover'
-              }}>
+                style={{
+                  backgroundImage: 'url("/reg_user_tablica.avif")',
+                  backgroundSize: 'cover'
+                }}>
                 <div className="flex flex-col tabletUserAcc:mt-[100px] h-full">
                   <div
                     className="text-[#0A85C2] text-[26px] leading-[38px] font-[500px] mobileUserAcc:mt-[56px]"
@@ -134,10 +135,12 @@ function UserAccountHeaderNew({
                     />
                   </div>
                   <div className="mt-[10px]">
-                    <ButtonWhiteBG
-                      placeholderImg={"/ico_setting.png"}
-                      placeholderText={"MOJI PODATKI"}
-                    />
+                    <Link href={`/u/${parsedUser?.slugKey}/moj-racun`}>
+                      <ButtonWhiteBG
+                        placeholderImg={"/ico_setting.png"}
+                        placeholderText={"MOJI PODATKI"}
+                      />
+                    </Link>
                   </div>
                   <div className="text-[#2198D3] mt-[50px] text-[14px] leading-[24px] font-variation-customOpt14 font-semibold">
                     MOJI BLIŽNJI
@@ -234,6 +237,7 @@ function UserAccountHeaderNew({
                       <div
                         className="w-full ml-[20px] h-full my-[2px] text-[16px] text-[#FFFFFF]
                         font-variation-customOpt16 font-normal leading-[24px] flex items-center "
+                        onClick={() => toast.error("Skrbnika za spominsko stran vam brezplačno podarijo v cvetličarni (ki je prikazana med lokalnimi na naši strani).")}
                       >
                         POSTANI SKRBNIK
                       </div>
@@ -263,7 +267,7 @@ function UserAccountHeaderNew({
                       />
                     </Link>
                   </div>
-                  <div className="mt-[70px] mobileUserAcc:mt-[15px] w-[184px] border-2 border-[#1860A335] rounded-[10px] mb-[90px]">
+                  <div className="mt-[70px] mobileUserAcc:mt-[15px] w-[184px] border-2 border-[#1860A335] rounded-[10px] mb-[90px]" onClick={logout}>
                     <div className=" rounded-lg w-[180px] h-[55px] flex justify-center items-center bg-gradient-to-b from-[#FFFFFF40] via-[rgba(12,104,244,0.15)] to-[#FFFFFF40]">
                       <div className="text-[16px] leading-[24px] font-variation-customOpt16 text-[#6D778E] ">
                         ODJAVA IZ RAČUNA
@@ -278,10 +282,12 @@ function UserAccountHeaderNew({
                 {/* 21 October 2024 */}
                 <div className="w-[314px] flex flex-col  mt-[165px] mobileUserAcc:hidden ">
                   <div>
-                    <ButtonWhiteBG
-                      placeholderImg={"/ico_obletnice.png"}
-                      placeholderText={"NAZAJ NA SPLETNO STRAN"}
-                    />
+                    <Link href={"/"}>
+                      <ButtonWhiteBG
+                        placeholderImg={"/ico_obletnice.png"}
+                        placeholderText={"NAZAJ NA SPLETNO STRAN"}
+                      />
+                    </Link>
                   </div>
                   <div className="mt-[10px]">
                     <ButtonWhiteBG
@@ -348,14 +354,16 @@ function UserAccountHeaderNew({
         )}
       </div>
 
-      {company ? (
-        <div className={`${noFooterOnMobile ? "mobileUserAcc:hidden" : ""} ${pathname?.startsWith("/c/") ? "tabletUserAcc:hidden":""}`}>
-          <CompanyFooterMobile setIsMobilSideBarOpen={setIsMobilSideBarOpen} />
-        </div>
-      ) : (
-        <FooterMobile setIsMobilSideBarOpen={setIsMobilSideBarOpen} />
-      )}
-    </React.Fragment>
+      {
+        company ? (
+          <div className={`${noFooterOnMobile ? "mobileUserAcc:hidden" : ""} ${pathname?.startsWith("/c/") ? "tabletUserAcc:hidden" : ""}`}>
+            <CompanyFooterMobile setIsMobilSideBarOpen={setIsMobilSideBarOpen} />
+          </div>
+        ) : (
+          <FooterMobile setIsMobilSideBarOpen={setIsMobilSideBarOpen} />
+        )
+      }
+    </React.Fragment >
   );
 }
 

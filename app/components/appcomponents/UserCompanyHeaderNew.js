@@ -276,10 +276,12 @@ function UserCompanyHeaderNew({
                 {/* 21 October 2024 */}
                 <div className="w-[314px] flex flex-col  mt-[165px] mobileUserAcc:hidden ">
                   <div>
-                    <ButtonWhiteBG
-                      placeholderImg={"/ico_obletnice.png"}
-                      placeholderText={"NAZAJ NA SPLETNO STRAN"}
-                    />
+                    <Link href={"/"}>
+                      <ButtonWhiteBG
+                        placeholderImg={"/ico_obletnice.png"}
+                        placeholderText={"NAZAJ NA SPLETNO STRAN"}
+                      />
+                    </Link>
                   </div>
                   <div className="mt-[10px]">
                     <ButtonWhiteBG

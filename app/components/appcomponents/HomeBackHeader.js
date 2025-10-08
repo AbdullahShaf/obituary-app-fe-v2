@@ -3,7 +3,7 @@ import Link from "next/link";
 import SideMenu from "../ui/sideMenu";
 const HomeBackHeader = () => {
   return (
-    <div className="mobile:pb-[110px] relative max-w-[1280px] overflow-hidden mx-auto desktop:mt-[137.02px] mobile:mt-[115px] tablet:mt-[124px] flex justify-center">
+    <div className="mobile:pb-[50px] relative max-w-[1280px] overflow-hidden mx-auto desktop:mt-[137.02px] mobile:mt-[115px] tablet:mt-[124px] flex justify-center">
       <img
         src="/samotna_klop.avif"
         alt="samotna_klop"

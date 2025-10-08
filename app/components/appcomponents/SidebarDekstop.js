@@ -4,6 +4,7 @@ import Image from "next/image";
 import { CommonViewUserAccSidebar } from "./Commonfunction";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import toast from "react-hot-toast";
 
 function SidebarDekstop({
   showAlternateContent,
@@ -107,7 +108,7 @@ function SidebarDekstop({
           </div>
         ) : (
           <div>
-            <div>
+            <div onClick={() => toast.error("Skrbnika za spominsko stran vam brezplačno podarijo v cvetličarni (ki je prikazana med lokalnimi na naši strani).")}>
               <CommonViewUserAccSidebar
                 imgPath={"/icon_plus_round.png"}
                 title={"Postani Skrbnik"}

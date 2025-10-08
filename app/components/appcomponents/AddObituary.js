@@ -224,7 +224,7 @@ const AddObituary = ({ set_Id, setModal }) => {
       !selectedRegion ||
       !selectedCity ||
       !inputValueGender ||
-      !birthDate ||
+      // !birthDate ||
       !deathDate
     ) {
       toast.error("Vsa polja so obvezna");

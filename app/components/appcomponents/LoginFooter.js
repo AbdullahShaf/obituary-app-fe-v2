@@ -94,9 +94,12 @@ export default function LoginFooter() {
                 </a>
 
                 <a
+                <a
                   href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
                   className="desktop:hidden flex  items-center text-gray-600 ml-[-2px] mt-[8px] hover:text-blue-500 transition duration-200 "
                   target="_blank"
+                  rel="noopener noreferrer"
+                >
                 >
                   <div className="rounded-lg shadow-custom-light-dark bg-gradient-to-br from-gray-300 to-white p-[6px] transition duration-300 hover:scale-105 active:scale-95">
                     <Image

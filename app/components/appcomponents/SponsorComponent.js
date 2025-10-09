@@ -6,16 +6,12 @@ import sponser3 from "@/public/sponser3.png";
 import sponser5 from "@/public/sponser5.png";
 import sponser6 from "@/public/sponser6.png";
 import sponser7 from "@/public/sponser7.png";
-import { useSearchParams } from "next/navigation";
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import userService from "@/services/user-service";
-const SponsorComponent = ({ text = "" }) => {
+const SponsorComponent = ({ text = "", region, city }) => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const region = searchParams.get("region");
-  const city = searchParams.get("city");
   const [sponsors, setSponsosrs] = useState([]);
 
   let sponsorPage = '';
@@ -58,6 +54,7 @@ const SponsorComponent = ({ text = "" }) => {
               {sponsors?.map((item) => {
                 return (
                   <img
+                    key={item.id}
                     src={item?.logo ?? sponser6}
                     alt="sponser2 of the image"
                     className="flex  w-[230px] mobile:w-[150px]  filter grayscale"

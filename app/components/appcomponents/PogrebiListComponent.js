@@ -208,8 +208,8 @@ const ObituaryListComponent = ({ city }) => {
     try {
       const queryParams = {};
 
-      if (selectedCity) queryParams.city = selectedCity;
-      if (selectedRegion) queryParams.region = selectedRegion;
+      if (selectedCity) queryParams.city = pathname?.includes('/u/') ? '' : selectedCity;
+      if (selectedRegion) queryParams.region = pathname?.includes('/u/') ? '' : selectedRegion;
       if (searchTerm) queryParams.search = searchTerm;
 
       console.log("Fetching with params:", queryParams);

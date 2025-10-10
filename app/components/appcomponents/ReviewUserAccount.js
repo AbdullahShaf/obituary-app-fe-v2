@@ -1,17 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import obituaryService from "@/services/obituary-service";
 import regionsAndCities from "@/utils/regionAndCities";
-import { useSearchParams } from "next/navigation";
 import PogrebiListComponent from "../../components/appcomponents/PogrebiListComponent";
 
 const ReviewUserAccount = () => {
-  const searchParams = useSearchParams();
-  const region = searchParams.get("region");
-  const city = searchParams.get("city");
   const [showSelect, setShowSelect] = useState(false);
   const [memories, setMemories] = useState(null);
 
@@ -208,7 +203,7 @@ const ReviewUserAccount = () => {
       </div>
 
       <div>
-        <PogrebiListComponent city={city} />
+        <PogrebiListComponent city={''} />
       </div>
 
       {/* <div className="hidden mobileUserAcc:flex h-[48px] mt-4 w-[335px] tabletUserAcc:w-[292px] bg-[#414141] rounded-[8px] justify-center items-center ">

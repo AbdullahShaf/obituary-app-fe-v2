@@ -51,12 +51,14 @@ const SponsorComponent = ({ text = "", region, city }) => {
             <div className="flex justify-center items-center mt-[30px]">
               {sponsors?.map((item) => {
                 return (
-                  <img
-                    key={item.id}
-                    src={item?.logo ?? sponser6}
-                    alt="sponser2 of the image"
-                    className="flex w-[230px] mobile:w-[150px]  filter grayscale mx-4"
-                  />
+                  <div className="flex w-[180px] h-[80px] mobile:w-[150px]  filter grayscale mx-[10px]">
+                    <img
+                      key={item.id}
+                      src={item?.logo ?? sponser6}
+                      alt="sponser2 of the image"
+                      className="max-w-[100%]"
+                    />
+                  </div>
                 )
               })}
             </div>

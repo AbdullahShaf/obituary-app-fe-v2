@@ -253,7 +253,8 @@ const adminService = {
     return response.data;
   },
 
-  deleteSponosor: async (id: any) => {
+// services/admin-service.ts
+  deleteSponsor: async (id: any) => {
     const endpoint = "/admin/delete-sponsor/" + id;
     const response = await axios.delete(endpoint);
     return response.data;

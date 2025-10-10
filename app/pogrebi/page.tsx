@@ -1,6 +1,7 @@
 "use client";
 
 import React, { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Layout from "../components/appcomponents/Layout";
 import MemorialPageView from "../components/appcomponents/MemorialPageView";
 import ObituaryListBanner from "../components/appcomponents/ObituaryListBanner";
@@ -8,7 +9,6 @@ import NextFunerals from "../components/appcomponents/NextFunerals";
 import PogrebiListComponent from "../components/appcomponents/PogrebiListComponent";
 import SponsorComponent from "../components/appcomponents/SponsorComponent";
 import FloristsComp from "../components/appcomponents/FloristsComp";
-import { useSearchParams } from "next/navigation";
 import MainOptions from "../components/appcomponents/MainOptions";
 import Carousel from "../components/slidercomponents/Carousel";
 import PogrebiLocalFloristComp from "../components/PogrebiLocalFloristComp";
@@ -16,6 +16,7 @@ import CommonFooter from "../components/appcomponents/CommonFooter";
 
 const ObituaryListContent = () => {
   const searchParams = useSearchParams();
+  const region = searchParams.get("region");
   const city = searchParams.get("city");
 
   return (
@@ -28,7 +29,7 @@ const ObituaryListContent = () => {
 
       <MainOptions />
       <PogrebiLocalFloristComp />
-      <SponsorComponent text="To stran so omogočili" />
+      <SponsorComponent text="To stran so omogočili" region={region} city={city} />
       <CommonFooter currentPage="/pogrebi" />
     </>
   );

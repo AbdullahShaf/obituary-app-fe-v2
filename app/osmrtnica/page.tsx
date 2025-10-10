@@ -19,7 +19,7 @@ const ObituaryList = () => {
         </Suspense>
         <NextFunerals />
         <MemorialPageView />
-        <SponsorComponent />
+        <SponsorComponent text="" region={''} city={''} />
         <FloristsComp />
       </div>
     </Layout>

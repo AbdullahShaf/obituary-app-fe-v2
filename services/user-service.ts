@@ -169,6 +169,17 @@ const updateCardStatus = async (id: string) => {
   return response.data;
 };
 
+const getSponsors = async (str: any) => {
+  try {
+    const endpoint = "/user/me/sponsors" + str;
+
+    const response = await axios.get(endpoint);
+    return response.data;
+  } catch (error: unknown) {
+    // return new Error("Network error or no response");
+  }
+};
+
 const userService = {
   registerUser,
   getMyUser,
@@ -183,7 +194,8 @@ const userService = {
   saveContact,
   saveObitNotification,
   getMyKeeperNotifications,
-  updateCardStatus
+  updateCardStatus,
+  getSponsors
 };
 
 export default userService;

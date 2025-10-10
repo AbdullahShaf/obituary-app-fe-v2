@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Dropdown from "@/app/components/appcomponents/Dropdown";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import ObituaryCard from "@/app/components/appcomponents/ObituaryCard";
@@ -16,6 +16,7 @@ import { set } from "date-fns";
 const ObituaryListComponent = ({ city }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   // Initialize state from URL params
   const [selectedCity, setSelectedCity] = useState(
@@ -207,8 +208,8 @@ const ObituaryListComponent = ({ city }) => {
     try {
       const queryParams = {};
 
-      if (selectedCity) queryParams.city = selectedCity;
-      if (selectedRegion) queryParams.region = selectedRegion;
+      if (selectedCity) queryParams.city = pathname?.includes('/u/') ? '' : selectedCity;
+      if (selectedRegion) queryParams.region = pathname?.includes('/u/') ? '' : selectedRegion;
       if (searchTerm) queryParams.search = searchTerm;
 
       console.log("Fetching with params:", queryParams);
@@ -234,13 +235,15 @@ const ObituaryListComponent = ({ city }) => {
     }
   };
 
+  const hideDropdowns = pathname?.includes('/u/') ? true : false;
+
   return (
-    <div className="max-w-[1920px] w-full tablet:w-full mobile:w-full mx-auto flex flex-col items-center desktop:bg-[#F5F7F9] mobile:bg-white tablet:bg-white">
+    <div className={`max-w-[1920px] w-full tablet:w-full mobile:w-full mx-auto flex flex-col items-center ${pathname?.includes('/u/') ? '' : 'desktop:bg-[#F5F7F9]'} ${pathname?.includes('/u/') ? '' : 'mobile:bg-white tablet:bg-white'}`}>
       {/* Main Container */}
       <div className="flex flex-col items-center w-full tablet:w-full mobile:w-full">
         {/* DESKTOP VERSION */}
-        <div className="w-full hidden desktop:flex tablet:w-full mobile:w-full flex-col items-center">
-          <div className="w-[777px] tablet:w-[600px] h-[48px] flex flex-row gap-4 mt-[69.07px] mb-[23.93px]">
+        <div className={`w-full hidden desktop:flex tablet:w-full mobile:w-full flex-col ${pathname?.includes('/u/') ? '' : 'items-center'}`}>
+          <div className={`w-[777px] tablet:w-[600px] h-[48px] flex flex-row gap-4 ${pathname?.includes('/u/') ? '' : 'mt-[69.07px] mb-[23.93px]'}`}>
             {/* Search Input */}
             <div className="flex relative w-[227px] h-[48px] justify-center items-center">
               <input
@@ -278,25 +281,29 @@ const ObituaryListComponent = ({ city }) => {
               )}
             </div>
 
-            {/* Region Dropdown */}
-            <SelectDropdown
-              label={"Regija"}
-              isFromNotification={false}
-              isFromFlower={false}
-              data={regionOptions}
-              selectedValue={selectedRegion}
-              onSelect={handleRegionSelect}
-            />
+            {!hideDropdowns ? (
+              <>
+                {/* Region Dropdown */}
+                <SelectDropdown
+                  label={"Regija"}
+                  isFromNotification={false}
+                  isFromFlower={false}
+                  data={regionOptions}
+                  selectedValue={selectedRegion}
+                  onSelect={handleRegionSelect}
+                />
 
-            {/* City Dropdown */}
-            <SelectDropdown
-              data={cityOptions}
-              label={"Občina"}
-              isFromNotification={false}
-              isFromFlower={false}
-              selectedValue={selectedCity}
-              onSelect={handleCitySelect}
-            />
+                {/* City Dropdown */}
+                <SelectDropdown
+                  data={cityOptions}
+                  label={"Občina"}
+                  isFromNotification={false}
+                  isFromFlower={false}
+                  selectedValue={selectedCity}
+                  onSelect={handleCitySelect}
+                />
+              </>
+            ) : null}
 
             {/* Search Button */}
             <div
@@ -309,30 +316,34 @@ const ObituaryListComponent = ({ city }) => {
         </div>
 
         {/* TABLET VERSION */}
-        <div className="w-full tablet:w-full mobile:w-full tablet:flex hidden flex-col items-center">
-          <div className="w-[600px] h-[112px] columns-2 flex flex-wrap flex-row gap-4 mt-[63px] mb-[53px]">
-            {/* Region Dropdown */}
-            <SelectDropdown
-              label={"Regija"}
-              isFromNotification={false}
-              isFromFlower={false}
-              data={regionOptions}
-              selectedValue={selectedRegion}
-              onSelect={handleRegionSelect}
-            />
+        <div className={`w-full tablet:w-full mobile:w-full tablet:flex hidden flex-col ${pathname?.includes('/u/') ? '' : 'items-center'}`}>
+          <div className={`w-[600px] h-[112px] columns-2 flex flex-wrap flex-row gap-4 ${pathname?.includes('/u/') ? '' : 'mt-[63px] mb-[53px]'}`}>
+            {!hideDropdowns ? (
+              <>
+                {/* Region Dropdown */}
+                <SelectDropdown
+                  label={"Regija"}
+                  isFromNotification={false}
+                  isFromFlower={false}
+                  data={regionOptions}
+                  selectedValue={selectedRegion}
+                  onSelect={handleRegionSelect}
+                />
 
-            {/* City Dropdown */}
-            <SelectDropdown
-              data={cityOptions}
-              label={"Mesto"}
-              isFromNotification={false}
-              isFromFlower={false}
-              selectedValue={selectedCity}
-              onSelect={handleCitySelect}
-            />
+                {/* City Dropdown */}
+                <SelectDropdown
+                  data={cityOptions}
+                  label={"Mesto"}
+                  isFromNotification={false}
+                  isFromFlower={false}
+                  selectedValue={selectedCity}
+                  onSelect={handleCitySelect}
+                />
+              </>
+            ) : null}
 
             {/* Search Input */}
-            <div className="flex w-[292px] h-[48px] justify-center items-center">
+            <div className="flex relative w-[292px] h-[48px] justify-center items-center">
               <input
                 type="text"
                 placeholder="Išči po imenu / priimku"
@@ -340,23 +351,63 @@ const ObituaryListComponent = ({ city }) => {
                 onChange={handleSearchChange}
                 className="bg-white border-[#7C7C7C] placeholder-[#7C7C7C] text-[16px] font-[400] leading-[24px] border rounded-lg shadow-sm flex flex-1 items-center justify-between h-full px-4 text-[#7C7C7C] focus:outline-none"
               />
+              {suggestion && suggestion.length > 0 && (
+                <div
+                  className="absolute w-full top-[100%] z-[9999] bg-[#f1fffe] my-[8px] box-border rounded-[4px]"
+                  style={{
+                    boxShadow:
+                      "0 0 0 1px hsla(0, 0%, 0%, 0.1),0 4px 11px hsla(0, 0%, 0%, 0.1)",
+                  }}
+                  ref={suggestionComponentRef}
+                >
+                  <div className="max-h-[300px] py-[4px] relative overflow-y-auto css-qr46ko">
+                    {suggestion &&
+                      suggestion.length > 0 &&
+                      suggestion.map((obit, index) => (
+                        <div
+                          key={index}
+                          className="text-[#7d7d7d] py-[8px] px-[12px] cursor-pointer select-none bg-transparent hover:bg-[#6D778E] hover:text-white box-border rounded-[0.375rem]"
+                          onClick={() => {
+                            setSearchTerm(`${obit.name} ${obit.sirName}`);
+                            setSuggestion([]);
+                            window.location.href = `/m/${obit.slugKey}`;
+                          }}
+                        >{`${obit.name} ${obit.sirName}`}</div>
+                      ))}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Search Button */}
-            <div
-              onClick={handleSearch}
-              className="w-[292px] h-[48px] text-[16px] text-[#F6F6F6] rounded-lg leading-6 bg-[#414141] font-[400] flex justify-center items-center cursor-pointer"
-            >
-              Prikaži
-            </div>
+            {pathname?.includes('/u/') ? (
+              <div
+                onClick={handleSearch}
+                className="flex justify-center items-center w-12 h-12 aspect-square rounded-lg bg-[#414141] cursor-pointer"
+              >
+                <MagnifyingGlassIcon className="w-5 h-5 text-white" />
+              </div>
+            ) : (
+              <>
+                {/* Search Button */}
+                <div
+                  onClick={handleSearch}
+                  className="w-[292px] h-[48px] text-[16px] text-[#F6F6F6] rounded-lg leading-6 bg-[#414141] font-[400] flex justify-center items-center cursor-pointer"
+                >
+                  Prikaži
+                </div>
+              </>
+            )}
+
+
+
           </div>
         </div>
 
         {/* MOBILE VERSION */}
-        <div className="w-full tablet:w-full mobile:w-full mobile:flex hidden flex-col items-center">
-          <div className="w-[296px] h-[240px] flex-wrap flex flex-row gap-4 mt-[40px] mb-[42px]">
+        <div className={`w-full tablet:w-full mobile:w-full mobile:flex hidden flex-col ${pathname?.includes('/u/') ? '' : 'items-center'}`}>
+          <div className={`w-[296px] ${pathname?.includes('/u/') ? '' : 'h-[240px] mt-[40px] mb-[42px]'} flex-wrap flex flex-row gap-4`}>
             {/* Search Input */}
-            <div className="flex w-[296px] h-[48px] justify-center items-center">
+            <div className={`flex relative ${pathname?.includes('/u/') ? '' : 'w-[296px]'} h-[48px] justify-center items-center`}>
               <input
                 type="text"
                 placeholder="Išči po imenu / priimku"
@@ -364,37 +415,79 @@ const ObituaryListComponent = ({ city }) => {
                 onChange={handleSearchChange}
                 className="bg-white border-[#7C7C7C] placeholder-[#7C7C7C] text-[16px] font-[400] leading-[24px] border rounded-lg shadow-sm flex flex-1 items-center justify-between h-full px-4 text-[#7C7C7C] focus:outline-none"
               />
+              {suggestion && suggestion.length > 0 && (
+                <div
+                  className="absolute w-full top-[100%] z-[9999] bg-[#f1fffe] my-[8px] box-border rounded-[4px]"
+                  style={{
+                    boxShadow:
+                      "0 0 0 1px hsla(0, 0%, 0%, 0.1),0 4px 11px hsla(0, 0%, 0%, 0.1)",
+                  }}
+                  ref={suggestionComponentRef}
+                >
+                  <div className="max-h-[300px] py-[4px] relative overflow-y-auto css-qr46ko">
+                    {suggestion &&
+                      suggestion.length > 0 &&
+                      suggestion.map((obit, index) => (
+                        <div
+                          key={index}
+                          className="text-[#7d7d7d] py-[8px] px-[12px] cursor-pointer select-none bg-transparent hover:bg-[#6D778E] hover:text-white box-border rounded-[0.375rem]"
+                          onClick={() => {
+                            setSearchTerm(`${obit.name} ${obit.sirName}`);
+                            setSuggestion([]);
+                            window.location.href = `/m/${obit.slugKey}`;
+                          }}
+                        >{`${obit.name} ${obit.sirName}`}</div>
+                      ))}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Region Dropdown */}
-            <SelectDropdown
-              label={"Regija"}
-              isFromNotification={false}
-              isFromFlower={false}
-              isFrom={"pogrebi"}
-              data={regionOptions}
-              selectedValue={selectedRegion}
-              onSelect={handleRegionSelect}
-            />
+            {!hideDropdowns ? (
+              <>
+                {/* Region Dropdown */}
+                <SelectDropdown
+                  label={"Regija"}
+                  isFromNotification={false}
+                  isFromFlower={false}
+                  isFrom={"pogrebi"}
+                  data={regionOptions}
+                  selectedValue={selectedRegion}
+                  onSelect={handleRegionSelect}
+                />
 
-            {/* City Dropdown */}
-            <SelectDropdown
-              data={cityOptions}
-              label={"Mesto"}
-              isFromNotification={false}
-              isFromFlower={false}
-              isFrom={"pogrebi"}
-              selectedValue={selectedCity}
-              onSelect={handleCitySelect}
-            />
+                {/* City Dropdown */}
+                <SelectDropdown
+                  data={cityOptions}
+                  label={"Mesto"}
+                  isFromNotification={false}
+                  isFromFlower={false}
+                  isFrom={"pogrebi"}
+                  selectedValue={selectedCity}
+                  onSelect={handleCitySelect}
+                />
+              </>
+            ) : null}
 
-            {/* Search Button */}
-            <div
-              onClick={handleSearch}
-              className="w-[296px] h-[48px] text-[16px] text-[#F6F6F6] rounded-lg leading-6 bg-[#414141] font-[400] flex justify-center items-center cursor-pointer"
-            >
-              Prikaži
-            </div>
+            {pathname?.includes('/u/') ? (
+              <div
+                onClick={handleSearch}
+                className="flex justify-center items-center w-12 h-12 aspect-square rounded-lg bg-[#414141] cursor-pointer"
+              >
+                <MagnifyingGlassIcon className="w-5 h-5 text-white" />
+              </div>
+            ) : (
+              <>
+                {/* Search Button */}
+                <div
+                  onClick={handleSearch}
+                  className="w-[296px] h-[48px] text-[16px] text-[#F6F6F6] rounded-lg leading-6 bg-[#414141] font-[400] flex justify-center items-center cursor-pointer"
+                >
+                  Prikaži
+                </div>
+              </>
+            )}
+
           </div>
         </div>
 

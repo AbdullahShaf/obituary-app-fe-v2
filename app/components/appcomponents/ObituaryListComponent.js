@@ -26,15 +26,16 @@ const ObituaryListComponent = ({ city }) => {
   ];
   const [obituaries, setObituaries] = useState([]);
   const allRegionsOption = {
-    place: "- Pokaži vse regije - ",
+    place: "- Pokaži vse regije -",
     id: "allRegions",
   };
-  const allCitiesOption = { place: " - Pokaži vse občine - ", id: "allCities" };
+  const allCitiesOption = { place: "- Pokaži vse občine -", id: "allCities" };
   const [selectedCity, setSelectedCity] = useState(city ? city : null);
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10); // default to mobile
   const [selectedName, setSelectedName] = useState("");
+  const [name, setName] = useState(null);
 
   const regionOptions = [
     allRegionsOption,
@@ -45,24 +46,24 @@ const ObituaryListComponent = ({ city }) => {
   ];
 
   const cityOptions =
-    selectedRegion && selectedRegion !== "allRegions"
+    selectedRegion && selectedRegion !== "allRegions" && selectedRegion !== "- Pokaži vse regije -"
       ? [
-          allCitiesOption,
-          ...regionsAndCities[selectedRegion].map((city) => ({
+        allCitiesOption,
+        ...regionsAndCities[selectedRegion].map((city) => ({
+          place: city,
+          id: city,
+        })),
+      ]
+      : [
+        allCitiesOption,
+        ...Object.values(regionsAndCities)
+          .flat()
+          .map((city) => ({
             place: city,
             id: city,
-          })),
-        ]
-      : [
-          allCitiesOption,
-          ...Object.values(regionsAndCities)
-            .flat()
-            .map((city) => ({
-              place: city,
-              id: city,
-            }))
-            .sort((a, b) => a.place.localeCompare(b.place, "sl")),
-        ];
+          }))
+          .sort((a, b) => a.place.localeCompare(b.place, "sl")),
+      ];
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -167,15 +168,16 @@ const ObituaryListComponent = ({ city }) => {
 
   useEffect(() => {
     fetchObituary();
-  }, []);
+  }, [selectedName]);
 
   const fetchObituary = async () => {
     try {
       const queryParams = {};
 
-      if (selectedCity) queryParams.city = selectedCity;
+      if (selectedCity && selectedCity != '- Pokaži vse občine -') queryParams.city = selectedCity;
 
-      if (selectedRegion) queryParams.region = selectedRegion;
+      if (selectedRegion && selectedRegion != '- Pokaži vse regije -') queryParams.region = selectedRegion;
+      if (selectedName) queryParams.name = selectedName;
       const response = await obituaryService.getObituary(queryParams);
 
       if (response.error) {
@@ -341,17 +343,15 @@ const ObituaryListComponent = ({ city }) => {
                     onClick={() => {
                       handleCitySelectQuickLinks(language);
                     }}
-                    className={`border border-[#C3C6C8] rounded-sm text-[#3C3E41] mobile:mt-[16px] hover:bg-gray-100 transition-colors cursor-pointer ${
-                      index == languages.length - 1
+                    className={`border border-[#C3C6C8] rounded-sm text-[#3C3E41] mobile:mt-[16px] hover:bg-gray-100 transition-colors cursor-pointer ${index == languages.length - 1
                         ? "ml-[0px]"
                         : index == 5
-                        ? "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
-                        : "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
-                    } ${index < 6 ? "tablet:mb-[18px]" : "tablet:mb-[18px]"} ${
-                      selectedCity === language
+                          ? "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
+                          : "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
+                      } ${index < 6 ? "tablet:mb-[18px]" : "tablet:mb-[18px]"} ${selectedCity === language
                         ? "bg-[#414141] text-white"
                         : "bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]"
-                    } text-[14px] mobile:text-[13px] font-extrabold tablet:font-bold mobile:font-bold italic leading-[16.41px] mobile:px-[6px] px-[7.5px] py-[4px]`}
+                      } text-[14px] mobile:text-[13px] font-extrabold tablet:font-bold mobile:font-bold italic leading-[16.41px] mobile:px-[6px] px-[7.5px] py-[4px]`}
                   >
                     {language}
                   </button>
@@ -435,9 +435,8 @@ const ObituaryListComponent = ({ city }) => {
               <div
                 key={pageNumber}
                 onClick={() => goToPage(pageNumber)}
-                className={`hover:border-black hover:border-2 w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center cursor-pointer shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] ${
-                  currentPage === pageNumber ? "bg-gray-300 font-bold" : ""
-                }`}
+                className={`hover:border-black hover:border-2 w-[48px] h-[48px] rounded-lg text-black flex justify-center items-center cursor-pointer shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] ${currentPage === pageNumber ? "bg-gray-300 font-bold" : ""
+                  }`}
               >
                 {pageNumber}
               </div>

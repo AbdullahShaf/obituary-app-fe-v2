@@ -103,36 +103,44 @@ export default function HomeContent(props) {
   // ];
 
   // Prepare city options (dependent on region)
-  const allCitiesOption = { place: " - Pokaži vse občine - ", id: "allCities" };
+  const allCitiesOption = { place: "- Pokaži vse občine -", id: "allCities" };
   const cityOptions =
-    selectedRegion && selectedRegion !== "allRegions"
+    selectedRegion && selectedRegion !== "allRegions" && selectedRegion !== "- Pokaži vse regije -"
       ? [
-          allCitiesOption,
-          ...regionsAndCities[selectedRegion].map((city) => ({
+        allCitiesOption,
+        ...regionsAndCities[selectedRegion].map((city) => ({
+          place: city,
+          id: city,
+        })),
+      ]
+      : [
+        allCitiesOption,
+        ...Object.values(regionsAndCities)
+          .flat()
+          .map((city) => ({
             place: city,
             id: city,
-          })),
-        ]
-      : [
-          allCitiesOption,
-          ...Object.values(regionsAndCities)
-            .flat()
-            .map((city) => ({
-              place: city,
-              id: city,
-            }))
-            .sort((a, b) => a.place.localeCompare(b.place, "sl")),
-        ];
+          }))
+          .sort((a, b) => a.place.localeCompare(b.place, "sl")),
+      ];
 
   // Handle region select
   const handleRegionSelect = (item) => {
-    if (item.id === "allRegions") {
+    // if (item.id === "allRegions") {
+    //   updateParams(selectedCity, null);
+    //   return;
+    // }
+    // setSelectedRegion(item.place);
+    // updateParams(selectedCity, item.place, name);
+
+    if (item.id === "allRegions" || item.id === "- Pokaži vse regije -") {
       setSelectedRegion(null);
-      updateParams(selectedCity, null);
-      return;
+      updateURL(selectedCity, null, name);
+    } else {
+      setSelectedRegion(item.place);
+      updateURL(selectedCity, item.place, name);
     }
-    setSelectedRegion(item.place);
-    updateParams(selectedCity, item.place, name);
+
   };
 
   const handleNameChange = (name) => {
@@ -140,15 +148,54 @@ export default function HomeContent(props) {
     updateParams(selectedCity, selectedRegion, name);
   };
 
+  const updateURL = (city, region, search) => {
+    const params = new URLSearchParams(window.location.search);
+    if (city && city !== "allCities" && city !== "- Pokaži vse občine -") {
+      params.set("city", city);
+    } else {
+      params.delete("city");
+    }
+    if (!city) {
+      setSelectedCity("");
+      params.delete("city");
+    }
+    if (
+      region &&
+      region !== "allRegions" &&
+      region !== "- Pokaži vse regije -"
+    ) {
+      params.set("region", region);
+    } else {
+      params.delete("region");
+    }
+    if (search) {
+      params.set("search", search);
+    } else {
+      params.delete("search");
+    }
+    const queryString = params.toString();
+    const newURL = queryString ? `?${queryString}` : window.location.pathname;
+    router.replace(newURL, { scroll: false });
+  };
+
   // Handle city select
   const handleCitySelect = (item) => {
-    if (item.id === "allCities") {
+    // if (item.id === "allCities") {
+    //   setSelectedCity(null);
+    //   updateParams(null, selectedRegion);
+    //   return;
+    // }
+    // setSelectedCity(item.place);
+    // updateParams(item.place, selectedRegion, name);
+
+
+    if (item.id === "allCities" || item.place === "- Pokaži vse občine -") {
       setSelectedCity(null);
-      updateParams(null, selectedRegion);
-      return;
+      updateURL(null, selectedRegion, name);
+    } else {
+      setSelectedCity(item.place);
+      updateURL(item.place, selectedRegion, name);
     }
-    setSelectedCity(item.place);
-    updateParams(item.place, selectedRegion, name);
   };
 
   // Handler for florist city dropdown
@@ -189,8 +236,8 @@ export default function HomeContent(props) {
     try {
       const queryParams = {};
 
-      if (selectedCity) queryParams.city = selectedCity;
-      if (selectedRegion) queryParams.region = selectedRegion;
+      if (selectedCity && selectedCity != '- Pokaži vse občine -') queryParams.city = selectedCity;
+      if (selectedRegion && selectedRegion != '- Pokaži vse regije -') queryParams.region = selectedRegion;
       if (name) queryParams.name = name;
 
       const response = await obituaryService.getObituary(queryParams);
@@ -319,7 +366,7 @@ export default function HomeContent(props) {
                 />
               </div>
 
-              <SelectDropdown
+              {/* <SelectDropdown
                 label={"Išči po regiji"}
                 data={regionOptions}
                 selectedValue={selectedRegion}
@@ -329,9 +376,17 @@ export default function HomeContent(props) {
                 isFrom={"mainPage"}
                 isFromFlowerGreenBgTablet={false}
                 isFromObituary={false}
+              /> */}
+              <SelectDropdown
+                label={"Išči po regiji"}
+                isFromNotification={false}
+                isFromFlower={false}
+                data={regionOptions}
+                selectedValue={selectedRegion}
+                onSelect={handleRegionSelect}
               />
               <div className="flex h-[16px] w-[360px] tablet:hidden desktop:hidden" />
-              <SelectDropdown
+              {/* <SelectDropdown
                 label={"Išči po kraju"}
                 data={cityOptions}
                 selectedValue={selectedCity}
@@ -341,6 +396,14 @@ export default function HomeContent(props) {
                 isFromFlower={false}
                 isFrom={"mainPage"}
                 isFromFlowerGreenBgTablet={false}
+              /> */}
+              <SelectDropdown
+                data={cityOptions}
+                label={"Išči po kraju"}
+                isFromNotification={false}
+                isFromFlower={false}
+                selectedValue={selectedCity}
+                onSelect={handleCitySelect}
               />
             </div>
             <div

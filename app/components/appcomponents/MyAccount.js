@@ -157,6 +157,12 @@ const MyAccount = () => {
     getAllCards();
   }, []);
 
+  useEffect(() => {
+    if (user && user?.city) {
+      setSelectedCity(user?.city);
+    }
+  }, [user])
+
   const handleCitySelect = async (item) => {
     try {
       const response = await updateUserAndRefreshSession({ city: item });
@@ -423,8 +429,8 @@ const MyAccount = () => {
                   {user?.city
                     ? user.city
                     : selectedCity
-                    ? selectedCity
-                    : "Izberi občino"}
+                      ? selectedCity
+                      : "Izberi občino"}
                 </span>
               </div>
               <div className="hidden  h-5 w-24   justify-between pl-0 pr-0 items-center mobileUserAcc:flex mobile:w-[100%] mobile:block mobile:relative mobile:top-8 mobile:text-sm">

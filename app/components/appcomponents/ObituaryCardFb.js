@@ -44,13 +44,7 @@ const ObituaryCardFb = ({
 
   const imageUrl = data?.image || "/user5.jpeg";
 
-  const funeralDate = new Date(data.deathDate);
-  const funeralDateFormatted = `${funeralDate
-    .getDate()
-    .toString()
-    .padStart(2, "0")}${(funeralDate.getMonth() + 1)
-    .toString()
-    .padStart(2, "0")}${funeralDate.getFullYear().toString().slice(2)}`;
+  const imageUrl = data?.image || "/user5.jpeg";
 
   const religionImages = {
     1: "/icon_cross.png",

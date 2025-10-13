@@ -2333,7 +2333,7 @@ const Modals = ({
                     .writeText(url)
                     .then(() => {
                       setCopied(true);
-                      setTimeout(() => setCopied(false), 2000);
+                      setTimeout(() => setCopied(false), 1000);
                     })
                     .catch((err) => {
                       console.error("Failed to copy", err);

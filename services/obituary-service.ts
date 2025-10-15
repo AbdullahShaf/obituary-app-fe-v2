@@ -396,7 +396,7 @@ const getSingleObituaryById = async (id: any) => {
   return response.data || null;
 };
 
-const generateQR = async ({id, slugKey}:{id: string, slugKey: string}) => {
+const generateQR = async ({ id, slugKey }: { id: string; slugKey: string }) => {
   try {
     const endpoint = `/obituary/generate-qr`;
     const response = await axios.post(endpoint, { id, slugKey });
@@ -407,13 +407,37 @@ const generateQR = async ({id, slugKey}:{id: string, slugKey: string}) => {
   }
 };
 
+const uploadMemoryImage = async (file: File, slugKey: any) => {
+  try {
+    const endpoint = `/logs/memory/image`; // backend endpoint for uploading image
+    const formData = new FormData();
+    formData.append("memory", file);
+    formData.append("slugKey", slugKey);
+
+    const response = await axios.post(endpoint, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    // response should return something like: { url: "https://..." }
+    return response.data.url;
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    throw new Error("Failed to upload image");
+  }
+};
+
 const obituaryService = {
-  getObituaryById,generateQR,
+  getObituaryById,
+  generateQR,
   createObituary,
   getGiftLogs,
-  getObituary, getCompanyPageObituary,
+  getObituary,
+  getCompanyPageObituary,
   getMemory,
-  getFunerals, getCompanyPageFunerals,
+  getFunerals,
+  getCompanyPageFunerals,
   updateObituary,
   updateObituaryVisits,
   createSorrowBook,
@@ -436,6 +460,7 @@ const obituaryService = {
   getCompanyLogs,
   uploadObituaryTemplateCards,
   getSingleObituaryById,
+  uploadMemoryImage,
 };
 
 export default obituaryService;

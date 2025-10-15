@@ -1,6 +1,5 @@
 "use client";
 import MemoryHeroSection from "../../../components/MemoryHeroSection";
-import Layout from "@/app/components/appcomponents/Layout";
 import { Suspense, useEffect } from "react";
 import { useState } from "react";
 
@@ -91,41 +90,10 @@ const FbPosting = ({ params }) => {
     }
   }, []);
 
-  const handleFacebookShare = () => {
-    // const url = `${window.location.origin}/m/${slugKey}`;
-    // const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-    //   url
-    // )}`;
-    // const width = 600;
-    // const height = 500;
-    // const left = (window.innerWidth - width) / 2;
-    // const top = (window.innerHeight - height) / 2;
-    // window.open(
-    //   shareUrl,
-    //   "facebook-share-dialog",
-    //   `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,status=yes`
-    // );
-  };
+  const handleFacebookShare = () => {};
 
   return (
     <div>
-      <Head>
-        <meta property="og:title" content="Vpis v žalno knjigo" />
-        <meta
-          property="og:description"
-          content="Vpis v žalno knjigo in informacije o pogrebu so tukaj."
-        />
-        <meta
-          property="og:image"
-          content={`https://www.osmrtnica.com/fb-preview-images/${slugKey}.jpg`}
-        />
-        <meta
-          property="og:url"
-          content={`https://www.osmrtnica.com/m/${slugKey}/fb-posting`}
-        />
-        <meta property="og:type" content="website" />
-      </Head>
-
       <MemoryHeroSection
         handleFacebookShare={handleFacebookShare}
         obituary={obituary}

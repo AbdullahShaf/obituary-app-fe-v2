@@ -15,6 +15,7 @@ const MemorialPageTopComp = ({
   data,
   updateObituary,
   fetchMemory,
+  handleFacebookShare,
 }) => {
   const { user } = useAuth();
   const router = useRouter();
@@ -912,7 +913,10 @@ const MemorialPageTopComp = ({
                         height={17}
                         className=""
                       />
-                      <div className="text-[16px] ml-[10px] text-[#00B4D8] font-variation-customOpt16 font-normal">
+                      <div
+                        onClick={handleFacebookShare}
+                        className="text-[16px] ml-[10px] text-[#00B4D8] font-variation-customOpt16 font-normal"
+                      >
                         Deli na Facebooku
                       </div>
                     </div>

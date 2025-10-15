@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import iconArrowRight from "@/public/icon_arrowright.png";
@@ -73,7 +74,7 @@ const ObituaryCardFb = ({
   return (
     <Link
       href={buildHref()}
-      className="w-full h-[170px] rounded-lg flex justify-start items-center "
+      className="w-full h-auto rounded-lg flex justify-start items-center "
     >
       <div className="flex w-full pl-2.5">
         <div className="w-full flex">
@@ -86,33 +87,30 @@ const ObituaryCardFb = ({
               alt="Slika"
               width={1000}
               height={1000}
-              className="h-[130px] w-[95px] bg-center  rounded-lg"
+              className="h-[320px] w-[215px] bg-center  rounded-lg"
             />
           </div>
 
-          <div className=" flex-1 flex items-start flex-col  truncate overflow-hidden whitespace-nowrap ">
+          <div className=" flex-1 flex items-start flex-col">
             <div
               className="flex flex-row w-full items-start mobile:pt-[0px] tablet:pt-[4px]
              desktop:pt-[4px] tablet:pr-[2px] desktop:pr-[2px] "
             >
-              <div className="flex flex-1 flex-col">
-                <div
-                  className="text-[21px] text-[#414141] font-greatVibes font-normal text"
-                  style={
-                    {
-                      // textShadow: "0px 1px 1px #000000, 0px 4px 4px #00000040",
-                    }
-                  }
-                >
+              <div className="flex flex-1 flex-col gap-3">
+                <div className="text-[48px] text-[#414141] font-greatVibes font-normal text">
                   Za vedno v naših srcih
                 </div>
-                <div className="font-variation-customOpt24 text-left text-[24px] text-[#1E2125] leading-[28.13px]">
+                <div
+                  style={{ display: "block", color: "#414141" }}
+                  className="font-variation-customOpt24 text-left text-[54px] text-[#1E2125]"
+                >
                   {data.name} {data.sirName}
                 </div>
                 <p
+                  style={{ display: "block" }}
                   className="block font-variation-customOpt14 tablet:font-variation-customOpt16 
-                  desktop:font-variation-customOpt16 text-left mt-[16px]  
-                  text-[16px] text-[#414141] leading-[24px]"
+                  desktop:font-variation-customOpt16 text-left mt-[20px]  
+                  text-[34px] text-[#414141]"
                 >
                   {data?.birthDate?.includes("1025") ? (
                     <>{formattedDeathDate}</>
@@ -123,10 +121,11 @@ const ObituaryCardFb = ({
                   )}
                 </p>
                 <div
+                  style={{ display: "block" }}
                   className="flex h-[18px] tablet:h-6 
-                 desktop:h-6 items-center tablet:mt-[4px] desktop:mt-[4px]"
+                 desktop:h-6 items-center"
                 >
-                  <p className="font-variation-customOpt14 tablet:font-variation-customOpt16 desktop:font-variation-customOpt16 text-left desktop:text-[16px] tablet:text-[16px] mobile:text-[14px]  text-[#414141] leading-[24px]">
+                  <p className="font-variation-customOpt14 tablet:font-variation-customOpt16 desktop:font-variation-customOpt16 text-left desktop:text-[34px] tablet:text-[16px] mobile:text-[14px]  text-[#414141]">
                     {data.location}
                     {key}
                   </p>

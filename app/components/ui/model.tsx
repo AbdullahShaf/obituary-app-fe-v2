@@ -87,7 +87,9 @@ export const modelData: Record<
           <p>Mi teh produktov na naši strani ne nudimo.</p>
 
           <div className="text-[#0A85C2] underline text-sm tab:hidden mt-8 text-right">
-            Več o Skrbniku in kaj omogoča je tukaj{" "}
+            <Link href={"/spominska"}>
+              Več o Skrbniku in kaj omogoča je tukaj{" "}
+            </Link>
           </div>
         </div>
       </div>
@@ -302,9 +304,9 @@ export const modelData: Record<
             Preglejte ugodnosti za cvetličarne - splača se biti med prvimi.
           </p>
           <Link href="https://osmrtnica.com/p-info">
-          <p className="text-[#0A85C2]  text-base tab:mt-14 mt-20 text-right">
-            več informacij{" "}
-          </p>
+            <p className="text-[#0A85C2]  text-base tab:mt-14 mt-20 text-right">
+              več informacij{" "}
+            </p>
           </Link>
         </div>
       </div>
@@ -424,9 +426,8 @@ const Modal: React.FC<ModalProps> = ({
         </div>
         {/* Content */}
         <div
-          className={` tab:mx-[90px] mx-4 tab:mt-16 mt-[61px] tab:px-[34px] px-5  bg-white ${
-            [3, 4].includes(index) ? "  h-[242px]" : "  h-[360px]"
-          } tab:h-[271px]  text-[#3C3E41] shadow-md tab:py-[34px] py-[22px] border-2 border-[#0A85C2]`}
+          className={` tab:mx-[90px] mx-4 tab:mt-16 mt-[61px] tab:px-[34px] px-5  bg-white ${[3, 4].includes(index) ? "  h-[242px]" : "  h-[360px]"
+            } tab:h-[271px]  text-[#3C3E41] shadow-md tab:py-[34px] py-[22px] border-2 border-[#0A85C2]`}
         >
           {modelData[index]?.body}
         </div>
@@ -434,9 +435,8 @@ const Modal: React.FC<ModalProps> = ({
 
         <div
           onClick={onFooterClick}
-          className={`tab:mx-[90px] mx-4 tab:mb-[45px] mb-5  flex items-center justify-between  text-gray-500 ${
-            onFooterClick ? "cursor-pointer" : ""
-          }`}
+          className={`tab:mx-[90px] mx-4 tab:mb-[45px] mb-5  flex items-center justify-between  text-gray-500 ${onFooterClick ? "cursor-pointer" : ""
+            }`}
         >
           {modelData[index]?.footer}
         </div>

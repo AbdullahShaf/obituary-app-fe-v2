@@ -45,9 +45,9 @@ function DriverPage() {
 
         <div className="bg-[#36556C]">
           <div className="mobile:flex items-center justify-between hidden h-[30px] bg-[#36556C] px-3 mobile:max-w-[348px] mx-auto">
-            <Link href="/c-faq">KAKO ZAČETI</Link>
-            <Link href="/c-info">CENIK</Link>
-            <Link href="/c-priloznost">PRILOŽNOST</Link>
+            <Link href="/c-faq" className="text-[#fff]">KAKO ZAČETI</Link>
+            <Link href="/c-info" className="text-[#fff]">CENIK</Link>
+            <Link href="/c-priloznost" className="text-[#fff]">PRILOŽNOST</Link>
           </div>
         </div>
 
@@ -344,7 +344,7 @@ function DriverPage() {
 
         {/* Secton Four */}
         <div className="bg-[#E7F0FA]">
-          <div className="relative max-w-[1029px] tablet:max-w-[740px] desktop:py-[125px] py-[75px] px-[10px] mobile:space-y-8 space-y-[60px] w-full mx-auto mobile:max-w-[348px] mobile:px-0">
+          <div className="relative max-w-[1029px] tablet:max-w-[740px] mobile:!pb-5 desktop:py-[125px] py-[75px] px-[10px] mobile:space-y-8 space-y-[60px] w-full mx-auto mobile:max-w-[348px] mobile:px-0">
             <div className="text-left mobile:text-center space-y-3 desktop:space-y-4">
               <h1 className="text-[32px] leading-[32px] tablet:text-[28px] tablet:leading-[28px] mobile:text-[24px] mobile:leading-[24px] font-[400] text-[#3C3E41] ">
                 Produkti za vašo promocijo{" "}

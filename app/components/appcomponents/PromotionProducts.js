@@ -277,10 +277,10 @@ const UniqueFeature = () => {
   return (
     <div className="text-center space-y-[80px] mobile:px-0 tablet:px-[10px] desktop:px-[100px] w-full">
       <div className="space-y-4">
-        <p className="text-[20px] mobile:text-[14px] font-[400] text-[#3090D5] leading-normal mb-2">
+        <p className="text-[20px] mobile:text-[14px] font-[400] text-[#3090D5] leading-normal mb-2 mobile:!mt-[30px]">
           DIGITALNI PRODUKTI
         </p>
-        <h4 className="desktop:text-[40px] tablet:text-[36px] mobile:text-[24px] mobile:!mt-[40px] font-[400] text-[#3C3E41] mobile:leading-[28px] leading-[48px]">
+        <h4 className="desktop:text-[40px] tablet:text-[36px] mobile:text-[24px] mobile:!mt-[10px] font-[400] text-[#3C3E41] mobile:leading-[28px] leading-[48px]">
           Edinstvena priložnost za <br className="hidden mobile:block" />{" "}
           <span className="inline mobile:flex items-center justify-center gap-1.5">
             <span className="font-[800]">močno</span> promocijo{" "}
@@ -370,7 +370,7 @@ const UniqueFeature = () => {
         </p>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 mobile:!mt-[20px]">
         <h4 className="desktop:text-[40px] tablet:text-[32px] mobile:text-[24px] font-[400] text-[#3C3E41] mobile:leading-[28px] leading-[48px]">
           Zdaj na začetku je pravi trenutek in učinek največji
         </h4>
@@ -410,10 +410,10 @@ const UniqueFeature = () => {
           </span>
         </p> */}
 
-        <p className="text-[16px] mobile:text-[14px] leading-[27px] mobile:leading-[24px] font-[400] text-[#3C3E41] hidden mobile:inline">
+        {/* <p className="text-[16px] mobile:text-[14px] leading-[27px] mobile:leading-[24px] font-[400] text-[#3C3E41] hidden mobile:inline">
           Izgubiti ne morete, če se pridružite, pa četudi <br /> samo za en
           mesec.
-        </p>
+        </p> */}
       </div>
     </div>
   );

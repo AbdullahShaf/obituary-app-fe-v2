@@ -1,5 +1,6 @@
 import obituaryService from "@/services/obituary-service";
 import MemoryPageClientComponent from "../../components/appcomponents/MemoryPageClientComponent";
+import APP_BASE_URL from "@/config/appConfig";
 
 export async function generateMetadata({ params }) {
   const { slugKey } = params;
@@ -13,8 +14,8 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: "Vpis v žalno knjigo",
       description: "Vpis v žalno knjigo in informacije o pogrebu so tukaj.",
-      url: `https://www.osmrtnica.com/m/${slugKey}`,
-      metadataBase: new URL("https://www.osmrtnica.com/"),
+      url: `${APP_BASE_URL}/m/${slugKey}`,
+      metadataBase: new URL(`${APP_BASE_URL}/`),
       images: [
         {
           url: image,

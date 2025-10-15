@@ -19,7 +19,7 @@ import { getTemplateCardImages } from "@/utils/commonUtils";
 import { useAuth } from "@/hooks/useAuth";
 import MemoryHeroSection from "@/app/components/MemoryHeroSection";
 import html2canvas from "html2canvas-pro";
-import Head from "next/head";
+import APP_BASE_URL from "@/config/appConfig";
 
 const MemoryPageContent = ({ params, obituaryDataFromServer }) => {
   const { slugKey } = params;
@@ -102,6 +102,23 @@ const MemoryPageContent = ({ params, obituaryDataFromServer }) => {
     if (storedUser) {
       setCurrentUser(JSON.parse(storedUser));
     }
+    (async () => {
+      if (!memoryRef.current) {
+        console.warn("Obituary not loaded yet");
+        return;
+      }
+
+      // 1️⃣ Capture component as image
+      const canvas = await html2canvas(memoryRef.current, {
+        useCORS: true,
+        backgroundColor: "transparent",
+        scale: 2,
+      });
+
+      const dataUrl = canvas.toDataURL("image/png");
+      const file = dataURLtoFile(dataUrl, `${slugKey}.png`);
+      await obituaryService.uploadMemoryImage(file, slugKey);
+    })();
   }, []);
 
   const handleMemoryChange = async (type) => {
@@ -141,48 +158,8 @@ const MemoryPageContent = ({ params, obituaryDataFromServer }) => {
   // ⚡ Convert and Upload image
   const handleFacebookShare = async () => {
     try {
-      if (!memoryRef.current || !obituary) {
-        console.warn("Obituary not loaded yet");
-        return;
-      }
+      const pageUrl = `${APP_BASE_URL}/m/${slugKey}`;
 
-      await document.fonts.ready; // wait for fonts
-      const images = memoryRef.current.querySelectorAll("img");
-      await Promise.all(
-        Array.from(images).map(
-          (img) =>
-            new Promise((resolve) => {
-              if (img.complete) return resolve();
-              img.onload = () => resolve();
-              img.onerror = () => resolve(); // don't block if one fails
-            })
-        )
-      );
-
-      // 🕒 Small delay to ensure text/state is flushed
-      await new Promise((r) => setTimeout(r, 300));
-      // 1️⃣ Capture component as image
-      let imageUrl = obituary?.fbImage;
-      console.log("obituary", obituary);
-      console.log("memoryRef.current", memoryRef.current);
-      //   if (!imageUrl) {
-      // 2️⃣ Generate new image only once if missing
-      const canvas = await html2canvas(memoryRef.current, {
-        useCORS: true,
-        backgroundColor: "transparent",
-        scale: 2,
-      });
-
-      const dataUrl = canvas.toDataURL("image/png");
-      const file = dataURLtoFile(dataUrl, `${slugKey}.png`);
-      console.log(memoryRef.current.innerText, "lslsls");
-      // 3️⃣ Upload and save it to obituary
-      imageUrl = await obituaryService.uploadMemoryImage(file, slugKey);
-      //   }
-
-      const pageUrl = `https://www.osmrtnica.com/m/${slugKey}`;
-      // setImageUrl(imageUrl);
-      // 4️⃣ Open Facebook share popup with uploaded image URL
       const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
         pageUrl
       )}`;
@@ -200,100 +177,11 @@ const MemoryPageContent = ({ params, obituaryDataFromServer }) => {
     }
   };
 
-  // const handleFacebookShare = async () => {
-  //   try {
-  //     if (!memoryRef.current || !obituary) return;
-
-  //     // ✅ 1. Wait for all fonts, images, and DOM updates
-  //     await document.fonts.ready;
-  //     await new Promise((r) => setTimeout(r, 700));
-
-  //     const images = memoryRef.current.querySelectorAll("img");
-  //     await Promise.all(
-  //       Array.from(images).map(
-  //         (img) =>
-  //           new Promise((resolve) => {
-  //             if (img.complete) return resolve();
-  //             img.onload = resolve;
-  //             img.onerror = resolve;
-  //           })
-  //       )
-  //     );
-
-  //     // ✅ 2. Force repaint
-  //     memoryRef.current.style.display = "block";
-  //     memoryRef.current.style.opacity = "1";
-  //     memoryRef.current.offsetHeight;
-
-  //     // ✅ 3. Clone the node into a visible, unstyled body container
-  //     const clone = memoryRef.current.cloneNode(true);
-  //     clone.style.position = "fixed";
-  //     clone.style.zIndex = "999999";
-  //     clone.style.opacity = "1";
-  //     clone.style.pointerEvents = "none";
-  //     clone.style.transform = "scale(1)";
-  //     clone.style.background = "white"; // important: prevents white blank output
-  //     document.body.appendChild(clone);
-
-  //     // ✅ 4. Capture using safe flags (disable foreignObjectRendering!)
-  //     const canvas = await html2canvas(clone, {
-  //       useCORS: true,
-  //       scale: 2,
-  //       backgroundColor: "#ffffff", // prevents transparency glitch
-  //       logging: false,
-  //       allowTaint: true,
-  //       foreignObjectRendering: false, // ← disable this or you get white canvas in Next.js
-  //       removeContainer: true,
-  //       imageTimeout: 0,
-  //       onclone: (clonedDoc) => {
-  //         // Ensure fonts render correctly in the cloned node
-  //         clonedDoc.querySelectorAll("*").forEach((el) => {
-  //           el.style.fontFamily = getComputedStyle(el).fontFamily;
-  //         });
-  //       },
-  //     });
-
-  //     document.body.removeChild(clone);
-
-  //     // ✅ 5. Convert to file and upload
-  //     const dataUrl = canvas.toDataURL("image/png");
-  //     const file = dataURLtoFile(dataUrl, `${slugKey}.png`);
-  //     const imageUrl = await obituaryService.uploadMemoryImage(file, slugKey);
-
-  //     const pageUrl = `https://www.osmrtnica.com/m/${slugKey}`;
-  //     const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-  //       pageUrl
-  //     )}`;
-  //     window.open(shareUrl, "_blank", "width=600,height=500");
-  //   } catch (err) {
-  //     console.error("Error sharing:", err);
-  //   }
-  // };
-
-  //   const handleFacebookShare = () => {
-  //     const pageUrl = `https://www.osmrtnica.com/m/${slugKey}`; // must be public
-  //     const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-  //       pageUrl
-  //     )}`;
-
-  //     const width = 600;
-  //     const height = 500;
-  //     const left = (window.innerWidth - width) / 2;
-  //     const top = (window.innerHeight - height) / 2;
-
-  //     window.open(
-  //       shareUrl,
-  //       "facebook-share-dialog",
-  //       `width=${width},height=${height},top=${top},left=${left}`
-  //     );
-  //   };
-  // 🧾 Helper to convert base64 to File
   function dataURLtoFile(dataUrl, filename) {
     if (!dataUrl || !dataUrl.startsWith("data:")) {
       throw new Error("Invalid data URL");
     }
     const arr = dataUrl.split(",");
-    // const mime = arr[0].match(/:(.*?);/)[1];
     const match = arr[0].match(/:(.*?);/);
     if (!match) {
       throw new Error("Could not parse MIME type from data URL");

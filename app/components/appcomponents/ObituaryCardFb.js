@@ -76,40 +76,39 @@ const ObituaryCardFb = ({
       className="w-full h-auto rounded-lg flex justify-start items-center "
     >
       <div className="flex w-full pl-2.5">
-        <div className="w-full flex">
+        <div className="w-full flex desktop:gap-10">
           <div
-            className="rounded-xl mobile:mr-[17.33px] tablet:mr-[26px] desktop:mr-[29px]  
-          shadow-custom-light-dark-box-image p-1 bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] "
+            className="rounded-xl mobile:h-[130px] desktop:h-fit mobile:w-[100px] tablet:w-[130px] desktop:w-[300px] mobile:mr-[17.33px] tablet:mr-[26px] desktop:mr-[29px]  
+          shadow-custom-light-dark-box-image desktop:p-1 bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] "
           >
             <Image
               src={imageUrl}
               alt="Slika"
               width={1000}
               height={1000}
-              className="h-[320px] w-[215px] bg-center  rounded-lg"
+              className="h-full w-full bg-center rounded-lg"
             />
           </div>
 
           <div className=" flex-1 flex items-start flex-col">
             <div
-              className="flex flex-row w-full items-start mobile:pt-[0px] tablet:pt-[4px]
+              className="flex flex-row w-full items-start h-full mobile:pt-[0px] tablet:pt-[4px]
              desktop:pt-[4px] tablet:pr-[2px] desktop:pr-[2px] "
             >
-              <div className="flex flex-1 flex-col gap-3">
-                <div className="text-[48px] text-[#414141] font-greatVibes font-normal text">
+              <div className="flex flex-1 flex-col justify-between">
+                <div className="mobile:text-[16px] tablet:text-[24px] desktop:text-[44px] text-[#414141] font-greatVibes font-normal text">
                   Za vedno v naših srcih
                 </div>
                 <div
                   style={{ display: "block", color: "#414141" }}
-                  className="font-variation-customOpt24 text-left text-[54px] text-[#1E2125]"
+                  className="font-variation-customOpt24 text-left mobile:text-[20px] tablet:text-[32px] desktop:text-[64px] text-[#1E2125]"
                 >
                   {data.name} {data.sirName}
                 </div>
                 <p
-                  style={{ display: "block" }}
-                  className="block font-variation-customOpt14 tablet:font-variation-customOpt16 
-                  desktop:font-variation-customOpt16 text-left mt-[20px]  
-                  text-[34px] text-[#414141]"
+                  className="flex flex-col gap-2 font-variation-customOpt14 tablet:font-variation-customOpt16 
+                  desktop:font-variation-customOpt16 text-left  
+                  desktop:text-[34px] text-[#414141]"
                 >
                   {data?.birthDate?.includes("1025") ? (
                     <>{formattedDeathDate}</>
@@ -118,19 +117,15 @@ const ObituaryCardFb = ({
                       {formattedBirthDate} – {formattedDeathDate} ({age} let)
                     </>
                   )}
+                  <div
+                    style={{ display: "block" }}
+                    className="flex items-center"
+                  >
+                    <p className="font-variation-customOpt14 tablet:font-variation-customOpt16 desktop:font-variation-customOpt16 text-left mobile:text-[12px] tablet:text-[20px] desktop:text-[34px] text-[#414141]">
+                      {data.location}
+                    </p>
+                  </div>
                 </p>
-                <div
-                  style={{ display: "block" }}
-                  className="flex h-[18px] tablet:h-6 
-                 desktop:h-6 items-center"
-                >
-                  <p className="font-variation-customOpt14 tablet:font-variation-customOpt16 desktop:font-variation-customOpt16 text-left desktop:text-[34px] tablet:text-[16px] mobile:text-[14px]  text-[#414141]">
-                    {data.location}
-<p className="font-variation-customOpt14 tablet:font-variation-customOpt16 desktop:font-variation-customOpt16 text-left desktop:text-[16px] tablet:text-[16px] mobile:text-[14px]  text-[#414141] leading-[24px]">
-  {data.location}
-</p>
-                  </p>
-                </div>
               </div>
             </div>
           </div>

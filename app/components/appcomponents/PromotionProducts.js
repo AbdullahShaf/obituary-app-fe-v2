@@ -370,14 +370,14 @@ const UniqueFeature = () => {
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-2">
         <h4 className="desktop:text-[40px] tablet:text-[32px] mobile:text-[24px] font-[400] text-[#3C3E41] mobile:leading-[28px] leading-[48px]">
           Zdaj na začetku je pravi trenutek in učinek največji
         </h4>
-        <p className="text-[24px] mobile:text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5">
+        {/* <p className="text-[24px] mobile:text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5">
           in hkrati priložnost za izkoriščenje vseh dodatnih ugodnosti
-        </p>
-        <p className="text-[18px] mobile:text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leading-[24px] flex items-center justify-center gap-1.5">
+        </p> */}
+        {/* <p className="text-[18px] mobile:text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leading-[24px] flex items-center justify-center gap-1.5">
           <span className="inline mobile:hidden">
             ki jih omogoča otvoritvena akcija. Oglejte si jih{" "}
             <span className="underline text-[#3090D5]">
@@ -391,11 +391,11 @@ const UniqueFeature = () => {
             ki jih omogoča otvoritvena akcija{" "}
             <span className="underline text-[#3090D5]"> (tukaj)</span>
           </span>
-        </p>
+        </p> */}
       </div>
 
-      <div className="flex flex-col gap-y-4">
-        <p className="text-[16px] mobile:text-[14px] leading-[27px] mobile:leading-[24px] font-[400] text-[#3C3E41]">
+      <div className="flex flex-col !mt-4">
+        {/* <p className="text-[16px] mobile:text-[14px] leading-[27px] mobile:leading-[24px] font-[400] text-[#3C3E41]">
           <span className="block mobile:hidden">
             V primeru, da se konec oktobra ne odločite za nadaljevanje, se
             dostop do vaše strani prekine in enako privilegiji, vaša cvetličarna
@@ -408,7 +408,7 @@ const UniqueFeature = () => {
             privilegiji, vaša cvetličarna pa vseeno ostane brezplačno <br /> na
             listi lokalnih, vendar brez kontaktnih informacij.
           </span>
-        </p>
+        </p> */}
 
         <p className="text-[16px] mobile:text-[14px] leading-[27px] mobile:leading-[24px] font-[400] text-[#3C3E41] hidden mobile:inline">
           Izgubiti ne morete, če se pridružite, pa četudi <br /> samo za en
@@ -437,10 +437,10 @@ const data = {
       question: "Objavljanje osmrtnic",
       answer: <PublishingObituaries />
     },
-    // {
-    //   question: "Edinstvena priložnost",
-    //   answer: <UniqueFeature />
-    // }
+    {
+      question: "Edinstvena priložnost",
+      answer: <UniqueFeature />
+    }
   ]
 };
 
@@ -480,7 +480,7 @@ function PromotionProducts() {
                     `}
                   >
                     <h3 className="text-[20px] desktop:text-[24px] font-[700] text-[#3C3E41] leading-[48px]">
-                      {index && (
+                      {products.length - 1 !== index && (
                         <span className="text-[#EB1D1D] mr-2">
                           {index + 4}.{" "}
                         </span>
@@ -495,7 +495,7 @@ function PromotionProducts() {
                   />
                 </button>
                 {visibleIndexes[index] && (
-                  <div className="py-12 mobile:py-0 w-full mobile:mb-[35px]">
+                  <div className="py-12 mobile:py-0 w-full mobile:mb-[35px] !pb-0">
                     {product?.answer}
                   </div>
                 )}

@@ -480,7 +480,6 @@ function PromotionProducts() {
                     `}
                   >
                     <h3 className="text-[20px] desktop:text-[24px] font-[700] text-[#3C3E41] leading-[48px]">
-                      {/* {products.length - 1 !== index && ( */}
                       {index && (
                         <span className="text-[#EB1D1D] mr-2">
                           {index + 4}.{" "}

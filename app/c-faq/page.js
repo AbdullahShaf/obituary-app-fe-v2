@@ -44,9 +44,9 @@ export default function Faq2() {
         <div className="w-full hidden mobile:flex gap-[16px] absolute top-[62px] left-0 right-0">
           <div className="bg-[#36556C] w-full">
             <div className="mobile:flex items-center justify-between hidden h-[30px] bg-[#36556C] px-3 mobile:max-w-[348px] mx-auto">
-              <Link href="/c-faq">KAKO ZAČETI</Link>
-              <Link href="/c-info">CENIK</Link>
-              <Link href="/c-priloznost">PRILOŽNOST</Link>
+              <Link href="/c-faq" className="text-[#fff]">KAKO ZAČETI</Link>
+              <Link href="/c-info" className="text-[#fff]">CENIK</Link>
+              <Link href="/c-priloznost" className="text-[#fff]">PRILOŽNOST</Link>
             </div>
           </div>
         </div>

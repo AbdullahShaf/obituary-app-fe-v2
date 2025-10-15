@@ -280,7 +280,7 @@ const UniqueFeature = () => {
         <p className="text-[20px] mobile:text-[14px] font-[400] text-[#3090D5] leading-normal mb-2">
           DIGITALNI PRODUKTI
         </p>
-        <h4 className="desktop:text-[40px] tablet:text-[36px] mobile:text-[24px] font-[400] text-[#3C3E41] mobile:leading-[28px] leading-[48px]">
+        <h4 className="desktop:text-[40px] tablet:text-[36px] mobile:text-[24px] mobile:!mt-[40px] font-[400] text-[#3C3E41] mobile:leading-[28px] leading-[48px]">
           Edinstvena priložnost za <br className="hidden mobile:block" />{" "}
           <span className="inline mobile:flex items-center justify-center gap-1.5">
             <span className="font-[800]">močno</span> promocijo{" "}
@@ -300,7 +300,7 @@ const UniqueFeature = () => {
         </p>
       </div>
 
-      <div className="space-y-8 text-left">
+      <div className="space-y-8 text-left mobile:!mt-[20px]">
         <p className="desktop:text-[18px] text-[16px] font-[400] text-[#3C3E41] leading-[27px] flex flex-col gap-1.5">
           Biti na seznamu cvetličarn, ko uporabniki prav{" "}
           <br className="hidden mobile:block" /> to storitev iščejo ali imeti

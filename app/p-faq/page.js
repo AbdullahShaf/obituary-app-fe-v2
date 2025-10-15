@@ -57,7 +57,7 @@ export default function Faq1() {
         <div className="flex flex-col items-center justify-center pt-[200px] w-[700px] mx-auto mobile:w-[350px] min-h-[calc(100vh-55px)]">
           <Image src={"/faq_page_icon.png"} alt="FAQ" className="mobile:w-[78px] mobile:h-[78px]" width={94} height={94} />
           <h1 className="text-[40px] mobile:text-[28px] font-[300] leading-[48px] text-[#3C3E41] text-center mt-[16px]">Kaj zdaj, kako naj začnem?</h1>
-          <h3 className="text-[22px] mobile:text-[20px] font-[600] leading-[48px] text-[#3C3E41] text-center mt-[8px] mobile:mt-[2px]">Cvetličarne - Preprosti napotki</h3>
+          <h3 className="text-[22px] mobile:text-[20px] font-[600] leading-[48px] text-[#3C3E41] text-center mt-[8px] mobile:mt-[2px]">Pogrebna podjetja - Preprosti napotki</h3>
           <div className="flex flex-col items-center justify-center mt-[50px] w-full mobile:mb-[100px]">
             <FrequentlyAskedQuestionView3 data={{faqs: faqData}} />
           </div>

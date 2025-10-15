@@ -316,10 +316,10 @@ const UserAccountLayout = ({ children }) => {
       </div>
 
       {/* FOOTER FOR MOBILE */}
-      <FooterMobile
+      {/* <FooterMobile
         handleGoToTop={handleGoToTop}
         setIsMobilSideBarOpen={setIsMobilSideBarOpen}
-      />
+      /> */}
     </div>
   );
 };

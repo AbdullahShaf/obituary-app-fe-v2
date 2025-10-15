@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import omr from "@/public/omr.png";
-import back_icon from "@/public/back_icon.png";
+import { FiMenu } from "react-icons/fi";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import ButtonWhiteBG from "./buttonwhitebg";
@@ -79,17 +79,28 @@ function UserAccountHeaderNew({
                         2
                       </span>
                     </div>
-                    <button
-                      onClick={() => router.back()}
-                      className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-                      title="Nazaj"
-                    >
-                      <Image
-                        src={backIcon}
-                        alt="Back"
-                        className="h-8 w-8 mobile:h-7 mobile:w-7"
-                      />
-                    </button>
+                    {typeof window != 'undefined' && window.innerWidth >= 1200 ? (
+                      <button
+                        onClick={() => router.back()}
+                        className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                        title="Nazaj"
+                      >
+                        <Image
+                          src={backIcon}
+                          alt="Back"
+                          className="h-8 w-8 mobile:h-7 mobile:w-7"
+                        />
+                      </button>
+                    ) : (
+                      <span
+                        className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                        title="Nazaj"
+                      >
+                        <Link href={`/u/${parsedUser?.slugKey}/menu`}>
+                          <FiMenu size={32} color="black" />
+                        </Link>
+                      </span>
+                    )}
                   </div>
               }
 
@@ -360,7 +371,9 @@ function UserAccountHeaderNew({
             <CompanyFooterMobile setIsMobilSideBarOpen={setIsMobilSideBarOpen} />
           </div>
         ) : (
-          <FooterMobile setIsMobilSideBarOpen={setIsMobilSideBarOpen} />
+          <>
+            {/* <FooterMobile setIsMobilSideBarOpen={setIsMobilSideBarOpen} /> */}
+          </>
         )
       }
     </React.Fragment >

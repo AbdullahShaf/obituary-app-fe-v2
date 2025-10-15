@@ -2,20 +2,17 @@
 
 import UserAccountHeaderNew from "@/app/components/appcomponents/UserAccountHeaderNew";
 import Link from "next/link";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ButtonWhiteBG, {
   ButtonWhiteBGCap,
 } from "@/app/components/appcomponents/buttonwhitebg";
 import obituaryService from "@/services/obituary-service";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import ButtonLightGreen from "@/app/components/appcomponents/buttonLightGreen";
 
 export default function Funeral() {
   const [isMobilSideBarOpen, setIsMobilSideBarOpen] = useState(true);
   const [showAlternateContent, setShowAlternateContent] = useState(false);
   const [isKeeper, setIsKeeper] = useState(false);
-  const router = useRouter();
   const gotoTopRef = useRef(null);
 
   useEffect(() => {

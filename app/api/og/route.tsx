@@ -2,6 +2,7 @@ import React from "react";
 import { ImageResponse } from "next/og";
 import APP_BASE_URL from "@/config/appConfig";
 import API_BASE_URL from "@/config/apiConfig";
+import sharp from "sharp";
 
 export const runtime = "nodejs";
 
@@ -29,12 +30,10 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const slugKey = searchParams.get("slugKey");
 
-  // const obituary = await obituaryService.getMemory({ slugKey });
   const obituary = await fetch(
     `${API_BASE_URL}/obituary/memory?slugKey=${slugKey}`
   ).then(async (res) => {
     const data = await res.json();
-    console.log(data, "Fetched obituary");
     return data.obituary;
   });
 
@@ -44,6 +43,17 @@ export async function GET(req: Request) {
   const age = calculateAge(obituary?.birthDate, obituary?.deathDate);
 
   const imageUrl = obituary?.image || `${APP_BASE_URL}/user5.jpeg`;
+
+  let convertedImageUrl = imageUrl;
+  try {
+    const imageRes = await fetch(imageUrl);
+    const imageBuffer = Buffer.from(await imageRes.arrayBuffer());
+    const jpegBuffer = await sharp(imageBuffer).jpeg().toBuffer();
+    const base64 = jpegBuffer.toString("base64");
+    convertedImageUrl = `data:image/jpeg;base64,${base64}`;
+  } catch (error) {
+    console.error("Image conversion failed:", error);
+  }
   if (!obituary) {
     return new Response("Not found", { status: 404 });
   }
@@ -97,12 +107,13 @@ export async function GET(req: Request) {
             }}
           >
             <img
-              src={imageUrl}
+              src={convertedImageUrl}
               alt="Obituary"
+              width={180}
+              height={250}
               style={{
-                width: "100%",
-                height: "100%",
                 objectFit: "cover",
+                borderRadius: "12px",
               }}
             />
           </div>

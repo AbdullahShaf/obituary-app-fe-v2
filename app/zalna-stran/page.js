@@ -1,4 +1,6 @@
 import React from "react";
+import "../qr-kode/qr-kode.css";
+import "../qr-kode/qr-kode-responsive.css";
 import Layout from "../components/appcomponents/Layout";
 import ColdObituary from "../components/appcomponents/ColdObituary";
 import AnniversaryReminder from "../components/appcomponents/AnniversaryReminder";
@@ -53,6 +55,25 @@ const MemoryPromo = () => {
     <Layout from={"18"} forFooter={"memorypage"} currentPage="zalna-stran">
       <div className="flex flex-1 flex-col mx-auto bg-gradient-to-br from-[#ECF0F3] to-[#F2F6F9]">
         <div className="h-[72px] tablet:h-[80px] desktop:h-[92.02px] " />
+        <div className="mobile_navbar mobile_navbar_header top-[68px] z-[1]">
+          <ul>
+            <li>
+              <a href="/qr-kode">
+                QR KODE
+              </a>
+            </li>
+            <li>
+              <a href="/zalna-stran">
+                ŽALNA STRAN
+              </a>
+            </li>
+            <li>
+              <a href="/spominska">
+                SPOMINSKA
+              </a>
+            </li>
+          </ul>
+        </div>
         <WayToPost />
         <ColdObituary />
         <SimpleComp />

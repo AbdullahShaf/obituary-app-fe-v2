@@ -149,7 +149,7 @@ export default function Obituaries() {
                 </tr>
               </thead>
               <tbody className="bg-white/40">
-                {obituaries.length > 0
+                {obituaries && obituaries.length > 0
                   ? obituaries.map((obituary, index) => (
                     <tr
                       key={index}

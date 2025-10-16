@@ -148,7 +148,7 @@ const MyAccount = () => {
         }
       }
     } catch (e) {
-      toast.error("Napaka pri pridobivanju kartic.");
+      // toast.error("Napaka pri pridobivanju kartic.");
       console.error("getAllCards failed:", e);
     }
   };
@@ -157,16 +157,22 @@ const MyAccount = () => {
     getAllCards();
   }, []);
 
+  useEffect(() => {
+    if (user && user?.city) {
+      setSelectedCity(user?.city);
+    }
+  }, [user])
+
   const handleCitySelect = async (item) => {
     try {
       const response = await updateUserAndRefreshSession({ city: item });
       if (response.success === true) {
-        toast.success("City Updated Successfully");
+        toast.success("Občina je bila posodobljena");
       }
       setSelectedCity(item);
     } catch (error) {
       console.log(error);
-      toast.error("Error Updating City");
+      toast.error("Prišlo je do napake. Občina ni bila posodobljena.");
     }
   };
 
@@ -423,8 +429,8 @@ const MyAccount = () => {
                   {user?.city
                     ? user.city
                     : selectedCity
-                    ? selectedCity
-                    : "Izberi občino"}
+                      ? selectedCity
+                      : "Izberi občino"}
                 </span>
               </div>
               <div className="hidden  h-5 w-24   justify-between pl-0 pr-0 items-center mobileUserAcc:flex mobile:w-[100%] mobile:block mobile:relative mobile:top-8 mobile:text-sm">

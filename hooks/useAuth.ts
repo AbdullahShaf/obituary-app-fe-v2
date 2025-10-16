@@ -24,12 +24,12 @@ export function useAuth() {
       console.log("login", result);
 
       if (result?.error) {
-        toast.error("Invalid credentials");
+        toast.error("Napačni vnos");
         return { success: false, error: result.error };
       }
 
       if (result?.ok) {
-        toast.success("Login successful!");
+        toast.success("Prijava je uspela");
 
         // Wait for session to update, then redirect
         setTimeout(() => {
@@ -48,7 +48,7 @@ export function useAuth() {
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast.error("Login failed");
+      toast.error("Prijava ni uspela");
       return { success: false, error: "Login failed" };
     }
   };
@@ -62,7 +62,7 @@ export function useAuth() {
       });
 
       if (result?.error) {
-        toast.error("Invalid credentials");
+        toast.error("Napačni vnos");
         return { success: false, error: result.error };
       }
 
@@ -86,16 +86,31 @@ export function useAuth() {
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast.error("Login failed");
+      toast.error("Prijava ni uspela");
       return { success: false, error: "Login failed" };
     }
   };
 
   const logout = async () => {
     try {
+      localStorage.clear();
+      sessionStorage.clear();
+
+      // Clear all cookies
+      document.cookie.split(";").forEach((cookie) => {
+        const name = cookie.split("=")[0].trim();
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
+      });
+
+      // Try to clear the cache (optional and limited)
+      if ('caches' in window) {
+        const cacheNames = await caches.keys();
+        await Promise.all(cacheNames.map((name) => caches.delete(name)));
+      }
+
       await signOut({ redirect: false });
       router.push("/");
-      toast.success("Logout successful!");
+      toast.success("Odjava je uspela");
     } catch (error) {
       console.error("Logout error:", error);
       toast.error("Logout failed");

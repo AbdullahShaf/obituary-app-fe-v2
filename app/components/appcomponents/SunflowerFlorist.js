@@ -57,7 +57,7 @@ const SunflowerFlorist = ({ data }) => {
         {images[currentIndex].detail} 
         </div>
         */}
-        {shops.length > 1 && (
+        {shops && shops.length > 1 && (
           <button
             onClick={handlePrev}
             className={
@@ -77,7 +77,7 @@ const SunflowerFlorist = ({ data }) => {
           </div>
 
           <div className="tablet:flex flex-row w-full justify-between hidden ">
-            {shops.length > 1 && (
+            {shops && shops.length > 1 && (
               <button onClick={handlePrev} className={" my-auto ml-[-20px]"}>
                 <img
                   src="/img_back.png"
@@ -94,7 +94,7 @@ const SunflowerFlorist = ({ data }) => {
               className="h-[200px] w-[300px] mobile:w-[297px] mobile:h-[240px] 
                         mobile:mt-[18px] rounded-md mx-auto tablet:mt-[33px] mt-[56px]"
             />
-            {shops.length > 1 && (
+            {shops && shops.length > 1 && (
               <button onClick={handleNext} className={" my-auto mr-[-20px]"}>
                 <img
                   src="/img_forward.png"
@@ -108,7 +108,7 @@ const SunflowerFlorist = ({ data }) => {
           <div className="tablet:hidden desktop:flex mobile:flex flex h-[180px] w-[370px] justify-center flex-row mobile:w-[200px] mobile:h-[120px] mobile:mt-[50px] mobile:ml-10 mobile:mr-auto tablet:mt-[33px] mt-[45px]">
             <img
               key={`${data?.id}-${currentIndex}-logo-${currentShop?.id}`}
-              src={data?.logo}
+              src={data?.logo || "/suniflo_logo.avif"}
               alt="sunflower_img"
               className="w-full h-full object-contain rounded-md"
             />
@@ -233,7 +233,7 @@ const SunflowerFlorist = ({ data }) => {
               />
             </div>
 
-            {shops.length > 1 && (
+            {shops && shops.length > 1 && (
               <div className="flex gap-[30px] flex-row items-center ">
                 <button
                   onClick={handlePrev}
@@ -328,7 +328,7 @@ const SunflowerFlorist = ({ data }) => {
           </div>
         </div>
 
-        {shops.length > 1 && (
+        {shops && shops.length > 1 && (
           <button
             onClick={handleNext}
             className={"hidden desktop:flex self-center my-auto ml-[-80px]"}

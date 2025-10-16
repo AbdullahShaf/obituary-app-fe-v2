@@ -4,6 +4,15 @@ import iconArrowRight from "@/public/icon_arrowright.png";
 import Link from "next/link";
 import { format } from "date-fns";
 
+const formatObituaryDate = (dateString) => {
+  if (!dateString) return ""; // If date doesn't exist
+
+  const date = new Date(dateString);
+
+  // Otherwise, show full date
+  return format(date, "yyyy");
+};
+
 const calculateAge = (birthDate, deathDate) => {
   const birth = new Date(birthDate);
   const death = new Date(deathDate);
@@ -27,8 +36,10 @@ const ObituaryCard = ({
   selectedCity,
   selectedRegion,
 }) => {
-  const formattedBirthDate = new Date(data.birthDate).getFullYear();
-  const formattedDeathDate = format(new Date(data.deathDate), "dd.MM.yyyy");
+
+  // Conditional formatting
+  const formattedBirthDate = formatObituaryDate(data?.birthDate);
+  const formattedDeathDate = formatObituaryDate(data?.deathDate);
 
   const age = calculateAge(data.birthDate, data.deathDate);
 
@@ -105,18 +116,15 @@ const ObituaryCard = ({
                   {data.name} {data.sirName}
                 </div>
                 <p
-                  className="hidden desktop:block font-variation-customOpt14 tablet:font-variation-customOpt16 
+                  className="block font-variation-customOpt14 tablet:font-variation-customOpt16 
                   desktop:font-variation-customOpt16 text-left desktop:mt-[16px] tablet:mt-[16px]  
                   desktop:text-[16px] tablet:text-[16px] mobile:text-[14px]  text-[#414141] leading-[24px]"
                 >
-                  {formattedBirthDate} – {formattedDeathDate} ({age} let)
-                </p>
-                <p
-                  className="hidden mobile:block tablet:block font-variation-customOpt14 tablet:font-variation-customOpt16 
-                  desktop:font-variation-customOpt16 text-left desktop:mt-[16px] tablet:mt-[16px]  
-                  desktop:text-[16px] tablet:text-[16px] mobile:text-[14px]  text-[#414141] leading-[24px]"
-                >
-                  {formattedBirthDate} – {formattedDeathDate}
+                  {data?.birthDate?.includes('1025') ? (
+                    <>{formattedDeathDate}</>
+                  ) : (
+                    <>{formattedBirthDate} – {formattedDeathDate} ({age} let)</>
+                  )}
                 </p>
                 <div
                   className="flex h-[18px] tablet:h-6 

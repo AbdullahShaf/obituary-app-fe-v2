@@ -34,11 +34,13 @@ const FuneralPromoFooter = () => {
           <ul className='flex text-sm md:text-[14px] leading-[24px] font-normal gap-4 md:gap-[30.5px] text-[#DAEBF1] items-center'>
             <li className='hidden md:block'>Pišite nam</li>
             <li>
+              <a href='https://www.facebook.com/people/Osmrtnicacom/61581688912510/' target='_blank'>
               <img 
                 src="/funeralpromo/facebook.png" 
                 className='w-[18px] h-[18px]' 
                 alt="Facebook" 
               />
+              </a>
             </li>
             <li>
               <img 

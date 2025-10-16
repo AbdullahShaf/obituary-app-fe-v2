@@ -4,23 +4,32 @@ import { IconView } from "./Commonfunction";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import obituaryService from "@/services/obituary-service";
 
 function FooterMobile({ handleGoToTop, setIsMobilSideBarOpen }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isIconChange, setIsIconChange] = useState(false);
+  const { user } = useAuth();
+  const [memories, setMemories] = useState([]);
 
-  // useEffect(() => {
-  //   if (
-  //     pathname == "/moji-prispevki" ||
-  //     pathname == "/pregled2" ||
-  //     pathname == "/potrditev-objave"
-  //   ) {
-  //     setIsIconChange(true);
-  //   }
-  // }, [pathname]);
+  const getKeeperMemory = async () => {
+    try {
+      const response = await obituaryService.getKeeperMemories();
 
-  const {logout} = useAuth();
+      setMemories(response.obituaries);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getKeeperMemory();
+  }, []);
+
+  const parsedUser = user;
+
+  const { logout } = useAuth();
   return (
     <div className=" hidden mobileUserAcc:flex tabletUserAcc:flex self-end bottom-0 rounded-t-[12px] fixed z-[999] w-full h-[85px] bg-[#FFFFFF] shadow-lg justify-center items-center">
       <div
@@ -29,24 +38,25 @@ function FooterMobile({ handleGoToTop, setIsMobilSideBarOpen }) {
       "
       >
         <div className=" hidden tabletUserAcc:flex ">
-          <button onClick={logout} className="w-full h-[52px] ">
+          <Link href={`/`} className="w-full h-[52px] ">
             <IconView
               iconPath={"/icon_sidebar_arrow.png"}
               name={"Na spletno stran"}
             />
-          </button>
+          </Link>
         </div>
 
         <div className="flex mobileUserAcc:w-full justify-between tabletUserAcc:gap-[60px]">
           <div
             onClick={() => {
-              setIsMobilSideBarOpen(true);
+              // setIsMobilSideBarOpen(true);
+              router.replace(`/u/${parsedUser?.slugKey}/menu`);
             }}
           >
             <IconView iconPath={"/icon_home.png"} name={"Domov"} />
           </div>
 
-          <Link href={"/pregled"}>
+          <Link href={`/u/${parsedUser?.slugKey}/pregled`}>
             <div>
               <IconView
                 iconPath={"/icon_inactive_heart.png"}
@@ -55,7 +65,7 @@ function FooterMobile({ handleGoToTop, setIsMobilSideBarOpen }) {
             </div>
           </Link>
 
-          <Link href={"/obletnice"}>
+          <Link href={`/u/${parsedUser?.slugKey}/obletnice`}>
             <div>
               <IconView iconPath={"/icon_search.png"} name={"Obletnice"} />
             </div>
@@ -66,7 +76,7 @@ function FooterMobile({ handleGoToTop, setIsMobilSideBarOpen }) {
               <IconView iconPath={"/gototop.png"} name={"Na vrh"} />
             </div>
           ) : (
-            <Link href={"/pregled2"}>
+            <Link href={`${memories && memories?.length ? `/u/${parsedUser?.slugKey}/pregled2` : "#"}`}>
               <div>
                 <IconView
                   iconPath={"/icon_active_heart.png"}

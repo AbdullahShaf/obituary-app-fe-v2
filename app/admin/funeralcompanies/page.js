@@ -7,7 +7,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import adminService from "../../../services/admin-service";
 import { toast } from "react-hot-toast";
 import NotesModal from "../../components/NotesModal";
-
+import { TOAST_MESSAGE } from "../../../utils/toastMessage";
 // verify
 const FuneralCompanyData = () => {
   const [whichScreen, setWhichScreen] = useState(1);
@@ -64,7 +64,7 @@ const FuneralCompanyData = () => {
       } catch (error) {
         console.error("Error fetching funeral companies:", error);
         setError("Failed to fetch funeral companies");
-        toast.error("Failed to load funeral companies data");
+        toast.error(TOAST_MESSAGE.FAILED_TO_LOAD_FUNERAL_COMPANIES_DATA);
       } finally {
         setLoading(false);
       }
@@ -93,18 +93,18 @@ const FuneralCompanyData = () => {
       const response = await adminService.updateUserPermissions(companyId, permissions);
       if (response.success) {
         // Update local state
-        setCompanies(prevCompanies => 
-          prevCompanies.map(company => 
-            company.id === companyId 
+        setCompanies(prevCompanies =>
+          prevCompanies.map(company =>
+            company.id === companyId
               ? { ...company, permissions: { ...company.permissions, [permissionType]: !currentValue } }
               : company
           )
         );
-        toast.success("Permissions updated successfully");
+        toast.success(TOAST_MESSAGE.PERMISSIONS_UPDATED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error updating permissions:", error);
-      toast.error("Failed to update permissions");
+      toast.error(TOAST_MESSAGE.FAILED_TO_UPDATED_PERMISSIONS);
     }
   };
 
@@ -114,9 +114,9 @@ const FuneralCompanyData = () => {
       const response = await adminService.blockUser(companyId, !currentBlockedStatus);
       if (response.success) {
         // Update local state
-        setCompanies(prevCompanies => 
-          prevCompanies.map(company => 
-            company.id === companyId 
+        setCompanies(prevCompanies =>
+          prevCompanies.map(company =>
+            company.id === companyId
               ? { ...company, isBlocked: !currentBlockedStatus }
               : company
           )
@@ -125,7 +125,7 @@ const FuneralCompanyData = () => {
       }
     } catch (error) {
       console.error("Error blocking/unblocking user:", error);
-      toast.error("Failed to block/unblock user");
+      toast.error(TOAST_MESSAGE.FAILED_TO_BLOCK_UNBLOCK_USER);
     }
   };
 
@@ -135,18 +135,18 @@ const FuneralCompanyData = () => {
       const response = await adminService.updateUserNotes(companyId, notes);
       if (response.success) {
         // Update local state
-        setCompanies(prevCompanies => 
-          prevCompanies.map(company => 
-            company.id === companyId 
+        setCompanies(prevCompanies =>
+          prevCompanies.map(company =>
+            company.id === companyId
               ? { ...company, notes }
               : company
           )
         );
-        toast.success("Notes updated successfully");
+        toast.success(TOAST_MESSAGE.NOTES_UPDATED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error updating notes:", error);
-      toast.error("Failed to update notes");
+      toast.error(TOAST_MESSAGE.FAILED_TO_UPDATE_NOTES);
     }
   };
 
@@ -183,18 +183,18 @@ const FuneralCompanyData = () => {
       const response = await adminService.updateAdminFields(companyId, { adminRating: rating });
       if (response.success) {
         // Update local state
-        setCompanies(prevCompanies => 
-          prevCompanies.map(company => 
-            company.id === companyId 
+        setCompanies(prevCompanies =>
+          prevCompanies.map(company =>
+            company.id === companyId
               ? { ...company, adminRating: rating }
               : company
           )
         );
-        toast.success("Rating updated successfully");
+        toast.success(TOAST_MESSAGE.RATING_UPDATED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error updating rating:", error);
-      toast.error("Failed to update rating");
+      toast.error(TOAST_MESSAGE.FAILED_TO_UPDATE_RATING);
     }
   };
 
@@ -203,22 +203,22 @@ const FuneralCompanyData = () => {
     try {
       const currentCompany = companies.find(c => c.id === companyId);
       const newHasFlorist = !(currentCompany?.hasFlorist || false);
-      
+
       const response = await adminService.updateAdminFields(companyId, { hasFlorist: newHasFlorist });
       if (response.success) {
         // Update local state
-        setCompanies(prevCompanies => 
-          prevCompanies.map(company => 
-            company.id === companyId 
+        setCompanies(prevCompanies =>
+          prevCompanies.map(company =>
+            company.id === companyId
               ? { ...company, hasFlorist: newHasFlorist }
               : company
           )
         );
-        toast.success("Florist status updated successfully");
+        toast.success(TOAST_MESSAGE.FLORIST_STATUS_UPDATED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error updating florist status:", error);
-      toast.error("Failed to update florist status");
+      toast.error(TOAST_MESSAGE.FAILED_TO_UPDATE_FLORIST_STATUS);
     }
   };
 
@@ -227,22 +227,22 @@ const FuneralCompanyData = () => {
     try {
       const currentCompany = companies.find(c => c.id === companyId);
       const newIsPaid = !(currentCompany?.isPaid || false);
-      
+
       const response = await adminService.updateAdminFields(companyId, { isPaid: newIsPaid });
       if (response.success) {
         // Update local state
-        setCompanies(prevCompanies => 
-          prevCompanies.map(company => 
-            company.id === companyId 
+        setCompanies(prevCompanies =>
+          prevCompanies.map(company =>
+            company.id === companyId
               ? { ...company, isPaid: newIsPaid }
               : company
           )
         );
-        toast.success("Payment status updated successfully");
+        toast.success(TOAST_MESSAGE.PAYMENT_STATUS_UPDATED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error updating payment status:", error);
-      toast.error("Failed to update payment status");
+      toast.error(TOAST_MESSAGE.FAILED_TO_UPDATE_PAYMENT_STATUS);
     }
   };
   return (
@@ -452,10 +452,10 @@ const FuneralCompanyData = () => {
           </div>
           <div className="flex justify-between">
             <div>
-              
+
               <p
-              style={{fontVariationSettings: "'wdth' 50"}}
-              className="font-sourcesans text-[32px] font-semibold leading-[37.5px] text-[#0A85C2]">
+                style={{ fontVariationSettings: "'wdth' 50" }}
+                className="font-sourcesans text-[32px] font-semibold leading-[37.5px] text-[#0A85C2]">
                 Funeral Companies only
               </p>
             </div>
@@ -541,7 +541,7 @@ const FuneralCompanyData = () => {
                         src={"/arraydownward.png"}
                         width={8}
                         height={12}
-                        //   className="w-[24px] h-[30px] m-[0]"
+                      //   className="w-[24px] h-[30px] m-[0]"
                       ></Image>
                     </div>
                   </th>
@@ -615,7 +615,7 @@ const FuneralCompanyData = () => {
                         src={"/arraydownward.png"}
                         width={8}
                         height={12}
-                        //   className="w-[24px] h-[30px] m-[0]"
+                      //   className="w-[24px] h-[30px] m-[0]"
                       ></Image>
                     </div>
                   </th>
@@ -684,7 +684,7 @@ const FuneralCompanyData = () => {
                         src={"/arraydownward.png"}
                         width={8}
                         height={12}
-                        //   className="w-[24px] h-[30px] m-[0]"
+                      //   className="w-[24px] h-[30px] m-[0]"
                       ></Image>
                     </div>
                   </th>
@@ -854,38 +854,34 @@ const FuneralCompanyData = () => {
                           {/* Permission toggles */}
                           <button
                             onClick={() => handlePermissionToggle(company.id, 'createObituary', company.permissions.createObituary)}
-                            className={`w-6 h-6 rounded-full border-2 ${
-                              company.permissions.createObituary 
-                                ? 'bg-green-500 border-green-500' 
+                            className={`w-6 h-6 rounded-full border-2 ${company.permissions.createObituary
+                                ? 'bg-green-500 border-green-500'
                                 : 'bg-white border-gray-300'
-                            }`}
+                              }`}
                             title="Create Obituary Permission"
                           />
                           <button
                             onClick={() => handlePermissionToggle(company.id, 'assignKeeper', company.permissions.assignKeeper)}
-                            className={`w-6 h-6 rounded-full border-2 ${
-                              company.permissions.assignKeeper 
-                                ? 'bg-green-500 border-green-500' 
+                            className={`w-6 h-6 rounded-full border-2 ${company.permissions.assignKeeper
+                                ? 'bg-green-500 border-green-500'
                                 : 'bg-white border-gray-300'
-                            }`}
+                              }`}
                             title="Assign Keeper Permission"
                           />
                           <button
                             onClick={() => handlePermissionToggle(company.id, 'sendGifts', company.permissions.sendGifts)}
-                            className={`w-6 h-6 rounded-full border-2 ${
-                              company.permissions.sendGifts 
-                                ? 'bg-green-500 border-green-500' 
+                            className={`w-6 h-6 rounded-full border-2 ${company.permissions.sendGifts
+                                ? 'bg-green-500 border-green-500'
                                 : 'bg-white border-gray-300'
-                            }`}
+                              }`}
                             title="Send Gifts Permission"
                           />
                           <button
                             onClick={() => handlePermissionToggle(company.id, 'sendMobile', company.permissions.sendMobile)}
-                            className={`w-6 h-6 rounded-full border-2 ${
-                              company.permissions.sendMobile 
-                                ? 'bg-green-500 border-green-500' 
+                            className={`w-6 h-6 rounded-full border-2 ${company.permissions.sendMobile
+                                ? 'bg-green-500 border-green-500'
                                 : 'bg-white border-gray-300'
-                            }`}
+                              }`}
                             title="Send Mobile Permission"
                           />
                         </div>
@@ -1055,7 +1051,7 @@ const FuneralCompanyData = () => {
                   </p>
                 </div>
                 <div className="text-[16px] text-[#1E2125] font-medium font-variation-customOpt14 leading-[16px]">
-                  Cities covered 
+                  Cities covered
                 </div>
               </div>
 
@@ -1175,8 +1171,8 @@ const FuneralCompanyData = () => {
           <div className="flex justify-between">
             <div>
               <p
-              style={{fontVariationSettings: "'wdth' 50"}}
-              className="font-sourcesans text-[32px] font-semibold leading-[37.5px] text-[#0A85C2]">
+                style={{ fontVariationSettings: "'wdth' 50" }}
+                className="font-sourcesans text-[32px] font-semibold leading-[37.5px] text-[#0A85C2]">
                 New Orleans
               </p>
             </div>
@@ -1870,7 +1866,7 @@ const FuneralCompanyData = () => {
               <div className="flex justify-between">
                 <div>
                   <p className="font-sourcesans text-[16px] font-medium leading-[18.75px] text-[#1E2125] m-[0]">
-                    Cities covered 
+                    Cities covered
                   </p>
                 </div>
 
@@ -2004,7 +2000,7 @@ const FuneralCompanyData = () => {
                       src={"/arraydownward.png"}
                       width={8}
                       height={12}
-                      //   className="w-[24px] h-[30px] m-[0]"
+                    //   className="w-[24px] h-[30px] m-[0]"
                     ></Image>
                   </div>
                 </th>
@@ -2128,11 +2124,11 @@ const FuneralCompanyData = () => {
                       </p>
                     </td>
 
-                                          <td className="w-[74px] text-left">
-                        <p className="font-sourcesans text-[13px] font-normal leading-[15.23px] text-[#3C3E41]">
-                          {formatDate(company.createdTimestamp)}
-                        </p>
-                      </td>
+                    <td className="w-[74px] text-left">
+                      <p className="font-sourcesans text-[13px] font-normal leading-[15.23px] text-[#3C3E41]">
+                        {formatDate(company.createdTimestamp)}
+                      </p>
+                    </td>
 
                     <td className="w-[131px] text-center">
                       <p className="font-sourcesans text-[13px] font-normal leading-[24px] text-[#6D778E]">
@@ -2151,9 +2147,9 @@ const FuneralCompanyData = () => {
                         className="cursor-pointer"
                         title="Toggle Obituary Creation Permission"
                       >
-                        <Image 
-                          src={company.permissions.createObituary ? "/verify.png" : "/reject.png"} 
-                          width={24} 
+                        <Image
+                          src={company.permissions.createObituary ? "/verify.png" : "/reject.png"}
+                          width={24}
                           height={24}
                           alt={company.permissions.createObituary ? "Obituary creation allowed" : "Obituary creation blocked"}
                         />

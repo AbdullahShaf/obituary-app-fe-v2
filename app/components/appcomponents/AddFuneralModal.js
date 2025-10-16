@@ -13,8 +13,13 @@ import { sl } from "date-fns/locale";
 import DatePicker from "react-datepicker";
 import { getYear, getMonth } from "date-fns";
 import toast from "react-hot-toast";
+import { useAuth } from "@/hooks/useAuth";
+import MobileCards from "./MobileCards";
+import { getCardsImageAndPdfsFiles } from "@/utils/downloadCards";
+import BackDropLoader from "../ui/backdrop-loader";
 
 const AddFuneralModal = ({ setModalVisible }) => {
+  const { user } = useAuth();
   const [obituaries, setObituaries] = useState([]);
   const [cemeteries, setCemeteries] = useState([]);
 
@@ -35,6 +40,10 @@ const AddFuneralModal = ({ setModalVisible }) => {
     useState(false);
   const [showFuneralMinutesDropdown, setShowFuneralMinutesDropdown] =
     useState(false);
+  const [obituaryResponse, setObituaryResponse] = useState(null);
+  const cardRefs = useRef([]);
+
+
   const hours = Array.from({ length: 24 }, (_, i) => i + 1);
   const minutes = Array.from({ length: 4 }, (_, i) => i * 15);
   const togglePicker = (type) => {
@@ -46,10 +55,18 @@ const AddFuneralModal = ({ setModalVisible }) => {
     try {
       let queryParams = {};
       queryParams.name = query;
+      const today = new Date().toISOString();
+      queryParams.date = today;
+      queryParams.city = user?.city;
+      queryParams.userId = user?.id;
+      queryParams.allow = 'allow';
+      console.log(queryParams, "here------------");
+
+
       const response = await obituaryService.getObituary(queryParams);
       setObituaries(response.obituaries);
     } catch (error) {
-      console.log(error);
+      console.log('>>>>>>>>>>>>>>', error);
     }
   };
 
@@ -124,7 +141,7 @@ const AddFuneralModal = ({ setModalVisible }) => {
 
   const handleObituaryInputChange = (input) => {
     setObituaryInputValue(input);
-    if (cemeteryData.length == 1) {
+    if (cemeteryData && cemeteryData.length == 1) {
       // setSelectedCemetery(cemeteryData[0]['value']);
     }
   };
@@ -154,11 +171,54 @@ const AddFuneralModal = ({ setModalVisible }) => {
       selectedFuneralHour === null ||
       selectedFuneralMinute === null
     ) {
-      toast.error("Please fill complete data");
+      toast.error("Izpolni vsa polja");
       return false;
     }
     return true;
   };
+
+
+  useEffect(() => {
+    if (obituaryResponse?.id) {
+      handleUploadTemplateCards();
+    }
+  }, [obituaryResponse]);
+
+  const handleUploadTemplateCards = async () => {
+    setLoading(() => true);
+
+    // Wait for cardRefs to be populated
+
+    let attempts = 0;
+    while (!cardRefs.current && attempts < 10) {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      attempts++;
+    }
+    if (!obituaryResponse || !cardRefs.current) return;
+    const { images, pdfs } = await getCardsImageAndPdfsFiles(cardRefs.current);
+    const formData = new FormData();
+    images.forEach((image) => {
+      formData.append(`cardImages`, image);
+    });
+    pdfs.forEach((pdf) => {
+      formData.append(`cardPdfs`, pdf);
+    });
+    const response = await obituaryService.uploadObituaryTemplateCards(
+      obituaryResponse.id,
+      formData
+    );
+    if (response.error) {
+      // toast.error(response.error || "Failed to upload template cards.");
+      return;
+    }
+    // toast.success("Template cards uploaded successfully!");
+    setObituaryResponse(null);
+    setLoading(() => false);
+    setModalVisible(false);
+
+  };
+
+
   const handleSubmit = async () => {
     try {
       setLoading(true);
@@ -193,26 +253,28 @@ const AddFuneralModal = ({ setModalVisible }) => {
         formData,
         'allow'
       );
-      toast.success("Obituary updated successfully!");
+      const updated = await obituaryService.getObituary({ id: selectedObituary })
+      setObituaryResponse(updated?.obituaries?.[0]);
+      toast.success("Osmrtnica je bila posodobljena");
 
-      if(typeof window !== 'undefined'){
-        window.location.reload();
-      }
+      // if (typeof window !== 'undefined') {
+      //   window.location.reload();
+      // }
 
       if (response?.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Prišlo je do napake."
+        // );
         return;
       }
     } catch (error) {
       if (error?.response?.status === 404) {
-        toast.error("You cannot update other company's obituary");
+        toast.error("Podatke na osmrtnici lahko posodobi samo podjetje, ki jih je vneslo");
       } else {
         console.error("Error creating obituary:", error);
         toast.error(
           error?.response?.data?.error ||
-          "Failed to create obituary. Please try again."
+          "Prišlo je do napake."
         );
       }
     } finally {
@@ -225,297 +287,266 @@ const AddFuneralModal = ({ setModalVisible }) => {
   };
 
   return (
-    <div
-      className="fixed z-[1000] top-0 left-0 w-full  bg-[#000000B2] h-screen  flex items-center justify-center"
-      onClick={() => setModalVisible(false)}
-    >
+    <>
+      {obituaryResponse?.id && (
+        <MobileCards cardRefs={cardRefs} data={obituaryResponse} cemetery={""} />
+      )}
+      {loading && <BackDropLoader zindex={"z-[9999]"}/>}
       <div
-        className="relative mx-auto max-w-[1280px] flex justify-center mobile:w-[360px] w-full h-full "
-        onClick={(e) => e.stopPropagation()}
+        className="fixed z-[1000] top-0 left-0 w-full  bg-[#000000B2] h-screen  flex items-center justify-center"
+        onClick={() => setModalVisible(false)}
       >
-        <div className="w-[595px] h-[700px] bg-[#E7EEF3] rounded-[16px] p-[6px]">
-          <div className="flex justify-end h-[50px]">
-            <img
-              src={"./circle_cross.png"}
-              alt="Close"
-              className="w-[70px] h-[70px] cursor-pointer"
-              onClick={() => setModalVisible(false)}
-            />
-          </div>
-          <div
-            className="ms-24 mb-2 text-[#1E2125] text-[28px] text-normal"
-            style={{ fontFamily: "Roboto Flex" }}
-          >
-            Dodaj pogreb
-          </div>
-          <div className="w-[450px] h-[549px] bg-[#E1E6EC] rounded-[16px] border-[1px] border-[#6D778E] mx-auto p-10">
-            <div className="mb-4 flex flex-col ">
-              <label
-                className="font-normal text-base text-[#414B5A]"
-                style={{ fontFamily: "Roboto Flex" }}
-              >
-                Poišči osmrtnico
-              </label>
-
-              <div className="w-full mx-auto">
-                <Select
-                  options={obituaryData}
-                  onChange={handleObituaryChange}
-                  onInputChange={handleObituaryInputChange}
-                  value={
-                    selectedObituary
-                      ? obituaryData.find(
-                        (option) => option.id === selectedObituary
-                      )
-                      : null
-                  }
-                  inputValue={obituaryInputValue}
-                  placeholder={""}
-                  isSearchable
-                  // filterOption={(option, obituaryInputValue) =>
-                  //   option.label
-                  //     .toLowerCase()
-                  //     .startsWith(obituaryInputValue.toLowerCase())
-                  // }
-                  styles={{
-                    control: (base) => ({
-                      ...base,
-                      backgroundColor: "#F2F8FF66",
-                      border: "1px solid #d4d4d4",
-                      borderRadius: "6px",
-                      boxShadow:
-                        "inset 3px 3px 5px rgba(166, 171, 189, 1), inset -3px -3px 3px rgba(250, 251, 255, 0.46)",
-                      "&:hover": { borderColor: "#105ccf" },
-                      minHeight: "36px",
-                    }),
-
-                    dropdownIndicator: (base) => ({
-                      ...base,
-                      color: "#7d7d7d", // Arrow color
-                      "&:hover": { color: "#808080" }, // Arrow hover color
-                    }),
-                    indicatorSeparator: () => ({
-                      display: "none", // Remove the separator line
-                    }),
-                    menu: (base) => ({
-                      ...base,
-                      borderRadius: "4px", // Rounded menu
-                      marginTop: "2px", // Minimal gap
-                      zIndex: 10,
-                    }),
-                    option: (base, { isFocused }) => ({
-                      ...base,
-                      backgroundColor: isFocused ? "#e8f5f4" : "#fff", // Highlight on hover
-                      color: "#333", // Text color
-                      cursor: "pointer",
-                    }),
-                    singleValue: (base) => ({
-                      ...base,
-                      color: "#105CCF",
-                      fontSize: "18px",
-                    }),
-                  }}
-                />
-              </div>
+        <div
+          className="relative mx-auto max-w-[1280px] flex justify-center mobile:w-[360px] w-full h-full "
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="w-[595px] h-[700px] bg-[#E7EEF3] rounded-[16px] p-[6px]">
+            <div className="flex justify-end h-[50px]">
+              <img
+                src={"./circle_cross.png"}
+                alt="Close"
+                className="w-[70px] h-[70px] cursor-pointer"
+                onClick={() => setModalVisible(false)}
+              />
             </div>
-            <div className="mb-4 flex flex-col ">
-              <label
-                className="font-normal text-base text-[#414B5A]"
-                style={{ fontFamily: "Roboto Flex" }}
-              >
-                Pogreb - občina
-              </label>
-
-              <div className="w-full mx-auto">
-                <Select
-                  options={flattenedOptions}
-                  value={
-                    selectedCity
-                      ? flattenedOptions.find(
-                        (option) => option.value === selectedCity
-                      )
-                      : null
-                  }
-                  onInputChange={handleCityInputChange}
-                  onChange={(selectedOption) =>
-                    setSelectedCity(selectedOption?.value)
-                  }
-                  inputValue={cityInputValue}
-                  isSearchable
-                  placeholder={""}
-                  styles={{
-                    control: (base) => ({
-                      ...base,
-                      backgroundColor: "#F2F8FF66",
-                      border: "1px solid #d4d4d4",
-                      borderRadius: "6px",
-                      boxShadow:
-                        "inset 3px 3px 5px rgba(166, 171, 189, 1), inset -3px -3px 3px rgba(250, 251, 255, 0.46)",
-                      "&:hover": { borderColor: "#105ccf" },
-                      minHeight: "36px",
-                    }),
-
-                    dropdownIndicator: (base) => ({
-                      ...base,
-                      color: "#7d7d7d", // Arrow color
-                      "&:hover": { color: "#808080" }, // Arrow hover color
-                    }),
-                    indicatorSeparator: () => ({
-                      display: "none", // Remove the separator line
-                    }),
-                    menu: (base) => ({
-                      ...base,
-                      borderRadius: "4px", // Rounded menu
-                      marginTop: "2px", // Minimal gap
-                      zIndex: 10,
-                    }),
-                    option: (base, { isFocused }) => ({
-                      ...base,
-                      backgroundColor: isFocused ? "#e8f5f4" : "#fff", // Highlight on hover
-                      color: "#333", // Text color
-                      cursor: "pointer",
-                    }),
-                    singleValue: (base) => ({
-                      ...base,
-                      color: "#105CCF",
-                      fontSize: "18px",
-                    }),
-                  }}
-                  isDisabled
-                />
-              </div>
+            <div
+              className="ms-24 mb-2 text-[#1E2125] text-[28px] text-normal"
+              style={{ fontFamily: "Roboto Flex" }}
+            >
+              Dodaj pogreb
             </div>
-            <div className="mb-4 flex flex-col ">
-              <label
-                className="font-normal text-base text-[#414B5A]"
-                style={{ fontFamily: "Roboto Flex" }}
-              >
-                Pokopališče
-              </label>
+            <div className="w-[450px] h-[549px] bg-[#E1E6EC] rounded-[16px] border-[1px] border-[#6D778E] mx-auto p-10">
+              <div className="mb-4 flex flex-col ">
+                <label
+                  className="font-normal text-base text-[#414B5A]"
+                  style={{ fontFamily: "Roboto Flex" }}
+                >
+                  Poišči osmrtnico
+                </label>
 
-              <div className="w-full mx-auto">
-                <Select
-                  options={cemeteryData} // Use flattened options without grouping
-                  onChange={handleCemeteryChange}
-                  onInputChange={handleCemeteryInputChange}
-                  value={
-                    selectedCemetery
-                      ? cemeteryData.find(
-                        (option) => (option.id === selectedCemetery || option.value === selectedCemetery)
-                      )
-                      : null
-                  }
-                  inputValue={cemeteryInputValue}
-                  placeholder={""}
-                  isSearchable
-                  filterOption={(option, cemeteryInputValue) =>
-                    option.label
-                      .toLowerCase()
-                      .startsWith(cemeteryInputValue.toLowerCase())
-                  }
-                  styles={{
-                    control: (base) => ({
-                      ...base,
-                      backgroundColor: "#F2F8FF66",
-                      border: "1px solid #d4d4d4",
-                      borderRadius: "6px",
-                      boxShadow:
-                        "inset 3px 3px 5px rgba(166, 171, 189, 1), inset -3px -3px 3px rgba(250, 251, 255, 0.46)",
-                      "&:hover": { borderColor: "#105ccf" },
-                      minHeight: "36px",
-                    }),
+                <div className="w-full mx-auto">
+                  <Select
+                    options={obituaryData}
+                    onChange={handleObituaryChange}
+                    onInputChange={handleObituaryInputChange}
+                    value={
+                      selectedObituary
+                        ? obituaryData.find(
+                          (option) => option.id === selectedObituary
+                        )
+                        : null
+                    }
+                    inputValue={obituaryInputValue}
+                    placeholder={""}
+                    isSearchable
+                    // filterOption={(option, obituaryInputValue) =>
+                    //   option.label
+                    //     .toLowerCase()
+                    //     .startsWith(obituaryInputValue.toLowerCase())
+                    // }
+                    styles={{
+                      control: (base) => ({
+                        ...base,
+                        backgroundColor: "#F2F8FF66",
+                        border: "1px solid #d4d4d4",
+                        borderRadius: "6px",
+                        boxShadow:
+                          "inset 3px 3px 5px rgba(166, 171, 189, 1), inset -3px -3px 3px rgba(250, 251, 255, 0.46)",
+                        "&:hover": { borderColor: "#105ccf" },
+                        minHeight: "36px",
+                      }),
 
-                    dropdownIndicator: (base) => ({
-                      ...base,
-                      color: "#7d7d7d", // Arrow color
-                      "&:hover": { color: "#808080" }, // Arrow hover color
-                    }),
-                    indicatorSeparator: () => ({
-                      display: "none", // Remove the separator line
-                    }),
-                    menu: (base) => ({
-                      ...base,
-                      borderRadius: "4px", // Rounded menu
-                      marginTop: "2px", // Minimal gap
-                      zIndex: 10,
-                    }),
-                    option: (base, { isFocused }) => ({
-                      ...base,
-                      backgroundColor: isFocused ? "#e8f5f4" : "#fff", // Highlight on hover
-                      color: "#333", // Text color
-                      cursor: "pointer",
-                    }),
-                    singleValue: (base) => ({
-                      ...base,
-                      color: "#105CCF",
-                      fontSize: "18px",
-                    }),
-                  }}
-                />
-              </div>
-            </div>
-            <div className="mb-4 flex flex-col ">
-              <label
-                className="font-normal text-base text-[#414B5A]"
-                style={{ fontFamily: "Roboto Flex" }}
-              >
-                DAN POGREBA
-              </label>
-
-              <div className="flex relative gap-x-[32px]">
-                <ModalDropBox
-                  placeholder={`Dan`}
-                  onClick={() => {
-                    togglePicker("funeralDay");
-                  }}
-                  isSelectText={funeralDate ? funeralDate.getDate() : ""}
-                />
-
-                {openPicker === "funeralDay" && (
-                  <div className="absolute mt-12 bg-white border rounded shadow-lg z-10">
-                    <DatePicker
-                      selected={funeralDate}
-                      onChange={(date) => {
-                        setFuneralDate(date);
-                        setOpenPicker(null);
-                      }}
-                      dateFormat="d"
-                      inline
-                      minDate={new Date()}
-                      onClickOutside={() => {
-                        setOpenPicker(null);
-                      }}
-                      locale={sl}
-                      openToDate={funeralDate || new Date()}
-                    />
-                  </div>
-                )}
-
-                <div className="flex relative">
-                  <ModalDropBox
-                    placeholder={`Mesec`}
-                    onClick={() => {
-                      togglePicker("funeralMonth");
+                      dropdownIndicator: (base) => ({
+                        ...base,
+                        color: "#7d7d7d", // Arrow color
+                        "&:hover": { color: "#808080" }, // Arrow hover color
+                      }),
+                      indicatorSeparator: () => ({
+                        display: "none", // Remove the separator line
+                      }),
+                      menu: (base) => ({
+                        ...base,
+                        borderRadius: "4px", // Rounded menu
+                        marginTop: "2px", // Minimal gap
+                        zIndex: 10,
+                      }),
+                      option: (base, { isFocused }) => ({
+                        ...base,
+                        backgroundColor: isFocused ? "#e8f5f4" : "#fff", // Highlight on hover
+                        color: "#333", // Text color
+                        cursor: "pointer",
+                      }),
+                      singleValue: (base) => ({
+                        ...base,
+                        color: "#105CCF",
+                        fontSize: "18px",
+                      }),
                     }}
-                    isSelectText={funeralDate ? getMonth(funeralDate) + 1 : ""}
+                  />
+                </div>
+              </div>
+              <div className="mb-4 flex flex-col ">
+                <label
+                  className="font-normal text-base text-[#414B5A]"
+                  style={{ fontFamily: "Roboto Flex" }}
+                >
+                  Pogreb - občina
+                </label>
+
+                <div className="w-full mx-auto">
+                  <Select
+                    options={flattenedOptions}
+                    value={
+                      selectedCity
+                        ? flattenedOptions.find(
+                          (option) => option.value === selectedCity
+                        )
+                        : null
+                    }
+                    onInputChange={handleCityInputChange}
+                    onChange={(selectedOption) =>
+                      setSelectedCity(selectedOption?.value)
+                    }
+                    inputValue={cityInputValue}
+                    isSearchable
+                    placeholder={""}
+                    styles={{
+                      control: (base) => ({
+                        ...base,
+                        backgroundColor: "#F2F8FF66",
+                        border: "1px solid #d4d4d4",
+                        borderRadius: "6px",
+                        boxShadow:
+                          "inset 3px 3px 5px rgba(166, 171, 189, 1), inset -3px -3px 3px rgba(250, 251, 255, 0.46)",
+                        "&:hover": { borderColor: "#105ccf" },
+                        minHeight: "36px",
+                      }),
+
+                      dropdownIndicator: (base) => ({
+                        ...base,
+                        color: "#7d7d7d", // Arrow color
+                        "&:hover": { color: "#808080" }, // Arrow hover color
+                      }),
+                      indicatorSeparator: () => ({
+                        display: "none", // Remove the separator line
+                      }),
+                      menu: (base) => ({
+                        ...base,
+                        borderRadius: "4px", // Rounded menu
+                        marginTop: "2px", // Minimal gap
+                        zIndex: 10,
+                      }),
+                      option: (base, { isFocused }) => ({
+                        ...base,
+                        backgroundColor: isFocused ? "#e8f5f4" : "#fff", // Highlight on hover
+                        color: "#333", // Text color
+                        cursor: "pointer",
+                      }),
+                      singleValue: (base) => ({
+                        ...base,
+                        color: "#105CCF",
+                        fontSize: "18px",
+                      }),
+                    }}
+                    isDisabled
+                  />
+                </div>
+              </div>
+              <div className="mb-4 flex flex-col ">
+                <label
+                  className="font-normal text-base text-[#414B5A]"
+                  style={{ fontFamily: "Roboto Flex" }}
+                >
+                  Pokopališče
+                </label>
+
+                <div className="w-full mx-auto">
+                  <Select
+                    options={cemeteryData} // Use flattened options without grouping
+                    onChange={handleCemeteryChange}
+                    onInputChange={handleCemeteryInputChange}
+                    value={
+                      selectedCemetery
+                        ? cemeteryData.find(
+                          (option) => (option.id === selectedCemetery || option.value === selectedCemetery)
+                        )
+                        : null
+                    }
+                    inputValue={cemeteryInputValue}
+                    placeholder={""}
+                    isSearchable
+                    filterOption={(option, cemeteryInputValue) =>
+                      option.label
+                        .toLowerCase()
+                        .startsWith(cemeteryInputValue.toLowerCase())
+                    }
+                    styles={{
+                      control: (base) => ({
+                        ...base,
+                        backgroundColor: "#F2F8FF66",
+                        border: "1px solid #d4d4d4",
+                        borderRadius: "6px",
+                        boxShadow:
+                          "inset 3px 3px 5px rgba(166, 171, 189, 1), inset -3px -3px 3px rgba(250, 251, 255, 0.46)",
+                        "&:hover": { borderColor: "#105ccf" },
+                        minHeight: "36px",
+                      }),
+
+                      dropdownIndicator: (base) => ({
+                        ...base,
+                        color: "#7d7d7d", // Arrow color
+                        "&:hover": { color: "#808080" }, // Arrow hover color
+                      }),
+                      indicatorSeparator: () => ({
+                        display: "none", // Remove the separator line
+                      }),
+                      menu: (base) => ({
+                        ...base,
+                        borderRadius: "4px", // Rounded menu
+                        marginTop: "2px", // Minimal gap
+                        zIndex: 10,
+                      }),
+                      option: (base, { isFocused }) => ({
+                        ...base,
+                        backgroundColor: isFocused ? "#e8f5f4" : "#fff", // Highlight on hover
+                        color: "#333", // Text color
+                        cursor: "pointer",
+                      }),
+                      singleValue: (base) => ({
+                        ...base,
+                        color: "#105CCF",
+                        fontSize: "18px",
+                      }),
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="mb-4 flex flex-col ">
+                <label
+                  className="font-normal text-base text-[#414B5A]"
+                  style={{ fontFamily: "Roboto Flex" }}
+                >
+                  DAN POGREBA
+                </label>
+
+                <div className="flex relative gap-x-[32px]">
+                  <ModalDropBox
+                    placeholder={`Dan`}
+                    onClick={() => {
+                      togglePicker("funeralDay");
+                    }}
+                    isSelectText={funeralDate ? funeralDate.getDate() : ""}
                   />
 
-                  {openPicker === "funeralMonth" && (
+                  {openPicker === "funeralDay" && (
                     <div className="absolute mt-12 bg-white border rounded shadow-lg z-10">
                       <DatePicker
                         selected={funeralDate}
                         onChange={(date) => {
-                          const currentDate = funeralDate || new Date();
-                          const updatedDate = new Date(
-                            currentDate.getFullYear(),
-                            date.getMonth(),
-                            currentDate.getDate()
-                          );
-                          setFuneralDate(updatedDate); // Update only month
-                          setOpenPicker(null); // Close picker after selection
+                          setFuneralDate(date);
+                          setOpenPicker(null);
                         }}
-                        dateFormat="MM/yyyy" // Show only month
-                        showMonthYearPicker // Show only month selection
+                        dateFormat="d"
                         inline
                         minDate={new Date()}
                         onClickOutside={() => {
@@ -526,110 +557,147 @@ const AddFuneralModal = ({ setModalVisible }) => {
                       />
                     </div>
                   )}
+
+                  <div className="flex relative">
+                    <ModalDropBox
+                      placeholder={`Mesec`}
+                      onClick={() => {
+                        togglePicker("funeralMonth");
+                      }}
+                      isSelectText={funeralDate ? getMonth(funeralDate) + 1 : ""}
+                    />
+
+                    {openPicker === "funeralMonth" && (
+                      <div className="absolute mt-12 bg-white border rounded shadow-lg z-10">
+                        <DatePicker
+                          selected={funeralDate}
+                          onChange={(date) => {
+                            const currentDate = funeralDate || new Date();
+                            const updatedDate = new Date(
+                              currentDate.getFullYear(),
+                              date.getMonth(),
+                              currentDate.getDate()
+                            );
+                            setFuneralDate(updatedDate); // Update only month
+                            setOpenPicker(null); // Close picker after selection
+                          }}
+                          dateFormat="MM/yyyy" // Show only month
+                          showMonthYearPicker // Show only month selection
+                          inline
+                          minDate={new Date()}
+                          onClickOutside={() => {
+                            setOpenPicker(null);
+                          }}
+                          locale={sl}
+                          openToDate={funeralDate || new Date()}
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="mb-4 flex flex-col">
-              <label
-                className="font-normal text-base text-[#414B5A]"
-                style={{ fontFamily: "Roboto Flex" }}
-              >
-                ČAS POGREBA
-              </label>
+              <div className="mb-4 flex flex-col">
+                <label
+                  className="font-normal text-base text-[#414B5A]"
+                  style={{ fontFamily: "Roboto Flex" }}
+                >
+                  ČAS POGREBA
+                </label>
 
-              <div
-                className="flex flex-row mobile:gap-x-[11px] gap-x-[32px] gap-y-[8px] flex-wrap"
-                ref={funeralDropdownRef}
-              >
-                <ModalDropBox
-                  placeholder={"Ura"}
-                  onClick={() => {
-                    setOpenPicker(false);
-                    setShowFuneralHoursDropdown(!showFuneralHoursDropdown);
-                    setShowFuneralMinutesDropdown(false); // Hide minutes dropdown if open
-                  }}
-                  isSelectText={
-                    selectedFuneralHour
-                      ? `${selectedFuneralHour.toString().padStart(2, "0")}`
-                      : "Ura:"
-                  }
-                />
-
-                {showFuneralHoursDropdown && (
-                  <div className="bg-white border overflow-y-scroll mt-12 h-[210px] absolute border-gray-300 rounded-md m-2 w-32 z-10">
-                    <div className="flex p-2 flex-col">
-                      {hours
-                        .filter((hour) => hour >= 7 && hour <= 19)
-                        .map((hour) => (
-                          <div
-                            key={hour}
-                            className="cursor-pointer hover:bg-gray-100 px-2 py-1 text-black"
-                            onClick={() => {
-                              setShowFuneralHoursDropdown(false);
-                              setSelecteFuneralHour(hour);
-                            }}
-                          >
-                            {hour.toString().padStart(2, "0")}
-                          </div>
-                        ))}
-                    </div>
-                  </div>
-                )}
-
-                <div className="flex relative ">
+                <div
+                  className="flex flex-row mobile:gap-x-[11px] gap-x-[32px] gap-y-[8px] flex-wrap"
+                  ref={funeralDropdownRef}
+                >
                   <ModalDropBox
-                    placeholder={"Min"}
+                    placeholder={"Ura"}
                     onClick={() => {
                       setOpenPicker(false);
-                      setShowFuneralMinutesDropdown(
-                        !showFuneralMinutesDropdown
-                      );
-                      setShowFuneralHoursDropdown(false); // Hide hours dropdown if open
+                      setShowFuneralHoursDropdown(!showFuneralHoursDropdown);
+                      setShowFuneralMinutesDropdown(false); // Hide minutes dropdown if open
                     }}
                     isSelectText={
-                      selectedFuneralMinute !== null &&
-                        selectedFuneralMinute !== undefined
-                        ? `${selectedFuneralMinute.toString().padStart(2, "0")}`
-                        : "Min:"
+                      selectedFuneralHour
+                        ? `${selectedFuneralHour.toString().padStart(2, "0")}`
+                        : "Ura:"
                     }
                   />
 
-                  {showFuneralMinutesDropdown && (
-                    <div className="bg-white border absolute z-10 mt-12 overflow-y-scroll h-[150px] text-black border-gray-300 rounded-md p-2 w-32">
-                      {minutes.map((minute) => (
-                        <div
-                          key={minute}
-                          className="cursor-pointer hover:bg-gray-100 px-2 py-1"
-                          onClick={() => {
-                            console.log(`Selected minute: ${minute}`);
-                            setShowFuneralMinutesDropdown(false);
-                            setSelectedFuneralMinute(minute);
-                          }}
-                        >
-                          {minute.toString().padStart(2, "0")}
-                        </div>
-                      ))}
+                  {showFuneralHoursDropdown && (
+                    <div className="bg-white border overflow-y-scroll mt-12 h-[210px] absolute border-gray-300 rounded-md m-2 w-32 z-10">
+                      <div className="flex p-2 flex-col">
+                        {hours
+                          .filter((hour) => hour >= 7 && hour <= 19)
+                          .map((hour) => (
+                            <div
+                              key={hour}
+                              className="cursor-pointer hover:bg-gray-100 px-2 py-1 text-black"
+                              onClick={() => {
+                                setShowFuneralHoursDropdown(false);
+                                setSelecteFuneralHour(hour);
+                              }}
+                            >
+                              {hour.toString().padStart(2, "0")}
+                            </div>
+                          ))}
+                      </div>
                     </div>
                   )}
+
+                  <div className="flex relative ">
+                    <ModalDropBox
+                      placeholder={"Min"}
+                      onClick={() => {
+                        setOpenPicker(false);
+                        setShowFuneralMinutesDropdown(
+                          !showFuneralMinutesDropdown
+                        );
+                        setShowFuneralHoursDropdown(false); // Hide hours dropdown if open
+                      }}
+                      isSelectText={
+                        selectedFuneralMinute !== null &&
+                          selectedFuneralMinute !== undefined
+                          ? `${selectedFuneralMinute.toString().padStart(2, "0")}`
+                          : "Min:"
+                      }
+                    />
+
+                    {showFuneralMinutesDropdown && (
+                      <div className="bg-white border absolute z-10 mt-12 overflow-y-scroll h-[150px] text-black border-gray-300 rounded-md p-2 w-32">
+                        {minutes.map((minute) => (
+                          <div
+                            key={minute}
+                            className="cursor-pointer hover:bg-gray-100 px-2 py-1"
+                            onClick={() => {
+                              console.log(`Selected minute: ${minute}`);
+                              setShowFuneralMinutesDropdown(false);
+                              setSelectedFuneralMinute(minute);
+                            }}
+                          >
+                            {minute.toString().padStart(2, "0")}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="my-10 flex flex-col">
-              <button
-                className={`flex flex-1 px-[90px] py-3 mobile:px-10 text-center justify-center items-center rounded-lg shadow-custom-dual text-[16px] cursor-pointer ${loading
-                  ? "bg-gray-400 cursor-not-allowed" // Disabled styles
-                  : "bg-gradient-to-b from-[#0d94e8] to-[#1860a3] text-[#ffffff]" // Enabled styles
-                  }`}
-                type="button"
-                onClick={handleSubmit}
-              >
-                Objavi pogreb
-              </button>
+              <div className="my-10 flex flex-col">
+                <button
+                  className={`flex flex-1 px-[90px] py-3 mobile:px-10 text-center justify-center items-center rounded-lg shadow-custom-dual text-[16px] cursor-pointer ${loading
+                    ? "bg-gray-400 cursor-not-allowed" // Disabled styles
+                    : "bg-gradient-to-b from-[#0d94e8] to-[#1860a3] text-[#ffffff]" // Enabled styles
+                    }`}
+                  type="button"
+                  onClick={handleSubmit}
+                >
+                  Objavi pogreb
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

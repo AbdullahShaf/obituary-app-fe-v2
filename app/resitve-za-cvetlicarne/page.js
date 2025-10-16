@@ -33,7 +33,7 @@ const Floristspromo = () => {
         {/* <div className="flex w-full mobile:bg-[#E0E9F3] bg-[#FFFFFF]">
                     <FrequentlyAskedQuestionView from={"8"} />
                 </div> */}
-        <OfficialOpening />
+        {/* <OfficialOpening /> */}
         <KickStart showButton={true} />
 
         <div className="mobile:flex w-full flex-col items-center hidden bg-transparent pt-[85px] pb-[100px]">
@@ -41,7 +41,7 @@ const Floristspromo = () => {
             <div className="flex flex-col w-full mt-[10px]">
               <div className="text-[32px] mobile:text-[24px] text-[#3C3E41] font-light text-center leading-[48px]">
                 Uradna otvoritev je
-                <br /> 1. septembra
+                <br /> 15. septembra
               </div>
               <div className="my-6 text-[18px] hidden mobile:block mobile:text-[18px] text-[#3C3E41] font-bold font-variation-customOpt24 text-center leading-[32px]">
                 Izdelajte svojo spletno stran še pravočasno

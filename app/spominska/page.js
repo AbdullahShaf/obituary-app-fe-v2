@@ -1,4 +1,6 @@
 import React from "react";
+import "../qr-kode/qr-kode.css";
+import "../qr-kode/qr-kode-responsive.css";
 import Layout from "../components/appcomponents/Layout";
 import AdministratorCompo from "../components/appcomponents/AdministratorCompo";
 import AdditionalOptions from "../components/appcomponents/AdditionalOptions";
@@ -11,7 +13,12 @@ import OpeningPromotion from "../components/appcomponents/OpeningPromotion";
 import AdminBenefits from "../components/appcomponents/AdminBenefits";
 import EverythingIsFree from "../components/appcomponents/EverythingIsFree";
 import CommonFooter from "../components/appcomponents/CommonFooter";
-
+import Image from "next/image";
+import footer_logo from "@/public/qr-kode/footer_logo.svg";
+import facebook_icon from "@/public/qr-kode/facebook_icon.svg";
+import twitter_icon from "@/public/qr-kode/twitter_icon.svg";
+import linnked_in_icons from "@/public/qr-kode/linnked_in_icons.svg";
+import instagram_icon from "@/public/qr-kode/instagram_icon.svg";
 const Keeperpromo = () => {
   const faqData = {
     faqs: [
@@ -47,6 +54,25 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
     <Layout from={"18"} forFooter={"memorypage"} currentPage="spominska">
       <div className="flex w-full flex-col  bg-gradient-to-br from-[#ECF0F3] to-[#F2F6F9]">
         <div className="h-[72px] tablet:h-[80px] desktop:h-[92.02px] " />
+        <div className="mobile_navbar mobile_navbar_header top-[68px] z-[1]">
+          <ul>
+            <li>
+              <a href="/qr-kode">
+                QR KODE
+              </a>
+            </li>
+            <li>
+              <a href="/zalna-stran">
+                ŽALNA STRAN
+              </a>
+            </li>
+            <li>
+              <a href="/spominska">
+                SPOMINSKA
+              </a>
+            </li>
+          </ul>
+        </div>
         <MemorialWithAdmin />
         {/* <Difference /> */}
         <AdminBenefits />
@@ -56,7 +82,101 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
         {/* <div className="flex w-full mobile:bg-[#E0E9F3] bg-[#FFFFFF]"> */}
         <FrequentlyAskedQuestionView2 data={faqData} />
         {/* </div> */}
-        <EverythingIsFree />
+        {/* <EverythingIsFree /> */}
+                  <section className="everything_free_sec">
+            <div className="autoContent">
+              <div className="everything_free_inner">
+                <div className="everything_free_heading">
+                  <h2>VSE je brezplačno!</h2>
+                  <p>In brez odvečnih korakov </p>
+                </div>
+                <div className="everything_free_content">
+                  <div className="e_free_content_list">
+                    <div className="e_free_content_list_data">
+                      <div className="e_free_c_list_nbr">
+                        <strong className="number_1">01.</strong>
+                      </div>
+                      <div className="e_free_c_list_txt">
+                        <p>Pogrebno podjetje vam brezplačno izdela in objavi <span>osmrtnico</span>.</p>
+                        <small>(ko urejate dokumente za pokop)</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="e_free_content_list">
+                    <div className="e_free_content_list_data">
+                      <div className="e_free_c_list_nbr">
+                        <strong className="number_2">02.</strong>
+                      </div>
+                      <div className="e_free_c_list_txt">
+                        <p>Istočasno vam izdela brezplačno <span>žalno spominsko stran</span>.</p>
+                        <small>(ko urejate dokumente za pokop) </small>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="e_free_content_list">
+                    <div className="e_free_content_list_data">
+                      <div className="e_free_c_list_nbr">
+                        <strong className="number_3">03.</strong>
+                      </div>
+                      <div className="e_free_c_list_txt">
+                        <p>Vaša lokalna cvetličarna vam brezplačno podari <span>status Skrbnika</span> spominske strani.</p>
+                        <small>(ko se dogovarjate za cvetlično ureditev vežice; status Skrbnika je za cel prvi mesec) </small>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="e_free_content_list">
+                    <div className="e_free_content_list_data">
+                      <div className="e_free_c_list_nbr">
+                        <strong className="number_4">04.</strong>
+                      </div>
+                      <div className="e_free_c_list_txt">
+                        <p>Vaša lokalna cvetličarna vam brezplačno podari <span>mobi kartice</span> za pošiljanje naprej</p>
+                        <small>(ko se dogovarjate za cvetlično ureditev vežice) </small>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="e_free_content_list">
+                    <div className="e_free_content_list_data">
+                      <div className="e_free_c_list_nbr">
+                        <strong className="number_5">05.</strong>
+                      </div>
+                      <div className="e_free_c_list_txt">
+                        <p>Pogrebno podjetje vam brezplačno podari <span>QR kodo</span> za nagrobnik</p>
+                        <small>(digitalna koda je že na žalni / spominski strani; izdelate si jo sami) </small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="everything_free_content_text">
+                    <p>Ekskluzivno samo pri naših partnerjih. Poiščite jih! </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        <div className="mobile_navbar">
+            <div className="mobile_navbar_inner">
+              <ul>
+                <li>
+                  <a href="/qr-kode">
+                    QR KODE
+                  </a>
+                </li>
+                <li>
+                  <a href="/zalna-stran">
+                    ŽALNA STRAN
+                  </a>
+                </li>
+                <li>
+                  <a href="/spominska">
+                    SPOMINSKA
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
         <CommonFooter currentPage="/spominska" />
       </div>
     </Layout>

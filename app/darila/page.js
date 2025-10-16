@@ -39,7 +39,7 @@ const FloristsGifts = () => {
     const currentUser = isAuthenticated ? user : {};
     // Temporarily commented
     if (!currentUser.assignKeeperPermission) {
-      toast.error("You don't have permission to assign keepers.");
+      toast.error("Nimaš pooblastila dodeljevati status Skrbnika");
       return;
     }
 
@@ -62,11 +62,11 @@ const FloristsGifts = () => {
       console.log(formData);
 
       const response = await keeperService.assignKeeper(formData);
-      toast.success("Keeper Assigned Successfully");
+      toast.success("Registracija Skrbnika je uspela");
       console.log(response);
     } catch (error) {
       console.log('>>>>>>>>> error', error);
-      toast.error(error?.data?.error ?? "Some Error Occured");
+      // toast.error(error?.data?.error ?? "Prišlo je do napake.");
     }
   };
 

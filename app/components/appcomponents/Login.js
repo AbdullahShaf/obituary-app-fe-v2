@@ -27,7 +27,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     if (!inputValueEmail || !inputValueGeslo) {
-      toast.error("Email and password are required!");
+      toast.error("Potrebna sta e-naslov in geslo");
       return;
     }
 
@@ -50,7 +50,7 @@ const Login = () => {
         redirectToRoleBasedRoute(role, slugKey, false)
       }
     } catch (error) {
-      toast.error("Login failed. Please check your credentials.");
+      toast.error("Prijava ni uspela. Poskusi znova.");
     }
   };
 

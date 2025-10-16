@@ -8,6 +8,10 @@ import { toast } from "react-hot-toast";
 import FuneralCompanyPreview from "../components/funeral-company-preview";
 import RichTexEditor from "@/app/components/form/rich-editor";
 import { useAuth } from "@/hooks/useAuth";
+import { useSession } from "next-auth/react";
+import { Loader } from "@/utils/Loader";
+import { useApi } from "@/hooks/useApi";
+import companyService from "@/services/company-service";
 
 const defaultFaqs = [
   {
@@ -33,13 +37,37 @@ const defaultFaqs = [
 ];
 
 export default function Step5({ data, onChange, handleStepChange }) {
-  const [faqs, setFaqs] = useState(() => {
-    return data?.faqs?.length > 0 ? data?.faqs : defaultFaqs;
-  });
+  const [faqs, setFaqs] = useState(defaultFaqs
+    // () => {
+    // return data?.faqs?.length > 0 ? data?.faqs : defaultFaqs;}
+  );
 
   const [companyId, setCompanyId] = useState(data?.id);
+  const { data: session } = useSession();
+  const { isLoading, trigger: createFaq } = useApi(faqService.createFaq);
 
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const { user } = useAuth();
+
+ // Refactor--------
+  const fetchFaqs = async () => {
+    try {
+      const response = await companyService.companyAdditionalData({ companyId, table: "faqs" });
+       if (response && response.length > 0) {
+        setFaqs(response);
+      }
+      console.log('fetchFaqs', response);
+    } catch (error) {
+      console.error('Failed to fetch faqs data:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (companyId) {
+      fetchFaqs();
+    }
+  }, [companyId])
+  // ----------
 
   const handleFaqChange = (index, updatedFaq) => {
     const updatedFaqs = [...faqs];
@@ -80,7 +108,7 @@ export default function Step5({ data, onChange, handleStepChange }) {
     );
 
     if (hasEmpty) {
-      toast.error("Please fill in all FAQ questions and answers.");
+      toast.error("Nekaj manjka. Preveri še enkrat");
       return false;
     }
 
@@ -98,11 +126,11 @@ export default function Step5({ data, onChange, handleStepChange }) {
         companyId,
         faqs: faqsToSend,
       };
-      const response = await faqService.createFaq(payload);
+      const response = await createFaq(payload);
       const updatedCompany = { ...data, faqs: response.faqs };
       onChange(updatedCompany);
       setFaqs(response.faqs);
-      toast.success("Faq's Updated Successfully");
+      toast.success("Posodobljeno");
       return true;
     } catch (error) {
       console.log("Error while submitting form:", error);
@@ -136,7 +164,7 @@ export default function Step5({ data, onChange, handleStepChange }) {
       setFaqs(faqs);
       const updatedCompany = { ...data, faqs: faqs };
       onChange(updatedCompany);
-      toast.success("Faq's Deleted Successfully");
+      toast.success("Izbrisano");
     } catch (err) {
       console.error("Failed to delete FAQ", err);
     }
@@ -144,8 +172,10 @@ export default function Step5({ data, onChange, handleStepChange }) {
 
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[20px]">
@@ -166,7 +196,7 @@ export default function Step5({ data, onChange, handleStepChange }) {
             {companyId && <FuneralCompanyPreview company={data} />}
           </div>
           <div className="space-y-[8px]">
-            {faqs.map((block, index) => (
+            {faqs?.map((block, index) => (
               <SliderBlock
                 key={`faq-${block.id || index + 1}`}
                 index={block.index || index + 1}

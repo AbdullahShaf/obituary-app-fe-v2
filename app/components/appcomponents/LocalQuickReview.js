@@ -104,7 +104,7 @@ const LocalQuickReview = ({ setIsLocalQuickModalVisible }) => {
                 <div className="w-full bg-[#E7EBF0] rounded-[10px] flex items-center justify-between py-[15px] px-[8px] min-h-[60px] relative">
                   <Link
                     href={`/pogrebi`}
-                    className="w-full bg-[#E7EBF0] rounded-[10px] flex items-center justify-between py-[15px] px-[8px] min-h-[60px] relative"
+                    className="w-full bg-[#E7EBF0] rounded-[10px] flex items-center justify-between relative"
                   >
                     <div className="flex flex-row justify-between items-center pl-[24px] gap-[17px]">
                       <h4 className="text-[#0D94E8] text-[32px] font-bold leading-[24px]">
@@ -203,14 +203,14 @@ const LocalQuickReviewModal = ({ setIsLocalQuickReviewModalVisible }) => {
 
           // Fetch obituaries from yesterday to today (2 days range)
           const obituaryParams = {
-            city: parsedUser.city,
+            city: currUser.city,
             startDate: formattedYesterday,
             endDate: formattedToday,
           };
 
           // Fetch funerals for today and tomorrow (2 days range)
           const funeralParams = {
-            city: parsedUser.city,
+            city: currUser.city,
             startDate: formattedToday,
             endDate: formattedTomorrow,
           };

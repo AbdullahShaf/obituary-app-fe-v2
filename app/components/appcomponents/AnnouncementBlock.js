@@ -22,7 +22,7 @@ export default function AnnouncementBlock() {
         </div>
         <p className="text-[#EDF1F3] text-[16px] leading-[24px] font-variation-customOpt16 font-normal tablet:hidden mobile:w-full mobile:text-end">
           Več informacij
-          <span className="mobile:hidden">
+          <span>
             o Skrbniku je
             <Link
               href={"/spominska"}

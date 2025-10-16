@@ -44,7 +44,7 @@ export default function ModalNew3({
       const userId = user?.id;
 
       if (!userId) {
-        toast.error("User not found. Please log in again.");
+        toast.error("Ta uporabnik ne obstaja. Poskusi znova.");
         return;
       }
 
@@ -65,11 +65,11 @@ export default function ModalNew3({
       if (!data || data === "undefined") {
         // Create company if no data exists
         response = await companyService.createCompany(formData, "funeral");
-        toast.success("Created successfully");
+        toast.success("Uspešno ustvarjeno");
       } else {
         // Update company if data exists
         response = await companyService.updateCompany(formData, data);
-        toast.success("Updated successfully");
+        toast.success("Uspešno dodano");
       }
 
       setIsShowModal(false);

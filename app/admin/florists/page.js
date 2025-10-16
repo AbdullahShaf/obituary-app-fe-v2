@@ -8,6 +8,7 @@ import RevenueComp from "../../components/appcomponents/RevenueComp";
 import adminService from "../../../services/admin-service";
 import { toast } from "react-hot-toast";
 import NotesModal from "../../components/NotesModal";
+import { TOAST_MESSAGE } from "../../../utils/toastMessage";
 
 const FloristFirst = () => {
   const [whichScreen, setWhichScreen] = useState(1);
@@ -65,7 +66,7 @@ const FloristFirst = () => {
     } catch (error) {
       console.error("Error fetching financial data:", error);
       setError("Failed to fetch financial data");
-      toast.error("Failed to load financial data");
+      toast.error(TOAST_MESSAGE.FAILED_TO_LOAD_FINANCIAL_DATA);
     } finally {
       setFinancialLoading(false);
     }
@@ -85,7 +86,7 @@ const FloristFirst = () => {
       } catch (error) {
         console.error("Error fetching florist companies:", error);
         setError("Failed to fetch florist companies");
-        toast.error("Failed to load florist companies data");
+        toast.error(TOAST_MESSAGE.FAILED_TO_LOAD_FLORIST_COMPANIES_DATA);
       } finally {
         setLoading(false);
       }
@@ -121,11 +122,11 @@ const FloristFirst = () => {
               : company
           )
         );
-        toast.success("Permissions updated successfully");
+        toast.success(TOAST_MESSAGE.PERMISSIONS_UPDATED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error updating permissions:", error);
-      toast.error("Failed to update permissions");
+      toast.error(TOAST_MESSAGE.FAILED_TO_UPDATED_PERMISSIONS);
     }
   };
 
@@ -146,7 +147,7 @@ const FloristFirst = () => {
       }
     } catch (error) {
       console.error("Error blocking/unblocking user:", error);
-      toast.error("Failed to block/unblock user");
+      toast.error(TOAST_MESSAGE.FAILED_TO_BLOCK_UNBLOCK_USER);
     }
   };
 
@@ -163,11 +164,11 @@ const FloristFirst = () => {
               : company
           )
         );
-        toast.success("Notes updated successfully");
+        toast.success(TOAST_MESSAGE.NOTES_UPDATED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error updating notes:", error);
-      toast.error("Failed to update notes");
+      toast.error(TOAST_MESSAGE.FAILED_TO_UPDATE_NOTES);
     }
   };
 
@@ -211,11 +212,11 @@ const FloristFirst = () => {
               : company
           )
         );
-        toast.success("Rating updated successfully");
+        toast.success(TOAST_MESSAGE.RATING_UPDATED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error updating rating:", error);
-      toast.error("Failed to update rating");
+      toast.error(TOAST_MESSAGE.FAILED_TO_UPDATE_RATING);
     }
   };
 
@@ -235,11 +236,11 @@ const FloristFirst = () => {
               : company
           )
         );
-        toast.success("Florist status updated successfully");
+        toast.success(TOAST_MESSAGE.FLORIST_STATUS_UPDATED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error updating florist status:", error);
-      toast.error("Failed to update florist status");
+      toast.error(TOAST_MESSAGE.FAILED_TO_UPDATE_FLORIST_STATUS);
     }
   };
 
@@ -259,11 +260,11 @@ const FloristFirst = () => {
               : company
           )
         );
-        toast.success("Payment status updated successfully");
+        toast.success(TOAST_MESSAGE.PAYMENT_STATUS_UPDATED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error updating payment status:", error);
-      toast.error("Failed to update payment status");
+      toast.error(TOAST_MESSAGE.FAILED_TO_UPDATE_PAYMENT_STATUS);
     }
   };
 

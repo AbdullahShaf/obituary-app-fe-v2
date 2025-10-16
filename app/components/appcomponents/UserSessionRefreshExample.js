@@ -29,7 +29,7 @@ const UserSessionRefreshExample = () => {
     try {
       const result = await refreshUserSession();
       if (result.success) {
-        toast.success("Session refreshed successfully!");
+        toast.success("Posodobljeno");
       } else {
         toast.error("Failed to refresh session");
       }
@@ -43,7 +43,7 @@ const UserSessionRefreshExample = () => {
   // Example 2: Update user city with automatic session refresh
   const handleCityUpdate = async () => {
     if (!newCity.trim()) {
-      toast.error("Please enter a city name");
+      toast.error("Vnesi občino");
       return;
     }
 
@@ -54,10 +54,10 @@ const UserSessionRefreshExample = () => {
         toast.success("City updated and session refreshed!");
         setNewCity("");
       } else {
-        toast.error("Failed to update city");
+        toast.error("Napaka pri vnosu občine");
       }
     } catch (error) {
-      toast.error("Error updating city");
+      toast.error("Prišlo je do napake. Občina ni bila posodobljena.");
     } finally {
       setIsLoading(false);
     }
@@ -74,7 +74,7 @@ const UserSessionRefreshExample = () => {
     try {
       const result = await changeSlugAndRefreshSession(newSlug);
       if (result.success) {
-        toast.success("Slug changed and session refreshed!");
+        toast.success("Posodobljeno");
         setNewSlug("");
       } else {
         toast.error("Failed to change slug");

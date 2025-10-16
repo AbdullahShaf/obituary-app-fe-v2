@@ -54,23 +54,23 @@ const Registration = () => {
 
   const handleRegister = async () => {
     if (!inputValueEmail || !inputValueGeslo || !inputValueConfirmGeslo || !enabledRememberMe) {
-      toast.error("All fields are required");
+      toast.error("Vsa polja so obvezna");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(inputValueEmail)) {
-      toast.error("Please enter a valid email address");
+      toast.error("Napaka pri vnosu e-naslova");
       return;
     }
     const passwordRegex = /^.{6,}$/;
     if (!passwordRegex.test(inputValueGeslo)) {
-      toast.error("Password must be at least 6 characters long");
+      toast.error("Geslo mora biti dolgo vsaj 6 znakov");
       return;
     }
 
     if (inputValueGeslo !== inputValueConfirmGeslo) {
-      toast.error("Passwords do not match!");
+      toast.error("Geslo se ne ujema!");
       return;
     }
 
@@ -83,29 +83,29 @@ const Registration = () => {
 
       const response = await userService.registerUser(payload);
       if (response.status === 409) {
-        toast.error("Email Already Exists");
+        toast.error("Ta e-naslov je že v uporabi");
         return;
       }
       if (response.error) {
         toast.error(
-          response.error || "Something went wrong. Please try again!"
+          response.error || "Prišlo je do napake. Poskusi znova."
         );
         return;
       }
 
       toast.success(
-        response.message || "Registration successful! You can now log in."
+        response.message || "Registracija je uspela! Lahko se prijaviš."
       );
 
       setActiveDiv("login");
     } catch (error) {
-      toast.error("Registration failed. Please try again.");
+      toast.error("Registracija ni uspela. Poskusi znova.");
     }
   };
 
   const handleLogin = async () => {
     if (!inputValueEmail || !inputValueGeslo) {
-      toast.error("Email and password are required!");
+      toast.error("Potrebna sta e-naslov in geslo");
       return;
     }
 
@@ -120,12 +120,12 @@ const Registration = () => {
 
       if (response.status === 401) {
         toast.error(
-          response.error || "Invalid Credentials!"
+          response.error || "Napačni vnos"
         );
         return;
       } else if (response.error) {
         toast.error(
-          response.error || "Something went wrong. Please try again!"
+          response.error || "Prišlo je do napake. Poskusi znova."
         );
         return;
       }
@@ -139,7 +139,7 @@ const Registration = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Login failed. Please check your credentials.");
+      toast.error("Prijava ni uspela. Poskusi znova.");
     }
   };
 

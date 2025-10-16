@@ -9,7 +9,12 @@ import { useEffect, useState } from "react";
 import companyService, { submitStep1Data } from "@/services/company-service";
 import toast from "react-hot-toast";
 import CompanyPreview from "../components/company-preview";
-
+import { useSession } from "next-auth/react";
+import InfoModal from "@/app/components/appcomponents/InfoModal";
+import { useApi } from "@/hooks/useApi";
+import { Loader } from "@/utils/Loader";
+import { RenderImage } from "@/utils/ImageViewerModal";
+import { TOAST_MESSAGE } from "../../../../../utils/toastMessage";
 export default function Step1({
   data,
   onChange,
@@ -25,6 +30,13 @@ export default function Step1({
   const [companyId, setCompanyId] = useState(null);
   const [glassFrameState, setGlassFrameState] = useState(false);
   const [user, setUser] = useState(null);
+  // const [showNotifyCard, setShowNotifyCard] = useState(true);
+  const { isLoading: isCreating, trigger: create } = useApi(companyService.createCompany);
+  const { isLoading: isUpdating, trigger: update } = useApi(companyService.updateCompany);
+
+  const { data: session } = useSession();
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
+
   const handleSave = async () => {
     const formData = new FormData();
 
@@ -64,16 +76,16 @@ export default function Step1({
           selectedImage instanceof File;
 
         if (hasChanges) {
-          response = await companyService.updateCompany(formData, companyId);
+          response = await update(formData, companyId);
 
-          toast.success("Changes Applied Successfully");
+          toast.success(TOAST_MESSAGE.CHANGES_APPLIED_SUCCESSFULLY);
         } else {
           return true;
         }
       } else {
-        response = await companyService.createCompany(formData, "florist");
+        response = await create(formData, "florist");
 
-        toast.success("Podjetje je ustvarjeno");
+        toast.success(TOAST_MESSAGE.COMPANY_IS_CREATED);
       }
 
       onChange(response.company);
@@ -102,8 +114,19 @@ export default function Step1({
 
   return (
     <>
+      {(isCreating || isUpdating) && <Loader />}
+      {/* <InfoModal
+        icon={"/giftbox.svg"}
+        heading={"V pripravi"}
+        text={"Izdelava brezplačne lastne strani bo"}
+        name={"omogočena predvidoma do 18. sept."}
+        isOpen={showNotifyCard}
+        onClose={() => {
+          setShowNotifyCard(false);
+        }}
+      /> */}
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div>
         <div className="min-h-full flex flex-col justify-between gap-[16px] relative">
@@ -136,9 +159,9 @@ export default function Step1({
                 handleOpenBlock={() => setOpenedBlock(1)}
               >
                 <div className="space-y-[8px]">
-                  <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
+                  {/* <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
                     Ime cvetličarne oz podjetja in kraj
-                  </span>
+                  </span> */}
                   <input
                     type="text"
                     value={heading}
@@ -174,6 +197,7 @@ export default function Step1({
                 index={2}
                 openBlock={openedBlock === 2}
                 handleOpenBlock={() => setOpenedBlock(2)}
+                className=""
               >
                 <div className="space-y-[8px]">
                   <span className="text-[14px] text-[#3C3E41] font-normal leading-[24px]">
@@ -187,13 +211,14 @@ export default function Step1({
                   }}
                 />
                 <div className="space-y-[8px]">
-                  <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
+                  {/* <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
                     Ime cvetličarne oz podjetja in kraj
-                  </span>
+                  </span> */}
                   <ImageSelector
                     setFile={(file) => setSelectedImage(file)}
                     inputId="florist-company-picture"
                   />
+                  <RenderImage src={data?.background} alt={"img"} label={""} />
                 </div>
                 <div className="text-center text-[14px] leading-[24px] text-[#3C3E41] pt-[5px] pb-[10px]">
                   --------------

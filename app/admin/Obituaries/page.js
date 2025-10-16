@@ -9,6 +9,7 @@ import obituaryService from "../../../services/obituary-service";
 import adminService from "../../../services/admin-service";
 import { toast } from "react-hot-toast";
 import NotesModal from "../../components/NotesModal";
+import { TOAST_MESSAGE } from "../../../utils/toastMessage";
 
 const Obituaries = () => {
   const [obituaries, setObituaries] = useState([]);
@@ -58,7 +59,7 @@ const Obituaries = () => {
     } catch (error) {
       console.error("Error fetching obituaries:", error);
       setError("Failed to fetch obituaries");
-      toast.error("Failed to load obituaries");
+      // toast.error("Failed to load obituaries");
     } finally {
       setLoading(false);
     }
@@ -75,11 +76,11 @@ const Obituaries = () => {
       if (response.success) {
         // Remove obituary from local state
         setObituaries(prevObituaries => prevObituaries.filter(obit => obit.id !== obituaryId));
-        toast.success("Obituary deleted successfully. It can be recovered within 1 month.");
+        toast.success(TOAST_MESSAGE.OBITUARY_DELETED_SUCCESSFULLY_RECOVER_WITHIN_MONTH);
       }
     } catch (error) {
       console.error("Error deleting obituary:", error);
-      toast.error("Failed to delete obituary");
+      toast.error(TOAST_MESSAGE.FAILED_TO_DELETE_OBITUARY);
     }
   };
 
@@ -96,11 +97,11 @@ const Obituaries = () => {
               : obit
           )
         );
-        toast.success(currentHiddenStatus ? "Obituary unhidden successfully" : "Obituary hidden successfully");
+        toast.success(currentHiddenStatus ? TOAST_MESSAGE.OBITUARY_UNHIDDEN_SUCCESSFULLY : TOAST_MESSAGE.OBITUARY_HIDDEN_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error toggling obituary visibility:", error);
-      toast.error("Failed to toggle obituary visibility");
+      toast.error(TOAST_MESSAGE.FAILED_TO_TOGGLE_OBITUARY_VISIBILITY);
     }
   };
 
@@ -117,11 +118,11 @@ const Obituaries = () => {
               : obit
           )
         );
-        toast.success(currentBlockedStatus ? "Memory page unblocked successfully" : "Memory page blocked successfully");
+        toast.success(currentBlockedStatus ? TOAST_MESSAGE.MEMORY_PAGE_UNBLOCKED_SUCCESSFULLY : TOAST_MESSAGE.MEMORY_PAGE_BLOCKED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error toggling memory visibility:", error);
-      toast.error("Failed to toggle memory visibility");
+      toast.error(TOAST_MESSAGE.FAILED_TO_TOGGLE_MEMORY_VISIBILITY);
     }
   };
 
@@ -138,11 +139,11 @@ const Obituaries = () => {
               : obit
           )
         );
-        toast.success("Admin notes updated successfully");
+        toast.success(TOAST_MESSAGE.ADMIN_NOTES_UPDATED_SUCCESSFULLY);
       }
     } catch (error) {
       console.error("Error updating admin notes:", error);
-      toast.error("Failed to update admin notes");
+      toast.error(TOAST_MESSAGE.FAILED_TO_UPDATE_ADMIN_NOTES);
     }
   };
 

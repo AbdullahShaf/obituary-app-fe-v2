@@ -8,6 +8,11 @@ import { toast } from "react-hot-toast";
 import companyService from "@/services/company-service";
 import FuneralCompanyPreview from "../components/funeral-company-preview";
 import { useAuth } from "@/hooks/useAuth";
+import { useSession } from "next-auth/react";
+import InfoModal from "@/app/components/appcomponents/InfoModal";
+import { Loader } from "@/utils/Loader";
+import { useApi } from "@/hooks/useApi";
+import { ImageViewerModal, RenderImage } from "@/utils/ImageViewerModal";
 
 export default function Step1({ data, onChange, handleStepChange }) {
   const [openedBlock, setOpenedBlock] = useState(1);
@@ -20,9 +25,14 @@ export default function Step1({ data, onChange, handleStepChange }) {
   const [logo, setLogo] = useState(null);
   const [background, setBackground] = useState(null);
   const [companyId, setCompanyId] = useState(null);
+  // const [showNotifyCard, setShowNotifyCard] = useState(true);
 
   const { user } = useAuth();
+  const { data: session } = useSession();
+  const { isLoading: isCreating, trigger: create } = useApi(companyService.createCompany);
+  const { isLoading: isUpdating, trigger: update } = useApi(companyService.updateCompany);
 
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`
   useEffect(() => {
     if (data && data !== null) {
       if (data.heading !== null) setHeading(data.heading);
@@ -40,7 +50,7 @@ export default function Step1({ data, onChange, handleStepChange }) {
 
   const validateFields = () => {
     if (!heading || !logo || !background) {
-      toast.error("All fields are mandatory.");
+      toast.error("Vsa polja so obvezna");
       return false;
     }
 
@@ -84,17 +94,17 @@ export default function Step1({ data, onChange, handleStepChange }) {
           background instanceof File;
 
         if (hasChanges) {
-          response = await companyService.updateCompany(formData, companyId);
+          response = await update(formData, companyId);
           onChange(response.company);
-          toast.success("Changes Applied Successfully");
+          toast.success("Posodobljeno");
         } else {
-          // toast.error("No Changes Found");
+          // toast.error("Ni sprememb");
           return true;
         }
       } else {
-        response = await companyService.createCompany(formData, "funeral");
+        response = await create(formData, "funeral");
 
-        toast.success("Company Created Successfully");
+        toast.success("Uspešno izdelano");
       }
 
       onChange(response.company);
@@ -103,7 +113,7 @@ export default function Step1({ data, onChange, handleStepChange }) {
       console.error("Error Creating Funeral Company:", error);
       toast.error(
         error?.response?.data?.error ||
-          "Failed to create company. Please try again."
+        "Napaka pri dodajanju podjetja. Poskusi znova"
       );
       return false;
     }
@@ -111,8 +121,20 @@ export default function Step1({ data, onChange, handleStepChange }) {
 
   return (
     <>
+      {(isCreating || isUpdating) && <Loader />}
+
+      {/* <InfoModal
+        icon={"/giftbox.svg"}
+        heading={"V pripravi"}
+        text={"Izdelava brezplačne lastne strani bo"}
+        name={"omogočena predvidoma do 18. sept."}
+        isOpen={showNotifyCard}
+        onClose={() => {
+          setShowNotifyCard(false);
+        }}
+      /> */}
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[43px]">
@@ -139,6 +161,7 @@ export default function Step1({ data, onChange, handleStepChange }) {
               index={1}
               openBlock={openedBlock === 1}
               handleOpenBlock={() => setOpenedBlock(1)}
+              className=""
             >
               <div className="space-y-[8px]">
                 <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
@@ -149,6 +172,7 @@ export default function Step1({ data, onChange, handleStepChange }) {
                   setFile={(file) => setLogo(file)}
                   inputId="logo-upload"
                 />
+                {/* <RenderImage src={data?.company_logo} alt={"img"} label={""} /> */}
               </div>
               <div className="space-y-[8px]">
                 <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
@@ -194,6 +218,8 @@ export default function Step1({ data, onChange, handleStepChange }) {
                   setFile={(file) => setBackground(file)}
                   inputId="background-upload"
                 />
+                <RenderImage src={data?.background} alt={"img"} label={""} />
+
               </div>
             </OpenableBlock>
             <OpenableBlock

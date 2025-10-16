@@ -7,6 +7,8 @@ import Image from "next/image";
 import shopService from "@/services/shop-service";
 import DropdownWithSearch from "./DropdownWithSearch";
 import toast from "react-hot-toast";
+import { Loader } from "@/utils/Loader";
+import { useApi } from "@/hooks/useApi";
 
 export default function ModalNew6({
   isShowModal,
@@ -14,6 +16,8 @@ export default function ModalNew6({
   data,
   onChange
 }) {
+  const { isLoading, trigger: createShop } = useApi(shopService.createShop);
+
   const [scrollBehavior, setScrollBehavior] = React.useState("outside");
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState("");
@@ -71,13 +75,13 @@ export default function ModalNew6({
         formData.append("picture", selectedFile);
       }
 
-      await shopService.createShop(formData);
-      toast.success("Trgovine so ustvarjene, podjetje je poslano za odobritev");
+      await createShop(formData);
+      toast.success("Vnos je uspel");
       setIsShowModal(false);
       onChange(null);
       resetForm();
     } catch (error) {
-      toast.error("Napaka pri shranjevanju podatkov");
+      toast.error("Napaka pri shranjevanju podatkov.");
     }
   }
 
@@ -92,6 +96,7 @@ export default function ModalNew6({
       classNames={{ backdrop: "bg-[#344054B2] bg-opacity-70" }}
     >
       <ModalContent className="flex items-center justify-center w-full mt-32">
+        {isLoading && <Loader zindex="z-[100]" />}
         <div className="flex flex-col w-full items-center justify-center desktop:w-[600px]">
           <div className="flex flex-col bg-[#E8F0F6]  rounded-2xl ">
             <div

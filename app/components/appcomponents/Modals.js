@@ -105,12 +105,12 @@ const Modals = ({
 
   const handleKeeperAssignment = async () => {
     if (!isKeeper()) {
-      toast.error("Only Keeper is allowed to invite other keeper");
+      toast.error("Samo Skrbnik lahko povabi novega Skrbnika");
       return;
     }
 
     if (keeperEmail.trim() === "") {
-      toast.error("Please Enter Email");
+      toast.error("Dodaj e-mail");
       return;
     }
 
@@ -128,10 +128,10 @@ const Modals = ({
       console.log(formData);
 
       const response = await keeperService.assignKeeper(formData);
-      toast.success("Keeper Assigned Successfully");
+      toast.success("Registracija Skrbnika je uspela");
       console.log(response);
     } catch (error) {
-      toast.error("Some Error Occured");
+      // toast.error("Prišlo je do napake.");
     }
   };
   useEffect(() => {
@@ -140,12 +140,12 @@ const Modals = ({
   // add sorrow book
   const addSorrowBook = async () => {
     if (!name || name.trim() === "") {
-      toast.error("Please enter a name before submitting.");
+      toast.error("Dodaj ime");
       return;
     }
 
     if (!user) {
-      toast.error("You must log in to enter your name in list of sorrow book.");
+      toast.error("Za vpis v Žalno knjigo je potrebna prijava");
       return;
     }
     if (isCompany()) {
@@ -160,7 +160,7 @@ const Modals = ({
 
     try {
       const response = await obituaryService.createSorrowBook(
-        data.id,
+        data?.id,
         sorrowBookData
       );
 
@@ -169,21 +169,21 @@ const Modals = ({
       emptyField("name");
       emptyField("relation");
 
-      const updatedSorrowBooks = [...data.SorrowBooks, response];
+      const updatedSorrowBooks = [...data?.SorrowBooks, response];
       updateObituary({ ["SorrowBooks"]: updatedSorrowBooks });
-      toast.success("Sorrow Book Created Successfully");
+      toast.success("Uspešno dodano");
       updateObituary();
       closeModal();
     } catch (error) {
       console.error("Failed to create SorrowBook:", error);
 
       if (error.status === 409) {
-        toast.error("You are already in the Book of Sorrow.");
+        toast.error("To je žalna knjiga");
         closeModal();
       } else {
-        toast.error(
-          error.data?.message || "Error Creating Sorrow Book. Please try again."
-        );
+        // toast.error(
+        //   error.data?.message || "Error Creating Sorrow Book. Please try again."
+        // );
       }
     }
   };
@@ -193,11 +193,11 @@ const Modals = ({
   const [message, setMessage] = useState(null);
   const addDedication = async () => {
     if (!title?.trim() || !message?.trim() || !name?.trim()) {
-      toast.error("Please fill in all required fields before submitting.");
+      toast.error("Izpolni vsa polja");
       return;
     }
     if (!user) {
-      toast.error("You must log in to add dedication.");
+      toast.error("Za dodajanje Posvetila, Zahvale, zgodb je potrebna prijava");
       return;
     }
     if (isCompany()) {
@@ -206,7 +206,7 @@ const Modals = ({
     }
 
     if (!memoryHasKeeper()) {
-      toast.error("Current Memory has no keeper! You cannot proceed");
+      toast.error("Ta žalna stran še nima svojega Skrbnika. Skrbnik bi ta vnos moral potrditi.");
       return;
     }
     const dedicationData = {
@@ -218,18 +218,18 @@ const Modals = ({
 
     try {
       const response = await obituaryService.createDedication(
-        data.id,
+        data?.id,
         dedicationData
       );
 
       console.log(`Dedication Created successfully!`, response);
 
       if (isKeeper()) {
-        const updatedDedication = [...data.Dedications, response];
+        const updatedDedication = [...data?.Dedications, response];
         updateObituary({ ["Dedications"]: updatedDedication });
-        toast.success("Dedication Created Successfully");
+        toast.success("Posvetilo je bilo ustvarjeno");
       } else {
-        toast.success("Dedication Sent to Keeper for review!");
+        toast.success("Posvetilo je bilo poslano Skrbniku v potrditev");
       }
       emptyField("name");
       emptyField("message");
@@ -237,14 +237,14 @@ const Modals = ({
       closeModal();
     } catch (error) {
       console.error(`Failed to create Dedication`, error);
-      toast.error("Error Creating Dedication");
+      // toast.error("Error Creating Dedication");
     }
   };
 
   //add photo
   const addPhoto = async () => {
     if (!user) {
-      toast.error("You must log in to add photo.");
+      toast.error("Za dodajanje slik je potrebna prijava");
       return;
     }
 
@@ -254,18 +254,23 @@ const Modals = ({
     }
 
     if (!memoryHasKeeper()) {
-      toast.error("Current Memory has no keeper! You cannot add photo");
+      toast.error("Ta žalna stran še nima svojega Skrbnika. Skrbnik bi ta vnos slike moral potrditi.");
       return;
     }
     if (!uploadedPicture) {
-      toast.error("No image selected!");
+      toast.error("Dodaj sliko");
+      return;
+    }
+    if (!name || name.trim() === "") {
+      toast.error("Dodaj ime");
       return;
     }
     const formData = new FormData();
     formData.append("picture", uploadedPicture);
     formData.append("isKeeper", isKeeper());
+    formData.append("userName", name);
     try {
-      const response = await obituaryService.addPhoto(data.id, formData);
+      const response = await obituaryService.addPhoto(data?.id, formData);
 
       console.log(`Photo Sent to Keeper for review!`, response);
 
@@ -273,23 +278,26 @@ const Modals = ({
       setUploadedImage(null);
 
       if (isKeeper()) {
-        const updatedPhoto = [...data.Photos, response];
+        const updatedPhoto = [...data?.Photos, response];
         updateObituary({ ["Photos"]: updatedPhoto });
-        toast.success("Photo Added Successfully!");
+        toast.success("Slika je bila dodana");
       } else if (!isKeeper()) {
-        toast.success("Photo Sent to Keeper for review!");
+        toast.success("Slika je bila poslano Skrbniku v potrditevCondolence Created Successfully");
       }
       closeModal();
     } catch (error) {
       console.error(`Failed to add  photo`, error);
-      toast.error("Error Adding Photo");
+      // toast.error("Error Adding Photo");
+    }
+    finally {
+      setName('');
     }
   };
 
   //add condolence
   const addCondolence = async () => {
     if (!user) {
-      toast.error("You must log in to add condolence.");
+      toast.error("Za dodajanje sožalja je potrebna prijava");
       return;
     }
     if (isCompany()) {
@@ -298,10 +306,10 @@ const Modals = ({
     }
 
     if (!name?.trim()) {
-      toast.error("Please enter name before submitting.");
+      toast.error("Dodaj ime");
       return;
     } else if (!memoryHasKeeper() && !placeholderName?.trim()) {
-      toast.error("Please select a message.");
+      toast.error("Izberi sporočilo");
       return;
     }
 
@@ -321,7 +329,7 @@ const Modals = ({
 
     try {
       const response = await obituaryService.createCondolence(
-        data.id,
+        data?.id,
         condolenceData
       );
 
@@ -331,28 +339,28 @@ const Modals = ({
       emptyField("message");
       emptyField("relation");
       if (isKeeper() || !isCustomMessage) {
-        const updatedCondolences = [...data.Condolences, response];
+        const updatedCondolences = [...data?.Condolences, response];
         updateObituary({ ["Condolences"]: updatedCondolences });
-        toast.success("Condolence Created Successfully");
+        toast.success("Sožalje je bilo ustvarjeno");
       } else if (!isKeeper()) {
-        toast.success("Condolence Sent to Keeper for review!");
+        toast.success("Sožalje je bilo poslano Skrbniku v potrditev");
       }
       closeModal();
     } catch (error) {
       if (error.status === 409) {
-        toast.error("You can only add a condolence once every 24 hours.");
+        toast.error("Vsakih 24 ur lahko dodaš samo eno sožalje.");
         closeModal();
       } else {
-        toast.error(
-          error.data?.message || "Error Creating Condolence. Please try again."
-        );
+        // toast.error(
+        //   error.data?.message || "Prišlo je do napake."
+        // );
       }
     }
   };
 
   const addReport = async () => {
     if (!user) {
-      toast.error("You must log in to update.");
+      toast.error("Potrebno je biti prijavljen");
       return;
     }
     if (isCompany()) {
@@ -361,7 +369,7 @@ const Modals = ({
     }
 
     if (!name?.trim() || !message?.trim()) {
-      toast.error("Please enter complete details before submitting.");
+      toast.error("Dodaj vse podatke");
       return;
     }
 
@@ -371,7 +379,7 @@ const Modals = ({
     };
 
     try {
-      const response = await obituaryService.addReport(data.id, reportData);
+      const response = await obituaryService.addReport(data?.id, reportData);
 
       console.log(`Report Submitted successfully!`, response);
 
@@ -381,7 +389,7 @@ const Modals = ({
       closeModal();
     } catch (error) {
       console.error(`Failed to submit report`, error);
-      toast.error("Error submitting report");
+      // toast.error("Napaka pri pošiljanju");
     }
   };
 
@@ -419,9 +427,9 @@ const Modals = ({
     setSelect(!select);
     setOpenPicker(openPicker === type ? null : type); // Close if already open
   };
-  const updateMemory = async (field, value) => {
+  const updateMemory = async (field, value, allow) => {
     if (!user) {
-      toast.error("You must log in to update.");
+      toast.error("Potrebno je biti prijavljen");
       return;
     }
     if (isCompany()) {
@@ -430,7 +438,7 @@ const Modals = ({
     }
 
     if (!isKeeper()) {
-      toast.error("Only keepers can update!");
+      toast.error("Samo Skrbnik lahko to dopolni, spreminja");
       return;
     }
     if (field === "events") {
@@ -446,12 +454,12 @@ const Modals = ({
       );
 
       if (!isValidEvent) {
-        toast.error("Please fill in all event details.");
+        toast.error("Dodaj vse podatke");
         return;
       }
 
       // Parse existing events and update
-      const parsedEvents = data?.events ? data.events : [];
+      const parsedEvents = data?.events ? data?.events : [];
 
       const updatedEvents =
         parsedEvents.length > 0 ? [...parsedEvents, value] : [value];
@@ -459,12 +467,12 @@ const Modals = ({
       value = JSON.stringify(updatedEvents);
     } else if (field === "picture") {
       if (!value) {
-        toast.error("No image selected!");
+        toast.error("Dodaj sliko");
         return;
       }
     } else {
       if (!value.trim() && field !== "symbol") {
-        toast.error(`${field} field is empty`);
+        toast.error(`${field} Polje je prazno`);
         return;
       }
     }
@@ -475,9 +483,9 @@ const Modals = ({
     console.log(formData);
 
     try {
-      const response = await obituaryService.updateObituary(data.id, formData);
+      const response = await obituaryService.updateObituary(data?.id, formData, allow);
       console.log(`${field} updated successfully!`, response);
-      toast.success(`${field} updated successfully!`);
+      toast.success(`${field} Posodobljeno`);
 
       if (field === "picture") {
         setUploadedImage(URL.createObjectURL(value));
@@ -493,7 +501,7 @@ const Modals = ({
       closeModal();
     } catch (error) {
       console.error(`Failed to update ${field}:`, error);
-      toast.error(`Failed to update ${field}`);
+      toast.error(`Napaka pri posodabljanju ${field}`);
     }
   };
 
@@ -508,7 +516,7 @@ const Modals = ({
   const isCompany = () => {
     // This is not needed for now
     return false;
-    // if (user && user.id === data.id) {
+    // if (user && user.id === data?.id) {
     //   return true;
     // }
     // return false;
@@ -717,10 +725,11 @@ const Modals = ({
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
-    if (!data?.candles?.lastBurnedCandleTime) return;
+    // To handle first click
+    const dateToCheck = data?.candles?.lastBurnedCandleTime ? data?.candles?.lastBurnedCandleTime : new Date();
 
     const targetDate =
-      new Date(data.candles.lastBurnedCandleTime).getTime() +
+      new Date(dateToCheck).getTime() +
       24 * 60 * 60 * 1000;
 
     const updateCountdown = () => {
@@ -762,19 +771,19 @@ const Modals = ({
   const submitNotification = async () => {
     try {
       if (!emails.length || !notifyMessage) {
-        toast.error("Fill all details");
+        toast.error("Izpolni vsa polja.");
         return;
       }
 
       await userService.saveObitNotification({
         emails,
         message: notifyMessage,
-        obituaryId: data.id,
+        obituaryId: data?.id,
       });
       setIsShowModal(false);
-      toast.success("Request submitted successfully");
+      toast.success("Poslano");
     } catch (err) {
-      toast.error("Some error occured");
+      // toast.error("Prišlo je do napake.");
     }
   };
 
@@ -794,9 +803,8 @@ const Modals = ({
                   setIsSelectedReligion("");
                 }
               }}
-              className={`p-[10px] ${
-                isSelectedRelegion === "1" ? "shadow-custom-dark-to-white" : ""
-              }`}
+              className={`p-[10px] ${isSelectedRelegion === "1" ? "shadow-custom-dark-to-white" : ""
+                }`}
             >
               <Image
                 src={"/icon_cross.png"}
@@ -814,9 +822,8 @@ const Modals = ({
                   setIsSelectedReligion("");
                 }
               }}
-              className={`p-[10px] ${
-                isSelectedRelegion === "2" ? "shadow-custom-dark-to-white" : ""
-              }`}
+              className={`p-[10px] ${isSelectedRelegion === "2" ? "shadow-custom-dark-to-white" : ""
+                }`}
             >
               <Image
                 src={"/img_plus2.png"}
@@ -834,9 +841,8 @@ const Modals = ({
                   setIsSelectedReligion("");
                 }
               }}
-              className={`py-[20px] px-[10px] ${
-                isSelectedRelegion === "3" ? "shadow-custom-dark-to-white" : ""
-              }`}
+              className={`py-[20px] px-[10px] ${isSelectedRelegion === "3" ? "shadow-custom-dark-to-white" : ""
+                }`}
             >
               <Image
                 src={"/img_moon_star.png"}
@@ -854,9 +860,8 @@ const Modals = ({
                   setIsSelectedReligion("");
                 }
               }}
-              className={`p-[10px] ${
-                isSelectedRelegion === "4" ? "shadow-custom-dark-to-white" : ""
-              }`}
+              className={`p-[10px] ${isSelectedRelegion === "4" ? "shadow-custom-dark-to-white" : ""
+                }`}
             >
               <Image
                 src={"/img_plus3.png"}
@@ -874,9 +879,8 @@ const Modals = ({
                   setIsSelectedReligion("");
                 }
               }}
-              className={`p-[10px] ${
-                isSelectedRelegion === "5" ? "shadow-custom-dark-to-white" : ""
-              }`}
+              className={`p-[10px] ${isSelectedRelegion === "5" ? "shadow-custom-dark-to-white" : ""
+                }`}
             >
               <Image
                 src={"/img_star.png"}
@@ -896,7 +900,7 @@ const Modals = ({
           <div className="mobile:w-[100%] w-[254px] mt-6">
             <ButtonBlueBorder
               placeholder={"Objavi"}
-              onClick={() => updateMemory("symbol", isSelectedRelegion)}
+              onClick={() => updateMemory("symbol", isSelectedRelegion, "allow")}
             />
           </div>
         </div>
@@ -967,7 +971,7 @@ const Modals = ({
             <ButtonBlueBorder
               placeholder={"Objavi"}
               onClick={() => {
-                updateMemory("picture", uploadedPicture);
+                updateMemory("picture", uploadedPicture, "allow");
               }}
             />
           </div>
@@ -1015,8 +1019,8 @@ const Modals = ({
 
           <div className="w-[254px] mobile:w-[100%] mt-[42px]">
             <ButtonBlueBorder
-              placeholder={"Objavi"}
-              onClick={() => updateMemory("obituary", obituaryText)}
+              placeholder={"Objavia"}
+              onClick={() => updateMemory("obituary", obituaryText, "allow")}
             />
           </div>
         </div>
@@ -1259,7 +1263,7 @@ const Modals = ({
           <div className="w-[254px] mt-[42px]">
             <ButtonBlueBorder
               placeholder={"Objavi"}
-              onClick={() => updateMemory("events", newEvent)}
+              onClick={() => updateMemory("events", newEvent, "allow")}
             />
           </div>
         </div>
@@ -1290,7 +1294,7 @@ const Modals = ({
           <div className="mobile:w-[100%] w-[254px] mt-8">
             <ButtonBlueBorder
               placeholder={"Objavi"}
-              onClick={() => updateMemory("verse", verse)}
+              onClick={() => updateMemory("verse", verse, "allow")}
             />
           </div>
         </div>
@@ -1833,9 +1837,8 @@ const Modals = ({
               Osmrtnica in več informacij na strani:
             </div>
             <div className="flex mobile:hidden text-base font-normal text-[#0A85C2] mt-1 underline ">
-              {`${
-                typeof window !== "undefined" ? window.location.origin : ""
-              }/m/${data?.slugKey}`}
+              {`${typeof window !== "undefined" ? window.location.origin : ""
+                }/m/${data?.slugKey}`}
             </div>
           </div>
           <div className="mobile:w-[100%] w-[254px] mt-8">
@@ -1858,7 +1861,7 @@ const Modals = ({
           {/* <div className="mt-6">
             <TextFieldComp placeholder={"Napiši naslov"} />
           </div> */}
-          <div className="flex mt-6 ">
+          <div className="flex flex-col mt-6 ">
             <div
               className={
                 "flex flex-col rounded-[6px] bg-[#F2F8FF66] shadow-custom-dark-to-white w-full py-7 px-[80px] mobile:px-5 items-center justify-center "
@@ -1882,6 +1885,16 @@ const Modals = ({
               <div className="text-[#939393] font-normal text-xs mt-3 self-center ">
                 Format: jpg, png, webp
               </div>
+            </div>
+            <div className="mt-[24px] flex">
+              <TextFieldComp
+                placeholder={"Napiši svoje ime ali vzdevek"}
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                maxLength={100}
+              />
             </div>
           </div>
           {false && (
@@ -2143,8 +2156,8 @@ const Modals = ({
       {select_id == "20" ? (
         <div className="flex flex-col w-full">
           <div className="rounded-md self-center mb-[10px]">
-            <Image
-              src={data?.image}
+            <img
+              src={data?.image ?? "/user5.jpeg"}
               alt=" photo"
               width={85}
               height={85}
@@ -2167,7 +2180,7 @@ const Modals = ({
           </div>
 
           <div className="flex w-full mt-8 flex-col px-[20px] mobile:px-0">
-            {data.SorrowBooks.map((item, index) => (
+            {data?.SorrowBooks?.map((item, index) => (
               <CommonStyle item={item} index={index} key={index} />
             ))}
           </div>
@@ -2327,9 +2340,8 @@ function CommonStyle({ item, index, key }) {
   return (
     <div
       key={key}
-      className={` ${
-        index % 2 !== 0 ? "bg-[#E8F0F6]" : "bg-white popup-custom-shadow"
-      }  h-14 flex-row flex items-center border-b-[1px] border-[#D4D4D4] mobile:flex-row-reverse mobile:justify-between mobile:pr-[4px] relative `}
+      className={` ${index % 2 !== 0 ? "bg-[#E8F0F6]" : "bg-white popup-custom-shadow"
+        }  h-14 flex-row flex items-center border-b-[1px] border-[#D4D4D4] mobile:flex-row-reverse mobile:justify-between mobile:pr-[4px] relative `}
     >
       <div
         className={`py-[10px] border-2 text-[#6D778E]

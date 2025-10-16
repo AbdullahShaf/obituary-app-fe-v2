@@ -1,11 +1,10 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { useBreakpoint } from '@/app/hooks/useBreakpoint';
-import obituaryService from '@/services/obituary-service';
+import React, { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { useBreakpoint } from "@/app/hooks/useBreakpoint";
+import obituaryService from "@/services/obituary-service";
 
-// Helper functions
 const formatDateForDisplay = (dateObj) => {
   const day = dateObj.getDate();
   const month = dateObj.getMonth() + 1;
@@ -14,15 +13,57 @@ const formatDateForDisplay = (dateObj) => {
 };
 
 const formatDateForAPI = (dateObj) => {
-  const day = String(dateObj.getDate()).padStart(2, '0');
-  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const day = String(dateObj.getDate()).padStart(2, "0");
+  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
   const year = dateObj.getFullYear();
   return `${year}-${month}-${day}`;
 };
 
 const getDayName = (dateObj) => {
-  const days = ['Ned', 'Pon', 'Tor', 'Sre', 'Čet', 'Pet', 'Sob'];
+  const days = ["Ned", "Pon", "Tor", "Sre", "Čet", "Pet", "Sob"];
   return days[dateObj.getDay()];
+};
+
+const CarouselEntry = ({ item }) => {
+  const funeralDate = new Date(item.deathDate); // ensure data.funeralDate exists
+  const funeralDateFormatted = `${funeralDate
+    .getDate()
+    .toString()
+    .padStart(2, "0")}${(funeralDate.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}${funeralDate.getFullYear().toString().slice(2)}`; // Format: DDMMYY
+
+  return (
+    <a
+      key={item.id}
+      className="flex flex-row items-center border-b border-[#D4D4D4] w-full h-[64px] last:border-b-0 cursor-pointer"
+      // href={`/memorypage/${item.id}/${item.name}_${item.sirName}_${funeralDateFormatted}`}
+      href={`/m/${item.slugKey}`} // Updated to use slugKey
+    >
+      <h1 className="text-[#0A85C2] font-normal text-sm mobile:text-lg tablet:text-lg desktop:text-xl w-[50px] mobile:w-[60px] tablet:w-[75px] desktop:w-[97px] text-center flex-shrink-0">
+        {item.funeralTimestamp
+          ? new Date(item.funeralTimestamp).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+            })
+          : "--:--"}
+      </h1>
+      <h3 className="text-[#3C3E41] font-semibold text-[12px] mobile:text-[14px] tablet:text-[16px] desktop:text-[18px] flex-1 min-w-0 pl-[8px] mobile:pl-[12px] tablet:pl-[16px] desktop:pl-[22px] truncate">
+        {item.name} {item.sirName}
+      </h3>
+      <h4 className="text-[#3C3E41] font-normal text-[10px] mobile:text-[12px] tablet:text-[14px] desktop:text-[16px] flex-1 min-w-0 pl-[4px] mobile:pl-[6px] tablet:pl-[8px] desktop:pl-[9px] truncate">
+        {item.location || item.city || ""}
+      </h4>
+      {/* <button className="flex-shrink-0 p-1 mobile:p-2"> */}
+      <button className="flex-shrink-0 p-1 mobile:hidden">
+        <img
+          src="/arrow-next.png"
+          className="w-3 h-3 mobile:w-4 mobile:h-4 tablet:w-5 tablet:h-5 desktop:w-6 desktop:h-6"
+        />
+      </button>
+    </a>
+  );
 };
 
 const Carousel = () => {
@@ -32,8 +73,9 @@ const Carousel = () => {
   const breakpoint = useBreakpoint();
 
   // Get city and region from URL parameters
-  const selectedCity = searchParams.get('city');
-  const selectedRegion = searchParams.get('region');
+  const selectedCity = searchParams.get("city");
+  const selectedRegion = searchParams.get("region");
+  const selectedName = searchParams.get("search");
 
   // Fetch funerals when currentDate, city, or region changes
   useEffect(() => {
@@ -44,7 +86,7 @@ const Carousel = () => {
         // Build query parameters object for getFunerals
         const queryParams = {
           startDate: formattedDate,
-          endDate: formattedDate  // Same date for single day funerals
+          endDate: formattedDate, // Same date for single day funerals
         };
 
         // Add city and region if they exist in URL params
@@ -55,17 +97,44 @@ const Carousel = () => {
           queryParams.region = selectedRegion;
         }
 
-        console.log('Sending params for funerals:', queryParams);
+        console.log("Sending params for funerals:", queryParams);
 
         const result = await obituaryService.getFunerals(queryParams);
-        setObituaries(result.obituaries || []);
+
+        /**
+         * Filter obituaries based on selectedName
+         */
+        if (selectedName && selectedName.length > 0) {
+          const rawName = decodeURIComponent(selectedName).trim().toLowerCase();
+          const temp = result.obituaries || [];
+          let tempObituaries = [];
+          if (temp && temp.length > 0) {
+            // {item.name} {item.sirName}
+            tempObituaries = temp.filter(
+              (obituaries) =>{
+                const fullName = `${obituaries.name} ${obituaries.sirName}`;
+                return (
+                  fullName.toLowerCase().startsWith(rawName) ||
+                  obituaries.sirName.toLowerCase().startsWith(rawName)
+                );
+              }
+                // obituaries.name.toLowerCase().startsWith(rawName) ||
+                // obituaries.sirName.toLowerCase().startsWith(rawName)
+              // obituaries.name.includes(selectedName) ||
+              // obituaries.sirName.includes(selectedName)
+            );
+          }
+          setObituaries(tempObituaries);
+        } else {
+          setObituaries(result.obituaries || []);
+        }
       } catch (error) {
-        console.error('Error fetching funerals:', error);
+        console.error("Error fetching funerals:", error);
         setObituaries([]);
       }
     };
     fetchFunerals();
-  }, [currentDate, selectedCity, selectedRegion]);
+  }, [currentDate, selectedCity, selectedRegion, selectedName]);
 
   const goToPrevious = () => {
     const newDate = new Date(currentDate);
@@ -100,8 +169,20 @@ const Carousel = () => {
             onClick={goToPrevious}
             className="p-3 hover:scale-110 transition-transform cursor-pointer"
           >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="#666"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
 
@@ -109,8 +190,20 @@ const Carousel = () => {
             onClick={goToNext}
             className="p-3 hover:scale-110 transition-transform cursor-pointer"
           >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 18L15 12L9 6" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 18L15 12L9 6"
+                stroke="#666"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
         </div>
@@ -121,46 +214,48 @@ const Carousel = () => {
         {obituaries.length === 0 ? (
           <div className="text-center py-6 text-[#3C3E41]">
             Ni vnešenih pogrebov tega dne.
-
           </div>
         ) : (
           obituaries.map((item, index) => (
-            <div
-              key={item.id || index}
-              className="flex flex-row items-center border-b border-[#D4D4D4] w-full h-[64px] last:border-b-0"
-            >
-              <h1 className="text-[#0A85C2] font-normal text-sm mobile:text-lg tablet:text-lg desktop:text-xl w-[50px] mobile:w-[60px] tablet:w-[75px] desktop:w-[97px] text-center flex-shrink-0">
-                {item.funeralTimestamp
-                  ? new Date(item.funeralTimestamp).toLocaleTimeString([], {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false
-                  })
-                  : '--:--'}
-              </h1>
-              <h3 className="text-[#3C3E41] font-semibold text-[12px] mobile:text-[14px] tablet:text-[16px] desktop:text-[18px] flex-1 min-w-0 pl-[8px] mobile:pl-[12px] tablet:pl-[16px] desktop:pl-[22px] truncate">
-                {item.name} {item.sirName}
-              </h3>
-              <h4 className="text-[#3C3E41] font-normal text-[10px] mobile:text-[12px] tablet:text-[14px] desktop:text-[16px] flex-1 min-w-0 pl-[4px] mobile:pl-[6px] tablet:pl-[8px] desktop:pl-[9px] truncate">
-                {item.location || item.city || ''}
-              </h4>
-              <button className="flex-shrink-0 p-1 mobile:p-2">
-                <img src="/arrow-next.png" className="w-3 h-3 mobile:w-4 mobile:h-4 tablet:w-5 tablet:h-5 desktop:w-6 desktop:h-6" />
-              </button>
-            </div>
+            // here
+            <CarouselEntry key={item.id || index} item={item} />
+            // <a
+            //   key={item.id || index}
+            //   className="flex flex-row items-center border-b border-[#D4D4D4] w-full h-[64px] last:border-b-0 cursor-pointer"
+            //   href={`/memorypage/${item.id}/${item.name}_${item.sirName}_${funeralDateFormatted}`}
+            // >
+            //   <h1 className="text-[#0A85C2] font-normal text-sm mobile:text-lg tablet:text-lg desktop:text-xl w-[50px] mobile:w-[60px] tablet:w-[75px] desktop:w-[97px] text-center flex-shrink-0">
+            //     {item.funeralTimestamp
+            //       ? new Date(item.funeralTimestamp).toLocaleTimeString([], {
+            //         hour: '2-digit',
+            //         minute: '2-digit',
+            //         hour12: false
+            //       })
+            //       : '--:--'}
+            //   </h1>
+            //   <h3 className="text-[#3C3E41] font-semibold text-[12px] mobile:text-[14px] tablet:text-[16px] desktop:text-[18px] flex-1 min-w-0 pl-[8px] mobile:pl-[12px] tablet:pl-[16px] desktop:pl-[22px] truncate">
+            //     {item.name} {item.sirName}
+            //   </h3>
+            //   <h4 className="text-[#3C3E41] font-normal text-[10px] mobile:text-[12px] tablet:text-[14px] desktop:text-[16px] flex-1 min-w-0 pl-[4px] mobile:pl-[6px] tablet:pl-[8px] desktop:pl-[9px] truncate">
+            //     {item.location || item.city || ''}
+            //   </h4>
+            //   <button className="flex-shrink-0 p-1 mobile:p-2">
+            //     <img src="/arrow-next.png" className="w-3 h-3 mobile:w-4 mobile:h-4 tablet:w-5 tablet:h-5 desktop:w-6 desktop:h-6" />
+            //   </button>
+            // </a>
           ))
         )}
       </div>
 
       <div className="w-full mt-[72px]  flex justify-center tablet:mt-20 desktop:mt-20 px-4">
         <p className="text-[#3C3E41] hidden tablet:block desktop:block">
-          Če pogreb še ni vnešen, je pa termin že znan,
-          zaprosite svojo cvetličarno (ali pogrebno podjetje), da ga vnese.
+          Če pogreb še ni vnešen, je pa termin že znan, zaprosite svojo
+          cvetličarno (ali pogrebno podjetje), da ga vnese.
         </p>
 
         <p className="text-[#3C3E41] tablet:hidden desktop:hidden text-sm">
-          Če pogreb še ni vnešen, je pa termin že znan,
-          zaprosite svojo cvetličarno (ali pogrebno p.), da ga vnese.
+          Če pogreb še ni vnešen, je pa termin že znan, zaprosite svojo
+          cvetličarno (ali pogrebno p.), da ga vnese.
         </p>
       </div>
     </div>

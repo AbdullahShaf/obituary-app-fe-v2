@@ -1,11 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import obituaryService from "@/services/obituary-service";
 import regionsAndCities from "@/utils/regionAndCities";
-import DropdownWithSearch from "./DropdownWithSearch";
+import PogrebiListComponent from "../../components/appcomponents/PogrebiListComponent";
 
 const ReviewUserAccount = () => {
   const [showSelect, setShowSelect] = useState(false);
@@ -113,53 +112,51 @@ const ReviewUserAccount = () => {
         <div className="mt-[10px] tabletUserAcc:mt-[10px] mobileUserAcc:mt-[12px] w-full flex flex-wrap gap-[11px] tabletUserAcc:gap-[9px] mobileUserAcc:gap-[9px]">
           {memories && memories.length > 0
             ? memories.map((memory, index) => (
-                <div
-                  key={index}
-                  className="relative w-[234px] h-[76px] p-[2px] rounded-[8px]
+              <div
+                key={index}
+                className="relative w-[234px] h-[76px] p-[2px] rounded-[8px]
         mobileUserAcc:w-[160px] mobileUserAcc:h-[73px]"
-                >
-                  <Link
-                    href={`/memorypage/${memory.id}/${memory.name}_${
-                      memory.sirName
+              >
+                <Link
+                  href={`/memorypage/${memory.id}/${memory.name}_${memory.sirName
                     }_${funeralDateFormatted(memory.funeralTimestamp)}`}
-                    className={`flex flex-col justify-between items-center w-full h-full rounded-[8px] pt-[12px] pb-[16px]
+                  className={`flex flex-col justify-between items-center w-full h-full rounded-[8px] pt-[12px] pb-[16px]
             mobileUserAcc:py-[6px]
-            ${
-              memory.Keepers?.length > 0
-                ? memory.isKeeper
-                  ? "bg-[#e9f1e8] border-2 border-purple-500"
-                  : "bg-[#e9f1e8] border-2 border-[#1860A3]"
-                : "bg-[#ffffff] border-2 border-[#1860A3]"
-            }
+            ${memory.Keepers?.length > 0
+                      ? memory.isKeeper
+                        ? "bg-[#e9f1e8] border-2 border-purple-500"
+                        : "bg-[#e9f1e8] border-2 border-[#1860A3]"
+                      : "bg-[#ffffff] border-2 border-[#1860A3]"
+                    }
           `}
-                  >
-                    <div className="mobileUserAcc:text-center">
-                      <p
-                        className="text-[16px] font-normal leading-[18.75px] text-[#1E2125] m-[0]
+                >
+                  <div className="mobileUserAcc:text-center">
+                    <p
+                      className="text-[16px] font-normal leading-[18.75px] text-[#1E2125] m-[0]
               mobileUserAcc:text-[14px] mobileUserAcc:leading-[16.41px] mobileUserAcc:text-[#6D778E] mobileUserAcc:mt-[2px]"
-                      >
-                        {memory.name}
-                        <span className="mobileUserAcc:block text-[16px] ml-1 font-normal leading-[18.75px] text-[#1E2125] m-[0]">
-                          {memory.sirName}
-                        </span>
-                      </p>
-                    </div>
-                    <div>
-                      <p
-                        className="text-[14px] font-normal leading-[16.41px] text-[#6D778E] m-[0]
+                    >
+                      {memory.name}
+                      <span className="mobileUserAcc:block text-[16px] ml-1 font-normal leading-[18.75px] text-[#1E2125] m-[0]">
+                        {memory.sirName}
+                      </span>
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      className="text-[14px] font-normal leading-[16.41px] text-[#6D778E] m-[0]
               mobileUserAcc:text-[12px] mobileUserAcc:font-light mobileUserAcc:leading-[14.06px] mobileUserAcc:m-[0]"
-                      >
-                        {memory.city}
-                      </p>
-                    </div>
-                    <div className="absolute bottom-[4px] right-[10px] mobileUserAcc:hidden">
-                      <p className="text-[10px] font-extralight leading-[11.72px] text-[rgba(109,_119,_142,_0.6)] m-[0]">
-                        {funeralDateFormatted(memory.deathDate)}
-                      </p>
-                    </div>
-                  </Link>
-                </div>
-              ))
+                    >
+                      {memory.city}
+                    </p>
+                  </div>
+                  <div className="absolute bottom-[4px] right-[10px] mobileUserAcc:hidden">
+                    <p className="text-[10px] font-extralight leading-[11.72px] text-[rgba(109,_119,_142,_0.6)] m-[0]">
+                      {funeralDateFormatted(memory.deathDate)}
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            ))
             : null}
         </div>
       </div>
@@ -168,12 +165,12 @@ const ReviewUserAccount = () => {
         style={{
           fontVariationSettings: "'wdth' 50,'wght' 600,'opsz' 32",
         }}
-        className="text-[24px] tabletUserAcc:mt-[83px] tabletUserAcc:pl-[26px] mt-[100px] mobileUserAcc:mt-[69px] text-6 font-semibold text-[#0A85C2] "
+        className="text-[24px] tabletUserAcc:mt-[83px] tabletUserAcc:pl-[0px] mt-[100px] mobileUserAcc:mt-[69px] text-6 font-semibold text-[#0A85C2] "
       >
         Dodaj bližnjega ?
       </div>
 
-      <div className="flex mobileUserAcc:hidden w-[690px] tabletUserAcc:pl-[26px] tabletUserAcc:max-w-[660px] text-[#717B8C] text-[14px] font-normal font-variation-customOpt14 ">
+      <div className="flex max-w-[690px] tabletUserAcc:pl-[0px] tabletUserAcc:max-w-[660px] text-[#717B8C] text-[14px] font-normal font-variation-customOpt14 ">
         Enostavno je. Zgolj sodelujte na njegovi/njeni spominski strani in
         avtomatsko bo dodan/a med vaše bližnje na tej strani, prikazana bo
         statistika tiste spominske in nastavljeni bodo opomniki ob obletnicah,
@@ -185,7 +182,7 @@ const ReviewUserAccount = () => {
       mobileUserAcc:block
       "
       >
-        <input
+        {/* <input
           type="text"
           placeholder="Išči po imenu / priimku"
           className="w-[227px] h-[36px] bg-[#f1fffe] border-[1px] border-[solid] border-[#7C7C7C] rounded-[8px] pl-[16px] placeholder:text-[16px] placeholder:font-normal placeholder:text-[#7C7C7C] placeholder:m-[0]
@@ -202,10 +199,14 @@ const ReviewUserAccount = () => {
 
         <div className=" flex mobileUserAcc:hidden justify-center  w-9 items-center h-full aspect-square rounded-lg bg-[#414141]">
           <MagnifyingGlassIcon className="w-5 h-5 text-white " />
-        </div>
+        </div> */}
       </div>
 
-      <div className="hidden mobileUserAcc:flex h-[48px] mt-4 w-[335px] tabletUserAcc:w-[292px] bg-[#414141] rounded-[8px] justify-center items-center ">
+      <div>
+        <PogrebiListComponent city={''} />
+      </div>
+
+      {/* <div className="hidden mobileUserAcc:flex h-[48px] mt-4 w-[335px] tabletUserAcc:w-[292px] bg-[#414141] rounded-[8px] justify-center items-center ">
         <div
           style={{
             fontSize: "16px",
@@ -217,7 +218,7 @@ const ReviewUserAccount = () => {
         >
           Prikaži
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

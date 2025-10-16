@@ -172,13 +172,14 @@ const Mycontributions = () => {
             </div>
 
             <div className="flex flex-col gap-y-4">
+              <GradientBlue num={logs?.myAdministrator} text={"Moji Skrbniki"} />
               <GradientBlue
-                num={logs?.myAdministrator}
-                text={"Moji Skrbniki"}
+                num={"0"}
+                text={"Podarjeni skrbniki"}
+                isFor={"Gray"}
               />
-              <GradientBlue num={"1"} text={"Podarjeni skrbniki"} />
               <GradientBlue num={"0"} text={"Premium sveče"} isFor={"Gray"} />
-              <GradientBlue num={"6"} text={"Mobi Kartice"} />
+              <GradientBlue num={"0"} text={"Mobi Kartice"} isFor={"Gray"} />
             </div>
           </div>
         )}
@@ -392,33 +393,33 @@ const Mycontributions = () => {
               <div>
                 {logs?.logs && logs?.logs.length > 0
                   ? logs?.logs.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex justify-between  items-center py-[20px]"
-                      >
-                        <div className="flex flex-col  gap-y-[10px]">
-                          <span className="text-[16px] leading-[14px] font-variation-customOpt14 text-[#1E2125]">
-                            {item.Obituary.name} {item.Obituary.sirName}
-                          </span>
-                          <span className="text-[12px] text-[#6D778E] leading-[14px] font-variation-customOpt12">
-                            {item.typeInSL}
-                          </span>
-                        </div>
-
-                        <div className="flex flex-col gap-y-[10px] items-end">
-                          <div className="text-[12px] text-[#6D778E] leading-[14px] font-variation-customOpt12">
-                            {formattedDate(item.createdTimestamp)}
-                          </div>
-
-                          <Image
-                            src={getStatusIcon(item.status)}
-                            alt="status"
-                            width={20}
-                            height={20}
-                          />
-                        </div>
+                    <div
+                      key={index}
+                      className="flex justify-between  items-center py-[20px]"
+                    >
+                      <div className="flex flex-col  gap-y-[10px]">
+                        <span className="text-[16px] leading-[14px] font-variation-customOpt14 text-[#1E2125]">
+                          {item.Obituary.name} {item.Obituary.sirName}
+                        </span>
+                        <span className="text-[12px] text-[#6D778E] leading-[14px] font-variation-customOpt12">
+                          {item.typeInSL}
+                        </span>
                       </div>
-                    ))
+
+                      <div className="flex flex-col gap-y-[10px] items-end">
+                        <div className="text-[12px] text-[#6D778E] leading-[14px] font-variation-customOpt12">
+                          {formattedDate(item.createdTimestamp)}
+                        </div>
+
+                        <Image
+                          src={getStatusIcon(item.status)}
+                          alt="status"
+                          width={20}
+                          height={20}
+                        />
+                      </div>
+                    </div>
+                  ))
                   : null}
               </div>
             </div>
@@ -482,41 +483,41 @@ const Mycontributions = () => {
             <tbody>
               {logs?.logs && logs?.logs.length > 0
                 ? logs?.logs.map((item, index) => (
-                    <tr key={index}>
-                      <td className="p-4 text-[16px] leading-[19px] font-variation-customOpt18 text-[#6D778E] border-t border-b border-l rounded-l border-[#A1B1D4]">
-                        {formattedDate(item.createdTimestamp)}
-                      </td>
-                      <td className="p-4 border-t border-b border-[#A1B1D4]">
-                        <div className="flex flex-row items-center gap-x-[16px]">
-                          <div className="flex flex-col justify-center">
-                            <span className="text-[14px] leading-[24px] font-variation-customOpt14 text-[#6D778E]">
-                              {item.Obituary.name}
-                            </span>
-                            <span className="text-[16px] leading-[19px] font-variation-customOpt16 text-[#6D778E]">
-                              {item.Obituary.sirName}
-                            </span>
-                          </div>
-                          <Image
-                            alt="arrow"
-                            src={"/img_left_arrow.png"}
-                            width={30}
-                            height={30}
-                          />
+                  <tr key={index}>
+                    <td className="p-4 text-[16px] leading-[19px] font-variation-customOpt18 text-[#6D778E] border-t border-b border-l rounded-l border-[#A1B1D4]">
+                      {formattedDate(item.createdTimestamp)}
+                    </td>
+                    <td className="p-4 border-t border-b border-[#A1B1D4]">
+                      <div className="flex flex-row items-center gap-x-[16px]">
+                        <div className="flex flex-col justify-center">
+                          <span className="text-[14px] leading-[24px] font-variation-customOpt14 text-[#6D778E]">
+                            {item.Obituary.name}
+                          </span>
+                          <span className="text-[16px] leading-[19px] font-variation-customOpt16 text-[#6D778E]">
+                            {item.Obituary.sirName}
+                          </span>
                         </div>
-                      </td>
-                      <td className="p-4 text-[16px] leading-[19px] font-variation-customOpt16 text-[#3C3E41] border-t border-b border-[#A1B1D4]">
-                        {item.typeInSL}
-                      </td>
-                      <td className="p-4 border-t border-b border-r rounded-r border-[#A1B1D4]">
                         <Image
-                          alt="item"
-                          src={getStatusIcon(item.status)}
+                          alt="arrow"
+                          src={"/img_left_arrow.png"}
                           width={30}
                           height={30}
                         />
-                      </td>
-                    </tr>
-                  ))
+                      </div>
+                    </td>
+                    <td className="p-4 text-[16px] leading-[19px] font-variation-customOpt16 text-[#3C3E41] border-t border-b border-[#A1B1D4]">
+                      {item.typeInSL}
+                    </td>
+                    <td className="p-4 border-t border-b border-r rounded-r border-[#A1B1D4]">
+                      <Image
+                        alt="item"
+                        src={getStatusIcon(item.status)}
+                        width={30}
+                        height={30}
+                      />
+                    </td>
+                  </tr>
+                ))
                 : null}
             </tbody>
           </table>
@@ -529,31 +530,27 @@ const Mycontributions = () => {
 function GradientPurple({ num, text, isFor }) {
   return (
     <div
-      className={`flex bg-gradient-to-b ${
-        num === 0
-          ? "from-[#D4D4D440] to-[#D4D4D420]"
-          : "from-[#BE97FF] to-[#530CC6] "
-      } w-[160px]  h-[30px]  p-[2px] rounded-lg shadow-lg shadow-[#C2C2C280]`}
+      className={`flex bg-gradient-to-b ${num === 0
+        ? "from-[#D4D4D440] to-[#D4D4D420]"
+        : "from-[#BE97FF] to-[#530CC6] "
+        } w-[160px]  h-[30px]  p-[2px] rounded-lg shadow-lg shadow-[#C2C2C280]`}
     >
       <div
-        className={`flex w-[156px] h-[26px] ${
-          num === 0 ? "bg-[#FFFFFF20]" : "bg-white"
-        } rounded-md items-center justify-start ps-2`}
+        className={`flex w-[156px] h-[26px] ${num === 0 ? "bg-[#FFFFFF20]" : "bg-white"
+          } rounded-md items-center justify-start ps-2`}
       >
         <div
           style={{
             fontVariationSettings: "'wdth' 50,'wght' 600,'opsz' 24",
           }}
-          className={`text-6 ${
-            num === 0 ? "text-[#D4D4D480]" : "text-[#6D778E] "
-          } font-semibold`}
+          className={`text-6 ${num === 0 ? "text-[#D4D4D480]" : "text-[#6D778E] "
+            } font-semibold`}
         >
           {num}
         </div>
         <div
-          className={`text-4 ${
-            num === 0 ? "text-[#D4D4D480]" : "text-[#6D778E] "
-          } font-normal ml-2`}
+          className={`text-4 ${num === 0 ? "text-[#D4D4D480]" : "text-[#6D778E] "
+            } font-normal ml-2`}
         >
           {text}
         </div>
@@ -565,21 +562,18 @@ function GradientPurple({ num, text, isFor }) {
 function GradientBlue({ num, text, isFor }) {
   return (
     <div
-      className={`flex bg-gradient-to-b ${
-        isFor === "Gray"
-          ? "from-[#D4D4D440] to-[#D4D4D420]"
-          : "from-[#0A85C2] to-[#123597]"
-      }  w-[160px]  h-[30px]  p-[2px] rounded-lg shadow-lg shadow-[#C2C2C280]`}
+      className={`flex bg-gradient-to-b ${isFor === "Gray"
+        ? "from-[#D4D4D440] to-[#D4D4D420]"
+        : "from-[#0A85C2] to-[#123597]"
+        }  w-[160px]  h-[30px]  p-[2px] rounded-lg shadow-lg shadow-[#C2C2C280]`}
     >
       <div
-        className={`flex min-w-[156px] h-[26px] ${
-          isFor === "Gray" ? "bg-[#FFFFFF20]" : "bg-white"
-        }  rounded-md items-center justify-end pr-[10px]`}
+        className={`flex min-w-[156px] h-[26px] ${isFor === "Gray" ? "bg-[#FFFFFF20]" : "bg-white"
+          }  rounded-md items-center justify-end pr-[10px]`}
       >
         <div
-          className={`text-[15px] leading-[18px] font-variation-customOpt16 ${
-            isFor === "Gray" ? "text-[#D4D4D480]" : "text-[#6D778E] "
-          } font-normal mr-[8px]`}
+          className={`text-[15px] leading-[18px] font-variation-customOpt16 ${isFor === "Gray" ? "text-[#D4D4D480]" : "text-[#6D778E] "
+            } font-normal mr-[8px]`}
         >
           {text}
         </div>
@@ -587,9 +581,8 @@ function GradientBlue({ num, text, isFor }) {
           style={{
             fontVariationSettings: "'wdth' 50,'wght' 600,'opsz' 24",
           }}
-          className={`text-6  ${
-            isFor === "Gray" ? "text-[#D4D4D480]" : "text-[#0A85C2] "
-          }  font-semibold `}
+          className={`text-6  ${isFor === "Gray" ? "text-[#D4D4D480]" : "text-[#0A85C2] "
+            }  font-semibold `}
         >
           {num}
         </div>

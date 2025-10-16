@@ -12,7 +12,7 @@ export default function OpenableBlock({
   havingSpacing = false,
   helpText = "",
   openBlock,
-  handleOpenBlock,
+  handleOpenBlock, className = "max-h-[920px]",onDelete, isDisabled
 }) {
   const [isOpen, setIsOpen] = useState(isDefaultOpen);
 
@@ -30,19 +30,16 @@ export default function OpenableBlock({
 
   return (
     <div
-      className={`${isOpen ? "pb-[8px]" : ""} ${
-        havingSpacing && isOpen ? "mb-[28px]" : ""
-      }`}
+      className={`${isOpen ? "pb-[8px]" : ""} ${havingSpacing && isOpen ? "mb-[28px]" : ""
+        }`}
     >
       <div
-        className={`${
-          isOpen ? "bg-[#f2f5f8]" : "bg-[#e7ebf5]"
-        } rounded-[4px] border border-[#A1B1D4]`}
+        className={`${isOpen ? "bg-[#f2f5f8]" : "bg-[#e7ebf5]"
+          } rounded-[4px] border border-[#A1B1D4]`}
       >
         <div
-          className={`flex items-center justify-between ${
-            isOpen ? "border-b border-[#A1B1D4]" : "border-b-0"
-          } py-[16px] px-[16px]`}
+          className={`flex items-center justify-between ${isOpen ? "border-b border-[#A1B1D4]" : "border-b-0"
+            } py-[16px] px-[16px]`}
         >
           <div className="flex items-center gap-[16px]">
             <div className="w-[24px] h-[24px] rounded-full bg-[#E9EDF7] border border-[#3C3E41] flex items-center justify-center text-[14px] font-normal leading-[100%] text-[#3C3E41]">
@@ -67,6 +64,16 @@ export default function OpenableBlock({
                   height={20}
                 />
               )}
+              {(typeof onDelete === "function") && (
+                <button onClick={onDelete} disabled={isDisabled}>
+                  <Image
+                    src="/florist_delete.png"
+                    alt="Spletna stran"
+                    width={20}
+                    height={20}
+                  />
+                </button>
+              )}
               <Image
                 src="/eye_ico.png"
                 alt="Spletna stran"
@@ -83,9 +90,8 @@ export default function OpenableBlock({
             <Image
               src="/right_small_icon.png"
               alt="Spletna stran"
-              className={`${
-                isOpen ? "" : "rotate-90"
-              } transition-transform duration-300 cursor-pointer`}
+              className={`${isOpen ? "" : "rotate-90"
+                } transition-transform duration-300 cursor-pointer`}
               width={24}
               height={24}
               onClick={() => setIsOpen(!isOpen)}
@@ -93,11 +99,10 @@ export default function OpenableBlock({
           </div>
         </div>
         <div
-          className={`${
-            isOpen
-              ? "py-[16px] space-y-[8px] max-h-[920px]"
-              : "py-[0] space-y-[8px] max-h-[0px] overflow-hidden"
-          } transition-all duration-300 px-[16px]`}
+          className={`${isOpen
+            ? `py-[16px] space-y-[8px] ${className}`
+            : "py-[0] space-y-[8px] max-h-[0px] overflow-hidden"
+            } transition-all duration-300 px-[16px]`}
         >
           {children}
         </div>

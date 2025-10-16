@@ -108,7 +108,7 @@ const ShippingNotifications = ({
 
   return (
     <div className="relative bg-[url('../public/pisano_ozadje.avif')]  bg-cover border-t-[1px] border-[#0F0671]  py-24 tablet:py[65px] w-full overflow-hidden mx-auto justify-center items-center flex flex-col">
-      <div className="max-w-[1000px] tablet:w-[700px] w-full flex flex-row mobile:flex-col gap-[77px] tablet:gap-[50px] mobile:gap-[39px] justify-evenly mobile:px-7">
+      <div className="max-w-[1000px] memory_cards tablet:w-[700px] w-full flex flex-row mobile:flex-col gap-[77px] tablet:gap-[50px] mobile:gap-[39px] justify-evenly mobile:px-7">
         <div className="w-[368.5px] tablet:w-[347px] shrink-0 mobile:pl-0 mobile:w-full mx-3 mobile:mx-0 mobile:text-center  ">
           <div className="text-[40px] leading-[100%] mobile:text-[28px] mobile:leading-[33px] whitespace-nowrap font-normal text-[#1E2125]">
             Obvestila za pošiljanje

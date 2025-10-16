@@ -11,7 +11,15 @@ import Switch from "../components/Switch";
 import { toast } from "react-hot-toast";
 import companyService from "@/services/company-service";
 import CompanyPreview from "../components/company-preview";
-
+import { useSession } from "next-auth/react";
+import { useApi } from "@/hooks/useApi";
+import { Loader } from "@/utils/Loader";
+import { RenderImage } from "@/utils/ImageViewerModal";
+import { TOAST_MESSAGE } from "../../../../../utils/toastMessage";
+const getNumberWord = (num) => {
+  const words = ["one", "two", "three"];
+  return words[num - 1] || "";
+};
 export default function Step4({
   data,
   onChange,
@@ -31,7 +39,10 @@ export default function Step4({
   const [showBackground, setShowBackground] = useState(
     data?.showBoxBackground || false
   );
+  const { isLoading, trigger: update } = useApi(companyService.updateCompany);
 
+  const { data: session } = useSession();
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const addSliderBlock = () => {
     setBoxes([...boxes, { index: boxes.length + 1 }]);
   };
@@ -75,13 +86,13 @@ export default function Step4({
         console.log(`${key}:`, value);
       }
       if (nonEmptyBoxes.length > 0) {
-        const response = await companyService.updateCompany(
+        const response = await update(
           formData,
           companyId
         );
         onChange(response.company);
 
-        toast.success("Company updated Successfully");
+        toast.success(TOAST_MESSAGE.COMPANY_UPDATED_SUCCESSFULLY);
       }
 
       return true;
@@ -89,7 +100,7 @@ export default function Step4({
       console.error("Error:", error);
       toast.error(
         error?.response?.data?.error ||
-          "Failed to update company. Please try again."
+        TOAST_MESSAGE.FAILED_TO_UPDATE_COMPANY_TRY_AGAIN
       );
       return false;
     }
@@ -110,10 +121,7 @@ export default function Step4({
   //   onChange(response.company);
   // };
 
-  const getNumberWord = (num) => {
-    const words = ["one", "two", "three"];
-    return words[num - 1] || "";
-  };
+
 
   useEffect(() => {
     if (data && data !== null) {
@@ -146,8 +154,10 @@ export default function Step4({
   };
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[43px]">
@@ -170,13 +180,14 @@ export default function Step4({
             )}
           </div>
           <div className="space-y-[8px]">
-            {boxes.map((block) => (
+            {boxes.map((block, i) => (
               <SliderBlock
                 key={block.index}
                 index={block.index}
                 title={`Okvir ${block.index}`}
                 box={block}
                 onChange={handleBoxChange}
+                savedIcon={data?.[`box_${getNumberWord(i + 1)}_icon`]}
               />
             ))}
             {boxes.length < 2 && (
@@ -215,6 +226,8 @@ export default function Step4({
                 inputId={"boxes-bg-image"}
                 disabled={true}
               />
+              <RenderImage src={data?.boxBackgroundImage} alt={"img"} label={""} />
+
               <div className="flex items-center justify-center gap-[22px] py-[9px]">
                 <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
                   Prikaži obstoječ dizajn
@@ -273,7 +286,7 @@ export default function Step4({
   );
 }
 
-function SliderBlock({ index, title, box, onChange }) {
+function SliderBlock({ index, title, box, onChange, savedIcon }) {
   const [isDefaultOpen, setIsDefaultOpen] = useState(index === 1);
   const handleChange = (e) => {
     onChange(index - 1, { ...box, [e.target.name]: e.target.value });
@@ -295,6 +308,8 @@ function SliderBlock({ index, title, box, onChange }) {
             Za prvo silo smo nekaj slik že dodali. Svoje prilepi čimprej.
           </div>
           <IconSelectorStep4 setBoxIcon={handleImageChange} />
+
+          <RenderImage src={savedIcon} alt={"img"} label={""} />
         </div>
         <div className="space-y-[8px]">
           <div className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">

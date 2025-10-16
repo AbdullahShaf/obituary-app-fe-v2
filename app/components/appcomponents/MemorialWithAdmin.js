@@ -10,7 +10,7 @@ const MemorialWithAdmin = () => {
                     <div className="relative w-full flex desktop:flex-row flex-col desktop:items-start items-center gap-[30px] mobile:gap-[20px] tablet:gap-[25px]">
 
                         <div className="text-left desktop:w-[600px] tablet:w-full mobile:w-full desktop:flex-shrink-0 tablet:mx-auto mobile:mx-auto desktop:mt-[98.84px] 
-                    tablet:mt-[40px] mobile:mt-[20px] flex flex-col mobile:items-center tablet:items-center desktop:px-0 tablet:px-[20px] mobile:px-[15px]">
+                    tablet:mt-[40px] mobile:mt-[50px] flex flex-col mobile:items-center tablet:items-center desktop:px-0 tablet:px-[20px] mobile:px-[15px]">
                             <h1 className="text-[#3C3E41] text-[40px] desktop:whitespace-nowrap mobile:text-[28px] tablet:text-[32px] mobile:text-center tablet:text-center leading-[48px] mobile:leading-[34px] tablet:leading-[38px] mobile:font-variation-customOpt28 font-variation-customOpt40">
                                 Spominska stran s <span className="text-[#0A85C2] font-semibold">Skrbnikom</span>
                             </h1>

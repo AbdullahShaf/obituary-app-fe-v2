@@ -9,16 +9,12 @@ import shopService from "@/services/shop-service";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import CompanyPreview from "../components/company-preview";
-
-export default function Step6({
-  data,
-  onChange,
-  handleStepChange,
-  setIsRender,
-}) {
-  const [openBlock, setOpenBlock] = useState(1);
-  const router = useRouter();
-  const [shops, setShops] = useState([
+import { useSession } from "next-auth/react";
+import { Loader } from "@/utils/Loader";
+import { useApi } from "@/hooks/useApi";
+import { RenderImage } from "@/utils/ImageViewerModal";
+import {TOAST_MESSAGE} from "../../../../../utils/toastMessage"
+const defaultShop = [
     {
       index: 1,
       title: "Podatki o trgovini",
@@ -29,14 +25,27 @@ export default function Step6({
       email: "",
       telephone: "",
     },
-  ]);
+  ]
+export default function Step6({
+  data,
+  onChange,
+  handleStepChange,
+  setIsRender,
+}) {
+  const [openBlock, setOpenBlock] = useState(1);
+  const router = useRouter();
+  const [shops, setShops] = useState(defaultShop);
   const [name, setName] = useState("");
   const [companyId, setCompanyId] = useState(null);
   const [logo, setLogo] = useState(null);
   const [highlightText, setHighlightText] = useState("");
   const [instagram, setInstagram] = useState("");
   const [facebook, setFacebook] = useState("");
+  const { data: session } = useSession();
+  const { isLoading, trigger: updateCompany } = useApi(companyService.updateCompany);
+  const { isLoading: isShopCreating, trigger: createShop } = useApi(shopService.createShop);
 
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const addSliderBlock = () => {
     setShops([
       ...shops,
@@ -74,9 +83,9 @@ export default function Step6({
       if (logo) formData.append("logo", logo);
       if (instagram) formData.append("instagram", instagram);
 
-      const response = await companyService.updateCompany(formData, companyId);
+      const response = await updateCompany(formData, companyId);
       onChange(response.company);
-      toast.success("Podatki so shranjeni");
+      toast.success(TOAST_MESSAGE.DATA_SAVED);
       router.refresh();
       console.log(response);
       return true;
@@ -97,7 +106,7 @@ export default function Step6({
     );
 
     if (hasEmpty) {
-      toast.error("Vpišite vse podatke o trgovini");
+      toast.error(TOAST_MESSAGE.ENTER_ALL_STORE_DATA);
       return false;
     }
 
@@ -125,12 +134,13 @@ export default function Step6({
         allowStatus: send ?? ''
       };
       await handlePublish();
-      const response = await shopService.createShop(payload);
+      const response = await createShop(payload);
       // onChange({
       //   ...data,
       //   shops: response.shops,
       // });
-      toast.success("Poslano v potrditev");
+      fetchShops();
+      toast.success(TOAST_MESSAGE.SENT_FOR_APPROVAL);
       // router.push(`/floristdetails/${companyId}`);
 
       console.log(response);
@@ -147,7 +157,7 @@ export default function Step6({
       const formData = new FormData();
       formData.append("status", "DRAFT");
 
-      const response = await companyService.updateCompany(formData, companyId);
+      const response = await updateCompany(formData, companyId);
       onChange(response.company);
       console.log(response);
     } catch (error) {
@@ -164,20 +174,55 @@ export default function Step6({
     setInstagram(data.instagram);
     setLogo(data.logo);
 
-    if (data?.shops && data?.shops?.length > 0) {
-      console.log(data.shops, "===================");
-      const updatedShops = data.shops.map((shop, index) => ({
-        ...shop,
-        index: index + 1,
-      }));
-      setShops(updatedShops);
-    }
+    // if (data?.shops && data?.shops?.length > 0) {
+    //   console.log(data.shops, "===================");
+    //   const updatedShops = data.shops.map((shop, index) => ({
+    //     ...shop,
+    //     index: index + 1,
+    //   }));
+    //   setShops(updatedShops);
+    // }
   }, [data]);
+
+  // Refactor--------
+  const fetchShops = async () => {
+    try {
+      const response = await companyService.companyAdditionalData({ companyId, table: "shops" });
+      if (response && response?.length > 0) {
+        const updatedShops = response.map((shop, index) => ({
+          ...shop,
+          index: index + 1,
+        }));
+        setShops(updatedShops);
+      }
+      else if(response && response?.length == 0){
+        setShops(defaultShop)
+      }
+    } catch (error) {
+      console.error('Failed to fetch shops data:', error);
+    }
+  }
+
+  useEffect(() => {
+
+    if (companyId) {
+      fetchShops();
+    }
+  }, [companyId])
+
+  function handleSave() {
+    handleBCSubmit();
+    handleShopSubmit();
+  }
+
+  // --------------------
 
   return (
     <>
+      {(isLoading || isShopCreating) && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[44px]">
@@ -232,6 +277,7 @@ export default function Step6({
                     setFile={(file) => setLogo(file)}
                     inputId="logo-upload"
                   />
+                  <RenderImage src={data?.logo} alt={"img"} label={""} />
                 </div>
                 <div className="space-y-[8px]">
                   <label className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
@@ -306,6 +352,7 @@ export default function Step6({
                 index={block.index}
                 shop={block}
                 onChange={handleShopChange}
+                refetch={fetchShops}
               />
             ))}
             {openBlock === 2 && (
@@ -339,7 +386,7 @@ export default function Step6({
               <div className="flex items-center gap-[8px]">
                 <button
                   type="button"
-                  onClick={handleShopSubmit}
+                  onClick={handleSave}
                   className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
                 >
                   Shrani
@@ -376,7 +423,7 @@ export default function Step6({
               <div className="flex items-center gap-[8px] justify-between w-full">
                 <button
                   type="button"
-                  onClick={handleBCSubmit}
+                  onClick={handleSave}
                   className="bg-[#3DA34D] text-[#FFFFFF] font-normal leading-[24px] text-[16px] py-[12px] px-[25px] rounded-[8px]"
                 >
                   Shrani
@@ -432,11 +479,30 @@ function SliderBlock({
   shop,
   onChange,
   openBlock,
-  setOpenBlock,
+  setOpenBlock, refetch
 }) {
+  const { isLoading: isDeleting, trigger: deleteShop } = useApi(shopService.deleteShop);
+
   const handleChange = (e) => {
     onChange(index - 1, { ...shop, [e.target.name]: e.target.value });
   };
+  const handleDeleteShop = async () => {
+    try {
+    
+      if (!shop?.id) return;
+      const response = await deleteShop(shop?.id);
+
+      if (response.status === 200) {
+        toast.success(TOAST_MESSAGE.SHOP_DELETED_SUCCESSFULLY);
+        refetch();
+
+      }
+    } catch (error) {
+      toast.error(TOAST_MESSAGE.ERROR_DELETING_FLORIST_SHOP);
+    } finally {
+    }
+  };
+  
   return (
     <OpenableBlock
       isDefaultOpen={false}
@@ -444,6 +510,8 @@ function SliderBlock({
       index={index + 1}
       openBlock={openBlock === 2}
       handleOpenBlock={() => setOpenBlock(2)}
+      onDelete={shop?.id ? handleDeleteShop : null}
+      isDisabled={isDeleting}
     >
       <div className="space-y-[16px] ">
         <div className="space-y-[8px]">

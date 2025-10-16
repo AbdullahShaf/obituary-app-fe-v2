@@ -11,6 +11,11 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 import FuneralCompanyPreview from "../components/funeral-company-preview";
 import { useAuth } from "@/hooks/useAuth";
+import { useSession } from "next-auth/react";
+import { useApi } from "@/hooks/useApi";
+import { Loader } from "@/utils/Loader";
+import companyService from "@/services/company-service";
+import { RenderImage } from "@/utils/ImageViewerModal";
 
 export default function Step3({ data, onChange, handleStepChange }) {
   const [cemetries, setCemetries] = useState([
@@ -23,20 +28,48 @@ export default function Step3({ data, onChange, handleStepChange }) {
   ]);
   const [companyId, setCompanyId] = useState(null);
   const { user } = useAuth();
+  const { data: session } = useSession();
+  const { isLoading, trigger: createCemetry } = useApi(cemetryService.createCemetry);
 
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   useEffect(() => {
     if (data && data !== null) {
       setCompanyId(data.id);
 
-      if (data.cemeteries && data.cemeteries.length > 0) {
-        const updatedCemetries = data.cemeteries.map((cemetry, index) => ({
+      // if (data.cemeteries && data.cemeteries.length > 0) {
+      //   const updatedCemetries = data.cemeteries.map((cemetry, index) => ({
+      //     ...cemetry,
+      //     index: index + 1,
+      //   }));
+      //   setCemetries(updatedCemetries);
+      // }
+    }
+  }, [data]);
+
+  // Refactor--------
+  const fetchCemeteries = async () => {
+    try {
+      const response = await companyService.companyAdditionalData({ companyId, table: "cementry" });
+      if (response && response.length > 0) {
+        const updatedCemetries = response.map((cemetry, index) => ({
           ...cemetry,
           index: index + 1,
         }));
         setCemetries(updatedCemetries);
       }
+      console.log('response', response);
+    } catch (error) {
+      console.error('Failed to fetch packages data:', error);
     }
-  }, [data]);
+  }
+
+  useEffect(() => {
+    if (companyId) {
+      fetchCemeteries();
+    }
+  }, [companyId])
+  // ----------
+
   const addSliderBlock = () => {
     setCemetries([
       ...cemetries,
@@ -62,7 +95,7 @@ export default function Step3({ data, onChange, handleStepChange }) {
       // );
 
       // if (incompleteCemetries) {
-      //   toast.error("Each CEmetery must have an name,address and image");
+      //   toast.error("Pokopališče mora imeti ime, naslov in sliko");
       //   return false;
       // }
       const formData = new FormData();
@@ -110,26 +143,26 @@ export default function Step3({ data, onChange, handleStepChange }) {
         console.log(`${pair[0]}:`, pair[1]);
       }
       if (nonEmptyCemeteries.length > 0) {
-        const response = await cemetryService.createCemetry(formData);
+        const response = await createCemetry(formData);
         const updateCompany = {
           ...data,
           cemeteries: response.cemeteries,
         };
         onChange(updateCompany);
         setCemetries(response.cemeteries);
-        toast.success("Cemetries Updated Successfully");
+        toast.success("Posodobljeno");
       }
       return true;
     } catch (error) {
       console.log(error);
-      toast.error("Some Error Occured");
+      toast.error("Prišlo je do napake.");
       return false;
     }
   };
 
   const handleDeleteCemtery = async (cemetery) => {
     if (!cemetery?.id) {
-      toast.error("Cemetery is not saved yet.");
+      toast.error("Pokopališče ni shranjeno");
       return;
     }
     console.log("Deleting cemetery with ID:", cemetery?.id);
@@ -141,7 +174,7 @@ export default function Step3({ data, onChange, handleStepChange }) {
         cemeteries: cemeteries,
       };
       onChange(updateCompany);
-      toast.success("Cemetery deleted successfully");
+      toast.success("Pokopališče je bilo izbrisano");
     } catch (err) {
       console.error("Failed to delete Cemetery", err);
     }
@@ -149,8 +182,10 @@ export default function Step3({ data, onChange, handleStepChange }) {
 
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[22px]">
@@ -255,6 +290,12 @@ export default function Step3({ data, onChange, handleStepChange }) {
 
 function SliderBlock({ index, title, cemetery, onChange, handleDelete }) {
   const [isDefaultOpen, setIsDefaultOpen] = useState(index === 1);
+  const [savedImage, setSavedImage] = useState("");
+  useEffect(()=>{
+    if(typeof cemetery?.image ==="string" && cemetery?.image){
+      setSavedImage(cemetery?.image)
+    }
+  },[cemetery])
   const handleChange = (e) => {
     onChange(index - 1, { ...cemetery, [e.target.name]: e.target.value });
   };
@@ -265,6 +306,7 @@ function SliderBlock({ index, title, cemetery, onChange, handleDelete }) {
       index={index}
       hasDeleteButton={index !== 1 && true}
       onDelete={() => handleDelete(cemetery)}
+      className=""
     >
       <div className="space-y-[16px]">
         <div className="space-y-[8px]">
@@ -289,6 +331,8 @@ function SliderBlock({ index, title, cemetery, onChange, handleDelete }) {
               onChange(index - 1, updated);
             }}
           />
+          <RenderImage src={savedImage} alt={"img"} label={""} />
+
         </div>
         <div className="space-y-[8px] pt-[22px]">
           <label className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">

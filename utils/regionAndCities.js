@@ -102,6 +102,7 @@ const regionsAndCities = {
     'Grad',
     'Hodoš/Hodos',
     'Kobilje',
+    'Križevci',
     'Kuzma',
     'Lendava/Lendva',
     'Ljutomer',

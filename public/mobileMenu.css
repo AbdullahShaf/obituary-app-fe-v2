@@ -1,0 +1,116 @@
+/* Mobile Menu Styles for Call Genie */
+
+.mobile-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 70%;
+  background-color: #07273f;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mobile-menu-logo {
+  width: 130px;
+  height: auto;
+}
+
+.mobile-menu-close {
+  color: white;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  transition: background-color 0.2s;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-menu-close:hover {
+  background-color: rgba(0, 174, 255, 0.2);
+}
+
+.mobile-menu-nav {
+  flex: 1;
+}
+
+.mobile-menu-nav-list {
+  padding: 0.5rem 0;
+  list-style-type: none;
+  margin: 0;
+}
+
+.mobile-menu-nav-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mobile-menu-nav-link {
+  display: block;
+  padding: 1rem 1.5rem;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.mobile-menu-nav-link:hover {
+  background-color: rgba(0, 174, 255, 0.2);
+}
+
+.mobile-menu-footer {
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mobile-menu-login-btn {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #00aeff;
+  color: white;
+  text-align: center;
+  border-radius: 9999px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.mobile-menu-login-btn:hover {
+  background-color: #0096e0;
+}
+
+.mobile-menu-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
+  padding: 0.5rem;
+  background-color: #07273f;
+  border-radius: 0.375rem;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .mobile-menu-toggle {
+    display: none;
+  }
+}

@@ -6,6 +6,12 @@ import { useState, useEffect } from "react";
 import packageService from "@/services/pacakge-service";
 import toast from "react-hot-toast";
 import CompanyPreview from "../components/company-preview";
+import { useSession } from "next-auth/react";
+import companyService from "@/services/company-service";
+import { useApi } from "@/hooks/useApi";
+import { Loader } from "@/utils/Loader";
+import { RenderImage } from "@/utils/ImageViewerModal";
+import { TOAST_MESSAGE } from "../../../../../utils/toastMessage";
 
 export default function Step3({
   data,
@@ -40,13 +46,42 @@ export default function Step3({
     },
   ]);
   const [companyId, setCompanyId] = useState(null);
+  const { data: session } = useSession();
+  const { isLoading, trigger } = useApi(packageService.createPackage);
+
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
 
   useEffect(() => {
     if (data && data !== null) {
       setCompanyId(data.id);
 
-      if (data.packages && data.packages.length > 0) {
-        const updatedPackages = data.packages.map((item, index) => ({
+      // if (data.packages && data.packages.length > 0) {
+      //   const updatedPackages = data.packages.map((item, index) => ({
+      //     ...item,
+      //     index: index + 1,
+      //   }));
+      //   const paddedPackages = [...updatedPackages];
+
+      //   while (paddedPackages.length < 4) {
+      //     paddedPackages.push({
+      //       index: paddedPackages.length + 1,
+      //       title: "",
+      //       price: "",
+      //       image: null,
+      //     });
+      //   }
+
+      //   setPackages(paddedPackages);
+      // }
+    }
+  }, [data]);
+
+  // Refactor--------
+  const fetchPackages = async () => {
+    try {
+      const response = await companyService.companyAdditionalData({ companyId, table: "packages" });
+      if (response && response?.length > 0) {
+        const updatedPackages = response.map((item, index) => ({
           ...item,
           index: index + 1,
         }));
@@ -63,11 +98,23 @@ export default function Step3({
 
         setPackages(paddedPackages);
       }
+      console.log('response', response);
+    } catch (error) {
+      console.error('Failed to fetch packages data:', error);
     }
-  }, [data]);
+  }
+
+  useEffect(() => {
+    if (companyId) {
+      fetchPackages();
+    }
+  }, [companyId])
+  // ----------
+
+
   const addSliderBlock = () => {
-    if (packages?.length >= 4) {
-      toast.error("Dodate lahko največ 4 paketov");
+    if (packages && packages?.length >= 4) {
+      toast.error(TOAST_MESSAGE.YOU_CAN_ADD_4_PACKAGES);
       return;
     }
     setPackages([
@@ -139,14 +186,14 @@ export default function Step3({
       }
 
       if (nonEmptyPackages.length > 0) {
-        const response = await packageService.createPackage(formData);
+        const response = await trigger(formData);
         const updatedCompany = {
           ...data,
           packages: response.packages,
         };
-
+        fetchPackages();
         onChange(updatedCompany);
-        toast.success("Packages Updated Successfully");
+        toast.success(TOAST_MESSAGE.PACKAGES_UPDATED_SUCCESSFULLY);
       }
 
       return true;
@@ -157,8 +204,10 @@ export default function Step3({
   };
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[43px]">
@@ -251,6 +300,12 @@ function SliderBlock({ index, title, currentPackage, onChange }) {
   const handleChange = (e) => {
     onChange(index - 1, { ...currentPackage, [e.target.name]: e.target.value });
   };
+  const [savedImage, setSavedImage] = useState("");
+  useEffect(() => {
+    if (typeof currentPackage?.image === "string" && currentPackage?.image) {
+      setSavedImage(currentPackage?.image);
+    }
+  }, [currentPackage])
   return (
     <OpenableBlock isDefaultOpen={isDefaultOpen} title={title} index={index}>
       <div className="space-y-[16px]">
@@ -265,6 +320,7 @@ function SliderBlock({ index, title, currentPackage, onChange }) {
             }}
             inputId={`package-${index}-upload`}
           />
+          <RenderImage src={savedImage} alt={"img"} label={""} />
         </div>
         <div className="space-y-[8px]">
           <label className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">

@@ -27,7 +27,7 @@ const Card5 = ({ data = {}, cardRefs, index, cemetery }) => {
           <div className="img-container mx-auto rounded-full  shadow-md p-2 h-[200px] w-[140.7567596435547px] flex justify-center">
             <img
               className="object-cover rounded-full"
-              src={data?.image}
+              src={data?.image ?? '/user5.jpeg'}
               alt="Mario"
             />
           </div>
@@ -44,8 +44,12 @@ const Card5 = ({ data = {}, cardRefs, index, cemetery }) => {
             {data?.name} {data?.sirName}
           </h2>
           <p className="tracking-[2px] text-center mx-auto mt-[21px] text-[18px]">
-            {formatToDottedDate(data?.birthDate)} -{" "}
-            {formatToDottedDate(data?.deathDate)}
+            {!data?.birthDate || data?.birthDate?.includes('1025') ? (
+              <>{formatToDottedDate(data?.deathDate)}</>
+            ) : (
+              <>{formatToDottedDate(data?.birthDate)} -{" "}
+                {formatToDottedDate(data?.deathDate)}</>
+            )}
           </p>
         </div>
       </div>

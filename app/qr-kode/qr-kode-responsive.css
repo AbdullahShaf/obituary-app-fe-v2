@@ -1,0 +1,478 @@
+@media only screen and (min-width: 1901px) {
+   
+    
+}
+
+@media only screen and (min-width: 1536px) and (max-width: 1900px){ 
+   
+     
+
+}
+
+/*start of = (min-width: 1366px) and (max-width: 1440px)*/
+@media only screen and (min-width: 1366px) and (max-width: 1535px){
+   
+ 
+
+/*end of = (min-width: 1366px) and (max-width: 1900px)*/			
+}
+
+
+
+
+
+ 
+/*start of = (min-width: 1280px) and (max-width: 1365px)*/	
+@media only screen and (min-width: 1279px) and (max-width: 1365px){
+
+     .everything_free_inner{ max-width: 685px; }
+    
+     .qr_page_wrapper{ padding-top: 70px; }
+    
+/*end of = (min-width: 1280px) and (max-width: 1365px)*/			
+}
+
+
+
+
+
+/*start of = (min-width: 1024px) and (max-width: 1279px)*/
+@media only screen and (min-width: 1024px) and (max-width: 1280px){
+
+   
+	
+body { -webkit-text-size-adjust:none;  -webkit-overflow-scrolling: touch; }
+ 
+.everything_free_inner{ max-width: 685px; }
+
+
+.autoContent{ padding: 0px 53px; }
+
+.qr_page_wrapper{ padding-top: 80px; }
+.banner_wrapper{ padding: 66px 0px 74px 0px; }
+.banner_inner{ flex-direction: column; gap: 50px; max-width: 587px; margin: auto; }
+.banner_content_heading{ padding-top: 30px; text-align: center; }
+.tab_how_it_works_card_li{ display: block; }
+.how_it_works_content ul{ margin: -78px -12px; }
+.how_it_works_content ul li{ width: 50%; padding: 78px 12px; }
+
+.bnefits_qr_tombstones{ padding: 91px 0px 114px 0px; }
+.bnefits_qr_features{ padding-top: 60px; }
+.feature_image_one, .feature_image_forth{ display: none; }
+.feature_text{ width: 100%; max-width: 100%; }
+.bnefits_qr_features ul li{ padding-bottom: 45px; }
+
+.tab_bnefits_qr_features{ display: block; }
+
+.web_bnefits_qr_features{ display: none; }
+
+.tab_bnefits_qr_features .qr_osmrtnica_img{ top: 0px; }
+
+ 
+
+.getQRcode_sec{ padding: 91px 0px 68px 0px; position: relative; }
+
+.getQRcode_item{ padding-bottom: 28px; }
+
+.getQRcode_item_right_content{ top: -11px; }
+
+/* .doYouMakeQRcode_sec_text p{ max-width: 380px; } */
+
+.everything_free_inner{ max-width: 602px; }
+.everything_free_sec{ padding: 83px 0px 75px 0px; }
+.everything_free_content{ padding-top: 31px; }
+
+
+.feature_item_two_three{ padding-left: 30px; }
+
+.banner_content_detail p{ text-align: center; }
+
+.bnefits_qr_tombstones_inner{ max-width: 640px; margin: auto; }
+.faqs_sec_inner{ max-width: 655px; margin: auto; }
+
+.getQRcode_sec_inner{ max-width: 670px; margin: auto; }
+.getQRcode_item_right_content p{ display: none; }
+
+.getQRcode_item_right_img{ width: 250px; }
+
+.everything_free_content_text p{ max-width: 466px; margin: auto; }
+ 
+
+.doYouMakeQRcode_sec_text p{ font-size: 16px; max-width: 372px; }
+
+
+     .qr_code_accordion_item.active .accordion_content{ padding-bottom: 220px; }
+
+ .qr_code_accordion_item.active .doYouMakeQRcode_sec{ bottom: 0px; }
+
+
+ .bnefits_qr_tombstones_inner h2{ font-size: 28px; }
+
+ .web-text{ display: none; }
+ .tab-text{ display: block !important; }
+
+
+ .web-faqs{ display: none !important; }
+ .tab-faqs{ display: block !important; }
+ .mob-faqs{ display: none !important; }
+
+
+
+  .mobile_bnefits_qr_features{ display: none !important; }
+.tab_bnefits_qr_features{ display: block !important; }
+.web_bnefits_qr_features{ display: none !important; }
+ .e_free_c_list_txt p span{ color: #0A85C2; }
+ 
+ .getQRcode_sec_inner .web-text{ display: block !important; }
+
+ .tab-faqs .tablet\:max-w-\[600px\]{ max-width: 655px !important; }
+ .tab-faqs .tablet\:max-w-\[600px\] .px-5{ padding: 0px !important; }
+
+/*end of = (min-width: 1024px) and (max-width: 1279px)*/			
+}
+
+
+/*start of = (min-width: 768px) and (max-width: 1023px)*/	
+@media only screen and (min-width: 744px) and (max-width: 1024px){
+   
+ 
+body { -webkit-text-size-adjust:none; -webkit-overflow-scrolling: touch; overflow-x: hidden; }
+
+.autoContent{ padding: 0px 53px; }
+
+.qr_page_wrapper{ padding-top: 80px; }
+.banner_wrapper{ padding: 66px 0px 74px 0px; }
+.banner_inner{ flex-direction: column; gap: 50px; max-width: 587px; margin: auto; }
+.banner_content_heading{ padding-top: 30px; text-align: center; }
+.tab_how_it_works_card_li{ display: block; }
+.how_it_works_content ul{ margin: -78px -12px; }
+.how_it_works_content ul li{ width: 50%; padding: 78px 12px; }
+
+.bnefits_qr_tombstones{ padding: 91px 0px 114px 0px; }
+.bnefits_qr_features{ padding-top: 60px; }
+.feature_image_one, .feature_image_forth{ display: none; }
+.feature_text{ width: 100%; max-width: 100%; }
+.bnefits_qr_features ul li{ padding-bottom: 45px; }
+
+.tab_bnefits_qr_features{ display: block; }
+
+.web_bnefits_qr_features{ display: none; }
+
+.tab_bnefits_qr_features .qr_osmrtnica_img{ top: 0px; }
+
+ 
+
+.getQRcode_sec{ padding: 91px 0px 68px 0px; position: relative; }
+
+.getQRcode_item{ padding-bottom: 28px; }
+
+.getQRcode_item_right_content{ top: -11px; }
+
+/* .doYouMakeQRcode_sec_text p{ max-width: 380px; } */
+
+.everything_free_inner{ max-width: 602px; }
+.everything_free_sec{ padding: 83px 0px 75px 0px; }
+.everything_free_content{ padding-top: 31px; }
+
+
+.feature_item_two_three{ padding-left: 30px; }
+
+.banner_content_detail p{ text-align: center; }
+
+.bnefits_qr_tombstones_inner{ max-width: 640px; margin: auto; }
+.faqs_sec_inner{ max-width: 655px; margin: auto; }
+
+.getQRcode_sec_inner{ max-width: 670px; margin: auto; }
+.getQRcode_item_right_content p{ display: none; }
+
+.getQRcode_item_right_img{ width: 250px; }
+
+.everything_free_content_text p{ max-width: 466px; margin: auto; }
+ 
+
+.doYouMakeQRcode_sec_text p{ font-size: 16px; max-width: 372px; }
+
+
+     .qr_code_accordion_item.active .accordion_content{ padding-bottom: 220px; }
+
+ .qr_code_accordion_item.active .doYouMakeQRcode_sec{ bottom: 0px; }
+
+
+ .bnefits_qr_tombstones_inner h2{ font-size: 28px; }
+
+ .web-text{ display: none; }
+ .tab-text{ display: block !important; }
+
+
+ .web-faqs{ display: none !important; }
+ .tab-faqs{ display: block !important; }
+ .mob-faqs{ display: none !important; }
+
+
+
+  .mobile_bnefits_qr_features{ display: none !important; }
+.tab_bnefits_qr_features{ display: block !important; }
+.web_bnefits_qr_features{ display: none !important; }
+
+
+.e_free_c_list_txt p span{ color: #0A85C2; }
+
+.getQRcode_sec_inner .web-text{ display: block !important; }
+
+.tab-faqs .tablet\:max-w-\[600px\]{ max-width: 655px !important; }
+.tab-faqs .tablet\:max-w-\[600px\] .px-5{ padding: 0px !important; }
+
+
+
+/* end 768 */
+}
+
+
+@media only screen and (min-width:0px) and (max-width:744px){
+   
+ 
+
+    body {
+    -webkit-text-size-adjust: none;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden !important;
+    }
+
+    
+    .autoContent{ padding: 0px 12px; }
+    .qr_page_wrapper{ position: absolute; padding-top: 68px; }
+    .mobile_navbar{ display: block;  }
+    .mobile_navbar_header{ max-width: 360px;
+        margin: auto;
+        position: absolute;
+        width: 100%; transform: translateX(-50%); left: 50%; margin-top: 16px; }
+    .tablet\:h-\[80px\]{ height: 68px !important; }
+
+    .banner_wrapper{ padding: 60px 0px 28px 0px; }
+    .banner_inner{ flex-wrap: wrap; }
+    .banner_left{ width: 100%; margin: auto; }
+    .banner_right{ width: 100%; }
+
+    .banner_content_heading h2{ font-size: 28px; text-align: center; }
+    .banner_content_heading span{ font-size: 20px; font-weight: 700; line-height: 32px; text-align: center; }
+    .banner_content_detail p{ text-align: center; }
+
+
+
+    .how_it_works{ padding: 49px 0px; }
+    .how_it_works_heading{ padding-bottom: 39px; }
+    .how_it_works_content ul{ flex-wrap: wrap; }
+    .how_it_works_content ul li{ width: 100%; }
+
+    .hiw_card_icon{ width: 64px; height: 64px; }
+    .bnefits_qr_tombstones{ padding: 57px 0px 69px 0px; }
+
+    .bnefits_qr_tombstones_inner h2{ line-height: 40px; }
+    .bnefits_qr_features{ padding-top: 24px; }
+
+    .feature_image_one{ display: none; }
+
+    .feature_text{ padding-bottom: 24px; }
+    .qr_osmrtnica_img_wrapper .feature_text{ padding-bottom: 0px; }
+    .feature_text h3{ font-size: 20px; font-weight: 600; line-height: 32px; }
+    .feature_text p{ font-size: 16px; }
+    .bnefits_qr_features ul li{ padding-bottom: 24px; }
+
+    .feature_item{ flex-wrap: wrap; }
+    .feature_text{ width: 100%; max-width: 100%; }
+
+    .feature_image{ width: 100%; flex: auto; }
+
+    .qr_osmrtnica_img{ display: none;  }
+
+    .feature_image_three{ max-width: 217px; margin: auto; margin-bottom: 24px; }
+    .feature_image_forth{ display: none; }
+
+
+  
+
+    .faqs_sec_inner h2{ font-size: 28px; line-height: 48px; }
+    .accordion{ padding-top: 21px; }
+
+    .accordion_header strong{ font-size: 16px; font-weight: 500; line-height: 24px; }
+
+    .getQRcode_sec{ padding: 62px 0px; position: relative; }
+
+    .getQRcode_sec_inner h2{ font-size: 28px; line-height: 40px; }
+     .getQRcode_item_heading strong{ font-size: 20px; line-height: 32px; font-weight: 600; }
+    .getQRcode_item_heading span{ font-size: 14px; }
+    .getQRcode_item_left{ width: 100%; max-width: 100%; padding-right: 0px; }
+    .getQRcode_item_right{ display: none; }
+    .getQRcode_item_list{ padding-top: 21px; }
+    .getQRcode_item_list ul li p{ font-size: 16px; letter-spacing: -0.3px; }
+    .getQRcode_accordian_wrapper{ padding-top: 0px; }
+
+    .getQRcode_accordian_wrapper .accordion_header strong{ font-size: 20px; font-weight: 600; line-height: 32px; }
+
+    .doYouMakeQRcode_sec{ padding: 26px 0px; }
+
+    .doYouMakeQRcode_sec_inner{ display: block; text-align: center; max-width: 328px;  margin: auto; }
+    .doYouMakeQRcode_sec_text{ padding-bottom: 21px; }
+    .doYouMakeQRcode_sec_text strong{ line-height: 28px; }
+    .doYouMakeQRcode_sec_text p{ font-size: 14px; }
+
+    .everything_free_sec{ padding: 77px 0px 28px 0px; }
+    .everything_free_heading h2{ font-size: 28px; }
+    .everything_free_heading p{ font-size: 20px; font-weight: 600; }
+    .everything_free_content{ padding-top: 30px; }
+
+    .e_free_c_list_nbr strong{ font-size: 32px; line-height: 38px; }
+    .e_free_c_list_txt p{ font-size: 16px; }
+    .e_free_c_list_txt p span{ font-size: 16px; font-weight: 500; }
+    .e_free_c_list_txt small{ font-size: 14px; }
+    .e_free_content_list{ padding-bottom: 16px; }
+
+    .everything_free_content_text p{ font-size: 20px; font-weight: 600; }
+
+    .footer{ display: none;  }
+    .mob_footer{ margin-top: 12px; display: none; }
+
+    .mob_footer .footer_top{ padding: 0px 0px 18px 0px; justify-content: center;}
+    .mob_footer .footer_bottom{ padding: 18px 0px 0px 0px;}
+
+    .footer_bottom p{ font-size: 10.5px; padding-top: 6px; }
+
+    .text-web{ display: none; }
+
+    .text-mob{ color: #3C3E41; font-family: Roboto Flex;
+font-weight: 400; 
+font-size: 18px; 
+line-height: 27px; 
+text-align: center;
+display: block; }
+
+    .banner_inner{ gap: 30px; max-width: 337px; margin: auto; }
+
+    .banner_img{ max-width: 217px; margin: auto; }
+
+    .bnefits_qr_tombstones_inner{ max-width: 337px;
+    margin: auto; }
+
+    /* .getQRcode_sec_inner{ max-width: 337px; margin: auto; } */
+
+.getQRcode_sec_inner .getQRcode_content {
+        padding-top: 40px;
+        max-width: 337px;
+        margin: auto;
+    }
+
+    .getQRcode_sec_inner .qr_code_accordion_item .accordion_header{ max-width: 337px;
+        margin: auto; }
+ 
+        .getQRcode_sec_inner .getQRcode_accordian_wrapper{ margin-left: -12px;
+    margin-right: -12px; }
+
+    .qr_code_accordion_item.active .accordion_body{ max-width: 337px;
+        margin: auto; }
+.getQRcode_item_header span{ font-size: 14px; }
+
+.everything_free_inner{ max-width: 371px; margin: auto; }
+
+.faqs_sec_inner{ max-width: 371px; margin: auto; }
+
+    
+    
+
+
+        html, body {
+  overflow-x: hidden;
+}
+
+/* Ensure wrapper doesn't overflow */
+.qr_page_wrapper {
+  position: relative;  /* absolute hata kar relative karna best hoga */
+  width: 100%;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+}
+
+ 
+
+.footer_links ul li::after{ width: 6px; height: 6px; }
+
+.footer_links ul li{ padding-right: 27px; }
+.footer_links ul li::after{ right: 10px; }
+
+.mobile_navbar ul li{ padding: 0px 9px; }
+
+.header_icons{ display: none; }
+
+ 
+ 
+     .qr_code_accordion_item.active .accordion_content{ padding-bottom: 220px; }
+
+ .qr_code_accordion_item.active .doYouMakeQRcode_sec{ bottom: 0px; }
+
+ .faqs_sec_inner button{ height: auto; padding: 8px 6px; }
+
+ .faqs_sec_inner button div{ font-size: 16px !important; }
+
+
+ .faqs_sec_inner .px-5{ padding: 0px 0px; }
+
+ .getQRcode_item_header strong{ font-size: 20px; font-weight: 600; line-height: 32px; }
+
+
+ .bnefits_qr_tombstones_inner h2{ font-size: 28px; }
+
+ .web-text{ display: none !important; }
+ .mobile-text{ display: block !important; }
+
+ 
+
+
+ .web-faqs{ display: none !important; }
+ .tab-faqs{ display: none !important; }
+ .mob-faqs{ display: block !important; }
+
+ .faq-web-text{ display: none !important; }
+ .faq-mobile-text{ display: block !important; }
+
+
+ .mobile_bnefits_qr_features{ display: block !important; }
+.tab_bnefits_qr_features{ display: none !important; }
+.web_bnefits_qr_features{ display: none !important; }
+
+
+.max-width-230px {
+    max-width: 230px;
+    margin: auto;
+}
+
+.how_it_works_heading h2{ font-size: 28px; }
+
+
+}
+
+@media only screen and (min-width:320px) and (max-width:519px){
+     .banner_content_heading span{ max-width: 380px; margin: auto; }
+     .banner_content_detail p{ max-width: 380px; margin: auto; }
+ 
+}
+@media only screen and (min-width:520px) and (max-width:767px){
+     
+    
+}
+
+
+
+
+@supports (-webkit-touch-callout: none) {
+    html, body {
+        overflow-x: hidden;  
+    }
+}
+
+
+
+
+
+
+
+

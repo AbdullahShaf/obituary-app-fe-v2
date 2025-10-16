@@ -35,6 +35,20 @@ export function cloneWithStyles(node: HTMLElement) {
   return clone;
 }
 
+async function waitForImages(el: HTMLElement) {
+  const imgs = el.querySelectorAll("img");
+  await Promise.all(
+    Array.from(imgs).map(
+      (img) =>
+        new Promise<void>((resolve) => {
+          if (img.complete) return resolve();
+          img.onload = () => resolve();
+          img.onerror = () => resolve();
+        })
+    )
+  );
+}
+
 /**
  * Downloads an element as a PNG image, preserving styles (works with Tailwind).
  */
@@ -47,6 +61,8 @@ export async function downloadElementAsImage(element: HTMLElement) {
   document.body.appendChild(styledClone);
   styledClone.style.position = "fixed";
   styledClone.style.top = "-9999px";
+
+  await waitForImages(styledClone);
 
   const canvas = await html2canvas(styledClone, {
     scale: 1.5,
@@ -84,6 +100,8 @@ export async function getCardsImageAndPdfsFiles(
     elements.map(async (element, i) => {
       const imageDataUrl = await downloadElementAsImage(element);
       if (!imageDataUrl) return null;
+
+      i == 0 && console.log('>>>>>>>> imageDataUrl', imageDataUrl);
 
       // Convert image dataURL to File
       const imageFile = dataURLtoFile(imageDataUrl, `card_${i + 1}.png`);

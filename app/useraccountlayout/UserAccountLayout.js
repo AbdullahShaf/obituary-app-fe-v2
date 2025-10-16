@@ -87,21 +87,29 @@ const UserAccountLayout = ({ children }) => {
       case "/pregled":
         setHeadingOne("Moji bližnji");
         setHeadingTwo("Obletnice");
-        setHeadingThree("Moje vsebine");
+        if (window.innerWidth >= 744) {
+          setHeadingThree("Moje vsebine");
+        }
         setHrefLinkOne(`${basePath}/obletnice`);
         setHrefLinkTwo(`${basePath}/moji-prispevki`);
         break;
 
       case "/obletnice":
         setHeadingOne("Obletnice");
-        setHeadingTwo("Moji bližnji");
+        if (window.innerWidth >= 744) {
+          setHeadingTwo("Moji bližnji");
+        }
         setHeadingThree("Moje vsebine");
         setHrefLinkOne(`${basePath}/pregled`);
         setHrefLinkTwo(`${basePath}/moji-prispevki`);
         break;
 
       case "/moji-prispevki":
-        setHeadingOne("Moje žalne vsebine");
+        if (window.innerWidth >= 744) {
+          setHeadingOne("Moje žalne vsebine");
+        } else {
+          setHeadingOne("Moji prispevki");
+        }
         setHeadingTwo("Moji bližnji");
         setHeadingThree(!innnerSize ? "Obletnice" : "");
         setHrefLinkOne(`${basePath}/pregled`);
@@ -308,10 +316,10 @@ const UserAccountLayout = ({ children }) => {
       </div>
 
       {/* FOOTER FOR MOBILE */}
-      <FooterMobile
+      {/* <FooterMobile
         handleGoToTop={handleGoToTop}
         setIsMobilSideBarOpen={setIsMobilSideBarOpen}
-      />
+      /> */}
     </div>
   );
 };

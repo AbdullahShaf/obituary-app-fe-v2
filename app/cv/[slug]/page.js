@@ -43,7 +43,8 @@ export default function FloristPage() {
                         {
                             company ?
 
-                                <Layout from={"18"} forFooter={""} currentPage="">
+                                <Layout from={"7"} forFooter={"memorypage"} data={company} showHamburger={false}
+                                    currentPage="">
                                     <div className="flex flex-1 flex-col bg-[#F5F7F9]">
                                         <div className="flex flex-col relative mx-auto overflow-auto w-full bg-[#F5F7F9]">
                                             <FloristsSunFlowerView data={company} />

@@ -81,9 +81,9 @@ const adminService = {
   },
 
   // PATCH Approve company's request
-  approveCompanyRequest: async (id: string) => {
+  approveCompanyRequest: async (id: string, status: "DRAFT" | "PUBLISHED") => {
     try {
-      const response = await axios.patch(`/admin/approve-request/${id}`);
+      const response = await axios.patch(`/admin/approve-request/${id}`, { status });
       return response;
     } catch (error) {
       console.error("Error in aprroval:", error);
@@ -97,6 +97,17 @@ const adminService = {
       return response.data;
     } catch (error) {
       console.error("Error fetching florist companies:", error);
+      throw error;
+    }
+  },
+
+  // Get contacts
+  getContacts: async () => {
+    try {
+      const response = await axios.get("/admin/contact-list");
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching contacts :", error);
       throw error;
     }
   },
@@ -216,6 +227,40 @@ const adminService = {
       return response.data;
     } catch (error) {
       console.error("Error updating obituary notes:", error);
+      throw error;
+    }
+  },
+
+  createSponosor: async (formData: any) => {
+    const endpoint = "/admin/create-sponsor";
+    const response = await axios.post(endpoint, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return response.data;
+  },
+
+  editSponosor: async (formData: any, id: any) => {
+    const endpoint = `/admin/edit-sponsor/${id}`;
+    const response = await axios.post(endpoint, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return response.data;
+  },
+
+  getSponosors: async () => {
+    const endpoint = "/admin/sponsor-list";
+    const response = await axios.get(endpoint);
+    return response.data;
+  },
+
+// services/admin-service.ts
+  deleteSponsor: async (id: any) => {
+    try {
+      const endpoint = "/admin/delete-sponsor/" + id;
+      const response = await axios.delete(endpoint);
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting sponsor:", error);
       throw error;
     }
   }

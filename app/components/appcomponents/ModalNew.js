@@ -65,7 +65,7 @@ export default function ModalNew2({
     } catch (error) {
       console.log(error);
       // Optional: Show error toast
-      toast.error("Napaka pri shranjevanju podatkov");
+      toast.error("Napaka pri shranjevanju podatkov.");
     }
   };
 

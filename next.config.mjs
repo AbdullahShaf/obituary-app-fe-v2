@@ -110,6 +110,11 @@ const nextConfig = {
         hostname: "staging.osmrtnica.com",
         pathname: "/be/api/packageUploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "obituary-app-bee.b-cdn.net",
+        pathname: "/obituaries/**",
+      }
     ],
   },
 };

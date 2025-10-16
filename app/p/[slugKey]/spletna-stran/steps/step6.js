@@ -7,6 +7,9 @@ import { toast } from "react-hot-toast";
 import companyService from "@/services/company-service";
 import FuneralCompanyPreview from "../components/funeral-company-preview";
 import { useAuth } from "@/hooks/useAuth";
+import { useSession } from "next-auth/react";
+import { Loader } from "@/utils/Loader";
+import { useApi } from "@/hooks/useApi";
 
 export default function Step6({ data, onChange, handleStepChange }) {
   const [openBlock, setOpenBlock] = useState(1);
@@ -22,7 +25,10 @@ export default function Step6({ data, onChange, handleStepChange }) {
       isDefaultOpen: true,
     },
   ]);
+  const { data: session } = useSession();
+  const { isLoading, trigger: update } = useApi(companyService.updateCompany);
 
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const { user } = useAuth();
 
 
@@ -51,7 +57,7 @@ export default function Step6({ data, onChange, handleStepChange }) {
       !emergencyPhone ||
       !companyId
     ) {
-      toast.error("All fields are mandatory.");
+      toast.error("Vsa polja so obvezna");
       return false;
     }
 
@@ -78,16 +84,16 @@ export default function Step6({ data, onChange, handleStepChange }) {
         );
       }
 
-      const response = await companyService.updateCompany(formData, companyId);
+      const response = await update(formData, companyId);
       onChange(response.company);
-      toast.success("Company Updated Successfully");
+      toast.success("Posodobljeno");
       console.log(response);
       return true;
     } catch (error) {
       console.error("Error:", error);
       toast.error(
         error?.response?.data?.error ||
-        "Failed to update company. Please try again."
+        "Prišlo je do napake. Ni bilo posodobljeno. Poskusi znova."
       );
       return false;
     }
@@ -96,7 +102,7 @@ export default function Step6({ data, onChange, handleStepChange }) {
   const handlePublish = async (send = '') => {
     try {
       if (data && data.status === "SENT_FOR_APPROVAL") {
-        toast.error("Company is already sent for approval");
+        toast.error("Poslano v potrditev");
         return false;
       }
       const formData = new FormData();
@@ -105,7 +111,7 @@ export default function Step6({ data, onChange, handleStepChange }) {
         formData.append("allowStatus", send);
       }
 
-      const response = await companyService.updateCompany(formData, companyId);
+      const response = await update(formData, companyId);
       onChange(response.company);
       toast.success("Poslano v potrditev. Hvala.");
       // router.push(`/funeralcompany/${companyId}`);
@@ -120,8 +126,10 @@ export default function Step6({ data, onChange, handleStepChange }) {
 
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[44px]">

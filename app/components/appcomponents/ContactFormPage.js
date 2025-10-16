@@ -38,15 +38,15 @@ const ContactFormPage = () => {
   const handleSubmit = async () => {
     try {
       if (!inputValueEmail || !inputValueTodo || !inputValueMessage || !inputValueMatter) {
-        toast.error('Fill all details');
+        toast.error('Izpolni vsa polja.');
         return;
       }
       setLoading(true);
       await userService.saveContact({
         name: inputValueTodo,
         email: inputValueEmail,
-        subject: inputValueMessage,
-        message: inputValueMatter
+        subject: inputValueMatter,
+        message: inputValueMessage
       });
       resetForm();
       setLoading(false);
@@ -54,7 +54,7 @@ const ContactFormPage = () => {
     } catch (err) {
       resetForm();
       setLoading(false);
-      toast.error('Some error occured');
+      // toast.error('Prišlo je do napake.');
     }
   }
 

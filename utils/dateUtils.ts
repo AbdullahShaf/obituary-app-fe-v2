@@ -19,11 +19,19 @@ export function formatToDottedDate(
     return null;
   }
 
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months start at 0
+  const day = date.getDate();
+  const month = date.getMonth() + 1; // Months start at 0
   const year = date.getFullYear();
 
-  return `${day}.${month}.${year}`;
+  // 🎯 Special case: 31 December → only show year
+  if (day === 31 && month === 12) {
+    return `${year}`;
+  }
+
+  const dayStr = String(day).padStart(2, "0");
+  const monthStr = String(month).padStart(2, "0");
+
+  return `${dayStr}.${monthStr}.${year}`;
 }
 
 export function formatDayAndTimeSlovenian(
@@ -40,7 +48,17 @@ export function formatDayAndTimeSlovenian(
   const time = date.toLocaleTimeString("sl-SI", {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: false
+    hour12: false,
   });
   return { dayName, time };
 }
+
+
+
+export const formatDate = (timestamp: string, options: Intl.DateTimeFormatOptions = {
+  weekday: "long",
+  month: "2-digit",
+  day: "2-digit",
+}) => {
+  return new Date(timestamp).toLocaleString("sl-SI", options);
+};

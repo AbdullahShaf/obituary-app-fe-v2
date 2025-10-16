@@ -32,7 +32,21 @@ const getObituary = async (queryParams?: {
     return response.data;
   } catch (error: unknown) {
     console.error("Error fetching obituaries:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
+  }
+};
+
+const getCompanyPageObituary = async (queryParams?: {
+  city?: string;
+  userId?: string;
+}) => {
+  try {
+    const endpoint = "/obituary/company-page";
+    const response = await axios.get(endpoint, { params: queryParams });
+    return response.data;
+  } catch (error: unknown) {
+    console.error("Error fetching obituaries:", error);
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -44,7 +58,7 @@ const getMemory = async (queryParams?: { slugKey?: string }) => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error fetching obituaries:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -62,9 +76,28 @@ const getFunerals = async (queryParams?: {
     return response.data;
   } catch (error: unknown) {
     console.error("Error fetching obituaries:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
+
+const getCompanyPageFunerals = async (queryParams?: {
+  city?: string;
+  region?: string;
+  id?: string;
+  startDate?: string;
+  endDate?: string;
+}) => {
+  try {
+    const endpoint = "/obituary/company-page/funerals";
+
+    const response = await axios.get(endpoint, { params: queryParams });
+    return response.data;
+  } catch (error: unknown) {
+    console.error("Error fetching obituaries:", error);
+    // throw new Error("Network error or no response");
+  }
+};
+
 const updateObituary = async (
   id: string,
   formData: FormData,
@@ -89,7 +122,7 @@ const updateObituaryVisits = async (data: any) => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error updating obituary visits:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 //add sorrow book
@@ -104,7 +137,7 @@ const createSorrowBook = async (id: string, data: any) => {
       throw error.response;
     } else {
       console.error("Network error:", error);
-      throw new Error("Network error or no response");
+      // throw new Error("Network error or no response");
     }
   }
 };
@@ -121,7 +154,7 @@ const createDedication = async (id: string, data: any) => {
       throw error.response;
     } else {
       console.error("Network error:", error);
-      throw new Error("Network error or no response");
+      // throw new Error("Network error or no response");
     }
   }
 };
@@ -136,7 +169,7 @@ const addPhoto = async (id: string, formData: FormData) => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error updating obituary:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -152,7 +185,7 @@ const createCondolence = async (id: string, data: any) => {
       throw error.response;
     } else {
       console.error("Network error:", error);
-      throw new Error("Network error or no response");
+      // throw new Error("Network error or no response");
     }
   }
 };
@@ -169,7 +202,7 @@ const burnCandle = async (id: string, data: any) => {
       throw error.response;
     } else {
       console.error("Network error:", error);
-      throw new Error("Network error or no response");
+      // throw new Error("Network error or no response");
     }
   }
 };
@@ -186,7 +219,7 @@ const fetchPendingPosts = async () => {
       throw error.response;
     } else {
       console.error("Network error:", error);
-      throw new Error("Network error or no response");
+      // throw new Error("Network error or no response");
     }
   }
 };
@@ -203,7 +236,7 @@ const changePostStatus = async (data: any) => {
       throw error.response;
     } else {
       console.error("Network error:", error);
-      throw new Error("Network error or no response");
+      // throw new Error("Network error or no response");
     }
   }
 };
@@ -216,7 +249,7 @@ const addReport = async (id: string, data: any) => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error submitting report:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -228,7 +261,7 @@ const getMemories = async () => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error Getting Memories:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -239,7 +272,7 @@ const getKeeperMemories = async () => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error Getting Memories:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -250,7 +283,7 @@ const getMemoryLogs = async (id: number) => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error Getting Logs:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -261,7 +294,7 @@ const getLogs = async () => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error Getting Logs:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -272,7 +305,7 @@ const getGiftLogs = async () => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error Getting Logs:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -283,7 +316,7 @@ const getApprovedData = async () => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error Getting Posts:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -294,7 +327,7 @@ const getAdminMemories = async () => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error Getting Posts:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -305,7 +338,7 @@ const getCompanyObituaries = async () => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error Getting Posts:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -316,7 +349,7 @@ const getMonthlyCompanyData = async () => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error Getting Posts:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 
@@ -327,7 +360,7 @@ const getCompanyLogs = async () => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error Getting Logs:", error);
-    throw new Error("Network error or no response");
+    // throw new Error("Network error or no response");
   }
 };
 const getMemoryId = async (queryParams?: {
@@ -354,7 +387,7 @@ const uploadObituaryTemplateCards = async (id: string, data: FormData) => {
     return response.data;
   } catch (error: unknown) {
     console.error("Error Uploading Obituary Template Cards:", error);
-    throw error;
+    // throw error;
   }
 };
 
@@ -363,13 +396,24 @@ const getSingleObituaryById = async (id: any) => {
   return response.data || null;
 };
 
+const generateQR = async ({id, slugKey}:{id: string, slugKey: string}) => {
+  try {
+    const endpoint = `/obituary/generate-qr`;
+    const response = await axios.post(endpoint, { id, slugKey });
+    return response.data;
+  } catch (error: unknown) {
+    console.error("Error generate-qr:", error);
+    // throw error;
+  }
+};
+
 const obituaryService = {
-  getObituaryById,
+  getObituaryById,generateQR,
   createObituary,
   getGiftLogs,
-  getObituary,
+  getObituary, getCompanyPageObituary,
   getMemory,
-  getFunerals,
+  getFunerals, getCompanyPageFunerals,
   updateObituary,
   updateObituaryVisits,
   createSorrowBook,

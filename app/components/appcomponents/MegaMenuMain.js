@@ -4,18 +4,27 @@ import MegaMenuCompo from "../appcomponents/MegaMenuCompo";
 import MemorialMenuCompo from "../appcomponents/MemorialMenuCompo";
 import FloritsMenuCompo from "../appcomponents/FloritsMenuCompo";
 import ContactMenuCompo from "../appcomponents/ContactMenuCompo";
+import MobileMenuButton from "../appcomponents/MobileMenuButton";
 import Image from "next/image";
+import Link from "next/link";
 // 24 October 2024
 import { useRouter } from "next/navigation";
+
+// Import Bootstrap components (assuming they're available)
+import { OffcanvasHeader, OffcanvasTitle } from "react-bootstrap";
+
+// Import Logo (you'll need to adjust the path to your actual logo)
+import Logo from "../../../public/footer_logo_white.png";
 
 const MegaMenu = () => {
   // 24 October 2024
   const router = useRouter();
 
   const [activeButton, setActiveButton] = useState("Osmrtnice"); // Default to 'Osmrtnice'
-  const [isFor, setIsFor] = useState("desktop"); // Default to 'mob'
+  const [isFor, setIsFor] = useState("mob"); // Default to 'mob'
   const [activeDiv, setActiveDiv] = useState(0);
   const [isFrom, setIsFrom] = useState(1);
+  const [showMobileMenu, setShowMobileMenu] = useState(true); // Control mobile menu visibility
 
   const showDiv = (divId, isFrom) => {
     setActiveDiv(divId);
@@ -82,8 +91,128 @@ const MegaMenu = () => {
     }
   };
 
+  // State for expandable menu
+  const [ostaleStraniOpen, setOstaleStraniOpen] = useState(false);
+
+  const toggleOstaleStrani = () => {
+    setOstaleStraniOpen(!ostaleStraniOpen);
+  };
+
+  // Function to toggle mobile menu
+  const toggleMobileMenu = () => {
+    setShowMobileMenu(!showMobileMenu);
+  };
+
   return (
-    <div
+    <>
+    {/* Mobile Menu - Shows when mega menu is opened on mobile */}
+    {isFor === "mob" && showMobileMenu && (
+        <>
+        {/* Backdrop */}
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50" 
+          style={{zIndex: 9999998}}
+          onClick={() => setShowMobileMenu(false)}
+        />
+        <style jsx global>{`
+          header {
+            display: none !important;
+          }
+          .fixed.top-0.z-50 {
+            display: none !important;
+          }
+          div[class*="fixed"][class*="top-0"][class*="z-50"] {
+            display: none !important;
+          }
+          .d-none.d-md-block {
+            display: none !important;
+          }
+          div[style*="display: none"] {
+            display: none !important;
+          }
+          .d-none.d-md-block,
+          div[class*="d-none d-md-block"] {
+            display: none !important;
+          }
+        `}</style>
+        <div className="fixed top-0 left-0 bottom-0 w-[280px] h-full bg-[#083545] flex flex-col overflow-y-auto shadow-lg" style={{zIndex: 9999999}}>
+          {/* Offcanvas Header with logo and close button */}
+          <OffcanvasHeader style={{marginTop: "10px", paddingTop: "20px", borderBottom: "2px solid #fff", marginLeft: "15px", marginRight: "15px"}}>
+            <OffcanvasTitle className="" id={`offcanvasNavbarLabel-expand-xl`}>
+              <Link className="" href="/">
+              <div className="flex justify-between align-items-center w-full">
+<div className="">
+<Image src={Logo} className="px-3 pb-5" alt="App Logo" style={{width: "150px"}} />
+</div>
+<div className="pr-3">
+<button 
+              onClick={() => setShowMobileMenu(false)}
+              className="rounded-full hover:bg-gray-100 active:bg-gray-200 transition duration-200 ease-in-out transform-gpu active:scale-95"
+            >
+              <Image
+                src="/cancle_icon.png"
+                width={20}
+                height={20}
+                alt="Close"
+                className=""
+              />
+            </button>
+</div>
+              </div>
+              </Link>
+            </OffcanvasTitle>
+          </OffcanvasHeader>
+          
+          {/* Navigation Links */}
+          <nav className="flex-1">
+            <ul className="py-4">
+              <li>
+                <a href="/osmrtnice" style={{fontWeight: "500", fontSize: "15px"}} className="block px-6 py-4 text-white text-[20px]">Osmrtnice</a>
+              </li>
+              <li>
+                <a href="/pogrebi?city=Ljubljana" style={{fontWeight: "500", fontSize: "15px"}} className="block px-6 pb-4 text-white text-[20px]">Pogrebi</a>
+              </li>
+              <li>
+                <a href="/cvetlicarne?city=Ljubljana" style={{fontWeight: "500", fontSize: "15px"}} className="block px-6 pb-4 text-white text-[20px]">Cvetličarne</a>
+              </li>
+              <li>
+                <a href="/pogrebna-p?region=Osrednjeslovenska" style={{fontWeight: "500", fontSize: "15px"}} className="block px-6 pb-4 text-white text-[20px]">Pogrebna podjetja</a>
+              </li>
+              <li>
+                <div className="block px-6 pb-4 text-white text-[20px] cursor-pointer" onClick={toggleOstaleStrani}>
+                  <div className="flex justify-between items-center">
+                    <span style={{fontWeight: "500", fontSize: "15px"}}>Ostale strani</span>
+                    <span className="text-xl">{ostaleStraniOpen ? '−' : '>'}</span>
+                  </div>
+                </div>
+                {ostaleStraniOpen && (
+                  <ul className="bg-[#05202f] py-2">
+                    <li>
+                      <a href="/zalna-stran" style={{fontWeight: "500", fontSize: "15px"}} className="block px-12 pb-4  text-white text-[18px]">Žalna stran</a>
+                    </li>
+                    <li>
+                      <a href="/spominska-stran" style={{fontWeight: "500", fontSize: "15px"}} className="block px-12 pb-4 text-white text-[18px]">Spominska stran</a>
+                    </li>
+                    <li>
+                      <a href="/splosni-pogoji" style={{fontWeight: "500", fontSize: "15px"}} className="block px-12 pb-4 text-white text-[18px]">Splošni pogoji in drobni tisk</a>
+                    </li>
+                    <li>
+                      <a href="/kontakt" style={{fontWeight: "500", fontSize: "15px"}} className="block px-12 pb-2 text-white text-[18px]">Kontaktne informacije</a>
+                    </li>
+                  </ul>
+                )}
+              </li>
+              <li>
+                <a href="/" style={{fontWeight: "500", fontSize: "15px"}} className="block px-6 mt-5 py-4 text-white text-[20px]">Nazaj </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        </>
+    )}
+  
+      <div 
+      style={{display: window.innerWidth < 768 ? "none" : "block"}}
       className="z-10 overflow-y-auto pb-[200px] flex flex-col overflow-x-hidden mt-[5px] desktop:pt-[20px] tablet:mt-[2px] items-center gap-y-8 h-screen w-screen  mx-auto bg-[#00000080] px-[50px] mobile:px-5 
     tablet:pb-[20px] mobile:pb-[20px] fixed  "
     >
@@ -207,7 +336,7 @@ const MegaMenu = () => {
                   <div className="flex flex-col px-2 justify-center">
                     <div className="py-1 flex flex-row space-x-3 items-center">
                       <div className="text-[16px] font-medium text-[#5EAE91]">
-                        Spominska stran
+                        Spominska stran daiudhuiqwi
                       </div>
 
                       <div className="w-[6px] h-[11px]">
@@ -1212,7 +1341,7 @@ const MegaMenu = () => {
                   {activeDiv === 3 && (
                     <div className="flex flex-col w-full max-w-[252px] gap-y-1 bg-gradient-to-b from-[#1464E1] to-[#1151B5] shadow-custom-megamenu-shadow-box text-black rounded-[10px]">
                       {/* title container */}
-                      <div className="flex flex-col py-5 px-3 ">
+                      <div className="flex flex-col pb-4 px-3 ">
                         {/* first title container */}
                         <div
                           style={{
@@ -1507,7 +1636,7 @@ const MegaMenu = () => {
                     <div>
                       <div className="flex w-full ">
                         {/* main container which is wrapped inside */}
-                        <div className="flex w-full flex-row justify-between py-5 px-[10px]">
+                        <div className="flex w-full flex-row justify-between pb-4 px-[10px]">
                           <div className="flex flex-row items-start ">
                             {/* text container */}
                             <div className="flex flex-col  justify-center ">
@@ -1560,6 +1689,7 @@ const MegaMenu = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

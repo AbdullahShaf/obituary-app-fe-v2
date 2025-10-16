@@ -1,7 +1,27 @@
 "use client";
-import React, { useRef } from "react";
+import React from "react";
 
 const Card1 = ({ data, cardRefs, index, cemetery }) => {
+  const formatObituaryDate = (timestamp) => {
+    if (!timestamp) return "";
+    const date = new Date(timestamp);
+    if (isNaN(date.getTime())) return "";
+
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // 0-indexed
+    const year = date.getFullYear();
+
+    // If date is 31st December → show only year
+    if (day === 31 && month === 12) {
+      return `${year}`;
+    }
+
+    // Otherwise → full date
+    return `${day.toString().padStart(2, "0")}.${month
+      .toString()
+      .padStart(2, "0")}.${year}`;
+  };
+
   const formatDate = (timestamp) => {
     const funeralDate = new Date(timestamp);
     if (isNaN(funeralDate.getTime())) return "";
@@ -11,14 +31,9 @@ const Card1 = ({ data, cardRefs, index, cemetery }) => {
     return `${day}.${month}.${year}`;
   };
 
-  const formatYear = (timestamp) => {
-    const date = new Date(timestamp);
-    if (isNaN(date.getTime())) return "";
-    return `${date.getFullYear()}`;
-  };
-
   const formatDayAndTimeSlovenian = (timestamp) => {
     const date = new Date(timestamp);
+    if (isNaN(date.getTime())) return { dayName: "", time: "" };
     const dayName = date.toLocaleDateString("sl-SI", { weekday: "long" });
     const time = date.toLocaleTimeString("sl-SI", {
       hour: "2-digit",
@@ -30,65 +45,67 @@ const Card1 = ({ data, cardRefs, index, cemetery }) => {
   const { dayName, time } = formatDayAndTimeSlovenian(data?.funeralTimestamp);
 
   return (
-    <>
-      <div
-        ref={(el) => {
-          if (cardRefs?.current) {
-            cardRefs.current[index] = el;
-          }
-        }}
-        className="w-[360px] flex items-center justify-start bg-[#3b3b3b] h-[720px]  max-h-[720px] shadow-md overflow-hidden text-white"
-        style={{ fontFamily: "'Roboto Flex', sans-serif" }}
-      >
-        <div>
-          <div className="ml-[35px] mt-[63.35px]">
-            <div className="w-[138px]  bg-[#3b3b3b] rounded-t-full overflow-hidden border-[6px]  border-[#3b3b3b] shadow-2xl flex items-start justify-center pt-1">
-              <img src={data?.image} className="w-auto max-h-[188px]" />
-            </div>
+    <div
+      ref={(el) => {
+        if (cardRefs?.current) {
+          cardRefs.current[index] = el;
+        }
+      }}
+      className="w-[360px] flex items-center justify-start bg-[#3b3b3b] h-[720px]  max-h-[720px] shadow-md overflow-hidden text-white"
+      style={{ fontFamily: "'Roboto Flex', sans-serif" }}
+    >
+      <div className="ml-[35px] mt-[63.35px]">
+        <div className="w-[138px] bg-[#3b3b3b] rounded-t-full overflow-hidden border-[6px] border-[#3b3b3b] shadow-2xl flex items-start justify-center pt-1">
+          <img src={data?.image ?? '/user5.jpeg'} className="w-auto max-h-[188px]" />
+        </div>
 
-            <br />
-            <h2 className="text-[#fff] font-greatVibes text-[36px] font-normal leading-[30px] tracking-[0px]">
-              V spomin
-            </h2>
+        <br />
+        <h2 className="text-[#fff] font-greatVibes text-[36px] font-normal leading-[30px] tracking-[0px]">
+          V spomin
+        </h2>
 
-            <div className="mt-4">
-              <h5 className="text-[#D89B1C] text-[42px] font-[500]">
-                {data?.name}
-              </h5>
-              <h5 className="text-[#D89B1C] translate-y-[-14px] text-[42px] font-[500]">
-                {data?.sirName}
-              </h5>
+        <div className="mt-4">
+          <h5 className="text-[#D89B1C] text-[42px] font-[500]">
+            {data?.name}
+          </h5>
+          <h5 className="text-[#D89B1C] translate-y-[-14px] text-[42px] font-[500]">
+            {data?.sirName}
+          </h5>
 
-              <p className="text-[24px]">
-                {formatYear(data?.birthDate)} - {formatYear(data?.deathDate)}
-              </p>
-            </div>
+          <p className="text-[24px]">
 
-            <div className="mt-[153px]">
-              <h1 className="text-[#D89B1C] text-[24px] font-semibold">
-                {data?.funeralTimestamp ? `${dayName} ob ${time}` : "\u00A0"}
-              </h1>
+            {data?.birthDate?.includes('1025') ? (
+              <>{formatObituaryDate(data?.deathDate)}</>
+            ) : (
+              <>{formatObituaryDate(data?.birthDate)} -{" "}
+                {formatObituaryDate(data?.deathDate)}</>
+            )}
+          </p>
+        </div>
 
-              <p className="">
-                {data?.funeralTimestamp ? (
-                  <>{formatDate(data?.funeralTimestamp)}</>
-                ) : (
-                  <>&nbsp;</>
-                )}
-              </p>
-              <p className="text-[#fff] pb-10">
-                {data?.funeralTimestamp ? (
-                  <>{data?.Cemetry?.funeralCemetery ?? cemetery}</>
-                ) : (
-                  <>&nbsp;</>
-                )}
-                {/* {data?.Cemetry?.funeralCemetery} v {data?.funeralLocation} */}
-              </p>
-            </div>
-          </div>
+        <div className="mt-[153px]">
+          <h1 className="text-[#D89B1C] text-[24px] font-semibold">
+            {data?.funeralTimestamp ? `${dayName} ob ${time}` : "\u00A0"}
+          </h1>
+
+          <p>
+            {data?.funeralTimestamp ? (
+              <>{formatDate(data?.funeralTimestamp)}</>
+            ) : (
+              <>&nbsp;</>
+            )}
+          </p>
+          <p className="text-[#fff] pb-10">
+             <>&nbsp;</>
+            {/* {data?.funeralTimestamp ? (
+              <>{data?.Cemetry?.funeralCemetery ?? cemetery}</>
+            ) : (
+              <>&nbsp;</>
+            )} */}
+          </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

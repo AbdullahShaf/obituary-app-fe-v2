@@ -47,9 +47,9 @@ const MemoryPageContent = ({ params }) => {
       const response = await obituaryService.getMemory({ slugKey: slugKey });
 
       if (response.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Prišlo je do napake."
+        // );
         return;
       }
 
@@ -62,13 +62,13 @@ const MemoryPageContent = ({ params }) => {
         });
 
         if (visitRespone.error) {
-          toast.error(
-            visitRespone.error || "Something went wrong. Please try again!"
-          );
+          // toast.error(
+          //   visitRespone.error || "Prišlo je do napake."
+          // );
           return;
         }
 
-        setObituary(visitRespone);
+        // setObituary(visitRespone);
         if (visitRespone.Condolences.length === 0) {
           const persons = [
             {
@@ -83,7 +83,7 @@ const MemoryPageContent = ({ params }) => {
       }
     } catch (err) {
       console.error("Error fetching obituary:", err);
-      toast.error(err.message || "Failed to fetch obituary.");
+      // toast.error(err.message || "Failed to fetch obituary.");
     }
   };
 
@@ -123,13 +123,14 @@ const MemoryPageContent = ({ params }) => {
         urlParams.push(`region=${encodeURIComponent(queryParams.region)}`);
       const queryString = urlParams.length ? `?${urlParams.join("&")}` : "";
 
+      // Temporarily commented
       router.push(`/m/${data.slugKey}${queryString}`);
     } catch (error) {
       console.error("Error fetching memory:", error);
       if (error?.response?.status === 404) {
-        toast.error(`No ${type} memory exists`);
+        // toast.error(`No ${type} memory exists`);
       } else {
-        toast.error("Something went wrong.");
+        // toast.error("Prišlo je do napake.");
       }
     }
   };

@@ -8,6 +8,10 @@ import { toast } from "react-hot-toast";
 import companyService from "@/services/company-service";
 import Link from "next/link";
 import FuneralCompanyPreview from "../components/funeral-company-preview";
+import { useSession } from "next-auth/react";
+import { useApi } from "@/hooks/useApi";
+import { Loader } from "@/utils/Loader";
+import { RenderImage } from "@/utils/ImageViewerModal";
 
 export default function Step2({ data, onChange, handleStepChange }) {
   const [openedBlock, setOpenedBlock] = useState(1);
@@ -16,11 +20,15 @@ export default function Step2({ data, onChange, handleStepChange }) {
   const [image, setImage] = useState(null);
   const [background, setBackground] = useState(null);
   const [companyId, setCompanyId] = useState(null);
+  const { data: session } = useSession();
+  const { isLoading, trigger: update } = useApi(companyService.updateCompany);
 
+
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const validateFields = () => {
     console.log(title, description, image, background, companyId);
     if (!title || !description || !image || !background || !companyId) {
-      toast.error("All fields are mandatory.");
+      toast.error("Vsa polja so obvezna");
       return false;
     }
 
@@ -55,16 +63,16 @@ export default function Step2({ data, onChange, handleStepChange }) {
         formData.append("funeral_section_one_image_two", background);
       }
 
-      const response = await companyService.updateCompany(formData, companyId);
+      const response = await update(formData, companyId);
       onChange(response.company);
-      toast.success("Company Updated Successfully");
+      toast.success("Posodobljeno");
 
       return true;
     } catch (error) {
       console.error("Error:", error);
       toast.error(
         error?.response?.data?.error ||
-          "Failed to update company. Please try again."
+        "Prišlo je do napake. Ni bilo posodobljeno. Poskusi znova."
       );
       return false;
     }
@@ -72,8 +80,10 @@ export default function Step2({ data, onChange, handleStepChange }) {
 
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[43px]">
@@ -144,7 +154,7 @@ export default function Step2({ data, onChange, handleStepChange }) {
               className={`bg-[#f2f5f8] rounded-b-[4px] border border-[#A1B1D4]`}
             >
               <div
-                className={`py-[16px] space-y-[8px] max-h-[600px] transition-all duration-300 px-[16px]`}
+                className={`py-[16px] space-y-[8px] transition-all duration-300 px-[16px]`}
               >
                 <div className="space-y-[8px]">
                   <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
@@ -154,6 +164,7 @@ export default function Step2({ data, onChange, handleStepChange }) {
                     setFile={(file) => setImage(file)}
                     inputId="image-upload"
                   />
+                  <RenderImage src={data?.funeral_section_one_image_one} alt={"img"} label={""} />
                 </div>
                 <div className="space-y-[8px]">
                   <span className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
@@ -163,6 +174,7 @@ export default function Step2({ data, onChange, handleStepChange }) {
                     setFile={(file) => setBackground(file)}
                     inputId="background-upload"
                   />
+                  <RenderImage src={data?.funeral_section_one_image_two} alt={"img"} label={""} />
                 </div>
               </div>
             </div>

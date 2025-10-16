@@ -8,25 +8,33 @@ import { useEffect, useState } from "react";
 import slideService from "@/services/slides-service";
 import toast from "react-hot-toast";
 import CompanyPreview from "../components/company-preview";
-
+import { useSession } from "next-auth/react";
+import companyService from "@/services/company-service";
+import { useApi } from "@/hooks/useApi";
+import { Loader } from "@/utils/Loader";
+import { RenderImage } from "@/utils/ImageViewerModal";
+import {TOAST_MESSAGE} from "../../../../../utils/toastMessage"
+const defaultSlide = [
+  {
+    index: 1,
+    isDefaultOpen: true,
+    image: null,
+    title: "",
+    description: "",
+  },
+];
 export default function Step5({
   data,
   onChange,
   handleStepChange,
   setIsRender,
 }) {
-  const [slides, setSlides] = useState([
-    {
-      index: 1,
-      isDefaultOpen: true,
-      image: null,
-      title: "",
-      description: "",
-    },
-  ]);
+  const [slides, setSlides] = useState(defaultSlide);
   const [companyId, setCompanyId] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const { data: session } = useSession();
+  const { isLoading, trigger } = useApi(slideService.createSlide);
 
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const addSliderBlock = () => {
     setSlides([
       ...slides,
@@ -58,7 +66,7 @@ export default function Step5({
       //   return;
       // }
       if (!companyId) {
-        toast.error("Company is not ready. Please try again in a moment.");
+        toast.error(TOAST_MESSAGE.COMPANY_NOT_READY_TRY_AGAIN);
         return false;
       }
       const formData = new FormData();
@@ -101,10 +109,11 @@ export default function Step5({
       }
 
       if (nonEmptySlides.length > 0) {
-        const response = await slideService.createSlide(formData);
+        const response = await trigger(formData);
         const updatedCompany = { ...data, slides: response.slides };
+        fetchSlides();
         onChange(updatedCompany);
-        toast.success("Florist Slides Updated Successfully");
+        toast.success(TOAST_MESSAGE.FLORIST_SLIDES_UPDATED_SUCCESSFULLY);
       }
       return true;
     } catch (error) {
@@ -114,20 +123,51 @@ export default function Step5({
   };
 
   useEffect(() => {
-    setCompanyId(data.id);
+    setCompanyId(data?.id);
 
-    if (data.slides && data.slides.length > 0) {
-      const updatedSlides = data.slides.map((slide, index) => ({
-        ...slide,
-        index: index + 1,
-      }));
-      setSlides(updatedSlides);
-    }
+    // if (data.slides && data.slides.length > 0) {
+    //   const updatedSlides = data.slides.map((slide, index) => ({
+    //     ...slide,
+    //     index: index + 1,
+    //   }));
+    //   setSlides(updatedSlides);
+    // }
   }, [data]);
+
+  // Refactor--------
+  const fetchSlides = async () => {
+    try {
+      const response = await companyService.companyAdditionalData({ companyId, table: "slides" });
+      if (response && response?.length > 0) {
+        const updatedSlides = response.map((slide, index) => ({
+          ...slide,
+          index: index + 1,
+        }));
+        setSlides(updatedSlides);
+      }
+      else if (response?.length == 0) {
+        setSlides(defaultSlide);
+
+      }
+
+    } catch (error) {
+      console.error('Failed to fetch slides data:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (companyId) {
+
+      fetchSlides();
+    }
+  }, [companyId])
+  // --------------------
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[20px]">
@@ -164,6 +204,7 @@ export default function Step5({
                 index={block.index}
                 slide={block}
                 onChange={handleSlideChange}
+                refetch={fetchSlides}
               />
             ))}
             <div className="flex items-center justify-end pt-[8px] pb-[16px]">
@@ -225,14 +266,44 @@ export default function Step5({
   );
 }
 
-function SliderBlock({ index, title, slide, onChange }) {
+function SliderBlock({ index, title, slide, onChange, refetch }) {
+  const { isLoading: isDeleting, trigger: deleteSlide } = useApi(slideService.deleteSlide);
+
   const [isDefaultOpen, setIsDefaultOpen] = useState(index === 1);
+  const [savedImage, setSavedImage] = useState("");
   const handleChange = (e) => {
     onChange(index - 1, { ...slide, [e.target.name]: e.target.value });
   };
+  useEffect(() => {
+    if (typeof slide?.image === "string" && slide?.image) {
+      setSavedImage(slide?.image);
+    }
+  }, [slide])
+
+
+  const handleDeleteSlide = async () => {
+    try {
+      console.log("shop?.id", slide?.id);
+
+      if (!slide?.id) return;
+      const response = await deleteSlide(slide?.id);
+      console.log('responseresponse', response);
+
+      if (response.success) {
+        setSavedImage("")
+        toast.success(TOAST_MESSAGE.SHOP_DELETED_SUCCESSFULLY);
+        refetch();
+
+      }
+    } catch (error) {
+      toast.error(TOAST_MESSAGE.ERROR_DELETING_FLORIST_SLIDES);
+    } finally {
+    }
+  };
+  console.log("ccccccc", slide);
 
   return (
-    <OpenableBlock isDefaultOpen={isDefaultOpen} title={title} index={index}>
+    <OpenableBlock isDefaultOpen={isDefaultOpen} title={title} index={index} onDelete={slide?.id ? handleDeleteSlide : null} isDisabled={isDeleting}>
       <div className="space-y-[16px]">
         <div className="space-y-[8px]">
           <div className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">
@@ -245,6 +316,7 @@ function SliderBlock({ index, title, slide, onChange }) {
             }}
             inputId={`slide-${index}-upload`}
           />
+          <RenderImage src={savedImage} alt={"img"} label={""} />
         </div>
         <div className="space-y-[8px]">
           <label className="text-[16px] text-[#3C3E41] font-normal leading-[24px]">

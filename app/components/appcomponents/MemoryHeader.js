@@ -12,7 +12,7 @@ export default function MemoryHeader({ onChange }) {
           className={`
             desktop:h-[92.02px] mobile:h-[68px] tablet:h-[79px]
             w-full  desktop:w-[1200px]
-            desktop:pl-[23px] desktop:pr-[27px] tablet:pl-[23px]  tablet:pr-[27px] mobile:px-[24px]
+            desktop:pl-[23px] desktop:pr-[27px] tablet:pl-[23px]  tablet:pr-[27px] mobile:px-[20px]
             flex justify-between items-center
           `}
         >

@@ -12,15 +12,22 @@ import companyService from "@/services/company-service";
 import Link from "next/link";
 import FuneralCompanyPreview from "../components/funeral-company-preview";
 import { useAuth } from "@/hooks/useAuth";
+import { useSession } from "next-auth/react";
+import { useApi } from "@/hooks/useApi";
+import { Loader } from "@/utils/Loader";
+import { RenderImage } from "@/utils/ImageViewerModal";
 
 export default function Step4({ data, onChange, handleStepChange }) {
   const [companyId, setCompanyId] = useState(null);
   const [secondaryTitle, setSecondaryTitle] = useState(null);
   const [secondaryDescription, setSecondaryDescription] = useState(null);
   const [secondaryImage, setSecondaryImage] = useState(null);
+  const { data: session } = useSession();
+  const { isLoading, trigger: update } = useApi(companyService.updateCompany);
 
+  const companyAndCity = `${session?.user?.me?.company && session?.user?.me?.city ? `${session?.user?.me?.company}, ${session?.user?.me?.city}` : ""}`;
   const { user } = useAuth();
-  
+
   useEffect(() => {
     if (data && data !== null) {
       setCompanyId(data.id);
@@ -35,7 +42,7 @@ export default function Step4({ data, onChange, handleStepChange }) {
       !secondaryImage ||
       !companyId
     ) {
-      toast.error("All fields are mandatory.");
+      toast.error("Vsa polja so obvezna");
       return false;
     }
 
@@ -69,16 +76,16 @@ export default function Step4({ data, onChange, handleStepChange }) {
         formData.append("secondary_image", secondaryImage);
       }
 
-      const response = await companyService.updateCompany(formData, companyId);
+      const response = await update(formData, companyId);
       onChange(response.company);
-      toast.success("Company Updated Successfully");
+      toast.success("Posodobljeno");
       console.log(response);
       return true;
     } catch (error) {
       console.error("Error:", error);
       toast.error(
         error?.response?.data?.error ||
-          "Failed to update company. Please try again."
+        "Prišlo je do napake. Ni bilo posodobljeno. Poskusi znova."
       );
       return false;
     }
@@ -86,8 +93,10 @@ export default function Step4({ data, onChange, handleStepChange }) {
 
   return (
     <>
+      {isLoading && <Loader />}
+
       <div className="absolute top-[-24px] z-10 right-[30px] text-[14px] leading-[24px] text-[#6D778E]">
-        {data?.heading || "Blue Daisy Florist, London"}
+        {companyAndCity}
       </div>
       <div className="min-h-full flex flex-col justify-between gap-[16px]">
         <div className="space-y-[43px]">
@@ -156,6 +165,7 @@ export default function Step4({ data, onChange, handleStepChange }) {
                   setFile={(file) => setSecondaryImage(file)}
                   inputId="secondary-image"
                 />
+                <RenderImage src={data?.secondary_image} alt={"img"} label={""} />
               </div>
             </div>
           </div>

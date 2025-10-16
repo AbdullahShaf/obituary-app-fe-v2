@@ -12,24 +12,33 @@ import { useAuth } from "@/hooks/useAuth";
 const Obituaryform = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [select_id, setSelect_Id] = useState("");
-  
+
   const router = useRouter();
   const { user, isAuthenticated, isLoading } = useAuth();
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      toast.error("You must be logged in to access this page.");
+      toast.error("Za ogled strani moraš biti prijavljen");
       router.push("/registracija");
       return;
     }
 
+
     // Temporarily commented
     // Check if user has permission to create obituaries
-    if (!isLoading && !isAuthenticated &&!user.createObituaryPermission) {
-      toast.error("You don't have permission to create obituaries.");
+    if (!isLoading && !isAuthenticated && !user.createObituaryPermission) {
+      toast.error("Nimaš dovoljenja za objavo osmrtnic");
       router.push("/");
       return;
     }
+
+    // Temporarily commented
+    if (!isLoading && !isAuthenticated &&!user.createObituaryPermission) {
+      toast.error("Nimaš dovoljenja za objavo osmrtnic");
+      router.push("/");
+      return;
+    }
+
 
   }, [isLoading, isAuthenticated, user]);
 
@@ -51,6 +60,7 @@ const Obituaryform = () => {
       </Layout>
     );
   }
+
 
   // Temporarily commented
   if (!user?.createObituaryPermission) {
@@ -80,6 +90,7 @@ const Obituaryform = () => {
       </Layout>
     );
   }
+
 
   return (
     <Layout

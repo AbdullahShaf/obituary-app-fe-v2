@@ -15,24 +15,14 @@ export default function Faq1() {
         </h1>
       </div>
 
-      <div className="w-full hidden mobile:flex gap-[16px] absolute top-[80px] left-0 right-0 justify-center items-center">
-        <Link
-          href={"/c-priloznost"}
-          className="w-[140px] h-[35px] flex items-center justify-center rounded-[2px] text-[14px] text-[#FFFFFF]"
-          style={{
-            background: "linear-gradient(180deg, #0D94E8 4.81%, #1860A3 100%)",
-            border: "2px solid #6D778E",
-          }}
-        >
-          PRILOŽNOST
-        </Link>
-        <Link
-          href={"/c-info"}
-          className="w-[140px] h-[35px] flex items-center justify-center rounded-[2px] text-[14px] text-[#6D778E]"
-          style={{ border: "2px solid #6D778E" }}
-        >
-          CENIK
-        </Link>
+      <div className="w-full hidden mobile:flex gap-[16px] absolute top-[62px] left-0 right-0">
+        <div className="bg-[#36556C] w-full">
+          <div className="mobile:flex text-[#000000] items-center justify-between hidden h-[30px] bg-[#36556C] px-3 mobile:max-w-[348px] mx-auto">
+            <Link href="/c-faq" className="text-[#fff]">KAKO ZAČETI</Link>
+            <Link href="/c-info" className="text-[#fff]">CENIK</Link>
+            <Link href="/c-priloznost" className="text-[#fff]">PRILOŽNOST</Link>
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-col items-center pt-[200px] w-full px-4 max-w-[720px] mx-auto">
@@ -41,7 +31,7 @@ export default function Faq1() {
           Brezplačni vpis in oglaševanje
         </h1>
         <h2 className="text-[22px] mobile:hidden block mt-2 font-semibold text-center">
-          Za prvih 60 cvetličarn oziroma 15. oktobra 2025
+          Za prvih 60 cvetličarn oziroma do 15. oktobra 2025
         </h2>
 
         <h2 className="text-[22px] mobile:block hidden mobile:font-[20px] mt-2 font-semibold text-center">
@@ -56,7 +46,7 @@ export default function Faq1() {
               stranke potrebujejo.
               <br />
               <br />
-              Brezplačno izdelavo vaše strani. Dva meseca (Poldrugi mesec) brezplačne uporabe in oglaševanja in ekskluzivne
+              Brezplačno izdelavo vaše strani. Poldrugi mesec brezplačne uporabe in oglaševanja in ekskluzivne
               dodatne popuste kasneje. In seveda celo vrsto brezplačnih
               digitalnih produktov za vaše stranke. Prve pridružene cvetličarne
               pa bodo deležne še nekaj dodatnih ugodnosti.
@@ -115,17 +105,11 @@ export default function Faq1() {
               <br />
               20€ na mesec - občine z nad 20.000 prebivalcev
               <br />
-              30€ na mesec v Ljubljani -&nbsp;
-              <span className="text-[14px]">
-                (op. vse tukaj navedene cene so brez vključenega DDV in brez
-                upoštevanja popustov)
-              </span>
+              30€ na mesec v Ljubljani
               <br />
               <br />
               <span className="text-[14px]">
-                Op. V mesečni strošek je vključeno oglaševanje cvetličarne v
-                svoji občini. Za oglaševanje v več občinah odpri Pogosta
-                vprašanja tukaj.
+                Op. V naročnino je vključena brezplačna izdelava in gostovanje vaše strani + pojavljanje vaše cvetličarne na seznamu lokalnih cvetličarn (v vaši občini) + pojavljanje vaše cvetličarne na vseh lokalnih žalnih straneh (plus dodatne koristi za prve naročnike, ki so navedene na strani Priložnost).
               </span>
             </p>
           </div>

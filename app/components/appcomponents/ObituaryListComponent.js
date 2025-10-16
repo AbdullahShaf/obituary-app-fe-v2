@@ -10,6 +10,8 @@ import Image from "next/image";
 import { toast } from "react-hot-toast";
 import obituaryService from "@/services/obituary-service";
 import regionsAndCities from "@/utils/regionAndCities";
+import { SelectDropdown } from "./SelectDropdown";
+
 const ObituaryListComponent = ({ city }) => {
   const languages = [
     "Ljubljana",
@@ -24,14 +26,16 @@ const ObituaryListComponent = ({ city }) => {
   ];
   const [obituaries, setObituaries] = useState([]);
   const allRegionsOption = {
-    place: "- Pokaži vse regije - ",
+    place: "- Pokaži vse regije -",
     id: "allRegions",
   };
-  const allCitiesOption = { place: " - Pokaži vse občine - ", id: "allCities" };
+  const allCitiesOption = { place: "- Pokaži vse občine -", id: "allCities" };
   const [selectedCity, setSelectedCity] = useState(city ? city : null);
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10); // default to mobile
+  const [selectedName, setSelectedName] = useState("");
+  const [name, setName] = useState(null);
 
   const regionOptions = [
     allRegionsOption,
@@ -42,7 +46,7 @@ const ObituaryListComponent = ({ city }) => {
   ];
 
   const cityOptions =
-    selectedRegion && selectedRegion !== "allRegions"
+    selectedRegion && selectedRegion !== "allRegions" && selectedRegion !== "- Pokaži vse regije -"
       ? [
         allCitiesOption,
         ...regionsAndCities[selectedRegion].map((city) => ({
@@ -79,7 +83,6 @@ const ObituaryListComponent = ({ city }) => {
     }
   }, []);
 
-
   const updateUrlParams = (city) => {
     const params = new URLSearchParams();
 
@@ -106,6 +109,30 @@ const ObituaryListComponent = ({ city }) => {
     }
     setSelectedRegion(item.place);
     setSelectedCity(null);
+    updateURL('', item.place, '');
+  };
+
+  // Update URL with query parameters
+  const updateURL = (city, region, search) => {
+    const params = new URLSearchParams(window.location.search);
+    if (city && city !== "allCities" && city !== "- Pokaži vse občine -") {
+      params.set("city", city);
+    } else {
+      params.delete("city");
+    }
+    if (!city) {
+      setSelectedCity('');
+      params.delete("city");
+    }
+    if (region && region !== "allRegions" && region !== "- Pokaži vse regije -") {
+      params.set("region", region);
+    } else {
+      params.delete("region");
+    }
+
+    const queryString = params.toString();
+    const newURL = queryString ? `?${queryString}` : window.location.pathname;
+    router.replace(newURL, { scroll: false });
   };
 
   const handleCitySelect = (item) => {
@@ -115,7 +142,8 @@ const ObituaryListComponent = ({ city }) => {
     }
     setSelectedCity(item.place);
     setSelectedRegion(null);
-    updateUrlParams(item.place)
+    updateURL(item.place, null, '')
+    // updateUrlParams(item.place);
     // const region = Object.keys(regionsAndCities).find((region) =>
     //   regionsAndCities[region].includes(item.place)
     // );
@@ -128,7 +156,7 @@ const ObituaryListComponent = ({ city }) => {
   const handleCitySelectQuickLinks = (city) => {
     setSelectedCity(city);
     setSelectedRegion(null);
-    updateUrlParams(city)
+    updateUrlParams(city);
     // const region = Object.keys(regionsAndCities).find((region) =>
     //   regionsAndCities[region].includes(item.place)
     // );
@@ -140,28 +168,49 @@ const ObituaryListComponent = ({ city }) => {
 
   useEffect(() => {
     fetchObituary();
-  }, []);
+  }, [selectedName]);
 
   const fetchObituary = async () => {
     try {
       const queryParams = {};
 
-      if (selectedCity) queryParams.city = selectedCity;
+      if (selectedCity && selectedCity != '- Pokaži vse občine -') queryParams.city = selectedCity;
 
-      if (selectedRegion) queryParams.region = selectedRegion;
+      if (selectedRegion && selectedRegion != '- Pokaži vse regije -') queryParams.region = selectedRegion;
+      if (selectedName) queryParams.name = selectedName;
       const response = await obituaryService.getObituary(queryParams);
 
       if (response.error) {
-        toast.error(
-          response.error || "Something went wrong. Please try again!"
-        );
+        // toast.error(
+        //   response.error || "Prišlo je do napake."
+        // );
         return;
       }
 
-      const sortedObituaries = response.obituaries.sort(
-        (a, b) =>
-          new Date(b.deathDate).getTime() - new Date(a.deathDate).getTime()
-      );
+      // const sortedObituaries = response.obituaries.sort(
+      //   (a, b) =>
+      //     new Date(b.deathDate).getTime() - new Date(a.deathDate).getTime()
+      // );
+
+      let sortedObituaries = response.obituaries;
+
+      if (selectedName && selectedName.length > 0) {
+        const temp = sortedObituaries;
+        const rawName = decodeURIComponent(selectedName).trim().toLowerCase();
+        if (sortedObituaries && sortedObituaries.length > 0) {
+          sortedObituaries = temp.filter(
+            (obituaries) => {
+              const fullName = `${obituaries.name} ${obituaries.sirName}`;
+              return (
+                fullName.toLowerCase().startsWith(rawName) ||
+                obituaries.sirName.toLowerCase().startsWith(rawName)
+              );
+            }
+            // obituaries.name.toLowerCase().startsWith(selectedName.toLowerCase()) ||
+            // obituaries.sirName.toLowerCase().startsWith(selectedName.toLowerCase())
+          );
+        }
+      }
 
       setObituaries(sortedObituaries);
     } catch (err) {
@@ -201,8 +250,15 @@ const ObituaryListComponent = ({ city }) => {
   };
 
   const cardTopRef = React.useRef(null);
+  const firstRender = React.useRef(true);
 
   useEffect(() => {
+    // skip scroll on initial load
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+
     if (cardTopRef.current) {
       cardTopRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -225,10 +281,12 @@ const ObituaryListComponent = ({ city }) => {
                 type="text"
                 placeholder="Išči po imenu / priimku"
                 className="bg-white border-[#7C7C7C] placeholder-[#7C7C7C] text-[16px] font-[400] leading-[24px] border rounded-lg shadow-sm flex flex-1 items-center justify-between h-full px-4 text-[#7C7C7C] focus:outline-none"
+                value={selectedName}
+                onChange={(e) => setSelectedName(e.target.value)}
               />
             </div>
             {/* Dropdown for Išči po regiji*/}
-            <Dropdown
+            <SelectDropdown
               label={"Išči po regiji"}
               isFromNotification={false}
               isFromFlower={false}
@@ -237,7 +295,7 @@ const ObituaryListComponent = ({ city }) => {
               onSelect={handleRegionSelect}
             />
             {/* Dropdown for Išči po kraju*/}
-            <Dropdown
+            <SelectDropdown
               data={cityOptions}
               label={"Išči po kraju"}
               isFromNotification={false}
@@ -259,7 +317,10 @@ const ObituaryListComponent = ({ city }) => {
         </div>
 
         {/* Hitri izbor heading and list for tablet and mobile*/}
-        <div className="flex desktop:ml-[0px] desktop:h-[78px] tablet:w-[650px] tablet:h-[70px] tablet:justify-center mobile:w-[330px] mobile:flex-col desktop:flex-col" ref={cardTopRef}>
+        <div
+          className="flex desktop:ml-[0px] desktop:h-[78px] tablet:w-[650px] tablet:h-[70px] tablet:justify-center mobile:w-[330px] mobile:flex-col desktop:flex-col"
+          ref={cardTopRef}
+        >
           <div className="hidden desktop:flex text-[32px] font-[400px] leading-[28.13px] text-[#1E2125]">
             Hitri izbor
           </div>
@@ -280,17 +341,14 @@ const ObituaryListComponent = ({ city }) => {
                 >
                   <button
                     onClick={() => {
-                      handleCitySelectQuickLinks(language)
+                      handleCitySelectQuickLinks(language);
                     }}
                     className={`border border-[#C3C6C8] rounded-sm text-[#3C3E41] mobile:mt-[16px] hover:bg-gray-100 transition-colors cursor-pointer ${index == languages.length - 1
-                      ? "ml-[0px]"
-                      : index == 5
-                        ? "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
-                        : "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
-                      } ${index < 6
-                        ? "tablet:mb-[18px]"
-                        : "tablet:mb-[18px]"
-                      } ${selectedCity === language
+                        ? "ml-[0px]"
+                        : index == 5
+                          ? "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
+                          : "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
+                      } ${index < 6 ? "tablet:mb-[18px]" : "tablet:mb-[18px]"} ${selectedCity === language
                         ? "bg-[#414141] text-white"
                         : "bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]"
                       } text-[14px] mobile:text-[13px] font-extrabold tablet:font-bold mobile:font-bold italic leading-[16.41px] mobile:px-[6px] px-[7.5px] py-[4px]`}
@@ -306,7 +364,8 @@ const ObituaryListComponent = ({ city }) => {
         {/* Grid Contaner */}
         <div className="mx-auto mobile:hidden tablet:hidden desktop:grid desktop:grid-cols-2 grid-cols-1 mobile:gap-[22px] tablet:gap-6 desktop:gap-6 mt-[48px] tablet:mt-[4rem] mobile:mt-[86px] justify-between">
           {obituaries
-            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((obituary, index) => (
+            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+            .map((obituary, index) => (
               <ObituaryCard
                 data={obituary}
                 index={index}
@@ -317,7 +376,8 @@ const ObituaryListComponent = ({ city }) => {
         </div>
         <div className="mx-auto hidden tablet:grid desktop:hidden grid-cols-1 mobile:gap-[22px] tablet:gap-6 desktop:gap-6 mt-[48px] tablet:mt-[4rem] mobile:mt-[86px] justify-between">
           {obituaries
-            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((obituary, index) => (
+            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+            .map((obituary, index) => (
               <ObituaryCard
                 data={obituary}
                 index={index}
@@ -329,7 +389,8 @@ const ObituaryListComponent = ({ city }) => {
 
         <div className="mx-auto grid tablet:hidden desktop:hidden  grid-cols-1 mobile:gap-[22px] tablet:gap-6 desktop:gap-6 mt-[24.58px] tablet:mt-[69px] mobile:mt-[43px] justify-between">
           {obituaries
-            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((obituary, index) => (
+            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+            .map((obituary, index) => (
               <ObituaryCard
                 data={obituary}
                 index={index}
@@ -358,7 +419,10 @@ const ObituaryListComponent = ({ city }) => {
               1,
               currentPage - Math.floor(maxVisiblePages / 2)
             );
-            const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            const endPage = Math.min(
+              totalPages,
+              startPage + maxVisiblePages - 1
+            );
             const adjustedStartPage = Math.max(
               1,
               endPage - maxVisiblePages + 1

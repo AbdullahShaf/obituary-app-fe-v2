@@ -17,7 +17,6 @@ import { FlowerShops2 } from "../../components/appcomponents/FlowerShops";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getTemplateCardImages } from "@/utils/commonUtils";
 import { useAuth } from "@/hooks/useAuth";
-import MemoryHeroSection from "@/app/components/MemoryHeroSection";
 import APP_BASE_URL from "@/config/appConfig";
 
 const MemoryPageContent = ({ params, obituaryDataFromServer }) => {
@@ -35,7 +34,6 @@ const MemoryPageContent = ({ params, obituaryDataFromServer }) => {
   const [showImageView, setShowImageView] = useState(false);
   const [imageId, setImageId] = useState("0");
   const [obituary, setObituary] = useState({});
-  const memoryRef = useRef(null); // 👈 Reference to capture the component
   const city = searchParams.get("city");
   const region = searchParams.get("region");
 
@@ -230,21 +228,6 @@ const MemoryPageContent = ({ params, obituaryDataFromServer }) => {
           </a>
         </div>
       </Layout>
-      <div
-        ref={memoryRef}
-        style={{
-          position: "absolute",
-          top: "-9999px",
-          left: "-9999px",
-          pointerEvents: "none",
-          width: "100%",
-        }}
-      >
-        <MemoryHeroSection
-          obituary={obituaryDataFromServer}
-          href={`/m/${slugKey}`}
-        />
-      </div>
     </>
   );
 };

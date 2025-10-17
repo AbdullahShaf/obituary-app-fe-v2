@@ -4,7 +4,7 @@ import APP_BASE_URL from "@/config/appConfig";
 
 export async function generateMetadata({ params }) {
   const { slugKey } = params;
-  const image = `${APP_BASE_URL}/api/og?slugKey=${slugKey}`;
+  const image = `${APP_BASE_URL}/api/og?slugKey=${slugKey}&t=${Date.now()}`;
 
   return {
     title: "Vpis v žalno knjigo ",

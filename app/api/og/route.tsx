@@ -36,18 +36,8 @@ export async function GET(req: Request) {
     return new Response("Not found", { status: 404 });
   }
 
-  const imageUrl = obituary?.image || `${APP_BASE_URL}/user5.jpeg`;
+  const imageUrl = `${APP_BASE_URL}/user5.jpeg`;
 
-  let convertedImageUrl = imageUrl;
-  try {
-    const imageRes = await fetch(imageUrl);
-    const imageBuffer = Buffer.from(await imageRes.arrayBuffer());
-    const jpegBuffer = await sharp(imageBuffer).jpeg().toBuffer();
-    const base64 = jpegBuffer.toString("base64");
-    convertedImageUrl = `data:image/jpeg;base64,${base64}`;
-  } catch (error) {
-    console.error("Image conversion failed:", error);
-  }
   if (!obituary) {
     return new Response("Not found", { status: 404 });
   }
@@ -105,7 +95,7 @@ export async function GET(req: Request) {
             }}
           >
             <img
-              src={convertedImageUrl}
+              src={imageUrl}
               alt="Obituary"
               width={175}
               height={216}

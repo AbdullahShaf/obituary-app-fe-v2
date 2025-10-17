@@ -80,13 +80,16 @@ export async function GET(req: Request) {
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            gap: "45px",
-            padding: "30px 50px",
+            gap: "47px",
+            padding: "15px 15px",
             borderRadius: "16px",
-            width: "100%",
+            width: "1002px",
             position: "absolute",
-            top: "0",
+            top: "4%",
+            right: "2.7%",
+            height: "266px",
+            backgroundColor: "rgba(255,255,255,0.4)",
+            border: "2px solid #ffffff",
           }}
         >
           {/* Left image */}
@@ -119,7 +122,7 @@ export async function GET(req: Request) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              height: "100%",
+              height: "216px",
             }}
           >
             <div
@@ -134,7 +137,7 @@ export async function GET(req: Request) {
             </div>
             <div
               style={{
-                fontSize: "64px",
+                fontSize: "56px",
                 fontWeight: 500,
                 color: "#292424",
                 display: "flex",

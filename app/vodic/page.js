@@ -41,7 +41,7 @@ function DriverPage() {
     <>
       {/* Allow crawlability but no indexing. */}
       <Head>
-        <title>Vodič | Osrmtnica</title>
+        <title>Vodič | Osmrtnica</title>
         <meta name="robots" content="noindex, follow" />
       </Head>
       

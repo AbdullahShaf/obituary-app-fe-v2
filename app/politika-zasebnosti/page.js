@@ -28,7 +28,7 @@ export default function PolitikaZasebnostiPage() {
     <>
       {/* Allow crawlability but no indexing. */}
       <Head>
-        <title>Politika zasebnosti | Osrmtnica</title>
+        <title>Politika zasebnosti | Osmrtnica</title>
         <meta name="robots" content="noindex, follow" />
       </Head>
       

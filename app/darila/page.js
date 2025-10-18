@@ -90,7 +90,7 @@ const FloristsGifts = () => {
     <>
       {/* Allow crawlability but no indexing. */}
       <Head>
-        <title>Darila | Osrmtnica</title>
+        <title>Darila | Osmrtnica</title>
         <meta name="robots" content="noindex, follow" />
       </Head>
       

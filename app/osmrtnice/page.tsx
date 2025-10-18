@@ -34,7 +34,7 @@ const ObituaryList = () => {
   return (
     <>
       <Head>
-        <title>Osmrtnice | Osrmtnica</title>
+        <title>Osmrtnice | Osmrtnica</title>
         <link rel="canonical" href="https://www.osmrtnica.com/osmrtnice" />
         <meta name="description" content="Pregled lokalnih osmrtnic in pogrebov." />
       </Head>

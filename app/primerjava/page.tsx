@@ -13,9 +13,9 @@ export default function Faq1() {
     return (
     <>
       <Head>
-        <title>Primerjava | Osrmtnica</title>
+        <title>Primerjava | Osmrtnica</title>
         <link rel="canonical" href="https://www.osmrtnica.com/primerjava" />
-        <meta name="description" content="Primerjava storitev in možnosti na platformi Osmrtnica. Pregled različnih paketov in funkcionalnosti." />
+        <meta name="description" content="Primerjava možnosti brez skrbnika in s skrbnikom." />
       </Head>
 
       <Layout megaMenu={""} isMegaMenuVisible={false} from={"18"} forFooter={"memorypage"}  >

@@ -26,7 +26,7 @@ export default function SplosniPogoji() {
     <>
       {/* Allow crawlability but no indexing. */}
       <Head>
-        <title>Splošni pogoji | Osrmtnica</title>
+        <title>Splošni pogoji | Osmrtnica</title>
         <meta name="robots" content="noindex, follow" />
       </Head>
       

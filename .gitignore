@@ -8,7 +8,7 @@ lerna-debug.log*
 .pnpm-debug.log*
 
 # sitemaps
-public/sitemap.xml
+./public/sitemap.xml
 public/sitemap-0.xml
 public/robots.txt
 

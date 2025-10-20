@@ -23,7 +23,6 @@ jobs:
         script: |
           cd /home/jenkins/deployment/obituary-app/obituary-fe
           sleep 5
-          rm -rf node_modules package-lock.json
           npm install
           sleep 3
           npm run build && /root/.nvm/versions/node/v21.7.3/bin/pm2 restart obituary-fe

@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import SideMenuAdmin from "../../components/appcomponents/SideMenuAdmin";
 import RevenueComp from "../../components/appcomponents/RevenueComp";
-import AdminFinancialsMemory from "../../adminfinancialsmemory/page";
-import AdminFlorists from "../../adminflorists/page";
-import AdminAdvertisers from "../../adminadvertisers/page";
-import AdminPayments from "../../adminpayments/page";
+import AdminFinancialsMemory from "../../components/appcomponents/AdminFinancialsMemory";
+import AdminFlorists from "../../components/appcomponents/AdminFlorists";
+import AdminAdvertisers from "../../components/appcomponents/AdminAdvertisers";
+import AdminPayments from "../../components/appcomponents/AdminPayments";
 import { useRouter } from "next/navigation";
 const AdminFinancialOverView = () => {
   const [whichScreen, setWhichScreen] = useState(1);

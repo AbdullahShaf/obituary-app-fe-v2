@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Head from "next/head";
 import CompanyRegistration from "../components/appcomponents/CompanyRegistration";
 import HeaderRegistration from "../components/appcomponents/HeaderRegistration";
 import LoginFooter from "../components/appcomponents/LoginFooter";
@@ -10,7 +11,14 @@ const CompanyRegistrationPage = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [select_id, setSelect_Id] = useState("");
   return (
-    <Layout megaMenu={""} isMegaMenuVisible={false} from={"18"} currentPage="" forFooter={'memorypage'}>
+    <>
+      <Head>
+        <title>Podjetja | Osmrtnica</title>
+        <link rel="canonical" href="https://www.osmrtnica.com/podjetja" />
+        <meta name="description" content="Registracija podjetij na platformi Osmrtnica. Pridružite se mreži partnerskih pogrebnih podjetij in cvetličarn." />
+      </Head>
+
+      <Layout megaMenu={""} isMegaMenuVisible={false} from={"18"} currentPage="" forFooter={'memorypage'}>
       <div className="flex flex-1 flex-col bg-[#F5F7F9]">
         <ModalLibrary
           isShowModal={isShowModal}
@@ -23,6 +31,7 @@ const CompanyRegistrationPage = () => {
         {/* <LoginFooter/> */}
       </div>
     </Layout>
+    </>
   );
 };
 

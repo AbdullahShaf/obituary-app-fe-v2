@@ -68,8 +68,6 @@ const ContactList = () => {
     fetchContacts();
   }, []);
 
-  console.log("contats", contacts);
-
   return (
     <>
       <ContactViewModal modal={modal} setModal={setModal} />

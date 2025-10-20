@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
 import { useParams } from "next/navigation";
 import Layout from "@/app/components/appcomponents/Layout";
 import FuneralsCompanyBanner from "@/app/components/appcomponents/FuneralsCompanyBanner";
@@ -33,10 +34,14 @@ export default function FuneralPage() {
             console.log(error);
         }
     };
-    console.log('>>>>>>>>> company', company);
 
     return (
         <>
+            <Head>
+                <title>{company?.name ? `${company.name} - Pogrebno podjetje` : 'Pogrebno podjetje'} | Osmrtnica</title>
+                <link rel="canonical" href={`https://www.osmrtnica.com/pp/${slug}`} />
+                <meta name="description" content={company?.description || `Pregled storitev pogrebnega podjetja ${company?.name || ''}. Pogrebne storitve in organizacija pogrebov.`} />
+            </Head>
             {
 
                 (company?.id && company?.status !== "PUBLISHED") ?

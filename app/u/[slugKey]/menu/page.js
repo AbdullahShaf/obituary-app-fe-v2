@@ -21,9 +21,7 @@ const UserAccountDashboard = () => {
       if (window.innerWidth > 1200) {
         if (!isLoading && isAuthenticated) {
           const parsedUser = user;
-          console.log("parsedUser", parsedUser);
-          console.log(isAuthenticated);
-          router.replace(`/u/${parsedUser.slugKey}/moj-racun`);
+          router.replace(`/u/${parsedUser?.slugKey}/moj-racun`);
         }
       } else {
         fetchPendingPosts();

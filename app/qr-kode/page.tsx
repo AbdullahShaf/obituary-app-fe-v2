@@ -41,6 +41,9 @@ export const metadata: Metadata = {
     type: "website",
     url: "/qr-kode",
   },
+  alternates: {
+    canonical: "https://www.osmrtnica.com/qr-kode",
+  },
 };
 
 

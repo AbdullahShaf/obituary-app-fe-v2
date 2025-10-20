@@ -33,9 +33,6 @@ const Layout = ({
   isModalLayout = false,
 }) => {
   const { user, isAuthenticated } = useAuth();
-
-  console.log("isAuthenticated", isAuthenticated);
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isMessageModalVisible, setIsMessageModalVisible] = useState(false);

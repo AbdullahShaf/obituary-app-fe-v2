@@ -1,9 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import SideMenuAdmin from '../components/appcomponents/SideMenuAdmin';
-import RevenueComp from '../components/appcomponents/RevenueComp';
-import Dropdown from '../components/appcomponents/Dropdown';
+import SideMenuAdmin from './SideMenuAdmin';
+import RevenueComp from './RevenueComp';
+import Dropdown from './Dropdown';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 const AdminFinancialsMemory = () => {

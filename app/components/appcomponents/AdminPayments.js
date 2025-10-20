@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import SideMenuAdmin from "../components/appcomponents/SideMenuAdmin";
-import Dropdown from "../components/appcomponents/Dropdown";
+import SideMenuAdmin from "./SideMenuAdmin";
+import Dropdown from "./Dropdown";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { Icon } from "@iconify/react";
 

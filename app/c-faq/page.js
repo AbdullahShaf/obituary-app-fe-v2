@@ -1,5 +1,6 @@
 "use client"
 
+import Head from "next/head";
 import { FAQHeader } from "@/app/components/appcomponents/Header";
 import Image from "next/image";
 import { FrequentlyAskedQuestionView2, FrequentlyAskedQuestionView3 } from "../components/appcomponents/FrequentlyAskedQuestionView";
@@ -39,7 +40,14 @@ export default function Faq2() {
     },
   ];
     return (
-      <div className="bg-[#F9EBD4] tablet:bg-[#F9EBD4] mobile:bg-[#F9EBD4] min-h-[100vh]">
+      <>
+        {/* Allow crawlability but no indexing. */}
+        <Head>
+          <title>Cvetlicarne - pogosta vprašanja</title>
+          <meta name="robots" content="noindex, follow" />
+        </Head>
+        
+        <div className="bg-[#F9EBD4] tablet:bg-[#F9EBD4] mobile:bg-[#F9EBD4] min-h-[100vh]">
         <FAQHeader />
         <div className="w-full hidden mobile:flex gap-[16px] absolute top-[62px] left-0 right-0">
           <div className="bg-[#36556C] w-full">
@@ -65,6 +73,7 @@ export default function Faq2() {
           </Link>
         </div>
         <FooterForFaq2 />
-      </div>
+        </div>
+      </>
     )
 }

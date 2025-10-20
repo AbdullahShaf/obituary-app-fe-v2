@@ -1,4 +1,5 @@
 "use client";
+import Head from "next/head";
 import Layout from "../components/appcomponents/Layout";
 import OrbetoryFormComp from "../components/appcomponents/OrbetoryFormComp";
 import Newobituary from "../components/appcomponents/Newobituary";
@@ -86,8 +87,15 @@ const FloristsGifts = () => {
 
 
   return (
-    <Layout megaMenu={""} isMegaMenuVisible={false} from={"18"}  currentPage="" forFooter={'memorypage'}>
-    <div className="flex flex-1 flex-col bg-[#F5F7F9]">
+    <>
+      {/* Allow crawlability but no indexing. */}
+      <Head>
+        <title>Darila | Osmrtnica</title>
+        <meta name="robots" content="noindex, follow" />
+      </Head>
+      
+      <Layout megaMenu={""} isMegaMenuVisible={false} from={"18"}  currentPage="" forFooter={'memorypage'}>
+      <div className="flex flex-1 flex-col bg-[#F5F7F9]">
 
    
       
@@ -112,7 +120,8 @@ const FloristsGifts = () => {
         <AddFuneralModal setModalVisible={setIsModalVisible} />
       )}
     </div>
-       </Layout>
+    </Layout>
+    </>
   );
 };
 

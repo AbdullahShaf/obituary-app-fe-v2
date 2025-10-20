@@ -1,5 +1,6 @@
 "use client";
 
+import Head from "next/head";
 import Image from "next/image";
 import { FAQHeader2 } from "@/app/components/appcomponents/Header";
 import { FooterForFaq } from "../components/appcomponents/Footer";
@@ -7,7 +8,14 @@ import Link from "next/link";
 
 export default function Faq1() {
   return (
-    <div className="bg-[#ECF0F3] min-h-[100vh] relative text-[#3C3E41]">
+    <>
+      {/* Allow crawlability but no indexing. */}
+      <Head>
+        <title>P-Info | Osmrtnica</title>
+        <meta name="robots" content="noindex, follow" />
+      </Head>
+      
+      <div className="bg-[#ECF0F3] min-h-[100vh] relative text-[#3C3E41]">
       <FAQHeader2 />
 
       <div className="tablet:w-[700px] desktop:w-[1200px] absolute top-[108px] left-1/2 -translate-x-1/2 flex items-end justify-end">
@@ -100,6 +108,7 @@ export default function Faq1() {
       </div>
 
       <FooterForFaq />
-    </div>
+      </div>
+    </>
   );
 }

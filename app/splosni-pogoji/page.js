@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Head from "next/head";
 import { TermsAndCond } from "../components/appcomponents/Footer";
 import Layout from "../components/appcomponents/Layout";
 import Desktop from "./components/Desktop";
@@ -22,13 +23,20 @@ export default function SplosniPogoji() {
   }, []);
 
   return (
-    <Layout
-      from={"18"}
-      megaMenu={""}
-      forFooter={"memorypage"}
-      currentPage="splosni-pogoji"
-      isMegaMenuVisible={false}
-    >
+    <>
+      {/* Allow crawlability but no indexing. */}
+      <Head>
+        <title>Splošni pogoji | Osmrtnica</title>
+        <meta name="robots" content="noindex, follow" />
+      </Head>
+      
+      <Layout
+        from={"18"}
+        megaMenu={""}
+        forFooter={"memorypage"}
+        currentPage="splosni-pogoji"
+        isMegaMenuVisible={false}
+      >
       <div className="w-full">
         <div className="flex flex-col mx-auto bg-[#F5F7F9] w-full max-w-[700px] mt-[160px] text-[#3C3E41] mb-[80px] mobile:mt-[110px] mobile:px-[15px] mobile:mb-[40px]">
           {width === null ? null : width < 744 ? (
@@ -42,5 +50,6 @@ export default function SplosniPogoji() {
         <TermsAndCond />
       </div>
     </Layout>
+    </>
   );
 }

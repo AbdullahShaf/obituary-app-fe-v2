@@ -12,11 +12,11 @@ export default function Tabs({
     <div className="w-full">
       {/* Tabs Container */}
       <div
-        className={`flex overflow-auto mobile:mb-5 mb-8  items-center mx-auto  ${
+        className={`flex mobile:mb-5 mb-8  items-center mx-auto  ${
           !innerTab
             ? "mobile:bg-[#36556C] mobile:h-[35px] scrollbar-hide gap-6 justify-center mobile:justify-between"
             : "flex mobile:flex-wrap gap-x-6 gap-y-2"
-        }  bg-transparent px-4`}
+        }  bg-transparent mobile:px-2 px-4`}
       >
         {tabs.map((tab) => (
           <button
@@ -29,9 +29,9 @@ export default function Tabs({
                   active === tab.id
                     ? `text-[#0A85C2] ${
                         innerTab
-                          ? "bg-[#ffffff] px-2 py-2"
-                          : "mobile:px-0 px-2 mobile:py-0 py-2"
-                      } mobile:border-0 border-b-2 border-[#0077CC]`
+                          ? "bg-[#ffffff] border-b-2 border-[#0077CC] px-2 py-2"
+                          : "mobile:px-0 mobile:border-0 px-2 mobile:py-0 py-2"
+                      }  border-b-2 border-[#0077CC]`
                     : `${
                         !innerTab && "mobile:text-[#ffffff]"
                       } mobile:border-0 mobile:py-0 py-2 border-b-2 border-[#D4D4D4] text-[#6D778E]`

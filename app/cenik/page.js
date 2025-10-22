@@ -104,7 +104,7 @@ const Subscription = () => {
     switch (active) {
       case "spominske":
         return (
-          <div className="p-4 flex flex-col mb-[100px] items-center justify-center desktop:justify-start desktop:items-start gap-y-16">
+          <div className="mobile:px-1 p-4 flex flex-col mb-[100px] items-center justify-center desktop:justify-start desktop:items-start gap-y-16">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -113,13 +113,20 @@ const Subscription = () => {
               </div>
               <p className="text-[#414141] flex gap-1 w-full desktop:w-[780px] mobile:text-[14px] text-[16px]">
                 <p className="text-[14px]"></p>{" "}
-                <p className="mt-1">
+                <p className="mt-1 mobile:hidden block">
                   Bližnji svojci lahko postanejo Skrbniki spominske strani
                   pokojne/ga. S tem prevzamejo skrb nad objavljenimi vsebinami
                   in omogočijo dodajanje dodatnih vsebin tudi vsem ostalim.
                   Stran postane s skrbnikom toplejša, barvita, pristna, polna
                   zgodb in spominov; stran, na katero se bližnji kasneje pogosto
                   vračajo.
+                </p>
+                <p className="mobile:block hidden">
+                  Bližnji svojci lahko prevzamejo skrb nad objavljenimi
+                  vsebinami in omogočijo dodajanje dodatnih vsebin tudi vsem
+                  ostalim. Stran postane s skrbnikom toplejša, barvita, pristna,
+                  polna zgodb in spominov; stran, na katero se bližnji kasneje
+                  pogosto vračajo.{" "}
                 </p>
               </p>
               <PricingCard
@@ -133,6 +140,7 @@ const Subscription = () => {
                 label="SPOMINSKA STRAN"
                 sublabel="(preko naše strani)"
                 price="10 €"
+                mobilesublabel="(na naši strani)"
                 title="1 mesec"
               />
               <PricingCard
@@ -147,11 +155,17 @@ const Subscription = () => {
               />
               <div className="text-[#414141] flex gap-1 w-full desktop:w-[754px] mobile:text-[14px] text-[16px]">
                 <p className="text-[14px]">1</p>{" "}
-                <p className="mt-1">
+                <p className="mobile:hidden block mt-1">
                   Mesečnega Skrbnika lahko prejmete brezplačno v cvetličarni, ki
                   jo najdete na seznamu lokalnih cvetličarn. Če trenutno še ni
                   vpisane nobene lokalne cvetličarne, nas kontaktirajte in bomo
                   to uredili mi brezplačno.
+                </p>
+                <p className="mobile:block hidden mt-1">
+                  Mesečnega Skrbnika lahko prejmete brezplačno v cvetličarni, ki
+                  jo najdete na seznamu lokalnih. Če trenutno še ni vpisane
+                  nobene v vaši občini, nas kontaktirajte in bomo to uredili mi
+                  brezplačno.
                 </p>
               </div>
             </div>
@@ -169,6 +183,7 @@ const Subscription = () => {
               <PricingCard label="QR kode za nagrobnike" title="Brezplačno" />
               <PricingCard
                 label="novosti in občasne druge promocije"
+                mobilelabel="NOVOSTI IN DRUGE PROMOCIJE"
                 title="Na Facebooku - sledite nam"
                 icon="/fb-icon.png"
               />
@@ -178,7 +193,7 @@ const Subscription = () => {
 
       case "cvetlicarne":
         return (
-          <div className="p-4 mb-[100px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
+          <div className="mobile:px-1 p-4 mb-[100px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -219,11 +234,13 @@ const Subscription = () => {
                         <PricingCard
                           number={2}
                           label="možnost vpisovanja lokalnih osmrtnic"
+                          mobilelabel="MOŽNOST VPISOVANJA OSMRTNIC"
                           title="Brezplačno"
                         />
                         <PricingCard
                           number={2}
-                          label="darila za vaše stranke; skrbnik, qr kode"
+                          label="darila za vaše stranke; skrbnik, digitalne kartice, qr kode"
+                          mobilelabel="ZA STRANKE: SKRBNIK, KARTICE, QR KODE"
                           title="Brezplačno"
                         />
                         <PricingCard
@@ -234,18 +251,26 @@ const Subscription = () => {
                         <div>
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
                             <p className="text-[14px]">2</p>{" "}
-                            <p className="mt-1">
+                            <p className="mobile:hidden block mt-1">
                               Poleg naštetega so občasno mogoče še druge
                               promocije. Kontaktirajte nas in preverite
                               trenutne.
                             </p>
+                            <p className="mobile:block hidden mt-1">
+                              Občasno v teku še druge promocije. Kontaktirajte
+                              nas in preverite trenutne.{" "}
+                            </p>
                           </div>
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] mobile:text-[14px] text-[16px]">
                             <p className="text-[14px]">3</p>{" "}
-                            <p className="mt-1">
+                            <p className="mobile:hidden block mt-1">
                               Vsako podjetje, ki oglašuje vsaj eno leto bo za
                               vedno prikazano na posebni strani Naši partnerji
                               (še v izdelavi).
+                            </p>
+                            <p className="mobile:block hidden mt-1">
+                              Vsako podjetje, ki oglašuje vsaj eno leto bo za
+                              vedno prikazano na posebni strani Naši partnerji.
                             </p>
                           </div>
                         </div>
@@ -262,7 +287,7 @@ const Subscription = () => {
 
       case "oglasevalci":
         return (
-          <div className="p-4 mb-[100px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
+          <div className="mobile:px-1 p-4 mb-[100px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -288,7 +313,7 @@ const Subscription = () => {
                     <>
                       <FormTabsContentOglasevalci />
                       <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col gap-4">
-                        <div className="mb-7">
+                        <div className="mb-7 space-y-1">
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
                             <p className="text-[14px]">1</p>{" "}
                             <p className="mt-1">
@@ -298,9 +323,13 @@ const Subscription = () => {
                           </div>
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] mobile:text-[14px] text-[16px]">
                             <p className="text-[14px]">2</p>{" "}
-                            <p className="mt-1">
+                            <p className="mobile:hidden block mt-1">
                               Kontaktirajte nas. Enako za oglaševanje izven
                               predvidenih mest ter na strani pogrebna podjetja.
+                            </p>
+                            <p className="mobile:block hidden mt-1">
+                              Kontaktirajte nas. Mogoče je tudi oglaševanje
+                              izven predvidenih mest{" "}
                             </p>
                           </div>
                         </div>
@@ -323,29 +352,43 @@ const Subscription = () => {
                           label="vpis na strani naši partnerji"
                           title="Za vedno"
                         />
-                        <div>
+                        <div className="space-y-1">
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] mobile:text-[14px] text-[16px]">
                             <p className="text-[14px]">3</p>{" "}
-                            <p className="mt-1">
+                            <p className="mobile:hidden block mt-1">
                               Primer: Oglaševanje na strani pogrebi polna cena,
                               na straneh osmrtnice in cvetličarne se obračuna
                               50% popust.
                             </p>
+                            <p className="mobile:block hidden mt-1">
+                              Primer: Oglaševanje na strani pogrebi polna cena,
+                              na straneh osmrtnice in cvetličarne v isti občini
+                              pa se obračuna 50% popust.{" "}
+                            </p>
                           </div>
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] mobile:text-[14px] text-[16px]">
                             <p className="text-[14px]">4</p>{" "}
-                            <p className="mt-1">
+                            <p className="mobile:hidden block mt-1">
                               Velja v primeru letnega naročila. Drugi v občini
                               prejme 50% popust v naslednjem letu za isto
                               oglaševanje.
                             </p>
+                            <p className="mobile:block hidden mt-1">
+                              Velja v primeru letnega naročila. Drugi
+                              oglaševalec v občini prejme 50% popust v
+                              naslednjem letu za isto oglaševanje.{" "}
+                            </p>
                           </div>
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] mobile:text-[14px] text-[16px]">
                             <p className="text-[14px]">5</p>{" "}
-                            <p className="mt-1">
+                            <p className="mobile:hidden block mt-1">
                               Vsako podjetje, ki oglašuje vsaj eno leto bo za
                               vedno prikazano na posebni strani Naši partnerji
                               (še v izdelavi).
+                            </p>
+                            <p className="mobile:block hidden mt-1">
+                              Vsako podjetje, ki oglašuje vsaj eno leto bo za
+                              vedno prikazano na posebni strani Naši partnerji.
                             </p>
                           </div>
                         </div>

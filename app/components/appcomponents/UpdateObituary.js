@@ -140,8 +140,8 @@ const UpdateObituary = ({ set_Id, setModal }) => {
       }
 
       try {
-        console.log("Birthdate: ", response.birthDate);
-        response.birthDate &&
+        console.log("Birthdate: >>>>>>>>>>>", response.birthDate);
+        response.birthDate && !response.birthDate.includes('1025') &&
           setBirthDate(
             response.birthDate ? new Date(response.birthDate) : null
           );
@@ -369,7 +369,7 @@ const UpdateObituary = ({ set_Id, setModal }) => {
           formattedBirthDate = birthDate.toISOString().split("T")[0];
         }
       }
-      
+
       let formattedDeathDate = null;
       if (deathDate) {
         if (deathMode === "year") {

@@ -25,7 +25,7 @@ export default function PricingCard(props) {
           </div>
         </div>
         {props.price && (
-          <div className="mobile:text-[32px] text-[40px] text-[#1E2125] font-[500px]">
+          <div className="mobile:text-[32px] text-[40px] text-[#1E2125] font-medium">
             {props.price}
           </div>
         )}

@@ -1,7 +1,6 @@
 import React from "react";
 import { ImageResponse } from "next/og";
-import API_BASE_URL from "@/config/apiConfig";
-import sharp from "sharp";
+import API_BASE_URL, { APP_BASE_URL } from "@/config/apiConfig";
 import fs from "fs";
 import path from "path";
 
@@ -35,7 +34,7 @@ export async function GET(req: Request) {
     return new Response("Not found", { status: 404 });
   }
 
-  const imageUrl = `${API_BASE_URL}/user5.jpeg`;
+  const imageUrl = `${APP_BASE_URL}/user5.jpeg`;
 
   if (!obituary) {
     return new Response("Not found", { status: 404 });
@@ -58,7 +57,7 @@ export async function GET(req: Request) {
         }}
       >
         <img
-          src={`${API_BASE_URL}/fb-post-bg.png`}
+          src={`${APP_BASE_URL}/fb-post-bg.png`}
           alt="Memory page hero background"
           style={{
             width: "100%",

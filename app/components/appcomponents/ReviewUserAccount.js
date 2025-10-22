@@ -118,8 +118,7 @@ const ReviewUserAccount = () => {
         mobileUserAcc:w-[160px] mobileUserAcc:h-[73px]"
               >
                 <Link
-                  href={`/memorypage/${memory.id}/${memory.name}_${memory.sirName
-                    }_${funeralDateFormatted(memory.funeralTimestamp)}`}
+                  href={`/m/${memory.slugKey}`}
                   className={`flex flex-col justify-between items-center w-full h-full rounded-[8px] pt-[12px] pb-[16px]
             mobileUserAcc:py-[6px]
             ${memory.Keepers?.length > 0

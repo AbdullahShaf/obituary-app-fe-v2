@@ -181,10 +181,9 @@ const Obituaries = () => {
   };
 
   // Handle opening memory page
-  const handleOpenMemoryPage = (obituaryId, slugKey) => {
+  const handleOpenMemoryPage = (slugKey) => {
     // Open the memory page in a new tab
-    // The memory page URL structure is /memorypage/[id]/[user]
-    const memoryUrl = `/memorypage/${obituaryId}/${slugKey}`;
+    const memoryUrl = `/m/${slugKey}`;
     window.open(memoryUrl, '_blank');
   };
 
@@ -637,7 +636,7 @@ const Obituaries = () => {
                   <td className="w-[60px]  pl-[25px] text-center px-2 ">
                     <div className="flex flex-col items-start gap-y-[4px]">
                       <button
-                        onClick={() => handleOpenMemoryPage(data.id, data.slugKey)}
+                        onClick={() => handleOpenMemoryPage(data.slugKey)}
                         className="cursor-pointer"
                         title="Open Memory Page"
                       >

@@ -31,10 +31,12 @@ const ObituariesList = ({ city, userId }) => {
         return;
       }
 
-      const sortedObituaries = response.obituaries.sort(
-        (a, b) =>
-          new Date(b.deathDate).getTime() - new Date(a.deathDate).getTime()
-      );
+      // const sortedObituaries = response.obituaries.sort(
+      //   (a, b) =>
+      //     new Date(b.deathDate).getTime() - new Date(a.deathDate).getTime()
+      // );
+      
+      let sortedObituaries = response.obituaries;
 
       setObituaries(sortedObituaries);
     } catch (err) {

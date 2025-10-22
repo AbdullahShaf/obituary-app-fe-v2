@@ -9,25 +9,27 @@ export async function generateMetadata({ params }) {
   const response = await obituaryService.getMemory({ slugKey });
   const obituary = response?.obituary || {};
 
-  const fullName =
-    obituary?.firstName && obituary?.lastName
-      ? `${obituary.firstName} ${obituary.lastName}`
+  const nameForTitle =
+    obituary?.name && obituary?.sirname
+      ? `${obituary.name} ${obituary.sirname}`
+      : obituary?.name
+      ? `${obituary.name}`
       : null;
 
   return {
-    title: fullName
-      ? `${fullName} - Spominska stran | Osmrtnica`
+    title: nameForTitle
+      ? `${nameForTitle} - Spominska stran`
       : "Spominska stran | Osmrtnica",
-    description: fullName
-      ? `Spominska stran za ${fullName}. Delite spomine, prižgite svečko in izrazite sožalje.`
+    description: nameForTitle
+      ? `Spominska stran za ${nameForTitle}. Delite spomine, prižgite svečko in izrazite sožalje.`
       : "Spominska stran za pokojnega. Delite spomine, prižgite svečko in izrazite sožalje.",
     alternates: {
       canonical: `https://www.osmrtnica.com/m/${slugKey}`,
     },
     openGraph: {
-      title: fullName ? `${fullName} - Spominska stran` : "Spominska stran",
-      description: fullName
-        ? `Spominska stran za ${fullName}. Delite spomine, prižgite svečko in izrazite sožalje.`
+      title: nameForTitle ? `${nameForTitle} - Spominska stran` : "Spominska stran",
+      description: nameForTitle
+        ? `Spominska stran za ${nameForTitle}. Delite spomine, prižgite svečko in izrazite sožalje.`
         : "Spominska stran za pokojnega. Delite spomine, prižgite svečko in izrazite sožalje.",
       url: `${APP_BASE_URL}/m/${slugKey}`,
       siteName: "Osmrtnica",

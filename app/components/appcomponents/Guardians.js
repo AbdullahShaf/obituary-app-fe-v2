@@ -249,7 +249,7 @@ const Guardians = () => {
                 .reverse()
                 .join(".");
 
-              const memoryLink = `/memorypage/${memory.id}/${memory.name}_${memory.sirName}_${deathDateFormatted}`;
+              const memoryLink = `/m/${memory.slugKey}`;
 
               return (
                 <Link href={memoryLink} className="flex items-center">
@@ -641,7 +641,7 @@ const Guardians = () => {
               .join(".");
 
             const href = isActive
-              ? `/memorypage/${memory.id}/${memory.name}_${memory.sirName}_${deathDateFormatted}`
+              ? `/m/${memory.slugKey}`
               : "#";
 
             return (
@@ -680,7 +680,7 @@ const Guardians = () => {
               .reverse()
               .join(".");
 
-            const memoryLink = `/memorypage/${memory.id}/${memory.name}_${memory.sirName}_${deathDateFormatted}`;
+            const memoryLink = `/m/${memory.slugKey}`;
 
           return (
               <Link

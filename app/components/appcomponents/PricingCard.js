@@ -8,13 +8,13 @@ export default function PricingCard(props) {
     >
       <div className="flex items-center justify-between rounded-[8px] mobile:py-1.5 p-3">
         <div>
-          <p className="mobile:text-[14px] text-[16px] font-medium text-[#7A7A7A] uppercase">
+          <p className="mobile:text-[14px] text-[14px] font-medium text-[#7A7A7A] uppercase">
             {props.label}
             {props.sublabel && (
               <span className="lowercase ml-1">{props.sublabel}</span>
             )}
           </p>
-          <div className="mobile:text-[20px] flex items-center gap-1 text-[24px] text-[#1E2125] mt-1 font-[600]">
+          <div className="mobile:text-[20px] flex items-center gap-1 text-[24px] text-[#1E2125] mt-1 font-semibold">
             <p className={props.number && "mt-1"}>{props.title}</p>{" "}
             {props.number && <p className="text-[14px]">{props.number}</p>}
             {props.subtitle && (
@@ -25,7 +25,7 @@ export default function PricingCard(props) {
           </div>
         </div>
         {props.price && (
-          <div className="mobile:text-[32px] text-[40px] text-[#1E2125] font-medium">
+          <div className="mobile:text-[32px] text-[40px] text-[#1E2125] font-[300]">
             {props.price}
           </div>
         )}

@@ -12,9 +12,9 @@ export default function Tabs({
     <div className="w-full">
       {/* Tabs Container */}
       <div
-        className={`flex overflow-auto mb-8  items-center mx-auto  ${
+        className={`flex overflow-auto mobile:mb-5 mb-8  items-center mx-auto  ${
           !innerTab
-            ? "mobile:bg-[#36556C] mobile:h-[30px] gap-6 justify-center"
+            ? "mobile:bg-[#36556C] mobile:h-[35px] scrollbar-hide gap-6 justify-center mobile:justify-between"
             : "flex mobile:flex-wrap gap-x-6 gap-y-2"
         }  bg-transparent px-4`}
       >
@@ -22,18 +22,20 @@ export default function Tabs({
           <button
             key={tab.id}
             onClick={() => setActive(tab.id)}
-            className={`mobile:text-[14px] text-[20px] text-nowrap font-medium transition-all duration-200  
-              ${
-                active === tab.id
-                  ? `text-[#0A85C2] ${
-                      innerTab
-                        ? "bg-[#ffffff] px-2 py-2"
-                        : "mobile:px-0 px-2 mobile:py-0 py-2"
-                    } mobile:border-0 border-b-2 border-[#0077CC]`
-                  : `${
-                      !innerTab && "mobile:text-[#ffffff]"
-                    } mobile:border-0 mobile:py-0 py-2 border-b-2 border-[#D4D4D4] text-[#6D778E]`
-              }`}
+            className={`mobile:text-[16px] ${
+              tab.id === "pogrebna-podjetja" && "mobile:hidden"
+            } text-[20px] text-nowrap mobile:uppercase font-medium mobile:w-[33.33%] transition-all duration-200  
+                ${
+                  active === tab.id
+                    ? `text-[#0A85C2] ${
+                        innerTab
+                          ? "bg-[#ffffff] px-2 py-2"
+                          : "mobile:px-0 px-2 mobile:py-0 py-2"
+                      } mobile:border-0 border-b-2 border-[#0077CC]`
+                    : `${
+                        !innerTab && "mobile:text-[#ffffff]"
+                      } mobile:border-0 mobile:py-0 py-2 border-b-2 border-[#D4D4D4] text-[#6D778E]`
+                }`}
           >
             {tab.label}
           </button>
@@ -44,7 +46,14 @@ export default function Tabs({
           </p>
         )}
       </div>
-
+      <div className="mobile:flex hidden justify-end w-[95%]">
+        <button
+          onClick={() => setActive(tabs[3]?.id)}
+          className="text-[#414141] underline mobile:text-[14px] text-[16px]"
+        >
+          {tabs[3]?.label}
+        </button>
+      </div>
       {/* Active Tab Content (optional demo) */}
       {tabContent}
     </div>

@@ -104,27 +104,14 @@ const Subscription = () => {
     switch (active) {
       case "spominske":
         return (
-          <div className="p-4 flex flex-col items-center justify-center desktop:justify-start desktop:items-start gap-y-16">
+          <div className="p-4 flex flex-col mb-[100px] items-center justify-center desktop:justify-start desktop:items-start gap-y-16">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
-                <span className="flex items-center text-[14px] shadow-xl uppercase font-medium mobile:text-[#414B5A] justify-center gap-2 bg-gradient-to-b mobile:from-[#E7EBF0]/[30%] mobile:border mobile:border-[#414B5A] mobile:to-[#000000]/[0%] from-[#0D94E8] from-[20%] to-[#0A85C2] rounded-[10px] w-[89px] h-[33px]">
-                  odpri
-                  <img
-                    className="mobile:hidden block"
-                    src="/arrow-down.png"
-                    alt="icon"
-                  />
-                  <img
-                    className="mobile:block hidden"
-                    src="/arrow-down-black.png"
-                    alt="icon"
-                  />
-                </span>
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
-                  Spominske stran
+                  Spominska stran
                 </h2>
               </div>
-              <p className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
+              <p className="text-[#414141] flex gap-1 w-full desktop:w-[780px] mobile:text-[14px] text-[16px]">
                 <p className="text-[14px]"></p>{" "}
                 <p className="mt-1">
                   Bližnji svojci lahko postanejo Skrbniki spominske strani
@@ -158,7 +145,7 @@ const Subscription = () => {
                 price="30 €"
                 title="6 let"
               />
-              <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
+              <div className="text-[#414141] flex gap-1 w-full desktop:w-[754px] mobile:text-[14px] text-[16px]">
                 <p className="text-[14px]">1</p>{" "}
                 <p className="mt-1">
                   Mesečnega Skrbnika lahko prejmete brezplačno v cvetličarni, ki
@@ -191,22 +178,9 @@ const Subscription = () => {
 
       case "cvetlicarne":
         return (
-          <div className="p-4 flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
+          <div className="p-4 mb-[100px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
-                <span className="flex items-center text-[14px] shadow-xl uppercase font-medium mobile:text-[#414B5A] justify-center gap-2 bg-gradient-to-b mobile:from-[#E7EBF0]/[30%] mobile:border mobile:border-[#414B5A] mobile:to-[#000000]/[0%] from-[#0D94E8] from-[20%] to-[#0A85C2] rounded-[10px] w-[89px] h-[33px]">
-                  odpri
-                  <img
-                    className="mobile:hidden block"
-                    src="/arrow-down.png"
-                    alt="icon"
-                  />
-                  <img
-                    className="mobile:block hidden"
-                    src="/arrow-down-black.png"
-                    alt="icon"
-                  />
-                </span>
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
                   Cvetličarne
                 </h2>
@@ -288,22 +262,9 @@ const Subscription = () => {
 
       case "oglasevalci":
         return (
-          <div className="p-4 flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
+          <div className="p-4 mb-[100px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
-                <span className="flex items-center text-[14px] shadow-xl uppercase font-medium mobile:text-[#414B5A] justify-center gap-2 bg-gradient-to-b mobile:from-[#E7EBF0]/[30%] mobile:border mobile:border-[#414B5A] mobile:to-[#000000]/[0%] from-[#0D94E8] from-[20%] to-[#0A85C2] rounded-[10px] w-[89px] h-[33px]">
-                  odpri
-                  <img
-                    className="mobile:hidden block"
-                    src="/arrow-down.png"
-                    alt="icon"
-                  />
-                  <img
-                    className="mobile:block hidden"
-                    src="/arrow-down-black.png"
-                    alt="icon"
-                  />
-                </span>
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
                   Oglaševalci
                 </h2>
@@ -401,7 +362,7 @@ const Subscription = () => {
 
       case "pogrebna-podjetja":
         return (
-          <div className="p-4 flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
+          <div className="p-4 mb-[300px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -416,13 +377,6 @@ const Subscription = () => {
                 </p>
               </p>
             </div>
-            <div className="mobile:w-[99%] w-[744px] flex mobile:justify-center justify-end">
-              <div className="mobile:h-[60px] h-[60px] mobile:mt-[30px] mt-[100px] shadow-xl w-[250px] bg-gradient-to-b from-[#0A85C2] to-[#123597] flex justify-center items-center rounded-full p-[2px]">
-                <button className="mobile:h-[56px] h-[56px] shadow-xl w-[250px] bg-gradient-to-b from-[#FAFBFF] from-[70%] to-[#A6ABBD] text-[20px] text-[#414B5A] cursor-pointer font-variation-customOpt20 font-semibold leading-[24px] flex justify-center items-center rounded-full">
-                  Kontaktirajte nas
-                </button>
-              </div>
-            </div>
           </div>
         );
 
@@ -435,7 +389,7 @@ const Subscription = () => {
       <Layout from={"23"} forFooter={"cenikpage"}>
         <div
           style={{ fontFamily: "Roboto Flex" }}
-          className="w-full bg-[#ECF0F3] sm:px-6 lg:px-8 mobile:py-3 py-8"
+          className="w-full bg-[#ECF0F3] lg:px-8 mobile:py-3 py-8"
         >
           <div className="w-full desktop:w-[1200px]  mx-auto">
             <Tabs

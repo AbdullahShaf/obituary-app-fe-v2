@@ -35,6 +35,7 @@ const ObituaryCard = ({
   mob,
   selectedCity,
   selectedRegion,
+  iframed = false
 }) => {
 
   // Conditional formatting
@@ -50,8 +51,8 @@ const ObituaryCard = ({
     .getDate()
     .toString()
     .padStart(2, "0")}${(funeralDate.getMonth() + 1)
-    .toString()
-    .padStart(2, "0")}${funeralDate.getFullYear().toString().slice(2)}`;
+      .toString()
+      .padStart(2, "0")}${funeralDate.getFullYear().toString().slice(2)}`;
 
   const religionImages = {
     1: "/icon_cross.png",
@@ -74,9 +75,15 @@ const ObituaryCard = ({
 
     const queryString = params.toString();
 
-    return queryString
-      ? `/m/${data.slugKey}?${queryString}`
-      : `/m/${data.slugKey}`;
+    if (iframed) {
+      return queryString
+        ? `/m/${data.slugKey}?${queryString}`
+        : `/m/${data.slugKey}`;
+    } else {
+      return queryString
+        ? `/m/${data.slugKey}?${queryString}`
+        : `/m/${data.slugKey}`;
+    }
   };
 
   return (
@@ -172,9 +179,8 @@ const ObituaryCard = ({
               alt="Slika"
               width={1000}
               height={1000}
-              className={`w-[51px] ${
-                data.symbol === "3" ? "h-[50px]" : "h-[55px]"
-              }`}
+              className={`w-[51px] ${data.symbol === "3" ? "h-[50px]" : "h-[55px]"
+                }`}
             />
           </div>
         )}
@@ -190,9 +196,8 @@ const ObituaryCard = ({
               alt="Slika"
               width={500}
               height={500}
-              className={` w-[37.66px] tablet:h-[65px] tablet:w-[51px] ${
-                data.symbol === "3" ? "h-[40px]" : "h-[48px]"
-              }`}
+              className={` w-[37.66px] tablet:h-[65px] tablet:w-[51px] ${data.symbol === "3" ? "h-[40px]" : "h-[48px]"
+                }`}
             />
           </div>
         )}

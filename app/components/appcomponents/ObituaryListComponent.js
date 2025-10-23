@@ -387,7 +387,7 @@ const ObituaryListComponent = ({ city }) => {
             ))}
         </div>
 
-        <div className="mx-auto grid tablet:hidden desktop:hidden  grid-cols-1 mobile:gap-[22px] mobile:w-full mobile:max-w-[500px] mobile:px-3 tablet:gap-6 desktop:gap-6 mt-[24.58px] tablet:mt-[69px] mobile:mt-[43px] justify-between">
+        <div className="mx-auto grid tablet:hidden desktop:hidden  grid-cols-1 mobile:gap-[22px] mobile:w-full mobile:max-w-[400px] mobile:px-3 tablet:gap-6 desktop:gap-6 mt-[24.58px] tablet:mt-[69px] mobile:mt-[43px] justify-between">
           {obituaries
             .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
             .map((obituary, index) => (

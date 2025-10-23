@@ -327,7 +327,7 @@ export default function HomeContent(props) {
           />
         )}
 
-        <div className="flex flex-col items-center desktop:w-[1280px] tablet:w-[680px] mobile:w-[100%] mobile:max-w-[500px] mx-auto mobile:px-3">
+        <div className="flex flex-col items-center desktop:w-[1280px] tablet:w-[680px] mobile:w-[100%] mobile:max-w-[400px] mx-auto mobile:px-3">
           <div
             className="flex items-center 
         desktop:mt-[60.73px] tablet:mt-[67.73px] mobile:mt-[22px]

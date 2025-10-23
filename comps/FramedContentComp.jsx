@@ -126,7 +126,7 @@ export default function FramedContentComp() {
         if (name && name.length > 0) params.set("search", name);
 
         const queryString = params.toString();
-        router.replace(queryString ? `/?${queryString}` : "/", { scroll: false });
+        router.replace(queryString ? `/iframed?${queryString}` : "/iframed", { scroll: false });
     };
 
     useEffect(() => {

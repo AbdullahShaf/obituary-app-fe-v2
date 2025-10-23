@@ -26,11 +26,13 @@ export default function PricingCard(props) {
               </>
             )}
           </p>
-          <div className="mobile:text-[20px] flex items-center gap-1 text-[24px] text-[#1E2125] mt-1 font-semibold">
+          <div
+            className={`mobile:text-[20px] flex items-center gap-1 text-[24px] text-[#1E2125] mt-1 font-[500]`}
+          >
             <p className={props.number && "mt-1"}>{props.title}</p>{" "}
             {props.number && <p className="text-[14px]">{props.number}</p>}
             {props.subtitle && (
-              <p className="mobile:text-[14px] text-[16px] ml-1 text-[#6D778E] font-medium">
+              <p className="mobile:text-[14px] text-[16px] ml-1 text-[#6D778E] font-[500]">
                 {props.subtitle}
               </p>
             )}

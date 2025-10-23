@@ -104,7 +104,7 @@ const Subscription = () => {
     switch (active) {
       case "spominske":
         return (
-          <div className="mobile:px-1 p-4 flex flex-col mb-[100px] items-center justify-center desktop:justify-start desktop:items-start gap-y-16">
+          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center justify-center desktop:justify-start desktop:items-start mobile:gap-y-11 gap-y-9">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -153,7 +153,7 @@ const Subscription = () => {
                 price="30 €"
                 title="6 let"
               />
-              <div className="text-[#414141] flex gap-1 w-full desktop:w-[754px] mobile:text-[14px] text-[16px]">
+              <div className="text-[#414141] flex gap-1 w-full desktop:w-[754px] text-[14px] desktop:text-[16px]">
                 <p className="text-[14px]">1</p>{" "}
                 <p className="mobile:hidden block mt-1">
                   Mesečnega Skrbnika lahko prejmete brezplačno v cvetličarni, ki
@@ -193,7 +193,7 @@ const Subscription = () => {
 
       case "cvetlicarne":
         return (
-          <div className="mobile:px-1 p-4 mb-[100px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
+          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 mb-[40px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -219,7 +219,7 @@ const Subscription = () => {
                     <>
                       <FormTabsContentCvetlicarne />
                       <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col gap-4">
-                        <div className="text-[#414141] flex gap-1 mb-7 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
+                        <div className="text-[#414141] flex gap-1 mobile:mb-7 mb-4 w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
                           <p className="text-[14px]">1</p>{" "}
                           <p className="mt-1">
                             Občine nad 25.000 preb: Maribor, Celje, Kranj,
@@ -249,7 +249,7 @@ const Subscription = () => {
                           title="Za vedno"
                         />
                         <div>
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">2</p>{" "}
                             <p className="mobile:hidden block mt-1">
                               Poleg naštetega so občasno mogoče še druge
@@ -261,7 +261,7 @@ const Subscription = () => {
                               nas in preverite trenutne.{" "}
                             </p>
                           </div>
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] mobile:text-[14px] text-[16px]">
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">3</p>{" "}
                             <p className="mobile:hidden block mt-1">
                               Vsako podjetje, ki oglašuje vsaj eno leto bo za
@@ -287,7 +287,7 @@ const Subscription = () => {
 
       case "oglasevalci":
         return (
-          <div className="mobile:px-1 p-4 mb-[100px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
+          <div className="mobile:px-1 p-4 mobile:max-w-[500px] mobile:mx-auto mb-[40px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -314,22 +314,28 @@ const Subscription = () => {
                       <FormTabsContentOglasevalci />
                       <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col gap-4">
                         <div className="mb-7 space-y-1">
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">1</p>{" "}
                             <p className="mt-1">
-                              Občine nad 25.000 preb: Maribor, Celje, Kranj,
-                              Koper, Novo mesto, Domžale, Velenje, Nova Gorica
+                              Občine nad 25.000 preb:
+                              <br className="md:block lg:hidden hidden" />{" "}
+                              Maribor, Celje, Kranj, Koper, Novo mesto, Domžale,
+                              Velenje, Nova Gorica
                             </p>
                           </div>
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] mobile:text-[14px] text-[16px]">
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">2</p>{" "}
-                            <p className="mobile:hidden block mt-1">
+                            <p className="hidden desktop:block mt-1">
                               Kontaktirajte nas. Enako za oglaševanje izven
                               predvidenih mest ter na strani pogrebna podjetja.
                             </p>
                             <p className="mobile:block hidden mt-1">
                               Kontaktirajte nas. Mogoče je tudi oglaševanje
                               izven predvidenih mest{" "}
+                            </p>
+                            <p className="tablet:block hidden mt-1">
+                              Kontaktirajte nas. Enako za oglaševanje izven
+                              predvidenih mest
                             </p>
                           </div>
                         </div>
@@ -353,7 +359,7 @@ const Subscription = () => {
                           title="Za vedno"
                         />
                         <div className="space-y-1">
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] mobile:text-[14px] text-[16px]">
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">3</p>{" "}
                             <p className="mobile:hidden block mt-1">
                               Primer: Oglaševanje na strani pogrebi polna cena,
@@ -366,7 +372,7 @@ const Subscription = () => {
                               pa se obračuna 50% popust.{" "}
                             </p>
                           </div>
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] mobile:text-[14px] text-[16px]">
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">4</p>{" "}
                             <p className="mobile:hidden block mt-1">
                               Velja v primeru letnega naročila. Drugi v občini
@@ -379,7 +385,7 @@ const Subscription = () => {
                               naslednjem letu za isto oglaševanje.{" "}
                             </p>
                           </div>
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] mobile:text-[14px] text-[16px]">
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">5</p>{" "}
                             <p className="mobile:hidden block mt-1">
                               Vsako podjetje, ki oglašuje vsaj eno leto bo za
@@ -405,7 +411,7 @@ const Subscription = () => {
 
       case "pogrebna-podjetja":
         return (
-          <div className="p-4 mb-[300px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
+          <div className="p-4 mb-[300px] mobile:max-w-[500px] mobile:mx-auto flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">

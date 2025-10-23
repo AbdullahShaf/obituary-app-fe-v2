@@ -82,13 +82,13 @@ const ObituaryCard = ({
   return (
     <Link
       href={buildHref()}
-      className="mobile:w-[298px] tablet:w-[466px] desktop:w-[466px] 
+      className="mobile:w-[100%] mobile:max-w-[400px] tablet:w-[466px] desktop:w-[466px] 
       mobile:h-[126px] tablet:h-[170px] desktop:h-[170px]  border-2
        border-white shadow-custom-light-dark-box
         bg-gradient-to-br from-[#E3EAEF] to-[#F3F6F8] rounded-lg flex justify-center items-center "
     >
-      <div className="flex">
-        <div className="mobile:w-[263px] tablet:w-[420.33px] desktop:w-[428px] flex">
+      <div className="flex mobile:w-[100%] mobile:px-3">
+        <div className="mobile:w-[100%] tablet:w-[420.33px] desktop:w-[428px] flex">
           <div
             className="rounded-xl mobile:mr-[17.33px] tablet:mr-[26px] desktop:mr-[29px]  
           shadow-custom-light-dark-box-image p-1 bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] "

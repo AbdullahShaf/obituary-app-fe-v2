@@ -47,7 +47,7 @@ export default function SplosniPogoji() {
               <Desktop />
             )}
           </div>
-          <iframe src="https://staging.osmrtnica.com/iframed" width="100%" height="1180" style={{ border: 'none' }}></iframe>
+          {/* <iframe src="https://staging.osmrtnica.com/iframed" width="100%" height="1180" style={{ border: 'none' }}></iframe> */}
           <TermsAndCond />
         </div>
       </Layout>

@@ -62,7 +62,7 @@ export default function Obituaries() {
     return `${year}`;
   };
   return (
-    <CompanyAccountLayout>
+    <CompanyAccountLayout isMobileViewChange={true}>
       <div className="w-full mobile:max-w-[500px] mobile:mx-auto max-w-[950px]">
         <div className="mt-[60px] mobile:hidden">
           <div className="flex items-center gap-3">

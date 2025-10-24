@@ -143,7 +143,7 @@ export default function AccountSettings() {
   };
 
   return (
-    <CompanyAccountLayout>
+    <CompanyAccountLayout isMobileViewChange={true}>
       <div className="w-full mobile:min-w-full max-w-[1000px] min-w-[720px]">
         <div
           style={{

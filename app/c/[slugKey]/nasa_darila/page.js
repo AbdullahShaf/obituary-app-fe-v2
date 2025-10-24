@@ -22,7 +22,7 @@ export default function Darila() {
     }
   };
   return (
-    <CompanyAccountLayout>
+    <CompanyAccountLayout isMobileViewChange={true}>
       <div className="w-full mobile:max-w-[500px] mobile:mx-auto max-w-[969px]">
         <div className="flex items-center mobile:hidden gap-[37px] text-[#6D778E] mt-[62px]">
           <Link

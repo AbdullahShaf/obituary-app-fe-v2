@@ -10,7 +10,7 @@ import CompanySidebar from "@/app/components/appcomponents/CompanySidebar";
 import { useAuth } from "@/hooks/useAuth";
 import { useSession } from "next-auth/react";
 
-const CompanyAccountLayout = ({ children }) => {
+const CompanyAccountLayout = ({ children, isMobileViewChange }) => {
   const pathname = usePathname();
   const { user, isAuthenticated } = useAuth();
 
@@ -230,16 +230,13 @@ const CompanyAccountLayout = ({ children }) => {
             setShowAlternateContent={setShowAlternateContent}
             pendingConfirmations={pendingPosts.length}
           />
-          {pathname == "/c/osmrtnica-com/nase_osmrtnice" ||
-            pathname == "/c/osmrtnica-com/nase_spominske" ||
-            pathname == "/c/osmrtnica-com/nasa_darila" ||
-            (pathname == "/c/osmrtnica-com/nasi_podatki" && (
-              <div
-                className={`text-[#6D778E] text-[12px] absolute mobile:block hidden right-3`}
-              >
-                {companyAndCity}
-              </div>
-            ))}
+          {isMobileViewChange && (
+            <div
+              className={`text-[#6D778E] text-[12px] absolute mobile:block hidden right-3`}
+            >
+              {companyAndCity}
+            </div>
+          )}
           <div className="flex mobileUserAcc:pt-[36px] pt-[46px]  desktopUserAcc:max-w-[1049px] w-full ">
             <div className="flex flex-row w-full ">
               <div
@@ -259,7 +256,9 @@ const CompanyAccountLayout = ({ children }) => {
                     style={{
                       fontVariationSettings: "'wdth' 50,'wght' 600,'opsz' 32",
                     }}
-                    className={`pt-[10px] flex text-[32px] text-[#0A85C2] font-medium`}
+                    className={`pt-[10px] flex ${
+                      isMobileViewChange && "mobile:text-[20px]"
+                    } text-[32px] text-[#0A85C2] font-medium`}
                   >
                     {headingOne}
 
@@ -286,7 +285,7 @@ const CompanyAccountLayout = ({ children }) => {
                     ${
                       pathname == "/potrditev-objave" ||
                       pathname == "/dodaj-vsebine" ||
-                      pathname == "/c/osmrtnica-com/nase_spominske"
+                      isMobileViewChange
                         ? "mobileUserAcc:hidden "
                         : ""
                     }
@@ -345,7 +344,7 @@ const CompanyAccountLayout = ({ children }) => {
                   )}
                 </div>
 
-                {pathname === "/c/osmrtnica-com/spletna-stran" && (
+                {headingOne === "Naša spletna stran" && (
                   <p className="text-[#6D778E] w-[298px] text-[12px] mt-4 hidden mobile:block">
                     op. Majhen zaslon mobilnega telefona ni optimalen za
                     izdelavo spletne strani. Uporabite računalnik ali tablico.{" "}

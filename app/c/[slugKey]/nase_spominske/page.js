@@ -62,7 +62,7 @@ export default function Spominske() {
     return `${day}.${month}.${year}`;
   };
   return (
-    <CompanyAccountLayout>
+    <CompanyAccountLayout isMobileViewChange={true}>
       <div className="w-full mobile:max-w-full max-w-[940px]">
         <div className="mt-[62px] mobile:hidden flex justify-between">
           <div className="flex gap-[15px]">

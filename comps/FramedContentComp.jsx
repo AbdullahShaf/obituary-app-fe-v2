@@ -198,7 +198,7 @@ export default function FramedContentComp() {
                 <div
                     className="flex flex-col desktop:flex-row 
         desktop:mt-[70px] tablet:mt-[48px] mobile:mt-[29px]
-        desktop:w-[777px] tablet:w-[600px] mobile:w-[296]
+        desktop:w-[777px] tablet:w-[600px] mobile:w-[296px]
           items-center justify-center space-x-[16px]"
                 >
                     <div className="flex flex-col w-full items-center tablet:flex-row desktop:flex-row desktop:space-x-[16px] tablet:justify-between mobile:h-[112px] tablet:h-[48px] desktop:h-[48px]">

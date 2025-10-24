@@ -56,19 +56,35 @@ const footerLinkSets = {
     { label: "Prva stran", path: "/", showOnMobile: false },
     { label: "Osmrtnice", path: "/osmrtnice", showOnMobile: true },
     { label: "Pogrebi", path: "/pogrebi", showOnMobile: true },
-    { label: "Spominske", path: "/spominske", showOnMobile: true },  
+    { label: "Spominske", path: "/spominske", showOnMobile: true },
     { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
-],
+  ],
   "/resitve-za-cvetlicarne": [
     { label: "Začetna ", path: "/ ", showOnMobile: false },
-    { label: "Cvetličarne", path: "/resitve-za-cvetlicarne ", showOnMobile: true },
+    {
+      label: "Cvetličarne",
+      path: "/resitve-za-cvetlicarne ",
+      showOnMobile: true,
+    },
     { label: "Priložnost", path: "/c-priloznost ", showOnMobile: true },
-    { label: "Pogrebna", path: "/resitve-za-pogrebna-podjetja ", showOnMobile: true },
+    {
+      label: "Pogrebna",
+      path: "/resitve-za-pogrebna-podjetja ",
+      showOnMobile: true,
+    },
   ],
   "/resitve-za-pogrebna-podjetja": [
     { label: "Začetna ", path: "/ ", showOnMobile: false },
-    { label: "Cvetličarne", path: "/resitve-za-cvetlicarne ", showOnMobile: true },
-    { label: "Pogrebna", path: "/resitve-za-pogrebna-podjetja ", showOnMobile: true },
+    {
+      label: "Cvetličarne",
+      path: "/resitve-za-cvetlicarne ",
+      showOnMobile: true,
+    },
+    {
+      label: "Pogrebna",
+      path: "/resitve-za-pogrebna-podjetja ",
+      showOnMobile: true,
+    },
     { label: "Priložnost", path: "/p-priloznost ", showOnMobile: true },
   ],
   "/vodic": [
@@ -77,14 +93,21 @@ const footerLinkSets = {
     { label: "Pogrebi", path: "/pogrebi ", showOnMobile: true },
     { label: "Spominske", path: "/osmrtnice ", showOnMobile: true },
     { label: "Cvetličarne", path: "/cvetlicarne  ", showOnMobile: true },
-  ]
+  ],
+  "/cenik": [
+    { label: "Prva stran", path: "/", showOnMobile: false },
+    { label: "Osmrtnice", path: "/osmrtnice ", showOnMobile: true },
+    { label: "Pogrebi", path: "/pogrebi ", showOnMobile: true },
+    { label: "Spominske", path: "/osmrtnice ", showOnMobile: true },
+    { label: "Cvetličarne", path: "/cvetlicarne  ", showOnMobile: true },
+  ],
 };
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const checkMobile = () => setIsMobile(window.innerWidth < 768);
       checkMobile(); // initial check
       window.addEventListener("resize", checkMobile);
@@ -98,7 +121,9 @@ function useIsMobile() {
 const CommonFooter = ({ currentPage = "/" }) => {
   const pathname = usePathname();
   const isMobile = useIsMobile();
-  const linksToRender = !isMobile ? footerLinkSets[currentPage] || [] : footerLinkSets[currentPage].filter((item) => item.showOnMobile);
+  const linksToRender = !isMobile
+    ? footerLinkSets[currentPage] || []
+    : footerLinkSets[currentPage].filter((item) => item.showOnMobile);
 
   return (
     <div className="bg-[#D4E6F9] border-l-1 border-r-1 border-t-1 border-b-1 border-color-[#D3D3D3] tablet:pt-[31px] pt-[29px] mobile:pt-[15px] pb-[14px]">
@@ -116,13 +141,17 @@ const CommonFooter = ({ currentPage = "/" }) => {
             <React.Fragment key={link.label}>
               <Link
                 href={link.path}
-                className={`text-[#1860A3] underline ${link.showOnMobile === false ? "hidden md:block" : "block"}`}
+                className={`text-[#1860A3] underline ${
+                  link.showOnMobile === false ? "hidden md:block" : "block"
+                }`}
               >
                 {link.label}
               </Link>
               {index < linksToRender.length - 1 && (
                 <div
-                  className={`w-[5px] h-[5px] bg-[#1860A3] rounded-full ${link.showOnMobile === false ? "hidden md:block" : "block"}`}
+                  className={`w-[5px] h-[5px] bg-[#1860A3] rounded-full ${
+                    link.showOnMobile === false ? "hidden md:block" : "block"
+                  }`}
                 ></div>
               )}
             </React.Fragment>
@@ -154,7 +183,11 @@ const CommonFooter = ({ currentPage = "/" }) => {
           >
             Pišite nam
           </Link>
-          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" target="_blank" className="">
+          <Link
+            href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
+            target="_blank"
+            className=""
+          >
             <Image
               src={"/promo_footer_facebook.png"}
               width={18}
@@ -194,7 +227,11 @@ const CommonFooter = ({ currentPage = "/" }) => {
           >
             Pišite nam
           </Link>
-          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" target="_blank" className="">
+          <Link
+            href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
+            target="_blank"
+            className=""
+          >
             <Image
               src={"/promo_footer_facebook.png"}
               width={18}

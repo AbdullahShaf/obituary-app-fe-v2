@@ -34,6 +34,8 @@ function UserAccountHeaderNew({
   const [isButtonHide, setIsButtonHide] = useState(false);
   const parsedUser = user;
 
+  const slugName = parsedUser?.role === 'Florist' ? 'c' : parsedUser?.role === 'User' ? 'u' : 'p';
+
   return (
     <React.Fragment>
       <header className="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 ">
@@ -96,7 +98,7 @@ function UserAccountHeaderNew({
                         className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200"
                         title="Nazaj"
                       >
-                        <Link href={`/u/${parsedUser?.slugKey}/menu`}>
+                        <Link href={`/${slugName}/${parsedUser?.slugKey}/menu`}>
                           <FiMenu size={32} color="black" />
                         </Link>
                       </span>

@@ -273,7 +273,7 @@ export default function AccountSettings() {
         <div className="space-y-4 text-[#6D778E] text-[14px]">
           <div className="space-y-1">
             <span className="uppercase">OBČINA:</span>
-            <div className="grid mobile:grid-cols-1 grid-cols-2 gap-[12px] px-6 pb-[10px]">
+            <div className="grid mobile:grid-cols-1 grid-cols-2 gap-[12px] mobile:px-0 px-6 pb-[10px]">
               <div className="flex items-center gap-[12px] ">
                 <span className="uppercase">Primarno:</span>
                 <span className="text-[#3C3E41]">{data?.city}</span>

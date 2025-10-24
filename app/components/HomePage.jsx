@@ -32,41 +32,15 @@ import { SelectDropdown } from "@/app/components/appcomponents/SelectDropdown";
 export default function HomeContent(props) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { user } = useAuth();
-
-  // 17 September 2024
-  const arrPlace = [
-    { place: "City 1", url: "/cvetlicarne", id: 1 },
-    {
-      place: "City 2",
-      url: "/cvetlicarne",
-      id: 2,
-    },
-    {
-      place: "City 3",
-      url: "/cvetlicarne",
-      id: 3,
-    },
-    {
-      place: "City 4",
-      url: "/cvetlicarne",
-      id: 4,
-    },
-  ];
-
   const [obituaries, setObituaries] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isMessageModalVisible, setIsMessageModalVisible] = useState(false);
-  const [isLocalQuickModalVisible, setIsLocalQuickModalVisible] =
-    useState(false);
-  const [isMemoralPopupVisible, setIsMemoralPopupVisible] = useState(false);
-  const [isLocalQuickReviewModalVisible, setIsLocalQuickReviewModalVisible] =
-    useState(false);
-
+  const [isLocalQuickModalVisible, setIsLocalQuickModalVisible] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [name, setName] = useState(null);
   const [selectedFloristCity, setSelectedFloristCity] = useState(null);
+  const [obitLoading, setObitLoading] = useState(false);
 
   // Initialize state from URL parameters on component mount
   useEffect(() => {
@@ -242,7 +216,9 @@ export default function HomeContent(props) {
       if (selectedRegion && selectedRegion != '- Pokaži vse regije -') queryParams.region = selectedRegion;
       if (name) queryParams.name = name;
 
+      setObitLoading(true);
       const response = await obituaryService.getObituary(queryParams);
+      setObitLoading(false);
 
       if (response.error) {
         // toast.error(
@@ -275,6 +251,7 @@ export default function HomeContent(props) {
 
       setObituaries(sortedObituaries);
     } catch (err) {
+      setObitLoading(false);
       console.error("Error fetching obituary:", err);
       // toast.error(err.message || "Failed to fetch obituary.");
     }
@@ -327,7 +304,7 @@ export default function HomeContent(props) {
           />
         )}
 
-        <div className="flex flex-col items-center desktop:w-[1280px] tablet:w-[680px] mobile:w-[360px] mx-auto">
+        <div className="flex flex-col items-center desktop:w-[1280px] tablet:w-[680px] mobile:w-[100%] mobile:max-w-[400px] mx-auto mobile:px-3">
           <div
             className="flex items-center 
         desktop:mt-[60.73px] tablet:mt-[67.73px] mobile:mt-[22px]
@@ -344,8 +321,11 @@ export default function HomeContent(props) {
             className="flex flex-col desktop:flex-row 
         desktop:mt-[70px] tablet:mt-[48px] mobile:mt-[29px]
         desktop:w-[777px] tablet:w-[600px] mobile:w-[296]
-          items-center justify-center space-x-[16px]"
+          items-center justify-center space-x-[16px] relative"
           >
+            {obitLoading ? (
+              <div className="absolute top-0 left-0 h-full w-full z-50"></div>
+            ) : null}
             <div className="flex flex-col w-full items-center tablet:flex-row desktop:flex-row desktop:space-x-[16px] tablet:justify-between mobile:h-[112px] tablet:h-[48px] desktop:h-[48px]">
               <div className="hidden desktop:flex h-[48px]">
                 <input
@@ -456,7 +436,7 @@ export default function HomeContent(props) {
               />
             ))}
           </div>
-          <div className="mx-auto grid grid-cols-1 tablet:hidden desktop:hidden gap-[22px] tablet:gap-6 mt-[43px] tablet:mt-[64px]">
+          <div className="mx-auto mobile:w-full grid grid-cols-1 tablet:hidden desktop:hidden gap-[22px] tablet:gap-6 mt-[43px] tablet:mt-[64px]">
             {obituaries.slice(0, 8).map((obituary, index) => (
               <ObituaryCard
                 data={obituary}

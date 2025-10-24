@@ -396,7 +396,7 @@ const ListView = ({ item, key }) => {
       .padStart(2, "0")}${responseDeathDate.getFullYear().toString().slice(2)}`;
 
     router.push(
-      `/memorypage/${item.id}/${item.name}_${item.sirName}_${deathDateFormatted}`
+      `/m/${item.slugKey}`
     );
   };
   return (

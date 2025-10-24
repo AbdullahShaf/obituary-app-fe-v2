@@ -35,6 +35,7 @@ const ObituaryCard = ({
   mob,
   selectedCity,
   selectedRegion,
+  iframed = false
 }) => {
 
   // Conditional formatting
@@ -50,8 +51,8 @@ const ObituaryCard = ({
     .getDate()
     .toString()
     .padStart(2, "0")}${(funeralDate.getMonth() + 1)
-    .toString()
-    .padStart(2, "0")}${funeralDate.getFullYear().toString().slice(2)}`;
+      .toString()
+      .padStart(2, "0")}${funeralDate.getFullYear().toString().slice(2)}`;
 
   const religionImages = {
     1: "/icon_cross.png",
@@ -73,22 +74,28 @@ const ObituaryCard = ({
     }
 
     const queryString = params.toString();
-
-    return queryString
-      ? `/m/${data.slugKey}?${queryString}`
-      : `/m/${data.slugKey}`;
+    if (iframed) {
+      return queryString
+        ? `/m/${data.slugKey}?${queryString}`
+        : `/m/${data.slugKey}`;
+    } else {
+      return queryString
+        ? `/m/${data.slugKey}?${queryString}`
+        : `/m/${data.slugKey}`;
+    }
   };
 
   return (
     <Link
       href={buildHref()}
-      className="mobile:w-[298px] tablet:w-[466px] desktop:w-[466px] 
+      target={`${iframed ? '_blank' : '_self'}`}
+      className="mobile:w-[100%] mobile:max-w-[400px] tablet:w-[466px] desktop:w-[466px] 
       mobile:h-[126px] tablet:h-[170px] desktop:h-[170px]  border-2
        border-white shadow-custom-light-dark-box
         bg-gradient-to-br from-[#E3EAEF] to-[#F3F6F8] rounded-lg flex justify-center items-center "
     >
-      <div className="flex">
-        <div className="mobile:w-[263px] tablet:w-[420.33px] desktop:w-[428px] flex">
+      <div className="flex mobile:w-[100%] mobile:px-3">
+        <div className="mobile:w-[100%] tablet:w-[420.33px] desktop:w-[428px] flex">
           <div
             className="rounded-xl mobile:mr-[17.33px] tablet:mr-[26px] desktop:mr-[29px]  
           shadow-custom-light-dark-box-image p-1 bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] "
@@ -172,9 +179,8 @@ const ObituaryCard = ({
               alt="Slika"
               width={1000}
               height={1000}
-              className={`w-[51px] ${
-                data.symbol === "3" ? "h-[50px]" : "h-[55px]"
-              }`}
+              className={`w-[51px] ${data.symbol === "3" ? "h-[50px]" : "h-[55px]"
+                }`}
             />
           </div>
         )}
@@ -190,9 +196,8 @@ const ObituaryCard = ({
               alt="Slika"
               width={500}
               height={500}
-              className={` w-[37.66px] tablet:h-[65px] tablet:w-[51px] ${
-                data.symbol === "3" ? "h-[40px]" : "h-[48px]"
-              }`}
+              className={` w-[37.66px] tablet:h-[65px] tablet:w-[51px] ${data.symbol === "3" ? "h-[40px]" : "h-[48px]"
+                }`}
             />
           </div>
         )}

@@ -37,8 +37,7 @@ const CarouselEntry = ({ item }) => {
     <a
       key={item.id}
       className="flex flex-row items-center border-b border-[#D4D4D4] w-full h-[64px] last:border-b-0 cursor-pointer"
-      // href={`/memorypage/${item.id}/${item.name}_${item.sirName}_${funeralDateFormatted}`}
-      href={`/m/${item.slugKey}`} // Updated to use slugKey
+      href={`/m/${item.slugKey}`}
     >
       <h1 className="text-[#0A85C2] font-normal text-sm mobile:text-lg tablet:text-lg desktop:text-xl w-[50px] mobile:w-[60px] tablet:w-[75px] desktop:w-[97px] text-center flex-shrink-0">
         {item.funeralTimestamp
@@ -222,7 +221,7 @@ const Carousel = () => {
             // <a
             //   key={item.id || index}
             //   className="flex flex-row items-center border-b border-[#D4D4D4] w-full h-[64px] last:border-b-0 cursor-pointer"
-            //   href={`/memorypage/${item.id}/${item.name}_${item.sirName}_${funeralDateFormatted}`}
+            //   href={`/m/${item.slugKey}`}
             // >
             //   <h1 className="text-[#0A85C2] font-normal text-sm mobile:text-lg tablet:text-lg desktop:text-xl w-[50px] mobile:w-[60px] tablet:w-[75px] desktop:w-[97px] text-center flex-shrink-0">
             //     {item.funeralTimestamp

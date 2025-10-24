@@ -20,12 +20,14 @@ import {
 import MemoryHeader from "./MemoryHeader";
 import { useAuth } from "@/hooks/useAuth";
 import SideMenu from "../ui/sideMenu";
+import CommonFooter from "./CommonFooter";
 const Layout = ({
   children,
   from,
   forFooter,
   isMegaMenuVisible,
-  megaMenu,showHamburger=true,
+  megaMenu,
+  showHamburger = true,
   data = {},
   onChangeMemory = () => {},
   currentPage = "",
@@ -131,12 +133,29 @@ const Layout = ({
         </>
       )}
 
+      {from == "23" ? (
+        <>
+          <CommonHeader currentPage={currentPage} />
+          <div className="flex relative mobile:h-[196px] tablet:h-[220px] desktop:h-[300px] mt-[65px] desktop:mt-[91px] w-full mx-auto">
+            <img
+              className="object-cover h-full w-full"
+              src="/payment-hero.jpg"
+            />
+            <div className="absolute text-[#1E2125] border border-[#ffffff] mobile:text-[28px] text-[40px] top-[35%] mx-auto left-0 right-0 flex items-center justify-center mobile:w-[114px] mobile:h-[64px] w-[137px] h-[79px] bg-gradient-to-r from-[#ffffff] to-[#ffffff]/[30%] rounded-[8px]">
+              Cenik
+            </div>
+          </div>
+        </>
+      ) : null}
+
       <main className="flex bg-[#F5F7F9]">{children}</main>
 
       {/* Footer */}
       {forFooter == "company" ? (
         <CompanyFooter data={data} />
-      ) : forFooter == "memorypage" ? null : (
+      ) : forFooter == "memorypage" ? null : forFooter === "cenikpage" ? (
+        <CommonFooter currentPage="/cenik" />
+      ) : (
         <Footer />
       )}
 

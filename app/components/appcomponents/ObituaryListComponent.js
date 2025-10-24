@@ -13,6 +13,8 @@ import regionsAndCities from "@/utils/regionAndCities";
 import { SelectDropdown } from "./SelectDropdown";
 
 const ObituaryListComponent = ({ city }) => {
+  const searchParams = useSearchParams();
+  const regionParam1 = searchParams.get("region");
   const languages = [
     "Ljubljana",
     "Maribor",
@@ -25,13 +27,14 @@ const ObituaryListComponent = ({ city }) => {
     "Nova Gorica",
   ];
   const [obituaries, setObituaries] = useState([]);
+  const [obitLoading, setObitLoading] = useState(false);
   const allRegionsOption = {
     place: "- Pokaži vse regije -",
     id: "allRegions",
   };
   const allCitiesOption = { place: "- Pokaži vse občine -", id: "allCities" };
   const [selectedCity, setSelectedCity] = useState(city ? city : null);
-  const [selectedRegion, setSelectedRegion] = useState(null);
+  const [selectedRegion, setSelectedRegion] = useState(regionParam1 ?? null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10); // default to mobile
   const [selectedName, setSelectedName] = useState("");
@@ -64,12 +67,11 @@ const ObituaryListComponent = ({ city }) => {
           }))
           .sort((a, b) => a.place.localeCompare(b.place, "sl")),
       ];
-
-  const searchParams = useSearchParams();
   const router = useRouter();
 
   useEffect(() => {
     const cityParam = searchParams.get("city");
+    const regionParam = searchParams.get("region");
 
     if (cityParam) {
       setSelectedCity(cityParam);
@@ -178,7 +180,9 @@ const ObituaryListComponent = ({ city }) => {
 
       if (selectedRegion && selectedRegion != '- Pokaži vse regije -') queryParams.region = selectedRegion;
       if (selectedName) queryParams.name = selectedName;
+      setObitLoading(true);
       const response = await obituaryService.getObituary(queryParams);
+      setObitLoading(false);
 
       if (response.error) {
         // toast.error(
@@ -214,6 +218,7 @@ const ObituaryListComponent = ({ city }) => {
 
       setObituaries(sortedObituaries);
     } catch (err) {
+      setObitLoading(false);
       console.error("Error fetching obituary:", err);
       toast.error(err.message || "Failed to fetch obituary.");
     }
@@ -273,8 +278,11 @@ const ObituaryListComponent = ({ city }) => {
           {/* Inputs main Container */}
           <div
             className="w-[777px] tablet:w-[600px] h-[48px] tablet:h-[112px] tablet:columns-2 mobile:w-[296px] mobile:h-[240px] mobile:flex-wrap 
-            flex tablet:flex-wrap flex-row gap-4 mt-[69.07px] tablet:mt-[63px] mobile:mt-[40px] mobile:mb-[42px] tablet:mb-[53px] mb-[23.93px]"
+            flex tablet:flex-wrap flex-row gap-4 mt-[69.07px] tablet:mt-[63px] mobile:mt-[40px] mobile:mb-[42px] tablet:mb-[53px] mb-[23.93px] relative"
           >
+            {obitLoading ? (
+              <div className="absolute top-0 left-0 h-full w-full z-50"></div>
+            ) : null}
             {/* Input field for  Išči po imenu / priimku*/}
             <div className="flex w-[227px] tablet:w-[292px] h-[48px] mobile:w-[296px] justify-center items-center">
               <input
@@ -344,10 +352,10 @@ const ObituaryListComponent = ({ city }) => {
                       handleCitySelectQuickLinks(language);
                     }}
                     className={`border border-[#C3C6C8] rounded-sm text-[#3C3E41] mobile:mt-[16px] hover:bg-gray-100 transition-colors cursor-pointer ${index == languages.length - 1
-                        ? "ml-[0px]"
-                        : index == 5
-                          ? "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
-                          : "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
+                      ? "ml-[0px]"
+                      : index == 5
+                        ? "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
+                        : "mobile:ml-[0px] tablet:mx-[6px] desktop:mr-[17px]"
                       } ${index < 6 ? "tablet:mb-[18px]" : "tablet:mb-[18px]"} ${selectedCity === language
                         ? "bg-[#414141] text-white"
                         : "bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]"
@@ -387,7 +395,7 @@ const ObituaryListComponent = ({ city }) => {
             ))}
         </div>
 
-        <div className="mx-auto grid tablet:hidden desktop:hidden  grid-cols-1 mobile:gap-[22px] tablet:gap-6 desktop:gap-6 mt-[24.58px] tablet:mt-[69px] mobile:mt-[43px] justify-between">
+        <div className="mx-auto grid tablet:hidden desktop:hidden  grid-cols-1 mobile:gap-[22px] mobile:w-full mobile:max-w-[400px] mobile:px-3 tablet:gap-6 desktop:gap-6 mt-[24.58px] tablet:mt-[69px] mobile:mt-[43px] justify-between">
           {obituaries
             .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
             .map((obituary, index) => (

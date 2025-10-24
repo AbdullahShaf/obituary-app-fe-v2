@@ -290,7 +290,7 @@ export default function FramedContentComp() {
                         />
                     ))}
                 </div>
-                <div className="mx-auto mobile:w-full grid grid-cols-1 tablet:hidden desktop:hidden gap-[22px] tablet:gap-6 mt-[43px] tablet:mt-[64px]">
+                <div className="mx-auto mobile:w-full grid grid-cols-1 tablet:hidden desktop:hidden gap-[22px] tablet:gap-6 mt-[43px] tablet:mt-[64px] mobile:place-items-center">
                     {obituaries.slice(0, 8).map((obituary, index) => (
                         <ObituaryCard
                             data={obituary}

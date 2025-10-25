@@ -92,7 +92,7 @@ const TopBar = ({
               />
             </button>
           </div>
-          {!isAuthenticated && (
+          {(!isAuthenticated || !user?.city) && (
             <div
               className="flex -z-10  tablet:w-[100%] tablet:justify-center  tablet:absolute 
                     desktop:absolute desktop:w-[1200px] desktop:justify-center items-center "
@@ -113,7 +113,7 @@ const TopBar = ({
               </button>
             </div>
           )}
-          {isAuthenticated && (
+          {(isAuthenticated && user?.city) && (
             <div
               className="flex -z-10  tablet:w-[100%] tablet:justify-center  tablet:absolute 
                     desktop:absolute desktop:w-[1200px] desktop:justify-center items-center "

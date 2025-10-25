@@ -8,11 +8,11 @@ import { usePathname } from "next/navigation";
 import obituaryService from "@/services/obituary-service";
 import CompanySidebar from "@/app/components/appcomponents/CompanySidebar";
 import { useAuth } from "@/hooks/useAuth";
+import { useSession } from "next-auth/react";
 
-const CompanyAccountLayout = ({ children }) => {
+const CompanyAccountLayout = ({ children, isMobileViewChange }) => {
   const pathname = usePathname();
   const { user, isAuthenticated } = useAuth();
-  
 
   const normalPath = pathname.startsWith("/c")
     ? pathname.replace("/c", "")
@@ -37,7 +37,13 @@ const CompanyAccountLayout = ({ children }) => {
   const [hrefLinkTwo, setHrefLinkTwo] = useState("");
 
   const [innnerSize, setInnnerSize] = useState(false);
-  
+  const { data: session } = useSession();
+  const companyAndCity = `${
+    session?.user?.me?.company && session?.user?.me?.city
+      ? `${session?.user?.me?.company}, ${session?.user?.me?.city}`
+      : ""
+  }`;
+
   function handleResize() {
     if (window.innerWidth <= 744) {
       setInnnerSize(true); // Change state value when width is <= 744
@@ -224,19 +230,35 @@ const CompanyAccountLayout = ({ children }) => {
             setShowAlternateContent={setShowAlternateContent}
             pendingConfirmations={pendingPosts.length}
           />
-
-          <div className="flex pt-[46px]  desktopUserAcc:max-w-[1049px] w-full ">
+          {isMobileViewChange && (
+            <div
+              className={`text-[#6D778E] text-[12px] absolute mobile:block hidden right-3`}
+            >
+              {companyAndCity}
+            </div>
+          )}
+          <div className="flex mobileUserAcc:pt-[36px] pt-[46px]  desktopUserAcc:max-w-[1049px] w-full ">
             <div className="flex flex-row w-full ">
               <div
                 className={`flex w-full  flex-col pl-[42px] mobileUserAcc:pl-[12px] mobileUserAcc:pr-[12px]  tabletUserAcc:px-3  pb-[155px] mobileUserAcc:pb-[100px] tabletUserAcc:pb-[272px] desktopUserAcc:pb-[217px] relative`}
               >
                 {/* MAIN SCREEN HEADING */}
-                <div className="flex h-[38px]  items-center">
+                <div
+                  className={`flex ${
+                    headingOne === "Vnešene osmrtnice" ||
+                    headingOne === "Darila strankam" ||
+                    headingOne === "Račun in nastavitve"
+                      ? "mobile:hidden"
+                      : "h-[38px]"
+                  }  items-center`}
+                >
                   <div
                     style={{
                       fontVariationSettings: "'wdth' 50,'wght' 600,'opsz' 32",
                     }}
-                    className="pt-[10px] flex text-[32px] text-[#0A85C2] font-medium"
+                    className={`pt-[10px] flex ${
+                      isMobileViewChange && "mobile:text-[20px]"
+                    } text-[32px] text-[#0A85C2] font-medium`}
                   >
                     {headingOne}
 
@@ -262,7 +284,8 @@ const CompanyAccountLayout = ({ children }) => {
                     
                     ${
                       pathname == "/potrditev-objave" ||
-                      pathname == "/dodaj-vsebine"
+                      pathname == "/dodaj-vsebine" ||
+                      isMobileViewChange
                         ? "mobileUserAcc:hidden "
                         : ""
                     }
@@ -321,6 +344,12 @@ const CompanyAccountLayout = ({ children }) => {
                   )}
                 </div>
 
+                {headingOne === "Naša spletna stran" && (
+                  <p className="text-[#6D778E] w-[298px] text-[12px] mt-4 hidden mobile:block">
+                    op. Majhen zaslon mobilnega telefona ni optimalen za
+                    izdelavo spletne strani. Uporabite računalnik ali tablico.{" "}
+                  </p>
+                )}
                 {/* MAIN SCREENS WHICH WILL CHANGE WHEN ROUTE CHANGES */}
                 <main>{children}</main>
               </div>

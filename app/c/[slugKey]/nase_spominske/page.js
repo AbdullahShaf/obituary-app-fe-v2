@@ -21,7 +21,10 @@ export default function Spominske() {
         setMonthlyTotalData(response.obituaries);
         setTotalObitWithKeeper(response.totalObituariesWithKeeper);
         const now = new Date();
-        const formatted = now.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+        const formatted = now.toLocaleString("en-US", {
+          month: "long",
+          year: "numeric",
+        });
         if (typeof response.obituaries[formatted] !== undefined) {
           setCurrentMonthlData(response.obituaries[formatted]);
         }
@@ -35,7 +38,7 @@ export default function Spominske() {
     setTimeout(() => {
       getObituaries();
       getMonthlyData();
-    }, 500)
+    }, 500);
   }, []);
 
   const getObituaries = async () => {
@@ -59,9 +62,9 @@ export default function Spominske() {
     return `${day}.${month}.${year}`;
   };
   return (
-    <CompanyAccountLayout>
-      <div className="w-full max-w-[940px]">
-        <div className="mt-[62px] flex justify-between">
+    <CompanyAccountLayout isMobileViewChange={true}>
+      <div className="w-full mobile:max-w-full max-w-[940px]">
+        <div className="mt-[62px] mobile:hidden flex justify-between">
           <div className="flex gap-[15px]">
             <div className="border-gradient-rounded  flex flex-col h-[90px] w-[310px] py-[13px] px-[15px] border-[2px] border-[#0A85C2] rounded-[10px] bg-[#fff] shadow-md">
               <div className="flex justify-between items-start mb-[2px]">
@@ -148,9 +151,9 @@ export default function Spominske() {
             </div>
           </div>
         </div>
-        <div className="mt-[76px] min-w-[720px]">
+        <div className="mobileUserAcc:my-[16px] mt-[76px] mobile:min-w-full min-w-[720px]">
           <div className="flex justify-between">
-            <div className="flex items-end gap-2">
+            <div className="flex mobile:hidden items-end gap-2">
               <h4
                 className="text-[24px] text-[#0A85C2] leading-none"
                 style={{
@@ -164,8 +167,8 @@ export default function Spominske() {
               </span>
             </div>
 
-            <div className="space-y-[5px] tabletUserAcc:block mobileUserAcc:block hidden">
-              <div className="flex gap-3">
+            <div className="mobileUserAcc:justify-between mobileUserAcc:w-full mobileUserAcc:max-w-[500px] mobileUserAcc:items-center mobile:space-y-0 space-y-[5px] tabletUserAcc:block mobileUserAcc:flex hidden">
+              <div className="flex mobile:gap-2.5 gap-3">
                 <div className="w-[30px] shrink-0 inline-flex items-center justify-end">
                   <img
                     src="/ico_pregled.png"
@@ -173,11 +176,14 @@ export default function Spominske() {
                     className="h-[10px]"
                   />
                 </div>
-                <span className="text-[#717B8C] text-[12px]">
+                <span className="mobile:hidden block text-[#717B8C] text-[12px]">
                   Dodana osmrtnica
                 </span>
+                <span className="mobile:block hidden text-[#717B8C] text-[12px]">
+                  Osmrtnica
+                </span>
               </div>
-              <div className="flex gap-3">
+              <div className="flex mobile:gap-2.5 gap-3">
                 <div className="w-[30px] shrink-0 inline-flex items-center justify-end">
                   <img
                     src="/spominske.png"
@@ -185,11 +191,14 @@ export default function Spominske() {
                     className="h-[10px]"
                   />
                 </div>
-                <span className="text-[#717B8C] text-[12px]">
+                <span className="mobile:hidden block text-[#717B8C] text-[12px]">
                   Dodan Skrbnik
                 </span>
+                <span className="mobile:block hidden text-[#717B8C] text-[12px]">
+                  Skrbnik
+                </span>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-3 mobile:hidden">
                 <div className="w-[30px] shrink-0 inline-flex items-center justify-end">
                   <img src="/dodana.png" alt="spominske" className="h-[10px]" />
                 </div>
@@ -206,46 +215,51 @@ export default function Spominske() {
                   />
                 </div>
                 <span className="text-[#717B8C] text-[12px]">
-                  (obarvano) Aktivni Skrbnik
+                  (obarvano)
+                  <br className="mobile:block hidden" />
+                  Aktivni Skrbnik
                 </span>
               </div>
             </div>
           </div>
-          <div className="mt-[36px] grid grid-cols-4 tabletUserAcc:grid-cols-3 mobileUserAcc:grid-cols-3 gap-[18px]">
+          <div className="mt-[36px] grid grid-cols-4 tabletUserAcc:grid-cols-3 mobileUserAcc:grid-cols-1 mobileUserAcc:w-[215px] gap-[18px]">
             {obituaries && obituaries.length > 0
               ? obituaries.map((obituary, index) => (
-                <div
-                  key={index}
-                  className="bg-gradient-to-b from-[#0D94E8] to-[#1860A3] rounded-[8px] p-[2px] h-[72px]"
-                >
-                  <div className="bg-[#E9F1E8] rounded-[7px] w-full h-full">
-                    <div className="w-full flex flex-col items-center justify-center pt-[9px] pb-0 cursor-pointer">
-                      <Link href={`/m/${obituary.slugKey}`} className="text-[14px] text-[#6D778E] w-full flex flex-col items-center justify-center">
-                        <p className="text-[16px] text-[#1E2125]">
-                          {obituary.name} {obituary.sirName}
-                        </p>
-                        <p className="text-[14px] text-[#6D778E]">
-                          {obituary.city}
-                        </p>
-                      </Link>
-                    </div>
-                    <div className="flex justify-between items-center px-[6px] pb-[6px]">
-                      {obituary.hasKeeper === true ? (
-                        <img src="/dodana.png" alt="" className="h-[10px]" />
-                      ) : (
-                        <img
-                          src="/ico_pregled.png"
-                          alt=""
-                          className="h-[10px]"
-                        />
-                      )}
-                      <span className="text-[#6D778E99] text-[10px] leading-none">
-                        {formatDate(obituary.createdTimestamp)}
-                      </span>
+                  <div
+                    key={index}
+                    className="bg-gradient-to-b from-[#0D94E8] to-[#1860A3] rounded-[8px] p-[2px] h-[72px]"
+                  >
+                    <div className="bg-[#E9F1E8] rounded-[7px] w-full h-full">
+                      <div className="w-full flex flex-col items-center justify-center pt-[9px] pb-0 cursor-pointer">
+                        <Link
+                          href={`/m/${obituary.slugKey}`}
+                          className="text-[14px] text-[#6D778E] w-full flex flex-col items-center justify-center"
+                        >
+                          <p className="text-[16px] text-[#1E2125]">
+                            {obituary.name} {obituary.sirName}
+                          </p>
+                          <p className="text-[14px] text-[#6D778E]">
+                            {obituary.city}
+                          </p>
+                        </Link>
+                      </div>
+                      <div className="flex justify-between items-center px-[6px] pb-[6px]">
+                        {obituary.hasKeeper === true ? (
+                          <img src="/dodana.png" alt="" className="h-[10px]" />
+                        ) : (
+                          <img
+                            src="/ico_pregled.png"
+                            alt=""
+                            className="h-[10px]"
+                          />
+                        )}
+                        <span className="text-[#6D778E99] text-[10px] leading-none">
+                          {formatDate(obituary.createdTimestamp)}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
+                ))
               : null}
           </div>
         </div>

@@ -112,7 +112,7 @@ const Layout = ({
             </div>
           )}
 
-          {isLocalQuickModalVisible && (
+          {isLocalQuickModalVisible && !user?.city && (
             <div className="flex">
               <LocalQuickReview
                 setIsLocalQuickModalVisible={setIsLocalQuickModalVisible}
@@ -121,7 +121,7 @@ const Layout = ({
           )}
 
           {isLocalQuickReviewModalVisible &&
-            isAuthenticated && ( // Fixed prop name
+            isAuthenticated && user?.city && ( // Fixed prop name
               <div className="flex">
                 <LocalQuickReviewModal
                   setIsLocalQuickReviewModalVisible={

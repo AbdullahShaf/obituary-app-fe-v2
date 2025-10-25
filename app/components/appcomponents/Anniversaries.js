@@ -510,7 +510,7 @@ const Anniversaries = () => {
                             .split("-");
 
                           if (day == 31 && month == 12) {
-                            return `N/A`;
+                            return `-`;
                           }
 
                           return `${day}.${month}.${year}`;

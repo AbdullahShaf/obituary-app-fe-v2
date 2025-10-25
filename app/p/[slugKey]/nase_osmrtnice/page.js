@@ -15,8 +15,8 @@ export default function Obituaries() {
   useEffect(() => {
     const getUser = async () => {
       const user = await userService.getMyUser();
-      setUser(user)
-    }
+      setUser(user);
+    };
     getUser();
     getObituaries();
   }, []);
@@ -62,12 +62,15 @@ export default function Obituaries() {
     return `${year}`;
   };
   return (
-    <CompanyAccountLayout>
-      <div className="w-full max-w-[950px]">
-        <div className="mt-[60px]">
+    <CompanyAccountLayout isMobileViewChange={true}>
+      <div className="w-full mobile:max-w-[500px] mobile:mx-auto max-w-[950px]">
+        <div className="mt-[60px] mobile:hidden">
           <div className="flex items-center gap-3">
             {user?.createObituaryPermission ? (
-              <div onClick={() => router.push('/osmrtnice-vpis')} className="h-[55px] bg-gradient-to-b from-[#0D94E8] to-[#1860A3] border-2 custom-border-gradient inline-flex flex-row items-center justify-center rounded-[8px] w-[310px] relative cursor-pointer tabletUserAcc:w-[310px]">
+              <div
+                onClick={() => router.push("/osmrtnice-vpis")}
+                className="h-[55px] bg-gradient-to-b from-[#0D94E8] to-[#1860A3] border-2 custom-border-gradient inline-flex flex-row items-center justify-center rounded-[8px] w-[310px] relative cursor-pointer tabletUserAcc:w-[310px]"
+              >
                 <Link
                   href={"/osmrtnice-vpis"}
                   className="text-[18px] text-[#FFFFFF]
@@ -86,8 +89,10 @@ export default function Obituaries() {
               </div>
             ) : (
               <div className="h-[55px] bg-gradient-to-b from-[#999999] to-[#666666] border-2 custom-border-gradient inline-flex flex-row items-center justify-center rounded-[8px] w-[310px] relative cursor-not-allowed tabletUserAcc:w-[310px] opacity-60">
-                <span className="text-[18px] text-[#FFFFFF]
-                        font-variation-customOpt16 font-normal leading-[24px]">
+                <span
+                  className="text-[18px] text-[#FFFFFF]
+                        font-variation-customOpt16 font-normal leading-[24px]"
+                >
                   DODAJ OSMRTNICO (ZAPRTO)
                 </span>
 
@@ -100,7 +105,10 @@ export default function Obituaries() {
                 />
               </div>
             )}
-            <div onClick={() => router.push('/darila')} className="h-[55px] bg-gradient-to-b from-[#F9AB16] to-[#C5870E] border-2 custom-border-gradient inline-flex flex-row items-center justify-center rounded-[8px] w-[310px] relative cursor-pointer tabletUserAcc:w-[310px]">
+            <div
+              onClick={() => router.push("/darila")}
+              className="h-[55px] bg-gradient-to-b from-[#F9AB16] to-[#C5870E] border-2 custom-border-gradient inline-flex flex-row items-center justify-center rounded-[8px] w-[310px] relative cursor-pointer tabletUserAcc:w-[310px]"
+            >
               <Link
                 href={"/darila"}
                 className="text-[18px] text-[#FFFFFF]
@@ -119,7 +127,7 @@ export default function Obituaries() {
             </div>
           </div>
         </div>
-        <div className="mt-[82px]">
+        <div className="mobile:mt-[12px] mt-[82px]">
           <h4
             className="text-[24px] text-[#0A85C2]"
             style={{
@@ -130,138 +138,145 @@ export default function Obituaries() {
           </h4>
           {/* Table */}
           <div className="mt-[20px]">
-            <table className="min-w-[720px] w-full">
+            <table className="mobile:min-w-full min-w-[720px] w-full">
               <thead>
                 <tr className="text-[16px] tabletUserAcc:text-[14px] mobileUserAcc:text-[14px] text-[#6D778E] font-variation-customOpt16 font-normal leading-[24px] border-b border-[#A1B1D4] uppercase">
                   <th className="w-[20%] tabletUserAcc:w-[10%] mobileUserAcc:w-[10%] pb-[12px]"></th>
                   <th className="w-[25%] tabletUserAcc:w-[30%] mobileUserAcc:w-[30%] pb-[12px] text-start">
                     osmrtnica
                   </th>
-                  <th className="w-[10%] pb-[12px]">skrbnik</th>
-                  <th className="flex items-center gap-[10px]">
+                  <th className="w-[10%] pb-[12px] mobile:hidden">skrbnik</th>
+                  <th className="flex items-center gap-[10px] mobile:hidden">
                     <span className="w-[50%] text-end">slika</span>
                     <span className="text-[#D4D4D4] shrink-0">I</span>
                     <span className="w-[50%] text-start">pogreb</span>
                   </th>
-                  <th className="w-[20%] tabletUserAcc:w-[25%] mobileUserAcc:w-[25%] pb-[12px] text-end pr-[25px]">
-                    dopolni podatke
+                  <th className="w-[20%] tabletUserAcc:w-[25%] mobileUserAcc:w-[5%] pb-[12px] mobile:text-center text-end mobile:pr-0 pr-[25px]">
+                    <span className="mobile:hidden block">dopolni podatke</span>
+                    <span className="mobile:block hidden">dopolni</span>
                   </th>
                 </tr>
               </thead>
               <tbody className="bg-white/40">
                 {obituaries && obituaries.length > 0
                   ? obituaries.map((obituary, index) => (
-                    <tr
-                      key={index}
-                      className="h-[72px] border-b border-[#A1B1D4]"
-                    >
-                      <td className="px-[19px] py-[28px] tabletUserAcc:py-[16px] mobileUserAcc:py-[16px] text-[#6D778E] leading-none">
-                        <span className="tabletUserAcc:hidden mobileUserAcc:hidden">
-                          {formatDate(obituary.createdTimestamp)}
-                        </span>
-                        <span className="hidden mobileUserAcc:block tabletUserAcc:block text-end text-[rgba(109,119,142,1)] leading-[20px] text-[14px]">
-                          {formatDay(obituary.createdTimestamp)}
-                          <br />
-                          <span className="text-[rgba(212,212,212,1)]">
-                            {formatYear(obituary.createdTimestamp)}
+                      <tr
+                        key={index}
+                        className="h-[72px] border-b border-[#A1B1D4]"
+                      >
+                        <td className="px-[19px] py-[28px] tabletUserAcc:py-[16px] mobileUserAcc:py-[16px] text-[#6D778E] leading-none">
+                          <span className="tabletUserAcc:hidden mobileUserAcc:hidden">
+                            {formatDate(obituary.createdTimestamp)}
                           </span>
-                        </span>
-                      </td>
-                      <td>
-                        <div className="inline-flex gap-[16px] items-center">
-                          <div className="space-y-[1px]">
-                            <a href={`/m/${obituary.slugKey}`} className="text-[14px] text-[#6D778E]" target="_blank">
-                              {obituary.name}
-                            </a>
-                            <div className="text-[#3C3E41] text-[16px]">
-                              {obituary.sirName}
+                          <span className="hidden mobileUserAcc:block tabletUserAcc:block text-end text-[rgba(109,119,142,1)] leading-[20px] text-[14px]">
+                            {formatDay(obituary.createdTimestamp)}
+                            <br />
+                            <span className="text-[rgba(212,212,212,1)]">
+                              {formatYear(obituary.createdTimestamp)}
+                            </span>
+                          </span>
+                        </td>
+                        <td>
+                          <div className="inline-flex gap-[16px] items-center">
+                            <div className="space-y-[1px]">
+                              <a
+                                href={`/m/${obituary.slugKey}`}
+                                className="text-[14px] text-[#6D778E]"
+                                target="_blank"
+                              >
+                                {obituary.name}
+                              </a>
+                              <div className="text-[#3C3E41] text-[16px]">
+                                {obituary.sirName}
+                              </div>
+                            </div>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={2.8}
+                              stroke="#6D778E"
+                              className="size-5"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                              />
+                            </svg>
+                          </div>
+                        </td>
+                        <td className="flex justify-center items-center h-[72px] text-center mobile:hidden">
+                          {obituary.hasKeeper === true ? (
+                            <img
+                              src="/tick_green.png"
+                              alt=""
+                              className="w-[28px] h-[28px]"
+                            />
+                          ) : (
+                            <img
+                              src="/tick.png"
+                              alt=""
+                              className="w-[24px] h-[24px]"
+                            />
+                          )}
+                        </td>
+                        <td className="text-center mobile:hidden">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-[50%] flex items-center justify-end">
+                              {obituary.image === null ? (
+                                <img
+                                  src="/cross.png"
+                                  alt=""
+                                  className="w-[28px] h-[28px]"
+                                />
+                              ) : (
+                                <img
+                                  src="/tick_green.png"
+                                  alt=""
+                                  className="w-[28px] h-[28px]"
+                                />
+                              )}
+                            </div>
+                            <span className="text-[#D4D4D4]">I</span>
+                            <div className="w-[50%] flex items-center justify-start">
+                              {obituary.funeralTimestamp === null ? (
+                                <img
+                                  src="/cross.png"
+                                  alt=""
+                                  className="w-[28px] h-[28px]"
+                                />
+                              ) : (
+                                <img
+                                  src="/tick_green.png"
+                                  alt=""
+                                  className="w-[28px] h-[28px]"
+                                />
+                              )}
                             </div>
                           </div>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={2.8}
-                            stroke="#6D778E"
-                            className="size-5"
+                        </td>
+                        <td className="mobile:pr-0 pr-[25px]">
+                          <button
+                            className="border-[2px] border-[#0A85C2] bg-white rounded-[6px] px-[11px] py-[5px] flex items-center gap-[16px] shadow-md ml-auto "
+                            onClick={() => {
+                              if (typeof window !== undefined) {
+                                window.location.href = `/dopolni-osmrtnico/${obituary?.id}`;
+                              }
+                            }}
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                            <img
+                              src="/edit.png"
+                              alt=""
+                              className="w-[26px] h-[26px]"
                             />
-                          </svg>
-                        </div>
-                      </td>
-                      <td className="flex justify-center items-center h-[72px]">
-                        {obituary.hasKeeper === true ? (
-                          <img
-                            src="/tick_green.png"
-                            alt=""
-                            className="w-[28px] h-[28px]"
-                          />
-                        ) : (
-                          <img
-                            src="/tick.png"
-                            alt=""
-                            className="w-[24px] h-[24px]"
-                          />
-                        )}
-                      </td>
-                      <td className="text-center">
-                        <div className="flex items-center justify-center gap-3">
-                          <div className="w-[50%] flex items-center justify-end">
-                            {obituary.image === null ? (
-                              <img
-                                src="/cross.png"
-                                alt=""
-                                className="w-[28px] h-[28px]"
-                              />
-                            ) : (
-                              <img
-                                src="/tick_green.png"
-                                alt=""
-                                className="w-[28px] h-[28px]"
-                              />
-                            )}
-                          </div>
-                          <span className="text-[#D4D4D4]">I</span>
-                          <div className="w-[50%] flex items-center justify-start">
-                            {obituary.funeralTimestamp === null ? (
-                              <img
-                                src="/cross.png"
-                                alt=""
-                                className="w-[28px] h-[28px]"
-                              />
-                            ) : (
-                              <img
-                                src="/tick_green.png"
-                                alt=""
-                                className="w-[28px] h-[28px]"
-                              />
-                            )}
-                          </div>
-                        </div>
-                      </td>
-                      <td className="pr-[25px]">
-                        <button className="border-[2px] border-[#0A85C2] bg-white rounded-[6px] px-[11px] py-[5px] flex items-center gap-[16px] shadow-md ml-auto "
-                          onClick={() => {
-                            if (typeof window !== undefined) {
-                              window.location.href = `/dopolni-osmrtnico/${obituary?.id}`;
-                            }
-                          }}>
-                          <img
-                            src="/edit.png"
-                            alt=""
-                            className="w-[26px] h-[26px]"
-                          />
-                          <span className="text-[16px] text-[#6D778E] leading-none">
-                            Dopolni
-                          </span>
-                        </button>
-                      </td>
-                    </tr>
-                  ))
+                            <span className="text-[16px] text-[#6D778E] leading-none">
+                              Dopolni
+                            </span>
+                          </button>
+                        </td>
+                      </tr>
+                    ))
                   : null}
               </tbody>
             </table>

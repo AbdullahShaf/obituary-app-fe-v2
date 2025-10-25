@@ -13,8 +13,15 @@ import ModalNew3 from "@/app/components/appcomponents/ModalNew3";
 import { useAuth } from "@/hooks/useAuth";
 import Modal from "../../../components/ui/model";
 
-const citiesArr = ['secondaryCity', 'thirdCity', 'fourthCity', 'fifthCity', 'sixthCity', 'seventhCity', 'eightCity']
-
+const citiesArr = [
+  "secondaryCity",
+  "thirdCity",
+  "fourthCity",
+  "fifthCity",
+  "sixthCity",
+  "seventhCity",
+  "eightCity",
+];
 
 export default function AccountSettings() {
   const { refreshUserSession } = useAuth();
@@ -90,9 +97,17 @@ export default function AccountSettings() {
   };
 
   return (
-    <CompanyAccountLayout>
-      <div className="w-full max-w-[1000px] min-w-[720px]">
-        <div className="grid grid-cols-2 tabletUserAcc:grid-cols-1 mobileUserAcc:grid-cols-1 gap-4 text-[#6D778E] mt-[60px] text-[14px]">
+    <CompanyAccountLayout isMobileViewChange={true}>
+      <div className="w-full mobile:min-w-full max-w-[1000px] min-w-[720px]">
+        <div
+          style={{
+            fontVariationSettings: "'wdth' 50,'wght' 500,'opsz' 32",
+          }}
+          className={`pt-[10px] mobile:block hidden flex text-[20px] text-[#0A85C2]`}
+        >
+          Naš uporabniški račun
+        </div>
+        <div className="grid grid-cols-2 tabletUserAcc:grid-cols-1 mobileUserAcc:grid-cols-1 gap-4 text-[#6D778E] mobile:mt-[30px] mt-[60px] text-[14px]">
           <div className="space-y-[18px]">
             <div className="flex items-center gap-[12px]">
               <span className="uppercase">Podjetje:</span>
@@ -160,12 +175,12 @@ export default function AccountSettings() {
         <div className="space-y-4 text-[#6D778E] text-[14px]">
           <div className="space-y-1">
             <span className="uppercase">OBČINA:</span>
-            <div className="grid grid-cols-2 gap-[12px] px-6 pb-[10px]">
+            <div className="grid mobile:grid-cols-1 grid-cols-2 gap-[12px] mobile:px-0 px-6 pb-[10px]">
               <div className="flex items-center gap-[12px] ">
                 <span className="uppercase">Primarno:</span>
                 <span className="text-[#3C3E41]">{data?.city}</span>
               </div>
-              <div className="flex  items-center gap-[38px]">
+              <div className="flex items-center mobile:hidden gap-[38px]">
                 <div>
                   <DropdownWithSearch
                     onSelectCity={handleCitySelect}
@@ -411,7 +426,7 @@ export default function AccountSettings() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 tabletUserAcc:grid-cols-3 mobileUserAcc:grid-cols-3 gap-4 text-[#6D778E] mt-[60px] text-[14px]">
+        <div className="grid grid-cols-2 tabletUserAcc:grid-cols-3 mobileUserAcc:grid-cols-1 gap-4 text-[#6D778E] mt-[60px] text-[14px]">
           <div className="flex items-center gap-[12px] tabletUserAcc:col-span-2 mobileUserAcc:col-span-2">
             <span className="uppercase">stran na osmrtnica.com:</span>
             {/* <Link

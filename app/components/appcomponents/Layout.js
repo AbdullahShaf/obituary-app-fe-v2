@@ -136,12 +136,12 @@ const Layout = ({
       {from == "23" ? (
         <>
           <CommonHeader currentPage={currentPage} />
-          <div className="flex relative mobile:h-[196px] tablet:h-[220px] desktop:h-[300px] mt-[65px] desktop:mt-[91px] w-full mx-auto">
+          <div className="flex relative mobile:h-[196px] tablet:h-[220px] desktop:h-[300px] mt-[73px] tablet:mt-[81px] desktop:mt-[91px] w-full mx-auto">
             <img
               className="object-cover h-full w-full"
               src="/payment-hero.jpg"
             />
-            <div className="absolute text-[#1E2125] border border-[#ffffff] mobile:text-[28px] text-[40px] top-[35%] mx-auto left-0 right-0 flex items-center justify-center mobile:w-[114px] mobile:h-[64px] w-[137px] h-[79px] bg-gradient-to-r from-[#ffffff] to-[#ffffff]/[30%] rounded-[8px]">
+            <div className="absolute text-[#1E2125] border border-[#ffffff] mobile:text-[28px] text-[40px] top-[35%] mx-auto left-0 right-0 flex items-center justify-center mobile:w-[114px] mobile:h-[65px] w-[137px] h-[79px] bg-gradient-to-r from-[#ffffff] to-[#ffffff]/[30%] rounded-[8px]">
               Cenik
             </div>
           </div>

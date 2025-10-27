@@ -187,7 +187,7 @@ export default function Funeral() {
                   placeholderText={"NAŠ RAČUN"}
                 />
               </Link>
-              <div className="w-[314px] flex-col mobile:flex hidden">
+              <div className="mobile:w-full flex-col mobile:flex hidden">
                 <div
                   onClick={() => {
                     setIsButtonHide(!isButtonHide);
@@ -199,9 +199,9 @@ export default function Funeral() {
                 {user?.createObituaryPermission ? (
                   <Link
                     href={"/osmrtnice-vpis"}
-                    className="bg-white rounded-lg py-4 px-6 flex items-center gap-4 justify-between shadow-[5px_5px_10px_rgba(197,135,14,1)] mt-[2px] mobileUserAcc:mt-[5px] relative overflow-hidden min-h-[55px]"
+                    className="bg-gray-200 rounded-lg py-4 px-6 flex items-center gap-4 justify-between shadow-[5px_5px_10px_rgba(194,194,194,0.5)] mt-[2px] mobileUserAcc:mt-[5px] relative overflow-hidden min-h-[55px]"
                   >
-                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-end bg-gradient-to-b from-[rgba(128,128,128,1)] to-[rgba(96,96,96,1)]">
+                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-end bg-gradient-to-b from-[rgba(249,171,22,1)] to-[rgba(197,135,14,1)]">
                       <div className="px-5">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -223,7 +223,7 @@ export default function Funeral() {
                       <img
                         src="/user/plus.png"
                         alt="predloge"
-                        className="w-6 h-6 object-contain opacity-50"
+                        className="w-6 h-6 object-contain"
                       />
                       <Link
                         href={"/osmrtnice-vpis"}
@@ -235,7 +235,7 @@ export default function Funeral() {
                   </Link>
                 ) : (
                   <div className="bg-gray-200 rounded-lg py-4 px-6 flex items-center gap-4 justify-between shadow-[5px_5px_10px_rgba(194,194,194,0.5)] mt-[2px] mobileUserAcc:mt-[5px] relative overflow-hidden min-h-[55px] cursor-not-allowed">
-                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-end bg-gradient-to-b from-[rgba(128,128,128,1)] to-[rgba(96,96,96,1)]">
+                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-end bg-gradient-to-b from-[rgba(249,171,22,1)] to-[rgba(197,135,14,1)]">
                       <div className="px-5">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -356,8 +356,8 @@ export default function Funeral() {
               </div>
               {/* <Link href={"/c" + `/${user?.slugKey}` + "/nase_osmrtnice"} className="hidden mobile:block"> */}
               <Link
-                href={""}
-                onClick={mobileToast}
+                href={"/c" + `/${user?.slugKey}` + "/nase_osmrtnice"}
+                // onClick={mobileToast}
                 className="hidden mobile:block"
               >
                 <div className="mt-[8px]">
@@ -365,14 +365,13 @@ export default function Funeral() {
                     placeholderImg={"/ico_pregled.png"}
                     placeholderText={"OSMRTNICE"}
                     arrow={"down"}
-                    isOpen={1}
                   />
                 </div>
               </Link>
               {/* <Link href={"/c" + `/${user?.slugKey}` + "/nase_spominske"} className="hidden mobile:block"> */}
               <Link
-                href={""}
-                onClick={mobileToast}
+                href={"/c" + `/${user?.slugKey}` + "/nase_spominske"}
+                // onClick={mobileToast}
                 className="hidden mobile:block"
               >
                 <div className="mt-[8px]">
@@ -380,14 +379,13 @@ export default function Funeral() {
                     placeholderImg={"/user/spominske.png"}
                     placeholderText={"SPOMINSKE"}
                     arrow={"down"}
-                    isOpen={1}
                   />
                 </div>
               </Link>
               {/* <Link href={"/c" + `/${user?.slugKey}` + "/nasa_darila"} className="hidden mobile:block"> */}
               <Link
-                href={""}
-                onClick={mobileToast}
+                href={"/c" + `/${user?.slugKey}` + "/nasa_darila"}
+                // onClick={mobileToast}
                 className="hidden mobile:block"
               >
                 <div className="mt-[8px]">

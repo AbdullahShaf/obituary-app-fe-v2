@@ -258,7 +258,7 @@ export default function AccountSettings() {
               </h4>
               <button
                 onClick={() => setIsPopUP7(true)}
-                className="text-[#EB1D1D] mobile:hidden outline-none"
+                className="text-[#EB1D1D] hidden outline-none"
                 title="Help"
               >
                 <svg

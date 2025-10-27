@@ -113,9 +113,9 @@ const SlideOne = () => {
   if (breakpoint === "mobile") {
     return (
       <div className="bg-[#E0E9F3] text-[#22281C] h-full">
-        <div className="py-[69px] text-center mobile:py-[30px]">
+        <div className="py-[69px] text-center">
           <div className="text-center text-container mx-auto w-[321px] mobile:w-full mobile:max-w-[500px] mobile:px-3 mobile:text-left">
-            <h2 className="text-[28px]">Žalna stran</h2>
+            <h2 className="text-[28px] mobile:text-center">Žalna stran</h2>
             <p className="text-[#414141] text-[16px] mt-[16px] leading-6">
               Stran, kjer izvemo vse o pogrebu, se vpišemo v Žalno knjigo,{" "}
               izrečemo sožalje in prižgemo virtualno svečko.{" "}

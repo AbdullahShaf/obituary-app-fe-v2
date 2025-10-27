@@ -164,9 +164,9 @@ const SlideTwo = () => {
   // === Mobile Layout ===
   if (breakpoint === "mobile") {
     return (
-      <div className="bg-[#F5F0E8] h-auto text-[#22281C] py-[69px] flex justify-center text-center mobile:w-full mobile:px-3 mobile:py-[30px]">
+      <div className="bg-[#F5F0E8] h-auto text-[#22281C] py-[69px] flex justify-center text-center mobile:w-full mobile:px-3">
         <div className="image-container mobile:w-full w-[352px] mobile:max-w-[500px]">
-          <h2 className="text-center mobile:text-left text-[28px]">
+          <h2 className="text-center mobile:text-left text-[28px] mobile:text-center">
             Spominska stran{" "}
             <br />
             <span className="text-[#de222e] font-medium">s skrbnikom</span>

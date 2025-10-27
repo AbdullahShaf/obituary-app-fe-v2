@@ -99,7 +99,7 @@ export default function Footer() {
             className="
       mobile:w-[360px]  tablet:w-[680px] desktop:w-[1200px]    
        desktop:pl-[62px] desktop:pr-[40.19px]
-       mobile:h-[610px] tablet:h-[500px] desktop:h-[480px]
+       mobile:h-[510px] tablet:h-[500px] desktop:h-[480px]
        "
           >
             <footer

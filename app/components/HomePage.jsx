@@ -480,14 +480,14 @@ export default function HomeContent(props) {
               alt="viola_ozadje"
               className="h-[284px] w-[1280px] object-cover object-center mobile:h-[235px]"
             />
-            <div className="absolute flex flex-col items-center self-center desktop:h-[143px] desktop:w-[476px] desktop:right-[140px] tablet:h-[127px] tablet:w-[302px] tablet:left-1/2 mobile:left-1/2 mobile:transform mobile:-translate-x-1/2 mobile:h-[113px] mobile:w-[299px]">
-              <div className="tablet:mb-[32px] desktop:mb-[48px] mobile:mb-[32px]">
+            <div className="absolute flex flex-col items-center self-center desktop:h-[143px] desktop:w-[476px] desktop:right-[140px] tablet:h-[127px] tablet:w-[302px] tablet:left-1/2 mobile:right-[15px] mobile:h-[113px] mobile:w-[299px]">
+              <div className="tablet:mb-[32px] desktop:mb-[48px] mobile:mb-[32px] mobile:text-right mobile:w-full">
                 <div
                   className="
               mobile:text-[28px]
               text-[40px]  leading-[46.88px] 
               font-normal text-[#FFFFFF]  
-                mobile:leading-[32.81px] whitespace-nowrap"
+                mobile:leading-[32.81px] whitespace-nowrap mobile:text-right mobile:w-full"
                 >
                   Lokalne cvetličarne
                 </div>

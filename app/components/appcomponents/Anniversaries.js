@@ -102,6 +102,8 @@ const Anniversaries = () => {
     }
   };
 
+  console.log('>>>>>>>>> memories', memories);
+
   const formattedDate = (timestamp) => {
     const funeralDate = new Date(timestamp);
     if (isNaN(funeralDate.getTime())) return "";
@@ -217,7 +219,7 @@ const Anniversaries = () => {
                 {/* First item */}
                 {/* 23 October 2024 */}
                 <Link
-                  href={item.name === "Angela" ? "/memorypage" : ""}
+                  href={item.name === "Angela" ? "/memorypage" : `/m/${item.slugKey}`}
                   className={`flex flex-col justify-center items-center w-[210px] mobileUserAcc:w-[160px] h-[90px] mobileUserAcc:h-[73px] mobileUserAcc:items-center py-[13px] px-[3px] border-[2px] border-[#0A85C2] rounded-[8px] ${item.className}`}
                 >
                   <h2 className="text-[16px] text-[#6D778E] font-normal flex flex-col items-center leading-[18.75px] pb-[4px]">
@@ -268,7 +270,10 @@ const Anniversaries = () => {
                       <TextStyle
                         text={
                           "Zadnja svečka: " +
-                          formattedDate(item.lastCandleBurnt)
+                          formattedDate(
+                            item.candles[item.candles.length - 1].createdTimestamp
+                            // item.lastCandleBurnt
+                          )
                         }
                         size={"text-[14px]"}
                       />
@@ -348,6 +353,10 @@ const Anniversaries = () => {
                             .toISOString()
                             .split("T")[0]
                             .split("-");
+
+                          if (day == 31 && month == 12) {
+                            return `-`;
+                          }
 
                           return `${day}.${month}.${year}`;
                         })()}
@@ -435,7 +444,10 @@ const Anniversaries = () => {
                         isLeft={false}
                         isCandle={true}
                         val={item.totalCandles}
-                        date={formattedDate(item.lastCandleBurnt)}
+                        date={formattedDate(
+                          item.candles[item.candles.length - 1].createdTimestamp
+                        )}
+                        // date={formattedDate(item.lastCandleBurnt)}
                       />
                     ) : (
                       <CommonView

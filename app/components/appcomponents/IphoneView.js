@@ -120,7 +120,7 @@ Op. Na naši strani mi teh kartic in mesečnega Skrbnika ne ponujamo. </p>
        <div className="bg-[url('/gradient_ozadje.avif')] bg-cover text-[#22281C] h-auto">
         <div className="py-[54px]">
             <div className="image-container w-[325px] text-center mx-auto mobile:w-full mobile:max-w-[500px] mobile:px-3 mobile:text-left">
-                <h2 className="text-[28px] p-0 leading-[100%]">Obveščanje o pogrebu</h2>
+                <h2 className="text-[28px] p-0 leading-[100%] mobile:text-center">Obveščanje o pogrebu</h2>
                 <p className="text-[#3C3E41] text-[16px] mt-[25px]">V težkih trenutkih je včasih lažje poslati ali deliti po socialnih omrežjih,   kot obveščati vsakega posebej. </p>
                 <p className="text-[#3C3E41] text-[16px] mt-[30px]">Digitalna obvestila o pogrebu, sožalja, zahvale lahko brezplačno prevzamete v vaši lokalni cvetličarni (ki jo najdete na naših straneh) in s pošiljanjem naprej lahko začnete takoj.  </p>
                <p className="text-[#3C3E41] text-[16px] mt-[16px]">Op. Na naši strani mi teh kartic ne ponujamo. </p>

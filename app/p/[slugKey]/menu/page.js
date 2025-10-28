@@ -88,7 +88,7 @@ export default function Funeral() {
           alt="funeral banner"
           className="w-full h-full object-cover absolute top-0 left-0 z-0"
         />
-        <div className="relative z-10 mobile:mt-5 desktopUserAcc:pt-16 tabletUserAcc:pt-0">
+        <div className="relative z-10 mobile:mt-12 desktopUserAcc:pt-16 tabletUserAcc:pt-0">
           <div className="w-full tabletUserAcc:max-w-[620px] desktopUserAcc:w-[620px] mobileUserAcc:max-w-[310px] text-[16px]">
             <div
               className="text-[#0A85C2] text-[32px] leading-[38px] font-semibold mb-5"
@@ -99,7 +99,7 @@ export default function Funeral() {
               Uporabniški kotiček
             </div>
             <div>
-              <div className="text-[rgb(60,62,65)] hidden mobileUserAcc:block">
+              <div className="text-[rgb(60,62,65)] hidden">
                 Pozor. Razen spodnjih treh povezav je ta del za boljšo
                 uporabniško izkušnjo optimiziran za tablico ali računalnik.{" "}
                 <br /> <br />
@@ -239,10 +239,10 @@ export default function Funeral() {
             {/* 21 October 2024 */}
 
             <div className="w-[314px] flex flex-col">
-              <div className="items-center justify-center gap-5 mt-5 hidden mobileUserAcc:flex">
+              <div className="items-center justify-center gap-5 hidden mobileUserAcc:flex">
                 <Link
                   href={"/osmrtnice"}
-                  className="flex items-center rounded-lg justify-center shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]
+                  className="flex items-center rounded-lg justify-center mobileUserAcc:hidden shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]
                 mobile:h-[50px] mobile:w-[120px]
                 tablet:h-[43px] tablet:w-[97px]
                 desktop:h-12 desktop:w-[125px]"
@@ -256,7 +256,7 @@ export default function Funeral() {
                 </Link>
                 <Link
                   href={"/osmrtnice"}
-                  className="flex items-center rounded-lg justify-center shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]
+                  className="flex items-center rounded-lg justify-center mobileUserAcc:hidden shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]
                 mobile:h-[50px] mobile:w-[120px]
                 tablet:h-[43px] tablet:w-[97px]
                 desktop:h-12 desktop:w-[125px]"
@@ -268,6 +268,13 @@ export default function Funeral() {
                     NAPREJ
                   </div>
                 </Link>
+                <div className="mt-[8px] w-full">
+                  <ButtonWhiteBG
+                    placeholderImg={""}
+                    placeholderText={"OBVESTILA"}
+                    pendingConfirmations={pendingPosts.length}
+                  />
+                </div>
               </div>
               <Link href={"/"} className="mt-[8px]  mobileUserAcc:hidden">
                 <ButtonWhiteBG
@@ -282,13 +289,13 @@ export default function Funeral() {
                   placeholderText={"POGOSTA VPRAŠANJA"}
                 />
               </div>
-              <div className="w-[314] h-[58px] mt-[8px] py-[2px] px-[2px] rounded-[10px] shadow-custom-light-dark-box-image bg-transparent opacity-0 invisible"></div>
+              <div className="w-[314] h-[58px] mt-[8px] py-[2px] px-[2px] rounded-[10px] mobile:hidden shadow-custom-light-dark-box-image bg-transparent opacity-0 invisible"></div>
               {/* {/ 21/10 changeeeee /} */}
               <div
                 onClick={() => {
                   setIsButtonHide(!isButtonHide);
                 }}
-                className="cursor-pointer text-[#2198D3] mt-[50px] mb-[10px] text-[14px] leading-[24px] font-variation-customOpt14 font-semibold"
+                className="cursor-pointer text-[#2198D3] mobile:mt-8 mt-[50px] mb-[10px] text-[14px] leading-[24px] font-variation-customOpt14 font-semibold"
               >
                 ZA STRANKE
               </div>
@@ -331,7 +338,7 @@ export default function Funeral() {
                 </Link>
               ) : (
                 <div className="bg-gray-200 rounded-lg py-4 px-6 flex items-center gap-4 justify-between shadow-[5px_5px_10px_rgba(194,194,194,0.5)] mt-[2px] mobileUserAcc:mt-[5px] relative overflow-hidden min-h-[55px] cursor-not-allowed">
-                  <div className="absolute top-0 left-0 w-full h-full flex items-center justify-end bg-gradient-to-b from-[rgba(128,128,128,1)] to-[rgba(96,96,96,1)]">
+                  <div className="absolute top-0 left-0 w-full h-full flex items-center justify-end bg-gradient-to-b from-[rgba(249,171,22,1)] to-[rgba(197,135,14,1)]">
                     <div className="px-5">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -390,10 +397,7 @@ export default function Funeral() {
                     alt="predloge"
                     className="w-6 h-6 object-contain"
                   />
-                  <Link
-                    href={"/darila"}
-                    className="text-[16px] text-[#6D778E]"
-                  >
+                  <Link href={"/darila"} className="text-[16px] text-[#6D778E]">
                     PODARI SKRBNIKA
                   </Link>
                 </div>
@@ -427,15 +431,101 @@ export default function Funeral() {
                     alt="predloge"
                     className="w-6 h-6 object-contain"
                   />
-                  <Link
-                    href={"/darila"}
-                    className="text-[16px] text-[#6D778E]"
-                  >
+                  <Link href={"/darila"} className="text-[16px] text-[#6D778E]">
                     MOBI PREDLOGE
                   </Link>
                 </div>
               </Link>
               <div className="w-[314] h-[58px] mt-[8px] py-[2px] px-[2px] rounded-[10px] shadow-custom-light-dark-box-image bg-transparent mobileUserAcc:hidden"></div>
+              <div className="mt-[100px] hidden mobile:hidden">
+                <p className="text-[#6D778E] text-[15px] leading-[24px] font-variation-customOpt14 hidden mobile:block">
+                  POZOR: <br />
+                  Uporabniški kotiček za podjetja zaenkrat še ni optimiziran za
+                  mobilni telefon, razen prvih treh daril za stranke. Za pregled
+                  preostalega prosim uporabite računalnik ali tablico.{" "}
+                </p>
+              </div>
+              <div className="text-[#2198D3] mobile:mt-12 mt-4 text-[14px] leading-[24px] font-variation-customOpt14 font-semibold hidden mobile:block">
+                <span className="mobile:hidden block">
+                  MESEČNI PREGLED IN STATISTIKE
+                </span>
+                <span className="mobile:block hidden">STATISTIKE</span>
+              </div>
+              {/* <Link href={"/p" + `/${user?.slugKey}` + "/nase_osmrtnice"} className="hidden mobile:block"> */}
+              <Link
+                href={"/p" + `/${user?.slugKey}` + "/nase_osmrtnice"}
+                // onClick={mobileToast}
+                className="hidden mobile:block"
+              >
+                <div className="mt-[8px]">
+                  <ButtonWhiteBGCap
+                    placeholderImg={"/ico_pregled.png"}
+                    placeholderText={"OSMRTNICE"}
+                    arrow={"down"}
+                  />
+                </div>
+              </Link>
+              {/* <Link href={"/p" + `/${user?.slugKey}` + "/nase_spominske"} className="hidden mobile:block"> */}
+              <Link
+                href={"/p" + `/${user?.slugKey}` + "/nase_spominske"}
+                // onClick={mobileToast}
+                className="hidden mobile:block"
+              >
+                <div className="mt-[8px]">
+                  <ButtonWhiteBGCap
+                    placeholderImg={"/user/spominske.png"}
+                    placeholderText={"SPOMINSKE"}
+                    arrow={"down"}
+                  />
+                </div>
+              </Link>
+              {/* <Link href={"/p" + `/${user?.slugKey}` + "/nasa_darila"} className="hidden mobile:block"> */}
+              <Link
+                href={"/p" + `/${user?.slugKey}` + "/nasa_darila"}
+                // onClick={mobileToast}
+                className="hidden mobile:block"
+              >
+                <div className="mt-[8px]">
+                  <ButtonWhiteBGCap
+                    placeholderImg={"/user/mobi_predloge.png"}
+                    placeholderText={"MOBI PREDLOGE"}
+                  />
+                </div>
+              </Link>
+              <Link
+                href={"/p" + `/${user?.slugKey}` + "/spletna-stran"}
+                className="mt-8 hidden mobile:block"
+              >
+                <ButtonWhiteBG
+                  placeholderImg={"/ico_obletnice.png"}
+                  placeholderText={"NAŠA SPLETNA STRAN"}
+                />
+              </Link>
+              <Link
+                href={"/p" + `/${user?.slugKey}` + "/nasi_podatki"}
+                className="mt-[8px] hidden mobile:block"
+              >
+                <ButtonWhiteBG
+                  placeholderImg={"/ico_obletnice.png"}
+                  placeholderText={"NAŠ RAČUN"}
+                />
+              </Link>
+              <Link href={"/"} className="mt-[8px] hidden mobile:block">
+                <ButtonWhiteBG
+                  placeholderImg={"/ico_obletnice.png"}
+                  placeholderText={"NAZAJ NA SPLETNO STRAN"}
+                />
+              </Link>
+              <div
+                onClick={logout}
+                className="mt-[35px] w-[184px] border-2 hidden mobile:block border-[#1860A335] rounded-[10px] mobile:mx-auto mobile:mt-12 "
+              >
+                <div className=" rounded-lg w-[180px] h-[55px] flex justify-center items-center bg-gradient-to-b from-[#FFFFFF40] via-[rgba(12,104,244,0.15)] to-[#FFFFFF40]">
+                  <div className="text-[16px] leading-[24px] font-variation-customOpt16 text-[#6D778E] ">
+                    ODJAVA IZ RAČUNA
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

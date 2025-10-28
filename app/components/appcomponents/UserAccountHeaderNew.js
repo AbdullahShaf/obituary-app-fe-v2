@@ -104,8 +104,12 @@ function UserAccountHeaderNew({
                       className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200"
                       title="Nazaj"
                     >
-                      <Link href={`/${slugName}/${parsedUser?.slugKey}/menu`}>
-                        <FiMenu size={32} color="black" />
+                      <Link href={`/`}>
+                        <Image
+                          src={backIcon}
+                          alt="Back"
+                          className="h-8 w-8 mobile:h-7 mobile:w-7"
+                        />
                       </Link>
                     </span>
                   )}

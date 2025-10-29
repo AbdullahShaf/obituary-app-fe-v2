@@ -5,6 +5,7 @@ import CompanyAccountLayout from "../components/appcomponents/CompanyAccountLayo
 import Layout from "../components/appcomponents/Layout";
 import Tabs from "../components/appcomponents/Tabs";
 import PricingCard from "../components/appcomponents/PricingCard";
+import CustomPackageCard from "../components/appcomponents/CustomPackageCard";
 import { Button } from '@nextui-org/react';
 import axios from '@/services/axios'
 import toast from 'react-hot-toast';
@@ -33,10 +34,30 @@ const Subscription = () => {
     useState("mesecno");
   const [activeFormTabOglasevalci, setActiveFormTabOglasevalci] =
     useState("mesecno");
-  const [paymentModal, setPaymentModal] = useState({ isOpen: false, packageType: null });
+  const [paymentModal, setPaymentModal] = useState({ isOpen: false, packageType: null, customCode: null });
 
-  const handlePayment = (packageType) => {
-    setPaymentModal({ isOpen: true, packageType });
+  const handlePayment = (packageType, customCode = null) => {
+    setPaymentModal({ 
+      isOpen: true, 
+      packageType,
+      customCode 
+    });
+  };
+
+  const handleCustomCodeSubmit = (code, type) => {
+    // Map the code to the appropriate package type
+    const codeToPackageMap = {
+      'CUSTOM-001': 'custom_one',
+      'CUSTOM-002': 'custom_two'
+    };
+    
+    const packageType = codeToPackageMap[code];
+    if (!packageType) {
+      toast.error('Neveljavna koda. Prosimo preverite kodo in poskusite znova.');
+      return;
+    }
+    
+    handlePayment(packageType, code);
   };
 
 
@@ -91,6 +112,10 @@ const Subscription = () => {
                 onPayment={() => handlePayment('florist_monthly_capital_city')}
                 paymentEnabled={true}
               />
+              {/* <CustomPackageCard 
+                type="florist"
+                onCodeSubmit={(code) => handleCustomCodeSubmit(code, 'florist')}
+              /> */}
             </div>
           </>
         );
@@ -120,6 +145,10 @@ const Subscription = () => {
                 onPayment={() => handlePayment('florist_yearly_capital_city')}
                 paymentEnabled={true}
               />
+              {/* <CustomPackageCard 
+                type="florist"
+                onCodeSubmit={(code) => handleCustomCodeSubmit(code, 'florist')}
+              /> */}
             </div>
           </>
         );
@@ -156,6 +185,10 @@ const Subscription = () => {
               paymentEnabled={true}
             />
             <PricingCard label="MESEČNO" title="Regijsko" number={2} />
+            {/* <CustomPackageCard 
+              type="advertiser"
+              onCodeSubmit={(code) => handleCustomCodeSubmit(code, 'advertiser')}
+            /> */}
           </div>
         );
       case "letno":
@@ -184,6 +217,10 @@ const Subscription = () => {
               paymentEnabled={true}
             />
             <PricingCard label="LETNO" title="Regijsko" number={2} />
+            {/* <CustomPackageCard 
+              type="advertiser"
+              onCodeSubmit={(code) => handleCustomCodeSubmit(code, 'advertiser')}
+            /> */}
           </div>
         );
       default:
@@ -561,10 +598,11 @@ const Subscription = () => {
             {/* Payment Modal */}
             <PaymentModal
               isOpen={paymentModal.isOpen}
-              onClose={() => setPaymentModal({ isOpen: false, packageType: null })}
+              onClose={() => setPaymentModal({ isOpen: false, packageType: null, customCode: null })}
               packageType={paymentModal.packageType}
+              customCode={paymentModal.customCode}
               onPaymentCreated={(data) => {
-                setPaymentModal({ isOpen: false, packageType: null });
+                setPaymentModal({ isOpen: false, packageType: null, customCode: null });
                 toast.success('Preusmerjamo na plačilo...');
               }}
             />

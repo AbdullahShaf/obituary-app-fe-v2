@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, Select, SelectItem } from '@nextui-org/react';
 import { useAuth } from "@/hooks/useAuth";
 import axios from '@/services/axios';
@@ -69,7 +69,7 @@ const ADVERTISER_PAGES = [
   { value: 'homepage', label: 'Domača stran' }
 ];
 
-const PaymentModal = ({ isOpen, onClose, packageType, onPaymentCreated }) => {
+const PaymentModal = ({ isOpen, onClose, packageType, onPaymentCreated, customCode }) => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -77,18 +77,28 @@ const PaymentModal = ({ isOpen, onClose, packageType, onPaymentCreated }) => {
     email: '',
     name: '',
     city: '',
-    page: ''
+    page: '',
+    customCode: customCode || ''
   });
+
+  // Update customCode when prop changes
+  useEffect(() => {
+    if (customCode) {
+      setFormData(prev => ({ ...prev, customCode }));
+    }
+  }, [customCode]);
 
   const isMemoryPage = packageType?.startsWith('memory_page_');
   const isFlorist = packageType?.startsWith('florist_');
   const isAdvertiser = packageType?.startsWith('advertiser_');
+  const isCustom = packageType?.startsWith('custom_');
 
   // Get modal title based on package type
   const getModalTitle = () => {
     if (isMemoryPage) return 'Spominska stran';
     if (isFlorist) return 'Naročnina za cvetličarno';
     if (isAdvertiser) return 'Oglaševanje';
+    if (isCustom) return 'Prilagojeni paket';
     return 'Plačilo';
   };
 
@@ -97,6 +107,7 @@ const PaymentModal = ({ isOpen, onClose, packageType, onPaymentCreated }) => {
     if (isMemoryPage) return 'Vnesite podatke za aktivacijo spominske strani';
     if (isFlorist) return 'Potrdite svoj račun za nadaljevanje';
     if (isAdvertiser) return 'Izpolnite podatke za oglaševanje';
+    if (isCustom) return 'Izpolnite podatke za prilagojeni paket';
     return 'Izpolnite podatke za nadaljevanje';
   };
 
@@ -161,6 +172,18 @@ const PaymentModal = ({ isOpen, onClose, packageType, onPaymentCreated }) => {
           name: formData.name,
           city: formData.city,
           page: formData.page
+        };
+      } else if (isCustom) {
+        if (!formData.email || !formData.name) {
+          toast.error('Prosimo izpolnite vsa obvezna polja');
+          setLoading(false);
+          return;
+        }
+        
+        metadata = {
+          email: formData.email,
+          name: formData.name,
+          customCode: formData.customCode
         };
       }
 
@@ -361,6 +384,61 @@ const PaymentModal = ({ isOpen, onClose, packageType, onPaymentCreated }) => {
               </SelectItem>
             ))}
           </Select>
+        </div>
+      );
+    }
+
+    if (isCustom) {
+      return (
+        <div className="space-y-5">
+          <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800">
+            <p className="text-sm text-purple-800 dark:text-purple-200">
+              🎯 Prilagojeni paket za posebne potrebe
+            </p>
+          </div>
+
+          <Input
+            type="email"
+            placeholder="vas.email@primer.si"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            required
+            variant="bordered"
+            classNames={{
+              input: "text-base",
+              label: "text-sm font-medium",
+              inputWrapper: "border-gray-300 hover:border-purple-400 focus-within:border-purple-500"
+            }}
+            startContent={
+              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            }
+          />
+          
+          <Input
+            placeholder="Vaše ime ali naziv podjetja"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            required
+            variant="bordered"
+            classNames={{
+              input: "text-base",
+              label: "text-sm font-medium",
+              inputWrapper: "border-gray-300 hover:border-purple-400 focus-within:border-purple-500"
+            }}
+            startContent={
+              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            }
+          />
+
+          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-3">
+            <p className="text-sm text-amber-800 dark:text-amber-200">
+              ℹ️ Koda paketa: <span className="font-mono font-bold">{formData.customCode}</span>
+            </p>
+          </div>
         </div>
       );
     }

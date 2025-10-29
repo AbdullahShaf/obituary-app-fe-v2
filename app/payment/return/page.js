@@ -10,6 +10,7 @@ const PaymentReturnContent = () => {
   const [paymentStatus, setPaymentStatus] = useState('loading');
   const [orderData, setOrderData] = useState(null);
   const orderId = searchParams.get('orderId');
+  const canceled = searchParams.get('canceled');
 
   useEffect(() => {
     if (orderId) {
@@ -18,6 +19,15 @@ const PaymentReturnContent = () => {
   }, [orderId]);
 
   const checkPaymentStatus = async () => {
+    if (!orderId) {
+      return;
+    }
+
+    if (canceled) {
+      setPaymentStatus('canceled');
+      return;
+    }
+    
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/payment/status/${orderId}`);
       

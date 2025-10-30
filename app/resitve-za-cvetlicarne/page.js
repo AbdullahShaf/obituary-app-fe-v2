@@ -5,6 +5,7 @@ import MultipleStores from "../components/appcomponents/MultipleStores";
 import FreeCharge from "../components/appcomponents/FreeCharge";
 import FreeTrial from "../components/appcomponents/FreeTrial";
 import RegisterComp from "../components/appcomponents/RegisterComp";
+import AdditionalPromotion from "../components/appcomponents/AdditionalPromotion";
 import NotJustObituaries from "../components/appcomponents/NotJustObituaries";
 import DirectoryEntry from "../components/appcomponents/DirectoryEntry";
 import FrequentlyAskedQuestionView from "../components/appcomponents/FrequentlyAskedQuestionView";
@@ -33,9 +34,11 @@ const Floristspromo = () => {
       <div className="flex flex-1 flex-col mx-auto bg-gradient-to-br from-[#ECF0F3] to-[#F2F6F9]">
         <div className="flex h-[72px] tablet:h-[80px] desktop:h-[92.02px]" />
         <MultipleStores />
-        <FreeCharge />
-        <FreeTrial />
+        <FreeCharge mbZero />
+        {/* <FreeTrial /> */}
         <RegisterComp />
+        <AdditionalPromotion />
+        
         <NotJustObituaries />
         <DirectoryEntry />
         {/* <div className="flex w-full mobile:bg-[#E0E9F3] bg-[#FFFFFF]">
@@ -44,7 +47,7 @@ const Floristspromo = () => {
         {/* <OfficialOpening /> */}
         <KickStart showButton={true} />
 
-        <div className="mobile:flex w-full flex-col items-center hidden bg-transparent pt-[85px] pb-[100px]">
+        {/* <div className="mobile:flex w-full flex-col items-center hidden bg-transparent pt-[85px] pb-[100px]">
           <div className="flex gap-[25px] flex-col justify-between">
             <div className="flex flex-col w-full mt-[10px]">
               <div className="text-[32px] mobile:text-[24px] text-[#3C3E41] font-light text-center leading-[48px]">
@@ -67,7 +70,7 @@ const Floristspromo = () => {
               Sodelujmo
             </Link>
           </div>
-        </div>
+        </div> */}
 
         <CommonFooter currentPage="/resitve-za-cvetlicarne" />
       </div>

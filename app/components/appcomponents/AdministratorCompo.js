@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const AdministratorCompo = () => {
@@ -40,7 +41,7 @@ const AdministratorCompo = () => {
                 SAMO
               </h>
               <div className="text-[24px] text-[#3090D5] font-variation-customOpt14 text-center mt-[3px]">
-              V VAŠI CVETLIČARNI
+                V VAŠI CVETLIČARNI
               </div>
             </div>
 
@@ -51,49 +52,61 @@ const AdministratorCompo = () => {
               </h>
               <div
                 style={{
-                  textShadow: "0px 1px 1px #0A85C2",
-                  color: "#282D33",
-                  fontWeight: 200,
+                  textShadow: "0px 3px 4px #00000050",
+                  color: "#2D3D48",
+                  fontWeight: 400,
                   fontSize: "32px",
-                  fontVariationSettings: "'opsz' 48",
+                  fontVariationSettings: "'opsz' 32",
                   fontVariationSettings: "'wdth' 100",
                 }}
-                className="text-center mt-[12px] mb-[4px] text-[#6D778E]"
-              >( KMALU )
+                // className="text-center mt-[12px] mb-[4px] text-[#6D778E]"
+                className=" text-center mt-[6px]"
+              >
+                20 €
               </div>
               <button className="w-[97px] h-[48px] mt-2 mobile:mt-[33px] tablet:mt-6 text-[16px] font-variation-customOpt16 rounded-lg text-[#1E2125] justify-center items-center shadow-custom-light-dark bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] mx-auto">
                 Naprej
               </button>
-              <div className="text-[14px] text-[#3090D5] font-variation-customOpt14 text-center mt-[34px]">
+              <Link href={"/primerjava"} className="text-[14px] text-[#3090D5] font-variation-customOpt14 text-center mt-[34px]">
                 PREVERI KAJ JE VKLJUČENO V SKRBNIKA
-              </div>
+              </Link>
             </div>
 
             {/*c3 container*/}
             <div className="flex w-[332px] h-[266px] tablet:w-[333px] mobile:w-[348px] mobile:h-[258px] bg-[#FFFFFF] border-t-4 desktop:ml-[44.5px] tablet:mt-[25px] mobile:mt-10 border-[#0A85C2] flex-col mx-auto desktop:mx-0 ">
-              <h className="text-[24px] font-variation-customOpt24 font-semibold text-center mt-[27.5px] text-[#E6E6E6]">
+              {/* <h className="text-[24px] font-variation-customOpt24 font-semibold text-center mt-[27.5px] text-[#E6E6E6]">
                 <span className="text-[#E6E6E680]">n</span><span>a</span> <span>s</span><span className="text-[#E6E6E680]">v</span><span className="#E6E6E640">e</span>
+              </h> */}
+              <h className="text-[24px] text-[#3C3E41] font-variation-customOpt24 font-semibold text-center mt-[27.5px] tablet:mt-[35px]">
+                6-letna svečka
               </h>
               <div
                 style={{
-                  textShadow: "0px 1px 1px #0A85C2",
-                  color: "#282D33",
-                  fontWeight: 200,
+                  textShadow: "0px 3px 4px #00000050",
+                  color: "#2D3D48",
+                  fontWeight: 400,
                   fontSize: "32px",
-                  fontVariationSettings: "'opsz' 48",
+                  fontVariationSettings: "'opsz' 32",
                   fontVariationSettings: "'wdth' 100",
                 }}
-                className="text-center mt-[12px] mb-[4px] text-[#6D778E]"
-              >( KMALU )
+                // className="text-center mt-[12px] mb-[4px] text-[#6D778E]"
+                className=" text-center mt-[6px]"
+              >
+                30 €
               </div>
               <button className="w-[97px] h-[48px] mt-2 mobile:mt-[33px] tablet:mt-6 text-[16px] font-variation-customOpt16 rounded-lg text-[#1E2125] justify-center items-center shadow-custom-light-dark bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] mx-auto">
                 Naprej
               </button>
-              <div className="text-[14px] text-[#3090D5] font-variation-customOpt14 text-center mt-[34px]">
+              <Link href={"/primerjava"} className="text-[14px] text-[#3090D5] font-variation-customOpt14 text-center mt-[34px]">
                 PREVERI KAJ JE VKLJUČENO V SKRBNIKA
-              </div>
+              </Link>
             </div>
           </div>
+            <p className="text-[#2D3D48] mt-4 mobile:text-center text-left mobile:px-4 px-0">
+              * Op. če na seznam ni vključena še nobena lokalna cvetličarna, nas
+              kontaktirajte in vam bomo mesečnega skrbnika uredili mi,
+              brezplačno seveda
+            </p>
         </div>
       </div>
     </div>

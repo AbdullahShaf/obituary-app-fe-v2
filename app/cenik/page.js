@@ -155,18 +155,23 @@ const Subscription = () => {
               />
               <div className="text-[#414141] flex gap-1 w-full desktop:w-[754px] text-[14px] desktop:text-[16px]">
                 <p className="text-[14px]">1</p>{" "}
-                <p className="mobile:hidden block mt-1">
-                  Mesečnega Skrbnika lahko prejmete brezplačno v cvetličarni, ki
-                  jo najdete na seznamu lokalnih cvetličarn. Če trenutno še ni
-                  vpisane nobene lokalne cvetličarne, nas kontaktirajte in bomo
-                  to uredili mi brezplačno.
-                </p>
-                <p className="mobile:block hidden mt-1">
-                  Mesečnega Skrbnika lahko prejmete brezplačno v cvetličarni, ki
-                  jo najdete na seznamu lokalnih. Če trenutno še ni vpisane
-                  nobene v vaši občini, nas kontaktirajte in bomo to uredili mi
-                  brezplačno.
-                </p>
+                <div className="flex flex-col">
+                  <p className="mobile:hidden block mt-1">
+                    Mesečnega Skrbnika lahko prejmete brezplačno v cvetličarni,
+                    ki jo najdete na seznamu lokalnih cvetličarn. Če trenutno še
+                    ni vpisane nobene lokalne cvetličarne, nas kontaktirajte in
+                    bomo to uredili mi brezplačno.
+                  </p>
+                  <p className="mobile:block hidden mt-1">
+                    Mesečnega Skrbnika lahko prejmete brezplačno v cvetličarni,
+                    ki jo najdete na seznamu lokalnih. Če trenutno še ni vpisane
+                    nobene v vaši občini, nas kontaktirajte in bomo to uredili
+                    mi brezplačno.
+                  </p>
+                  <p className="text-[#414141] w-full desktop:w-[754px] text-[14px] desktop:text-[16px] mt-3">
+                    Plačilo je enkratno, brez avtomatskega podaljšanja.
+                  </p>
+                </div>
               </div>
             </div>
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
@@ -221,33 +226,59 @@ const Subscription = () => {
                       <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col gap-4">
                         <div className="text-[#414141] flex gap-1 mobile:mb-7 mb-4 w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
                           <p className="text-[14px]">1</p>{" "}
-                          <p className="mt-1">
-                            Občine nad 25.000 preb: Maribor, Celje, Kranj,
-                            Koper, Novo mesto, Domžale, Velenje, Nova Gorica
-                          </p>
+                          <div className="flex flex-col">
+                            <p className="mt-1">
+                              Občine nad 25.000 preb: Maribor, Celje, Kranj,
+                              Koper, Novo mesto, Domžale, Velenje, Nova Gorica
+                            </p>
+                            <p className="mt-2">
+                              Naročnina s samodejnim podaljšanjem; velja do
+                              preklica.
+                            </p>
+                          </div>
                         </div>
-                        <PricingCard
-                          number={2}
-                          label="Izdelava lastne strani"
-                          title="Brezplačno"
-                        />
-                        <PricingCard
-                          number={2}
-                          label="možnost vpisovanja lokalnih osmrtnic"
-                          mobilelabel="MOŽNOST VPISOVANJA OSMRTNIC"
-                          title="Brezplačno"
-                        />
-                        <PricingCard
-                          number={2}
-                          label="darila za vaše stranke; skrbnik, digitalne kartice, qr kode"
-                          mobilelabel="ZA STRANKE: SKRBNIK, KARTICE, QR KODE"
-                          title="Brezplačno"
-                        />
-                        <PricingCard
-                          number={3}
-                          label="vpis na strani naši partnerji"
-                          title="Za vedno"
-                        />
+                        <div className="relative">
+                          <PricingCard
+                            number={2}
+                            label="Izdelava lastne strani"
+                            title="Brezplačno"
+                          />
+                          <div className="absolute top-1 right-3 text-[#414141] text-[20px]">
+                            *
+                          </div>
+                        </div>
+                        <div className="relative">
+                          <PricingCard
+                            number={2}
+                            label="možnost vpisovanja lokalnih osmrtnic"
+                            mobilelabel="MOŽNOST VPISOVANJA OSMRTNIC"
+                            title="Brezplačno"
+                          />
+                          <div className="absolute top-1 right-3 text-[#414141] text-[20px]">
+                            *
+                          </div>
+                        </div>
+                        <div className="relative">
+                          <PricingCard
+                            number={2}
+                            label="darila za vaše stranke; skrbnik, digitalne kartice, qr kode"
+                            mobilelabel="ZA STRANKE: SKRBNIK, KARTICE, QR KODE"
+                            title="Brezplačno"
+                          />
+                          <div className="absolute top-1 right-3 text-[#414141] text-[20px]">
+                            *
+                          </div>
+                        </div>
+                        <div className="relative">
+                          <PricingCard
+                            number={3}
+                            label="vpis na strani naši partnerji"
+                            title="Za vedno"
+                          />
+                          <div className="absolute top-1 right-3 text-[#414141] text-[20px]">
+                            *
+                          </div>
+                        </div>
                         <div>
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">2</p>{" "}
@@ -272,6 +303,17 @@ const Subscription = () => {
                               Vsako podjetje, ki oglašuje vsaj eno leto bo za
                               vedno prikazano na posebni strani Naši partnerji.
                             </p>
+                          </div>
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
+                            <p className="text-[14px]">*</p>{" "}
+                            <div className="flex flex-col">
+                              <p className="mt-1">V primeru letne naročnine</p>
+                              <p className="mt-1">
+                                Če imate cvetličarne v več občinah ali
+                                dostavljate v več občin, nas kontaktirajte, da
+                                vam pripravimo posebno ponudbo.
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -313,7 +355,7 @@ const Subscription = () => {
                     <>
                       <FormTabsContentOglasevalci />
                       <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col gap-4">
-                        <div className="mb-7 space-y-1">
+                        <div className=" space-y-1">
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">1</p>{" "}
                             <p className="mt-1">
@@ -338,26 +380,58 @@ const Subscription = () => {
                               predvidenih mest
                             </p>
                           </div>
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
+                            <p className="mt-1">
+                              Naročnina s samodejnim podaljšanjem; velja do
+                              preklica.
+                            </p>
+                          </div>
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
+                            <p className="mt-1">
+                              Spodaj nevedene ugodnosti veljajo za letno
+                              oglaševanje
+                            </p>
+                          </div>
                         </div>
-                        <PricingCard
-                          label="Vsaka naslednja občina"
-                          title="25% popust"
-                        />
-                        <PricingCard
-                          number={3}
-                          label="druga in tretja stran v isti občini"
-                          title="50% popust"
-                        />
-                        <PricingCard
-                          number={4}
-                          label="prvi oglaševalec v občini"
-                          title="Naslednje leto brezplačno"
-                        />
-                        <PricingCard
-                          number={5}
-                          label="vpis na strani naši partnerji"
-                          title="Za vedno"
-                        />
+                        <div className="relative">
+                          <PricingCard
+                            label="Vsaka naslednja občina"
+                            title="25% popust"
+                          />
+                          <div className="absolute top-1 right-3 text-[#414141] text-[20px]">
+                            *
+                          </div>
+                        </div>
+                        <div className="relative">
+                          <PricingCard
+                            number={3}
+                            label="druga in tretja stran v isti občini"
+                            title="50% popust"
+                          />
+                          <div className="absolute top-1 right-3 text-[#414141] text-[20px]">
+                            *
+                          </div>
+                        </div>
+                        <div className="relative">
+                          <PricingCard
+                            number={4}
+                            label="prvi oglaševalec v občini"
+                            title="Naslednje leto brezplačno"
+                          />
+                          <div className="absolute top-1 right-3 text-[#414141] text-[20px]">
+                            *
+                          </div>
+                        </div>
+                        <div className="relative">
+                          <PricingCard
+                            number={5}
+                            label="vpis na strani naši partnerji"
+                            title="Za vedno"
+                          />
+                          <div className="absolute top-1 right-3 text-[#414141] text-[20px]">
+                            *
+                          </div>
+                        </div>
                         <div className="space-y-1">
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">3</p>{" "}
@@ -374,15 +448,12 @@ const Subscription = () => {
                           </div>
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">4</p>{" "}
-                            <p className="mobile:hidden block mt-1">
-                              Velja v primeru letnega naročila. Drugi v občini
-                              prejme 50% popust v naslednjem letu za isto
-                              oglaševanje.
-                            </p>
-                            <p className="mobile:block hidden mt-1">
-                              Velja v primeru letnega naročila. Drugi
-                              oglaševalec v občini prejme 50% popust v
-                              naslednjem letu za isto oglaševanje.{" "}
+                            <p className="mt-1">
+                              Pri podaljšanju v naslednjem letu prejme naročnik
+                              brezplačno letno oglaševanje na dodatni izmed treh
+                              lokalnih strani ali oglaševanje v drugi občini
+                              (enakega ranga). Drugi oglaševalec v občini pa
+                              enako polletno oglaševanje.
                             </p>
                           </div>
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">

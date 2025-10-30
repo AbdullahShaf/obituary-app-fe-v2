@@ -61,15 +61,12 @@ const footerLinkSets = {
   ],
   "/resitve-za-cvetlicarne": [
     { label: "Začetna ", path: "/ ", showOnMobile: false },
+    { label: "Osmrtnice", path: "/osmrtnice", showOnMobile: true },
+    { label: "Pogrebi", path: "/pogrebi", showOnMobile: true },
+    { label: "Spominske", path: "/osmrtnice", showOnMobile: true },
     {
       label: "Cvetličarne",
       path: "/resitve-za-cvetlicarne ",
-      showOnMobile: true,
-    },
-    { label: "Priložnost", path: "/c-priloznost ", showOnMobile: true },
-    {
-      label: "Pogrebna",
-      path: "/resitve-za-pogrebna-podjetja ",
       showOnMobile: true,
     },
   ],

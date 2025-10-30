@@ -51,7 +51,7 @@ const headerLinkSets = {
   ],
   "/resitve-za-cvetlicarne": [
     { label: "Cvetličarne", path: "/resitve-za-cvetlicarne", active: false },
-    { label: " PRILOŽNOST", path: "/c-priloznost", active: true },
+    // { label: " PRILOŽNOST", path: "/c-priloznost", active: true },
     {
       label: "Pogrebna podjetja",
       path: "/resitve-za-pogrebna-podjetja",
@@ -69,19 +69,27 @@ const headerLinkSets = {
   ],
   "/splosni-pogoji": [
     { label: "Splošni pogoji", path: "/splosni-pogoji", active: false },
-    { label: "Politika zasebnosti", path: "/politika-zasebnosti", active: false },
+    {
+      label: "Politika zasebnosti",
+      path: "/politika-zasebnosti",
+      active: false,
+    },
     { label: "Piškotki", path: "/piskotki", active: false },
   ],
   "/politika-zasebnosti": [
     { label: "Splošni pogoji", path: "/splosni-pogoji", active: false },
-    { label: "Politika zasebnosti", path: "/politika-zasebnosti", active: false },
+    {
+      label: "Politika zasebnosti",
+      path: "/politika-zasebnosti",
+      active: false,
+    },
     { label: "Piškotki", path: "/piskotki", active: false },
   ],
   "/vodic": [
     { label: "Cvetličarne", path: "/cvetlicarne", active: false },
     { label: "Preprosti vodič", path: "/vodic", active: true },
-    { label: "Pogrebna podjetja", path: "/pogrebna-p", active: false }
-  ]
+    { label: "Pogrebna podjetja", path: "/pogrebna-p", active: false },
+  ],
 };
 
 function CommonHeader({ currentPage }) {
@@ -101,7 +109,7 @@ function CommonHeader({ currentPage }) {
   const [user, setUser] = useState(null);
   const [isUserLoaded, setIsUserLoaded] = useState(false);
 
-  const canShowBack = shouldShowBack(pathname)
+  const canShowBack = shouldShowBack(pathname);
 
   // Check user authentication on component mount
   useEffect(() => {
@@ -188,23 +196,46 @@ function CommonHeader({ currentPage }) {
                 {/* Navigation Links */}
                 <div className="hidden tablet:flex desktop:flex tablet:mr-[30px] desktop:mr-[38px]">
                   <ul className="flex items-center gap-[32px] tablet:gap-[16px]">
-                    {linksToRender.map((link, index) => (
-                      <li
-                        key={index}
-                        className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center"
-                      >
-                        <Link
-                          href={link.path}
-                          className={`font-normal hover:text-blue-500 transition duration-200 tablet:text-[18px] desktop:text-[20px] ${link.active ? "!text-[#0A85C2]" : "text-[#1E2125]"
-                            }`}
+                    {linksToRender.map((link, index) =>
+                      link.label === "Pogrebna podjetja" ? (
+                        <li
+                          key={index}
+                          className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center"
                         >
-                          {link.active && (
-                            <span className="text-[#EB1D1D]">{">>"}</span>
-                          )}
-                          {link.label}
-                        </Link>
-                      </li>
-                    ))}
+                          <Link
+                            href={link.path}
+                            className={`font-normal hover:text-blue-500 transition duration-200 tablet:text-[18px] desktop:text-[20px] ${
+                              link.active ? "!text-[#0A85C2]" : "text-[#1E2125]"
+                            }`}
+                          >
+                            {link.active && (
+                              <span className="text-[#EB1D1D]">{">>"}</span>
+                            )}
+                            <div className="relative">
+                              <p className="absolute text-[10px] text-[#EB1D1D] right-0 top-[-10px]">KMALU</p>
+                              <p className="relative">{link.label}</p>
+                            </div>
+                          </Link>
+                        </li>
+                      ) : (
+                        <li
+                          key={index}
+                          className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center"
+                        >
+                          <Link
+                            href={link.path}
+                            className={`font-normal hover:text-blue-500 transition duration-200 tablet:text-[18px] desktop:text-[20px] ${
+                              link.active ? "!text-[#0A85C2]" : "text-[#1E2125]"
+                            }`}
+                          >
+                            {link.active && (
+                              <span className="text-[#EB1D1D]">{">>"}</span>
+                            )}
+                            {link.label}
+                          </Link>
+                        </li>
+                      )
+                    )}
                   </ul>
                 </div>
 
@@ -231,12 +262,7 @@ function CommonHeader({ currentPage }) {
                     className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200 "
                     title="Nazaj"
                   >
-                    <Image
-                      src="/back.svg"
-                      alt="Back"
-                      height={28}
-                      width={28}
-                    />
+                    <Image src="/back.svg" alt="Back" height={28} width={28} />
                   </button>
                 )}
                 <SideMenu />

@@ -112,6 +112,16 @@ const FuneralTable = () => {
                             <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
                             <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
                         </tr>
+                        <tr className="border-b  h-[45px]">
+                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Deljenje na Facebooku</td>
+                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
+                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
+                        </tr>
+                        <tr className="border-b  h-[45px]">
+                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Brezplačna QR koda</td>
+                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
+                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
+                        </tr>
                     </tbody>
 
                     <thead>
@@ -137,15 +147,16 @@ const FuneralTable = () => {
 
                         <tr className="border-b  h-[45px]">
                             <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Posvetilo, Zadnji klic, Zahvala, deljenje zgodb</td>
-                            <td className="p-2 border border-gray-300 tablet:pl-[48px] desktop:pl-[67px]"><img src="/table_star.png" className="object-contain"/></td>
+                            {/* <td className="p-2 border border-gray-300 tablet:pl-[48px] desktop:pl-[67px]"><img src="/table_star.png" className="object-contain"/></td> */}
+                            <td className="p-2 border border-gray-300 tablet:pl-[48px] desktop:pl-[67px]"></td>
                             <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
                         </tr>
 
-                        <tr className="border-b  h-[45px]">
+                        {/* <tr className="border-b  h-[45px]">
                             <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Še več MOBI predlog za pošiljanje naprej</td>
                             <td className="p-2 border border-gray-300 tablet:pl-[48px] desktop:pl-[67px]"><img src="/table_star.png" className="object-contain"/></td>
                             <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
-                        </tr>
+                        </tr> */}
                     </tbody>
 
                     <thead>
@@ -213,14 +224,15 @@ const FuneralTable = () => {
 
                         <tr className="border-b  h-[45px]">
                             <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Dodajanje spominov, Zahvala, Zadnji pozdrav, poezije</td>
-                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_star.png" className="object-contain"/></td>
+                            {/* <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_star.png" className="object-contain"/></td> */}
+                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"></td>
                             <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
                         </tr>
 
                         <tr className="border-b  h-[45px]">
-                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Virtualna svečka - letna, 6-letna</td>
+                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Virtualna svečka - letna, 5-letna</td>
                             <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_star.png" className="object-contain"/></td>
-                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_star.png" className="object-contain"/></td>
+                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
                         </tr>
 
                         <tr className="border-b  h-[45px]">
@@ -251,7 +263,7 @@ const FuneralTable = () => {
 
                     
             </table>
-            <div className="tablet:w-[686px] w-[765px] mx-auto flex items-center justify-between flex-row h-20 text-[#3C3E41] mobile:hidden">
+            {/* <div className="tablet:w-[686px] w-[765px] mx-auto flex items-center justify-between flex-row h-20 text-[#3C3E41] mobile:hidden">
                         <div className="flex flex-col items-start text-[#3C3E41] text-[15px]">
                             <p>Tekst v <span className="underline text-[#0769FD] text-[14px]"> MODRI</span> barvi - registracija ni potrebna</p>
                             <p>Tekst v   <span className="underline text-[#2B5D80] text-[14px]"> TEMNI</span>barvi - potrebna je brezplačna registracija    </p>
@@ -274,14 +286,14 @@ const FuneralTable = () => {
                                     Plačljivo
                                 </div>
                         </div>
-            </div>
+            </div> */}
 
-            <table className=" text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto font-medium">
+            <table className=" text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto font-medium mt-11">
    
                     <thead>
                         <tr className="bg-[#2B5D80]
                         text-white h-[83px] mobile:hidden">
-                            <th className="p-2 mobile:pl-4 pl-[34px] w-[576px]">Možnosti na Spominskih stranah</th>
+                            <th className="p-2 mobile:pl-4 pl-[34px] w-[576px]">Ostalo</th>
                             <th className="p-2 tablet:w-[110px] desktop:w-[147px]"></th>
                         </tr>
 
@@ -292,7 +304,7 @@ const FuneralTable = () => {
                         </tr>
 
                         <tr className="mobile:hidden">
-                            <th  className="p-2 bg-gray-200 border mobile:pl-4 pl-[34px] font-bold text-[#414B5A] h-[60px]">BREZPLAČNO za vse</th>
+                            <th  className="p-2 bg-gray-200 border mobile:pl-4 pl-[34px] font-bold text-[#414B5A] h-[60px]">Plačljive opcije, ki jih BREZPLAČNO nudijo cvetličarne in pogrebna podjetja</th>
                             <th  className="p-2 bg-gray-200 "></th>
                         </tr>
 
@@ -321,37 +333,22 @@ const FuneralTable = () => {
                     </thead>
                     <tbody>
                         <tr className="border-b  h-[45px]">
-                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#0769FD] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Dnevna svečka</td>
+                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Objava osmrtnice</td>
+                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"></td>
+                        </tr>
+
+                        <tr className="border-b  h-[45px]">
+                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Izdelava Žalne strani na podlagi osmrtnice</td>
+                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"></td>
+                        </tr>
+
+                        <tr className="border-b  h-[45px]">
+                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Brezplačni mesečni skrbnik</td>
                             <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
                         </tr>
 
                         <tr className="border-b  h-[45px]">
-                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#0769FD] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Izdelava spominske strani</td>
-                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
-                        </tr>
-
-                        <tr className="border-b  h-[45px]">
-                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#0769FD] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Obveščanje drugih preko e-pošte</td>
-                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
-                        </tr>
-
-                        <tr className="border-b  h-[45px]">
-                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#0769FD] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">MOBI predloga Obvestilo o pogrebu za pošiljanje naprej</td>
-                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
-                        </tr>
-
-                        <tr className="border-b  h-[45px]">
-                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#0769FD] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">MOBI predloge Zahvala in Moje sožalje za pošiljanje naprej</td>
-                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
-                        </tr>
-
-                        <tr className="border-b  h-[45px]">
-                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">LOKALNO - Hitri pregled osmrtnic in pogrebov v domačem kraju</td>
-                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
-                        </tr>
-
-                        <tr className="border-b  h-[45px]">
-                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Direktni kontakt s cvetličarnami, pogrebnimi podjetji</td>
+                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Digitalne kartice</td>
                             <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
                         </tr>
 
@@ -362,12 +359,12 @@ const FuneralTable = () => {
             <table className="mt-11 text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto">
                     <thead>
                         <tr className="mobile:hidden">
-                            <th  className="p-2 bg-gray-200 border mobile:pl-4 pl-[34px] font-bold text-[#414B5A] h-[60px]">Plačljive opcije, ki so tekom promocije brezplačne v cvetličarnah, pogrebnih podjetjih</th>
+                            <th  className="p-2 bg-gray-200 border mobile:pl-4 pl-[34px] font-bold text-[#414B5A] h-[60px]">Plačljive opcije</th>
                         </tr>
                     </thead>
             </table>
 
-            <table className=" text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto font-medium">
+            <table className="mb-16 text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto font-medium">
    
                     <thead>
 
@@ -380,25 +377,30 @@ const FuneralTable = () => {
                     </thead>
                     <tbody>
                         <tr className="border-b  h-[45px]">
-                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Mesečni Skrbnik</td>
-                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
+                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Poudarjena osmrtnica</td>
+                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_star.png" className="object-contain"/></td>
                         </tr>
 
                         <tr className="border-b  h-[45px]">
-                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">MOBI predloge</td>
-                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
+                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Letni / 6-letni  Skrbnik</td>
+                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_star.png" className="object-contain"/></td>
                         </tr>
 
                         <tr className="border-b  h-[45px]">
-                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Posvetilo, Zadnji klic, Zahvala, deljenje zgodb</td>
-                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_check.png" className="object-contain"/></td>
+                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Animirana virtualna svečka, ki ‘gori’ eno leto ali 6 let; z dodanim imenom</td>
+                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_star.png" className="object-contain"/></td>
+                        </tr>
+
+                        <tr className="border-b  h-[45px]">
+                            <td className="p-2 border border-gray-300 mobile:pl-4 pl-[34px] underline decoration-dotted text-[15px] text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px]">Izdelava spominske strani za pred časom umrle (brez osmrtnice)</td>
+                            <td className="p-2 border border-gray-300 tablet:pl-[45px] desktop:pl-[67px]"><img src="/table_star.png" className="object-contain"/></td>
                         </tr>
 
                     </tbody>
                     
             </table>
 
-            <table className="mt-11 text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto">
+            {/* <table className="mt-11 text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto">
                     <thead>
                         <tr className="mobile:hidden">
                             <th  className="p-2 bg-gray-200 border mobile:pl-4 pl-[34px] font-bold text-[#414B5A] h-[60px]">Plačljive opcije</th>
@@ -436,7 +438,7 @@ const FuneralTable = () => {
 
             <p className="underline decoration-dotted mt-5 mb-20 mx-auto  text-[#2B5D80] decoration-[#ACAAAA] underline-offset-4 decoration-[2px] tablet:w-[686px] w-[765px] text-[12px]">
                  <span className="text-[#EB1D1D]">*</span>  Z nakupom animirane svečke istočasno hkrati podaljšaš status Skrbnika obstoječemu Skrbniku za enak čas 
-            </p>
+            </p> */}
 
             </div>
         );
@@ -512,6 +514,16 @@ const FuneralTable = () => {
                         <td className="p-2 border border-gray-300 pl-[22px]"><img src="/table_check_sm.png" className="object-contain"/></td>
                         <td className="p-2 border border-gray-300 pl-[22px]"><img src="/table_check_sm.png" className="object-contain"/></td>
                     </tr>
+                    <tr className="border-b  h-[40px]">
+                        <td className="p-2 border border-gray-300 mobile:pl-4 text-[14px] text-[#2B5D80]">Deljenje na Facebooku</td>
+                        <td className="p-2 border border-gray-300 pl-[22px]"><img src="/table_check_sm.png" className="object-contain"/></td>
+                        <td className="p-2 border border-gray-300 pl-[22px]"><img src="/table_check_sm.png" className="object-contain"/></td>
+                    </tr>
+                    <tr className="border-b  h-[40px]">
+                        <td className="p-2 border border-gray-300 mobile:pl-4 text-[14px] text-[#2B5D80]">Brezplačna QR koda</td>
+                        <td className="p-2 border border-gray-300 pl-[22px]"><img src="/table_check_sm.png" className="object-contain"/></td>
+                        <td className="p-2 border border-gray-300 pl-[22px]"><img src="/table_check_sm.png" className="object-contain"/></td>
+                    </tr>
 
                 </tbody>
         </table>
@@ -551,15 +563,15 @@ const FuneralTable = () => {
 
                     <tr className="border-b  h-[40px]">
                         <td className="p-2 border border-gray-300 mobile:pl-4 text-[14px] text-[#2B5D80]">Posvetilo, Zadnji klic, Zahvala, deljenje zgodb </td>
-                        <td className="p-2 border border-gray-300 pl-[24px]"><img src="/table_star_sm.png" className="object-contain"/></td>
+                        <td className="p-2 border border-gray-300 pl-[24px]"></td>
                         <td className="p-2 border border-gray-300 pl-[22px]"><img src="/table_check_sm.png" className="object-contain"/></td>
                     </tr>
 
-                    <tr className="border-b  h-[40px]">
+                    {/* <tr className="border-b  h-[40px]">
                         <td className="p-2 border border-gray-300 mobile:pl-4 text-[14px] text-[#2B5D80]">Še več MOBI predlog </td>
                         <td className="p-2 border border-gray-300 pl-[24px]"><img src="/table_star_sm.png" className="object-contain"/></td>
                         <td className="p-2 border border-gray-300 pl-[22px]"><img src="/table_check_sm.png" className="object-contain"/></td>
-                    </tr>
+                    </tr> */}
 
                 </tbody>
         </table>
@@ -629,17 +641,17 @@ const FuneralTable = () => {
                      <tr className="border-b  h-[40px]">
                         <td className="p-2 pr-0  border-gray-300 w-full mobile:pl-4 text-[14px] whitespace-nowrap tracking-normal text-[#2B5D80] inline-flex items-center relative">
                             Dodajanje spominov, Zadnji pozdrav,...
-                            <img src="/table_star_sm.png" className="object-contain absolute right-12 top-[14px]"/>    
+                            {/* <img src="/table_star_sm.png" className="object-contain absolute right-12 top-[14px]"/>     */}
                         </td>                        
                         <td className="  border-gray-300 "><img src="/table_check_sm.png" className="object-contain"/></td>
                     </tr>
 
                      <tr className="border-b  h-[40px]">
                         <td className="p-2 pr-0  border-gray-300 w-full mobile:pl-4 text-[14px] whitespace-nowrap tracking-normal text-[#2B5D80] inline-flex items-center relative">
-                            Virtualna svečka - letna, 6-letna
+                            Virtualna svečka - letna, 5-letna
                             <img src="/table_star_sm.png" className="object-contain absolute right-12 top-[14px]"/>    
                         </td>
-                        <td className="  border-gray-300 pl-1"><img src="/table_star_sm.png" className="object-contain"/></td>
+                        <td className="  border-gray-300 pl-1"><img src="/table_check_sm.png" className="object-contain"/></td>
                     </tr>
 
                     <tr className="border-b  h-[40px]">
@@ -668,20 +680,20 @@ const FuneralTable = () => {
                 </tbody>
         </table>
         
-        <div className="flex flex-col items-start text-[#3C3E41] text-[12px] w-[358px] pl-1 mt-9">
+        {/* <div className="flex flex-col items-start text-[#3C3E41] text-[12px] w-[358px] pl-1 mt-9">
             <p>Tekst v <span className="underline text-[#0769FD] "> MODRI</span> barvi - registracija ni potrebna</p>
             <p>Tekst v   <span className="underline text-[#2B5D80] "> TEMNI</span>barvi - potrebna je brezplačna registracija    </p>
-        </div>
+        </div> */}
 
         <table className=" text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto font-medium mt-4">
                 <thead>
                     <tr className="bg-[#2B5D80]
                     text-white h-[60px] tablet:hidden desktop:hidden">
-                        <th className="p-2 mobile:pl-4 border border-[#D4D4D4] w-[238px] font-semibold text-[16px] whitespace-nowrap">Preostale možnosti</th>
+                        <th className="p-2 mobile:pl-4 border border-[#D4D4D4] w-[238px] font-semibold text-[16px] whitespace-nowrap">Ostalo</th>
                     </tr>
 
                     <tr className="tablet:hidden desktop:hidden relative h-[60px]">
-                        <th  className="p-2 text-[14px] bg-gray-200 border mobile:pl-4 pl-[34px] font-bold text-[#414B5A]">BREZPLAČNO za vse</th>
+                        <th  className="p-2 text-[14px] bg-gray-200 border mobile:pl-4 pl-[34px] font-bold text-[#414B5A]">Plačljive opcije, ki jih BREZPLAČNO nudijo cvetličarne in pogrebna podjetja</th>
                     </tr>
                 </thead>
                
@@ -698,26 +710,26 @@ const FuneralTable = () => {
             <tbody>
 
                 <tr className="border-b  h-[40px]">
-                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#0769FD]">Objava osmrtnice </td>
+                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#2B5D80]">Objava osmrtnice </td>
+                    {/* <td className="  border-gray-300 "><img src="/table_check_sm.png" className="object-contain"/></td> */}
+                </tr>
+
+                 <tr className="border-b  h-[40px]">
+                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#2B5D80]">Izdelava Žalne strani na podlagi osmrtnice</td>
+                    {/* <td className="  border-gray-300 "><img src="/table_check_sm.png" className="object-contain"/></td> */}
+                </tr>
+
+                 <tr className="border-b  h-[40px]">
+                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#2B5D80]">Brezplačni mesečni skrbnik</td>
                     <td className="  border-gray-300 "><img src="/table_check_sm.png" className="object-contain"/></td>
                 </tr>
 
                  <tr className="border-b  h-[40px]">
-                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#0769FD]">Izdelava spominske strani</td>
+                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#2B5D80]">Digitalne kartice</td>
                     <td className="  border-gray-300 "><img src="/table_check_sm.png" className="object-contain"/></td>
                 </tr>
-
-                 <tr className="border-b  h-[40px]">
-                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#0769FD]">MOBI predloga Obvestilo o pogrebu</td>
-                    <td className="  border-gray-300 "><img src="/table_check_sm.png" className="object-contain"/></td>
-                </tr>
-
-                 <tr className="border-b  h-[40px]">
-                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#0769FD]">MOBI predloge Zahvala in Moje sožalje </td>
-                    <td className="  border-gray-300 "><img src="/table_check_sm.png" className="object-contain"/></td>
-                </tr>
-
-                 <tr className="border-b  h-[40px]">
+{/* here */}
+                 {/* <tr className="border-b  h-[40px]">
                     <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#2B5D80] leading-[0.9em] pr-2">LOKALNO - Hitri pregled osmrtnic in pogrebov v domačem kraju z enim klikom</td>
                     <td className="  border-gray-300 "><img src="/table_check_sm.png" className="object-contain"/></td>
                 </tr>
@@ -725,12 +737,12 @@ const FuneralTable = () => {
                  <tr className="border-b  h-[40px]">
                     <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#2B5D80]">Direktni kontakt s cvetličarnami, pogrebnimi   </td>
                     <td className="  border-gray-300 "><img src="/table_check_sm.png" className="object-contain"/></td>
-                </tr>
+                </tr> */}
 
             </tbody>
         </table>
 
-        <table className=" text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto font-medium mt-10">
+        {/* <table className=" text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto font-medium mt-10">
                 <thead>
                     <tr className="tablet:hidden desktop:hidden relative h-[60px]">
                         <th  className="p-2 text-[14px] bg-gray-200 border mobile:pl-4 pl-[34px] font-bold text-[#414B5A]">
@@ -768,7 +780,7 @@ const FuneralTable = () => {
                 </tr>
 
             </tbody>
-        </table>
+        </table> */}
 
         <table className=" text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto font-medium mt-10">
                 <thead>
@@ -781,7 +793,7 @@ const FuneralTable = () => {
                
         </table>
 
-        <table className=" text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto font-medium ">
+        <table className="mb-16 text-left border-collapse text-[#3C3E41] w-[358px] tablet:w-[689px] desktop:w-[765px] mx-auto font-medium ">
             <thead>
                 <tr className="h-0">
                     <th  className="w-[318px] p-0"></th>
@@ -792,18 +804,26 @@ const FuneralTable = () => {
             <tbody>
 
                 <tr className="border-b  h-[40px]">
-                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#2B5D80]">Poudarjena osmrtnica </td>
+                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#2B5D80]">Poudarjena osmrtnica</td>
                     <td className="  border-gray-300 pl-1"><img src="/table_star_sm.png" className="object-contain"/></td>
                 </tr>
 
                  <tr className="border-b  h-[40px]">
-                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#2B5D80]">Letni / 6-letni  Skrbnik </td>
+                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px]  text-[#2B5D80]">Letni / 6-letni  Skrbnik</td>
                     <td className="  border-gray-300 pl-1"><img src="/table_star_sm.png" className="object-contain"/></td>
                 </tr>
 
                  <tr className="border-b  h-[40px]">
                     <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px] whitespace-nowrap text-[#2B5D80]">
-                        Animirana virtualna svečka, z dodanim imenom<span className="text-[#EB1D1D]">*</span> 
+                        {/* Animirana virtualna svečka, ki ‘gori’ eno leto ali 6 let; z dodanim imenom  */}
+                        Animirana virtualna svečka, ki... 
+                    </td>
+                    <td className="  border-gray-300 pl-1"><img src="/table_star_sm.png" className="object-contain"/></td>
+                </tr>
+                 <tr className="border-b  h-[40px]">
+                    <td className="p-2 pr-0  border-gray-300 mobile:pl-4 text-[14px] whitespace-nowrap text-[#2B5D80]">
+                        Izdelava spominske strani za... 
+                        {/* Izdelava spominske strani za pred časom umrle (brez osmrtnice)  */}
                     </td>
                     <td className="  border-gray-300 pl-1"><img src="/table_star_sm.png" className="object-contain"/></td>
                 </tr>
@@ -811,10 +831,10 @@ const FuneralTable = () => {
             </tbody>
         </table>
 
-        <p className="text-[#6D778E] text-[12px] w-[358px] pl-7 relative font-medium mb-16 mt-3">
+        {/* <p className="text-[#6D778E] text-[12px] w-[358px] pl-7 relative font-medium mb-16 mt-3">
             <span className="text-[#EB1D1D] absolute left-4 top-1">*</span>  Z nakupom animirane svečke istočasno tudi podaljšaš <br />
             status Skrbnika obstoječemu Skrbniku za enak čas
-        </p>
+        </p> */}
         </div>
     );
     }

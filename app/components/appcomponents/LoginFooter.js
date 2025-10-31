@@ -93,7 +93,7 @@ export default function LoginFooter() {
                   </h>
                 </a>
 <a
-  href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
+  href="https://www.facebook.com/osmrtnicaportal"
   className="desktop:hidden flex items-center text-gray-600 ml-[-2px] mt-[8px] hover:text-blue-500 transition duration-200"
   target="_blank"
   rel="noopener noreferrer"
@@ -242,7 +242,7 @@ export default function LoginFooter() {
                     </div>
 
                     <Link
-                      href={"https://www.facebook.com/people/Osmrtnicacom/61581688912510/"}
+                      href={"https://www.facebook.com/osmrtnicaportal"}
                       className="mt-[15px] rounded-[8px] px-[61.5px] py-[12px] bg-[#5470B0] text-[16px] text-[#FFFFFF] leading-[24px] font-variation-customOpt16 font-[400px]"
                       target="_blank"
                     >

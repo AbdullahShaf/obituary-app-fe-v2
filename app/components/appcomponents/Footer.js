@@ -79,7 +79,7 @@ export default function Footer() {
           </div>
           <div className="inline-flex gap-[30px] mobile:gap-[16px]">
             <Link href="/" className="text-[#1860A3] underline w-[65px] text-[14px]">Pišite nam</Link>
-            <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" target="_blank" className="">
+            <Link href="https://www.facebook.com/osmrtnicaportal" target="_blank" className="">
               <Image src={"/promo_footer_facebook.png"} width={18} height={18} alt="Facebook Icon" />
             </Link>
             <Link href="/" className="">
@@ -158,7 +158,7 @@ export default function Footer() {
                     </div>
                   </div>
                   <a
-                    href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
+                    href="https://www.facebook.com/osmrtnicaportal"
                     className="hidden tablet:flex desktop:flex items-center text-gray-600 mobile:mt-[75px] tablet:mt-[73px] desktop:mt-[50px] hover:text-blue-500 transition duration-200 "
                     target="_blank"
                   >
@@ -343,7 +343,7 @@ export default function Footer() {
               <div className="flex flex-col  w-[311px] self-center ">
                 <div className="flex justify-center items-center h-[38px]   ">
                   <a
-                    href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
+                    href="https://www.facebook.com/osmrtnicaportal"
                     className="flex items-center text-gray-600  hover:text-blue-500 transition duration-200 "
                     target="_blank"
                   >
@@ -505,7 +505,7 @@ export function FooterForFaq() {
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
           <Link href="/kontakt" className="text-[#A7C6E3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" className="" target="_blank">
+          <Link href="https://www.facebook.com/osmrtnicaportal" className="" target="_blank">
             <Image src={"/promo_footer_facebook_white.png"} width={18} height={18} alt="Facebook Icon" />
           </Link>
           <Link href="/" className="">
@@ -543,7 +543,7 @@ export function FooterForFaq2() {
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
           <Link href="/kontakt" className="text-[#A7C6E3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" className="" target="_blank">
+          <Link href="https://www.facebook.com/osmrtnicaportal" className="" target="_blank">
             <Image src={"/promo_footer_facebook_white.png"} width={18} height={18} alt="Facebook Icon" />
           </Link>
           <Link href="/" className="">
@@ -582,7 +582,7 @@ export function TermsAndCond() {
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
           <Link href="/kontakt" className="text-[#A7C6E3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" target="_blank" className="">
+          <Link href="https://www.facebook.com/osmrtnicaportal" target="_blank" className="">
             <Image src={"/promo_footer_facebook_white.png"} width={18} height={18} alt="Facebook Icon" />
           </Link>
           <Link href="/" className="">

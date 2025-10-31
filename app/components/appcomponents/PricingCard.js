@@ -54,7 +54,7 @@ export default function PricingCard(props) {
         )}
         {props.icon &&
           (props.icon == "/fb-icon.png" ? (
-            <Link href="/kontakt">
+            <Link href="https://www.facebook.com/osmrtnicaportal">
               <img
                 src={props.icon}
                 className="mobile:w-[36px] absolute right-3 top-5 mobile:h-[36px]"

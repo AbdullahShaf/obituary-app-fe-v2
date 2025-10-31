@@ -181,7 +181,7 @@ const CommonFooter = ({ currentPage = "/" }) => {
             Pišite nam
           </Link>
           <Link
-            href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
+            href="https://www.facebook.com/osmrtnicaportal"
             target="_blank"
             className=""
           >
@@ -225,7 +225,7 @@ const CommonFooter = ({ currentPage = "/" }) => {
             Pišite nam
           </Link>
           <Link
-            href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
+            href="https://www.facebook.com/osmrtnicaportal"
             target="_blank"
             className=""
           >

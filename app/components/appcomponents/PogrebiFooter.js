@@ -31,7 +31,7 @@ const PogrebiFooter = () => {
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
           <Link href="/" className="text-[#1860A3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" target="_blank" className="">
+          <Link href="https://www.facebook.com/osmrtnicaportal" target="_blank" className="">
             <Image src={"/promo_footer_facebook.png"} width={18} height={18} alt="Facebook Icon" />
           </Link>
           <Link href="/" className="">
@@ -50,7 +50,7 @@ const PogrebiFooter = () => {
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
           <Link href="/" className="text-[#1860A3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" target="_blank" className="">
+          <Link href="https://www.facebook.com/osmrtnicaportal" target="_blank" className="">
             <Image src={"/promo_footer_facebook.png"} width={18} height={18} alt="Facebook Icon" />
           </Link>
           <Link href="/" className="">

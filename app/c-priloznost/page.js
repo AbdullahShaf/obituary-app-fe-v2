@@ -60,7 +60,7 @@ export default function Faq1() {
                     Prvih 60 cvetličarn
                   </span>{" "}
                   oz pridružene, ki poravnajo prvo letno pogodbo
-                  <span className="font-bold underline"> do 15. oktobra</span>
+                  <span className="font-bold underline"> do 12. novembra</span>
                 </p>
 
                 <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
@@ -68,19 +68,18 @@ export default function Faq1() {
                     <span className="text-[#0A85C2] font-bold">
                       Podvojena doba Skrbnikov
                     </span>{" "}
-                    do konca leta 2025
+                    do začetka marca 2026
                     <div className="text-[#6D778E] mt-1 pl-5">
                       (vsak Skrbnik, ki ga uporabniki pri vas naročijo velja
-                      dvojno dobo – z uporabo vaše kode. Mesečni Skrbnik traja
+                      dvojno dobo - z uporabo vaše kode. Mesečni Skrbnik traja
                       dva meseca. Letni Skrbnik, če se zanj stranka odloči traja
-                      2 leti, torej eno leto je plačljivo, drugo pa jim s svojo
-                      kodo brezplačno podarite vi, 6-letni Skrbnik traja 12 let.
-                      Predstavlja konkurenčno prednost v primerjavi s
-                      cvetličarnami, ki bi se vključile kasneje in zagotavlja
-                      zadovoljstvo vaših strank, ki jim podarite prav to, česar
-                      si želijo oz so morda celo že naročili, obenem pa je lahko
-                      to darilo učinkovito orodje za vašo lastno promocijo, o
-                      vas se govori).
+                      2 leti, torej eno leto je plačljivo, drugo pa jim podarite
+                      vi, 6-letni Skrbnik traja 12 let. Predstavlja konkurenčno
+                      prednost v primerjavi s cvetličarnami, ki bi se vključile
+                      kasneje in zagotavlja zadovoljstvo vaših strank, ki jim
+                      podarite prav to, česar si želijo, obenem pa je lahko to
+                      darilo zdaj na začetku učinkovito orodje za vašo lastno
+                      promocijo, o vas se govori).
                     </div>
                   </li>
 
@@ -88,10 +87,32 @@ export default function Faq1() {
                     <span className="text-[#0A85C2] font-bold">
                       Dodatna občina
                     </span>{" "}
-                    brezplačno do konca leta{" "}
+                    brezplačno do začetka marca{" "}
                     <span className="text-[#6D778E] mt-1 ">
-                      (vaša cvetličarna se pojavlja med lokalnimi <br />
-                      <span className="pl-5"></span>v drugem kraju)
+                      <br />
+                      <span className="pl-5"></span>(vaša cvetličarna se
+                      pojavlja med lokalnimi v drugem kraju)
+                    </span>
+                  </li>
+
+                  <li>
+                    <span className="text-[#0A85C2] font-bold">
+                      Garantirano enako ceno
+                    </span>{" "}
+                    letne naročnine{" "}
+                    <span className="text-[#0A85C2] font-bold">
+                      vse do leta 2030
+                    </span>
+                    <span className="text-[#6D778E] mt-1 ">
+                      <br />
+                      <div className="ml-5">
+                        <span>
+                          (kot velja po uradnem ceniku letos jeseni. Pomeni, da
+                          četudi bi kdaj v naslednjih letih spremenili ceno
+                          naročnine, bo vaša cena ostala nespremenjena za isti
+                          paket vse do leta 2030)
+                        </span>
+                      </div>
                     </span>
                   </li>
 
@@ -99,114 +120,110 @@ export default function Faq1() {
                 </ul>
 
                 <p className="font-light text-[16px] mt-12">
-                  Cvetličarne, ki pristopijo{" "}
-                  <span className="font-bold underline">do 30. septembra</span>{" "}
-                  prejmejo dodatno še
-                </p>
-
-                <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
-                  <li>
-                    <span className="text-[#0A85C2] font-bold">
-                      Garantirano enako ceno
-                    </span>{" "}
-                    letne naročnine
-                    <span className="text-[#0A85C2] font-bold">
-                      {" "}
-                      vse do leta 2030
-                    </span>
-                    <div className="text-[#6D778E] mt-1 pl-5">
-                      (kot velja po uradnem ceniku letos poleti. Pomeni, da
-                      četudi bi kdaj v naslednjih letih spremenili ceno
-                      naročnine, bo vaša cena ostala nespremenjena za isti paket
-                      vse do leta 2030)
-                    </div>
-                  </li>
-
-                  <li>
-                    <span className="text-[#0A85C2] font-bold">
-                      Dodatni mesec
-                    </span>{" "}
-                    brezplačno
-                    <span className="text-[#6D778E] mt-1 ">
-                      {" "}
-                      (po izteku prvega leta)
-                    </span>
-                  </li>
-
-                  <li>
-                    <span className="text-[#0A85C2] font-bold">
-                      Dva tedna oglaševanja
-                    </span>{" "}
-                    na notranjih straneh brezplačno
-                    <span className="text-[#6D778E] mt-1 pl-1">
-                      (zaradi optimalnega delovanja <br />
-                      <span className="pl-5"></span> bomo mi sami določili kje
-                      in kdaj bo to oglaševanje izvršeno; bo pa to zagotovo v
-                      vašem lokalnem <br />
-                      <span className="pl-5"></span>okolju in do konca leta
-                      2025)
-                    </span>
-                  </li>
-
-                  <li>
-                    Možnost vpisovanja brezplačnih osmrtnic že od začetka
-                    <span className="text-[#6D778E] mt-1 pl-1">
-                      (priložnost za še večjo promocijo,
-                      <br />
-                      <span className="pl-5"></span> ko drugi še niso vključeni
-                      in ko je darilo za stranke še bolj nepričakovano / ko o
-                      tem še ne vedo)
-                    </span>
-                  </li>
-                </ul>
-
-                <p className="font-light text-[16px] mt-12">
-                  <span className="underline underline-offset-2 text-stone-800 font-bold">
-                    DODATNO
-                  </span>
-                  , ne glede na čas pridružitve -{" "}
-                  <span className="underline underline-offset-2 text-stone-800 font-bold">
-                    prva pridružena cvetličarna{" "}
+                  <span className="font-bold underline">
+                    DODATNO, prva pridružena cvetličarna
                   </span>{" "}
                   v posamezni občini:
                 </p>
 
                 <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
-                  <li className="pl-4">
-                    prejme brezplačno še{" "}
+                  <li>
                     <span className="text-[#0A85C2] font-bold">
-                      šest mesecev brezplačnega oglaševanja
+                      3+3 mesece oglaševanja
                     </span>{" "}
-                    na notranjih straneh v svoji
-                    <p className="pl-5">
-                      občini. In druga pridružena prejme tri mesece brezplačno!
-                    </p>
+                    brezplačno!
+                    <div className="text-[#6D778E] mt-1 pl-5">
+                      3 mesece brezplačnega oglaševanja na eni izmed strani:
+                      Osmrtnice, Pogrebi ali Cvetličarne. Kasneje pa za vsak
+                      komentar na naši FB strani prejmete en dodatni mesec
+                      oglaševanja (največ 3 dodatni meseci). Druga pridružena
+                      cvetličarna v občini prejme 1+1 mesec brezplačno.
+                    </div>
                   </li>
-                  <li className="pl-5">
+
+                  <li>
                     <span className="text-[#0A85C2] font-bold">
-                      Še ena dodatna občina
+                      12x12 - prvih 12 cvetličarn
                     </span>{" "}
-                    brezplačno do konca leta{" "}
-                    <span className="text-[#0A85C2] font-bold">!!!</span>{" "}
-                    <span className="text-[#6D778E] mt-1 text-[14px] font-light">
-                      (kjer se vaša cvetličarna pojavlja med{" "}
-                    </span>
-                    <span className="text-[#6D778E] font-light mt-1 text-[14px] pl-5">
-                      lokalnimi v drugem kraju)
-                    </span>
+                    v novembru prejme vsaka po 12 Skrbnikov za spominske
+                    <div className="mt-1 pl-5">
+                      <span>
+                        strani prednikov, ki jih lahko podari svojim klientom
+                        naprej{" "}
+                      </span>
+                      <span className="text-[#6D778E]">
+                        (doslej so bile spominske vezane na aktualne osmrtnice,
+                        odslej bodo omogočale tudi zapisovanje in hranjenje
+                        spominov najdražjih, ki so odšli pred leti, desetletji).
+                        To novost bomo omogočili 12.12. in strani bo mogoče
+                        aktivirati do 1.2., sicer zapadejo). Podarjeni skrbniki
+                        bodo mesečni, če pa na našem FB komentirate, jim bomo ob
+                        aktivaciji dodali še dva dodatna meseca - kar je dovolj
+                        časa, da družine spomine skupaj uredijo. Ta promocija je
+                        spet lahko dobrodošla dodatna priložnost, da svojim
+                        klientom pomagate obuditi dragocene spomine preden
+                        zbledijo - ponuja priložnost za povezovanje generacij in
+                        mnogi vam bodo še leta hvaležni.
+                      </span>
+                    </div>
+                  </li>
+
+                  <li>
+                    Opcija: vzajemno sodelovanje pri promociji na FB
+                    (cvetličarna tedna s predstavitvijo).
                   </li>
                 </ul>
 
                 <p className="mt-6 mb-5">Splača se biti med prvimi.</p>
                 <p className="text-[#6D778E] font-light mt-1 text-[14px]">
-                  (in da ponovimo - odstop od letne naročnine je možen
-                  kadarkoli, brez navedbe razloga in neizkoriščeni meseci bodo
-                  povrnjeni nazaj). To je BREZ RIZIKA!{" "}
+                  Op. vse promocije veljajo samo v primeru letne naročnine.
+                  Popusti se ne seštevajo, obvelja višji popust. Osnovni paketi
+                  so vnešeni v cenik, kjer je možno tudi naročilo, v primeru
+                  obsežnejšega oglaševanja pa nas kontaktirajte, da pripravimo
+                  posebno ponudbo.
                 </p>
               </div>
             </section>
 
-            <Link
+            {/* set for desktop */}
+            <div className="flex justify-between items-center w-full mt-[50px] pb-[60px] mobile:hidden">
+              <Link
+                className="text-[20px] text-[#0A85C2] underline"
+                href={"/kontakt"}
+              >
+                Kontaktirajte nas
+              </Link>
+              <div
+                className="flex w-[250px] h-[60px] rounded-full bg-white"
+                style={{
+                  boxShadow: "5px 5px 10px 0px #A6ABBD",
+                  border: "0.5px solid #6D778E66",
+                }}
+              >
+                <Link
+                  href={"/cenik"}
+                  className={`w-[250px] h-[60px] shrink-0 rounded-full text-[#3C3E41] justify-center items-center self-center shadow-custom-light-dark flex font-semibold text-[20px]`}
+                  style={{
+                    background:
+                      "background: linear-gradient(0deg, rgba(231, 235, 240, 0.3), rgba(231, 235, 240, 0.3)), linear-gradient(180deg, rgba(0, 0, 0, 0) 60.83%, rgba(24, 96, 163, 0.1) 100%)",
+                    boxShadow: "inset -5px -5px 10px 0px #A6ABBD",
+                  }}
+                >
+                  Cenik / Naročilo
+                </Link>
+              </div>
+              {/* <Link href={"/podjetja"}>
+                <button>
+                  <Image
+                    src="/pridruzi-se-button.svg"
+                    alt="Arrow Right"
+                    width={250}
+                    height={60}
+                  />
+                </button>
+              </Link> */}
+            </div>
+            {/* <Link
               href={"/podjetja"}
               className="flex justify-end w-full mt-[50px] pb-[60px] mobile:hidden"
             >
@@ -218,7 +235,7 @@ export default function Faq1() {
                   height={60}
                 />
               </button>
-            </Link>
+            </Link> */}
           </div>
           <FooterForFaq2 />
         </div>
@@ -282,7 +299,7 @@ export default function Faq1() {
                     Prvih 60 cvetličarn
                   </span>{" "}
                   oz pridružene, ki poravnajo prvo letno pogodbo
-                  <span className="font-bold underline"> do 15. oktobra</span>
+                  <span className="font-bold underline"> do 12. novembra</span>
                 </p>
 
                 <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
@@ -290,20 +307,19 @@ export default function Faq1() {
                     <span className="text-[#0A85C2] font-bold">
                       Podvojena doba Skrbnikov
                     </span>{" "}
-                    do konca <br />
-                    <span className="pl-5"></span> leta 2025
+                    do začetka <br />
+                    <span className="pl-5"></span> marca 2026
                     <div className="text-[#6D778E] mt-1 pl-5">
                       (vsak Skrbnik, ki ga uporabniki pri vas naročijo velja
-                      dvojno dobo – z uporabo vaše kode. Mesečni Skrbnik traja
+                      dvojno dobo - z uporabo vaše kode. Mesečni Skrbnik traja
                       dva meseca. Letni Skrbnik, če se zanj stranka odloči traja
-                      2 leti, torej eno leto je plačljivo, drugo pa jim s svojo
-                      kodo brezplačno podarite vi, 6-letni Skrbnik traja 12 let.
-                      <br /> Predstavlja konkurenčno prednost v primerjavi s
-                      cvetličarnami, ki bi se vključile kasneje in zagotavlja
-                      zadovoljstvo vaših strank, ki jim podarite prav to, česar
-                      si želijo oz so morda celo že naročili, obenem pa je lahko
-                      to darilo učinkovito orodje za vašo lastno promocijo, o
-                      vas se govori).
+                      2 leti, torej eno leto je plačljivo, drugo pa jim podarite
+                      vi, 6-letni Skrbnik traja 12 let. Predstavlja konkurenčno
+                      prednost v primerjavi s cvetličarnami, ki bi se vključile
+                      kasneje in zagotavlja zadovoljstvo vaših strank, ki jim
+                      podarite prav to, česar si želijo, obenem pa je lahko to
+                      darilo zdaj na začetku učinkovito orodje za vašo lastno
+                      promocijo, o vas se govori).
                     </div>
                   </li>
 
@@ -311,13 +327,31 @@ export default function Faq1() {
                     <span className="text-[#0A85C2] font-bold">
                       Dodatna občina
                     </span>{" "}
-                    brezplačno do konca
+                    brezplačno do začetka marca
                     <br />
-                    <span className="pl-5"></span>leta{" "}
-                    <span className="text-[#6D778E] mt-1 ">
+                    <span className="text-[#6D778E] mt-1 pl-5">
                       (vaša cvetličarna se pojavlja med <br />
                       <span className="pl-5"></span>lokalnimi v drugem kraju)
                     </span>
+                  </li>
+
+                  <li>
+                    <span className="text-[#0A85C2] font-bold">
+                      Garantirano enako ceno
+                    </span>{" "}
+                    letne naročnine <br />
+                    <span className="text-[#0A85C2] font-bold pl-5">
+                      vse do leta 2030
+                    </span>
+                    <br />
+                    <div className="mt-1 pl-5">
+                      <span className="text-[#6D778E]">
+                        (kot velja po uradnem ceniku letos jeseni. Pomeni, da
+                        četudi bi kdaj v naslednjih letih spremenili ceno
+                        naročnine, bo vaša cena ostala nespremenjena za isti
+                        paket vse do leta 2030)
+                      </span>
+                    </div>
                   </li>
 
                   <li>
@@ -327,121 +361,72 @@ export default function Faq1() {
                 </ul>
 
                 <p className="font-light text-[16px] mt-12">
-                  Cvetličarne, ki pristopijo{" "}
-                  <span className="font-bold underline">do 30. septembra</span>{" "}
-                  prejmejo dodatno še
-                </p>
-
-                <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
-                  <li>
-                    <span className="text-[#0A85C2] font-bold">
-                      Garantirano enako ceno
-                    </span>{" "}
-                    letne naročnine vse <br />
-                    <span className="pl-5"></span>do leta 2030
-                    <div className="text-[#6D778E] mt-1 pl-5">
-                      (kot velja po uradnem ceniku letos <br />
-                      poleti. Pomeni, da četudi bi kdaj v naslednjih letih
-                      spremenili ceno naročnine, bo vaša cena ostala
-                      nespremenjena za isti paket vse do leta 2030)
-                    </div>
-                  </li>
-
-                  <li>
-                    <span className="text-[#0A85C2] font-bold">
-                      Dodatni mesec
-                    </span>{" "}
-                    brezplačno
-                    <span className="text-[#6D778E] mt-1 ">
-                      {" "}
-                      (po izteku prvega <br />
-                      <span className="pl-5"></span>leta)
-                    </span>
-                  </li>
-
-                  <li>
-                    <span className="text-[#0A85C2] font-bold">
-                      Dva tedna oglaševanja
-                    </span>{" "}
-                    na notranjih straneh <br />
-                    <span className="pl-5"></span> brezplačno
-                    <span className="text-[#6D778E] mt-1 pl-1">
-                      (zaradi optimalnega delovanja <br />
-                      <span className="pl-5"></span>bomo mi sami določili kje in
-                      kdaj bo to <br />
-                      <span className="pl-5"></span> oglaševanje izvršeno; bo pa
-                      to zagotovo
-                      <br />
-                      <span className="pl-5"></span> v vašem lokalnem okolju in
-                      do konca leta 2025)
-                    </span>
-                  </li>
-
-                  <li>
-                    Možnost vpisovanja brezplačnih osmrtnic že
-                    <br />
-                    <span className="pl-5"></span> od začetka
-                    <span className="text-[#6D778E] mt-1 pl-1">
-                      (priložnost za še večjo promocijo,
-                      <br />
-                      <span className="pl-5"></span> ko drugi še niso vključeni
-                      in ko je darilo za
-                      <br />
-                      <span className="pl-5"></span>stranke še bolj
-                      nepričakovano / ko o tem še ne <br />
-                      <span className="pl-5"></span>vedo)
-                    </span>
-                  </li>
-                </ul>
-
-                <p className="font-light text-[16px] mt-12">
-                  <span className="underline underline-offset-2 text-stone-800 font-bold">
-                    DODATNO
-                  </span>
-                  , ne glede na čas pridružitve -{" "}
-                  <span className="underline underline-offset-2 text-stone-800 font-bold">
-                    prva pridružena cvetličarna{" "}
+                  <span className="font-bold underline">
+                    DODATNO, prva pridružena cvetličarna
                   </span>{" "}
                   v posamezni občini:
                 </p>
 
                 <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
-                  <li className="pl-4">
-                    prejme brezplačno še{" "}
+                  <li>
                     <span className="text-[#0A85C2] font-bold">
-                      šest mesecev <br />
-                      <span className="pl-5">brezplačnega oglaševanja </span>
-                    </span>
-                    na notranjih{" "}
-                    <span className="pl-5">
-                      straneh v svoji občini. In druga pridružena
+                      3+3 mesece oglaševanja
                     </span>{" "}
-                    <span className="pl-5">prejme tri mesece brezplačno!</span>
-                    {/* Prva pridružena cvetličarna v posamezni <span className="pl-5">občini prejme brezplačno še </span><span className="text-[#0A85C2] font-bold">šest mesecev </span>
-                  <span className="text-[#0A85C2] font-bold pl-5">brezplačnega oglaševanja</span> na notranjih <span className="pl-5">straneh v svoji občini. In druga tri mesece.</span> */}
+                    brezplačno!
+                    <div className="text-[#6D778E] mt-1 pl-5">
+                      3 mesece brezplačnega oglaševanja na eni izmed strani:
+                      Osmrtnice, Pogrebi ali Cvetličarne.Kasneje pa za vsak
+                      komentar na naši FB strani prejmete en dodatni mesec
+                      oglaševanja (največ 3 dodatni meseci). Druga pridružena
+                      cvetličarna v občini prejme 1+1 mesec brezplačno.
+                    </div>
                   </li>
-                  <li className="pl-5">
+
+                  <li>
                     <span className="text-[#0A85C2] font-bold">
-                      Še ena dodatna občina
+                      12x12 - prvih 12 cvetličarn
                     </span>{" "}
-                    brezplačno do <span className="pl-5">konca leta </span>
-                    <span className="text-[#0A85C2] font-bold">!!!</span>{" "}
-                    <span className="text-[#6D778E] mt-1 text-[14px] font-light">
-                      (kjer se vaša cvetličarna{" "}
-                    </span>
                     <br />
-                    <span className="text-[#6D778E] font-light mt-1 text-[14px] pl-5">
-                      {" "}
-                      pojavlja med lokalnimi v drugem kraju)
+                    <div className="pl-5">
+                      <span>
+                        v novembru prejme vsaka po 12 Skrbnikov za spominske
+                        strani prednikov, ki jih lahko podari svojim klientom
+                        naprej
+                      </span>
+                    </div>
+                    <div className="pl-5 mt-1">
+                      <span className="text-[#6D778E]">
+                        (doslej so bile spominske vezane na aktualne osmrtnice,
+                        odslej bodo omogočale tudi zapisovanje in hranjenje
+                        spominov najdražjih, ki so odšli pred leti, desetletji).
+                        To novost bomo omogočili 12.12. in strani bo mogoče
+                        aktivirati do 1.2., sicer zapadejo). Podarjeni skrbniki
+                        bodo mesečni, če pa na našem FB komentirate, jim bomo ob
+                        aktivaciji dodali še dva dodatna meseca - kar je dovolj
+                        časa, da družine spomine skupaj uredijo. Ta promocija je
+                        spet lahko dobrodošla dodatna priložnost, da svojim
+                        klientom pomagate obuditi dragocene spomine preden
+                        zbledijo - ponuja priložnost za povezovanje generacij in
+                        mnogi vam bodo še leta hvaležni.
+                      </span>
+                    </div>
+                  </li>
+
+                  <li>
+                    Opcija: vzajemno sodelovanje pri promociji na{" "}
+                    <span className="pl-5">
+                      FB (cvetličarna tedna s predstavitvijo).
                     </span>
                   </li>
                 </ul>
 
                 <p className="mt-6 mb-6">Splača se biti med prvimi.</p>
                 <p className="text-[#6D778E] font-light mt-1 text-[14px] mb-10">
-                  (in da ponovimo - odstop od letne naročnine je možen
-                  kadarkoli, brez navedbe razloga in neizkoriščeni meseci bodo
-                  povrnjeni nazaj). To je BREZ RIZIKA!{" "}
+                  Op. vse promocije veljajo samo v primeru letne naročnine.
+                  Popusti se ne seštevajo, obvelja višji popust. Osnovni paketi
+                  so vnešeni v cenik, kjer je možno tudi naročilo, v primeru
+                  obsežnejšega oglaševanja pa nas kontaktirajte, da pripravimo
+                  posebno ponudbo.
                 </p>
               </div>
             </section>
@@ -461,11 +446,16 @@ export default function Faq1() {
             </Link>
           </div>
 
-          <Link
-            href={"/podjetja"}
-            className="w-full hidden mobile:flex pr-7 mb-10 mt-3   justify-end items-center"
-          >
-            <div
+          {/* set for mobile */}
+          <div className="w-full hidden mobile:flex px-7 mb-10 mt-3 justify-between items-center">
+            <Link
+              className="text-[17px] text-[#0A85C2] underline"
+              href={"/kontakt"}
+            >
+              Kontaktirajte nas
+            </Link>
+            <Link
+              href={"/cenik"}
               className="w-[140px] h-[35px] flex items-center justify-center rounded-[2px] text-[14px] text-[#FFFFFF]"
               style={{
                 background:
@@ -473,9 +463,9 @@ export default function Faq1() {
                 border: "2px solid #6D778E",
               }}
             >
-              PRIDRUŽI SE
-            </div>
-          </Link>
+              Cenik / Naročilo
+            </Link>
+          </div>
           <FooterForFaq2 />
         </div>
       </>

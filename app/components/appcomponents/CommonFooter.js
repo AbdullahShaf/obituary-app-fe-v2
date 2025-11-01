@@ -61,15 +61,12 @@ const footerLinkSets = {
   ],
   "/resitve-za-cvetlicarne": [
     { label: "Začetna ", path: "/ ", showOnMobile: false },
+    { label: "Osmrtnice", path: "/osmrtnice", showOnMobile: true },
+    { label: "Pogrebi", path: "/pogrebi", showOnMobile: true },
+    { label: "Spominske", path: "/osmrtnice", showOnMobile: true },
     {
       label: "Cvetličarne",
       path: "/resitve-za-cvetlicarne ",
-      showOnMobile: true,
-    },
-    { label: "Priložnost", path: "/c-priloznost ", showOnMobile: true },
-    {
-      label: "Pogrebna",
-      path: "/resitve-za-pogrebna-podjetja ",
       showOnMobile: true,
     },
   ],
@@ -184,7 +181,7 @@ const CommonFooter = ({ currentPage = "/" }) => {
             Pišite nam
           </Link>
           <Link
-            href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
+            href="https://www.facebook.com/osmrtnicaportal"
             target="_blank"
             className=""
           >
@@ -228,7 +225,7 @@ const CommonFooter = ({ currentPage = "/" }) => {
             Pišite nam
           </Link>
           <Link
-            href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
+            href="https://www.facebook.com/osmrtnicaportal"
             target="_blank"
             className=""
           >

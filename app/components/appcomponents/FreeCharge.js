@@ -1,9 +1,15 @@
 import React from "react";
 
-const FreeCharge = () => {
+const FreeCharge = ({ mbZero = false }) => {
   return (
     <div className="w-full bg-[#edf1f4]">
-      <div className="relative max-w-[1920px]  py-[65px] desktop:py-[105px] tablet:py-[75px] w-full overflow-hidden flex mx-auto justify-center items-center">
+      <div
+        className={
+          mbZero
+            ? "relative max-w-[1920px]  pt-[65px] desktop:pt-[105px] tablet:pt-[75px] w-full overflow-hidden flex mx-auto justify-center items-center"
+            : "relative max-w-[1920px]  py-[65px] desktop:py-[105px] tablet:py-[75px] w-full overflow-hidden flex mx-auto justify-center items-center"
+        }
+      >
         {/*Main container */}
         <div className="w-[669px] h-[616px] tablet:w-[637px] tablet:h-[685px] mobile:w-[337px] mobile:h-[483px] flex flex-col">
           {/*header container*/}

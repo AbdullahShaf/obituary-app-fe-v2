@@ -156,7 +156,7 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
                   </div>
 
                   <div className="everything_free_content_text">
-                    <p>Ekskluzivno samo pri naših partnerjih. Poiščite jih! </p>
+                    <p className="!mx-0 !px-0 w-full min-w-full">Ekskluzivno samo pri naših partnerjih. Poiščite jih! </p>
                   </div>
                 </div>
               </div>

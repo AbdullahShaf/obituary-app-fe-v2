@@ -374,10 +374,10 @@ const UniqueFeature = () => {
         <h4 className="desktop:text-[40px] tablet:text-[32px] mobile:text-[24px] font-[400] text-[#3C3E41] mobile:leading-[28px] leading-[48px]">
           Zdaj na začetku je pravi trenutek in učinek največji
         </h4>
-        {/* <p className="text-[24px] mobile:text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5">
+        <p className="text-[24px] mobile:text-[18px] font-[700] text-[#3C3E41] leading-[48px] flex flex-col gap-1.5">
           in hkrati priložnost za izkoriščenje vseh dodatnih ugodnosti
-        </p> */}
-        {/* <p className="text-[18px] mobile:text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leading-[24px] flex items-center justify-center gap-1.5">
+        </p>
+        <p className="text-[18px] mobile:text-[16px] font-[400] text-[#3C3E41] leading-[27px] mobile:leading-[24px] flex items-center justify-center gap-1.5">
           <span className="inline mobile:hidden">
             ki jih omogoča otvoritvena akcija. Oglejte si jih{" "}
             <span className="underline text-[#3090D5]">
@@ -391,10 +391,10 @@ const UniqueFeature = () => {
             ki jih omogoča otvoritvena akcija{" "}
             <span className="underline text-[#3090D5]"> (tukaj)</span>
           </span>
-        </p> */}
+        </p>
       </div>
 
-      <div className="flex flex-col !mt-4">
+      <div className="flex flex-col !mt-0">
         {/* <p className="text-[16px] mobile:text-[14px] leading-[27px] mobile:leading-[24px] font-[400] text-[#3C3E41]">
           <span className="block mobile:hidden">
             V primeru, da se konec oktobra ne odločite za nadaljevanje, se

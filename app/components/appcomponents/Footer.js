@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import logo from "@/public/app_big_logo.png";
@@ -18,18 +18,22 @@ const promoPathname = [
   "/resitve-za-pogrebna-podjetja",
   "/resitve-za-cvetlicarne",
   "/zalna-stran",
-  "/spominska"
-]
+  "/spominska",
+];
 
 export default function Footer() {
-  const [isLocalQuickModalVisible, setIsLocalQuickModalVisible] = useState(false);
+  const [isLocalQuickModalVisible, setIsLocalQuickModalVisible] =
+    useState(false);
   const [isMemoralPopupVisible, setIsMemoralPopupVisible] = useState(false);
   const [footerVariant, setFooterVariant] = useState("default");
 
   const pathname = usePathname();
 
   useEffect(() => {
-    if (pathname.startsWith("/zalna-stran") || pathname.startsWith("/spominska")) {
+    if (
+      pathname.startsWith("/zalna-stran") ||
+      pathname.startsWith("/spominska")
+    ) {
       setFooterVariant("memory");
     } else {
       setFooterVariant("default");
@@ -38,57 +42,112 @@ export default function Footer() {
 
   const handleLocalQuickModalVisible = () => {
     setIsLocalQuickModalVisible(!isLocalQuickModalVisible);
-  }
+  };
 
   const handleMemoralPopupVisible = () => {
     setIsMemoralPopupVisible(!isMemoralPopupVisible);
-  }
+  };
 
   if (promoPathname.includes(pathname)) {
     return (
       <div className="bg-[#E0E9F399] border-l-1 border-r-1 border-t-1 border-b-1 border-color-[#E3E8EC] pt-[35px] pb-[23px]">
         <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto">
-          <Image src={logo2} width={160} height={20} alt="c" className="w-[160px] h-[20px] mobile:hidden" />
-          {footerVariant === "default" && <div className="inline-flex gap-[10px] mobile:gap-[8px] text-[14px] items-center mobile:justify-center mobile:w-full">
-            <Link href="/" className="text-[#1860A3] underline">Začetna</Link>
-            <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
-            <Link href="/" className="text-[#1860A3] underline">Cvetličarne</Link>
-            <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
-            <Link href="/" className="text-[#1860A3] underline">Pogrebna</Link>
-            <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
-            <Link href="/" className="text-[#1860A3] underline">Priložnost</Link>
-          </div>}
-          {footerVariant === "memory" && <div className="inline-flex gap-[10px] mobile:gap-[8px] text-[14px] items-center mobile:justify-center mobile:w-full">
-            <Link href="/" className="text-[#1860A3] underline">Začetna</Link>
-            <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
-            <Link href="/" className="text-[#1860A3] underline">Osmrtnice</Link>
-            <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
-            <Link href="/" className="text-[#1860A3] underline">Pogrebi</Link>
-            <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
-            <Link href="/" className="text-[#1860A3] underline">Spominske</Link>
-            <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
-            <Link href="/" className="text-[#1860A3] underline">Cvetličarne</Link>
-          </div>}
+          <Image
+            src={logo2}
+            width={160}
+            height={20}
+            alt="c"
+            className="w-[160px] h-[20px] mobile:hidden"
+          />
+          {footerVariant === "default" && (
+            <div className="inline-flex gap-[10px] mobile:gap-[8px] text-[14px] items-center mobile:justify-center mobile:w-full">
+              <Link href="/" className="text-[#1860A3] underline">
+                Začetna
+              </Link>
+              <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
+              <Link href="/" className="text-[#1860A3] underline">
+                Cvetličarne
+              </Link>
+              <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
+              <Link href="/" className="text-[#1860A3] underline">
+                Pogrebna
+              </Link>
+              <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
+              <Link href="/" className="text-[#1860A3] underline">
+                Priložnost
+              </Link>
+            </div>
+          )}
+          {footerVariant === "memory" && (
+            <div className="inline-flex gap-[10px] mobile:gap-[8px] text-[14px] items-center mobile:justify-center mobile:w-full">
+              <Link href="/" className="text-[#1860A3] underline">
+                Začetna
+              </Link>
+              <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
+              <Link href="/" className="text-[#1860A3] underline">
+                Osmrtnice
+              </Link>
+              <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
+              <Link href="/" className="text-[#1860A3] underline">
+                Pogrebi
+              </Link>
+              <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
+              <Link href="/" className="text-[#1860A3] underline">
+                Spominske
+              </Link>
+              <div className="w-[5px] h-[5px] bg-[#1860A3] rounded-full"></div>
+              <Link href="/" className="text-[#1860A3] underline">
+                Cvetličarne
+              </Link>
+            </div>
+          )}
         </div>
         <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] mx-auto bg-[#D4D4D4] h-[1px] mt-[22px]"></div>
         <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto mt-[22px]">
           <div className="flex flex-col">
-            <Image src={logo2} width={160} height={20} alt="c" className="w-[160px] h-[20px] hidden mobile:flex mb-[5px]" />
+            <Image
+              src={logo2}
+              width={160}
+              height={20}
+              alt="c"
+              className="w-[160px] h-[20px] hidden mobile:flex mb-[5px]"
+            />
 
-            <span className="text-[12px] text-[#1E2125] font-normal leading-[24px] mobile:text-[#3C3E41B2]">© 2025 Vse pravice zadržane</span>
+            <span className="text-[12px] text-[#1E2125] font-normal leading-[24px] mobile:text-[#3C3E41B2]">
+              © 2025 Vse pravice zadržane
+            </span>
           </div>
           <div className="inline-flex gap-[30px] mobile:gap-[16px]">
-            <Link href="/" className="text-[#1860A3] underline w-[65px] text-[14px]">Pišite nam</Link>
-            <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" target="_blank" className="">
-              <Image src={"/promo_footer_facebook.png"} width={18} height={18} alt="Facebook Icon" />
+            <Link
+              href="/"
+              className="text-[#1860A3] underline w-[65px] text-[14px]"
+            >
+              Pišite nam
+            </Link>
+            <Link
+              href="https://www.facebook.com/osmrtnicaportal"
+              target="_blank"
+              className=""
+            >
+              <Image
+                src={"/promo_footer_facebook.png"}
+                width={18}
+                height={18}
+                alt="Facebook Icon"
+              />
             </Link>
             <Link href="/" className="">
-              <Image src={"/promo_footer_instagram.png"} width={18} height={18} alt="Instagram Icon" />
+              <Image
+                src={"/promo_footer_instagram.png"}
+                width={18}
+                height={18}
+                alt="Instagram Icon"
+              />
             </Link>
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -158,7 +217,7 @@ export default function Footer() {
                     </div>
                   </div>
                   <a
-                    href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
+                    href="https://www.facebook.com/osmrtnicaportal"
                     className="hidden tablet:flex desktop:flex items-center text-gray-600 mobile:mt-[75px] tablet:mt-[73px] desktop:mt-[50px] hover:text-blue-500 transition duration-200 "
                     target="_blank"
                   >
@@ -188,45 +247,35 @@ export default function Footer() {
                     <ul className="mt-[24px] ">
                       <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center">
                         <Link href="/osmrtnice">
-                          <div
-                            className=" text-[#414141] font-variation-customOpt16 hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px] cursor-pointer"
-                          >
+                          <div className=" text-[#414141] font-variation-customOpt16 hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px] cursor-pointer">
                             Osmrtnice
                           </div>
                         </Link>
                       </li>
                       <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] mt-4 items-center">
                         <Link href="/pogrebi">
-                          <div
-                            className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px] cursor-pointer"
-                          >
+                          <div className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px] cursor-pointer">
                             Pogrebi
                           </div>
                         </Link>
                       </li>
                       <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
                         <Link href="/osmrtnice">
-                          <div
-                            className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
-                          >
+                          <div className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]">
                             Spominska
                           </div>
                         </Link>
                       </li>
                       <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
                         <Link href="/cvetlicarne">
-                          <div
-                            className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
-                          >
+                          <div className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]">
                             Cvetličarne
                           </div>
                         </Link>
                       </li>
                       <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
                         <Link href="/pogrebna-p">
-                          <div
-                            className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
-                          >
+                          <div className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]">
                             Pogrebna podjetja
                           </div>
                         </Link>
@@ -343,7 +392,7 @@ export default function Footer() {
               <div className="flex flex-col  w-[311px] self-center ">
                 <div className="flex justify-center items-center h-[38px]   ">
                   <a
-                    href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/"
+                    href="https://www.facebook.com/osmrtnicaportal"
                     className="flex items-center text-gray-600  hover:text-blue-500 transition duration-200 "
                     target="_blank"
                   >
@@ -404,27 +453,27 @@ export default function Footer() {
             {/* micro links tablet */}
             {/* <div className="flex mobile:hidden tablet:flex desktop:hidden h-[33px] tablet:w-[680px] justify-center  mt-[46px]  tablet:pl-[35px]"> */}
             <div className="hidden">
-            <div className="flex mobile:hidden tablet:flex desktop:hidden h-[33px] tablet:w-[680px] justify-center  mt-[46px]  tablet:pr-[0px]">
-              {/* <div className="w-[612px] h-[33px]  items-end pl-[6px]"> */}
-              <div className="w-[612px] h-[33px]  items-end pr-[0px] flex justify-center">
-                <div className=" h-full w-[596px] flex  space-x-[18px] flex-row justify-end ">
-                  <div className="flex items-center h-6 ">
-                    <a
-                      href="/splosni-pogoji"
-                      className=" text-[#414141] font-normal   hover:text-blue-500 transition duration-200 text-[13px]"
-                    >
-                      Splošni pogoji
-                    </a>
-                  </div>
-                  <div className="flex items-center h-6 ">
-                    <a
-                      href="/politika-zasebnosti"
-                      className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
-                    >
-                      Politika zasebnosti
-                    </a>
-                  </div>
-                  {/* <div className="flex items-center h-6 ">
+              <div className="flex mobile:hidden tablet:flex desktop:hidden h-[33px] tablet:w-[680px] justify-center  mt-[46px]  tablet:pr-[0px]">
+                {/* <div className="w-[612px] h-[33px]  items-end pl-[6px]"> */}
+                <div className="w-[612px] h-[33px]  items-end pr-[0px] flex justify-center">
+                  <div className=" h-full w-[596px] flex  space-x-[18px] flex-row justify-end ">
+                    <div className="flex items-center h-6 ">
+                      <a
+                        href="/splosni-pogoji"
+                        className=" text-[#414141] font-normal   hover:text-blue-500 transition duration-200 text-[13px]"
+                      >
+                        Splošni pogoji
+                      </a>
+                    </div>
+                    <div className="flex items-center h-6 ">
+                      <a
+                        href="/politika-zasebnosti"
+                        className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
+                      >
+                        Politika zasebnosti
+                      </a>
+                    </div>
+                    {/* <div className="flex items-center h-6 ">
                     <a
                       href="#"
                       className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
@@ -432,17 +481,17 @@ export default function Footer() {
                       Politika varovanja osebnih podatkov
                     </a>
                   </div> */}
-                  <div className="flex items-center h-6 ">
-                    <a
-                      href="/piskotki"
-                      className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
-                    >
-                      Piškotki
-                    </a>
+                    <div className="flex items-center h-6 ">
+                      <a
+                        href="/piskotki"
+                        className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 text-[13px]"
+                      >
+                        Piškotki
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
             </div>
             <div className="hidden desktop:flex desktop:mt-[92px] w-[680px] desktop:w-[1137px] pr-[1px] ">
               <div className="desktop:w-[427px] h-6 mt-[48px] flex  items-center ">
@@ -466,7 +515,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
       </div>
       {isLocalQuickModalVisible && (
         <LocalQuickReviewModal
@@ -474,125 +522,336 @@ export default function Footer() {
         />
       )}
       {isMemoralPopupVisible && (
-        <MemoralPopup
-          setIsMemoralPopupVisible={setIsMemoralPopupVisible}
-        />
+        <MemoralPopup setIsMemoralPopupVisible={setIsMemoralPopupVisible} />
       )}
     </>
   );
 }
 
-
 export function FooterForFaq() {
   return (
     <div className="bg-[#083545] border-l-1 border-r-1 border-t-1 border-b-1 border-color-[#E3E8EC] pt-[29px] mobile:pt-[15px] pb-[9px]">
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[340px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto">
-        <Image src={logoWhite} width={160} height={20} alt="c" className="w-[160px] h-[20px] mobile:hidden" />
+        <Image
+          src={logoWhite}
+          width={160}
+          height={20}
+          alt="c"
+          className="w-[160px] h-[20px] mobile:hidden"
+        />
         <div className="inline-flex gap-[10px] mobile:gap-[8px] text-[14px] items-center mobile:justify-center mobile:w-full">
-          <Link href="/" className="text-[#DAEBF1] ">Začetna</Link>
+          <Link href="/" className="text-[#DAEBF1] ">
+            Začetna
+          </Link>
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full"></div>
-          <Link href="/resitve-za-pogrebna-podjetja" className="text-[#DAEBF1] ">Stran za pogrebna podjetja</Link>
+          <Link
+            href="/resitve-za-pogrebna-podjetja"
+            className="text-[#DAEBF1] "
+          >
+            Stran za pogrebna podjetja
+          </Link>
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full"></div>
-          <Link href="/c-priloznost" className="text-[#DAEBF1] ">Cvetličarne </Link>
+          <Link href="/c-priloznost" className="text-[#DAEBF1] ">
+            Cvetličarne{" "}
+          </Link>
         </div>
       </div>
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] mx-auto bg-[#D4D4D4] h-[1px] mt-[18px] mobile:hidden"></div>
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto mt-[18px] mobile:hidden">
         <div className="flex flex-col">
-          <Image src={logo2} width={160} height={20} alt="c" className="w-[160px] h-[20px] hidden mobile:flex mb-[5px]" />
+          <Image
+            src={logo2}
+            width={160}
+            height={20}
+            alt="c"
+            className="w-[160px] h-[20px] hidden mobile:flex mb-[5px]"
+          />
 
-          <span className="text-[12px] text-[#C7C7C7] font-normal leading-[24px]">© 2025 Vse pravice zadržane</span>
+          <span className="text-[12px] text-[#C7C7C7] font-normal leading-[24px]">
+            © 2025 Vse pravice zadržane
+          </span>
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
-          <Link href="/kontakt" className="text-[#A7C6E3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" className="" target="_blank">
-            <Image src={"/promo_footer_facebook_white.png"} width={18} height={18} alt="Facebook Icon" />
+          <Link
+            href="/kontakt"
+            className="text-[#A7C6E3] underline w-[65px] text-[14px]"
+          >
+            Pišite nam
+          </Link>
+          <Link
+            href="https://www.facebook.com/osmrtnicaportal"
+            className=""
+            target="_blank"
+          >
+            <Image
+              src={"/promo_footer_facebook_white.png"}
+              width={18}
+              height={18}
+              alt="Facebook Icon"
+            />
           </Link>
           <Link href="/" className="">
-            <Image src={"/promo_footer_instagram_white.png"} width={18} height={18} alt="Instagram Icon" />
+            <Image
+              src={"/promo_footer_instagram_white.png"}
+              width={18}
+              height={18}
+              alt="Instagram Icon"
+            />
           </Link>
         </div>
       </div>
       <div className="text-center text-[#1A6F8D] font-[400] text-[12px] leading-[100%] mt-[12px] mb-[6px] hidden mobile:block">
-        www.osmrtnica.com @ 2025.  Vse pravice zadržane
+        www.osmrtnica.com @ 2025. Vse pravice zadržane
       </div>
     </div>
-  )
+  );
 }
 
 export function FooterForFaq2() {
   return (
     <div className="bg-[#083545] border-l-1 border-r-1 border-t-1 border-b-1 border-color-[#E3E8EC] pt-[29px] mobile:pt-[15px] pb-[9px]">
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[340px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto">
-        <Image src={logoWhite} width={160} height={20} alt="c" className="w-[160px] h-[20px] mobile:hidden" />
+        <Image
+          src={logoWhite}
+          width={160}
+          height={20}
+          alt="c"
+          className="w-[160px] h-[20px] mobile:hidden"
+        />
         <div className="inline-flex gap-[10px] mobile:gap-[8px] text-[14px] items-center mobile:justify-center mobile:w-full">
-          <Link href="/" className="text-[#DAEBF1]  underline">Prva stran</Link>
+          <Link href="/" className="text-[#DAEBF1]  underline">
+            Prva stran
+          </Link>
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full underline"></div>
-          <Link href="/resitve-za-cvetlicarne" className="text-[#DAEBF1] mobile:hidden underline">Stran za cvetličarne</Link>
-          <Link href="/resitve-za-cvetlicarne" className="text-[#DAEBF1] mobile:block hidden underline">Cvetličarne</Link>
+          <Link
+            href="/resitve-za-cvetlicarne"
+            className="text-[#DAEBF1] mobile:hidden underline"
+          >
+            Stran za cvetličarne
+          </Link>
+          <Link
+            href="/resitve-za-cvetlicarne"
+            className="text-[#DAEBF1] mobile:block hidden underline"
+          >
+            Cvetličarne
+          </Link>
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full underline"></div>
-          <Link href="/p-faq" className="text-[#DAEBF1]  underline">Pogrebna podjetja</Link>
+          <Link href="/vodic" className="text-[#DAEBF1]  underline">
+            Vodič
+          </Link>
+          <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full underline"></div>
+          <Link href="/oglasevalci" className="text-[#DAEBF1]  underline">
+            Oglaševalci
+          </Link>
         </div>
       </div>
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] mx-auto bg-[#D4D4D4] h-[1px] mt-[18px] mobile:hidden"></div>
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto mt-[18px] mobile:hidden">
         <div className="flex flex-col">
-          <Image src={logo2} width={160} height={20} alt="c" className="w-[160px] h-[20px] hidden mobile:flex mb-[5px]" />
+          <Image
+            src={logo2}
+            width={160}
+            height={20}
+            alt="c"
+            className="w-[160px] h-[20px] hidden mobile:flex mb-[5px]"
+          />
 
-          <span className="text-[12px] text-[#C7C7C7] font-normal leading-[24px]">© 2025 Vse pravice zadržane</span>
+          <span className="text-[12px] text-[#C7C7C7] font-normal leading-[24px]">
+            © 2025 Vse pravice zadržane
+          </span>
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
-          <Link href="/kontakt" className="text-[#A7C6E3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" className="" target="_blank">
-            <Image src={"/promo_footer_facebook_white.png"} width={18} height={18} alt="Facebook Icon" />
+          <Link
+            href="/kontakt"
+            className="text-[#A7C6E3] underline w-[65px] text-[14px]"
+          >
+            Pišite nam
+          </Link>
+          <Link
+            href="https://www.facebook.com/osmrtnicaportal"
+            className=""
+            target="_blank"
+          >
+            <Image
+              src={"/promo_footer_facebook_white.png"}
+              width={18}
+              height={18}
+              alt="Facebook Icon"
+            />
           </Link>
           <Link href="/" className="">
-            <Image src={"/promo_footer_instagram_white.png"} width={18} height={18} alt="Instagram Icon" />
+            <Image
+              src={"/promo_footer_instagram_white.png"}
+              width={18}
+              height={18}
+              alt="Instagram Icon"
+            />
           </Link>
         </div>
       </div>
       <div className="text-center text-[#1A6F8D] font-[400] text-[12px] leading-[100%] mt-[12px] mb-[6px] hidden mobile:block">
-        www.osmrtnica.com @ 2025.  Vse pravice zadržane
+        www.osmrtnica.com @ 2025. Vse pravice zadržane
       </div>
     </div>
-  )
+  );
+}
+
+export function FooterForFaq3() {
+  return (
+    <div className="bg-[#083545] border-l-1 border-r-1 border-t-1 border-b-1 border-color-[#E3E8EC] pt-[29px] mobile:pt-[15px] pb-[9px]">
+      <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[340px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto">
+        <Image
+          src={logoWhite}
+          width={160}
+          height={20}
+          alt="c"
+          className="w-[160px] h-[20px] mobile:hidden"
+        />
+        <div className="inline-flex gap-[10px] mobile:gap-[8px] text-[14px] items-center mobile:justify-center mobile:w-full">
+          <Link href="/" className="text-[#DAEBF1]  underline">
+            Prva stran
+          </Link>
+          <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full underline"></div>
+          <Link
+            href="/resitve-za-cvetlicarne"
+            className="text-[#DAEBF1] underline"
+          >
+            Cvetličarne
+          </Link>
+          {/* <Link href="/resitve-za-cvetlicarne" className="text-[#DAEBF1] mobile:block hidden underline">Cvetličarne</Link>
+          <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full underline"></div>
+          <Link href="/vodic" className="text-[#DAEBF1]  underline">Vodič</Link>
+          <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full underline"></div>
+          <Link href="/oglasevalci" className="text-[#DAEBF1]  underline">Oglaševalci</Link> */}
+        </div>
+      </div>
+      <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] mx-auto bg-[#D4D4D4] h-[1px] mt-[18px] mobile:hidden"></div>
+      <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto mt-[18px] mobile:hidden">
+        <div className="flex flex-col">
+          <Image
+            src={logo2}
+            width={160}
+            height={20}
+            alt="c"
+            className="w-[160px] h-[20px] hidden mobile:flex mb-[5px]"
+          />
+
+          <span className="text-[12px] text-[#C7C7C7] font-normal leading-[24px]">
+            © 2025 Vse pravice zadržane
+          </span>
+        </div>
+        <div className="inline-flex gap-[30px] mobile:gap-[16px]">
+          <Link
+            href="/kontakt"
+            className="text-[#A7C6E3] underline w-[65px] text-[14px]"
+          >
+            Pišite nam
+          </Link>
+          <Link
+            href="https://www.facebook.com/osmrtnicaportal"
+            className=""
+            target="_blank"
+          >
+            <Image
+              src={"/promo_footer_facebook_white.png"}
+              width={18}
+              height={18}
+              alt="Facebook Icon"
+            />
+          </Link>
+          <Link href="/" className="">
+            <Image
+              src={"/promo_footer_instagram_white.png"}
+              width={18}
+              height={18}
+              alt="Instagram Icon"
+            />
+          </Link>
+        </div>
+      </div>
+      <div className="text-center text-[#1A6F8D] font-[400] text-[12px] leading-[100%] mt-[12px] mb-[6px] hidden mobile:block">
+        www.osmrtnica.com @ 2025. Vse pravice zadržane
+      </div>
+    </div>
+  );
 }
 
 export function TermsAndCond() {
   return (
     <div className="bg-[#083545] border-l-1 border-r-1 border-t-1 border-b-1 border-color-[#E3E8EC] pt-[29px] mobile:pt-[15px] pb-[9px]">
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[340px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto">
-        <Image src={logoWhite} width={160} height={20} alt="c" className="w-[160px] h-[20px] mobile:hidden" />
+        <Image
+          src={logoWhite}
+          width={160}
+          height={20}
+          alt="c"
+          className="w-[160px] h-[20px] mobile:hidden"
+        />
         <div className="inline-flex gap-[10px] mobile:gap-[8px] text-[14px] items-center mobile:justify-center mobile:w-full">
-          <Link href="/" className="text-[#DAEBF1] hidden md:inline">Začetna</Link>
+          <Link href="/" className="text-[#DAEBF1] hidden md:inline">
+            Začetna
+          </Link>
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full hidden md:inline"></div>
-          <Link href="/splosni-pogoji" className="text-[#DAEBF1] ">Splošni pogoji</Link>
+          <Link href="/splosni-pogoji" className="text-[#DAEBF1] ">
+            Splošni pogoji
+          </Link>
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full"></div>
-          <Link href="/politika-zasebnosti" className="text-[#DAEBF1] ">Politika zasebnosti</Link>
+          <Link href="/politika-zasebnosti" className="text-[#DAEBF1] ">
+            Politika zasebnosti
+          </Link>
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full"></div>
-          <Link href="/piskotki" className="text-[#DAEBF1] ">Piškotki</Link>
+          <Link href="/piskotki" className="text-[#DAEBF1] ">
+            Piškotki
+          </Link>
         </div>
       </div>
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] mx-auto bg-[#D4D4D4] h-[1px] mt-[18px] mobile:hidden"></div>
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto mt-[18px] mobile:hidden">
         <div className="flex flex-col">
-          <Image src={logo2} width={160} height={20} alt="c" className="w-[160px] h-[20px] hidden mobile:flex mb-[5px]" />
+          <Image
+            src={logo2}
+            width={160}
+            height={20}
+            alt="c"
+            className="w-[160px] h-[20px] hidden mobile:flex mb-[5px]"
+          />
 
-          <span className="text-[12px] text-[#C7C7C7] font-normal leading-[24px]">© 2025 Vse pravice zadržane</span>
+          <span className="text-[12px] text-[#C7C7C7] font-normal leading-[24px]">
+            © 2025 Vse pravice zadržane
+          </span>
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
-          <Link href="/kontakt" className="text-[#A7C6E3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" target="_blank" className="">
-            <Image src={"/promo_footer_facebook_white.png"} width={18} height={18} alt="Facebook Icon" />
+          <Link
+            href="/kontakt"
+            className="text-[#A7C6E3] underline w-[65px] text-[14px]"
+          >
+            Pišite nam
+          </Link>
+          <Link
+            href="https://www.facebook.com/osmrtnicaportal"
+            target="_blank"
+            className=""
+          >
+            <Image
+              src={"/promo_footer_facebook_white.png"}
+              width={18}
+              height={18}
+              alt="Facebook Icon"
+            />
           </Link>
           <Link href="/" className="">
-            <Image src={"/promo_footer_instagram_white.png"} width={18} height={18} alt="Instagram Icon" />
+            <Image
+              src={"/promo_footer_instagram_white.png"}
+              width={18}
+              height={18}
+              alt="Instagram Icon"
+            />
           </Link>
         </div>
       </div>
       <div className="text-center text-[#1A6F8D] font-[400] text-[12px] leading-[100%] mt-[12px] mb-[6px] hidden mobile:block">
-        www.osmrtnica.com @ 2025.  Vse pravice zadržane
+        www.osmrtnica.com @ 2025. Vse pravice zadržane
       </div>
     </div>
-  )
+  );
 }

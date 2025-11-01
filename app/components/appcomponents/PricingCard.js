@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function PricingCard(props) {
   const isClickable = props.paymentEnabled && props.onPayment;
   
@@ -48,7 +50,9 @@ export default function PricingCard(props) {
           <div
             className={`mobile:text-[20px] flex items-center gap-1 text-[24px] text-[#1E2125] mt-1 font-[500]`}
           >
-            <p className={props.number && "mt-1"}>{props.title}</p>{" "}
+            <p className={props.number && "mt-1"}>
+              <span className="font-medium">{props.title}</span>
+            </p>{" "}
             {props.number && <p className="text-[14px]">{props.number}</p>}
             {props.subtitle && (
               <p className="mobile:text-[14px] text-[16px] ml-1 text-[#6D778E] font-[500]">
@@ -67,18 +71,23 @@ export default function PricingCard(props) {
             {props.text}
           </div>
         )}
-        {props.icon && (
-          <img
-            src={props.icon}
-            className="mobile:w-[36px] absolute right-3 top-5 mobile:h-[36px]"
-            alt="icon"
-          />
-        )}
-        {isClickable && (
-          <div className="absolute bottom-2 right-3 text-[12px] text-[#530CC6] font-medium">
-            Klikni za plačilo →
-          </div>
-        )}
+
+        {props.icon &&
+          (props.icon == "/fb-icon.png" ? (
+            <Link href="https://www.facebook.com/osmrtnicaportal">
+              <img
+                src={props.icon}
+                className="mobile:w-[36px] absolute right-3 top-5 mobile:h-[36px]"
+                alt="icon"
+              />
+            </Link>
+          ) : (
+            <img
+              src={props.icon}
+              className="mobile:w-[36px] absolute right-3 top-5 mobile:h-[36px]"
+              alt="icon"
+            />
+          ))}
       </div>
     </div>
   );

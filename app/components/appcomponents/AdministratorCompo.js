@@ -56,7 +56,7 @@ const AdministratorCompo = () => {
                   color: "#2D3D48",
                   fontWeight: 400,
                   // fontSize: "32px",
-                  fontSize:"48px",
+                  fontSize: "48px",
                   fontVariationSettings: "'opsz' 32",
                   fontVariationSettings: "'wdth' 100",
                 }}
@@ -65,10 +65,16 @@ const AdministratorCompo = () => {
               >
                 20 €
               </div>
-              <Link href="/vodic" className="w-[97px] h-[48px] mt-2 mobile:mt-[33px] tablet:mt-6 text-[16px] font-variation-customOpt16 rounded-lg text-[#1E2125] flex justify-center items-center shadow-custom-light-dark bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] mx-auto">
+              <Link
+                href="/vodic"
+                className="w-[97px] min-w-[97px] max-w-[97px] h-[48px] min-h-[48px] max-h-[48px] mt-2 mobile:mt-[15px] tablet:mt-2 text-[16px] font-variation-customOpt16 rounded-lg text-[#1E2125] flex justify-center items-center shadow-custom-light-dark bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] mx-auto"
+              >
                 Naprej
               </Link>
-              <Link href={"/primerjava"} className="text-[14px] text-[#3090D5] font-variation-customOpt14 text-center mt-[34px]">
+              <Link
+                href={"/primerjava"}
+                className="text-[14px] text-[#3090D5] font-variation-customOpt14 text-center mt-[34px] mobile:mt-[24px]"
+              >
                 PREVERI KAJ JE VKLJUČENO V SKRBNIKA
               </Link>
             </div>
@@ -95,19 +101,25 @@ const AdministratorCompo = () => {
               >
                 30 €
               </div>
-              <Link href="/vodic" className="w-[97px] h-[48px] mt-2 mobile:mt-[33px] tablet:mt-6 text-[16px] font-variation-customOpt16 rounded-lg text-[#1E2125] flex justify-center items-center shadow-custom-light-dark bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] mx-auto">
+              <Link
+                href="/vodic"
+                className="w-[97px] min-w-[97px] max-w-[97px] h-[48px] min-h-[48px] max-h-[48px] mt-2 mobile:mt-[15px] tablet:mt-2 text-[16px] font-variation-customOpt16 rounded-lg text-[#1E2125] flex justify-center items-center shadow-custom-light-dark bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] mx-auto"
+              >
                 Naprej
               </Link>
-              <Link href={"/primerjava"} className="text-[14px] text-[#3090D5] font-variation-customOpt14 text-center mt-[34px]">
+              <Link
+                href={"/primerjava"}
+                className="text-[14px] text-[#3090D5] font-variation-customOpt14 text-center mt-[34px] mobile:mt-[24px]"
+              >
                 PREVERI KAJ JE VKLJUČENO V SKRBNIKA
               </Link>
             </div>
           </div>
-            <p className="text-[#2D3D48] mt-4 mobile:text-center text-left mobile:px-4 px-0">
-              * Op. če na seznam ni vključena še nobena lokalna cvetličarna, nas
-              kontaktirajte in vam bomo mesečnega skrbnika uredili mi,
-              brezplačno seveda
-            </p>
+          <p className="text-[#2D3D48] mt-4 mobile:text-center text-left mobile:px-4 px-0">
+            * Op. če na seznam ni vključena še nobena lokalna cvetličarna, nas
+            kontaktirajte in vam bomo mesečnega skrbnika uredili mi, brezplačno
+            seveda
+          </p>
         </div>
       </div>
     </div>

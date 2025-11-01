@@ -36,7 +36,7 @@ export default function Faq1() {
               Dodatne ugodnosti
             </h2>
 
-            <p className="font-light text-[16px] mt-[50px]">
+            <p className="font-light text-[16px] mt-[50px] leading-[24px]">
               Poleg mesečnih Skrbnikov, digitalnih kartic sožalja, zahval in
               vabil ter nekaterih novosti v nadaljevanju, pripada prvim
               cvetličarnam še nekaj dodatnih ugodnosti.
@@ -63,13 +63,13 @@ export default function Faq1() {
                   <span className="font-bold underline"> do 12. novembra</span>
                 </p>
 
-                <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
+                <ul className="list-disc list-inside text-[16px] mt-4 space-y-[12px]">
                   <li>
                     <span className="text-[#0A85C2] font-bold">
                       Podvojena doba Skrbnikov
                     </span>{" "}
                     do začetka marca 2026
-                    <div className="text-[#6D778E] mt-1 pl-5">
+                    <div className="text-[#6D778E] leading-[24px] text-[14px] pl-5">
                       (vsak Skrbnik, ki ga uporabniki pri vas naročijo velja
                       dvojno dobo - z uporabo vaše kode. Mesečni Skrbnik traja
                       dva meseca. Letni Skrbnik, če se zanj stranka odloči traja
@@ -88,7 +88,7 @@ export default function Faq1() {
                       Dodatna občina
                     </span>{" "}
                     brezplačno do začetka marca{" "}
-                    <span className="text-[#6D778E] mt-1 ">
+                    <span className="text-[#6D778E] text-[14px]">
                       <br />
                       <span className="pl-5"></span>(vaša cvetličarna se
                       pojavlja med lokalnimi v drugem kraju)
@@ -103,7 +103,7 @@ export default function Faq1() {
                     <span className="text-[#0A85C2] font-bold">
                       vse do leta 2030
                     </span>
-                    <span className="text-[#6D778E] mt-1 ">
+                    <span className="text-[#6D778E] text-[14px] ">
                       <br />
                       <div className="ml-5">
                         <span>
@@ -126,13 +126,13 @@ export default function Faq1() {
                   v posamezni občini:
                 </p>
 
-                <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
+                <ul className="list-disc list-inside text-[16px] mt-4 space-y-[12px]">
                   <li>
                     <span className="text-[#0A85C2] font-bold">
                       3+3 mesece oglaševanja
                     </span>{" "}
                     brezplačno!
-                    <div className="text-[#6D778E] mt-1 pl-5">
+                    <div className="text-[#6D778E] text-[14px] pl-5 leading-[24px]">
                       3 mesece brezplačnega oglaševanja na eni izmed strani:
                       Osmrtnice, Pogrebi ali Cvetličarne. Kasneje pa za vsak
                       komentar na naši FB strani prejmete en dodatni mesec
@@ -146,12 +146,12 @@ export default function Faq1() {
                       12x12 - prvih 12 cvetličarn
                     </span>{" "}
                     v novembru prejme vsaka po 12 Skrbnikov za spominske
-                    <div className="mt-1 pl-5">
+                    <div className="pl-5">
                       <span>
                         strani prednikov, ki jih lahko podari svojim klientom
                         naprej{" "}
                       </span>
-                      <span className="text-[#6D778E]">
+                      <span className="text-[#6D778E] text-[14px] leading-[24px]">
                         (doslej so bile spominske vezane na aktualne osmrtnice,
                         odslej bodo omogočale tudi zapisovanje in hranjenje
                         spominov najdražjih, ki so odšli pred leti, desetletji).
@@ -175,7 +175,7 @@ export default function Faq1() {
                 </ul>
 
                 <p className="mt-6 mb-5">Splača se biti med prvimi.</p>
-                <p className="text-[#6D778E] font-light mt-1 text-[14px]">
+                <p className="text-[#6D778E] font-light mt-1 text-[14px] leading-[24px]">
                   Op. vse promocije veljajo samo v primeru letne naročnine.
                   Popusti se ne seštevajo, obvelja višji popust. Osnovni paketi
                   so vnešeni v cenik, kjer je možno tudi naročilo, v primeru
@@ -193,7 +193,7 @@ export default function Faq1() {
               >
                 Kontaktirajte nas
               </Link>
-              <div
+              {/* <div
                 className="flex w-[250px] h-[60px] rounded-full bg-white"
                 style={{
                   boxShadow: "5px 5px 10px 0px #A6ABBD",
@@ -211,7 +211,15 @@ export default function Faq1() {
                 >
                   Cenik / Naročilo
                 </Link>
-              </div>
+              </div> */}
+              <Link href={"/cenik"}>
+                <Image
+                  src={"/cenik_narocilo_btn.png"}
+                  alt="Arrow Right"
+                  width={250}
+                  height={60}
+                />
+              </Link>
               {/* <Link href={"/podjetja"}>
                 <button>
                   <Image
@@ -302,14 +310,14 @@ export default function Faq1() {
                   <span className="font-bold underline"> do 12. novembra</span>
                 </p>
 
-                <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
+                <ul className="list-disc list-inside text-[16px] mt-4 space-y-[12px]">
                   <li>
                     <span className="text-[#0A85C2] font-bold">
                       Podvojena doba Skrbnikov
                     </span>{" "}
                     do začetka <br />
                     <span className="pl-5"></span> marca 2026
-                    <div className="text-[#6D778E] mt-1 pl-5">
+                    <div className="text-[#6D778E] text-[14px] pl-5 leading-[24px]">
                       (vsak Skrbnik, ki ga uporabniki pri vas naročijo velja
                       dvojno dobo - z uporabo vaše kode. Mesečni Skrbnik traja
                       dva meseca. Letni Skrbnik, če se zanj stranka odloči traja
@@ -329,7 +337,7 @@ export default function Faq1() {
                     </span>{" "}
                     brezplačno do začetka marca
                     <br />
-                    <span className="text-[#6D778E] mt-1 pl-5">
+                    <span className="text-[#6D778E] text-[14px] pl-5">
                       (vaša cvetličarna se pojavlja med <br />
                       <span className="pl-5"></span>lokalnimi v drugem kraju)
                     </span>
@@ -344,8 +352,8 @@ export default function Faq1() {
                       vse do leta 2030
                     </span>
                     <br />
-                    <div className="mt-1 pl-5">
-                      <span className="text-[#6D778E]">
+                    <div className="pl-5">
+                      <span className="text-[#6D778E] text-[14px] leading-[24px]">
                         (kot velja po uradnem ceniku letos jeseni. Pomeni, da
                         četudi bi kdaj v naslednjih letih spremenili ceno
                         naročnine, bo vaša cena ostala nespremenjena za isti
@@ -354,7 +362,7 @@ export default function Faq1() {
                     </div>
                   </li>
 
-                  <li>
+                  <li className="leading-[24px]">
                     prednost pri uvajanju nekaterih novih <br />
                     <span className="pl-5"></span> produktov
                   </li>
@@ -367,13 +375,13 @@ export default function Faq1() {
                   v posamezni občini:
                 </p>
 
-                <ul className="list-disc list-inside text-[16px] mt-4 space-y-0">
+                <ul className="list-disc list-inside text-[16px] mt-4 space-y-[12px]">
                   <li>
                     <span className="text-[#0A85C2] font-bold">
                       3+3 mesece oglaševanja
                     </span>{" "}
                     brezplačno!
-                    <div className="text-[#6D778E] mt-1 pl-5">
+                    <div className="text-[#6D778E] text-[14px] leading-[24px] pl-5">
                       3 mesece brezplačnega oglaševanja na eni izmed strani:
                       Osmrtnice, Pogrebi ali Cvetličarne.Kasneje pa za vsak
                       komentar na naši FB strani prejmete en dodatni mesec
@@ -388,14 +396,14 @@ export default function Faq1() {
                     </span>{" "}
                     <br />
                     <div className="pl-5">
-                      <span>
+                      <span className="leading-[24px]">
                         v novembru prejme vsaka po 12 Skrbnikov za spominske
                         strani prednikov, ki jih lahko podari svojim klientom
                         naprej
                       </span>
                     </div>
-                    <div className="pl-5 mt-1">
-                      <span className="text-[#6D778E]">
+                    <div className="pl-5">
+                      <span className="text-[#6D778E] text-[14px] leading-[24px]">
                         (doslej so bile spominske vezane na aktualne osmrtnice,
                         odslej bodo omogočale tudi zapisovanje in hranjenje
                         spominov najdražjih, ki so odšli pred leti, desetletji).
@@ -412,7 +420,7 @@ export default function Faq1() {
                     </div>
                   </li>
 
-                  <li>
+                  <li className="leading-[24px]">
                     Opcija: vzajemno sodelovanje pri promociji na{" "}
                     <span className="pl-5">
                       FB (cvetličarna tedna s predstavitvijo).
@@ -421,7 +429,7 @@ export default function Faq1() {
                 </ul>
 
                 <p className="mt-6 mb-6">Splača se biti med prvimi.</p>
-                <p className="text-[#6D778E] font-light mt-1 text-[14px] mb-10">
+                <p className="text-[#6D778E] font-light mt-1 text-[14px] mb-10 leading-[24px]">
                   Op. vse promocije veljajo samo v primeru letne naročnine.
                   Popusti se ne seštevajo, obvelja višji popust. Osnovni paketi
                   so vnešeni v cenik, kjer je možno tudi naročilo, v primeru
@@ -454,7 +462,10 @@ export default function Faq1() {
             >
               Kontaktirajte nas
             </Link>
-            <Link
+            <Link href={"/cenik"}>
+            <Image src={"/cenik_narocilo_btn.png"} alt="Arrow Right" width={140} height={35} />
+            </Link>
+            {/* <Link
               href={"/cenik"}
               className="w-[140px] h-[35px] flex items-center justify-center rounded-[2px] text-[14px] text-[#FFFFFF]"
               style={{
@@ -464,7 +475,7 @@ export default function Faq1() {
               }}
             >
               Cenik / Naročilo
-            </Link>
+            </Link> */}
           </div>
           <FooterForFaq2 />
         </div>

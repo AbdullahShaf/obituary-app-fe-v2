@@ -189,7 +189,7 @@ export default function Oglasevalci() {
               >
                 Kontaktirajte nas
               </Link>
-              <div
+              {/* <div
                 className="flex w-[250px] h-[60px] rounded-full bg-white"
                 style={{
                   boxShadow: "5px 5px 10px 0px #A6ABBD",
@@ -207,7 +207,15 @@ export default function Oglasevalci() {
                 >
                   Cenik / Naročilo
                 </Link>
-              </div>
+              </div> */}
+              <Link href={"/podjetja"}>
+                <Image
+                  src={"/cenik_narocilo_btn.png"}
+                  alt="Arrow Right"
+                  width={250}
+                  height={60}
+                />
+              </Link>
               {/* <Link href={"/podjetja"}>
                 <button>
                   <Image
@@ -429,7 +437,15 @@ export default function Oglasevalci() {
             >
               Kontaktirajte nas
             </Link>
-            <Link
+            <Link href={"/cenik"}>
+              <Image
+                src={"/cenik_narocilo_btn.png"}
+                alt="Arrow Right"
+                width={140}
+                height={35}
+              />
+            </Link>
+            {/* <Link
               href={"/cenik"}
               className="w-[140px] h-[35px] flex items-center justify-center rounded-[2px] text-[14px] text-[#FFFFFF]"
               style={{
@@ -439,7 +455,7 @@ export default function Oglasevalci() {
               }}
             >
               Cenik / Naročilo
-            </Link>
+            </Link> */}
           </div>
           <FooterForFaq3 />
         </div>

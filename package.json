@@ -16,6 +16,7 @@
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
     "@iconify/react": "^5.0.2",
+    "@mollie/api-client": "^4.3.3",
     "@nextui-org/modal": "^2.0.39",
     "@nextui-org/react": "^2.4.6",
     "axios": "^1.7.9",

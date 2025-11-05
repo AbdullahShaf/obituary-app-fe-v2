@@ -69,6 +69,18 @@ const footerLinkSets = {
       path: "/resitve-za-cvetlicarne ",
       showOnMobile: true,
     },
+    // { label: "Začetna ", path: "/ ", showOnMobile: false },
+    // {
+    //   label: "Cvetličarne",
+    //   path: "/resitve-za-cvetlicarne ",
+    //   showOnMobile: true,
+    // },
+    // { label: "Priložnost", path: "/c-priloznost ", showOnMobile: true },
+    // {
+    //   label: "Pogrebna",
+    //   path: "/resitve-za-pogrebna-podjetja ",
+    //   showOnMobile: true,
+    // },
   ],
   "/resitve-za-pogrebna-podjetja": [
     { label: "Začetna ", path: "/ ", showOnMobile: false },

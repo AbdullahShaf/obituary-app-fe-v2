@@ -198,7 +198,7 @@ function CommonHeader({ currentPage }) {
                 <div className="hidden tablet:flex desktop:flex tablet:mr-[30px] desktop:mr-[38px]">
                   <ul className="flex items-center gap-[32px] tablet:gap-[16px]">
                     {linksToRender.map((link, index) =>
-                      link.label === "Pogrebna podjetja" ? (
+                      link.label === "Pogrebna podjetja" && link.path==="" ? (
                         <li
                           key={index}
                           className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center"

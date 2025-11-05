@@ -4,7 +4,7 @@ import Head from "next/head";
 import { FAQHeader } from "@/app/components/appcomponents/Header";
 import Image from "next/image";
 import { FrequentlyAskedQuestionView2, FrequentlyAskedQuestionView3 } from "../components/appcomponents/FrequentlyAskedQuestionView";
-import { FooterForFaq, FooterForFaq2 } from "../components/appcomponents/Footer";
+import { FooterForFaq, FooterForFaq2, FooterForFaq4 } from "../components/appcomponents/Footer";
 import Link from "next/link";
 
 export default function Faq2() {
@@ -72,7 +72,7 @@ export default function Faq2() {
             </button>
           </Link>
         </div>
-        <FooterForFaq2 />
+        <FooterForFaq4 />
         </div>
       </>
     )

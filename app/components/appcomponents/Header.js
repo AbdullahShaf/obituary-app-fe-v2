@@ -77,7 +77,7 @@ export function FAQHeader() {
     <>
       <header className="flex flex-col fixed h-[92px] mobile:h-[55px] tablet:h-[80px] left-0 right-0 shadow-md z-50 bg-[#FFFFFF] px-5">
         <div className="desktop:w-[1200px] w-full tablet:max-w-[744px] tablet:w-full flex justify-between h-full items-center mx-auto">
-          <Link href={"/resitve-za-pogrebna-podjetja"} className="flex">
+          <Link href={"/"} className="flex">
             <Image
               src={omr}
               alt="App Logo"

@@ -9,8 +9,8 @@ import FuneralCompany from "../components/appcomponents/FuneralCompany";
 import FrequentlyAskedQuestionView from "../components/appcomponents/FrequentlyAskedQuestionView";
 import Indispensable from "../components/appcomponents/Indispensable";
 import OpeningDate from "../components/appcomponents/OpeningDate";
-import KickStart from "../components/appcomponents/KickStart";
 import CommonFooter from "../components/appcomponents/CommonFooter";
+import KickStart2 from "../components/appcomponents/KickStart2";
 
 const Funeralpromo = () => {
   return (
@@ -35,7 +35,7 @@ const Funeralpromo = () => {
           <Indispensable />
           <FreePrice />
           {/* <OpeningDate /> */}
-          <KickStart cUrl="/p-faq" />
+          <KickStart2 cUrl="/p-faq" />
           {/* <div className="flex w-full bg-[#F8F7F4] mobile:bg-gradient-to-b mobile:from-[#E6EBFA] mobile:to-[#E2EEFC]" >
                 <FrequentlyAskedQuestionView from={"7"} />
                 </div> */}

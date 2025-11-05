@@ -32,18 +32,18 @@ const AdditionalPromotion = ({ mbZero = false }) => {
           <div className="flex mt-[40px] w-full justify-center items-center gap-[35px] flex-col desktop:flex-row">
             <div className="flex flex-col justify-center items-center">
               <p className="text-[#0A85C2] text-center">BREZPLAČNA</p>
-              <div className="w-[280px] h-[63px]">
+              {/* <div className="w-[280px] h-[63px]">
                 <Image src={"/Spominska (Skrbnik).png"} alt="Spominska (Skrbnik).png" width={280} height={63} />
-              </div>
-              {/* <div
-                className="flex w-[280px] h-[63px] rounded-full bg-transparent"
+              </div> */}
+              <div
+                className="flex w-[280px] h-[63px] mobile:w-[250px] mobile:h-[56px] rounded-full bg-transparent"
                 style={{
                   boxShadow: "5px 5px 10px 0px #A6ABBD",
-                  border: "2px solid #0A85C2",
+                  // border: "2px solid #0A85C2",
                 }}
               >
                 <div
-                  className={`w-[280px] h-[63px] shrink-0 rounded-full text-[#3C3E41] justify-center items-center self-center shadow-custom-light-dark flex font-medium text-[22px]`}
+                  className={`w-[280px] h-[63px] mobile:w-[250px] mobile:h-[56px] shrink-0 rounded-full text-[#3C3E41] justify-center items-center self-center shadow-custom-light-dark flex font-medium text-[22px] mobile:text-[20px]`}
                   style={{
                     background:
                       "linear-gradient(0deg, rgba(231, 235, 240, 0.3), rgba(231, 235, 240, 0.3)), linear-gradient(180deg, rgba(0, 0, 0, 0) 60.83%, rgba(24, 96, 163, 0.1) 100%)",
@@ -52,22 +52,27 @@ const AdditionalPromotion = ({ mbZero = false }) => {
                 >
                   Spominska (Skrbnik)
                 </div>
-              </div> */}
+              </div>
             </div>
             <div className="flex flex-col justify-center items-center gap-1">
               <p className="text-[#0A85C2] text-center">BREZPLAČNE</p>
-              <div className="w-[280px] h-[63px]">
-                <Image src={"/Digitalne kartice.png"} alt="Digitalne kartice" width={280} height={63} />
-              </div>
-              {/* <div
-                className="flex w-[280px] h-[63px] rounded-full bg-transparent"
+              {/* <div className="w-[280px] h-[63px]">
+                <Image
+                  src={"/Digitalne kartice.png"}
+                  alt="Digitalne kartice"
+                  width={280}
+                  height={63}
+                />
+              </div> */}
+              <div
+                className="flex w-[280px] h-[63px] mobile:w-[250px] mobile:h-[56px] rounded-full bg-transparent"
                 style={{
                   boxShadow: "5px 5px 10px 0px #A6ABBD",
                   border: "0.5px solid #6D778E66",
                 }}
               >
                 <div
-                  className={`w-[280px] h-[63px] shrink-0 rounded-full text-[#3C3E41] justify-center items-center self-center shadow-custom-light-dark flex font-medium text-[22px]`}
+                  className={`w-[280px] h-[63px] mobile:w-[250px] mobile:h-[56px] shrink-0 rounded-full text-[#3C3E41] justify-center items-center self-center shadow-custom-light-dark flex font-medium text-[22px] mobile:text-[20px]`}
                   style={{
                     background:
                       "linear-gradient(0deg, rgba(231, 235, 240, 0.3), rgba(231, 235, 240, 0.3)), linear-gradient(180deg, rgba(0, 0, 0, 0) 60.83%, rgba(24, 96, 163, 0.1) 100%)",
@@ -76,22 +81,27 @@ const AdditionalPromotion = ({ mbZero = false }) => {
                 >
                   Digitalne kartice
                 </div>
-              </div> */}
+              </div>
             </div>
             <div className="flex flex-col justify-center items-center gap-1">
               <p className="text-[#0A85C2] text-center">BREZPLAČNA</p>
-              <div className="w-[280px] h-[63px]">
-                <Image src={"/Objava osmrtnic.png"} alt="Objava osmrtnic" width={280} height={63} />
-              </div>
-              {/* <div
-                className="flex w-[280px] h-[63px] rounded-full bg-transparent"
+              {/* <div className="w-[280px] h-[63px]">
+                <Image
+                  src={"/Objava osmrtnic.png"}
+                  alt="Objava osmrtnic"
+                  width={280}
+                  height={63}
+                />
+              </div> */}
+              <div
+                className="flex w-[280px] h-[63px] mobile:w-[250px] mobile:h-[56px] rounded-full bg-transparent"
                 style={{
                   boxShadow: "5px 5px 10px 0px #A6ABBD",
                   border: "0.5px solid #6D778E66",
                 }}
               >
                 <div
-                  className={`w-[280px] h-[63px] shrink-0 rounded-full text-[#3C3E41] justify-center items-center self-center shadow-custom-light-dark flex font-medium text-[22px]`}
+                  className={`w-[280px] h-[63px] mobile:w-[250px] mobile:h-[56px] shrink-0 rounded-full text-[#3C3E41] justify-center items-center self-center shadow-custom-light-dark flex font-medium text-[22px] mobile:text-[20px]`}
                   style={{
                     background:
                       "linear-gradient(0deg, rgba(231, 235, 240, 0.3), rgba(231, 235, 240, 0.3)), linear-gradient(180deg, rgba(0, 0, 0, 0) 60.83%, rgba(24, 96, 163, 0.1) 100%)",
@@ -100,7 +110,7 @@ const AdditionalPromotion = ({ mbZero = false }) => {
                 >
                   Objava osmrtnic
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
           <Link href={"/vodic"} className="self-center flex">

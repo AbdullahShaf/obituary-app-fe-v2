@@ -3,7 +3,7 @@ import Head from "next/head";
 import { FAQHeader } from "@/app/components/appcomponents/Header";
 import { FrequentlyAskedQuestionView2 } from "../components/appcomponents/FrequentlyAskedQuestionView";
 import PromotionProducts from "../components/appcomponents/PromotionProducts";
-import { FooterForFaq2 } from "../components/appcomponents/Footer";
+import { FooterForFaq2, FooterForFaq4 } from "../components/appcomponents/Footer";
 import Link from "next/link";
 
 function DriverPage() {
@@ -417,7 +417,7 @@ function DriverPage() {
             <FrequentlyAskedQuestionView2 data={faqData} />
           </div>
         </div>
-        <FooterForFaq2 />
+        <FooterForFaq4 />
       </div>
     </>
   );

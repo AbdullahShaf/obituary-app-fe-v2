@@ -66,7 +66,7 @@ const AdministratorCompo = () => {
                 20 €
               </div>
               <Link
-                href="/vodic"
+                href="/cenik"
                 className="w-[97px] min-w-[97px] max-w-[97px] h-[48px] min-h-[48px] max-h-[48px] mt-2 mobile:mt-[15px] tablet:mt-2 text-[16px] font-variation-customOpt16 rounded-lg text-[#1E2125] flex justify-center items-center shadow-custom-light-dark bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] mx-auto"
               >
                 Naprej
@@ -102,7 +102,7 @@ const AdministratorCompo = () => {
                 30 €
               </div>
               <Link
-                href="/vodic"
+                href="/cenik"
                 className="w-[97px] min-w-[97px] max-w-[97px] h-[48px] min-h-[48px] max-h-[48px] mt-2 mobile:mt-[15px] tablet:mt-2 text-[16px] font-variation-customOpt16 rounded-lg text-[#1E2125] flex justify-center items-center shadow-custom-light-dark bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF] mx-auto"
               >
                 Naprej

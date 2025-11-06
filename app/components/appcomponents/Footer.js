@@ -304,20 +304,52 @@ export default function Footer() {
                     <ul className="mt-[24px] ">
                       <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
                         <a
+                          href="/resitve-za-cvetlicarne"
+                          className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
+                        >
+                          Za cvetličarne
+                        </a>
+                      </li>
+                      <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
+                        <a
+                          href="/cenik"
+                          className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
+                        >
+                          Oglaševalci
+                        </a>
+                      </li>
+                      <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
+                        <a
+                          href="/cenik"
+                          className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
+                        >
+                          Cenik
+                        </a>
+                      </li>
+                      <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
+                        <a
+                          href="/qr-kode"
+                          className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
+                        >
+                          QR kode
+                        </a>
+                      </li>
+                      <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
+                        <a
                           href="/kontakt"
                           className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
                         >
                           Kontakt
                         </a>
                       </li>
-                      <li className="tablet:flex desktop:flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
+                      {/* <li className="tablet:flex desktop:flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
                         <a
                           href="/kontakt"
                           className="text-[#414141] font-normal   hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
                         >
                           Partnerji
                         </a>
-                      </li>
+                      </li> */}
                       <li className="tablet:flex desktop:hidden mobile:flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
                         <a
                           href="/splosni-pogoji"
@@ -787,7 +819,7 @@ export function FooterForFaq4() {
           <Link href="/resitve-za-cvetlicarne" className="text-[#DAEBF1] mobile:hidden underline">Stran za cvetličarne</Link>
           <Link href="/resitve-za-cvetlicarne" className="text-[#DAEBF1] mobile:block hidden underline">Cvetličarne</Link>
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full underline"></div>
-          <Link href="/p-faq" className="text-[#DAEBF1]  underline">Pogrebna podjetja</Link>
+          <Link href="/oglasevalci" className="text-[#DAEBF1]  underline">Oglaševalci</Link>
         </div>
       </div>
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] mx-auto bg-[#D4D4D4] h-[1px] mt-[18px] mobile:hidden"></div>

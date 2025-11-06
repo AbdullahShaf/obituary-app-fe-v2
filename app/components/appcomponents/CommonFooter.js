@@ -66,7 +66,7 @@ const footerLinkSets = {
     { label: "Spominske", path: "/osmrtnice", showOnMobile: true },
     {
       label: "Cvetličarne",
-      path: "/resitve-za-cvetlicarne ",
+      path: "/cvetlicarne ",
       showOnMobile: true,
     },
     // { label: "Začetna ", path: "/ ", showOnMobile: false },
@@ -187,7 +187,7 @@ const CommonFooter = ({ currentPage = "/" }) => {
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
           <Link
-            href="/kontakt"
+            href="mailto:info@osmrtnica.com"
             className="text-[#1860A3] underline w-[65px] text-[14px]"
           >
             Pišite nam

@@ -7,12 +7,15 @@ import { FooterForFaq3 } from "../components/appcomponents/Footer";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import Link from "next/link";
 import omr from "@/public/omr.png";
+import { useRouter } from "next/navigation";
 
 const linksToRender = [
   { label: "CENIK", path: "/cenik", active: false },
 ]
 
 function Header() {
+  const router = useRouter();
+
   return <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
 
     <div className="flex w-full justify-between">
@@ -145,7 +148,7 @@ export default function Oglasevalci() {
               <div>
                 <p className="font-light text-[16px]">
                   Naše prve oglaševalske partnerje, ki sklenejo letno pogodbo{" "}
-                  <span className="font-bold underline text-[#EB1D1D]"> do 12. novembra,</span>{" "}
+                  <span className="font-bold underline text-[#EB1D1D]"> do 15. novembra,</span>{" "}
                   <span>čaka še </span>
                   <br />
                   <span>nekaj dodatnih ugodnosti:</span>
@@ -191,7 +194,7 @@ export default function Oglasevalci() {
                     <span className="text-[#0A85C2] font-bold">Skupna FB promocija - partner tedna</span>
                     <span> (predstavitev na našem FB) za večje oglaševalce </span>
 
-                    <p className="ml-5 text-[#6D778E]">
+                    <p className="ml-5 text-[#6D778E] text-[14px]">
                       (in od januarja naprej tudi manjšim, ki bodo promovirali koristi portala osmrtnica.com)
                     </p>
                   </li>
@@ -219,17 +222,17 @@ export default function Oglasevalci() {
                       vse do leta 2030
                     </span>{" "}
                     <br />
-                    <span className="text-[#6D778E]">
+                    <span className="text-[#6D778E] text-[14px]">
                       (kot velja po uradnem ceniku letos jeseni. Četudi bi v naslednjih letih spremenili ceno oglaševanja, bo vaša cena ostala nespremenjena do leta 2030. Velja za uradno ceno oglaševanja, ne za popuste, ki so vsako leto različni).
                     </span>
-                    <span>Drugi ima garantirano enako ceno do 2028.</span>
+                    <span> Drugi ima garantirano enako ceno do 2028.</span>
                   </li>
 
                   <li>
                     <span>
                       Vaš logotip bo imel
                     </span>
-                    <span className="text-[#0A85C2] font-bold">direktno povezavo do vaše spletne strani </span>
+                    <span className="text-[#0A85C2] font-bold"> direktno povezavo do vaše spletne strani </span>
                     <br />
                     <span className="">
                       ali Facebook profila. Promocija velja izključno za naše Facebook sledilce.
@@ -253,9 +256,9 @@ export default function Oglasevalci() {
               <p className="text-[#6D778E] text-[14px] mt-4">Op. strani, kjer je mogoče oglaševanje so naslednje: </p>
 
               <ul className="flex flex-row gap-2 mt-4 text-[#0A85C2]">
-                <li className="underline underline-offset-2"><Link href={'/'}>Osmrtnice</Link></li>
+                <li className="underline underline-offset-2"><Link href={'/osmrtnice'}>Osmrtnice</Link></li>
                 <li><span>*</span> <Link href={'/pogrebi'} className="underline underline-offset-2">Pogrebi</Link> </li>
-                <li><span>*</span> <Link href={'/cenik'} className="underline underline-offset-2">Cvetličarne</Link> </li>
+                <li><span>*</span> <Link href={'/cvetlicarne'} className="underline underline-offset-2">Cvetličarne</Link> </li>
                 <li><span>*</span> <Link href={'/pogrebna-p'} className="underline underline-offset-2">Pogrebna podjetja</Link> </li>
               </ul>
             </div>
@@ -292,7 +295,7 @@ export default function Oglasevalci() {
           {/* <FAQHeader3 /> */}
 
           <div className="w-full hidden mobile:flex gap-[16px] absolute top-[62px] left-0 right-0">
-            <div className="bg-[#36556C] w-full">
+            <div className="bg-[#36556C] w-full mobile:mt-[13px]">
               <div className="mobile:flex text-[#FFFFFF] items-center justify-between hidden h-[30px] bg-[#36556C] px-3 mobile:max-w-[348px] mx-auto">
                 <div className="text-[#D4D4D4] text-[12px]">
                   POGREBNA PODJETJA
@@ -333,9 +336,9 @@ export default function Oglasevalci() {
               </ul>
             </p>
 
-            <section className="mt-10 text-[16px] space-y-6 leading-[1.6] mobile:w-[354px] w-[720px]">
+            <section className="mt-10 text-[16px] space-y-6 leading-[1.6] mobile:w-full mobile:max-w-[480px] w-[720px]">
               <div className="w-full bg-[#083545] relative h-12 flex items-center text-[#D4D4D4] text-[18px] pl-2">
-                <h3 className="font-medium mb-1 leading-[20px]">
+                <h3 className="font-medium mb-1 leading-[20px] mobile:text-[15px]">
                   Dodatne ugodnosti za prve pridružene oglaševalce?
                 </h3>
               </div>
@@ -343,7 +346,7 @@ export default function Oglasevalci() {
               <div>
                 <p className="font-light text-[16px]">
                   Naše prve oglaševalske partnerje, ki sklenejo letno pogodbo{" "}
-                  <span className="font-bold underline text-[#EB1D1D]">do 12. novembra,</span>{" "}
+                  <span className="font-bold underline text-[#EB1D1D]">do 15. novembra,</span>{" "}
                   čaka še nekaj dodatnih ugodnosti:
                 </p>
 
@@ -386,7 +389,7 @@ export default function Oglasevalci() {
                     <span className="text-[#0A85C2] font-bold">Skupna FB promocija - partner tedna</span>
                     <span> (predstavitev na našem FB) za večje oglaševalce </span>
 
-                    <p className="text-[#6D778E]">
+                    <p className="text-[#6D778E] text-[14px]">
                       (in od januarja naprej tudi manjšim, ki bodo promovirali koristi portala osmrtnica.com)
                     </p>
                   </li>
@@ -414,17 +417,17 @@ export default function Oglasevalci() {
                       vse do leta 2030
                     </span>{" "}
                     <br />
-                    <span className="text-[#6D778E]">
+                    <span className="text-[#6D778E] text-[14px]">
                       (kot velja po uradnem ceniku letos jeseni. Četudi bi v naslednjih letih spremenili ceno oglaševanja, bo vaša cena ostala nespremenjena do leta 2030. Velja za uradno ceno oglaševanja, ne za popuste, ki so vsako leto različni).
                     </span>
-                    <span>Drugi ima garantirano enako ceno do 2028.</span>
+                    <span> Drugi ima garantirano enako ceno do 2028.</span>
                   </li>
 
                   <li>
                     <span>
                       Vaš logotip bo imel
                     </span>
-                    <span className="text-[#0A85C2] font-bold">direktno povezavo do vaše spletne strani </span>
+                    <span className="text-[#0A85C2] font-bold"> direktno povezavo do vaše spletne strani </span>
                     <span className="">
                       ali Facebook profila. Promocija velja izključno za naše Facebook sledilce.
                     </span>
@@ -447,9 +450,9 @@ export default function Oglasevalci() {
               <p className="text-[#6D778E] text-[14px] mt-4">Op. strani, kjer je mogoče oglaševanje so naslednje: </p>
 
               <ul className="flex flex-row gap-2 mt-4 text-[#0A85C2]">
-                <li className="underline underline-offset-2"><Link href={'/'}>Osmrtnice</Link></li>
+                <li className="underline underline-offset-2"><Link href={'/osmrtnice'}>Osmrtnice</Link></li>
                 <li><span>*</span> <Link href={'/pogrebi'} className="underline underline-offset-2">Pogrebi</Link> </li>
-                <li><span>*</span> <Link href={'/cenik'} className="underline underline-offset-2">Cvetličarne</Link> </li>
+                <li><span>*</span> <Link href={'/cvetlicarne'} className="underline underline-offset-2">Cvetličarne</Link> </li>
                 <li><span>*</span> <Link href={'/pogrebna-p'} className="underline underline-offset-2">Pogrebna podjetja</Link> </li>
               </ul>
             </div>

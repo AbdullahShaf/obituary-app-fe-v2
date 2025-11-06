@@ -14,6 +14,7 @@ import KickStart from "../components/appcomponents/KickStart";
 import CommonFooter from "../components/appcomponents/CommonFooter";
 import Link from "next/link";
 import Image from "next/image";
+import './local.css';
 
 const Floristspromo = () => {
   return (

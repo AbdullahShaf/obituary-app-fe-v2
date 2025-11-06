@@ -158,7 +158,7 @@ export default function Footer() {
             className="
       mobile:w-[360px]  tablet:w-[680px] desktop:w-[1200px]    
        desktop:pl-[62px] desktop:pr-[40.19px]
-       mobile:h-[510px] tablet:h-[500px] desktop:h-[480px]
+       mobile:h-[560px] tablet:h-[500px] desktop:h-[480px]
        "
           >
             <footer
@@ -216,9 +216,19 @@ export default function Footer() {
                       </h>
                     </div>
                   </div>
+                  <div className="ml-[-15px] desktop:mt-[30px] mobile:mt-[15px]">
+                    <a href="mailto:info@osmrtnica.com">
+                      <Image
+                        src={'/emailco.svg'}
+                        alt="Facebook Icon"
+                        width={215}
+                        height={72}
+                      />
+                    </a>
+                  </div>
                   <a
                     href="https://www.facebook.com/osmrtnicacom/"
-                    className="hidden tablet:flex desktop:flex items-center text-gray-600 mobile:mt-[75px] tablet:mt-[73px] desktop:mt-[50px] hover:text-blue-500 transition duration-200 "
+                    className="hidden tablet:flex desktop:flex items-center text-gray-600 mobile:mt-[15px] tablet:mt-[10px] desktop:mt-[10px] hover:text-blue-500 transition duration-200 "
                     target="_blank"
                   >
                     <div className="rounded-lg shadow-custom-light-dark bg-gradient-to-br from-gray-300 to-white p-[6px] transition duration-300 hover:scale-105 active:scale-95">
@@ -831,7 +841,8 @@ export function FooterForFaq4() {
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
           <Link href="/kontakt" className="text-[#A7C6E3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" className="" target="_blank">
+          <Link href="https://www.facebook.com/osmrtnicacom/" className="" target="_blank">
+            {/* <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" className="" target="_blank"> */}
             <Image src={"/promo_footer_facebook_white.png"} width={18} height={18} alt="Facebook Icon" />
           </Link>
           <Link href="/" className="">

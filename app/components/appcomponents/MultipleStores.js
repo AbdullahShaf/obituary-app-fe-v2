@@ -33,9 +33,9 @@ const MultipleStores = () => {
         </div>
 
         {/*Main container for tablet & mobile*/}
-        <div className="w-[512px] h-[558px] mobile:w-[336px] mobile:h-[598px] flex flex-col desktop:hidden">
+        <div className="w-[512px] h-[558px] mobile:w-[100%] mobile:h-[598px] flex flex-col desktop:hidden">
           {/*header container*/}
-          <div className="flex w-[496px] h-[199px] mobile:w-[336px] mobile:h-[96px] mx-auto flex-col">
+          <div className="flex w-[496px] h-[199px] mobile:w-[100%] mobile:h-[96px] mx-auto flex-col">
             <div className="text-[40px] text-[#3C3E41] mobile:text-[28px] mobile:font-variation-customOpt28 text-center font-variation-customOpt40 mt-[-5px] mobile:mt-0 mobile:leading-[48px]">
               Spletne rešitve za cvetličarne
             </div>
@@ -63,7 +63,7 @@ const MultipleStores = () => {
             className="w-[512px] h-[295px] mobile:w-[391px] self-center mt-[64px] mobile:mt-[44.9px] hidden tablet:flex"
           ></img>
 
-          <div className=" w-[336px] h-[189px] mt-4 flex-col hidden mobile:flex">
+          <div className=" w-[336px] h-[189px] mt-4 flex-col hidden mobile:flex mobile:w-full mobile:max-w-[480px] mobile:mx-auto">
             <p className="text-[18px] text-[#3C3E41] font-variation-customOpt18 text-center mt-[27px]">
               Ni pomembno samo, da si na spletu, pomembno je, da te uporabniki
               najdejo.

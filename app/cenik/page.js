@@ -254,14 +254,14 @@ const Subscription = () => {
               </div>
 
               <div className="w-full space-y-[12px] ">
-                <div className="w-[719px] text-[18px] leading-[24px]">
+                <div className="w-[719px] text-[18px] leading-[24px] mobile:w-full">
                   <h4 className="text-[#3C3E41]">POZOR:</h4>
                   <p className="text-[#414141]">Če želite postati Skrbnik spominske strani, nas kontaktirajte in bomo to uredili <span className="text-[#530CC6]">BREZPLAČNO</span> </p>
-                  <p className="w-[586px] mt-1 text-[14px] leading-[24px] text-[#6D778E]">(dokler še niso vnešene lokalne cvetličarne v seznam; kasneje vam bodo to uredile cvetličarne).</p>
+                  <p className="w-[586px] mt-1 text-[14px] leading-[24px] text-[#6D778E]  mobile:w-full">(dokler še niso vnešene lokalne cvetličarne v seznam; kasneje vam bodo to uredile cvetličarne).</p>
                 </div>
 
 
-                <div className="w-[771px] text-[14px] leading-[24px] text-[#6D778E] space-y-[12px]">
+                <div className="w-[771px] text-[14px] leading-[24px] text-[#6D778E] space-y-[12px] mobile:w-full">
                   <p >Op. Za postati Skrbnik je nujno potrebno priložiti Smrtovnico, ki vam jo izda pogrebno podjetje (izdajo jo takoj).
                     Smrtovnica je nujno potrebna, da se preprečijo zlorabe, objavljanje lažnih smrti, spam in nasploh, ker skrbnik
                     je lahko samo en izmed najbližnjih pokojni/emu). </p>
@@ -360,7 +360,7 @@ const Subscription = () => {
                 icon="/fb-icon.png"
               />
               <div className="w-full flex justify-start mt-[60px]">
-                <p className="w-[456px] text-[16px] leading-[24px]">Imate vprašanja, predloge, komentarje? <span className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </span></p>
+                <p className="w-[456px] text-[16px] leading-[24px]">Imate vprašanja, predloge, komentarje? <a href="mailto:info@osmrtnica.com" className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </a></p>
                 {/* <Link href={"/kontakt"}>
                   <Image
                     src={"/Kontaktirajte_nas_btn.png"}
@@ -483,10 +483,10 @@ const Subscription = () => {
                             <p className=" mt-4 ">
                               Poleg naštetega so občasno mogoče še druge promocije. Preverite trenutne.
                             </p>
-                            <p className="w-[739px] text-[16px] leading-[24px] mt-14 ">
+                            <p className="w-[739px] text-[16px] leading-[24px] mt-14 mobile:w-full">
                               Imate več cvetličarn, dostavljate v več občin, razmišljate o širši kampanji? Kontaktirajte nas, da poiščemo možnosti oz. da vam pripravimo ponudbo po meri.
                             </p>
-                            <p className="w-[456px] text-[16px] leading-[24px] mt-3">Imate vprašanja, predloge, komentarje? <span className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </span></p>
+                            <p className="w-[456px] text-[16px] leading-[24px] mt-3 mobile:w-full">Imate vprašanja, predloge, komentarje? <a href="mailto:info@osmrtnica.com" className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </a></p>
                           </div>
 
                           {/* <div className="text-[#414141] flex gap-1 w-full mt-4 desktop:w-[744px] text-[14px] desktop:text-[16px]">
@@ -668,10 +668,10 @@ const Subscription = () => {
                           <p >
                             <span className=" text-[#414141] text-[20px] text-[#EB1D1D] " >*</span> V primeru letne naročnine
                           </p>
-                          <p className="w-[716px] mt-[6rem]" >
+                          <p className="w-[756px] mt-[6rem] mobile:w-full" >
                             Poleg naštetih so občasne še druge promocije. Kontaktirajte nas, da vam pripravimo ponudbo po meri.
                           </p>
-                          <p className="w-[456px] text-[16px] leading-[24px]">Imate vprašanja, predloge, komentarje? <span className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </span></p>
+                          <p className="w-[456px] text-[16px] leading-[24px] mobile:w-full">Imate vprašanja, predloge, komentarje? <a href="mailto:info@osmrtnica.com" className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </a></p>
                         </div>
 
                         {/* <div className="space-y-1">
@@ -722,7 +722,7 @@ const Subscription = () => {
                 className="w-full flex justify-end mt-[60px] desktop:w-[794px]"
                 style={{ marginTop: "60px" }}
               > */}
-                {/* <Link href="/kontakt">
+              {/* <Link href="/kontakt">
                   <Image
                     src={"/Kontaktirajte_nas_btn.png"}
                     alt="Kontaktirajte nas"
@@ -730,7 +730,7 @@ const Subscription = () => {
                     height={60}
                   />
                 </Link> */}
-                {/* <div
+              {/* <div
                   className="flex w-[250px] h-[60px] rounded-full bg-transparent"
                   style={{
                     boxShadow: "5px 5px 10px 0px #A6ABBD",
@@ -783,7 +783,7 @@ const Subscription = () => {
                     height={60}
                   />
                 </Link> */}
-                {/* <div
+              {/* <div
                   className="flex w-[250px] h-[60px] rounded-full bg-transparent"
                   style={{
                     boxShadow: "5px 5px 10px 0px #A6ABBD",
@@ -820,7 +820,8 @@ const Subscription = () => {
         >
           <div className="w-full desktop:w-[1200px] mx-auto">
             {/* Manage Payments Button for logged in users */}
-            {user && (active === "spominske" || active === "cvetlicarne") && (
+            {/* Temporarily removed for this week */}
+            {/* {user && (active === "spominske" || active === "cvetlicarne") && (
               <div className="flex justify-center mb-6">
                 <Button
                   variant="bordered"
@@ -830,7 +831,7 @@ const Subscription = () => {
                   Upravljaj plačila
                 </Button>
               </div>
-            )}
+            )} */}
 
             <Tabs
               tabs={tabs}

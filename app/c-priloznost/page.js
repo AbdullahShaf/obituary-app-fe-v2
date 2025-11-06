@@ -27,7 +27,7 @@ export default function Faq1() {
             </h1>
           </div> */}
 
-          <div className="flex flex-col items-center pt-[200px] w-full px-4 max-w-[720px] mx-auto">
+          <div className="flex flex-col items-center pt-[200px] w-full px-4 max-w-[720px] mx-auto mobile:px-3">
             <Image src="/faq_page_icon.png" alt="FAQ" width={94} height={94} />
             <h1 className="text-[40px] font-light mt-4 text-center mobile:text-[26px]">
               Priložnost za prve cvetličarne
@@ -139,9 +139,9 @@ export default function Faq1() {
             {/* set for desktop */}
             <div className="w-full mt-[50px] pb-[60px] mobile:hidden space-y-[12px]">
               <p
-                className="text-[20px] text-[#0A85C2] underline"
+                className="text-[16px]"
               >
-                Kontaktirajte nas za izdelavo ponudbe.
+                <a className="text-[#0A85C2] underline" href="mailto:info@osmrtnica.com">Kontaktirajte nas za izdelavo ponudbe.</a>
               </p>
               <p className="text-[16px] leading-[24px]">
                 Pošljite nam svoje podatke s podatki cvetličarne oz cvetličarn z navedbo občine oz občin, za katere se zanimate in čas (mesečno oz letno) in poslali vam bomo ponudbo s povezavo za plačilo po spletu oz predračun za plačilo na TRR.
@@ -231,7 +231,7 @@ export default function Faq1() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center pt-[200px] w-full px-4 max-w-[720px] mx-auto">
+          <div className="flex flex-col items-center pt-[200px] w-full px-4 max-w-[720px] mx-auto mobile:px-3">
             <Image src="/faq_page_icon.png" alt="FAQ" width={79} height={79} />
             <h1 className="text-[40px] font-light mt-4 text-center mobile:text-[26px]">
               Priložnost za prve cvetličarne
@@ -247,9 +247,9 @@ export default function Faq1() {
               Poleg mesečnih Skrbnikov, digitalnih kartic sožalja, zahval in vabil ter nekaterih novosti v nadaljevanju, pripada prvim cvetličarnam še nekaj dodatnih ugodnosti.
             </p>
 
-            <section className="mt-10 text-[16px] space-y-6 leading-[1.6] mobile:w-[354px] w-[720px]">
+            <section className="mt-10 text-[16px] space-y-6 leading-[1.6] mobile:w-full mobile:max-w-[480px] w-[720px]">
               <div className="w-full bg-[#083545] relative h-12 flex items-center text-[#D4D4D4] text-[18px] pl-2">
-                <h3 className="font-medium leading-[20px] mb-1">
+                <h3 className="font-medium leading-[20px] mb-1 mobile:text-[14px]">
                   Dodatne ugodnosti za prve pridružene cvetličarne?
                 </h3>
               </div>
@@ -359,9 +359,9 @@ export default function Faq1() {
             {/* set for mobile */}
             <div className="w-full mt-2 pb-[60px] space-y-[12px]">
               <p
-                className="text-[20px] text-[#0A85C2] underline"
+                className="text-[16px]"
               >
-                Kontaktirajte nas za izdelavo ponudbe.
+                <a className="text-[#0A85C2] underline" href="mailto:info@osmrtnica.com">Kontaktirajte nas za izdelavo ponudbe.</a>
               </p>
               <p className="text-[16px] leading-[24px]">
                 Pošljite nam svoje podatke s podatki cvetličarne oz cvetličarn z navedbo občine oz občin, za katere se zanimate in čas (mesečno oz letno) in poslali vam bomo ponudbo s povezavo za plačilo po spletu oz predračun za plačilo na TRR.

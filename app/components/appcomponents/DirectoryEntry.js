@@ -94,14 +94,14 @@ const DirectoryEntry = () => {
     showContactButton = false,
     showFreeRegistration = false,
   }) => (
-    <div className="flex bg-white flex-col w-full tablet:w-[310px] desktop:w-[333px]">
+    <div className="flex bg-white flex-col w-full tablet:w-[310px] desktop:w-[333px] mobile:w-full mobile:mx-auto ">
       <div
         className={`w-full ${
           borderColor === "red" ? "h-[8px] bg-[#EB1D1D]" : "h-1 bg-[#0A85C2]"
         }`}
       />
       <div className="flex flex-col w-full py-[10px] items-center min-h-[297px] tablet:min-h-[297px] mobile:min-h-[auto]">
-        <div className="flex flex-col w-[299px]">
+        <div className="flex flex-col w-[299px] mobile:w-full mobile:px-4">
           <div className="flex self-center h-[33px] items-center">
             <div className="text-[14px] text-[#3090D5] font-normal">
               {title}
@@ -237,8 +237,8 @@ const DirectoryEntry = () => {
   );
 
   return (
-    <div className="flex justify-center bg-[#F9EBD466]">
-      <div className="flex flex-col py-[65px] desktop:py-[105px] tablet:py-[75px]">
+    <div className="flex justify-center bg-[#F9EBD466] mobile:w-full">
+      <div className="flex flex-col py-[65px] desktop:py-[105px] tablet:py-[75px] mobile:w-full mobile:px-4">
         <div className="flex self-center items-center h-[48px]">
           <div className="mobile:hidden flex mobile:text-[28px] text-[40px] text-[#1E2125] font-variation-customOpt40 font-normal">
             Vpis v imenik lokalnih cvetličarn
@@ -248,7 +248,7 @@ const DirectoryEntry = () => {
           </div>
         </div>
 
-        <div className="flex flex-col desktop:flex-row mt-[40px] desktop:w-[1088px] tablet:w-[650px] w-[333px] desktop:justify-between">
+        <div className="flex flex-col desktop:flex-row mt-[40px] desktop:w-[1088px] tablet:w-[650px] w-[333px] desktop:justify-between mobile:w-full mobile:max-w-[480px] mobile:mx-auto">
           {/* Left Section */}
           <div className="flex flex-col tablet:w-[650px] desktop:w-[717px]">
             {/* <div className="flex w-full mobile:flex-col tablet:flex-row desktop:flex-row gap-4 tablet:gap-[30px] desktop:gap-[37px]"> */}
@@ -292,7 +292,7 @@ const DirectoryEntry = () => {
           </div>
 
           {/* Right Section */}
-          <div className="flex flex-col tablet:w-[650px] w-[333px] desktop:mt-0 tablet:mt-6 mobile:mt-[28px] tablet:hidden">
+          <div className="flex flex-col tablet:w-[650px] w-[333px] desktop:mt-0 tablet:mt-6 mobile:mt-[28px] tablet:hidden mobile:w-full mobile:mx-auto">
             <PricingCard
               type="standard"
               title="ŠE DODATNE"

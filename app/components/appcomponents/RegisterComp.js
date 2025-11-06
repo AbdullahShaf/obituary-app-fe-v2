@@ -5,9 +5,9 @@ const RegisterComp = () => {
   return (
     <div className="relative max-w-[1920px] bg-[#eef2f5] py-[65px] desktop:py-[105px] tablet:py-[75px] w-full overflow-hidden flex mx-auto justify-center items-center">
       {/*Main contianer*/}
-      <div className="flex w-[1086px] h-[312px]  tablet:w-[619px] tablet:h-[521px] mobile:h-[747px] mobile:w-[297px] flex-col">
+      <div className="flex w-[1086px] h-[312px]  tablet:w-[619px] tablet:h-[521px] mobile:h-[747px] mobile:w-[100%] mobile:max-w-[480px] flex-col">
         {/*Main contianer*/}
-        <div className="flex w-[1014.25px] tablet:w-[619px] mobile:w-[295px] mx-auto mobile:flex-col tablet:flex-col">
+        <div className="flex w-[1014.25px] tablet:w-[619px] mobile:w-[100%] mobile:max-w-[480px] mx-auto mobile:flex-col tablet:flex-col">
           {/*Main contianer for tablet*/}
           <div className="w-[619px] h-[424px] flex-col hidden tablet:flex">
             {/*1st coloum container*/}
@@ -74,7 +74,7 @@ const RegisterComp = () => {
           </div>
 
           {/*C1 container for desktop*/}
-          <div className="w-[295.42px] h-[200px] flex-col items-center flex tablet:hidden">
+          <div className="w-[295.42px] h-[200px] flex-col items-center flex tablet:hidden mobile:w-full mobile:max-w-[480px] mobile:px-2">
             <img
               src="/image_registration_desktop.png"
               className="w-[64px] h-[64px]"
@@ -89,7 +89,7 @@ const RegisterComp = () => {
           </div>
 
           {/*C2 container for desktop*/}
-          <div className="w-[295.42px] h-[200px] flex-col items-center flex desktop:ml-16 tablet:hidden mobile:mt-6">
+          <div className="w-[295.42px] h-[200px] flex-col items-center flex desktop:ml-16 tablet:hidden mobile:mt-6 mobile:w-full mobile:max-w-[480px] mobile:px-2">
             <img src="/image_posting.png" className="w-[64px] h-[64px]"></img>
             <div className="text-[20px] text-[#1E2125] font-variation-customOpt20wght400 font-semibold mt-[13px]">
               Objava v 48 urah
@@ -101,7 +101,7 @@ const RegisterComp = () => {
           </div>
 
           {/*C3 container for desktop*/}
-          <div className="w-[295.42px] h-[200px] flex-col items-center flex desktop:ml-16 tablet:hidden mobile:mt-6">
+          <div className="w-[295.42px] h-[200px] flex-col items-center flex desktop:ml-16 tablet:hidden mobile:mt-6 mobile:w-full mobile:max-w-[480px] mobile:px-2">
             <img
               src="/image_ flexibility.png"
               className="w-[64px] h-[64px] hidden desktop:flex"
@@ -122,7 +122,7 @@ const RegisterComp = () => {
           {/*Bottom contianer for mobile*/}
           <Link
             href={"/podjetja"}
-            className="self-center hidden mobile:flex w-full mt-[51px]"
+            className="self-center hidden mobile:flex w-full mt-[51px] mobile:max-w-[150px]"
           >
             {/* <Link href={"/registracija"} className='self-center hidden mobile:flex w-full mt-[51px]'> */}
             <div className="w-full h-12 rounded-lg text-black flex justify-center items-center shadow-custom-light-dark bg-gradient-to-r from-[#E3E8EC] to-[#FFFFFF]">

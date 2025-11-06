@@ -6,6 +6,88 @@ import { FAQHeader3 } from "@/app/components/appcomponents/Header";
 import { FooterForFaq3 } from "../components/appcomponents/Footer";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import Link from "next/link";
+import omr from "@/public/omr.png";
+
+const linksToRender = [
+  { label: "CENIK", path: "/cenik", active: false },
+]
+
+function Header() {
+  return <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+
+    <div className="flex w-full justify-between">
+      <div className="flex w-full h-[68px] tablet:w-[744px] mx-auto tablet:h-[80px] px-5  tablet:px-6 desktop:w-[1200px] desktop:h-[92.02px] desktop:px-[12px]">
+        <div className="flex justify-between items-center w-full h-full">
+          {/* Logo */}
+          <Link href="/" className="flex">
+            <Image
+              src={omr}
+              alt="App Logo"
+              width={500}
+              height={500}
+              className="box-border relative bottom-[2px] h-[22px] w-[182.76px] desktop:w-[255.31px] desktop:h-[32px]"
+            />
+          </Link>
+
+          {/* Navigation and Actions */}
+          <div className="flex items-center">
+            {/* Navigation Links */}
+            <div className="hidden tablet:flex desktop:flex tablet:mr-[30px] desktop:mr-[38px]">
+              <ul className="flex items-center gap-[32px] tablet:gap-[16px]">
+                {linksToRender.map((link, index) =>
+                  link.label === "Pogrebna podjetja" && link.path === "" ? (
+                    <li
+                      key={index}
+                      className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center"
+                    >
+                      <Link
+                        href={link.path}
+                        className={`font-normal hover:text-blue-500 transition duration-200 tablet:text-[18px] desktop:text-[20px] cursor-default ${link.active ? "!text-[#0A85C2]" : "text-[#1E2125]"
+                          }`}
+                      >
+                        {link.active && (
+                          <span className="text-[#EB1D1D]">{">>"}</span>
+                        )}
+                        <div className="relative">
+                          <p className="absolute text-[10px] text-[#EB1D1D] right-0 top-[-10px]">KMALU</p>
+                          <p className="relative text-[#1E21254D]">{link.label}</p>
+                        </div>
+                      </Link>
+                    </li>
+                  ) : (
+                    <li
+                      key={index}
+                      className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center"
+                    >
+                      <Link
+                        href={link.path}
+                        className={`font-normal hover:text-blue-500 transition duration-200 tablet:text-[18px] desktop:text-[20px] ${link.active ? "!text-[#0A85C2]" : "text-[#1E2125]"
+                          }`}
+                      >
+                        {link.active && (
+                          <span className="text-[#EB1D1D]">{">>"}</span>
+                        )}
+                        {link.label}
+                      </Link>
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+
+            <button
+              onClick={() => router.back()}
+              className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200 "
+              title="Nazaj"
+            >
+              <Image src="/back.svg" alt="Back" height={28} width={28} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+}
 
 export default function Oglasevalci() {
   const breakpoint = useBreakpoint();
@@ -20,7 +102,9 @@ export default function Oglasevalci() {
         </Head>
 
         <div className="bg-[#FBE9E8] min-h-[100vh] text-[#3C3E41] relative">
-          <FAQHeader3 />
+          <Header />
+          {/* <FAQHeader3 /> */}
+
           {/* <div className="tablet:w-[700px] desktop:w-[1200px] absolute top-[108px] left-1/2 -translate-x-1/2 flex items-end justify-end">
             <h1 className="text-[#0A85C2] text-[18px] desktop:text-[20px] mobile:hidden">
               OGLAŠEVALCI
@@ -162,8 +246,8 @@ export default function Oglasevalci() {
 
             {/* set for desktop */}
             <div className="w-[720px] mt-7 pb-[60px] mobile:hidden text-[#3C3E41] ">
-              <p className="mt-12 mb-4 text-[16px] text-[#0A85C2] font-bold">Kontaktirajte nas za izdelavo ponudbe. </p>
-              <p className="text-[16px]">
+              <Link href={"/kontakt"} className="mt-12 mb-4 text-[16px] text-[#0A85C2] font-bold underline underline-offset-2">Kontaktirajte nas za izdelavo ponudbe. </Link>
+              <p className="text-[16px] mt-3">
                 Pošljite nam svoje podatke z navedbo občine oz občin, za katere se zanimate in strani, kjer naj bi oglaševali ter čas (mesečno oz letno) in poslali vam bomo ponudbo s povezavo za plačilo po spletu oz predračun za plačilo na TRR.
               </p>
               <p className="text-[#6D778E] text-[14px] mt-4">Op. strani, kjer je mogoče oglaševanje so naslednje: </p>
@@ -204,7 +288,8 @@ export default function Oglasevalci() {
         </Head>
 
         <div className="bg-[#FBE9E8] min-h-[100vh] text-[#3C3E41]">
-          <FAQHeader3 />
+          <Header />
+          {/* <FAQHeader3 /> */}
 
           <div className="w-full hidden mobile:flex gap-[16px] absolute top-[62px] left-0 right-0">
             <div className="bg-[#36556C] w-full">
@@ -355,8 +440,8 @@ export default function Oglasevalci() {
             </section>
 
             <div className=" pb-[60px]  text-[#3C3E41] ">
-              <p className="mt-6 mb-4 text-[16px] text-[#0A85C2] font-bold">Kontaktirajte nas za izdelavo ponudbe. </p>
-              <p className="text-[16px]">
+              <Link href={"/kontakt"} className="mt-12 mb-5 text-[16px] text-[#0A85C2] font-bold underline underline-offset-2">Kontaktirajte nas za izdelavo ponudbe. </Link>
+              <p className="text-[16px] mt-2">
                 Pošljite nam svoje podatke z navedbo občine oz občin, za katere se zanimate in strani, kjer naj bi oglaševali ter čas (mesečno oz letno) in poslali vam bomo ponudbo s povezavo za plačilo po spletu oz predračun za plačilo na TRR.
               </p>
               <p className="text-[#6D778E] text-[14px] mt-4">Op. strani, kjer je mogoče oglaševanje so naslednje: </p>
@@ -401,7 +486,7 @@ export default function Oglasevalci() {
                 height={35}
               />
             </Link> */}
-            {/* <Link
+          {/* <Link
               href={"/cenik"}
               className="w-[140px] h-[35px] flex items-center justify-center rounded-[2px] text-[14px] text-[#FFFFFF]"
               style={{

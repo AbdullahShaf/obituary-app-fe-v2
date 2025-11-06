@@ -12,9 +12,9 @@ const AdditionalPromotion = ({ mbZero = false }) => {
         }
       >
         {/*Main container */}
-        <div className="w-[669px] tablet:w-[637px] mobile:w-[337px] flex flex-col">
+        <div className="w-full tablet:w-[637px] mobile:w-full mobile:max-w-[480px] flex flex-col">
           {/*header container*/}
-          <div className="flex mobile:w-[340px] mx-auto flex-col">
+          <div className="flex mobile:w-full mx-auto flex-col">
             <div className="text-[40px] text-[#3C3E41] mobile:text-[28px] mobile:font-variation-customOpt28 text-center font-variation-customOpt40  tablet:mt-[1px] tablet:truncate mobile:mt-[1px] leading-[48px] mobile:leading-10">
               Produkti za vašo dodatno promocijo
             </div>
@@ -113,7 +113,7 @@ const AdditionalPromotion = ({ mbZero = false }) => {
               </div>
             </div>
           </div>
-          <Link href={"/vodic"} className="self-center flex">
+          <Link href={"/podjetja"} className="self-center flex">
             <div className="w-[150px] h-[48px] rounded-lg text-[#1E2125] justify-center items-center flex mt-16 shadow-custom-light-dark bg-[#BCD7F4] text-[16px] font-variation-customOpt16">
               Več informacij
             </div>

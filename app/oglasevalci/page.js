@@ -114,7 +114,7 @@ export default function Oglasevalci() {
             </h1>
           </div> */}
 
-          <div className="flex flex-col items-center pt-[200px] w-full px-4 max-w-[720px] mx-auto">
+          <div className="flex flex-col items-center pt-[200px] w-full px-4 max-w-[720px] mx-auto mobile:max-w-[480px]">
             <Image src="/faq_page_icon.png" alt="FAQ" width={94} height={94} />
             <h1 className="text-[40px] font-light mt-4 text-center mobile:text-[26px]">
               Priložnost za prve oglaševalce
@@ -310,7 +310,7 @@ export default function Oglasevalci() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center pt-[200px] w-full px-4 max-w-[720px] mx-auto">
+          <div className="flex flex-col items-center pt-[200px] w-full px-4 max-w-[720px] mx-auto mobile:max-w-[480px]">
             <Image src="/faq_page_icon.png" alt="FAQ" width={79} height={79} />
             <h1 className="text-[40px] font-light mt-4 text-center mobile:text-[26px]">
               Priložnost za prve oglaševalce

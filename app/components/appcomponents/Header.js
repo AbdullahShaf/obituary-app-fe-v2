@@ -293,7 +293,7 @@ export function FAQHeader3() {
   );
 }
 
-export function OglasevalciHeader() {
+export function OglasevalciHeader({ arrowOnly = false }) {
   const router = useRouter();
   const [windowWidth, setWindowWidth] = useState(() =>
     typeof window !== "undefined" ? window.innerWidth : 0
@@ -325,12 +325,14 @@ export function OglasevalciHeader() {
             />
           </Link>
           <div className="flex gap-[24px] items-center">
-            <Link
-              href={"/cenik"}
-              className="flex text-[18px] leading-[24px] font-[400] text-[#1E2125]"
-            >
-              CENIK
-            </Link>
+            {!arrowOnly ? (
+              <Link
+                href={"/cenik"}
+                className="flex text-[18px] leading-[24px] font-[400] text-[#1E2125]"
+              >
+                CENIK
+              </Link>
+            ) : null}
             <div className="flex">
               <span
                 onClick={() => router.back()}

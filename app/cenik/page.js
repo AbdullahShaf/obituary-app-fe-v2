@@ -360,7 +360,7 @@ const Subscription = () => {
               </div>
 
               <div className="w-full flex justify-start mt-[60px]">
-                <p className="w-[456px] text-[16px] leading-[24px]">Imate vprašanja, predloge, komentarje? <a href="mailto:info@osmrtnica.com" className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </a></p>
+                <p className="w-[456px] text-[16px] leading-[24px] mobile:w-full">Imate vprašanja, predloge, komentarje? <a href="mailto:info@osmrtnica.com" className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </a></p>
                 {/* <Link href={"/kontakt"}>
                   <Image
                     src={"/Kontaktirajte_nas_btn.png"}

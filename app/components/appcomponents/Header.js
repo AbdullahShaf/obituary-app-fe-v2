@@ -86,28 +86,28 @@ export function FAQHeader() {
               className="box-border h-[22px] w-[182.76px] desktop:w-[255.31px] desktop:h-[32px]"
             />
           </Link>
-          <div className="flex gap-[24px] items-center mobile:hidden">
+          <div className="flex gap-[24px] items-center">
             <Link
               href={"/vodic"}
-              className="flex text-[18px] leading-[24px] font-[400] text-white bg-[#083545]  tablet:w-[72px] w-[149px] rounded-[2px] py-[5px] text-center items-center justify-center"
+              className="mobile:w-[72px] flex text-[18px] leading-[24px] font-[400] text-white bg-[#083545]  tablet:w-[72px] w-[149px] rounded-[2px] py-[5px] text-center items-center justify-center"
             >
               VODIČ
             </Link>
             <Link
               href={"/cenik"}
-              className="flex text-[18px] leading-[24px] font-[400] text-[#1E2125]"
+              className="flex text-[18px] leading-[24px] font-[400] text-[#1E2125] mobile:hidden"
             >
               CENIK
             </Link>
             <Link
               href={"/c-faq"}
-              className="flex text-[18px] leading-[24px] font-[400] text-[#1E2125]"
+              className="flex text-[18px] leading-[24px] font-[400] text-[#1E2125] mobile:hidden"
             >
               KAKO ZAČNEM
             </Link>
             <Link
               href={"/c-priloznost"}
-              className="flex text-[18px] leading-[24px] font-[400] text-[#1E2125]"
+              className="flex text-[18px] leading-[24px] font-[400] text-[#1E2125] mobile:hidden"
             >
               <Image
                 src={"/proiloznoot.svg"}

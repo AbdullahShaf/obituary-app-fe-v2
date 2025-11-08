@@ -94,14 +94,14 @@ const DirectoryEntry = () => {
     showContactButton = false,
     showFreeRegistration = false,
   }) => (
-    <div className="flex bg-white flex-col w-full tablet:w-[310px] desktop:w-[333px] mobile:w-full mobile:mx-auto ">
+    <div className="flex bg-white flex-col w-full tablet:w-[310px] desktop:w-[333px] mobile:w-[328px] mobile:mx-auto ">
       <div
         className={`w-full ${
           borderColor === "red" ? "h-[8px] bg-[#EB1D1D]" : "h-1 bg-[#0A85C2]"
         }`}
       />
       <div className="flex flex-col w-full py-[10px] items-center min-h-[297px] tablet:min-h-[297px] mobile:min-h-[auto]">
-        <div className="flex flex-col w-[299px] mobile:w-full mobile:px-4">
+        <div className="flex flex-col w-[299px] mobile:w-[328px] mobile:px-4">
           <div className="flex self-center h-[33px] items-center">
             <div className="text-[14px] text-[#3090D5] font-normal">
               {title}

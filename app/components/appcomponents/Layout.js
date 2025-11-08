@@ -21,6 +21,8 @@ import MemoryHeader from "./MemoryHeader";
 import { useAuth } from "@/hooks/useAuth";
 import SideMenu from "../ui/sideMenu";
 import CommonFooter from "./CommonFooter";
+import { OglasevalciHeader } from "@/app/components/appcomponents/Header";
+
 const Layout = ({
   children,
   from,
@@ -135,8 +137,11 @@ const Layout = ({
 
       {from == "23" ? (
         <>
-          <CommonHeader currentPage={currentPage} />
-          <div className="flex relative mobile:h-[196px] tablet:h-[220px] desktop:h-[300px] mt-[73px] tablet:mt-[81px] desktop:mt-[91px] w-full mx-auto">
+          {/* <CommonHeader currentPage={currentPage} /> */}
+          <div className="absolute top-0 left-0 w-full">
+            <OglasevalciHeader arrowOnly={true} />
+          </div>
+          <div className="flex relative mobile:h-[196px] tablet:h-[220px] desktop:h-[300px] mt-[73px] tablet:mt-[80px] mobile:mt-[55px] desktop:mt-[91px] w-full mx-auto mobile:z-50 mobile:relative">
             <img
               className="object-cover h-full w-full"
               src="/payment-hero.jpg"

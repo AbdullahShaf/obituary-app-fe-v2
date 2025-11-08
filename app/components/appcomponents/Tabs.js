@@ -46,7 +46,7 @@ export default function Tabs({
           </p>
         )}
       </div>
-      <div className="mobile:flex hidden justify-end w-[95%]">
+      <div className={`mobile:flex hidden justify-end w-[95%] ${active == tabs[3]?.id ? 'mobile:hidden tablet:hidden' : ''}`}>
         <button
           onClick={() => setActive(tabs[3]?.id)}
           className="text-[#414141] underline mobile:text-[14px] text-[16px]"

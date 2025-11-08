@@ -2,8 +2,8 @@
 
 import Head from "next/head";
 import Image from "next/image";
-import { FAQHeader3 } from "@/app/components/appcomponents/Header";
-import { FooterForFaq3 } from "../components/appcomponents/Footer";
+import { OglasevalciHeader } from "@/app/components/appcomponents/Header";
+import { FooterForOglasevalci } from "../components/appcomponents/Footer";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import Link from "next/link";
 import omr from "@/public/omr.png";
@@ -16,80 +16,10 @@ const linksToRender = [
 function Header() {
   const router = useRouter();
 
-  return <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-
-    <div className="flex w-full justify-between">
-      <div className="flex w-full h-[68px] tablet:w-[744px] mx-auto tablet:h-[80px] px-5  tablet:px-6 desktop:w-[1200px] desktop:h-[92.02px] desktop:px-[12px]">
-        <div className="flex justify-between items-center w-full h-full">
-          {/* Logo */}
-          <Link href="/" className="flex">
-            <Image
-              src={omr}
-              alt="App Logo"
-              width={500}
-              height={500}
-              className="box-border relative bottom-[2px] h-[22px] w-[182.76px] desktop:w-[255.31px] desktop:h-[32px]"
-            />
-          </Link>
-
-          {/* Navigation and Actions */}
-          <div className="flex items-center">
-            {/* Navigation Links */}
-            <div className="hidden tablet:flex desktop:flex tablet:mr-[30px] desktop:mr-[38px]">
-              <ul className="flex items-center gap-[32px] tablet:gap-[16px]">
-                {linksToRender.map((link, index) =>
-                  link.label === "Pogrebna podjetja" && link.path === "" ? (
-                    <li
-                      key={index}
-                      className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center"
-                    >
-                      <Link
-                        href={link.path}
-                        className={`font-normal hover:text-blue-500 transition duration-200 tablet:text-[18px] desktop:text-[20px] cursor-default ${link.active ? "!text-[#0A85C2]" : "text-[#1E2125]"
-                          }`}
-                      >
-                        {link.active && (
-                          <span className="text-[#EB1D1D]">{">>"}</span>
-                        )}
-                        <div className="relative">
-                          <p className="absolute text-[10px] text-[#EB1D1D] right-0 top-[-10px]">KMALU</p>
-                          <p className="relative text-[#1E21254D]">{link.label}</p>
-                        </div>
-                      </Link>
-                    </li>
-                  ) : (
-                    <li
-                      key={index}
-                      className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center"
-                    >
-                      <Link
-                        href={link.path}
-                        className={`font-normal hover:text-blue-500 transition duration-200 tablet:text-[18px] desktop:text-[20px] ${link.active ? "!text-[#0A85C2]" : "text-[#1E2125]"
-                          }`}
-                      >
-                        {link.active && (
-                          <span className="text-[#EB1D1D]">{">>"}</span>
-                        )}
-                        {link.label}
-                      </Link>
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
-
-            <button
-              onClick={() => router.back()}
-              className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200 "
-              title="Nazaj"
-            >
-              <Image src="/back.svg" alt="Back" height={28} width={28} />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+  return (
+    <>
+      <OglasevalciHeader />
+    </>)
 }
 
 export default function Oglasevalci() {
@@ -100,7 +30,7 @@ export default function Oglasevalci() {
       <>
         {/* Allow crawlability but no indexing. */}
         <Head>
-          <title>C-Priložnost | Osrmtnica</title>
+          <title>C-Priložnost | Osmrtnica</title>
           <meta name="robots" content="noindex, follow" />
         </Head>
 
@@ -249,7 +179,7 @@ export default function Oglasevalci() {
 
             {/* set for desktop */}
             <div className="w-[720px] mt-7 pb-[60px] mobile:hidden text-[#3C3E41] ">
-              <Link href={"/kontakt"} className="mt-12 mb-4 text-[16px] text-[#0A85C2] font-bold underline underline-offset-2">Kontaktirajte nas za izdelavo ponudbe. </Link>
+              <a href={"mailto:info@osmrtnica.com"} className="mt-12 mb-4 text-[16px] text-[#0A85C2] font-bold underline underline-offset-2">Kontaktirajte nas za izdelavo ponudbe. </a>
               <p className="text-[16px] mt-3">
                 Pošljite nam svoje podatke z navedbo občine oz občin, za katere se zanimate in strani, kjer naj bi oglaševali ter čas (mesečno oz letno) in poslali vam bomo ponudbo s povezavo za plačilo po spletu oz predračun za plačilo na TRR.
               </p>
@@ -276,7 +206,7 @@ export default function Oglasevalci() {
               </button>
             </Link> */}
           </div>
-          <FooterForFaq3 />
+          <FooterForOglasevalci />
         </div>
       </>
     );
@@ -286,38 +216,41 @@ export default function Oglasevalci() {
     return (
       <>
         <Head>
-          <title>C-Priložnost | Osrmtnica</title>
+          <title>C-Priložnost | Osmrtnica</title>
           <meta name="robots" content="noindex, follow" />
         </Head>
 
         <div className="bg-[#FBE9E8] min-h-[100vh] text-[#3C3E41]">
           <Header />
-          {/* <FAQHeader3 /> */}
-
-          <div className="w-full hidden mobile:flex gap-[16px] absolute top-[62px] left-0 right-0">
-            <div className="bg-[#36556C] w-full mobile:mt-[13px]">
+          {/* Temporarily commented */}
+          {/* <div className="w-full hidden mobile:flex gap-[16px] absolute top-[62px] left-0 right-0">
+            <div className="bg-[#36556C] w-full">
               <div className="mobile:flex text-[#FFFFFF] items-center justify-between hidden h-[30px] bg-[#36556C] px-3 mobile:max-w-[348px] mx-auto">
-                <div className="text-[#D4D4D4] text-[12px]">
-                  POGREBNA PODJETJA
-                </div>
-                <Link href="/cvetlicarne" className="text-[#fff] text-[12px]">
-                  CVETLIČARNE
+                <Link href="/c-faq" className="text-[#fff]">
+                  KAKO ZAČETI
                 </Link>
-                <Link href="/oglasevalci" className="text-[#fff] text-[12px]">
-                  OGLAŠEVALCI
+                <Link href="/c-info" className="text-[#fff]">
+                  CENIK
+                </Link>
+                <Link href="/c-priloznost" className="text-[#fff]">
+                  PRILOŽNOST
                 </Link>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="flex flex-col items-center pt-[200px] w-full px-4 max-w-[720px] mx-auto mobile:max-w-[480px]">
             <Image src="/faq_page_icon.png" alt="FAQ" width={79} height={79} />
             <h1 className="text-[40px] font-light mt-4 text-center mobile:text-[26px]">
-              Priložnost za prve oglaševalce
+              Priložnost
             </h1>
 
-            <h2 className="text-[22px] font-[600] block  mt-2 font-bold text-center">
+            <h2 className="text-[22px] font-[600] block  mt-2 font-bold text-center mobile:hidden">
               Številne ugodnosti
+            </h2>
+
+            <h2 className="text-[22px] mobile:block hidden mobile:font-[20px] mt-2 font-bold text-center">
+              za prve oglaševalce
             </h2>
 
             <p className="font-light text-[16px] mt-[50px]">
@@ -325,21 +258,17 @@ export default function Oglasevalci() {
               <p className="mt-[12px]">Standardni popusti za oglaševalce, ki so del redne ponudbe: </p>
 
               <ul className="list-disc list-inside text-[16px] mt-4 space-y-0 px-3">
-                <li >25% popust za drugo in vsako naslednjo <span className="ml-5">občino</span></li>
+                <li >25% popust za drugo in vsako naslednjo občino</li>
                 <li>
-                  <span className="">50% popust za oglaševanje na drugi in </span>
-                  <span className="ml-5">tretji strani v isti občini (izmed treh:</span>
-                  <br />
-                  <span className="ml-5"> osmrtnice, pogrebi, cvetličarne). </span>
-                  <span className="block ml-5">Pomeni oglaševanje na treh straneh za ceno dveh.</span>
+                  <span className="">50% popust za oglaševanje na drugi in tretji strani v isti občini (izmed treh: osmrtnice, pogrebi, cvetličarne). Pomeni oglaševanje na treh straneh za ceno dveh.</span>
                 </li>
               </ul>
             </p>
 
             <section className="mt-10 text-[16px] space-y-6 leading-[1.6] mobile:w-full mobile:max-w-[480px] w-[720px]">
               <div className="w-full bg-[#083545] relative h-12 flex items-center text-[#D4D4D4] text-[18px] pl-2">
-                <h3 className="font-medium mb-1 leading-[20px] mobile:text-[15px]">
-                  Dodatne ugodnosti za prve pridružene oglaševalce?
+                <h3 className="font-medium mb-1">
+                  Dodatne ugodnosti za prve?
                 </h3>
               </div>
 
@@ -443,17 +372,17 @@ export default function Oglasevalci() {
             </section>
 
             <div className=" pb-[60px]  text-[#3C3E41] ">
-              <Link href={"/kontakt"} className="mt-12 mb-5 text-[16px] text-[#0A85C2] font-bold underline underline-offset-2">Kontaktirajte nas za izdelavo ponudbe. </Link>
+              <a href={"mailto:info@osmrtnica.com"} className="mt-12 mb-5 text-[16px] text-[#0A85C2] font-bold underline underline-offset-2">Kontaktirajte nas za izdelavo ponudbe. </a>
               <p className="text-[16px] mt-2">
                 Pošljite nam svoje podatke z navedbo občine oz občin, za katere se zanimate in strani, kjer naj bi oglaševali ter čas (mesečno oz letno) in poslali vam bomo ponudbo s povezavo za plačilo po spletu oz predračun za plačilo na TRR.
               </p>
               <p className="text-[#6D778E] text-[14px] mt-4">Op. strani, kjer je mogoče oglaševanje so naslednje: </p>
 
               <ul className="flex flex-row gap-2 mt-4 text-[#0A85C2]">
-                <li className="underline underline-offset-2"><Link href={'/osmrtnice'}>Osmrtnice</Link></li>
-                <li><span>*</span> <Link href={'/pogrebi'} className="underline underline-offset-2">Pogrebi</Link> </li>
-                <li><span>*</span> <Link href={'/cvetlicarne'} className="underline underline-offset-2">Cvetličarne</Link> </li>
-                <li><span>*</span> <Link href={'/pogrebna-p'} className="underline underline-offset-2">Pogrebna podjetja</Link> </li>
+                <li className="underline underline-offset-2"><Link className="mobile:text-[12px]" href={'/osmrtnice'}>Osmrtnice</Link></li>
+                <li><span className="mobile:hidden">*</span> <Link href={'/pogrebi'} className="underline underline-offset-2 mobile:text-[12px]">Pogrebi</Link> </li>
+                <li><span className="mobile:hidden">*</span> <Link href={'/cvetlicarne'} className="underline underline-offset-2 mobile:text-[12px]">Cvetličarne</Link> </li>
+                <li><span className="mobile:hidden">*</span> <Link href={'/pogrebna-p'} className="underline underline-offset-2 mobile:text-[12px]">Pogrebna podjetja</Link> </li>
               </ul>
             </div>
 
@@ -501,7 +430,7 @@ export default function Oglasevalci() {
               Cenik / Naročilo
             </Link> */}
           {/* </div> */}
-          <FooterForFaq3 />
+          <FooterForOglasevalci />
         </div>
       </>
     );

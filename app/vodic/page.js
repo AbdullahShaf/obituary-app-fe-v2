@@ -55,7 +55,7 @@ function DriverPage() {
               <Link href="/c-faq" className="text-[#fff]">
                 KAKO ZAČETI
               </Link>
-              <Link href="/c-info" className="text-[#fff]">
+              <Link href="/cenik" className="text-[#fff]">
                 CENIK
               </Link>
               <Link href="/c-priloznost" className="text-[#fff]">

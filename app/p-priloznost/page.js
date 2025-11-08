@@ -15,7 +15,7 @@ export default function Faq1() {
       <>
         {/* Allow crawlability but no indexing. */}
         <Head>
-          <title>P-Priložnost | Osrmtnica</title>
+          <title>P-Priložnost | Osmrtnica</title>
           <meta name="robots" content="noindex, follow" />
         </Head>
 
@@ -126,7 +126,7 @@ export default function Faq1() {
     return (
       <>
         <Head>
-          <title>P-Priložnost | Osrmtnica</title>
+          <title>P-Priložnost | Osmrtnica</title>
           <meta name="robots" content="noindex, follow" />
         </Head>
 
@@ -135,7 +135,7 @@ export default function Faq1() {
 
           <div className="w-full hidden mobile:flex gap-[16px] absolute top-[80px] left-0 right-0 justify-center items-center">
             <Link
-              href={"/p-info"}
+              href={"/cenik"}
               className="w-[140px] h-[35px] flex items-center justify-center rounded-[2px] text-[14px] text-[#6D778E]"
               style={{ border: "2px solid #6D778E" }}
             >

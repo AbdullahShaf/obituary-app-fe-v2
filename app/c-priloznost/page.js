@@ -15,7 +15,7 @@ export default function Faq1() {
       <>
         {/* Allow crawlability but no indexing. */}
         <Head>
-          <title>C-Priložnost | Osrmtnica</title>
+          <title>C-Priložnost | Osmrtnica</title>
           <meta name="robots" content="noindex, follow" />
         </Head>
 
@@ -48,7 +48,7 @@ export default function Faq1() {
             <section className="mt-10 text-[16px] space-y-6 leading-[1.6] mobile:w-[360px] w-[720px]">
               <div className="w-full bg-[#083545] relative h-12 flex items-center text-[#D4D4D4] text-[18px] pl-6">
                 <h3 className="font-medium mb-1">
-                  Dodatne ugodnosti za prve pridružene cvetličarne?
+                  Dodatne ugodnosti za prve naročnike
                 </h3>
               </div>
               <div className="w-[636px] ml-8">
@@ -208,7 +208,7 @@ export default function Faq1() {
     return (
       <>
         <Head>
-          <title>C-Priložnost | Osrmtnica</title>
+          <title>C-Priložnost | Osmrtnica</title>
           <meta name="robots" content="noindex, follow" />
         </Head>
 
@@ -221,7 +221,7 @@ export default function Faq1() {
                 <Link href="/c-faq" className="text-[#fff]">
                   KAKO ZAČETI
                 </Link>
-                <Link href="/c-info" className="text-[#fff]">
+                <Link href="/cenik" className="text-[#fff]">
                   CENIK
                 </Link>
                 <Link href="/c-priloznost" className="text-[#fff]">
@@ -234,13 +234,17 @@ export default function Faq1() {
           <div className="flex flex-col items-center pt-[200px] w-full px-4 max-w-[720px] mx-auto mobile:px-3 mobile:max-w-[480px]">
             <Image src="/faq_page_icon.png" alt="FAQ" width={79} height={79} />
             <h1 className="text-[40px] font-light mt-4 text-center mobile:text-[26px]">
-              Priložnost za prve cvetličarne
+              Priložnost
             </h1>
             <h2 className="text-[40px] font-light text-center mobile:text-[26px]">
 
             </h2>
-            <h2 className="text-[22px]  block mt-2 font-bold text-center">
+            <h2 className="text-[22px]  block mt-2 font-bold text-center mobile:hidden">
               Dodatne ugodnosti
+            </h2>
+
+            <h2 className="text-[22px] mobile:block hidden mobile:font-[20px] mt-2 font-bold text-center">
+              za prve cvetličarne
             </h2>
 
             <p className="mt-6 leading-[20px]">
@@ -249,8 +253,8 @@ export default function Faq1() {
 
             <section className="mt-10 text-[16px] space-y-6 leading-[1.6] mobile:w-full mobile:max-w-[480px] w-[720px]">
               <div className="w-full bg-[#083545] relative h-12 flex items-center text-[#D4D4D4] text-[18px] pl-2">
-                <h3 className="font-medium leading-[20px] mb-1 mobile:text-[14px]">
-                  Dodatne ugodnosti za prve pridružene cvetličarne?
+                <h3 className="font-medium mb-1">
+                  Dodatne ugodnosti za prve naročnike
                 </h3>
               </div>
 
@@ -277,8 +281,8 @@ export default function Faq1() {
                       50% popust
                     </span>{" "}
                     <span className="">za drugo in vsako naslednjo </span>
-                    <span className="ml-5">cvetličarno. </span>
-                    <div className="text-[#6D778E] leading-[24px] text-[14px] pl-5">
+                    <span className="">cvetličarno. </span>
+                    <div className="text-[#6D778E] leading-[24px] text-[14px]">
                       S polno ceno se obračuna cvetličarna v največji občini in za vse naslednje cvetličarne velja 50% popust na siceršnjo ceno. Enako velja za pojavljanje med lokalnimi cvetličarnami v drugih krajih (vnesete naslov svoje cvetličarne in izberete drugo občino, kjer naj se pojavlja). Ta promocija velja izključno za naše FB sledilce.
                     </div>
                   </li>
@@ -287,15 +291,13 @@ export default function Faq1() {
                     <span className="text-[#0A85C2] font-bold">
                       Skupna FB promocija - cvetličarna tedna
                     </span>{" "}
-                    <span className="ml-5">(predstavitev na našem FB profilu za večje </span>
-                    <p className="ml-5"><span>partnerje </span>
-                      <span className="text-[#6D778E] leading-[24px] text-[14px] ">(in od januarja naprej vsem, ki bodo oddali naprej največ Skrbnikov, digitalnih kartic, vpisali osmrtnic oz drugače promovirali koristi portala osmrtnica.com.</span>
-                    </p>
+                    <span className="">(predstavitev na našem FB profilu za večje </span>
+                    <span>partnerje </span>
+                    <span className="text-[#6D778E] leading-[24px] text-[14px] ">(in od januarja naprej vsem, ki bodo oddali naprej največ Skrbnikov, digitalnih kartic, vpisali osmrtnic oz drugače promovirali koristi portala osmrtnica.com.</span>
                   </li>
 
                   <li className="leading-[24px]">
-                    prednost pri uvajanju nekaterih novih <br />
-                    <span className="pl-5"></span> produktov
+                    prednost pri uvajanju nekaterih novih produktov
                   </li>
                 </ul>
 
@@ -312,7 +314,7 @@ export default function Faq1() {
                       3+3 mesece oglaševanja
                     </span>{" "}
                     brezplačno!
-                    <div className="text-[#6D778E] text-[14px] leading-[24px] pl-5">
+                    <div className="text-[#6D778E] text-[14px] leading-[24px]">
                       3 mesece brezplačnega oglaševanja na eni izmed strani: Osmrtnice, Pogrebi ali Cvetličarne, aktivnim sodelujočim na naši Facebook strani pa omogočamo še do 3 dodatne mesece oglaševanja. Druga pridružena cvetličarna v občini prejme 1+1 mesec brezplačno.
                     </div>
                   </li>
@@ -322,11 +324,10 @@ export default function Faq1() {
                       Garantirana enaka cena
                     </span>{" "}
                     <span>letne naročnine </span>
-                    <br />
-                    <span className="ml-5 text-[#0A85C2] font-bold">
+                    <span className="text-[#0A85C2] font-bold">
                       vse do leta 2030
                     </span>
-                    <div className="pl-5">
+                    <div className="">
                       <span className="text-[#6D778E] text-[14px] leading-[24px]">
                         (kot velja po uradnem ceniku letos jeseni. Pomeni, da četudi bi kdaj v naslednjih letih spremenili ceno naročnine, bo vaša cena ostala nespremenjena za isti paket vse do leta 2030). Velja za uradno ceno oglaševanja, ne za popuste, ki se spreminjajo).
                       </span>

@@ -254,20 +254,10 @@ const Subscription = () => {
               </div>
 
               <div className="w-full space-y-[12px] ">
-                <div className="w-[719px] text-[18px] leading-[24px] mobile:w-full">
+                <div className="w-[759px] text-[18px] leading-[24px] mobile:w-full tablet:w-full">
                   <h4 className="text-[#3C3E41]">POZOR:</h4>
                   <p className="text-[#414141]">Če želite postati Skrbnik spominske strani, nas kontaktirajte in bomo to uredili <span className="text-[#530CC6]">BREZPLAČNO</span> </p>
                   <p className="w-[586px] mt-1 text-[14px] leading-[24px] text-[#6D778E]  mobile:w-full">(dokler še niso vnešene lokalne cvetličarne v seznam; kasneje vam bodo to uredile cvetličarne).</p>
-                </div>
-
-
-                <div className="w-[771px] text-[14px] leading-[24px] text-[#6D778E] space-y-[12px] mobile:w-full">
-                  <p >Op. Za postati Skrbnik je nujno potrebno priložiti Smrtovnico, ki vam jo izda pogrebno podjetje (izdajo jo takoj).
-                    Smrtovnica je nujno potrebna, da se preprečijo zlorabe, objavljanje lažnih smrti, spam in nasploh, ker skrbnik
-                    je lahko samo en izmed najbližnjih pokojni/emu). </p>
-                  <p>Op. Podarili bomo mesečnega skrbnika; kasneje ga lahko podaljšate ali pa gre v avtomatsko prekinitev (vse
-                    dodane vsebine ostanejo na spominski strani, ni pa mogoče dodajati več novih).
-                  </p>
                 </div>
               </div>
               <div className="border-[#0A85C2] border-t-[2px] w-[200px] my-6" ></div>
@@ -359,8 +349,18 @@ const Subscription = () => {
                 title="Na Facebooku - sledite nam"
                 icon="/fb-icon.png"
               />
+
+              <div className="w-[771px] text-[14px] leading-[24px] text-[#6D778E] space-y-[12px] mobile:w-full tablet:w-full mt-[20px]">
+                <p >Op. Za postati Skrbnik je nujno potrebno priložiti Smrtovnico, ki vam jo izda pogrebno podjetje (izdajo jo takoj).
+                  Smrtovnica je nujno potrebna, da se preprečijo zlorabe, objavljanje lažnih smrti, spam in nasploh, ker skrbnik
+                  je lahko samo en izmed najbližnjih pokojni/emu). </p>
+                <p>Op. Podarili bomo mesečnega skrbnika; kasneje ga lahko podaljšate ali pa gre v avtomatsko prekinitev (vse
+                  dodane vsebine ostanejo na spominski strani, ni pa mogoče dodajati več novih).
+                </p>
+              </div>
+
               <div className="w-full flex justify-start mt-[60px]">
-                <p className="w-[456px] text-[16px] leading-[24px]">Imate vprašanja, predloge, komentarje? <a href="mailto:info@osmrtnica.com" className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </a></p>
+                <p className="w-[456px] text-[16px] leading-[24px] mobile:w-full">Imate vprašanja, predloge, komentarje? <a href="mailto:info@osmrtnica.com" className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </a></p>
                 {/* <Link href={"/kontakt"}>
                   <Image
                     src={"/Kontaktirajte_nas_btn.png"}
@@ -483,7 +483,7 @@ const Subscription = () => {
                             <p className=" mt-4 ">
                               Poleg naštetega so občasno mogoče še druge promocije. Preverite trenutne.
                             </p>
-                            <p className="w-[739px] text-[16px] leading-[24px] mt-14 mobile:w-full">
+                            <p className="w-[739px] text-[16px] leading-[24px] mt-14 mobile:w-full tablet:w-full">
                               Imate več cvetličarn, dostavljate v več občin, razmišljate o širši kampanji? Kontaktirajte nas, da poiščemo možnosti oz. da vam pripravimo ponudbo po meri.
                             </p>
                             <p className="w-[456px] text-[16px] leading-[24px] mt-3 mobile:w-full">Imate vprašanja, predloge, komentarje? <a href="mailto:info@osmrtnica.com" className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </a></p>
@@ -668,7 +668,7 @@ const Subscription = () => {
                           <p >
                             <span className=" text-[#414141] text-[20px] text-[#EB1D1D] " >*</span> V primeru letne naročnine
                           </p>
-                          <p className="w-[756px] mt-[6rem] mobile:w-full" >
+                          <p className="w-[756px] mt-[6rem] mobile:w-full tablet:w-full" >
                             Poleg naštetih so občasne še druge promocije. Kontaktirajte nas, da vam pripravimo ponudbo po meri.
                           </p>
                           <p className="w-[456px] text-[16px] leading-[24px] mobile:w-full">Imate vprašanja, predloge, komentarje? <a href="mailto:info@osmrtnica.com" className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </a></p>
@@ -756,7 +756,7 @@ const Subscription = () => {
 
       case "pogrebna-podjetja":
         return (
-          <div className="p-4 mb-[300px] mobile:max-w-[500px] mobile:mx-auto flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
+          <div className="p-4 mb-[300px] mobile:max-w-[500px] mobile:mx-auto flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4 tablet:justify-start tablet:min-h-[36vh]">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">

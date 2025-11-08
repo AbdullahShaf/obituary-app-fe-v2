@@ -27,7 +27,7 @@ export default function Faq1() {
         <div className="bg-[#36556C] w-full">
           <div className="mobile:flex text-[#000000] items-center justify-between hidden h-[30px] bg-[#36556C] px-3 mobile:max-w-[348px] mx-auto">
             <Link href="/c-faq" className="text-[#fff]">KAKO ZAČETI</Link>
-            <Link href="/c-info" className="text-[#fff]">CENIK</Link>
+            <Link href="/cenik" className="text-[#fff]">CENIK</Link>
             <Link href="/c-priloznost" className="text-[#fff]">PRILOŽNOST</Link>
           </div>
         </div>
@@ -185,7 +185,7 @@ export default function Faq1() {
           PRILOŽNOST
         </Link>
         <Link
-          href={"/c-info"}
+          href={"/cenik"}
           className="w-[140px] h-[35px] flex items-center justify-center rounded-[2px] text-[14px] text-[#6D778E]"
           style={{ border: "2px solid #6D778E" }}
         >

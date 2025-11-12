@@ -14,7 +14,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Subscription = () => {
-  const { user } = useAuth();
+  const { user, isAuthenticated, isRole } = useAuth();
   const tabs = [
     { id: "spominske", label: "Spominske" },
     { id: "cvetlicarne", label: "Cvetličarne" },
@@ -245,8 +245,8 @@ const Subscription = () => {
       case "spominske":
         return (
           // <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center justify-center desktop:justify-start desktop:items-start mobile:gap-y-11 gap-y-9">
-          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center justify-center desktop:justify-start desktop:items-start">
-            <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4 mb-[68px]">
+          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center justify-center desktop:justify-start desktop:items-start mobile:gap-y-11 gap-y-9">
+            <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4 mb-[40px]">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
                   Spominska stran
@@ -402,6 +402,10 @@ const Subscription = () => {
                   Cvetličarne
                 </h2>
               </div>
+
+              {isAuthenticated && isRole("Florist") ? (
+                // Full content for logged-in florists (right version)
+                <>
               <p className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
                 <p className="text-[14px]"></p>{" "}
                 <p className="mt-1">
@@ -421,7 +425,7 @@ const Subscription = () => {
                     <>
                       <FormTabsContentCvetlicarne />
                       <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col">
-                        <div className="text-[#414141] flex gap-1 mb-[68px] w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
+                        <div className="text-[#414141] flex gap-1 mb-[40px] w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
                           <p className="text-[14px]">1</p>{" "}
                           <div className="flex flex-col">
                             <p className="mt-1">
@@ -554,6 +558,32 @@ const Subscription = () => {
                   />
                 </Link>
               </div> */}
+            </>
+              ) : (
+                // Limited content for non-florists (left version)
+                <>
+                  <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
+                    <span className="text-[14px]"></span>
+                    <p className="mt-1">
+                      Registrirajte se in poslali vam bomo vse potrebne informacije in trenutne promocije. Prvo cvetličarno v občini
+                      čakajo dodatne ugodnosti. Lahko nas tudi kontaktirate.
+                    </p>
+                  </div>
+                  <div className="mt-6">
+                    <Link
+                      href="mailto:info@osmrtnica.com"
+                      className="text-[#0A85C2] underline underline-offset-2 text-[16px]"
+                    >
+                      Kontaktirajte nas
+                </Link>
+              </div>
+                  <div className="mt-6">
+                    <button className="bg-[#2B5F99] hover:bg-[#234a7a] text-white px-8 py-3 rounded-full text-[16px] font-medium transition-colors">
+                      Registracija za cvetličarne
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         );
@@ -586,7 +616,7 @@ const Subscription = () => {
                     <>
                       <FormTabsContentOglasevalci />
                       <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col gap-4">
-                        <div className="mb-[68px] space-y-1">
+                       <div className="mb-[40px] space-y-1">
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">1</p>{" "}
                             <p className="mt-1">
@@ -756,7 +786,7 @@ const Subscription = () => {
 
       case "pogrebna-podjetja":
         return (
-          <div className="p-4 mb-[300px] mobile:max-w-[500px] mobile:mx-auto flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4 tablet:justify-start tablet:min-h-[36vh]">
+          <div className="p-4 mb-[40px] mobile:max-w-[500px] mobile:mx-auto flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -816,7 +846,7 @@ const Subscription = () => {
       <Layout from={"23"} forFooter={"cenikpage"}>
         <div
           style={{ fontFamily: "Roboto Flex" }}
-          className="w-full bg-[#ECF0F3] lg:px-8 mobile:py-3 py-8"
+          className="cenik-page-wrapper w-full bg-[#ECF0F3] lg:px-8 mobile:py-3 py-8"
         >
           <div className="w-full desktop:w-[1200px] mx-auto">
             {/* Manage Payments Button for logged in users */}

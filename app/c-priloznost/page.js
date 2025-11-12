@@ -60,7 +60,7 @@ export default function Faq1() {
                       Pridružene cvetličarne, ki poravnajo prvo letno pogodbo
                     </span>{" "}
                     <span className="text-[#EB1D1D] font-bold underline underline-offset-2 text-[16px]">
-                      do 15. novembra
+                      do 18. novembra
                     </span>
 
                     <span className="" > prejmejo: </span>
@@ -268,7 +268,7 @@ export default function Faq1() {
                       Pridružene cvetličarne, ki poravnajo prvo letno pogodbo
                     </span>{" "}
                     <span className="text-[#EB1D1D] font-bold underline underline-offset-2 text-[16px]">
-                      do 15. novembra
+                      do 18. novembra
                     </span>
 
                     <span className="" > prejmejo: </span>

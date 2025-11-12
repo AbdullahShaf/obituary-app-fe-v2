@@ -135,7 +135,7 @@ const CommonFooter = ({ currentPage = "/" }) => {
     : footerLinkSets[currentPage].filter((item) => item.showOnMobile);
 
   return (
-    <div className="bg-[#D4E6F9] border-l-1 border-r-1 border-t-1 border-b-1 border-color-[#D3D3D3] tablet:pt-[31px] pt-[29px] mobile:pt-[15px] pb-[14px]">
+    <div className="CommonFooter bg-[#D4E6F9] border-l-1 border-r-1 border-t-1 border-b-1 border-color-[#D3D3D3] tablet:pt-[31px] pt-[29px] mobile:pt-[15px] pb-[14px] mt-auto">
       {/* Top Section */}
       <div className="flex justify-between items-center tablet:w-[744px] mobile:w-[360px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto">
         <Image

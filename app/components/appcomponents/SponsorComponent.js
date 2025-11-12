@@ -13,6 +13,7 @@ import userService from "@/services/user-service";
 const SponsorComponent = ({ text = "", region, city }) => {
   const pathname = usePathname();
   const [sponsors, setSponsosrs] = useState([]);
+  const [sponsorLinks, setSponsorLinks] = useState({});
 
   let sponsorPage = '';
   if (pathname.includes('osmrtnice')) {
@@ -35,6 +36,36 @@ const SponsorComponent = ({ text = "", region, city }) => {
     fetchList();
   }, [region, city])
 
+  // Read sponsor links from localStorage once client is loaded
+  useEffect(() => {
+    const links = {};
+    // Get all localStorage keys that start with 'sponsor_website_sponsor_'
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith('sponsor_website_sponsor_')) {
+        const sponsorId = key.replace('sponsor_website_sponsor_', '');
+        links[sponsorId] = localStorage.getItem(key);
+      }
+    }
+    console.log("Loaded sponsor links from localStorage:", links);
+    setSponsorLinks(links);
+  }, []);
+
+  // Re-check localStorage when sponsors are updated
+  useEffect(() => {
+    if (sponsors && sponsors.length > 0) {
+      const links = {};
+      sponsors.forEach(sponsor => {
+        const link = localStorage.getItem(`sponsor_website_sponsor_${sponsor.id}`);
+        if (link) {
+          links[sponsor.id] = link;
+        }
+      });
+      console.log("Updated sponsor links for current sponsors:", links);
+      setSponsorLinks(prev => ({ ...prev, ...links }));
+    }
+  }, [sponsors]);
+
   return (
     <div className="bg-white">
       <div className="relative max-w-[1920px]  overflow-hidden mx-auto flex py-[115px] mobile:py-[100px] justify-center items-center">
@@ -50,7 +81,8 @@ const SponsorComponent = ({ text = "", region, city }) => {
           {sponsors && sponsors.length ? (
             <div className="flex justify-center items-center mt-[30px]">
               {sponsors?.map((item) => {
-                return (
+                const websiteLink = sponsorLinks[item.id];
+                const logoElement = (
                   <div key={item.id} className="flex w-[180px] h-[80px] mobile:w-[150px]  filter grayscale mx-[10px] items-center justify-center">
                     <img
                       src={item?.logo ?? sponser6}
@@ -58,7 +90,30 @@ const SponsorComponent = ({ text = "", region, city }) => {
                       className="max-w-[100%]"
                     />
                   </div>
-                )
+                );
+
+                // If website link exists, wrap in anchor tag
+                if (websiteLink) {
+                  console.log(`Creating clickable logo for sponsor ${item.id} with link:`, websiteLink);
+                  return (
+                    <a
+                      key={item.id}
+                      href={websiteLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex w-[180px] h-[80px] mobile:w-[150px] filter grayscale mx-[10px] items-center justify-center"
+                      onClick={() => console.log(`Clicked sponsor ${item.id}, opening:`, websiteLink)}
+                    >
+                      <img
+                        src={item?.logo ?? sponser6}
+                        alt="sponser2 of the image"
+                        className="max-w-[100%]"
+                      />
+                    </a>
+                  );
+                }
+
+                return logoElement;
               })}
             </div>
           ) : (

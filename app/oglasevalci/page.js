@@ -78,7 +78,7 @@ export default function Oglasevalci() {
               <div>
                 <p className="font-light text-[16px]">
                   Naše prve oglaševalske partnerje, ki sklenejo letno pogodbo{" "}
-                  <span className="font-bold underline text-[#EB1D1D]"> do 15. novembra,</span>{" "}
+                  <span className="font-bold underline text-[#EB1D1D]"> do 18. novembra,</span>{" "}
                   <span>čaka še </span>
                   <br />
                   <span>nekaj dodatnih ugodnosti:</span>
@@ -275,7 +275,7 @@ export default function Oglasevalci() {
               <div>
                 <p className="font-light text-[16px]">
                   Naše prve oglaševalske partnerje, ki sklenejo letno pogodbo{" "}
-                  <span className="font-bold underline text-[#EB1D1D]">do 15. novembra,</span>{" "}
+                  <span className="font-bold underline text-[#EB1D1D]">do 18. novembra,</span>{" "}
                   čaka še nekaj dodatnih ugodnosti:
                 </p>
 

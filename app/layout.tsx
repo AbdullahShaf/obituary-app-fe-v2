@@ -27,6 +27,12 @@ export default function RootLayout({
           src="https://cdn-cookieyes.com/client_data/4ea35c9889e0f2f54d3cfc92/script.js"
           strategy="afterInteractive"
         />
+        <Script
+          id="datasag-analytics"
+          src="https://www.datasag.com/tracker.js"
+          data-datasag-key="tb_pj2od6795ga6tjm5my0aju"
+          strategy="afterInteractive"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400&display=swap"
           rel="stylesheet"

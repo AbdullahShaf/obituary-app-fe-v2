@@ -48,5 +48,5 @@ npm start
 4. Create a new branch, and commit your changes  and publish the branch
 5. Raise a Pull Request, and add ```mm2439``` as a reviewer. 
 
-All devs must read the following instruction carefully. They must abide by it, otherwise they will be dropped from the project immediately.
+All devs must read the following instruction carefully. They must abide by it, otherwise they will be dropped from the project immediately
 

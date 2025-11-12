@@ -50,7 +50,7 @@ const Layout = ({
   };
 
   return (
-    <div className="main-wrapper">
+    <div className="main-wrapper flex flex-col min-h-screen">
       {/* Headers */}
       {from == "1" || from == "2" ? (
         <div className="fixed top-0 z-50 flex w-full justify-center">
@@ -153,7 +153,7 @@ const Layout = ({
         </>
       ) : null}
 
-      <main className="main-content flex bg-[#F5F7F9]">{children}</main>
+      <main className="main-content flex flex-grow bg-[#F5F7F9]">{children}</main>
 
       {/* Footer */}
       {forFooter == "company" ? (

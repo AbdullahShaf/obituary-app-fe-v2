@@ -86,7 +86,7 @@ export function FAQHeader() {
               className="box-border h-[22px] w-[182.76px] desktop:w-[255.31px] desktop:h-[32px]"
             />
           </Link>
-          <div className="flex gap-[24px] items-center">
+          <div className="flex gap-[24px] items-center mobile:hidden">
             <Link
               href={"/vodic"}
               className="mobile:w-[72px] flex text-[18px] leading-[24px] font-[400] text-white bg-[#083545]  tablet:w-[72px] w-[149px] rounded-[2px] py-[5px] text-center items-center justify-center"
@@ -118,7 +118,13 @@ export function FAQHeader() {
             </Link>
           </div>
           {/* {windowWidth > 0 && windowWidth < 600 && ( */}
-          <div className="desktop:hidden tablet:hidden flex">
+          <div className="desktop:hidden tablet:hidden flex mobile:items-center">
+            <Link
+              href={"/vodic"}
+              className="mobile:w-[72px] mobile:mr-[20px] flex text-[18px] leading-[24px] font-[400] text-white bg-[#083545]  tablet:w-[72px] w-[149px] rounded-[2px] py-[5px] text-center items-center justify-center"
+            >
+              VODIČ
+            </Link>
             <Link
               href={"/resitve-za-cvetlicarne"}
             >

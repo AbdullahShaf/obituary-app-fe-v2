@@ -12,7 +12,7 @@ async function checkGeolocation(ip: string): Promise<boolean> {
     const apiBaseUrl = process.env.NEXT_PUBLIC_APP_ENV === 'staging' 
       ? 'https://staging.osmrtnica.com/be/api'
       : process.env.NEXT_PUBLIC_APP_ENV === 'production' 
-      ? 'https://osmrtnica.com/be/api' 
+      ? 'https://www.osmrtnica.com/be/api' 
       : 'http://localhost:4000/api';
     
     const response = await fetch(`${apiBaseUrl}/geo-check`, {

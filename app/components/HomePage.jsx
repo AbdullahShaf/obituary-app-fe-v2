@@ -71,6 +71,15 @@ export default function HomeContent(props) {
     return () => clearTimeout(redirectTimeout);
   }, [hasRedirected]);
 
+  useEffect(() => {
+    if (!showMaintenancePopup) return;
+    const autoCloseTimeout = setTimeout(() => {
+      setShowMaintenancePopup(false);
+    }, 7000);
+
+    return () => clearTimeout(autoCloseTimeout);
+  }, [showMaintenancePopup]);
+
   // Prepare region options
   const regionOptions = [
     { place: "- Pokaži vse regije -", id: "allRegions" },

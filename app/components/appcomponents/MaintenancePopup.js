@@ -17,15 +17,6 @@ const MaintenancePopup = ({ message, onClose }) => {
               Obvestilo
             </span>
           </div>
-          {onClose && (
-            <button
-              className="w-[18px] h-[18px]"
-              aria-label="Zapri obvestilo"
-              onClick={onClose}
-            >
-              <Image src={imgClose} alt="Close" width={18} height={18} />
-            </button>
-          )}
         </div>
         <div className="px-[24px] py-[20px]">
           <p className="text-[#3C3E41] text-[14px] leading-[20px] font-variation-customOpt14 whitespace-pre-line">

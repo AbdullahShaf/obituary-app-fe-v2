@@ -20,6 +20,7 @@ import {
 import MegaMenu from "@/app/components/appcomponents/MegaMenuMain";
 import obituaryService from "@/services/obituary-service";
 // import { toast } from "react-hot-toast";
+import MaintenancePopup from "@/app/components/appcomponents/MaintenancePopup";
 import regionsAndCities from "@/utils/regionAndCities";
 // import MainOptions from "./components/appcomponents/MainOptions";
 import HomePageBox from "@/app/components/appcomponents/HomePageBox";
@@ -32,6 +33,8 @@ import { SelectDropdown } from "@/app/components/appcomponents/SelectDropdown";
 export default function HomeContent(props) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const maintenanceMessage =
+    "Pravkar nadgrajujemo stran, zato se promet začasno preusmerja na drug naslov (op. stran sicer deluje nemoteno).\nDela bodo predvidoma končana do 16.00. Hvala za razumevanje.";
   const [obituaries, setObituaries] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isMessageModalVisible, setIsMessageModalVisible] = useState(false);
@@ -41,6 +44,8 @@ export default function HomeContent(props) {
   const [name, setName] = useState(null);
   const [selectedFloristCity, setSelectedFloristCity] = useState(null);
   const [obitLoading, setObitLoading] = useState(false);
+  const [hasRedirected, setHasRedirected] = useState(false);
+  const [showMaintenancePopup, setShowMaintenancePopup] = useState(true);
 
   // Initialize state from URL parameters on component mount
   useEffect(() => {
@@ -54,6 +59,28 @@ export default function HomeContent(props) {
       setSelectedRegion(regionParam);
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    if (hasRedirected || !showMaintenancePopup) return;
+
+    const redirectTimeout = setTimeout(() => {
+      if (typeof window !== "undefined" && window.location.hostname !== "staging.osmrtnica.com") {
+        setHasRedirected(true);
+        window.location.href = "https://staging.osmrtnica.com/";
+      }
+    }, 2000);
+
+    return () => clearTimeout(redirectTimeout);
+  }, [hasRedirected, showMaintenancePopup]);
+
+  useEffect(() => {
+    if (!showMaintenancePopup) return;
+    const autoCloseTimeout = setTimeout(() => {
+      setShowMaintenancePopup(false);
+    }, 7000);
+
+    return () => clearTimeout(autoCloseTimeout);
+  }, [showMaintenancePopup]);
 
   // Prepare region options
   const regionOptions = [
@@ -289,6 +316,11 @@ export default function HomeContent(props) {
       forFooter={""}
       megaMenu={funcMegaMenu}
     >
+      {showMaintenancePopup && (
+        <MaintenancePopup
+          message={maintenanceMessage}
+        />
+      )}
       <div className="absolute z-40 w-full mx-auto mt-[132px] tablet:mt-[122px] mobile:mt-[112px] overflow-auto">
         {showMegaMenu && <MegaMenu />}
       </div>

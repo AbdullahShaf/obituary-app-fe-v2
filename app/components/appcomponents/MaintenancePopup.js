@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import imgClose from "@/public/ico_close1.png";
 import imgBell from "@/public/ico_notification_bell1.png";
 
 const MaintenancePopup = ({ message }) => {

@@ -26,7 +26,7 @@ const HomeBackHeader = () => {
             head={"POGREBI"}
             index={"02."}
             id={2}
-            endPoint={"/pogrebi"}
+            endPoint={"/pogrebi?city=Celje"}
           />
           <HeaderHeadingTextMobile
             head={"SPOMINSKA"}
@@ -53,7 +53,7 @@ const HomeBackHeader = () => {
           head={"POGREBI"}
           index={"02."}
           id={2}
-          endPoint={"/pogrebi"}
+          endPoint={"/pogrebi?city=Celje"}
         />
         <HeaderHeadingText
           head={"SPOMINSKA"}
@@ -79,7 +79,7 @@ const HomeBackHeader = () => {
           head={"POGREBI"}
           index={"02."}
           id={2}
-          endPoint={"/pogrebi"}
+          endPoint={"/pogrebi?city=Celje"}
         />
         <HeaderHeadingTextTablet
           head={"SPOMINSKA"}

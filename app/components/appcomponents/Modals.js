@@ -178,7 +178,7 @@ const Modals = ({
       console.error("Failed to create SorrowBook:", error);
 
       if (error.status === 409) {
-        toast.error("To je žalna knjiga");
+        toast.error("V žalno knjigo si že vpisan/a.");
         closeModal();
       } else {
         // toast.error(

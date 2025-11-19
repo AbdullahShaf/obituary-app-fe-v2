@@ -140,12 +140,19 @@ export default function Step6({
       //   shops: response.shops,
       // });
       fetchShops();
-      toast.success(TOAST_MESSAGE.SENT_FOR_APPROVAL);
+      if (send === 'send') {
+        toast.success(TOAST_MESSAGE.SENT_FOR_APPROVAL);
+      } else {
+        toast.success(TOAST_MESSAGE.DATA_SAVED);
+      }
       // router.push(`/floristdetails/${companyId}`);
 
       console.log(response);
+      return true;
     } catch (error) {
       console.log(error);
+      toast.error(error?.response?.data?.error || TOAST_MESSAGE.SOMETHING_WENT_WRONG);
+      return false;
     }
   };
 
@@ -210,7 +217,7 @@ export default function Step6({
     }
   }, [companyId])
 
-  function handleSave() {
+  async function handleSave() {
     handleBCSubmit();
     handleShopSubmit();
   }

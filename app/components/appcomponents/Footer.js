@@ -261,7 +261,7 @@ export default function Footer() {
                         </Link>
                       </li>
                       <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] mt-4 items-center">
-                        <Link href="/pogrebi">
+                        <Link href="/pogrebi?city=Celje">
                           <div className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px] cursor-pointer">
                             Pogrebi
                           </div>

@@ -9,7 +9,6 @@ const TopBar = ({
   setIsMessageModalVisible,
   setIsLocalQuickModalVisible,
   setIsLocalQuickReviewModalVisible,
-  onLocalQuickReviewClick, // New prop
 }) => {
   const popuButtonRef = React.useRef();
 
@@ -61,8 +60,24 @@ const TopBar = ({
                 className="w-[24px] h-[24px] "
               />
             </button>
+            <div className="ml-[10px] tablet:ml-[36px] desktop:ml-[16px] flex items-center text-white text-[14px] tablet:text-[16px] tracking-[0.12em] uppercase">
+              <Link
+                href="/registracija?view=login"
+                className="hover:text-[#0A85C2] transition-colors duration-200"
+              >
+                PRIJAVA
+              </Link>
+              <span className="mx-2 text-white">|</span>
+              <Link
+                href="/registracija?view=register"
+                className="hover:text-[#0A85C2] transition-colors duration-200"
+              >
+                REGISTRACIJA
+              </Link>
+            </div>
             <button
-              className="ml-[50px]  tablet:ml-[95px] desktop:ml-[80px]"
+              className="ml-[50px]  tablet:ml-[95px] desktop:ml-[80px] hidden"
+              aria-hidden="true"
               // onClick={() => {
               //   setIsMessageModalVisible(true);
               //   setIsModalVisible(false);
@@ -77,7 +92,8 @@ const TopBar = ({
               />
             </button>
             <button
-              className="ml-[50px] tablet:ml-[95px] desktop:ml-[80px]"
+              className="ml-[50px] tablet:ml-[95px] desktop:ml-[80px] hidden"
+              aria-hidden="true"
               // onClick={() => {
               //   setIsModalVisible(true);
               //   setIsMessageModalVisible(false);

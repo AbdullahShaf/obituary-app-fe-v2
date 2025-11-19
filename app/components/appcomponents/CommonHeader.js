@@ -19,11 +19,11 @@ import { shouldShowBack } from "@/utils/navigationUtils";
 const headerLinkSets = {
   "/osmrtnice": [
     { label: "Osmrtnice", path: "/osmrtnice", active: false },
-    { label: "Pogrebi", path: "/pogrebi", active: false },
+    { label: "Pogrebi", path: "/pogrebi?city=Celje", active: false },
   ],
   "/pogrebi": [
     { label: "Osmrtnice", path: "/osmrtnice", active: false },
-    { label: "Pogrebi", path: "/pogrebi", active: false },
+    { label: "Pogrebi", path: "/pogrebi?city=Celje", active: false },
   ],
 
   "/pogrebna-p": [
@@ -165,7 +165,7 @@ function CommonHeader({ currentPage }) {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-        {/* Show TopBar only for specific pages */}
+        {/* TODO: Temporarily disabled pending TopBar redesign - restore by 2026-01-31
         {(currentPage === "pogrebi" || currentPage === "osmrtnice") && (
           <TopBar
             setIsModalVisible={setIsModalVisible}
@@ -176,7 +176,7 @@ function CommonHeader({ currentPage }) {
             }
             onLocalQuickReviewClick={handleLocalQuickReviewClick}
           />
-        )}
+        )} */}
 
         <div className="flex w-full justify-between">
           <div className="flex w-full h-[68px] tablet:w-[744px] mx-auto tablet:h-[80px] px-5 tablet:px-6 desktop:w-[1200px] desktop:h-[92.02px] desktop:px-[12px]">

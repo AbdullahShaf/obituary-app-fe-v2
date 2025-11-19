@@ -187,7 +187,7 @@ export default function Oglasevalci() {
 
               <ul className="flex flex-row gap-2 mt-4 text-[#0A85C2]">
                 <li className="underline underline-offset-2"><Link href={'/osmrtnice'}>Osmrtnice</Link></li>
-                <li><span>*</span> <Link href={'/pogrebi'} className="underline underline-offset-2">Pogrebi</Link> </li>
+                <li><span>*</span> <Link href={'/pogrebi?city=Celje'} className="underline underline-offset-2">Pogrebi</Link> </li>
                 <li><span>*</span> <Link href={'/cvetlicarne'} className="underline underline-offset-2">Cvetličarne</Link> </li>
                 <li><span>*</span> <Link href={'/pogrebna-p'} className="underline underline-offset-2">Pogrebna podjetja</Link> </li>
               </ul>

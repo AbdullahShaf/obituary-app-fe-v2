@@ -259,7 +259,7 @@ function CommonHeader({ currentPage }) {
                 {/* Back Button */}
                 {canShowBack && (
                   <button
-                    onClick={() => router.back()}
+                    onClick={() => router.push('/')}
                     className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200 "
                     title="Nazaj"
                   >

@@ -28,6 +28,7 @@ import keeperService from "@/services/keeper-service";
 import { useAuth } from "@/hooks/useAuth";
 import { usePathname } from "next/navigation";
 import userService from "@/services/user-service";
+import LoginRegistrationModal from "./LoginRegistrationModal";
 
 const Modals = ({
   select_id,
@@ -62,6 +63,11 @@ const Modals = ({
 
   const [emails, setEmails] = useState([""]);
   const [notifyMessage, setNotifyMessage] = useState([""]);
+  
+  // Login modal state
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [pendingAction, setPendingAction] = useState(null);
+  const [pendingActionType, setPendingActionType] = useState(null);
 
   const handleEmailChange = (index, value) => {
     const updatedEmails = [...emails];
@@ -137,25 +143,60 @@ const Modals = ({
   useEffect(() => {
     console.log(keeperMessage);
   }, [keeperMessage]);
-  // add sorrow book
-  const addSorrowBook = async () => {
-    if (!name || name.trim() === "") {
+  // Execute pending action after login
+  const executePendingAction = async () => {
+    if (!pendingAction || !pendingActionType) return;
+
+    try {
+      switch (pendingActionType) {
+        case "sorrowBook":
+          await addSorrowBookInternal(pendingAction.name, pendingAction.relation);
+          break;
+        case "condolence":
+          await addCondolenceInternal(
+            pendingAction.name,
+            pendingAction.relation,
+            pendingAction.message,
+            pendingAction.placeholderName,
+            pendingAction.isCustomMessage
+          );
+          break;
+        case "dedication":
+          await addDedicationInternal(
+            pendingAction.title,
+            pendingAction.message,
+            pendingAction.name
+          );
+          break;
+        case "photo": {
+          // Make sure the file is still available (it should be in state)
+          const photoFile = pendingAction.uploadedPicture || uploadedPicture;
+          await addPhotoInternal(photoFile, pendingAction.name);
+          break;
+        }
+      }
+      setPendingAction(null);
+      setPendingActionType(null);
+    } catch (error) {
+      console.error("Failed to execute pending action:", error);
+    }
+  };
+
+  // Internal function for adding sorrow book (without login check)
+  const addSorrowBookInternal = async (nameValue, relationValue) => {
+    if (!nameValue || nameValue.trim() === "") {
       toast.error("Dodaj ime");
       return;
     }
 
-    if (!user) {
-      toast.error("Za vpis v Žalno knjigo je potrebna prijava");
-      return;
-    }
     if (isCompany()) {
       toast.error("You are not allowed to do this!");
       return;
     }
 
     const sorrowBookData = {
-      name,
-      relation,
+      name: nameValue,
+      relation: relationValue,
     };
 
     try {
@@ -188,18 +229,36 @@ const Modals = ({
     }
   };
 
+  // add sorrow book
+  const addSorrowBook = async () => {
+    if (!name || name.trim() === "") {
+      toast.error("Dodaj ime");
+      return;
+    }
+
+    if (!user) {
+      toast.error("Za vpis v Žalno knjigo je potrebna prijava");
+      // Store pending action and open login modal
+      setPendingAction({ name, relation });
+      setPendingActionType("sorrowBook");
+      setIsLoginModalOpen(true);
+      return;
+    }
+
+    await addSorrowBookInternal(name, relation);
+  };
+
   //dedication
   const [title, setTitle] = useState(null);
   const [message, setMessage] = useState(null);
-  const addDedication = async () => {
-    if (!title?.trim() || !message?.trim() || !name?.trim()) {
+  
+  // Internal function for adding dedication (without login check)
+  const addDedicationInternal = async (titleValue, messageValue, nameValue) => {
+    if (!titleValue?.trim() || !messageValue?.trim() || !nameValue?.trim()) {
       toast.error("Izpolni vsa polja");
       return;
     }
-    if (!user) {
-      toast.error("Za dodajanje Posvetila, Zahvale, zgodb je potrebna prijava");
-      return;
-    }
+    
     if (isCompany()) {
       toast.error("You are not allowed to do this!");
       return;
@@ -211,10 +270,11 @@ const Modals = ({
       );
       return;
     }
+    
     const dedicationData = {
-      title,
-      message,
-      name,
+      title: titleValue,
+      message: messageValue,
+      name: nameValue,
       isKeeper: isKeeper(),
     };
 
@@ -243,13 +303,26 @@ const Modals = ({
     }
   };
 
-  //add photo
-  const addPhoto = async () => {
+  const addDedication = async () => {
+    if (!title?.trim() || !message?.trim() || !name?.trim()) {
+      toast.error("Izpolni vsa polja");
+      return;
+    }
+    
     if (!user) {
-      toast.error("Za dodajanje slik je potrebna prijava");
+      toast.error("Za dodajanje Posvetila, Zahvale, zgodb je potrebna prijava");
+      // Store pending action and open login modal
+      setPendingAction({ title, message, name });
+      setPendingActionType("dedication");
+      setIsLoginModalOpen(true);
       return;
     }
 
+    await addDedicationInternal(title, message, name);
+  };
+
+  // Internal function for adding photo (without login check)
+  const addPhotoInternal = async (pictureFile, nameValue) => {
     if (isCompany()) {
       toast.error("You are not allowed to do this!");
       return;
@@ -261,18 +334,22 @@ const Modals = ({
       );
       return;
     }
-    if (!uploadedPicture) {
+    
+    if (!pictureFile) {
       toast.error("Dodaj sliko");
       return;
     }
-    if (!name || name.trim() === "") {
+    
+    if (!nameValue || nameValue.trim() === "") {
       toast.error("Dodaj ime");
       return;
     }
+    
     const formData = new FormData();
-    formData.append("picture", uploadedPicture);
+    formData.append("picture", pictureFile);
     formData.append("isKeeper", isKeeper());
-    formData.append("userName", name);
+    formData.append("userName", nameValue);
+    
     try {
       const response = await obituaryService.addPhoto(data?.id, formData);
 
@@ -299,36 +376,52 @@ const Modals = ({
     }
   };
 
-  //add condolence
-  const addCondolence = async () => {
+  //add photo
+  const addPhoto = async () => {
     if (!user) {
-      toast.error("Za dodajanje sožalja je potrebna prijava");
+      toast.error("Za dodajanje slik je potrebna prijava");
+      // Store pending action and open login modal
+      setPendingAction({ uploadedPicture, name });
+      setPendingActionType("photo");
+      setIsLoginModalOpen(true);
       return;
     }
+
+    await addPhotoInternal(uploadedPicture, name);
+  };
+
+  // Internal function for adding condolence (without login check)
+  const addCondolenceInternal = async (
+    nameValue,
+    relationValue,
+    messageValue,
+    placeholderNameValue,
+    isCustomMessageValue
+  ) => {
     if (isCompany()) {
       toast.error("You are not allowed to do this!");
       return;
     }
 
-    if (!name?.trim()) {
+    if (!nameValue?.trim()) {
       toast.error("Dodaj ime");
       return;
-    } else if (!memoryHasKeeper() && !placeholderName?.trim()) {
+    } else if (!memoryHasKeeper() && !placeholderNameValue?.trim()) {
       toast.error("Izberi sporočilo");
       return;
     }
 
     const isCustomMessage = Boolean(
-      memoryHasKeeper() && message?.trim().length > 0
+      memoryHasKeeper() && messageValue?.trim().length > 0
     );
 
-    const finalMessage = isCustomMessage ? message : placeholderName;
+    const finalMessage = isCustomMessage ? messageValue : placeholderNameValue;
 
     const condolenceData = {
       message: finalMessage,
       isCustomMessage,
-      name,
-      relation,
+      name: nameValue,
+      relation: relationValue,
       isKeeper: isKeeper(),
     };
 
@@ -361,6 +454,32 @@ const Modals = ({
         // );
       }
     }
+  };
+
+  //add condolence
+  const addCondolence = async () => {
+    if (!user) {
+      toast.error("Za dodajanje sožalja je potrebna prijava");
+      // Store pending action and open login modal
+      const isCustomMessage = Boolean(
+        memoryHasKeeper() && message?.trim().length > 0
+      );
+      setPendingAction({
+        name,
+        relation,
+        message,
+        placeholderName,
+        isCustomMessage,
+      });
+      setPendingActionType("condolence");
+      setIsLoginModalOpen(true);
+      return;
+    }
+
+    const isCustomMessage = Boolean(
+      memoryHasKeeper() && message?.trim().length > 0
+    );
+    await addCondolenceInternal(name, relation, message, placeholderName, isCustomMessage);
   };
 
   const addReport = async () => {
@@ -2349,6 +2468,18 @@ const Modals = ({
           </div>
         </div>
       ) : null}
+
+      {/* Login/Registration Modal */}
+      <LoginRegistrationModal
+        isOpen={isLoginModalOpen}
+        onClose={() => {
+          setIsLoginModalOpen(false);
+          setPendingAction(null);
+          setPendingActionType(null);
+        }}
+        onLoginSuccess={executePendingAction}
+        initialTab="login"
+      />
     </div>
   );
 };

@@ -25,6 +25,31 @@ const MemorialPageTopComp = ({
   const [currentCount, setCurrentCount] = useState(0);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showQr, setShowQr] = useState(false);
+  const [showFuneralIconTooltip, setShowFuneralIconTooltip] = useState(false);
+  const [funeralIconTooltipSide, setFuneralIconTooltipSide] = useState("right");
+  const funeralIconTooltipTimeoutRef = useRef(null);
+  const funeralIconButtonRef = useRef(null);
+
+  const updateFuneralIconTooltipSide = () => {
+    if (typeof window === "undefined") return;
+    const tooltipWidth = 260;
+    const triggerRect = funeralIconButtonRef.current?.getBoundingClientRect();
+    if (!triggerRect) return;
+    const spaceRight = window.innerWidth - triggerRect.right;
+    const newSide = spaceRight > tooltipWidth + 16 ? "right" : "left";
+    setFuneralIconTooltipSide(newSide);
+  };
+
+  const handleFuneralIconClick = () => {
+    updateFuneralIconTooltipSide();
+    setShowFuneralIconTooltip(true);
+    if (funeralIconTooltipTimeoutRef.current) {
+      clearTimeout(funeralIconTooltipTimeoutRef.current);
+    }
+    funeralIconTooltipTimeoutRef.current = setTimeout(() => {
+      setShowFuneralIconTooltip(false);
+    }, 2500);
+  };
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
@@ -34,6 +59,24 @@ const MemorialPageTopComp = ({
     // Cleanup on unmount
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (funeralIconTooltipTimeoutRef.current) {
+        clearTimeout(funeralIconTooltipTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!showFuneralIconTooltip) return;
+    updateFuneralIconTooltipSide();
+    const handleResize = () => updateFuneralIconTooltipSide();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [showFuneralIconTooltip]);
 
   const defaultMessage = {
     message: "Počivaj v miru",
@@ -656,10 +699,50 @@ const MemorialPageTopComp = ({
                                   </div>
                                 </div>
                                 <div className="flex flex-col pl-[15px]">
-                                  <div className="flex items-center h-[23px]">
+                                  <div className="flex items-center h-[23px] gap-2">
                                     <div className="text-[#1E2125] text-[20px] font-medium">
                                       Pogreb
                                     </div>
+                                    {data?.showMemoryPageIcon && (
+                                      <div
+                                        ref={funeralIconButtonRef}
+                                        className="cursor-pointer flex items-center justify-center relative"
+                                        onClick={handleFuneralIconClick}
+                                        title={data?.memoryPageMessage || "Svojci cvetje in sveče hvaležno odklanjajo."}
+                                      >
+                                        <svg
+                                          width="24"
+                                          height="24"
+                                          viewBox="0 0 24 24"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          fillRule="evenodd"
+                                          clipRule="evenodd"
+                                          className="fill-[#0A85C2]"
+                                        >
+                                          <path d="M1 15c4.075-1.121 9.51.505 11 6 1.985-5.939 7.953-7.051 11-6-2.467 1.524-3.497 9-11 9s-8.487-7.471-11-9zm8.203-12.081c.008-1.612 1.319-2.919 2.933-2.919 1.615 0 2.926 1.307 2.934 2.919 1.4-.799 3.187-.317 3.995 1.081.807 1.398.331 3.187-1.062 4 1.393.813 1.869 2.602 1.062 4-.808 1.398-2.595 1.88-3.995 1.081-.008 1.612-1.319 2.919-2.934 2.919-1.614 0-2.925-1.307-2.933-2.919-1.4.799-3.188.317-3.995-1.081-.807-1.398-.331-3.187 1.062-4-1.393-.813-1.869-2.602-1.062-4 .807-1.398 2.595-1.88 3.995-1.081zm2.797 2.581c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5z" />
+                                          <line
+                                            x1="21"
+                                            y1="3"
+                                            x2="3"
+                                            y2="21"
+                                            stroke="#1E2125"
+                                            strokeWidth="2.3"
+                                            strokeLinecap="round"
+                                          />
+                                        </svg>
+                                        {showFuneralIconTooltip && (
+                                          <div
+                                            className={`absolute top-1/2 -translate-y-1/2 z-20 w-max max-w-[260px] rounded-md bg-[#0A85C2] text-white text-[12px] leading-[16px] px-3 py-2 shadow-lg after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 ${
+                                              funeralIconTooltipSide === "right"
+                                                ? "left-full ml-3 after:left-[-6px] after:border-y-[6px] after:border-y-transparent after:border-r-[6px] after:border-r-[#0A85C2]"
+                                                : "right-full mr-3 after:right-[-6px] after:border-y-[6px] after:border-y-transparent after:border-l-[6px] after:border-l-[#0A85C2]"
+                                            }`}
+                                          >
+                                            {data?.memoryPageMessage || "Svojci cvetje in sveče hvaležno odklanjajo."}
+                                          </div>
+                                        )}
+                                      </div>
+                                    )}
                                   </div>
                                   <div className="flex mt-[8px] flex-col">
                                     <p className="text-[#414141] text-[14px] font-normal leading-[16.41px]">
@@ -705,7 +788,7 @@ const MemorialPageTopComp = ({
                                   </div>
                                 </div>
                                 <div className="flex flex-col pl-[15px]">
-                                  <div className="flex items-center h-[23px] gap-2">
+                                  <div className="flex items-center h-[23px]">
                                     <div className="text-[#1E2125] text-[20px] font-medium">
                                       {item.details.eventName
                                         ? formatTitleCase(
@@ -713,45 +796,6 @@ const MemorialPageTopComp = ({
                                           )
                                         : ""}
                                     </div>
-                                    {data?.showMemoryPageIcon && (
-                                      <div
-                                        className="cursor-pointer flex items-center justify-center relative"
-                                        onClick={() => {
-                                          const message = data?.memoryPageMessage || "Svojci cvetje in sveče hvaležno odklanjajo.";
-                                          toast(message, {
-                                            duration: 4000,
-                                            position: 'top-center',
-                                            style: {
-                                              background: '#0A85C2',
-                                              color: '#fff',
-                                              borderRadius: '8px',
-                                              padding: '12px 16px',
-                                            },
-                                          });
-                                        }}
-                                        title={data?.memoryPageMessage || "Svojci cvetje in sveče hvaležno odklanjajo."}
-                                      >
-                                        <svg
-                                          width="18"
-                                          height="18"
-                                          viewBox="0 0 24 24"
-                                          fill="none"
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          className="text-[#0A85C2]"
-                                        >
-                                          {/* Iconmonstr-style flower icon with diagonal line */}
-                                          <path d="M12 2C10.5 2 9.5 3 9.5 4.5C9.5 6 10.5 7 12 7C13.5 7 14.5 6 14.5 4.5C14.5 3 13.5 2 12 2Z" fill="currentColor" opacity="0.6"/>
-                                          <path d="M17.5 8C17.5 6.5 16.5 5.5 15 5.5C13.5 5.5 12.5 6.5 12.5 8C12.5 9.5 13.5 10.5 15 10.5C16.5 10.5 17.5 9.5 17.5 8Z" fill="currentColor" opacity="0.6"/>
-                                          <path d="M17.5 16C17.5 14.5 16.5 13.5 15 13.5C13.5 13.5 12.5 14.5 12.5 16C12.5 17.5 13.5 18.5 15 18.5C16.5 18.5 17.5 17.5 17.5 16Z" fill="currentColor" opacity="0.6"/>
-                                          <path d="M12 15C10.5 15 9.5 16 9.5 17.5C9.5 19 10.5 20 12 20C13.5 20 14.5 19 14.5 17.5C14.5 16 13.5 15 12 15Z" fill="currentColor" opacity="0.6"/>
-                                          <path d="M6.5 8C6.5 6.5 5.5 5.5 4 5.5C2.5 5.5 1.5 6.5 1.5 8C1.5 9.5 2.5 10.5 4 10.5C5.5 10.5 6.5 9.5 6.5 8Z" fill="currentColor" opacity="0.6"/>
-                                          <path d="M6.5 16C6.5 14.5 5.5 13.5 4 13.5C2.5 13.5 1.5 14.5 1.5 16C1.5 17.5 2.5 18.5 4 18.5C5.5 18.5 6.5 17.5 6.5 16Z" fill="currentColor" opacity="0.6"/>
-                                          <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
-                                          {/* Diagonal line (no flowers) */}
-                                          <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-                                        </svg>
-                                      </div>
-                                    )}
                                   </div>
                                   <div className="flex mt-[8px] flex-col">
                                     <p className="text-[#414141] text-[14px] font-normal leading-[16.41px]">

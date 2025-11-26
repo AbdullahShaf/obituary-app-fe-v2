@@ -263,6 +263,28 @@ const adminService = {
       console.error("Error deleting sponsor:", error);
       throw error;
     }
+  },
+
+  // Get all cemeteries (admin only)
+  getCemeteries: async () => {
+    try {
+      const response = await axios.get("/admin/cemeteries");
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching cemeteries:", error);
+      throw error;
+    }
+  },
+
+  // Delete cemetery (admin only)
+  deleteCemetery: async (id: number) => {
+    try {
+      const response = await axios.delete(`/cemetry/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting cemetery:", error);
+      throw error;
+    }
   }
 };
 

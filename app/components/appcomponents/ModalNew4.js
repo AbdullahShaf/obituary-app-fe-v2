@@ -30,6 +30,7 @@ export default function ModalNew4({
   updateObituary,
   defaultCity = "",
   onSaved,
+  cemeteryToEdit = null,
 }) {
   const [scrollBehavior, setScrollBehavior] = React.useState("outside");
   const { user } = useAuth();
@@ -44,12 +45,6 @@ export default function ModalNew4({
   const inputFileRefMobile = useRef(null);
 
   const breakpoint = useBreakpoint()
-
-  useEffect(() => {
-    if (defaultCity) {
-      setCity(defaultCity);
-    }
-  }, [defaultCity]);
 
   useEffect(() => {
     if (isShowModal && user?.id) {
@@ -68,6 +63,22 @@ export default function ModalNew4({
       fetchCompany();
     }
   }, [isShowModal, user]);
+
+  useEffect(() => {
+    if (cemeteryToEdit) {
+      setName(cemeteryToEdit.name || "");
+      setAddress(cemeteryToEdit.address || "");
+      setCity(cemeteryToEdit.city || defaultCity || "");
+      setImagePreview(cemeteryToEdit.image || "");
+      setSelectedImageFile(null);
+    } else {
+      setName("");
+      setAddress("");
+      setCity(defaultCity || "");
+      setImagePreview("");
+      setSelectedImageFile(null);
+    }
+  }, [cemeteryToEdit, defaultCity, isShowModal]);
 
   const handleImageUpload = (e) => {
     const file = e.target.files?.[0];
@@ -100,19 +111,29 @@ export default function ModalNew4({
       formData.append(`cemeteries[0][city]`, city.trim());
       formData.append(`cemeteries[0][updated]`, true);
 
+      if (cemeteryToEdit?.id) {
+        formData.append(`cemeteries[0][id]`, cemeteryToEdit.id);
+      }
+
       if (selectedImageFile) {
         formData.append(`cemeteries[0][image]`, selectedImageFile);
+      } else if (cemeteryToEdit?.image) {
+        formData.append(`cemeteries[0][image]`, cemeteryToEdit.image);
       }
 
       await cemetryService.createCemetry(formData);
-      toast.success("Pokopališče je bilo dodano");
+      toast.success(
+        cemeteryToEdit?.id ? "Pokopališče je bilo posodobljeno" : "Pokopališče je bilo dodano"
+      );
       
       // Reset form
       setName("");
-      setAddress("");
-      setCity(defaultCity || "");
-      setSelectedImageFile(null);
-      setImagePreview("");
+      if (!cemeteryToEdit?.id) {
+        setAddress("");
+        setCity(defaultCity || "");
+        setSelectedImageFile(null);
+        setImagePreview("");
+      }
       
       setIsShowModal(false);
       if (onSaved) {

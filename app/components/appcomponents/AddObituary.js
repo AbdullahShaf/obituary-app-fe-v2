@@ -66,6 +66,8 @@ const AddObituary = ({ set_Id, setModal }) => {
   const [isCemeteryModalOpen, setIsCemeteryModalOpen] = useState(false);
   const [showMemoryPageIcon, setShowMemoryPageIcon] = useState(false);
   const [memoryPageMessage, setMemoryPageMessage] = useState("Svojci cvetje in sveče hvaležno odklanjajo.");
+  const [showMemoryIconTooltip, setShowMemoryIconTooltip] = useState(false);
+  const [memoryIconTooltipSide, setMemoryIconTooltipSide] = useState("right");
 
   const addEvent = () => {
     setEvents((prev) => [...prev, createEmptyEvent()]);
@@ -95,6 +97,59 @@ const AddObituary = ({ set_Id, setModal }) => {
   // Default text will be shown only when field is empty AND date/time exists (handled in display logic)
 
   const [activeDivtype, setActiveDivType] = useState("KORAK 1");
+  const memoryIconTooltipTimeoutRef = useRef(null);
+  const memoryIconButtonRef = useRef(null);
+
+  const updateMemoryIconTooltipSide = () => {
+    if (typeof window === "undefined") return;
+    const tooltipWidth = 260;
+    const triggerRect = memoryIconButtonRef.current?.getBoundingClientRect();
+    if (!triggerRect) return;
+    const spaceRight = window.innerWidth - triggerRect.right;
+    const newSide = spaceRight > tooltipWidth + 16 ? "right" : "left";
+    setMemoryIconTooltipSide(newSide);
+  };
+
+  const triggerMemoryIconTooltip = () => {
+    updateMemoryIconTooltipSide();
+    setShowMemoryIconTooltip(true);
+    if (memoryIconTooltipTimeoutRef.current) {
+      clearTimeout(memoryIconTooltipTimeoutRef.current);
+    }
+    memoryIconTooltipTimeoutRef.current = setTimeout(() => {
+      setShowMemoryIconTooltip(false);
+    }, 4000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (memoryIconTooltipTimeoutRef.current) {
+        clearTimeout(memoryIconTooltipTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!showMemoryIconTooltip) return;
+    updateMemoryIconTooltipSide();
+    const handleResize = () => updateMemoryIconTooltipSide();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [showMemoryIconTooltip]);
+
+  const handleToggleMemoryIcon = () => {
+    setShowMemoryPageIcon((prev) => {
+      const next = !prev;
+      if (next) {
+        triggerMemoryIconTooltip();
+      } else {
+        setShowMemoryIconTooltip(false);
+      }
+      return next;
+    });
+  };
 
   const hours = Array.from({ length: 24 }, (_, i) => i + 1);
   const minutes = Array.from({ length: 4 }, (_, i) => i * 15);
@@ -314,10 +369,10 @@ const handleSubmit = async () => {
   const currentUser = isAuthenticated ? user : {};
 
   // Temporarily commented
-  if (!currentUser.createObituaryPermission) {
-    toast.error("Nimaš dovoljenja za objavo osmrtnic");
-    return;
-  }
+  // if (!currentUser.createObituaryPermission) {
+  //   toast.error("Nimaš dovoljenja za objavo osmrtnic");
+  //   return;
+  // }
 
   if (!validateFields()) return;
 
@@ -1717,8 +1772,53 @@ const handleSubmit = async () => {
 
               <div>
                 <div className="flex flex-col">
-                  <div className="text-[#6D778E] mobile:text-[#1E2125] text-[16px] mobile:text-[14px] py-3 border-b-[1px] border-[#D4D4D4] font-normal leading-[16px] font-variation-customOpt14 mt-7 mobile:mt-0">
-                    DOGODKI
+                  <div className="flex items-center justify-between text-[#6D778E] mobile:text-[#1E2125] text-[16px] mobile:text-[14px] py-3 border-b-[1px] border-[#D4D4D4] font-normal leading-[16px] font-variation-customOpt14 mt-7 mobile:mt-0">
+                    <span>DOGODKI</span>
+                  <button
+                    type="button"
+                    className="relative flex items-center gap-3 group"
+                    ref={memoryIconButtonRef}
+                    onClick={handleToggleMemoryIcon}
+                    title={memoryPageMessage}
+                  >
+                      <span className="sr-only">Preklopi ikono na spominski strani</span>
+                       <svg
+                         width="24"
+                         height="24"
+                         viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg"
+                         fillRule="evenodd"
+                         clipRule="evenodd"
+                         className="fill-[#0A85C2]"
+                       >
+                         <path d="M1 15c4.075-1.121 9.51.505 11 6 1.985-5.939 7.953-7.051 11-6-2.467 1.524-3.497 9-11 9s-8.487-7.471-11-9zm8.203-12.081c.008-1.612 1.319-2.919 2.933-2.919 1.615 0 2.926 1.307 2.934 2.919 1.4-.799 3.187-.317 3.995 1.081.807 1.398.331 3.187-1.062 4 1.393.813 1.869 2.602 1.062 4-.808 1.398-2.595 1.88-3.995 1.081-.008 1.612-1.319 2.919-2.934 2.919-1.614 0-2.925-1.307-2.933-2.919-1.4.799-3.188.317-3.995-1.081-.807-1.398-.331-3.187 1.062-4-1.393-.813-1.869-2.602-1.062-4 .807-1.398 2.595-1.88 3.995-1.081zm2.797 2.581c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5z" />
+                         <line
+                            x1="21"
+                            y1="3"
+                            x2="3"
+                            y2="21"
+                            stroke="#1E2125"
+                            strokeWidth="2.3"
+                            strokeLinecap="round"
+                         />
+                       </svg>
+                      <div className="relative w-6 h-6 border border-[#6D778E] rounded-sm flex items-center justify-center">
+                        {showMemoryPageIcon && (
+                          <div className="absolute inset-[3px] bg-[#0A85C2]"></div>
+                        )}
+                      </div>
+                    {showMemoryIconTooltip && (
+                      <div
+                        className={`absolute top-1/2 -translate-y-1/2 z-20 w-max max-w-[260px] rounded-md bg-[#0A85C2] text-white text-[12px] leading-[16px] px-3 py-2 shadow-lg after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 ${
+                          memoryIconTooltipSide === "right"
+                            ? "left-full ml-3 after:left-[-6px] after:border-y-[6px] after:border-y-transparent after:border-r-[6px] after:border-r-[#0A85C2]"
+                            : "right-full mr-3 after:right-[-6px] after:border-y-[6px] after:border-y-transparent after:border-l-[6px] after:border-l-[#0A85C2]"
+                        }`}
+                      >
+                        {memoryPageMessage}
+                      </div>
+                    )}
+                    </button>
                   </div>
                 </div>
 
@@ -1912,27 +2012,6 @@ const handleSubmit = async () => {
                   </div>
                 )}
 
-                <div className="flex flex-row items-center gap-4 mt-8 mobile:mt-6">
-                  <div
-                    className="relative w-10 h-8 cursor-pointer"
-                    onClick={() => setShowMemoryPageIcon(!showMemoryPageIcon)}
-                  >
-                    <div className="absolute inset-0 border-[1px] border-[#6D778E]"></div>
-                    {showMemoryPageIcon && (
-                      <div className="absolute inset-[3px] bg-[#0A85C2]"></div>
-                    )}
-                  </div>
-                  <div className="flex flex-col">
-                    <div className="text-[16px] text-[#1E2125] leading-[22px] font-normal">
-                      Prikaži ikono na spominski strani
-                    </div>
-                    {showMemoryPageIcon && (
-                      <div className="text-[14px] mt-1 text-[#ACAAAA] font-normal">
-                        Svojci cvetje in sveče hvaležno odklanjajo.
-                      </div>
-                    )}
-                  </div>
-                </div>
 
                 <div className="flex flex-row w-full space-x-8 mobile:space-y-2 mobile:space-x-0 mobile:flex-col  mt-16 mobile:mt-12">
                   <div

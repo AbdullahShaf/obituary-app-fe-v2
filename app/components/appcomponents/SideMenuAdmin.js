@@ -32,6 +32,11 @@ const SideMenuAdmin = ({
       imgSrc: "/ico_funeral_comp.png",
       path: "/admin/funeralcompanies",
     },
+    {
+      text: "Cemeteries",
+      imgSrc: "/ico_funeral_comp.png",
+      path: "/admin/cemeteries",
+    },
     { text: "Florists", imgSrc: "/ico_funerals.png", path: "/admin/florists" },
     { text: "Users", imgSrc: "/user_active_icon.png", imgActive: "/ico_funeral_comp.png", path: "/admin/users" },
     { text: "Keepers", imgSrc: "/ico_funeral_comp.png", path: "/admin/keepers" },

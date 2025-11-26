@@ -51,16 +51,35 @@ const SponsorComponent = ({ text = "", region, city }) => {
           {sponsors && sponsors.length ? (
             <div className="flex justify-center items-center mt-[30px]">
               {sponsors?.map((item) => {
+                const logoElement = (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={item?.logo ?? sponser6}
+                    alt={item?.company || "Logotip sponzorja"}
+                    className="max-w-[100%]"
+                  />
+                );
+                const content = item?.websiteLink ? (
+                  <a
+                    href={item.websiteLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Obišči ${item?.company || "sponzorja"}`}
+                    className="flex w-full h-full items-center justify-center"
+                  >
+                    {logoElement}
+                  </a>
+                ) : (
+                  logoElement
+                );
                 return (
-                  <div key={item.id} className="flex w-[180px] h-[80px] mobile:w-[150px]  filter grayscale mx-[10px] items-center justify-center">
-                    <img
-                      src={item?.logo ?? sponser6}
-                      alt="sponser2 of the image"
-                      className="max-w-[100%]"
-                    />
+                  <div
+                    key={item.id}
+                    className="flex w-[180px] h-[80px] mobile:w-[150px]  filter grayscale mx-[10px] items-center justify-center"
+                  >
+                    {content}
                   </div>
                 );
-
               })}
             </div>
           ) : (

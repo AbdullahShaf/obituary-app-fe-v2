@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Modal,
   ModalContent,
@@ -13,9 +13,12 @@ import imgUp from "@/public/ico_up.png";
 import Image from "next/image";
 import Modals from "./Modals";
 import Dropdown from "./Dropdown";
+import DropdownWithSearch from "./DropdownWithSearch";
 import { useBreakpoint } from "@/app/hooks/useBreakpoint";
-
-
+import { useAuth } from "@/hooks/useAuth";
+import cemetryService from "@/services/cemetry-service";
+import { toast } from "react-hot-toast";
+import companyService from "@/services/company-service";
 
 export default function ModalNew4({
   isShowModal,
@@ -25,10 +28,124 @@ export default function ModalNew4({
   selectedImage,
   data,
   updateObituary,
+  defaultCity = "",
+  onSaved,
+  cemeteryToEdit = null,
 }) {
   const [scrollBehavior, setScrollBehavior] = React.useState("outside");
+  const { user } = useAuth();
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState(defaultCity || "");
+  const [selectedImageFile, setSelectedImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
+  const [companyId, setCompanyId] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const inputFileRef = useRef(null);
+  const inputFileRefMobile = useRef(null);
 
   const breakpoint = useBreakpoint()
+
+  useEffect(() => {
+    if (isShowModal && user?.id) {
+      const fetchCompany = async () => {
+        try {
+          const response = await companyService.getFuneralCompany({
+            userId: user.id,
+          });
+          if (response?.company?.id) {
+            setCompanyId(response.company.id);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchCompany();
+    }
+  }, [isShowModal, user]);
+
+  useEffect(() => {
+    if (cemeteryToEdit) {
+      setName(cemeteryToEdit.name || "");
+      setAddress(cemeteryToEdit.address || "");
+      setCity(cemeteryToEdit.city || defaultCity || "");
+      setImagePreview(cemeteryToEdit.image || "");
+      setSelectedImageFile(null);
+    } else {
+      setName("");
+      setAddress("");
+      setCity(defaultCity || "");
+      setImagePreview("");
+      setSelectedImageFile(null);
+    }
+  }, [cemeteryToEdit, defaultCity, isShowModal]);
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedImageFile(file);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSave = async () => {
+    if (!name.trim()) {
+      toast.error("Vnesite ime pokopališča");
+      return;
+    }
+    if (!city.trim()) {
+      toast.error("Izberite mesto");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("companyId", companyId || "");
+      formData.append(`cemeteries[0][name]`, name.trim());
+      formData.append(`cemeteries[0][address]`, address.trim());
+      formData.append(`cemeteries[0][city]`, city.trim());
+      formData.append(`cemeteries[0][updated]`, true);
+
+      if (cemeteryToEdit?.id) {
+        formData.append(`cemeteries[0][id]`, cemeteryToEdit.id);
+      }
+
+      if (selectedImageFile) {
+        formData.append(`cemeteries[0][image]`, selectedImageFile);
+      } else if (cemeteryToEdit?.image) {
+        formData.append(`cemeteries[0][image]`, cemeteryToEdit.image);
+      }
+
+      await cemetryService.createCemetry(formData);
+      toast.success(
+        cemeteryToEdit?.id ? "Pokopališče je bilo posodobljeno" : "Pokopališče je bilo dodano"
+      );
+      
+      // Reset form
+      setName("");
+      if (!cemeteryToEdit?.id) {
+        setAddress("");
+        setCity(defaultCity || "");
+        setSelectedImageFile(null);
+        setImagePreview("");
+      }
+      
+      setIsShowModal(false);
+      if (onSaved) {
+        onSaved();
+      }
+    } catch (error) {
+      console.error("Error saving cemetery:", error);
+      toast.error("Napaka pri shranjevanju pokopališča");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (breakpoint === "desktop" || breakpoint === "tablet"){
     return (
@@ -77,12 +194,24 @@ export default function ModalNew4({
                       <div className="w-full rounded-[4px]   border border-[#6D778E] bg-white flex flex-row items-center h-12 justify-between pl-5 py-[5px] pr-3">
                         <div className=" inline-flex gap-x-2">
                             <img src="/modal_gallery.png" className="object-contain"/>
-                            <p className="text-[#3C3E41] text-[16px]">Dodaj sliko pokopališča</p>
+                            <p className="text-[#3C3E41] text-[16px]">
+                              {selectedImageFile ? selectedImageFile.name : "Dodaj sliko pokopališča"}
+                            </p>
                         </div>
-                        <button className="bg-[#6D778E] w-[150px] h-[38px] rounded-[4px] text-white flex items-center justify-center gap-x-[5px]">
+                        <button 
+                          onClick={() => inputFileRef.current?.click()}
+                          className="bg-[#6D778E] w-[150px] h-[38px] rounded-[4px] text-white flex items-center justify-center gap-x-[5px]"
+                        >
                             <img src="/modal_add.png" className="object-contain"/>
                               Dodaj
                         </button>
+                        <input
+                          ref={inputFileRef}
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={handleImageUpload}
+                        />
                       </div>
 
                       <div className="flex flex-col items-end gap-2 mt-3 mb-4">
@@ -103,6 +232,8 @@ export default function ModalNew4({
                           <input
                             type="text"
                             placeholder="Pokopališče    (npr. Pokopališče v Gabrskem)"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             className="w-full h-full bg-transparent focus:outline-none text-[#6D778E]"
                           />
                         </div>
@@ -113,6 +244,8 @@ export default function ModalNew4({
                           <input
                             type="text"
                             placeholder="Naslov       (npr. Gabrsko 59, Trbovlje)"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
                             className="w-full h-full bg-transparent focus:outline-none text-[#6D778E]"
                           />
                         </div>
@@ -120,7 +253,12 @@ export default function ModalNew4({
 
                       <div className="text-[#6D778E]  leading-[20px] font-[400px] w-full mt-[10px] h-[46px] flex flex-col justify-start items-start mb-2.5">
                         <div className="px-[10px] mobile:pl-4 pl-6 mt-[4px] h-[48px] rounded-[6px] bg-[#F2F8FF66] shadow-custom-dark-to-white w-full">
-
+                          <DropdownWithSearch
+                            placeholder="Mesto"
+                            selectedCity={city}
+                            onSelectCity={setCity}
+                            variant="ghost"
+                          />
                         </div>
                       </div>
 
@@ -138,7 +276,11 @@ export default function ModalNew4({
                         </div>
                       </div>
 
-                      <button className="w-[250px] h-[60px]">
+                      <button 
+                        onClick={handleSave}
+                        disabled={loading || !name.trim() || !city.trim()}
+                        className="w-[250px] h-[60px] disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
                         <img  src="/modal_button.png" className="w-full relative left-[-12px]"/>
                       </button>
                     </div>
@@ -199,11 +341,19 @@ export default function ModalNew4({
                         <div className="px-[10px] pl-6 mobile:pl-4 mt-[4px] mobile:h-[85px] h-[100px] rounded-[6px] 
                         bg-[#F2F8FF66] shadow-custom-dark-to-white w-full flex flex-col items-center pt-[22px]">
                             <button
+                              onClick={() => inputFileRefMobile.current?.click()}
                               style={{ boxShadow: '5px 5px 10px #A6ABBD, -5px -5px 10px #FAFBFF' }}
-                              className="w-[214px] mobile:w-[150px] mobile:h-8 h-[40px] rounded-[4px] bg-gradient-to-b from-[#0D94E8] to-[#0A85C2] text-white leading-6 text-md ">
+                              className="w-[214px] mobile:w-[150px] mobile:h-8 h-[40px] rounded-[4px] bg-gradient-to-b from-[#0D94E8] to-[#0A85C2] text-white leading-6 text-md "
+                            >
                                 Dodaj sliko
                               </button>
-
+                            <input
+                              ref={inputFileRefMobile}
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={handleImageUpload}
+                            />
                               <p className="text-[#939393] text-[11px] mt-2">Format: jpg, png, webp </p>
                         </div>
                     </div>
@@ -227,6 +377,8 @@ export default function ModalNew4({
                           <input
                             type="text"
                             placeholder="npr. Pokopališče v Gabrskem"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             className="w-full h-full bg-transparent focus:outline-none text-[#ACAAAA]"
                           />
                         </div>
@@ -239,6 +391,8 @@ export default function ModalNew4({
                           <input
                             type="text"
                             placeholder="npr. Gabrsko 59, Trbovlje"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
                             className="w-full h-full bg-transparent focus:outline-none text-[#ACAAAA]"
                           />
                         </div>
@@ -246,17 +400,23 @@ export default function ModalNew4({
 
                       
                       <div className=" text-[#6D778E]  leading-[20px] font-[400px] w-full mt-[10px] h-[82px] flex flex-col justify-start items-start mb-2.5">
-                        <div className="mb-2.5 text-[#414141]">OBČINA</div>
+                        <div className="mb-2.5 text-[#414141]">MESTO</div>
                         <div className="px-[10px] pl-6 m mobile:pl-4t-[4px] h-[48px] rounded-[6px] bg-[#F2F8FF66] shadow-custom-dark-to-white w-full">
-                          <input
-                            type="text"
-                            className="w-full h-full bg-transparent focus:outline-none text-[#ACAAAA]"
+                          <DropdownWithSearch
+                            placeholder="Mesto"
+                            selectedCity={city}
+                            onSelectCity={setCity}
+                            variant="ghost"
                           />
                         </div>
                       </div>
 
 
-                      <button className="w-full h-[60px]">
+                      <button 
+                        onClick={handleSave}
+                        disabled={loading || !name.trim() || !city.trim()}
+                        className="w-full h-[60px] disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
                         <img  src="/modal_button_sm.png" className="w-full relative left-[-12px] object-contain"/>
                       </button>
                     </div>

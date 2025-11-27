@@ -530,15 +530,6 @@ export default function FormModal({ isShowModal, setIsShowModal, editId, refetch
                                                 onChange={(e) => setCompany(e.target.value)}
                                             />
                                         </div>
-                                    <div className="px-[10px] pl-6 mt-[4px] h-[38px] rounded-[6px] bg-[#F2F8FF66] shadow-custom-dark-to-white w-full mb-3">
-                                        <input
-                                            type="text"
-                                            value={websiteLink}
-                                            placeholder="LINK TO THEIR WEBSITE"
-                                            className="w-full h-full bg-transparent focus:outline-none text-[#ACAAAA]"
-                                            onChange={(e) => setWebsiteLink(e.target.value)}
-                                        />
-                                    </div>
                                     </div>
                                     <div className="flex justify-between">
                                         <div className="w-[30%]">

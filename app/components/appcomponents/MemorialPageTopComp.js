@@ -705,7 +705,7 @@ const MemorialPageTopComp = ({
                                   </div>
                                 </div>
                                 <div className="flex flex-col pl-[15px]">
-                                  <div className="flex items-center h-[23px] gap-2">
+                                  <div className="flex items-center h-[23px]">
                                     <div className="text-[#1E2125] text-[20px] font-medium">
                                       {item.details.eventName
                                         ? formatTitleCase(
@@ -713,45 +713,6 @@ const MemorialPageTopComp = ({
                                           )
                                         : ""}
                                     </div>
-                                    {data?.showMemoryPageIcon && (
-                                      <div
-                                        className="cursor-pointer flex items-center justify-center relative"
-                                        onClick={() => {
-                                          const message = data?.memoryPageMessage || "Svojci cvetje in sveče hvaležno odklanjajo.";
-                                          toast(message, {
-                                            duration: 4000,
-                                            position: 'top-center',
-                                            style: {
-                                              background: '#0A85C2',
-                                              color: '#fff',
-                                              borderRadius: '8px',
-                                              padding: '12px 16px',
-                                            },
-                                          });
-                                        }}
-                                        title={data?.memoryPageMessage || "Svojci cvetje in sveče hvaležno odklanjajo."}
-                                      >
-                                        <svg
-                                          width="18"
-                                          height="18"
-                                          viewBox="0 0 24 24"
-                                          fill="none"
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          className="text-[#0A85C2]"
-                                        >
-                                          {/* Iconmonstr-style flower icon with diagonal line */}
-                                          <path d="M12 2C10.5 2 9.5 3 9.5 4.5C9.5 6 10.5 7 12 7C13.5 7 14.5 6 14.5 4.5C14.5 3 13.5 2 12 2Z" fill="currentColor" opacity="0.6"/>
-                                          <path d="M17.5 8C17.5 6.5 16.5 5.5 15 5.5C13.5 5.5 12.5 6.5 12.5 8C12.5 9.5 13.5 10.5 15 10.5C16.5 10.5 17.5 9.5 17.5 8Z" fill="currentColor" opacity="0.6"/>
-                                          <path d="M17.5 16C17.5 14.5 16.5 13.5 15 13.5C13.5 13.5 12.5 14.5 12.5 16C12.5 17.5 13.5 18.5 15 18.5C16.5 18.5 17.5 17.5 17.5 16Z" fill="currentColor" opacity="0.6"/>
-                                          <path d="M12 15C10.5 15 9.5 16 9.5 17.5C9.5 19 10.5 20 12 20C13.5 20 14.5 19 14.5 17.5C14.5 16 13.5 15 12 15Z" fill="currentColor" opacity="0.6"/>
-                                          <path d="M6.5 8C6.5 6.5 5.5 5.5 4 5.5C2.5 5.5 1.5 6.5 1.5 8C1.5 9.5 2.5 10.5 4 10.5C5.5 10.5 6.5 9.5 6.5 8Z" fill="currentColor" opacity="0.6"/>
-                                          <path d="M6.5 16C6.5 14.5 5.5 13.5 4 13.5C2.5 13.5 1.5 14.5 1.5 16C1.5 17.5 2.5 18.5 4 18.5C5.5 18.5 6.5 17.5 6.5 16Z" fill="currentColor" opacity="0.6"/>
-                                          <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
-                                          {/* Diagonal line (no flowers) */}
-                                          <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-                                        </svg>
-                                      </div>
-                                    )}
                                   </div>
                                   <div className="flex mt-[8px] flex-col">
                                     <p className="text-[#414141] text-[14px] font-normal leading-[16.41px]">

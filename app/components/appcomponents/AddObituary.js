@@ -50,10 +50,15 @@ const AddObituary = ({ set_Id, setModal }) => {
   const [obituaryResponse, setObituaryResponse] = useState(null);
   const cardRefs = useRef([]);
   const [birthMode, setBirthMode] = useState("full");
-  const [events, setEvents] = useState([createEmptyEvent()]);
-  const [isCemeteryModalOpen, setIsCemeteryModalOpen] = useState(false);
-  const [showMemoryPageIcon, setShowMemoryPageIcon] = useState(false);
-  const [memoryPageMessage, setMemoryPageMessage] = useState("Svojci cvetje in sveče hvaležno odklanjajo.");
+  const [events, setEvents] = useState([
+    {
+      eventName: "",
+      eventLocation: "",
+      eventDate: null,
+      eventHour: null,
+      eventMinute: null,
+    },
+  ]);
 
   const addEvent = () => {
     setEvents([
@@ -1875,28 +1880,6 @@ const handleSubmit = async () => {
                     {uploadedDeathReport.name}
                   </div>
                 )}
-
-                <div className="flex flex-row items-center gap-4 mt-8 mobile:mt-6">
-                  <div
-                    className="relative w-10 h-8 cursor-pointer"
-                    onClick={() => setShowMemoryPageIcon(!showMemoryPageIcon)}
-                  >
-                    <div className="absolute inset-0 border-[1px] border-[#6D778E]"></div>
-                    {showMemoryPageIcon && (
-                      <div className="absolute inset-[3px] bg-[#0A85C2]"></div>
-                    )}
-                  </div>
-                  <div className="flex flex-col">
-                    <div className="text-[16px] text-[#1E2125] leading-[22px] font-normal">
-                      Prikaži ikono na spominski strani
-                    </div>
-                    {showMemoryPageIcon && (
-                      <div className="text-[14px] mt-1 text-[#ACAAAA] font-normal">
-                        Svojci cvetje in sveče hvaležno odklanjajo.
-                      </div>
-                    )}
-                  </div>
-                </div>
 
                 <div className="flex flex-row w-full space-x-8 mobile:space-y-2 mobile:space-x-0 mobile:flex-col  mt-16 mobile:mt-12">
                   <div

@@ -25,93 +25,10 @@ export default function ModalNew4({
   selectedImage,
   data,
   updateObituary,
-  defaultCity = "",
-  onSaved,
 }) {
   const [scrollBehavior, setScrollBehavior] = React.useState("outside");
 
   const breakpoint = useBreakpoint()
-
-  useEffect(() => {
-    if (defaultCity) {
-      setCity(defaultCity);
-    }
-  }, [defaultCity]);
-
-  useEffect(() => {
-    if (isShowModal && user?.id) {
-      const fetchCompany = async () => {
-        try {
-          const response = await companyService.getFuneralCompany({
-            userId: user.id,
-          });
-          if (response?.company?.id) {
-            setCompanyId(response.company.id);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchCompany();
-    }
-  }, [isShowModal, user]);
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setSelectedImageFile(file);
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImagePreview(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSave = async () => {
-    if (!name.trim()) {
-      toast.error("Vnesite ime pokopališča");
-      return;
-    }
-    if (!city.trim()) {
-      toast.error("Izberite mesto");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const formData = new FormData();
-      formData.append("companyId", companyId || "");
-      formData.append(`cemeteries[0][name]`, name.trim());
-      formData.append(`cemeteries[0][address]`, address.trim());
-      formData.append(`cemeteries[0][city]`, city.trim());
-      formData.append(`cemeteries[0][updated]`, true);
-
-      if (selectedImageFile) {
-        formData.append(`cemeteries[0][image]`, selectedImageFile);
-      }
-
-      await cemetryService.createCemetry(formData);
-      toast.success("Pokopališče je bilo dodano");
-      
-      // Reset form
-      setName("");
-      setAddress("");
-      setCity(defaultCity || "");
-      setSelectedImageFile(null);
-      setImagePreview("");
-      
-      setIsShowModal(false);
-      if (onSaved) {
-        onSaved();
-      }
-    } catch (error) {
-      console.error("Error saving cemetery:", error);
-      toast.error("Napaka pri shranjevanju pokopališča");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (breakpoint === "desktop" || breakpoint === "tablet"){
     return (

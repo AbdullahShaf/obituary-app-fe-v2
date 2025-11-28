@@ -1,55 +1,70 @@
 import axios from "./axios";
 
 const partnerService = {
-
   getAllPartners: async () => {
     try {
-      const response = await axios.get("/partner")
-      return response.data
+      const response = await axios.get("/partner");
+      return response.data;
     } catch (error) {
-      console.error("Error fetching partners", error)
+      console.error("Error fetching partners", error);
     }
   },
-  
+
+  getLocalNewsPartners: async () => {
+    try {
+      const response = await axios.get("/partner/local-news-partner");
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching local news partners", error);
+    }
+  },
+
+  getRegionalPartners: async (region: string) => {
+    try {
+      const response = await axios.get(`/partner/regional-partner/${region}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching regional partners", error);
+    }
+  },
+
   deletePartner: async (partnerId: number) => {
     try {
-      const response = await axios.delete(`/partner/${partnerId}`)
-      return response.data
+      const response = await axios.delete(`/partner/${partnerId}`);
+      return response.data;
     } catch (error) {
-      console.error("Error deleting partner", error)
+      console.error("Error deleting partner", error);
     }
   },
 
   updatePartner: async (partnerId: number, partnerData: any) => {
     try {
-      const response = await axios.put(`/partner/${partnerId}`, partnerData)
-      return response.data
+      const response = await axios.put(`/partner/${partnerId}`, partnerData);
+      return response.data;
     } catch (error) {
-      console.error("Error updating partner", error)
+      console.error("Error updating partner", error);
     }
   },
 
-createPartner: async (partnerData: any) => {
-  try {
-    const response = await axios.post("/partner", partnerData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error creating partner", error);
-  }
-},
-
+  createPartner: async (partnerData: any) => {
+    try {
+      const response = await axios.post("/partner", partnerData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error creating partner", error);
+    }
+  },
 
   getPartnerById: async (partnerId: number) => {
     try {
-      const response = await axios.get(`/partner/${partnerId}`)
-      return response.data
+      const response = await axios.get(`/partner/${partnerId}`);
+      return response.data;
     } catch (error) {
-      console.error("Error fetching partner", error)
+      console.error("Error fetching partner", error);
     }
   },
-  
-}
+};
 
-export default partnerService
+export default partnerService;

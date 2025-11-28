@@ -14,10 +14,14 @@ const LokalniContent = () => {
   return (
     <>
       <LocalPartnersBanner label={"LOKALNI PARTNERJI"} />
+      <div className="flex flex-col mx-auto justify-center items-center w-full">
+
       <NewsPartnersComponent />
       <PartnersServicesSection />
       <RegionalPartnersSection />
       <PartnersContactSection />
+      </div>
+
       <CommonFooter currentPage="/lokalni" />
     </>
   );

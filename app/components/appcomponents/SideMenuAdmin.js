@@ -26,6 +26,7 @@ const SideMenuAdmin = ({
     { text: "Obituaries", imgSrc: "/ico_user.png", path: "/admin/Obituaries" },
     { text: "Memory Books", imgSrc: "/ico_funerals.png", path: "/admin/memorybooks" },
     { text: "Sponsors", imgSrc: "/ico_funerals.png", path: "/admin/sponsors" },
+    { text: "Local Partners", imgSrc: "/ico_funerals.png", path: "/admin/lokalni" },
     // { text: "Approval Requests", imgSrc: "/ico_funerals.png", path: "/admin/approval-requests" },
     {
       text: "Funeral Companies",

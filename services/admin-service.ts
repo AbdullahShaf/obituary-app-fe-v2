@@ -263,38 +263,6 @@ const adminService = {
       console.error("Error deleting sponsor:", error);
       throw error;
     }
-  },
-
-  createCemetery: async (formData: any) => {
-    const endpoint = "/admin/create-cemetery";
-    const response = await axios.post(endpoint, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    return response.data;
-  },
-
-  editCemetery: async (formData: any, id: any) => {
-    const endpoint = `/admin/edit-cemetery/${id}`;
-    const response = await axios.post(endpoint, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    return response.data;
-  },
-
-  getCemeteries: async () => {
-    const endpoint = "/admin/cemetery-list";
-    const response = await axios.get(endpoint);
-    return response.data;
-  },
-
-  deleteCemetery: async (id: any) => {
-    try {
-      const endpoint = "/admin/delete-cemetery/" + id;
-      const response = await axios.delete(endpoint);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
   }
 };
 

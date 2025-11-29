@@ -81,13 +81,13 @@ const CompaniesWithApprovalReq = () => {
             <tbody>
               {loading === true ? (
                 <tr>
-                  <td colSpan="9" className="text-center py-8">
+                  <td colSpan="10" className="text-center py-8">
                     <p className="text-[#6D778E]">Loading...</p>
                   </td>
                 </tr>
               ) : sponsors.length === 0 ? (
                 <tr>
-                  <td colSpan="9" className="text-center py-8">
+                  <td colSpan="10" className="text-center py-8">
                     <p className="text-[#6D778E]">No sponsors found</p>
                   </td>
                 </tr>

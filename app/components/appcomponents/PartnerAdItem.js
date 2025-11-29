@@ -1,17 +1,37 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import CircleArrow from "../../../public/lokalni/circle-arrow.png";
 import Image from "next/image";
 
 const PartnerAdItem = ({ partner }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [width, setWidth] = useState(null);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+
+    function handleResize() {
+      setWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="min-w-80 flex flex-col w-80">
-      <div className=" img-section h-[340px] w-[340px] relative border border-[#4E4E4E4D] overflow-hidden group">
+      <div
+        className="img-section h-[340px] w-[340px] relative border border-[#4E4E4E4D] overflow-hidden group"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <span className="absolute right-0 top-0 city-tag bg-[#3B3B3B] text-white py-[6px] px-[22px] text-lg leading-6 font-normal z-20">
           {partner.city}
         </span>
 
-        {/* First Image */}
+        {/* Main Image */}
         <Image
           fill
           src={partner?.mainImage}
@@ -19,7 +39,7 @@ const PartnerAdItem = ({ partner }) => {
           className="absolute inset-0 h-full w-full min-w-[340px] object-cover transition-opacity duration-1000 group-hover:opacity-0"
         />
 
-        {/* Hover Image */}
+        {/* Secondary Image */}
         <Image
           fill
           src={partner?.secondaryImage}
@@ -28,6 +48,7 @@ const PartnerAdItem = ({ partner }) => {
         />
       </div>
 
+      {/* Content Section */}
       <div className="min-h-[83px] content-section py-4 px-2 bg-gradient-to-r from-[#E3E8EC] to-white shadow-[5px_5px_10px_rgba(194,194,194,0.4)] shadow-[2px_2px_2px_rgba(0,0,0,0.15)] relative w-[340px]">
         <div className="content flex flex-col gap-[2px] ml-3 mt-1">
           <Link target="_blank" href={partner?.website}>
@@ -35,13 +56,24 @@ const PartnerAdItem = ({ partner }) => {
               className="text-[#0A85C2] text-sm uppercase leading-6 font-light 
                   max-w-[250px] overflow-hidden text-ellipsis whitespace-nowrap"
             >
-              {partner?.notes}
+              {isHovered
+                ? partner?.secondaryImageDescription
+                : partner?.mainImageDescription}
             </h2>
           </Link>
 
           <p className="text-[#1E2125] text-xl leading-[100%] font-light max-w-[250px] overflow-hidden text-ellipsis whitespace-nowrap">
             {partner?.name}
           </p>
+
+          {width >= 1279 && (
+            <p
+              className="
+              text-[#1E2125] text-sm leading-[140%] font-light text-justify mt-2 line-clamp-3 pr-2"
+            >
+              {partner?.notes}
+            </p>
+          )}
         </div>
 
         <Link target="_blank" href={partner?.website}>

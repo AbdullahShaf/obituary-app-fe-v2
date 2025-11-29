@@ -8,6 +8,19 @@ const PartnersSelectionList = ({ title, defaultItems, items }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
+  const [width, setWidth] = React.useState(null);
+
+  React.useEffect(() => {
+    setWidth(window.innerWidth);
+
+    function handleResize() {
+      setWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const paramValue = searchParams.get(title); // read ?title=value from URL
   const [selectedItem, setSelectedItem] = React.useState(paramValue || "");
 
@@ -29,12 +42,14 @@ const PartnersSelectionList = ({ title, defaultItems, items }) => {
   return (
     <div className="flex flex-row gap-[14px] justify-between items-center">
       <div className="flex flex-row gap-[14px] items-center w-full">
-        <DefaultItemsList
-          title={title}
-          defaultItems={defaultItems}
-          selected={selectedItem}
-          onSelect={updateQuery}
-        />
+        {width < 744 ? null : (
+          <DefaultItemsList
+            title={title}
+            defaultItems={defaultItems}
+            selected={selectedItem}
+            onSelect={updateQuery}
+          />
+        )}
 
         <ItemsList
           title={title}

@@ -155,7 +155,6 @@ export default function FormModal({
 
   const handleCategoryChange = (option) => {
     setSelectedCategory(option);
-    console.log("Selected:", option);
   };
 
   // 🆕 REGION handlers
@@ -254,6 +253,43 @@ export default function FormModal({
 
     await partnerService.createPartner(formData);
     toast.success("Partner created");
+
+    setIsLoading(false);
+    resetStates();
+    refetch();
+  };
+
+  const handleUpdate = async () => {
+    setIsLoading(true);
+
+    const allCities = selectedCities?.map((c) => c.value) || [];
+    const allRegions = selectedRegions?.map((r) => r.value) || [];
+
+    const formData = new FormData();
+
+    if (selectedFile)
+      formData.append("mainImage", selectedFile || editId.mainImage);
+    if (selectedFile2)
+      formData.append("secondaryImage", selectedFile2 || editId.secondaryImage);
+
+    formData.append("category", selectedCategory?.value || editId.category); // FIXED
+    formData.append("city", allCities.join(",") || editId.city); // FIXED
+    formData.append("region", allRegions.join(",") || editId.region); // FIXED
+    formData.append("name", companyName || editId.name);
+    formData.append("notes", notes || editId.notes);
+    formData.append("website", websiteLink || editId.website);
+    formData.append(
+      "mainImageDescription",
+      mainImageDescription || editId.mainImageDescription
+    );
+    formData.append(
+      "secondaryImageDescription",
+      secondaryImageDescription || editId.secondaryImageDescription
+    );
+    formData.append("isLocalNews", JSON.stringify(isLocalNews));
+
+    await partnerService.updatePartner(editId.id, formData);
+    toast.success("Partner updated");
 
     setIsLoading(false);
     resetStates();
@@ -858,6 +894,18 @@ export default function FormModal({
                     disabled={true}
                   >
                     Publishing...
+                  </button>
+                ) : editId ? (
+                  <button
+                    style={{
+                      boxShadow: "5px 5px 10px #A6ABBD, -5px -5px 10px #FAFBFF",
+                      opacity: isButtonDisabled() ? "0.4" : "1",
+                    }}
+                    className="my-[10px] bg-gradient-to-b from-[#0D94E8] to-[#0A85C2] w-[180px] h-[50px] rounded-[10px] text-white flex items-center justify-center gap-x-[5px] mx-auto"
+                    disabled={isButtonDisabled()}
+                    onClick={handleUpdate}
+                  >
+                    Update
                   </button>
                 ) : (
                   <button

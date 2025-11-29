@@ -48,13 +48,13 @@ const PartnersServicesSection = ({
   }, []);
 
   return (
-    <div className="w-full max-w-5xl mx-auto mb-28">
+    <div className="w-full max-w-5xl mx-auto mb-28 px-4 md:px-2">
       {/* ▼ HEADER WITH TOGGLE */}
       <div
         className="flex flex-row gap-4 items-center h-[64px] mb-9 cursor-pointer select-none"
         onClick={() => setActiveSection(isOpen ? "region" : "services")}
       >
-        <h1 className="flex font-normal text-[40px] leading-[48px] tracking-normal text-black">
+        <h1 className="flex font-normal text-[28px] md:text-[40px] leading-[48px] tracking-normal text-black">
           Storitve
         </h1>
 
@@ -86,7 +86,15 @@ const PartnersServicesSection = ({
 
 const PartnersServicesList = ({ partners }) => {
   return (
-    <div className="w-full max-w-5xl mx-auto text-left flex flex-row gap-[32px] flex-wrap">
+    <div
+      className="
+  w-full max-w-5xl mx-auto text-left 
+  flex flex-col md:flex-row      
+  gap-[32px]                     
+  items-center md:items-start    
+  flex-wrap
+"
+    >
       {partners?.length === 0 && (
         <p className="text-center">No partners found</p>
       )}

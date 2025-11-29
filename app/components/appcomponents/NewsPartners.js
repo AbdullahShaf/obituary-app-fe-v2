@@ -23,8 +23,8 @@ const NewsPartnersComponent = () => {
     setPartners(response);
   };
   return (
-    <div className="w-full max-w-5xl mx-auto text-left my-28">
-      <h1 className="text-[#1E2125] text-[40px] leading-[100%] text-[#1E2125] mb-11">
+    <div className="w-full max-w-5xl mx-auto text-left my-28 px-4 md:px-2">
+      <h1 className="text-[#1E2125] text-[28px] md:text-[40px] leading-[100%] text-[#1E2125] mb-11 ">
         Lokalne novice
       </h1>
       <NewsPartnersList partners={partners} />
@@ -34,7 +34,15 @@ const NewsPartnersComponent = () => {
 
 const NewsPartnersList = ({ partners }) => {
   return (
-    <div className="w-full max-w-5xl mx-auto text-left flex flex-row gap-[32px] flex-wrap">
+    <div
+      className="
+  w-full max-w-5xl mx-auto text-left 
+  flex flex-col md:flex-row      
+  gap-[32px]                     
+  items-center md:items-start    
+  flex-wrap
+"
+    >
       {partners.map((partner, index) => (
         <PartnerAdItem key={index} partner={partner} />
       ))}

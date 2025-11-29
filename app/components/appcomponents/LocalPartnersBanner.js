@@ -8,8 +8,8 @@ const LocalPartnersBanner = ({ label, categories }) => {
         className=" flex flex-col items-center justify-center
          py-4 px-6 mx-auto
         text-[#B9B9B9] 
-        mobile:text-[28px] text-[40px] 
-        font-normal leading-[47px] mobile:leading-[33px] whitespace-nowrap"
+        md:text-[28px] text-[40px] 
+        font-normal leading-[47px] whitespace-nowrap"
       >
         {label}
       </h1>

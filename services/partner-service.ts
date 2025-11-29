@@ -10,6 +10,15 @@ const partnerService = {
     }
   },
 
+  getAllPartnersPlusLocals: async () => {
+    try {
+      const response = await axios.get("/partner/all");
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching partners", error);
+    }
+  },
+
   getLocalNewsPartners: async () => {
     try {
       const response = await axios.get("/partner/local-news-partner");

@@ -34,7 +34,7 @@ const CompaniesWithApprovalReq = () => {
 
   const fetchList = async () => {
     setLoading(true);
-    const res = await partnerService.getAllPartners();
+    const res = await partnerService.getAllPartnersPlusLocals();
     setPartners(res);
     setLoading(false);
   };

@@ -51,28 +51,13 @@ const SponsorComponent = ({ text = "", region, city }) => {
           {sponsors && sponsors.length ? (
             <div className="flex justify-center items-center mt-[30px]">
               {sponsors?.map((item) => {
-                const logoContent = (
-                  <img
-                    src={item?.logo ?? sponser6}
-                    alt="sponser2 of the image"
-                    className="max-w-[100%]"
-                  />
-                );
-
                 return (
-                  <div key={item?.id} className="flex w-[180px] h-[80px] mobile:w-[150px]  filter grayscale mx-[10px] items-center justify-center">
-                    {item?.websiteLink ? (
-                      <a
-                        href={item?.websiteLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="cursor-pointer"
-                      >
-                        {logoContent}
-                      </a>
-                    ) : (
-                      logoContent
-                    )}
+                  <div key={item.id} className="flex w-[180px] h-[80px] mobile:w-[150px]  filter grayscale mx-[10px] items-center justify-center">
+                    <img
+                      src={item?.logo ?? sponser6}
+                      alt="sponser2 of the image"
+                      className="max-w-[100%]"
+                    />
                   </div>
                 );
 

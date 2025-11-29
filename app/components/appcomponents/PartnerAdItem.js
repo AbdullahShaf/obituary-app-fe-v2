@@ -77,14 +77,7 @@ const PartnerAdItem = ({ partner }) => {
           </p>
 
           <p className="text-[#4E4E4E] max-w-[270px] text-xs leading-[140%] font-light text-justify pr-4 mb-2 line-clamp-5">
-            {partner?.notes} Lorem Ipsum has been the industry's standard dummy
-            text ever since the 1500s, when an unknown printer took a galley of
-            type and scrambled it to make a type specimen book. It has survived
-            not only five centuries, but also the leap into electronic
-            typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum
-            passages, and more recently with desktop publishing software like
-            Aldus PageMa
+            {partner?.notes}
           </p>
         </div>
 

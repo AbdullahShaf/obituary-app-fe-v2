@@ -101,14 +101,14 @@ const CompaniesWithApprovalReq = () => {
                     <p className="text-[#6D778E]">Loading...</p>
                   </td>
                 </tr>
-              ) : partners.length === 0 ? (
+              ) : partners?.length === 0 ? (
                 <tr>
                   <td colSpan="10" className="text-center py-8">
-                    <p className="text-[#6D778E]">No sponsors found</p>
+                    <p className="text-[#6D778E]">No partners found</p>
                   </td>
                 </tr>
               ) : (
-                partners.map((company, index) => (
+                partners?.map((company, index) => (
                   <tr
                     key={company.id}
                     className={`border-b text-gray-600 text-center ${

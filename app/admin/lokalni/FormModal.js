@@ -272,7 +272,7 @@ export default function FormModal({
     if (selectedFile2)
       formData.append("secondaryImage", selectedFile2 || editId.secondaryImage);
 
-    formData.append("category", selectedCategory?.value || editId.category); // FIXED
+    formData.append("category", selectedCategory?.value ?? editId.category);
     formData.append("city", allCities.join(",") || editId.city); // FIXED
     formData.append("region", allRegions.join(",") || editId.region); // FIXED
     formData.append("name", companyName || editId.name);
@@ -314,7 +314,12 @@ export default function FormModal({
 
   useEffect(() => {
     if (editId) {
-      setSelectedCategory(editId?.category);
+      if (editId?.category) {
+        const matched = categoryOptions.find(
+          (opt) => opt.value === editId.category
+        );
+        setSelectedCategory(matched || null);
+      }
       setCompanyName(editId?.name);
       setNotes(editId?.notes);
       setWebsiteLink(editId?.website);

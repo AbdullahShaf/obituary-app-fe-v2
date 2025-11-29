@@ -28,7 +28,6 @@ export default function ModalCemetery({
   setIsShowModal,
   editId,
   refetch,
-  selectedCity,
 }) {
   const [scrollBehavior, setScrollBehavior] = React.useState("outside");
   const [name, setName] = useState('');
@@ -54,16 +53,10 @@ export default function ModalCemetery({
     } else {
       setName('');
       setAddress('');
+      setCity(null);
       setSelectedFile(null);
-      // Pre-select city if provided
-      if (selectedCity && selectedCity.trim() !== "") {
-        const cityOption = flattenedOptions.find(opt => opt.value === selectedCity);
-        setCity(cityOption || null);
-      } else {
-        setCity(null);
-      }
     }
-  }, [editId, isShowModal, selectedCity]);
+  }, [editId, isShowModal]);
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
@@ -107,24 +100,13 @@ export default function ModalCemetery({
         await adminService.createCemetery(formData);
         toast.success('Cemetery created');
       }
-      setIsLoading(false);
       setIsShowModal(false);
       setName('');
       setAddress('');
+      setCity(null);
       setSelectedFile(null);
-      // Keep city selected if selectedCity prop is provided
-      if (selectedCity && selectedCity.trim() !== "") {
-        const cityOption = flattenedOptions.find(opt => opt.value === selectedCity);
-        setCity(cityOption || null);
-      } else {
-        setCity(null);
-      }
-      // Refetch cemeteries after a short delay to ensure backend has processed
-      if (refetch) {
-        setTimeout(() => {
-          refetch();
-        }, 800);
-      }
+      setIsLoading(false);
+      if (refetch) refetch();
     } catch (error) {
       toast.error('Error saving cemetery');
       setIsLoading(false);
@@ -248,30 +230,18 @@ export default function ModalCemetery({
                                 border: "none",
                                 boxShadow: "none",
                                 minHeight: "48px",
-                                fontSize: "12px",
                               }),
                               placeholder: (base) => ({
                                 ...base,
                                 color: "#6D778E",
-                                fontSize: "12px",
                               }),
                               singleValue: (base) => ({
                                 ...base,
                                 color: "#6D778E",
-                                fontSize: "12px",
                               }),
                               input: (base) => ({
                                 ...base,
                                 color: "#6D778E",
-                                fontSize: "12px",
-                              }),
-                              option: (base) => ({
-                                ...base,
-                                fontSize: "12px",
-                              }),
-                              menu: (base) => ({
-                                ...base,
-                                fontSize: "12px",
                               }),
                             }}
                           />
@@ -449,30 +419,18 @@ export default function ModalCemetery({
                                 border: "none",
                                 boxShadow: "none",
                                 minHeight: "48px",
-                                fontSize: "12px",
                               }),
                               placeholder: (base) => ({
                                 ...base,
                                 color: "#ACAAAA",
-                                fontSize: "12px",
                               }),
                               singleValue: (base) => ({
                                 ...base,
                                 color: "#ACAAAA",
-                                fontSize: "12px",
                               }),
                               input: (base) => ({
                                 ...base,
                                 color: "#ACAAAA",
-                                fontSize: "12px",
-                              }),
-                              option: (base) => ({
-                                ...base,
-                                fontSize: "12px",
-                              }),
-                              menu: (base) => ({
-                                ...base,
-                                fontSize: "12px",
                               }),
                             }}
                           />

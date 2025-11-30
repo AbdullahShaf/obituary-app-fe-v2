@@ -38,7 +38,7 @@ const NewsPartnersList = ({ partners }) => {
       className="
   w-full max-w-5xl mx-auto text-left 
   flex flex-col md:flex-row      
-  gap-[32px]                     
+  gap-[24px]                     
   items-center md:items-start    
   flex-wrap
 "

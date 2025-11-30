@@ -219,6 +219,10 @@ export default function FormModal({
       flag = true;
     }
 
+    if (!notes) {
+      flag = true;
+    }
+
     return flag;
   };
 
@@ -289,7 +293,10 @@ export default function FormModal({
         "secondaryImageDescription",
         secondaryImageDescription || editId.secondaryImageDescription
       );
-      formData.append("isLocalNews", isLocalNews);
+      formData.append(
+        "isLocalNews",
+        String(isLocalNews ?? editId?.isLocalNews)
+      );
 
       await partnerService.updatePartner(editId.id, formData);
       toast.success("Partner updated");
@@ -354,7 +361,7 @@ export default function FormModal({
         setSelectedRegions(arr2);
       }
     }
-  }, [editId, categoryOptions]);
+  }, [editId, categories]);
 
   return (
     <Modal
@@ -648,61 +655,6 @@ export default function FormModal({
                     />
                   </div>
                 </div>
-
-                {/* Start & End Dates */}
-                {/* <div className="flex justify-between">
-                                    <div className="mb-4 flex flex-col w-[48%]">
-                                        <div className="relative">
-                                            <ModalDropBox
-                                                placeholder="START"
-                                                onClick={() => togglePicker("start")}
-                                                isSelectText={startDate ? formatDate(startDate) : ""}
-                                            />
-                                            {openPicker === "start" && (
-                                                <div className="absolute mt-12 bg-white border rounded shadow-lg z-10">
-                                                    <DatePicker
-                                                        selected={startDate}
-                                                        onChange={(date) => {
-                                                            setStartDate(date);
-                                                            setOpenPicker(null);
-                                                        }}
-                                                        dateFormat="d"
-                                                        inline
-                                                        minDate={new Date()}
-                                                        onClickOutside={() => setOpenPicker(null)}
-                                                        locale={sl}
-                                                    />
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    <div className="mb-4 flex flex-col w-[48%]">
-                                        <div className="relative">
-                                            <ModalDropBox
-                                                placeholder="END"
-                                                onClick={() => toggleEndPicker("end")}
-                                                isSelectText={endDate ? formatDate(endDate) : ""}
-                                            />
-                                            {endOpenPicker === "end" && (
-                                                <div className="absolute mt-12 bg-white border rounded shadow-lg z-10">
-                                                    <DatePicker
-                                                        selected={endDate}
-                                                        onChange={(date) => {
-                                                            setEndDate(date);
-                                                            setEndOpenPicker(null);
-                                                        }}
-                                                        dateFormat="d"
-                                                        inline
-                                                        minDate={new Date()}
-                                                        onClickOutside={() => setEndOpenPicker(null)}
-                                                        locale={sl}
-                                                    />
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div> */}
 
                 {/* Company Input */}
                 <div className="px-[10px] mt-[4px] h-[38px] rounded-[6px] bg-[#F2F8FF66] shadow-custom-dark-to-white w-full mb-[10px]">

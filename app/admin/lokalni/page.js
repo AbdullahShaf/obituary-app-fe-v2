@@ -29,6 +29,10 @@ const CompaniesWithApprovalReq = () => {
     return `${day}.${month}.${year}`;
   };
 
+  const refetchItems = () => {
+    fetchList();
+    fetchCategories();
+  };
   const fetchList = async () => {
     setLoading(true);
     try {
@@ -213,7 +217,7 @@ const CompaniesWithApprovalReq = () => {
         isShowModal={isShowModal1}
         setIsShowModal={setIsShowModal1}
         editId={editId}
-        refetch={fetchList}
+        refetch={refetchItems}
       />
     </div>
   );

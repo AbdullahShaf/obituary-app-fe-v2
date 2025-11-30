@@ -56,7 +56,7 @@ export default function ModalCemetery({
       setAddress('');
       setSelectedFile(null);
       // Pre-select city if provided
-      if (selectedCity && selectedCity.trim() !== "") {
+      if (typeof selectedCity === 'string' && selectedCity.trim() !== "") {
         const cityOption = flattenedOptions.find(opt => opt.value === selectedCity);
         setCity(cityOption || null);
       } else {
@@ -113,7 +113,7 @@ export default function ModalCemetery({
       setAddress('');
       setSelectedFile(null);
       // Keep city selected if selectedCity prop is provided
-      if (selectedCity && selectedCity.trim() !== "") {
+      if (typeof selectedCity === 'string' && selectedCity.trim() !== "") {
         const cityOption = flattenedOptions.find(opt => opt.value === selectedCity);
         setCity(cityOption || null);
       } else {

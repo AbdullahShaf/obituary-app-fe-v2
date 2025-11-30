@@ -10,21 +10,9 @@ const Cemeteries = () => {
   const [isShowModal1, setIsShowModal1] = useState(false);
   const [editId, setEditId] = useState(null);
   const [whichScreen, setWhichScreen] = useState(1);
-  const [whichTab, setWhichTab] = useState("");
+  const whichTab = "Cemeteries";
   const [loading, setLoading] = useState(true);
   const [cemeteries, setCemeteries] = useState([]);
-
-  const formatDate = (timestamp) => {
-    if (!timestamp) return "";
-    const funeralDate = new Date(timestamp);
-    if (isNaN(funeralDate.getTime())) return "";
-
-    const day = funeralDate.getDate().toString().padStart(2, "0");
-    const month = (funeralDate.getMonth() + 1).toString().padStart(2, "0");
-    const year = funeralDate.getFullYear();
-
-    return `${day}.${month}.${year}`;
-  };
 
   const fetchList = async () => {
     setLoading(true);

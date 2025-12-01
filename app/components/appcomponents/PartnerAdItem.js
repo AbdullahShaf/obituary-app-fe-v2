@@ -12,7 +12,7 @@ const PartnerAdItem = ({ partner }) => {
   // Fix website URL (always ensure http/https exists)
   const website = partner?.website?.startsWith("http")
     ? partner.website
-    : `https://${partner.website}`;
+    : `https://${partner.website}` || "#";
 
   return (
     <div className="relative flex flex-col w-80 h-[423px]">
@@ -32,19 +32,23 @@ const PartnerAdItem = ({ partner }) => {
           src={partner?.mainImage}
           alt={partner.name}
           className={`absolute inset-0 h-full w-full min-w-[340px] object-cover transition-opacity duration-500 ${
-            isHoveredImage ? "opacity-0" : "opacity-100"
+            isHoveredImage && partner.secondaryImage
+              ? "opacity-0"
+              : "opacity-100"
           }`}
         />
 
         {/* Secondary Image */}
-        <Image
-          fill
-          src={partner?.secondaryImage}
-          alt={partner?.name}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-            isHoveredImage ? "opacity-100" : "opacity-0"
-          }`}
-        />
+        {partner.secondaryImage && (
+          <Image
+            fill
+            src={partner?.secondaryImage}
+            alt={partner?.name}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+              isHoveredImage ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        )}
       </div>
 
       {/* Content Section */}
@@ -60,8 +64,9 @@ const PartnerAdItem = ({ partner }) => {
           <Link target="_blank" rel="noopener noreferrer" href={website}>
             <h2 className="text-[#0A85C2] text-sm uppercase leading-6 font-light max-w-[250px] overflow-hidden text-ellipsis whitespace-nowrap mb-[2px]">
               {isHoveredImage
-                ? partner?.secondaryImageDescription
-                : partner?.mainImageDescription}
+                ? partner?.secondaryImageDescription ||
+                  partner.mainImageDescription
+                : partner?.mainImageDescription || ""}
             </h2>
           </Link>
 
@@ -70,7 +75,7 @@ const PartnerAdItem = ({ partner }) => {
           </p>
 
           <p className="text-[#4E4E4E] max-w-[270px] text-xs leading-[140%] font-light text-justify pr-4 mb-2 line-clamp-5">
-            {partner?.notes}
+            {partner?.notes || ""}
           </p>
         </div>
 

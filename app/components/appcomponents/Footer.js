@@ -218,7 +218,7 @@ export default function Footer() {
                   </div>
                   <div className="ml-[-15px] desktop:mt-[30px] mobile:mt-[15px] mobile:hidden tablet:hidden">
                     <Image
-                      src={'/emailco.svg'}
+                      src={"/emailco.svg"}
                       alt="Facebook Icon"
                       width={233}
                       height={72}
@@ -320,7 +320,7 @@ export default function Footer() {
                       </li>
                       <li className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
                         <a
-                          href="/cenik"
+                          href="/lokalni"
                           className="text-[#414141] font-normal  hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
                         >
                           Oglaševalci
@@ -841,39 +841,87 @@ export function FooterForFaq4() {
   return (
     <div className="bg-[#083545] border-l-1 border-r-1 border-t-1 border-b-1 border-color-[#E3E8EC] pt-[29px] mobile:pt-[15px] pb-[9px]">
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[340px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto">
-        <Image src={logoWhite} width={160} height={20} alt="c" className="w-[160px] h-[20px] mobile:hidden" />
+        <Image
+          src={logoWhite}
+          width={160}
+          height={20}
+          alt="c"
+          className="w-[160px] h-[20px] mobile:hidden"
+        />
         <div className="inline-flex gap-[10px] mobile:gap-[8px] text-[14px] items-center mobile:justify-center mobile:w-full">
-          <Link href="/" className="text-[#DAEBF1]  underline">Prva stran</Link>
+          <Link href="/" className="text-[#DAEBF1]  underline">
+            Prva stran
+          </Link>
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full underline"></div>
-          <Link href="/resitve-za-cvetlicarne" className="text-[#DAEBF1] mobile:hidden underline">Stran za cvetličarne</Link>
-          <Link href="/resitve-za-cvetlicarne" className="text-[#DAEBF1] mobile:block hidden underline">Cvetličarne</Link>
+          <Link
+            href="/resitve-za-cvetlicarne"
+            className="text-[#DAEBF1] mobile:hidden underline"
+          >
+            Stran za cvetličarne
+          </Link>
+          <Link
+            href="/resitve-za-cvetlicarne"
+            className="text-[#DAEBF1] mobile:block hidden underline"
+          >
+            Cvetličarne
+          </Link>
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full underline"></div>
-          <Link href="/oglasevalci" className="text-[#DAEBF1]  underline">Oglaševalci</Link>
+          <Link href="/lokalni" className="text-[#DAEBF1]  underline">
+            Oglaševalci
+          </Link>
         </div>
       </div>
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] mx-auto bg-[#D4D4D4] h-[1px] mt-[18px] mobile:hidden"></div>
       <div className="flex justify-between items-center tablet:w-[695px] mobile:w-[320px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto mt-[18px] mobile:hidden">
         <div className="flex flex-col">
-          <Image src={logo2} width={160} height={20} alt="c" className="w-[160px] h-[20px] hidden mobile:flex mb-[5px]" />
+          <Image
+            src={logo2}
+            width={160}
+            height={20}
+            alt="c"
+            className="w-[160px] h-[20px] hidden mobile:flex mb-[5px]"
+          />
 
-          <span className="text-[12px] text-[#C7C7C7] font-normal leading-[24px]">© 2025 Vse pravice zadržane</span>
+          <span className="text-[12px] text-[#C7C7C7] font-normal leading-[24px]">
+            © 2025 Vse pravice zadržane
+          </span>
         </div>
         <div className="inline-flex gap-[30px] mobile:gap-[16px]">
-          <Link href="/kontakt" className="text-[#A7C6E3] underline w-[65px] text-[14px]">Pišite nam</Link>
-          <Link href="https://www.facebook.com/osmrtnicacom/" className="" target="_blank" rel="noopener noreferrer">
+          <Link
+            href="/kontakt"
+            className="text-[#A7C6E3] underline w-[65px] text-[14px]"
+          >
+            Pišite nam
+          </Link>
+          <Link
+            href="https://www.facebook.com/osmrtnicacom/"
+            className=""
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {/* <Link href="https://www.facebook.com/people/Osmrtnicacom/61581688912510/" className="" target="_blank"> */}
-            <Image src={"/promo_footer_facebook_white.png"} width={18} height={18} alt="Facebook Icon" />
+            <Image
+              src={"/promo_footer_facebook_white.png"}
+              width={18}
+              height={18}
+              alt="Facebook Icon"
+            />
           </Link>
           <Link href="/" className="">
-            <Image src={"/promo_footer_instagram_white.png"} width={18} height={18} alt="Instagram Icon" />
+            <Image
+              src={"/promo_footer_instagram_white.png"}
+              width={18}
+              height={18}
+              alt="Instagram Icon"
+            />
           </Link>
         </div>
       </div>
       <div className="text-center text-[#1A6F8D] font-[400] text-[12px] leading-[100%] mt-[12px] mb-[6px] hidden mobile:block">
-        www.osmrtnica.com @ 2025.  Vse pravice zadržane
+        www.osmrtnica.com @ 2025. Vse pravice zadržane
       </div>
     </div>
-  )
+  );
 }
 
 export function TermsAndCond() {
@@ -972,10 +1020,7 @@ export function FooterForOglasevalci() {
             Prva stran
           </Link>
           <div className="w-[5px] h-[5px] bg-[#DAEBF1] rounded-full underline"></div>
-          <Link
-            href="/cenik"
-            className="text-[#DAEBF1] underline"
-          >
+          <Link href="/cenik" className="text-[#DAEBF1] underline">
             Cenik
           </Link>
         </div>

@@ -100,9 +100,7 @@ const PartnersServicesList = ({ partners }) => {
   flex-wrap
 "
     >
-      {partners?.length === 0 && (
-        <p className="text-center">No partners found</p>
-      )}
+      {partners?.length === 0 && <p className="text-center">Še ni vnosov</p>}
 
       {partners?.length > 0 &&
         partners.map((partner, index) => (

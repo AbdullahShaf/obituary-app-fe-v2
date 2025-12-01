@@ -107,7 +107,7 @@ const RegionalPartnersList = ({ regionalPartners }) => {
 "
     >
       {regionalPartners?.length === 0 && (
-        <p className="text-center">No partners found</p>
+        <p className="text-center">Še ni vnosov</p>
       )}
 
       {regionalPartners.length > 0 &&

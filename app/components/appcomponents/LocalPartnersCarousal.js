@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { motion } from "framer-motion";
 import ArrowLeft from "../../../public/lokalni/left.png";
 import ArrowRight from "../../../public/lokalni/right.png";
 
@@ -9,23 +9,21 @@ export default function LocalPartnersCarousal({ categories }) {
   return <LocalCarousal categories={categories} />;
 }
 
-const DEFAULT_VISIBLE_COUNT = 5;
-const ITEM_WIDTH = 150; // min width of item
-const GAP = 16; // gap between items
+const GAP = 16;
 
 const LocalCarousal = ({ categories }) => {
   const total = categories.length;
 
-  // ----------------------
-  // Responsive / State
-  // ----------------------
-  const [index, setIndex] = useState(DEFAULT_VISIBLE_COUNT); // start at first real item
+  const [index, setIndex] = useState(categories.length);
+  const [isResetting, setIsResetting] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const containerRef = useRef(null);
+  const [itemWidths, setItemWidths] = useState([]);
+
+  const itemRefs = useRef([]);
   const resumeTimeout = useRef(null);
 
-  // detect mobile
+  // Responsive check
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 744);
     handleResize();
@@ -33,37 +31,48 @@ const LocalCarousal = ({ categories }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // responsive visible count
-  const visibleCount = isMobile ? 3 : DEFAULT_VISIBLE_COUNT;
-
-  // ----------------------
-  // Build looped items
-  // ----------------------
+  // Duplicate for infinite looping
   const loopedItems = [
-    ...categories.slice(-visibleCount),
+    ...categories.slice(-total),
     ...categories,
-    ...categories.slice(0, visibleCount),
+    ...categories.slice(0, total),
   ];
 
-  const totalLooped = loopedItems.length;
+  // Measure dynamic widths
+  useLayoutEffect(() => {
+    const w = itemRefs.current.map((el) => (el ? el.offsetWidth : 0));
+    setItemWidths(w);
+  }, [categories]);
 
-  // ----------------------
-  // Auto Slide
-  // ----------------------
+  // Compute total x offset
+  const computeX = () => {
+    if (itemWidths.length === 0) return 0;
+
+    let offset = 0;
+    for (let i = 0; i < index; i++) {
+      offset += itemWidths[i] + GAP;
+    }
+    return -offset;
+  };
+
+  const xOffset = computeX();
+
+  // Auto-slide
   useEffect(() => {
-    if (isPaused || categories.length <= visibleCount) return;
+    if (isPaused) return;
 
-    const t = setInterval(() => {
-      next();
+    const interval = setInterval(() => {
+      setIndex((prev) => prev + 1);
     }, 4000);
 
-    return () => clearInterval(t);
-  }, [isPaused, index, categories.length, visibleCount]);
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
+  // Pause & resume logic
   const pauseAuto = () => {
     setIsPaused(true);
     if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
-    resumeTimeout.current = setTimeout(() => setIsPaused(false), 6000);
+    resumeTimeout.current = setTimeout(() => setIsPaused(false), 5000);
   };
 
   useEffect(() => {
@@ -72,101 +81,95 @@ const LocalCarousal = ({ categories }) => {
     };
   }, []);
 
-  // ----------------------
-  // Navigation
-  // ----------------------
+  // Initialize position
+  useEffect(() => {
+    if (total > 0 && index === 0) {
+      setIndex(total);
+      setIsResetting(true);
+    }
+  }, [total, index]);
+
+  // Resetting cleanup
+  useEffect(() => {
+    if (isResetting) {
+      const timer = setTimeout(() => setIsResetting(false), 50);
+      return () => clearTimeout(timer);
+    }
+  }, [isResetting]);
+
+  const handleAnimationComplete = () => {
+    if (isResetting) return;
+
+    if (index >= total * 2) {
+      setIsResetting(true);
+      setIndex(index - total);
+    } else if (index < total) {
+      setIsResetting(true);
+      setIndex(index + total);
+    }
+  };
+
   const next = () => {
-    if (categories.length <= visibleCount) return;
     pauseAuto();
     setIndex((prev) => prev + 1);
   };
 
   const prev = () => {
-    if (categories.length <= visibleCount) return;
     pauseAuto();
     setIndex((prev) => prev - 1);
   };
 
-  // ----------------------
-  // Reset index for infinite looping
-  // ----------------------
-  useEffect(() => {
-    let timeoutId;
-    if (index >= total + visibleCount) {
-      timeoutId = setTimeout(() => setIndex(visibleCount), 50);
-    } else if (index < visibleCount) {
-      timeoutId = setTimeout(() => setIndex(total + visibleCount - 1), 50);
-    }
-    return () => clearTimeout(timeoutId);
-  }, [index, total, visibleCount]);
-
-  // ----------------------
-  // Handle Drag
-  // ----------------------
+  // Drag handling
   const handleDragEnd = (e, info) => {
     if (!isMobile) return;
     if (info.offset.x < -50) next();
     if (info.offset.x > 50) prev();
   };
 
-  // ----------------------
-  // Compute x offset
-  // ----------------------
-  const xOffset = -(index * (ITEM_WIDTH + GAP));
-
   return (
-    <div className="flex flex-col items-start justify-center gap-6 w-full md:w-[600px] lg:w-[750px]">
-      {/* Carousel */}
+    <div className="flex flex-col items-start justify-center w-full gap-6 md:w-[600px] lg:w-[750px]">
+      {/* CAROUSEL */}
       <div className="overflow-hidden w-full py-3">
         <motion.div
-          ref={containerRef}
-          className="flex flex-row gap-4"
+          className="flex gap-4"
           drag={isMobile ? "x" : false}
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.25}
           onDragEnd={handleDragEnd}
           animate={{ x: xOffset }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
+          transition={{ duration: isResetting ? 0 : 0.35, ease: "easeOut" }}
+          onAnimationComplete={handleAnimationComplete}
         >
+          {loopedItems.length == 0 ? (
+            <div className="flex items-center justify-center w-full h-full text-[#B9B9B9]">
+              Loading...
+            </div>
+          ) : null}
           {loopedItems.map((item, i) => (
-            <LocalPartnersCarousalItem key={i} {...item} />
+            <div key={i} ref={(el) => (itemRefs.current[i] = el)}>
+              <LocalPartnersCarousalItem {...item} />
+            </div>
           ))}
         </motion.div>
       </div>
 
-      {/* Desktop + Tablet Navigation */}
+      {/* Desktop Navigation */}
       <div className="hidden md:flex flex-row items-center justify-end w-full gap-8 mb-10">
-        <button
-          onClick={prev}
-          aria-label="Previous slide"
-          className="hover:cursor-pointer"
-        >
-          <img src={ArrowLeft.src} alt="" className="w-4" />
+        <button onClick={prev}>
+          <img src={ArrowLeft.src} className="w-4" />
         </button>
-        <button
-          onClick={next}
-          aria-label="Next slide"
-          className="hover:cursor-pointer"
-        >
-          <img src={ArrowRight.src} alt="" className="w-4" />
+        <button onClick={next}>
+          <img src={ArrowRight.src} className="w-4" />
         </button>
       </div>
 
       {/* Mobile Navigation */}
-      <div className="flex md:hidden flex-row items-center justify-center w-full gap-10 mt-3">
-        <button
-          onClick={prev}
-          aria-label="Previous slide"
-          className="hover:cursor-pointer"
-        >
-          <img src={ArrowLeft.src} alt="" className="w-5" />
+      <div className="flex md:hidden flex-row items-center justify-center w-full gap-12 mt-3">
+        <button onClick={prev}>
+          <img src={ArrowLeft.src} className="w-5" />
         </button>
-        <button
-          onClick={next}
-          aria-label="Next slide"
-          className="hover:cursor-pointer"
-        >
-          <img src={ArrowRight.src} alt="" className="w-5" />
+        <button onClick={next}>
+          <img src={ArrowRight.src} className="w-5" />
         </button>
       </div>
     </div>
@@ -177,8 +180,8 @@ const LocalPartnersCarousalItem = ({ name }) => {
   return (
     <div
       className="border border-[#B9B9B9] border-[2px] px-4 py-2 bg-[#3B3B3B]
-                 text-base md:text-lg text-[#B9B9B9] uppercase rounded-sm min-w-[150px]
-                 flex justify-center items-center"
+                 text-base md:text-lg text-[#B9B9B9] uppercase rounded-sm w-fit 
+                 flex justify-center items-center h-[50px] lg:h-[80px] whitespace-nowrap"
     >
       <span>{name}</span>
     </div>

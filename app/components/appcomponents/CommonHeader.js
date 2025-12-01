@@ -29,10 +29,12 @@ const headerLinkSets = {
   "/pogrebna-p": [
     { label: "Cvetličarne", path: "/cvetlicarne", active: false },
     { label: "Pogrebna podjetja", path: "/pogrebna-p", active: false },
+    { label: "Lokalni", path: "/lokalni", active: false },
   ],
   "/cvetlicarne": [
     { label: "Cvetličarne", path: "/cvetlicarne", active: false },
     { label: "Pogrebna podjetja", path: "/pogrebna-p", active: false },
+    { label: "Lokalni", path: "/lokalni", active: false },
   ],
   "/zalna-stran": [
     { label: "QR kode", path: "/qr-kode", active: false },
@@ -45,9 +47,9 @@ const headerLinkSets = {
     { label: " Spominska", path: "/spominska", active: false },
   ],
   "/lokalni": [
-    { label: "Cvetličarne", path: "/cvetličarne", active: false },
-    { label: "Pogrebna podjetja", path: "/pogrebna-podjetja", active: false },
-    { label: " Lokalci", path: "/lokalci", active: false },
+    { label: "Cvetličarne", path: "/cvetlicarne", active: false },
+    { label: "Pogrebna podjetja", path: "/pogrebna-p", active: false },
+    { label: "Lokalni", path: "/lokalni", active: false },
   ],
   "/spominska": [
     { label: "QR kode", path: "/qr-kode", active: false },
@@ -203,7 +205,7 @@ function CommonHeader({ currentPage }) {
                 <div className="hidden tablet:flex desktop:flex tablet:mr-[30px] desktop:mr-[38px]">
                   <ul className="flex items-center gap-[32px] tablet:gap-[16px]">
                     {linksToRender.map((link, index) =>
-                      link.label === "Pogrebna podjetja" && link.path==="" ? (
+                      link.label === "Pogrebna podjetja" && link.path === "" ? (
                         <li
                           key={index}
                           className="flex mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center"
@@ -218,8 +220,12 @@ function CommonHeader({ currentPage }) {
                               <span className="text-[#EB1D1D]">{">>"}</span>
                             )}
                             <div className="relative">
-                              <p className="absolute text-[10px] text-[#EB1D1D] right-0 top-[-10px]">KMALU</p>
-                              <p className="relative text-[#1E21254D]">{link.label}</p>
+                              <p className="absolute text-[10px] text-[#EB1D1D] right-0 top-[-10px]">
+                                KMALU
+                              </p>
+                              <p className="relative text-[#1E21254D]">
+                                {link.label}
+                              </p>
                             </div>
                           </Link>
                         </li>
@@ -264,13 +270,12 @@ function CommonHeader({ currentPage }) {
                 {/* Back Button */}
                 {canShowBack && (
                   <button
-                    onClick={() => router.push('/')}
+                    onClick={() => router.push("/")}
                     className="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200 "
                     title="Nazaj"
                   >
                     <Image src="/back.svg" alt="Back" height={28} width={28} />
                   </button>
-                
                 )}
                 <SideMenu />
               </div>

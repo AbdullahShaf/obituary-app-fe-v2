@@ -201,12 +201,14 @@ export default function FormModal({
       selectedRegions.some((r) => r.value) ||
       selectedCities.some((c) => c.value);
 
+    if (editId) {
+      return !hasLocation || !companyName || !selectedCategory?.value;
+    }
+
+    const hasImage = selectedFile && mainImageDescription;
+
     return (
-      !hasLocation ||
-      !companyName ||
-      !websiteLink ||
-      (!mainImageDescription && !secondaryImageDescription) ||
-      !notes
+      !hasLocation || !companyName || !selectedCategory?.value || !hasImage
     );
   };
 
@@ -255,13 +257,17 @@ export default function FormModal({
     const formData = new FormData();
 
     try {
-      if (selectedFile)
-        formData.append("mainImage", selectedFile || editId.mainImage);
-      if (selectedFile2)
-        formData.append(
-          "secondaryImage",
-          selectedFile2 || editId.secondaryImage
-        );
+      if (selectedFile) {
+        formData.append("mainImage", selectedFile);
+      } else if (editId.mainImage) {
+        formData.append("mainImage", editId.mainImage);
+      }
+
+      if (selectedFile2) {
+        formData.append("secondaryImage", selectedFile2);
+      } else if (editId.secondaryImage) {
+        formData.append("secondaryImage", editId.secondaryImage);
+      }
 
       formData.append("category", selectedCategory?.value ?? editId.category);
       formData.append("city", allCities.join(",") || editId.city); // FIXED

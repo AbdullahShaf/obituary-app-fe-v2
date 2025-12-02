@@ -4,17 +4,19 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { motion } from "framer-motion";
 import ArrowLeft from "../../../public/lokalni/left.png";
 import ArrowRight from "../../../public/lokalni/right.png";
+import screenSizes from "@/app/lokalni/constant";
 
-export default function LocalPartnersCarousal({ categories }) {
-  return <LocalCarousal categories={categories} />;
+export default function LocalPartnersCarousal({ categories, screen }) {
+  return <LocalCarousal categories={categories} screen={screen} />;
 }
 
 const GAP = 16;
 
-const LocalCarousal = ({ categories }) => {
-  const total = categories.length;
+const LocalCarousal = ({ categories, screen }) => {
+  const safeCategories = Array.isArray(categories) ? categories : [];
+  const total = safeCategories.length;
 
-  const [index, setIndex] = useState(categories.length);
+  const [index, setIndex] = useState(safeCategories.length);
   const [isResetting, setIsResetting] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -33,16 +35,16 @@ const LocalCarousal = ({ categories }) => {
 
   // Duplicate for infinite looping
   const loopedItems = [
-    ...categories.slice(-total),
-    ...categories,
-    ...categories.slice(0, total),
+    ...safeCategories.slice(-total),
+    ...safeCategories,
+    ...safeCategories.slice(0, total),
   ];
 
   // Measure dynamic widths
   useLayoutEffect(() => {
     const w = itemRefs.current.map((el) => (el ? el.offsetWidth : 0));
     setItemWidths(w);
-  }, [categories]);
+  }, [safeCategories]);
 
   // Compute total x offset
   const computeX = () => {
@@ -147,7 +149,7 @@ const LocalCarousal = ({ categories }) => {
           ) : null}
           {loopedItems.map((item, i) => (
             <div key={i} ref={(el) => (itemRefs.current[i] = el)}>
-              <LocalPartnersCarousalItem {...item} />
+              <LocalPartnersCarousalItem {...item} screen={screen} />
             </div>
           ))}
         </motion.div>
@@ -176,12 +178,16 @@ const LocalCarousal = ({ categories }) => {
   );
 };
 
-const LocalPartnersCarousalItem = ({ name }) => {
+const LocalPartnersCarousalItem = ({ name, screen }) => {
   return (
     <div
-      className="border border-[#B9B9B9] border-[2px] px-4 py-2 bg-[#3B3B3B]
-                 text-base md:text-lg text-[#B9B9B9] uppercase rounded-sm w-fit 
-                 flex justify-center items-center h-[50px] lg:h-[80px] whitespace-nowrap"
+      className={`border border-[#B9B9B9] border-[2px] px-4 py-2 bg-[#3B3B3B]
+                  text-[#B9B9B9] uppercase rounded-sm w-fit leading-6 
+                 flex justify-center items-center ${
+                   screen === screenSizes.MOBILE
+                     ? "text-base h-[50px]"
+                     : "text-lg h-[80px]"
+                 } whitespace-nowrap`}
     >
       <span>{name}</span>
     </div>

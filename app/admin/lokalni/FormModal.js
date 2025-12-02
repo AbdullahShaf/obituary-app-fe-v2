@@ -15,6 +15,9 @@ const regionOptions = Object.keys(regionsAndCities).map((region) => ({
   label: region,
 }));
 
+// Flatten all cities into one array
+const ALL_CITIES = Object.values(regionsAndCities).flat();
+
 export default function FormModal({
   isShowModal,
   setIsShowModal,
@@ -181,6 +184,22 @@ export default function FormModal({
     const newCities = [...selectedCities];
     newCities[index].value = selectedOption?.value || "";
     setSelectedCities(newCities);
+
+    // ---- AUTO SELECT REGION LOGIC ----
+    if (selectedOption?.value) {
+      const cityName = selectedOption.value;
+
+      // Find region from regionsAndCities
+      const foundRegion = Object.keys(regionsAndCities).find((region) =>
+        regionsAndCities[region].includes(cityName)
+      );
+
+      if (foundRegion) {
+        const newRegions = [...selectedRegions];
+        newRegions[index] = { value: foundRegion, inputValue: "" };
+        setSelectedRegions(newRegions);
+      }
+    }
   };
 
   const handleCityInputChange = (index, inputValue) => {
@@ -546,14 +565,18 @@ export default function FormModal({
                   <div key={index} className="mb-2 flex items-center gap-2">
                     <Select
                       options={
-                        selectedRegions[index]?.value
+                        selectedRegions[index]?.value &&
+                        regionsAndCities[selectedRegions[index]?.value]
                           ? regionsAndCities[selectedRegions[index].value].map(
                               (city) => ({
-                                label: city,
                                 value: city,
+                                label: city,
                               })
                             )
-                          : []
+                          : ALL_CITIES.map((city) => ({
+                              value: city,
+                              label: city,
+                            }))
                       }
                       placeholder="CITY"
                       value={

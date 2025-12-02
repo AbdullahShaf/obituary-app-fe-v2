@@ -23,7 +23,8 @@ const PartnerAdItem = ({ partner }) => {
         onMouseLeave={() => setIsHoveredImage(false)}
       >
         <span className="absolute right-0 top-0 city-tag bg-[#3B3B3B] text-white py-[6px] px-[22px] text-lg leading-6 font-normal z-20">
-          {partner.city}
+          {partner?.region || ""} {partner?.region && partner?.city && "-"}{" "}
+          {partner?.city || ""}
         </span>
 
         {/* Main Image */}

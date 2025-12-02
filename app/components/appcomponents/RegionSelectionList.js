@@ -2,24 +2,12 @@
 
 import React from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import screenSizes from "@/app/lokalni/constant";
 
-const RegionSelectionList = ({ title, defaultItems, items }) => {
+const RegionSelectionList = ({ title, defaultItems, items, screen }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-
-  const [width, setWidth] = React.useState(null);
-
-  React.useEffect(() => {
-    setWidth(window.innerWidth);
-
-    function handleResize() {
-      setWidth(window.innerWidth);
-    }
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const paramValue = searchParams.get(title); // read ?title=value from URL
   const [selectedItem, setSelectedItem] = React.useState(paramValue || "");
@@ -42,7 +30,7 @@ const RegionSelectionList = ({ title, defaultItems, items }) => {
   return (
     <div className="flex flex-row gap-[14px] justify-between items-center">
       <div className="flex flex-row gap-[14px] items-center w-full">
-        {width < 744 ? null : (
+        {screen === screenSizes.MOBILE ? null : (
           <DefaultItemsList
             title={title}
             defaultItems={defaultItems}

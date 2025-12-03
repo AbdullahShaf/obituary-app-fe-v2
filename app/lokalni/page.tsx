@@ -58,7 +58,7 @@ const LokalniContent = () => {
         label={"LOKALNI PARTNERJI"}
         categories={categories}
       />
-      <div className="flex flex-col mx-auto justify-center items-center w-full">
+      <div className="flex flex-col mx-auto justify-center items-center w-full ">
         <NewsPartnersComponent screen={screen} />
         <PartnersServicesSection
           screen={screen}
@@ -98,7 +98,7 @@ const ObituaryList = () => {
         currentPage="lokalni"
         forFooter={"memorypage"}
       >
-        <div className="flex flex-col mx-auto bg-[#F5F7F9] w-full">
+        <div className="flex flex-col mx-auto bg-[#F9EBD466] w-full">
           <Suspense fallback={<div>Loading...</div>}>
             <LokalniContent />
           </Suspense>

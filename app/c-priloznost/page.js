@@ -2,11 +2,20 @@
 
 import Head from "next/head";
 import Image from "next/image";
-import { FAQHeader } from "@/app/components/appcomponents/Header";
-import { FooterForFaq2 } from "../components/appcomponents/Footer";
+import { FooterForOglasevalci } from "../components/appcomponents/Footer";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import Cancel from "@/public/xmark.png";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { OglasevalciHeader } from "../components/appcomponents/Header";
+
+function Header() {
+  const router = useRouter();
+  return (
+    <>
+      <OglasevalciHeader />
+    </>
+  );
+}
 
 export default function Faq1() {
   const breakpoint = useBreakpoint();
@@ -21,7 +30,7 @@ export default function Faq1() {
         </Head>
 
         <div className="bg-[#F9EBD4] min-h-[100vh] text-[#3C3E41] relative">
-          <FAQHeader />
+          <Header />
           {/* <div className="tablet:w-[700px] desktop:w-[1200px] absolute top-[108px] left-1/2 -translate-x-1/2 flex items-end justify-end">
             <h1 className="text-[#0A85C2] text-[18px] desktop:text-[20px] mobile:hidden">
               CVETLIČARNE
@@ -205,7 +214,7 @@ export default function Faq1() {
               </button>
             </Link> */}
           </div>
-          <FooterForFaq2 />
+          <FooterForOglasevalci />
         </div>
       </>
     );
@@ -405,7 +414,7 @@ export default function Faq1() {
               </button>
             </Link> */}
           </div>
-          <FooterForFaq2 />
+          <FooterForOglasevalci />
         </div>
       </>
     );

@@ -6,7 +6,6 @@ import { OglasevalciHeader } from "@/app/components/appcomponents/Header";
 import { FooterForOglasevalci } from "../components/appcomponents/Footer";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import Link from "next/link";
-import omr from "@/public/omr.png";
 import { useRouter } from "next/navigation";
 import Cancel from "@/public/xmark.png";
 

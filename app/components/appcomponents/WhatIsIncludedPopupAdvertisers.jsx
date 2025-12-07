@@ -102,7 +102,7 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
               V primeru oglaševanja na vsaj dveh omenjenih straneh (osmrtnice, pogrebi, cvetličarne), se odpre še druga slika in tekst v ozadju.
             </p>
             <Link
-              href="#"
+              href="/lokalni"
               className="text-[16px] leading-[24px] text-[#0A85C2] font-normal underline underline-offset-2 mt-6 inline-block"
             >
               Odpri stran
@@ -148,7 +148,7 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
               />
             </div>
             <Link
-              href="#"
+              href="/lokalni"
               className="text-[16px] leading-[24px] text-[#0A85C2] font-normal underline underline-offset-2 mt-4 inline-block text-right w-full"
             >
               Odpri stran
@@ -160,7 +160,7 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
           <div className="flex items-center justify-between">
             <div className="flex-none flex items-center">
               <Link
-                href="#"
+                href="/lokalni"
                 className="text-[16px] leading-[24px] text-[#0A85C2] font-normal underline underline-offset-2"
               >
                 Odpri stran

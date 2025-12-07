@@ -48,7 +48,7 @@ export default function WhatIsIncludedPopup({ onClose }) {
               Uvrstitev na seznam lokalnih cvetličarn
             </p>
             <Link
-              href="#"
+              href="/cvetlicarne?city=Trbovlje"
               className="desktop:text-[18px] desktop:leading-[24px] tablet:text-[16px] mobile:text-[16px] text-[#0A85C2] font-normal underline underline-offset-2"
             >
               Odpri

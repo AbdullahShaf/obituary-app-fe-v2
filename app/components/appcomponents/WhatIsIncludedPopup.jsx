@@ -37,7 +37,7 @@ export default function WhatIsIncludedPopup({ onClose }) {
 
         <div className="flex mobile:flex-col mobile:items-center tablet:flex-row desktop:gap-[105px] tablet:gap-6 mobile:gap-6 w-[766px]">
           <div className="flex-1 mobile:w-[340px] desktop:max-w-[383px]">
-            <div className="desktop:w-[320px] ms-[-6px] desktop:h-[297px] tablet:w-[250px] tablet:h-[232px] mobile:w-[340px] mobile:h-[297px] overflow-hidden">
+            <div className="desktop:w-[320px] ms-[-10px] desktop:h-[297px] tablet:w-[250px] tablet:h-[232px] mobile:w-[340px] mobile:h-[297px] overflow-hidden">
               <img
                 src="/florist/what-is-included-popup/1.png"
                 alt="Seznam lokalnih cvetličarn"
@@ -56,11 +56,11 @@ export default function WhatIsIncludedPopup({ onClose }) {
           </div>
 
           <div className="flex-1 mobile:w-[340px] desktop:max-w-[383px]">
-            <div className="desktop:w-[320px] desktop:h-[297px] tablet:w-[250px] tablet:h-[232px] mobile:w-[340px] mobile:h-[297px] overflow-hidden">
+            <div className="desktop:w-[320px] ms-[-9px] desktop:h-[297px] tablet:w-[250px] tablet:h-[232px] mobile:w-[340px] mobile:h-[297px] overflow-hidden border-none">
               <img
                 src="/florist/what-is-included-popup/2.png"
                 alt="Prikaz na žalnih straneh"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover border-none"
               />
             </div>
             <p className="desktop:text-[16px] desktop:leading-[24px] tablet:text-[16px] mobile:text-[16px] text-[#444444] font-normal mt-3">

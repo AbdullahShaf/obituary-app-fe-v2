@@ -19,7 +19,7 @@ export default function WhatIsIncludedPopup({ onClose }) {
     <div ref={popupRef} className="w-full bg-[#F5EFE6] pt-14 pb-14">
       <div
         style={{ fontFamily: "Roboto Flex" }}
-        className="relative desktop:max-w-[744px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 px-4 pt-8 pb-[114px] mobile:pt-4 mobile:pb-[60px] tablet:pb-[80px]"
+        className="relative desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 px-4 pt-8 pb-[114px] mobile:pt-4 mobile:pb-[60px] tablet:pb-[80px]"
       >
         <button
           onClick={onClose}
@@ -35,7 +35,7 @@ export default function WhatIsIncludedPopup({ onClose }) {
           Kaj je vključeno
         </h2>
 
-        <div className="flex mobile:flex-col mobile:items-center tablet:flex-row desktop:gap-[122px] tablet:gap-6 mobile:gap-6">
+        <div className="flex mobile:flex-col mobile:items-center tablet:flex-row desktop:gap-[110px] tablet:gap-6 mobile:gap-6">
           <div className="flex-1 mobile:w-[340px]">
             <div className="desktop:w-[320px] ms-[-6px] desktop:h-[297px] tablet:w-[250px] tablet:h-[232px] mobile:w-[340px] mobile:h-[297px] overflow-hidden">
               <img
@@ -44,12 +44,12 @@ export default function WhatIsIncludedPopup({ onClose }) {
                 className="w-full h-full object-cover object-top"
               />
             </div>
-            <p className="desktop:text-[18px] desktop:leading-[24px] tablet:text-[16px] mobile:text-[16px] text-[#444444] font-normal mt-3">
+            <p className="desktop:text-[16px] desktop:leading-[24px] tablet:text-[16px] mobile:text-[16px] text-[#444444] font-normal mt-3">
               Uvrstitev na seznam lokalnih cvetličarn
             </p>
             <Link
               href="/cvetlicarne?city=Trbovlje"
-              className="desktop:text-[18px] desktop:leading-[24px] tablet:text-[16px] mobile:text-[16px] text-[#0A85C2] font-normal underline underline-offset-2"
+              className="desktop:text-[16px] desktop:leading-[24px] tablet:text-[16px] mobile:text-[16px] text-[#0A85C2] font-normal underline underline-offset-2"
             >
               Odpri
             </Link>
@@ -63,10 +63,10 @@ export default function WhatIsIncludedPopup({ onClose }) {
                 className="w-full h-full object-cover"
               />
             </div>
-            <p className="desktop:text-[18px] desktop:leading-[24px] tablet:text-[16px] mobile:text-[16px] text-[#444444] font-normal mt-3">
+            <p className="desktop:text-[16px] desktop:leading-[24px] tablet:text-[16px] mobile:text-[16px] text-[#444444] font-normal mt-3">
               Prikaz na vseh žalnih straneh v občini
             </p>
-            <p className="desktop:text-[18px] desktop:leading-[24px] tablet:text-[16px] mobile:text-[16px] text-[#0A85C2] font-normal">
+            <p className="desktop:text-[16px] desktop:leading-[24px] tablet:text-[16px] mobile:text-[16px] text-[#0A85C2] font-normal">
               V spodnjem delu
             </p>
           </div>
@@ -77,7 +77,7 @@ export default function WhatIsIncludedPopup({ onClose }) {
 
       <div
         style={{ fontFamily: "Roboto Flex" }}
-        className="desktop:max-w-[744px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 px-4 pt-[114px] pb-8 mobile:pt-[60px] mobile:pb-4 tablet:pt-[80px]"
+        className="desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 px-4 pt-[114px] pb-8 mobile:pt-[60px] mobile:pb-4 tablet:pt-[80px]"
       >
         <p className="desktop:text-[20px] desktop:leading-[100%] tablet:text-[16px] mobile:text-[14px] text-[#0A85C2] font-normal uppercase tracking-wide">
           PRILOŽNOST - AKCIJA V DECEMBRU
@@ -96,7 +96,7 @@ export default function WhatIsIncludedPopup({ onClose }) {
           <span className="mobile:hidden tablet:inline">(samo do konca leta)</span>
         </h3>
 
-        <div className="flex mobile:flex-row mobile:justify-center tablet:flex-row desktop:gap-[57px] tablet:gap-6 mobile:gap-4 mt-14">
+        <div className="flex mobile:flex-row mobile:justify-center tablet:flex-row desktop:gap-[40px] tablet:gap-6 mobile:gap-4 mt-14">
           <div className="flex-1 mobile:flex-none tablet:flex-none">
             <div className="desktop:w-[320px] ms-[-10px] desktop:h-[216px] tablet:w-[250px] tablet:h-[169px] mobile:w-[130px] mobile:h-[88px] overflow-hidden">
               <img
@@ -133,11 +133,11 @@ export default function WhatIsIncludedPopup({ onClose }) {
         </div>
 
         <div className="mobile:block tablet:hidden desktop:hidden">
-          <p className="tablet:w-[250px] mobile:block tablet:hidden desktop:hidden desktop:w-full mobile:text-[16px] w-full text-[#444444] mt-6 mobile:mt-3 leading-[22px]">
+          <p className="tablet:w-[250px] mobile:block tablet:hidden desktop:hidden desktop:w-full mobile:text-[14px] text-[14px] w-full text-[#444444] mt-6 mobile:mt-3 leading-[22px]">
             Oglaševanje na najbolj obiskanih straneh z možnostjo predstavitve
             produktov s 50% popustom.
           </p>
-          <p className="mobile:block tablet:hidden desktop:hidden tablet:w-[250px] desktop:w-full mobile:text-[16px] text-[#444444] mt-3 leading-[22px]">
+          <p className="mobile:block tablet:hidden desktop:hidden tablet:w-[250px] desktop:w-full mobile:text-[14px] text-[14px] text-[#444444] mt-3 leading-[22px]">
             Za več informacij odpri podstran{" "}
             <Link
               href="#"
@@ -159,13 +159,13 @@ export default function WhatIsIncludedPopup({ onClose }) {
         </div>
 
         <div className="mt-[40px] space-y-2">
-          <p className="desktop:text-[16px] tablet:text-[16px] mobile:text-[14px] text-[#444444] leading-[20px]">
-            <sup>1</sup> Oglaševanje na mestih za partnerje s 50% popustom.
+          <p className="desktop:text-[14px] tablet:text-[14px] mobile:text-[14px] text-[#444444] leading-[20px]">
+            <sup className="text-[12px]">1</sup> Oglaševanje na mestih za partnerje s 50% popustom.
             Pomeni od 5€ na mesec naprej (oz manj v primeru letne pogodbe).
             Ponudba velja do konca leta.
           </p>
-          <p className="desktop:text-[16px] tablet:text-[16px] mobile:text-[14px] text-[#444444] leading-[20px]">
-            <sup>2</sup> Prva cvetličarna v občini prejme pol leta oglaševanja
+          <p className="desktop:text-[14px] tablet:text-[14px] mobile:text-[14px] text-[#444444] leading-[20px]">
+            <sup className="text-[12px]">2</sup> Prva cvetličarna v občini prejme pol leta oglaševanja
             brezplačno. Druga cvetličarna v občini prejme 3 mesece brezplačno.
           </p>
         </div>

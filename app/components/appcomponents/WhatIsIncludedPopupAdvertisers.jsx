@@ -88,7 +88,7 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
 
       <div
         style={{ fontFamily: "Roboto Flex" }}
-        className="desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 px-4 pt-[25x] pb-8 mobile:pt-[25px] mobile:pb-4 tablet:pt-[25px]"
+        className="desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 px-4 pt-[25px] pb-8 mobile:pt-[25px] mobile:pb-4 tablet:pt-[25px]"
       >
         <div className="mobile:hidden tablet:hidden desktop:flex desktop:gap-8 items-start">
           <div className="flex-1 desktop:max-w-[383px]">

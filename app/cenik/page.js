@@ -12,9 +12,24 @@ import toast from "react-hot-toast";
 import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import Image from "next/image";
+import { getYear, getMonth } from "date-fns";
+import WhatIsIncludedPopup from "../components/appcomponents/WhatIsIncludedPopup";
+import WhatIsIncludedPopupAdvertisers from "../components/appcomponents/WhatIsIncludedPopupAdvertisers";
 
 const Subscription = () => {
   const { user, isAuthenticated, isRole } = useAuth();
+
+  const isFloristTabPublic = () => {
+    const now = new Date();
+    const year = getYear(now);
+    const month = getMonth(now);
+
+    return year === 2025 && month === 11;
+  };
+
+  const showFullFloristContent =
+    isFloristTabPublic() || (isAuthenticated && isRole("Florist"));
+
   const tabs = [
     { id: "spominske", label: "Spominske" },
     { id: "cvetlicarne", label: "Cvetličarne" },
@@ -41,6 +56,8 @@ const Subscription = () => {
     packageType: null,
     customCode: null,
   });
+  const [isWhatIsIncludedOpen, setIsWhatIsIncludedOpen] = useState(false);
+  const [isWhatIsIncludedAdvertisersOpen, setIsWhatIsIncludedAdvertisersOpen] = useState(false);
 
   const handlePayment = (packageType, customCode = null) => {
     setPaymentModal({
@@ -256,11 +273,18 @@ const Subscription = () => {
               <div className="w-full space-y-[12px] ">
                 <div className="w-[759px] text-[18px] leading-[24px] mobile:w-full tablet:w-full">
                   <h4 className="text-[#3C3E41]">POZOR:</h4>
-                  <p className="text-[#414141]">Če želite postati Skrbnik spominske strani, nas kontaktirajte in bomo to uredili <span className="text-[#530CC6]">BREZPLAČNO</span> </p>
-                  <p className="w-[586px] mt-1 text-[14px] leading-[24px] text-[#6D778E]  mobile:w-full">(dokler še niso vnešene lokalne cvetličarne v seznam; kasneje vam bodo to uredile cvetličarne).</p>
+                  <p className="text-[#414141]">
+                    Če želite postati Skrbnik spominske strani, nas
+                    kontaktirajte in bomo to uredili{" "}
+                    <span className="text-[#530CC6]">BREZPLAČNO</span>{" "}
+                  </p>
+                  <p className="w-[586px] mt-1 text-[14px] leading-[24px] text-[#6D778E]  mobile:w-full">
+                    (dokler še niso vnešene lokalne cvetličarne v seznam;
+                    kasneje vam bodo to uredile cvetličarne).
+                  </p>
                 </div>
               </div>
-              <div className="border-[#0A85C2] border-t-[2px] w-[200px] my-6" ></div>
+              <div className="border-[#0A85C2] border-t-[2px] w-[200px] my-6"></div>
 
               <p className="text-[#414141] flex gap-1 w-full desktop:w-[780px] mobile:text-[14px] text-[16px]">
                 <p className="text-[14px]"></p>{" "}
@@ -351,16 +375,32 @@ const Subscription = () => {
               />
 
               <div className="w-[771px] text-[14px] leading-[24px] text-[#6D778E] space-y-[12px] mobile:w-full tablet:w-full mt-[20px]">
-                <p >Op. Za postati Skrbnik je nujno potrebno priložiti Smrtovnico, ki vam jo izda pogrebno podjetje (izdajo jo takoj).
-                  Smrtovnica je nujno potrebna, da se preprečijo zlorabe, objavljanje lažnih smrti, spam in nasploh, ker skrbnik
-                  je lahko samo en izmed najbližnjih pokojni/emu). </p>
-                <p>Op. Podarili bomo mesečnega skrbnika; kasneje ga lahko podaljšate ali pa gre v avtomatsko prekinitev (vse
-                  dodane vsebine ostanejo na spominski strani, ni pa mogoče dodajati več novih).
+                <p>
+                  Op. Za postati Skrbnik je nujno potrebno priložiti Smrtovnico,
+                  ki vam jo izda pogrebno podjetje (izdajo jo takoj). Smrtovnica
+                  je nujno potrebna, da se preprečijo zlorabe, objavljanje
+                  lažnih smrti, spam in nasploh, ker skrbnik je lahko samo en
+                  izmed najbližnjih pokojni/emu).{" "}
+                </p>
+                <p>
+                  Op. Podarili bomo mesečnega skrbnika; kasneje ga lahko
+                  podaljšate ali pa gre v avtomatsko prekinitev (vse dodane
+                  vsebine ostanejo na spominski strani, ni pa mogoče dodajati
+                  več novih).
                 </p>
               </div>
 
               <div className="w-full flex justify-start mt-[60px]">
-                <p className="w-[456px] text-[16px] leading-[24px] mobile:w-full">Imate vprašanja, predloge, komentarje? <a href="mailto:info@osmrtnica.com" className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </a></p>
+                <p className="w-[456px] text-[16px] leading-[24px] mobile:w-full">
+                  Imate vprašanja, predloge, komentarje?{" "}
+                  <a
+                    href="mailto:info@osmrtnica.com"
+                    className="text-[#0A85C2] underline underline-offset-2"
+                  >
+                    {" "}
+                    Pišite nam.{" "}
+                  </a>
+                </p>
                 {/* <Link href={"/kontakt"}>
                   <Image
                     src={"/Kontaktirajte_nas_btn.png"}
@@ -403,170 +443,114 @@ const Subscription = () => {
                 </h2>
               </div>
 
-              {isAuthenticated && isRole("Florist") ? (
-                // Full content for logged-in florists (right version)
-                <>
-              <p className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
-                <p className="text-[14px]"></p>{" "}
-                <p className="mt-1">
-                  V ceni je zajeta uvrstitev na seznam lokalnih cvetličarn,
-                  prikazovanje lokalnih cvetličarn na lokalnih žalnih straneh /
-                  osmrtnicah in vrsta privilegijev, ki so podrobneje
-                  predstavljeni na straneh za cvetličarne. Več informacij vas
-                  čaka v uporabnikem računu.
-                </p>
-              </p>
-              <div className="w-full mt-4">
-                <Tabs
-                  tabs={formtabs}
-                  setActive={setActiveFormTabCvetlicarne}
-                  active={activeFormTabCvetlicarne}
-                  tabContent={
-                    <>
-                      <FormTabsContentCvetlicarne />
-                      <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col">
-                        <div className="text-[#414141] flex gap-1 mb-[40px] w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
-                          <p className="text-[14px]">1</p>{" "}
-                          <div className="flex flex-col">
-                            <p className="mt-1">
-                              Občine nad 25.000 preb: Maribor, Celje, Kranj,
-                              Koper, Novo mesto, Domžale, Velenje, Nova Gorica
-                            </p>
-                            <p className="mt-2">
-                              Naročnina s samodejnim podaljšanjem; velja do
-                              preklica.
-                            </p>
-                          </div>
-                        </div>
-                        <div className="w-full flex flex-col gap-4">
-                          <div className="relative">
-                            <PricingCard
-                              // number={2}
-                              label="Izdelava lastne strani"
-                              title="Brezplačno"
-                            />
-                            {/* <div className="absolute top-1 right-3 text-[#414141] text-[20px]">
-                              *
-                            </div> */}
-                          </div>
-                          <div className="relative">
-                            <PricingCard
-                              // number={2}
-                              label="možnost vpisovanja lokalnih osmrtnic"
-                              mobilelabel="MOŽNOST VPISOVANJA OSMRTNIC"
-                              title="Brezplačno"
-                            />
-                            {/* <div className="absolute top-1 right-3 text-[#414141] text-[20px]">
-                              *
-                            </div> */}
-                          </div>
-                          <div className="relative">
-                            <PricingCard
-                              // number={2}
-                              label="darila za vaše stranke; skrbnik, digitalne kartice, qr kode"
-                              mobilelabel="ZA STRANKE: SKRBNIK, KARTICE, QR KODE"
-                              title="Brezplačno"
-                            />
-                            {/* <div className="absolute top-1 right-3 text-[#414141] text-[20px]">
-                              *
-                            </div> */}
-                          </div>
-                          {/* <div className="relative">
-                            <PricingCard
-                              number={3}
-                              label="vpis na strani naši partnerji"
-                              title="Za vedno"
-                            />
-                            <div className="absolute top-1 right-3 text-[#414141] text-[20px]">
-                              *
+              {showFullFloristContent ? (
+                !isWhatIsIncludedOpen && (
+                  <>
+                    <p className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
+                      <p className="text-[14px]"></p>{" "}
+                      <p className="mt-1">
+                        V ceni je zajeta uvrstitev na seznam lokalnih cvetličarn, prikazovanje lokalnih cvetličarn na lokalnih žalnih straneh / osmrtnicah in vrsta privilegijev, ki so podrobneje predstavljeni na straneh za cvetličarne.
+                      </p>
+                    </p>
+                    <div className="w-full mt-4">
+                      <Tabs
+                        tabs={formtabs}
+                        setActive={setActiveFormTabCvetlicarne}
+                        active={activeFormTabCvetlicarne}
+                        tabContent={
+                          <>
+                            <FormTabsContentCvetlicarne />
+                            <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col">
+                              <div className="text-[#414141] flex gap-1 mb-[40px] w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
+                                <p className="text-[14px]">1</p>{" "}
+                                <div className="flex flex-col">
+                                  <p className="mt-1">
+                                    Občine nad 25.000 preb: Maribor, Celje, Kranj,
+                                    Koper, Novo mesto, Domžale, Velenje, Nova
+                                    Gorica
+                                  </p>
+                                  <p className="mt-2">
+                                    Naročnina s samodejnim podaljšanjem; velja do
+                                    preklica.
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="w-full flex flex-col gap-4">
+                                <div className="relative">
+                                  <PricingCard
+                                    label="Izdelava lastne strani"
+                                    title="Brezplačno"
+                                  />
+                                </div>
+                                <div className="relative">
+                                  <PricingCard
+                                    label="možnost vpisovanja lokalnih osmrtnic"
+                                    mobilelabel="MOŽNOST VPISOVANJA OSMRTNIC"
+                                    title="Brezplačno"
+                                  />
+                                </div>
+                                <div className="relative">
+                                  <PricingCard
+                                    label="darila za vaše stranke; skrbnik, digitalne kartice, qr kode"
+                                    mobilelabel="ZA STRANKE: SKRBNIK, KARTICE, QR KODE"
+                                    title="Brezplačno"
+                                  />
+                                </div>
+                              </div>
+                              <div>
+                                <div className="text-[#414141] w-full mt-6 desktop:w-[744px] text-[14px] desktop:text-[16px]">
+                                  <p className=" mt-4 ">
+                                    Poleg naštetega so občasno mogoče še druge
+                                    promocije. Preverite trenutne.
+                                  </p>
+                                  <button
+                                    onClick={() => setIsWhatIsIncludedOpen(true)}
+                                    className="w-[250px] mt-14 h-[53px] shrink-0 rounded-full text-white justify-center items-center self-center shadow-custom-light-dark bg-gradient-to-b from-[#0D94E8] to-[#1860A3] flex"
+                                    style={{
+                                      fontSize: "18px",
+                                      boxShadow:
+                                        "rgba(0, 0, 0, 0.22) 0px 4px 5px 0px, rgba(0, 0, 0, 0.45) 0px 2px 3px 0px",
+                                    }}
+                                  >
+                                    Kaj je vključeno
+                                  </button>
+                                  <p className="w-[739px] text-[16px] leading-[24px] mt-14 mobile:w-full tablet:w-full">
+                                    Imate več cvetličarn, dostavljate v več občin,
+                                    razmišljate o širši kampanji? Kontaktirajte
+                                    nas, da poiščemo možnosti oz. da vam
+                                    pripravimo ponudbo po meri.
+                                  </p>
+                                  <p className="w-[456px] text-[16px] leading-[24px] mt-3 mobile:w-full">
+                                    Imate vprašanja, predloge, komentarje?{" "}
+                                    <a
+                                      href="mailto:info@osmrtnica.com"
+                                      className="text-[#0A85C2] underline underline-offset-2"
+                                    >
+                                      {" "}
+                                      Pišite nam.{" "}
+                                    </a>
+                                  </p>
+                                </div>
+                              </div>
                             </div>
-                          </div> */}
-                        </div>
-                        <div>
-                          <div className="text-[#414141] w-full mt-6 desktop:w-[744px] text-[14px] desktop:text-[16px]">
-                            <p className=" mt-4 ">
-                              Poleg naštetega so občasno mogoče še druge promocije. Preverite trenutne.
-                            </p>
-                            <p className="w-[739px] text-[16px] leading-[24px] mt-14 mobile:w-full tablet:w-full">
-                              Imate več cvetličarn, dostavljate v več občin, razmišljate o širši kampanji? Kontaktirajte nas, da poiščemo možnosti oz. da vam pripravimo ponudbo po meri.
-                            </p>
-                            <p className="w-[456px] text-[16px] leading-[24px] mt-3 mobile:w-full">Imate vprašanja, predloge, komentarje? <a href="mailto:info@osmrtnica.com" className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </a></p>
-                          </div>
-
-                          {/* <div className="text-[#414141] flex gap-1 w-full mt-4 desktop:w-[744px] text-[14px] desktop:text-[16px]">
-                            <p className="text-[14px]">2</p>{" "}
-                            <p className="mobile:hidden block mt-1">
-                              Poleg naštetega so občasno mogoče še druge
-                              promocije. Kontaktirajte nas in preverite
-                              trenutne.
-                            </p>
-                            <p className="mobile:block hidden mt-1">
-                              Občasno v teku še druge promocije. Kontaktirajte
-                              nas in preverite trenutne.{" "}
-                            </p>
-                          </div> */}
-                          {/* <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
-                            <p className="text-[14px]">3</p>{" "}
-                            <p className="mobile:hidden block mt-1">
-                              Vsako podjetje, ki oglašuje vsaj eno leto bo za
-                              vedno prikazano na posebni strani Naši partnerji
-                              (še v izdelavi).
-                            </p>
-                            <p className="mobile:block hidden mt-1">
-                              Vsako podjetje, ki oglašuje vsaj eno leto bo za
-                              vedno prikazano na posebni strani Naši partnerji.
-                            </p>
-                          </div>
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
-                            <p className="text-[14px]">*</p>{" "}
-                            <div className="flex flex-col">
-                              <p className="mt-1">V primeru letne naročnine</p>
-                              <p className="mt-1">
-                                Če imate cvetličarne v več občinah ali
-                                dostavljate v več občin, nas kontaktirajte, da
-                                vam pripravimo posebno ponudbo.
-                              </p>
-                            </div>
-                          </div>
-                          <div className="mt-[40px] text-[#414141] flex flex-col gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
-                            <p>
-                              Naročite se, vaš uporabniški račun je pripravljen{" "}
-                            </p>
-                            <p className="">
-                              ali pa nas kontaktirajte v primeru vprašanj ali
-                              izdelave ponudbe po meri za več občin.{" "}
-                            </p>
-                          </div> */}
-                        </div>
-                      </div>
-                    </>
-                  }
-                  text="* 2 meseca brezplačno + promocije spodaj"
-                  innerTab={true}
-                />
-              </div>
-              {/* <div
-                className="w-full flex justify-end mt-[60px] desktop:w-[794px]"
-                style={{ marginTop: "60px" }}
-              >
-                <Link href="/kontakt">
-                  <Image
-                    src={"/Kontaktirajte_nas_btn.png"}
-                    alt="Kontaktirajte nas"
-                    width={250}
-                    height={60}
-                  />
-                </Link>
-              </div> */}
-            </>
+                          </>
+                        }
+                        text="* 2 meseca brezplačno + promocije spodaj"
+                        innerTab={true}
+                      />
+                    </div>
+                  </>
+                )
               ) : (
-                // Limited content for non-florists (left version)
+                // Limited content - shown when not December 2025 AND user is not authenticated florist
                 <>
                   <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
                     <span className="text-[14px]"></span>
                     <p className="mt-1">
-                      Registrirajte se in poslali vam bomo vse potrebne informacije in trenutne promocije. Prvo cvetličarno v občini
-                      čakajo dodatne ugodnosti. Lahko nas tudi kontaktirate.
+                      Registrirajte se in poslali vam bomo vse potrebne
+                      informacije in trenutne promocije. Prvo cvetličarno v
+                      občini čakajo dodatne ugodnosti. Lahko nas tudi
+                      kontaktirate.
                     </p>
                   </div>
                   <div className="mt-6">
@@ -575,13 +559,20 @@ const Subscription = () => {
                       className="text-[#0A85C2] underline underline-offset-2 text-[16px]"
                     >
                       Kontaktirajte nas
-                </Link>
-              </div>
+                    </Link>
+                  </div>
                   <div className="mt-6">
                     <Link href="/podjetja">
-                    <button className="w-[250px] h-[53px] shrink-0 rounded-full text-white justify-center items-center self-center shadow-custom-light-dark bg-gradient-to-b from-[#0D94E8] to-[#1860A3] flex" style={{fontSize: '18px', boxShadow: 'rgba(0, 0, 0, 0.22) 0px 4px 5px 0px, rgba(0, 0, 0, 0.45) 0px 2px 3px 0px'}}>
-                      Registracija za cvetličarne
-                    </button>
+                      <button
+                        className="w-[250px] h-[53px] shrink-0 rounded-full text-white justify-center items-center self-center shadow-custom-light-dark bg-gradient-to-b from-[#0D94E8] to-[#1860A3] flex"
+                        style={{
+                          fontSize: "18px",
+                          boxShadow:
+                            "rgba(0, 0, 0, 0.22) 0px 4px 5px 0px, rgba(0, 0, 0, 0.45) 0px 2px 3px 0px",
+                        }}
+                      >
+                        Registracija za cvetličarne
+                      </button>
                     </Link>
                   </div>
                 </>
@@ -604,9 +595,9 @@ const Subscription = () => {
                 <p className="mt-1">
                   Oglaševanje je mogoče v za to namenjenih sektorjih na spodnjem
                   delu strani osmrtnice, pogrebi, cvetličarne - prikazan logotip
-                  se pojavlja v izbrani občini. V kolikor vas zanima oglaševanje
-                  izven predvidenega prostora nas pokličite nas in morda bomo
-                  našli še druge opcije.
+                  se pojavlja v izbrani občini{" "}
+                  <span className="text-[#EB1D1D]">IN</span> hkrati na posebni
+                  strani lokalnih partnerjev.
                 </p>
               </p>
               <div className="w-full mt-4">
@@ -618,43 +609,21 @@ const Subscription = () => {
                     <>
                       <FormTabsContentOglasevalci />
                       <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col gap-4">
-                       <div className="mb-[40px] space-y-1">
+                        <div className="mb-[40px] space-y-1">
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">1</p>{" "}
                             <p className="mt-1">
-                              Občine nad 25.000 preb:
-                              <br className="md:block lg:hidden hidden" />{" "}
-                              Maribor, Celje, Kranj, Koper, Novo mesto, Domžale,
-                              Velenje, Nova Gorica
+                              Občine nad 25.000 preb: Maribor, Celje, Kranj,
+                              Koper, Novo mesto, Domžale, Velenje, Nova Gorica
                             </p>
                           </div>
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
                             <p className="text-[14px]">2</p>{" "}
-                            <p className="hidden desktop:block mt-1">
+                            <p className="mt-1">
                               Kontaktirajte nas. Enako za oglaševanje izven
-                              predvidenih mest ter na strani pogrebna podjetja.
-                            </p>
-                            <p className="mobile:block hidden mt-1">
-                              Kontaktirajte nas. Mogoče je tudi oglaševanje
-                              izven predvidenih mest{" "}
-                            </p>
-                            <p className="tablet:block hidden mt-1">
-                              Kontaktirajte nas. Enako za oglaševanje izven
-                              predvidenih mest
+                              predvidenih mest.
                             </p>
                           </div>
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
-                            <p className="mt-1">
-                              Naročnina s samodejnim podaljšanjem; velja do
-                              preklica.
-                            </p>
-                          </div>
-                          {/* <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
-                            <p className="mt-1">
-                              Spodaj nevedene ugodnosti veljajo za letno
-                              oglaševanje
-                            </p>
-                          </div> */}
                         </div>
                         <div className="relative">
                           <PricingCard
@@ -667,11 +636,11 @@ const Subscription = () => {
                         </div>
                         <div className="relative">
                           <PricingCard
-                            // number={3}
-                            label="druga in tretja stran v isti občini"
-                            title="50% popust"
+                            number={3}
+                            label="tretja stran v isti občini"
+                            title="Brezplačno"
                           />
-                          <div className="absolute top-1 right-3 text-[#414141] text-[#EB1D1D] text-[20px]">
+                          <div className="absolute top-1 right-3 text-[#EB1D1D] text-[20px]">
                             *
                           </div>
                         </div>
@@ -697,13 +666,42 @@ const Subscription = () => {
                         </div> */}
 
                         <div className="w-full text-[16px] text-[#414141] leading-[24px]">
-                          <p >
-                            <span className=" text-[#414141] text-[20px] text-[#EB1D1D] " >*</span> V primeru letne naročnine
+                          <p>
+                            <span className="text-[#EB1D1D] text-[20px]">
+                              *
+                            </span>{" "}
+                            V primeru letne naročnine
                           </p>
-                          <p className="w-[756px] mt-[6rem] mobile:w-full tablet:w-full" >
-                            Poleg naštetih so občasne še druge promocije. Kontaktirajte nas, da vam pripravimo ponudbo po meri.
+                          <p className="mt-1">
+                            <sup>3</sup> Na straneh osmrtnice, pogrebi,
+                            cvetličarne. Pomeni oglaševanje na treh straneh za
+                            ceno dveh.
                           </p>
-                          <p className="w-[456px] text-[16px] leading-[24px] mobile:w-full">Imate vprašanja, predloge, komentarje? <a href="mailto:info@osmrtnica.com" className="text-[#0A85C2] underline underline-offset-2"> Pišite nam. </a></p>
+                          <button
+                            onClick={() => setIsWhatIsIncludedAdvertisersOpen(true)}
+                            className="w-[250px] mt-14 h-[53px] shrink-0 rounded-full text-white justify-center items-center self-center shadow-custom-light-dark bg-gradient-to-b from-[#0D94E8] to-[#1860A3] flex"
+                            style={{
+                              fontSize: "18px",
+                              boxShadow:
+                                "rgba(0, 0, 0, 0.22) 0px 4px 5px 0px, rgba(0, 0, 0, 0.45) 0px 2px 3px 0px",
+                            }}
+                          >
+                            Kaj je vključeno
+                          </button>
+                          <p className="w-[756px] mt-14 mobile:w-full tablet:w-full">
+                            Poleg naštetih so občasne še druge promocije.
+                            Kontaktirajte nas za ponudbo po meri.
+                          </p>
+                          <p className="w-[456px] text-[16px] leading-[24px] mobile:w-full">
+                            Imate vprašanja, predloge, komentarje?{" "}
+                            <a
+                              href="mailto:info@osmrtnica.com"
+                              className="text-[#0A85C2] underline underline-offset-2"
+                            >
+                              {" "}
+                              Pišite nam.{" "}
+                            </a>
+                          </p>
                         </div>
 
                         {/* <div className="space-y-1">
@@ -802,7 +800,9 @@ const Subscription = () => {
                   informacije vas čakajo v vašem uporabniškem računu.
                 </p>
               </p>
-              <p className="text-[16px] text-[#0A85C2] leading-[24px] underline underlin-offset-2 mt-7" >Kontaktirajte nas</p>
+              <p className="text-[16px] text-[#0A85C2] leading-[24px] underline underlin-offset-2 mt-7">
+                Kontaktirajte nas
+              </p>
               {/* <div
                 className="w-full flex justify-end mt-[60px] desktop:w-[744px]"
                 style={{ marginTop: "60px" }}
@@ -848,7 +848,12 @@ const Subscription = () => {
       <Layout from={"23"} forFooter={"cenikpage"}>
         <div
           style={{ fontFamily: "Roboto Flex" }}
-          className="cenik-page-wrapper w-full bg-[#ECF0F3] lg:px-8 mobile:py-3 py-8"
+className={`cenik-page-wrapper w-full bg-[#ECF0F3] mobile:py-3 py-8 ${
+              (active === "cvetlicarne" && showFullFloristContent && isWhatIsIncludedOpen) ||
+              (active === "oglasevalci" && isWhatIsIncludedAdvertisersOpen)
+                ? "mb-[-2rem]"
+                : "lg:px-8"
+            }`}
         >
           <div className="w-full desktop:w-[1200px] mx-auto">
             {/* Manage Payments Button for logged in users */}
@@ -867,7 +872,12 @@ const Subscription = () => {
 
             <Tabs
               tabs={tabs}
-              tabContent={<TabContent />}
+              tabContent={
+                (active === "cvetlicarne" && showFullFloristContent && isWhatIsIncludedOpen) ||
+                (active === "oglasevalci" && isWhatIsIncludedAdvertisersOpen)
+                  ? null
+                  : <TabContent />
+              }
               active={active}
               setActive={setActive}
             />
@@ -894,6 +904,18 @@ const Subscription = () => {
               }}
             />
           </div>
+
+          {active === "cvetlicarne" && showFullFloristContent && isWhatIsIncludedOpen && (
+            <WhatIsIncludedPopup
+              onClose={() => setIsWhatIsIncludedOpen(false)}
+            />
+          )}
+
+          {active === "oglasevalci" && isWhatIsIncludedAdvertisersOpen && (
+            <WhatIsIncludedPopupAdvertisers
+              onClose={() => setIsWhatIsIncludedAdvertisersOpen(false)}
+            />
+          )}
         </div>
       </Layout>
     </>

@@ -17,7 +17,7 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
     <div ref={popupRef} className="w-full bg-[#F5EFE6] pt-14 pb-14">
       <div
         style={{ fontFamily: "Roboto Flex" }}
-        className="relative desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 px-4 pt-8 pb-[60px] mobile:pt-4 mobile:pb-[40px] tablet:pb-[60px]"
+        className="relative desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 pt-8 pb-[60px] mobile:pt-4 mobile:pb-[40px] tablet:pb-[60px]"
       >
         <button
           onClick={onClose}
@@ -34,7 +34,7 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
           Kaj je vključeno
         </h2>
 
-        <div className="mobile:hidden tablet:flex desktop:flex desktop:gap-8 tablet:gap-8 items-start">
+        <div className="mobile:hidden tablet:flex desktop:flex desktop:gap-[59px] tablet:gap-[59px] items-start">
           <div className="flex-none tablet:w-[200px]">
             <div className="desktop:w-[320px] desktop:h-auto tablet:w-[200px] tablet:h-[135px] overflow-hidden">
               <img
@@ -45,7 +45,7 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
             </div>
           </div>
 
-          <div className="flex-1 desktop:max-w-[383px] tablet:max-w-[357px]">
+          <div className="flex-1 desktop:max-w-[383px] tablet:max-w-[383px]">
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal">
               Oglaševanje v za to namenjenih sektorjih na spodnjem delu najbolj obiskanih strani:
             </p>
@@ -88,9 +88,9 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
 
       <div
         style={{ fontFamily: "Roboto Flex" }}
-        className="desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 px-4 pt-[25px] pb-8 mobile:pt-[25px] mobile:pb-4 tablet:pt-[25px]"
+        className="desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 pt-[25px] pb-8 mobile:pt-[25px] mobile:pb-4 tablet:pt-[25px]"
       >
-        <div className="mobile:hidden tablet:hidden desktop:flex desktop:gap-8 items-start">
+        <div className="mobile:hidden tablet:hidden desktop:flex desktop:gap-[59px] items-start">
           <div className="flex-1 desktop:max-w-[383px]">
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal">
               Istočasno oglaševalec dobi prostor tudi na posebni strani lokalnih partnerjev, kjer je mogoča prava predstavitev produktov.
@@ -117,7 +117,7 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
               <img
                 src="/florist/what-is-included-popup/6.png"
                 alt="Nagrobni spomeniki"
-                className="w-full h-full object-cover object-top"
+                className="w-full h-full object-contain"
               />
             </div>
           </div>

@@ -260,7 +260,7 @@ const Subscription = () => {
       case "spominske":
         return (
           // <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center justify-center desktop:justify-start desktop:items-start mobile:gap-y-11 gap-y-9">
-          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center justify-center mobile:gap-y-11 gap-y-9">
+          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto flex flex-col mb-[40px] w-[766px] mx-auto mobile:gap-y-11 gap-y-9">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4 mb-[40px]">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -332,8 +332,8 @@ const Subscription = () => {
                 onPayment={() => handlePayment("memory_page_six_years")}
                 paymentEnabled={true}
               />
-              <div className="text-[#414141] flex gap-1 w-full desktop:w-[754px] text-[14px] desktop:text-[16px]">
-                <p className="text-[14px]">1</p>{" "}
+              <div className="text-[#414141] flex gap-1 w-full desktop:w-[754px] text-[14px]">
+                <p className="text-[12px]">1</p>{" "}
                 <div className="flex flex-col">
                   <p className="mobile:hidden block mt-1">
                     Mesečnega Skrbnika lahko prejmete brezplačno v cvetličarni,
@@ -347,7 +347,7 @@ const Subscription = () => {
                     nobene v vaši občini, nas kontaktirajte in bomo to uredili
                     mi brezplačno.
                   </p>
-                  <p className="text-[#414141] w-full desktop:w-[754px] text-[14px] desktop:text-[16px] mt-3">
+                  <p className="text-[#414141] w-full desktop:w-[754px] text-[14px] mt-3">
                     Plačilo je enkratno, brez avtomatskega podaljšanja.
                   </p>
                 </div>
@@ -433,7 +433,7 @@ const Subscription = () => {
 
       case "cvetlicarne":
         return (
-          <div className="mobile:px-1 mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto p-4 mb-[40px] flex flex-col items-center justify-center space-y-4">
+          <div className="mobile:px-1 mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto p-4 mb-[40px] flex flex-col mobile:items-center mobile:justify-center space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -459,7 +459,7 @@ const Subscription = () => {
                           <>
                             <FormTabsContentCvetlicarne />
                             <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col">
-                              <div className="text-[#414141] flex gap-1 mb-[40px] w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
+                              <div className="text-[#414141] flex gap-1 mb-[40px] w-full desktop:w-[744px] text-[14px] desktop:text-[14px]">
                                 <p className="text-[14px]">1</p>{" "}
                                 <div className="flex flex-col">
                                   <p className="mt-1">
@@ -496,7 +496,7 @@ const Subscription = () => {
                                 </div>
                               </div>
                               <div>
-                                <div className="text-[#414141] w-full mt-6 desktop:w-[744px] text-[14px] desktop:text-[16px]">
+                                <div className="text-[#414141] w-full mt-6 desktop:w-[744px] text-[14px] desktop:text-[14px]">
                                   <p className=" mt-4 ">
                                     Poleg naštetega so občasno mogoče še druge
                                     promocije. Preverite trenutne.
@@ -581,7 +581,7 @@ const Subscription = () => {
 
       case "oglasevalci":
         return (
-          <div className="mobile:px-1 p-4 mobile:max-w-[500px] mobile:mx-auto mb-[40px] flex flex-col items-center justify-center space-y-4">
+          <div className="mobile:px-1 p-4 mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto mb-[40px] flex flex-col mobile:items-center mobile:justify-center space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -608,15 +608,15 @@ const Subscription = () => {
                       <FormTabsContentOglasevalci />
                       <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col gap-4">
                         <div className="mb-[40px] space-y-1">
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
-                            <p className="text-[14px]">1</p>{" "}
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] text-[14px]">
+                            <p className="text-[12px]">1</p>{" "}
                             <p className="mt-1">
                               Občine nad 25.000 preb: Maribor, Celje, Kranj,
                               Koper, Novo Mesto, Domžale, Velenje, Nova Gorica
                             </p>
                           </div>
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
-                            <p className="text-[14px]">2</p>{" "}
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px]">
+                            <p className="text-[12px]">2</p>{" "}
                             <p className="mt-1">
                               Kontaktirajte nas. Enako za oglaševanje izven
                               predvidenih mest.
@@ -677,7 +677,7 @@ const Subscription = () => {
                           </p>
                           <button
                             onClick={() => setIsWhatIsIncludedAdvertisersOpen(true)}
-                            className="w-[250px] mt-14 h-[53px] shrink-0 rounded-full mx-auto text-white justify-center items-center self-center shadow-custom-light-dark bg-gradient-to-b from-[#0D94E8] to-[#1860A3] flex"
+                            className="w-[250px] mt-14 h-[53px] shrink-0 rounded-full mobile:mx-auto text-white justify-center items-center self-center shadow-custom-light-dark bg-gradient-to-b from-[#0D94E8] to-[#1860A3] flex"
                             style={{
                               fontSize: "18px",
                               boxShadow:
@@ -784,7 +784,7 @@ const Subscription = () => {
 
       case "pogrebna-podjetja":
         return (
-          <div className="p-4 mb-[40px] mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto flex flex-col items-center justify-center space-y-4">
+          <div className="p-4 mb-[40px] mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto flex flex-col mobile:items-center mobile:justify-center space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">

@@ -35,8 +35,8 @@ export default function WhatIsIncludedPopup({ onClose }) {
           Kaj je vključeno
         </h2>
 
-        <div className="flex mobile:flex-col mobile:items-center tablet:flex-row desktop:gap-[110px] tablet:gap-6 mobile:gap-6">
-          <div className="flex-1 mobile:w-[340px]">
+        <div className="flex mobile:flex-col mobile:items-center tablet:flex-row desktop:gap-[105px] tablet:gap-6 mobile:gap-6 w-[766px]">
+          <div className="flex-1 mobile:w-[340px] desktop:max-w-[383px]">
             <div className="desktop:w-[320px] ms-[-6px] desktop:h-[297px] tablet:w-[250px] tablet:h-[232px] mobile:w-[340px] mobile:h-[297px] overflow-hidden">
               <img
                 src="/florist/what-is-included-popup/1.png"
@@ -55,7 +55,7 @@ export default function WhatIsIncludedPopup({ onClose }) {
             </Link>
           </div>
 
-          <div className="flex-1 mobile:w-[340px]">
+          <div className="flex-1 mobile:w-[340px] desktop:max-w-[383px]">
             <div className="desktop:w-[320px] desktop:h-[297px] tablet:w-[250px] tablet:h-[232px] mobile:w-[340px] mobile:h-[297px] overflow-hidden">
               <img
                 src="/florist/what-is-included-popup/2.png"
@@ -77,18 +77,21 @@ export default function WhatIsIncludedPopup({ onClose }) {
 
       <div
         style={{ fontFamily: "Roboto Flex" }}
-        className="desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 px-4 pt-[114px] pb-8 mobile:pt-[60px] mobile:pb-4 tablet:pt-[80px]"
+        className="desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 pt-[114px] pb-8 mobile:pt-[60px] mobile:pb-4 tablet:pt-[80px]"
       >
-        <p className="desktop:text-[20px] desktop:leading-[100%] tablet:text-[16px] mobile:text-[14px] text-[#0A85C2] font-normal uppercase tracking-wide">
-          PRILOŽNOST - AKCIJA V DECEMBRU
-        </p>
-        <h3 className="desktop:text-[32px] desktop:text-nowrap  desktop:block tablet:hidden desktop:leading-[40px] mobile:hidden tablet:text-[24px] tablet:leading-[32px] mobile:text-[20px] mobile:leading-[26px] text-[#444444] font-normal mt-2">
-          Dodatna ugodnost izključno za cvetličarne - oglaševanje
-          <br />
-          <span className="text-[#EB1D1D] desktop:text-[24px] tablet:text-[20px] mobile:text-[16px]">
-            (samo do konca leta)
-          </span>
-        </h3>
+        <div className="w-[766px]">
+          <p className="desktop:text-[20px] desktop:leading-[100%] desktop:max-w-[766px]  tablet:text-[16px] mobile:text-[14px] text-[#0A85C2] font-normal uppercase tracking-wide">
+            PRILOŽNOST - AKCIJA V DECEMBRU
+          </p>
+          <h3 className="desktop:text-[32px] desktop:text-nowrap  desktop:block tablet:hidden desktop:leading-[40px] mobile:hidden tablet:text-[24px] tablet:leading-[32px] mobile:text-[20px] mobile:leading-[26px] text-[#444444] font-normal mt-2">
+            Dodatna ugodnost izključno za cvetličarne - oglaševanje
+            <br />
+            <span className="text-[#EB1D1D] desktop:text-[24px] tablet:text-[20px] mobile:text-[16px]">
+              (samo do konca leta)
+            </span>
+          </h3>
+        </div>
+
         <h3 className="desktop:hidden tablet:block tablet:text-nowrap mobile:block desktop:leading-[40px] tablet:text-[24px] tablet:leading-[32px] mobile:text-[20px] mobile:leading-[26px] text-[#444444] font-normal mt-2">
           <span className="tablet:hidden whitespace-nowrap">Izključno za cvetličarne - oglaševanje<br /></span>
           <span className="mobile:hidden tablet:inline">Izključno za cvetličarne - oglaševanje </span>
@@ -96,20 +99,20 @@ export default function WhatIsIncludedPopup({ onClose }) {
           <span className="mobile:hidden tablet:inline">(samo do konca leta)</span>
         </h3>
 
-        <div className="flex mobile:flex-row mobile:justify-center tablet:flex-row desktop:gap-[40px] tablet:gap-6 mobile:gap-4 mt-14">
+        <div className="flex mobile:flex-row mobile:justify-center tablet:flex-row desktop:gap-[59px] tablet:gap-6 mobile:gap-4 mt-14 w-[766px] mx-auto">
           <div className="flex-1 mobile:flex-none tablet:flex-none">
-            <div className="desktop:w-[320px] ms-[-10px] desktop:h-[216px] tablet:w-[250px] tablet:h-[169px] mobile:w-[130px] mobile:h-[88px] overflow-hidden">
+            <div className="desktop:w-[320px] desktop:h-[216px] tablet:w-[250px] tablet:h-[169px] mobile:w-[130px] mobile:h-[88px] overflow-hidden">
               <img
-                src="/florist/what-is-included-popup/3.png"
+                src="/florist/what-is-included-popup/5.jpg"
                 alt="To stran so omogočili"
                 className="w-full h-full object-contain"
               />
             </div>
-            <p className="tablet:w-[250px] mobile:hidden desktop:w-[385px] mobile:text-[16px] w-full text-[#444444] mt-6 mobile:mt-3 leading-[22px]">
+            <p className="tablet:w-[250px] mobile:hidden desktop:w-[383px] mobile:text-[16px] w-full text-[#444444] mt-6 mobile:mt-3 leading-[22px] text-[14px]">
               Oglaševanje na najbolj obiskanih straneh z možnostjo predstavitve
               produktov s 50% popustom.
             </p>
-            <p className="mobile:hidden tablet:w-[250px] desktop:w-[385px] mobile:text-[16px] text-[#444444] mt-3 leading-[22px]">
+            <p className="mobile:hidden tablet:w-[250px] desktop:w-[383px] mobile:text-[16px] text-[#444444] mt-3 leading-[22px] text-[14px]">
               Za več informacij odpri podstran{" "}
               <Link
                 href="#"

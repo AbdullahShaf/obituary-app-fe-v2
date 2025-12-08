@@ -1,18 +1,16 @@
 "use client";
-import PaymentModal from "../components/PaymentModal";
-import React, { useState } from "react";
-import CompanyAccountLayout from "../components/appcomponents/CompanyAccountLayout";
-import Layout from "../components/appcomponents/Layout";
-import Tabs from "../components/appcomponents/Tabs";
-import PricingCard from "../components/appcomponents/PricingCard";
-import CustomPackageCard from "../components/appcomponents/CustomPackageCard";
-import { Button } from "@nextui-org/react";
-import axios from "@/services/axios";
-import toast from "react-hot-toast";
-import { useAuth } from "@/hooks/useAuth";
+
 import Link from "next/link";
-import Image from "next/image";
+import toast from "react-hot-toast";
+import axios from "@/services/axios";
+import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 import { getYear, getMonth } from "date-fns";
+
+import Tabs from "../components/appcomponents/Tabs";
+import PaymentModal from "../components/PaymentModal";
+import Layout from "../components/appcomponents/Layout";
+import PricingCard from "../components/appcomponents/PricingCard";
 import WhatIsIncludedPopup from "../components/appcomponents/WhatIsIncludedPopup";
 import WhatIsIncludedPopupAdvertisers from "../components/appcomponents/WhatIsIncludedPopupAdvertisers";
 
@@ -262,7 +260,7 @@ const Subscription = () => {
       case "spominske":
         return (
           // <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center justify-center desktop:justify-start desktop:items-start mobile:gap-y-11 gap-y-9">
-          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center justify-center desktop:justify-start desktop:items-start mobile:gap-y-11 gap-y-9">
+          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto flex flex-col mb-[40px] w-[766px] mx-auto mobile:gap-y-11 gap-y-9">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4 mb-[40px]">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -334,8 +332,8 @@ const Subscription = () => {
                 onPayment={() => handlePayment("memory_page_six_years")}
                 paymentEnabled={true}
               />
-              <div className="text-[#414141] flex gap-1 w-full desktop:w-[754px] text-[14px] desktop:text-[16px]">
-                <p className="text-[14px]">1</p>{" "}
+              <div className="text-[#414141] flex gap-1 w-full desktop:w-[754px] text-[14px]">
+                <p className="text-[12px]">1</p>{" "}
                 <div className="flex flex-col">
                   <p className="mobile:hidden block mt-1">
                     Mesečnega Skrbnika lahko prejmete brezplačno v cvetličarni,
@@ -349,7 +347,7 @@ const Subscription = () => {
                     nobene v vaši občini, nas kontaktirajte in bomo to uredili
                     mi brezplačno.
                   </p>
-                  <p className="text-[#414141] w-full desktop:w-[754px] text-[14px] desktop:text-[16px] mt-3">
+                  <p className="text-[#414141] w-full desktop:w-[754px] text-[14px] mt-3">
                     Plačilo je enkratno, brez avtomatskega podaljšanja.
                   </p>
                 </div>
@@ -435,7 +433,7 @@ const Subscription = () => {
 
       case "cvetlicarne":
         return (
-          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 mb-[40px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
+          <div className="mobile:px-1 mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto p-4 mb-[40px] flex flex-col mobile:items-center mobile:justify-center space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -461,12 +459,12 @@ const Subscription = () => {
                           <>
                             <FormTabsContentCvetlicarne />
                             <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col">
-                              <div className="text-[#414141] flex gap-1 mb-[40px] w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
+                              <div className="text-[#414141] flex gap-1 mb-[40px] w-full desktop:w-[744px] text-[14px] desktop:text-[14px]">
                                 <p className="text-[14px]">1</p>{" "}
                                 <div className="flex flex-col">
                                   <p className="mt-1">
                                     Občine nad 25.000 preb: Maribor, Celje, Kranj,
-                                    Koper, Novo mesto, Domžale, Velenje, Nova
+                                    Koper, Novo Mesto, Domžale, Velenje, Nova
                                     Gorica
                                   </p>
                                   <p className="mt-2">
@@ -498,7 +496,7 @@ const Subscription = () => {
                                 </div>
                               </div>
                               <div>
-                                <div className="text-[#414141] w-full mt-6 desktop:w-[744px] text-[14px] desktop:text-[16px]">
+                                <div className="text-[#414141] w-full mt-6 desktop:w-[744px] text-[14px] desktop:text-[14px]">
                                   <p className=" mt-4 ">
                                     Poleg naštetega so občasno mogoče še druge
                                     promocije. Preverite trenutne.
@@ -583,14 +581,14 @@ const Subscription = () => {
 
       case "oglasevalci":
         return (
-          <div className="mobile:px-1 p-4 mobile:max-w-[500px] mobile:mx-auto mb-[40px] flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
+          <div className="mobile:px-1 p-4 mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto mb-[40px] flex flex-col mobile:items-center mobile:justify-center space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
                   Oglaševalci
                 </h2>
               </div>
-              <p className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
+              <p className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[16px] text-[16px]">
                 <p className="text-[14px]"></p>{" "}
                 <p className="mt-1">
                   Oglaševanje je mogoče v za to namenjenih sektorjih na spodnjem
@@ -610,15 +608,15 @@ const Subscription = () => {
                       <FormTabsContentOglasevalci />
                       <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col gap-4">
                         <div className="mb-[40px] space-y-1">
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] text-[14px] desktop:text-[16px]">
-                            <p className="text-[14px]">1</p>{" "}
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] text-[14px]">
+                            <p className="text-[12px]">1</p>{" "}
                             <p className="mt-1">
                               Občine nad 25.000 preb: Maribor, Celje, Kranj,
-                              Koper, Novo mesto, Domžale, Velenje, Nova Gorica
+                              Koper, Novo Mesto, Domžale, Velenje, Nova Gorica
                             </p>
                           </div>
-                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px] desktop:text-[16px]">
-                            <p className="text-[14px]">2</p>{" "}
+                          <div className="text-[#414141] flex gap-1 w-full desktop:w-[794px] text-[14px]">
+                            <p className="text-[12px]">2</p>{" "}
                             <p className="mt-1">
                               Kontaktirajte nas. Enako za oglaševanje izven
                               predvidenih mest.
@@ -666,20 +664,20 @@ const Subscription = () => {
                         </div> */}
 
                         <div className="w-full text-[16px] text-[#414141] leading-[24px]">
-                          <p>
-                            <span className="text-[#EB1D1D] text-[20px]">
+                          <p className="text-[14px]">
+                            <span className="text-[#EB1D1D] text-[14px]">
                               *
                             </span>{" "}
                             V primeru letne naročnine
                           </p>
-                          <p className="mt-1">
-                            <sup>3</sup> Na straneh osmrtnice, pogrebi,
+                          <p className="mt-1 text-[14px]">
+                            <sup className="text-[12px]">3</sup> Na straneh osmrtnice, pogrebi,
                             cvetličarne. Pomeni oglaševanje na treh straneh za
                             ceno dveh.
                           </p>
                           <button
                             onClick={() => setIsWhatIsIncludedAdvertisersOpen(true)}
-                            className="w-[250px] mt-14 h-[53px] shrink-0 rounded-full text-white justify-center items-center self-center shadow-custom-light-dark bg-gradient-to-b from-[#0D94E8] to-[#1860A3] flex"
+                            className="w-[250px] mt-14 h-[53px] shrink-0 rounded-full mobile:mx-auto text-white justify-center items-center self-center shadow-custom-light-dark bg-gradient-to-b from-[#0D94E8] to-[#1860A3] flex"
                             style={{
                               fontSize: "18px",
                               boxShadow:
@@ -693,7 +691,7 @@ const Subscription = () => {
                             Kontaktirajte nas za ponudbo po meri.
                           </p>
                           <p className="w-[456px] text-[16px] leading-[24px] mobile:w-full">
-                            Imate vprašanja, predloge, komentarje?{" "}
+                            Imate vprašanja, predloge{" "}
                             <a
                               href="mailto:info@osmrtnica.com"
                               className="text-[#0A85C2] underline underline-offset-2"
@@ -786,7 +784,7 @@ const Subscription = () => {
 
       case "pogrebna-podjetja":
         return (
-          <div className="p-4 mb-[40px] mobile:max-w-[500px] mobile:mx-auto flex flex-col items-center justify-center desktop:justify-start desktop:items-start space-y-4">
+          <div className="p-4 mb-[40px] mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto flex flex-col mobile:items-center mobile:justify-center space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
@@ -848,11 +846,10 @@ const Subscription = () => {
       <Layout from={"23"} forFooter={"cenikpage"}>
         <div
           style={{ fontFamily: "Roboto Flex" }}
-className={`cenik-page-wrapper w-full bg-[#ECF0F3] mobile:py-3 py-8 ${
-              (active === "cvetlicarne" && showFullFloristContent && isWhatIsIncludedOpen) ||
-              (active === "oglasevalci" && isWhatIsIncludedAdvertisersOpen)
-                ? "mb-[-2rem]"
-                : "lg:px-8"
+          className={`cenik-page-wrapper w-full bg-[#ECF0F3] mobile:py-3 py-8 ${(active === "cvetlicarne" && showFullFloristContent && isWhatIsIncludedOpen) ||
+            (active === "oglasevalci" && isWhatIsIncludedAdvertisersOpen)
+            ? "mb-[-2rem]"
+            : "lg:px-8"
             }`}
         >
           <div className="w-full desktop:w-[1200px] mx-auto">
@@ -874,7 +871,7 @@ className={`cenik-page-wrapper w-full bg-[#ECF0F3] mobile:py-3 py-8 ${
               tabs={tabs}
               tabContent={
                 (active === "cvetlicarne" && showFullFloristContent && isWhatIsIncludedOpen) ||
-                (active === "oglasevalci" && isWhatIsIncludedAdvertisersOpen)
+                  (active === "oglasevalci" && isWhatIsIncludedAdvertisersOpen)
                   ? null
                   : <TabContent />
               }

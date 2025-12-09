@@ -76,7 +76,13 @@ function FooterMobile({ handleGoToTop, setIsMobilSideBarOpen }) {
               <IconView iconPath={"/gototop.png"} name={"Na vrh"} />
             </div>
           ) : (
-            <Link href={`${memories && memories?.length ? `/u/${parsedUser?.slugKey}/pregled2` : "#"}`}>
+            <Link
+              href={`${
+                memories && memories?.length
+                  ? `/u/${parsedUser?.slugKey}/pregled2`
+                  : "#"
+              }`}
+            >
               <div>
                 <IconView
                   iconPath={"/icon_active_heart.png"}

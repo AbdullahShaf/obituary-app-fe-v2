@@ -9,7 +9,6 @@ import ObituaryListBanner from "../components/appcomponents/ObituaryListBanner";
 import NextFunerals from "../components/appcomponents/NextFunerals";
 import ObituaryListComponent from "../components/appcomponents/ObituaryListComponent";
 import SponsorComponent from "../components/appcomponents/SponsorComponent";
-import FloristsComp from "../components/appcomponents/FloristsComp";
 import CommonFooter from "../components/appcomponents/CommonFooter";
 
 const ObituaryListContent = () => {
@@ -24,7 +23,6 @@ const ObituaryListContent = () => {
       <NextFunerals />
       <MemorialPageView />
       <SponsorComponent text="To stran so omogočili " region={region} city={city} />
-      <FloristsComp />
       <CommonFooter currentPage="/osmrtnice" />
     </>
   );

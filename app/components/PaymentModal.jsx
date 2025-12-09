@@ -13,7 +13,7 @@ const SLOVENIAN_CITIES = [
   { value: 'celje', label: 'Celje', population: 'large' },
   { value: 'kranj', label: 'Kranj', population: 'large' },
   { value: 'koper', label: 'Koper', population: 'large' },
-  { value: 'novo_mesto', label: 'Novo mesto', population: 'large' },
+  { value: 'novo_mesto', label: 'Novo Mesto', population: 'large' },
   { value: 'velenje', label: 'Velenje', population: 'large' },
   { value: 'nova_gorica', label: 'Nova Gorica', population: 'large' },
   { value: 'ptuj', label: 'Ptuj', population: 'medium' },

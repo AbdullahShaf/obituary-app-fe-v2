@@ -9,6 +9,11 @@ import { usePathname } from "next/navigation";
 
 // ✅ Footer link sets based on page identifier
 const footerLinkSets = {
+  "/lokalni": [
+{ label: "Začetna", path: "/", showOnMobile: false },
+{ label: "QR Kode", path: "/qr-kode", showOnMobile: false },
+{ label: "Cenik", path: "/cenik", showOnMobile: false },
+  ],
   "/osmrtnice": [
     { label: "Prva stran", path: "/", showOnMobile: false },
     { label: "Osmrtnice", path: "/osmrtnice ", showOnMobile: true },

@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 import Layout from "../app/components/appcomponents/Layout";
 import WorkTogetherComp from "../app/components/appcomponents/WorkTogetherComp";
 import ObituaryListBanner from "../app/components/appcomponents/ObituaryListBanner";
-import FuneralsLocalFloristComp from "../app/components/appcomponents/FuneralsLocalFloristComp";
 import FuneralList from "../app/components/appcomponents/FuneralList";
 import SponsorComponent from "../app/components/appcomponents/SponsorComponent";
 import PartnersCompo from "../app/components/appcomponents/PartnersCompo";
@@ -28,7 +27,6 @@ const FuneralsList = () => {
         <WorkTogetherComp />
         <PartnersCompo />
         <SponsorComponent region={region} city={city} />
-        <FuneralsLocalFloristComp />
         <CommonFooter currentPage="/pogrebna-p" />
 
       </div>

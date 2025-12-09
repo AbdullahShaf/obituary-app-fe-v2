@@ -129,7 +129,9 @@ const AddObituary = ({ set_Id, setModal }) => {
 
       try {
         setInputValueFuneralEnd(response?.funeralLocation || "");
-        setInputValueFuneralCemetery(response.Cemetry?.id || "pokopalisce");
+        // Check new Cemeteries first, then fallback to old Cemetry for backward compatibility
+        const cemeteryId = response.Cemeteries?.id || response.Cemetry?.id || "pokopalisce";
+        setInputValueFuneralCemetery(cemeteryId);
         setFuneralDate(
           response?.funeralTimestamp
             ? new Date(response?.funeralTimestamp)

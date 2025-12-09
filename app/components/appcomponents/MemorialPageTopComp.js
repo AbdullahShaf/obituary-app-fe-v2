@@ -23,16 +23,34 @@ const MemorialPageTopComp = ({
   const [maxCondolances, setMaxCondolances] = useState(6);
   const [limitedCondolances, setLimitedCondolances] = useState([]);
   const [currentCount, setCurrentCount] = useState(0);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1024);
   const [showQr, setShowQr] = useState(false);
+  const [showMemoryIconTooltip, setShowMemoryIconTooltip] = useState(false);
+  const [memoryIconTooltipSide, setMemoryIconTooltipSide] = useState("right");
+  const memoryIconButtonRef = useRef(null);
 
   useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
+    // Set initial screen width on mount (client-side only)
+    if (typeof window !== "undefined") {
+      setScreenWidth(window.innerWidth);
+    }
 
-    window.addEventListener("resize", handleResize);
+    const handleResize = () => {
+      if (typeof window !== "undefined") {
+        setScreenWidth(window.innerWidth);
+      }
+    };
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", handleResize);
+    }
 
     // Cleanup on unmount
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", handleResize);
+      }
+    };
   }, []);
 
   const defaultMessage = {
@@ -68,6 +86,9 @@ const MemorialPageTopComp = ({
   }, []);
 
   const parsedEvents = data?.events ? data?.events : [];
+  
+  // Extract refuseFlowersIcon from database (stored in obituary record)
+  const refuseFlowersIcon = data?.refuseFlowersIcon === true || data?.refuseFlowersIcon === 1;
 
   const handleCopyURL = () => {
     navigator.clipboard
@@ -656,10 +677,65 @@ const MemorialPageTopComp = ({
                                   </div>
                                 </div>
                                 <div className="flex flex-col pl-[15px]">
-                                  <div className="flex items-center h-[23px]">
+                                  <div className="flex items-center h-[23px] gap-2">
                                     <div className="text-[#1E2125] text-[20px] font-medium">
                                       Pogreb
                                     </div>
+                                    {refuseFlowersIcon && (
+                                      <div
+                                        className="cursor-pointer flex items-center justify-center relative"
+                                        onClick={() => {
+                                          if (memoryIconButtonRef.current) {
+                                            const rect = memoryIconButtonRef.current.getBoundingClientRect();
+                                            const windowWidth = window.innerWidth;
+                                            if (rect.right + 260 > windowWidth) {
+                                              setMemoryIconTooltipSide("left");
+                                            } else {
+                                              setMemoryIconTooltipSide("right");
+                                            }
+                                          }
+                                          setShowMemoryIconTooltip(true);
+                                          // Auto-hide after 3 seconds
+                                          setTimeout(() => {
+                                            setShowMemoryIconTooltip(false);
+                                          }, 3000);
+                                        }}
+                                        ref={memoryIconButtonRef}
+                                      >
+                                      <svg
+                                          width="24"
+                                          height="24"
+                                          viewBox="0 0 24 24"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          fillRule="evenodd"
+                                          clipRule="evenodd"
+                                          className="fill-[#0A85C2]"
+                                        >
+                                          <path d="M1 15c4.075-1.121 9.51.505 11 6 1.985-5.939 7.953-7.051 11-6-2.467 1.524-3.497 9-11 9s-8.487-7.471-11-9zm8.203-12.081c.008-1.612 1.319-2.919 2.933-2.919 1.615 0 2.926 1.307 2.934 2.919 1.4-.799 3.187-.317 3.995 1.081.807 1.398.331 3.187-1.062 4 1.393.813 1.869 2.602 1.062 4-.808 1.398-2.595 1.88-3.995 1.081-.008 1.612-1.319 2.919-2.934 2.919-1.614 0-2.925-1.307-2.933-2.919-1.4.799-3.188.317-3.995-1.081-.807-1.398-.331-3.187 1.062-4-1.393-.813-1.869-2.602-1.062-4 .807-1.398 2.595-1.88 3.995-1.081zm2.797 2.581c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5z" />
+                                          <line
+                                            x1="21"
+                                            y1="3"
+                                            x2="3"
+                                            y2="21"
+                                            stroke="#1E2125"
+                                            strokeWidth="2.3"
+                                            strokeLinecap="round"
+                                          />
+                                        </svg>
+                                        {showMemoryIconTooltip && (
+                                          <div
+                                            className={`absolute top-1/2 -translate-y-1/2 z-20 w-max max-w-[260px] rounded-md bg-[#0A85C2] text-white text-[12px] leading-[16px] px-3 py-2 shadow-lg after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 ${
+                                              memoryIconTooltipSide === "right"
+                                                ? "left-full ml-3 after:left-[-6px] after:border-y-[6px] after:border-y-transparent after:border-r-[6px] after:border-r-[#0A85C2]"
+                                                : "right-full mr-3 after:right-[-6px] after:border-y-[6px] after:border-y-transparent after:border-l-[6px] after:border-l-[#0A85C2]"
+                                            }`}
+                                            onClick={(e) => e.stopPropagation()}
+                                          >
+                                            Svojci cvetje in sveče hvaležno odklanjajo.
+                                          </div>
+                                        )}
+                                      </div>
+                                    )}
                                   </div>
                                   <div className="flex mt-[8px] flex-col">
                                     <p className="text-[#414141] text-[14px] font-normal leading-[16.41px]">

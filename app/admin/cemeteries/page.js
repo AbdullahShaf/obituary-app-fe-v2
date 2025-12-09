@@ -4,33 +4,24 @@ import Image from "next/image";
 import SideMenuAdmin from "../../components/appcomponents/SideMenuAdmin";
 import adminService from "../../../services/admin-service";
 import { toast } from "react-hot-toast";
-import { TOAST_MESSAGE } from "../../../utils/toastMessage";
-import FormModal from './FormModal';
+import ModalCemetery from "../../components/appcomponents/ModalCemetery";
 
-const CompaniesWithApprovalReq = () => {
+const Cemeteries = () => {
   const [isShowModal1, setIsShowModal1] = useState(false);
   const [editId, setEditId] = useState(null);
   const [whichScreen, setWhichScreen] = useState(1);
-  const [whichTab, setWhichTab] = useState("");
-  const [companies, setCompanies] = useState([]);
+  const whichTab = "Cemeteries";
   const [loading, setLoading] = useState(true);
-  const [sponsors, setSponsors] = useState([]);
-
-  const formatDate = (timestamp) => {
-    const funeralDate = new Date(timestamp);
-    if (isNaN(funeralDate.getTime())) return "";
-
-    const day = funeralDate.getDate().toString().padStart(2, "0");
-    const month = (funeralDate.getMonth() + 1).toString().padStart(2, "0");
-    const year = funeralDate.getFullYear();
-
-    return `${day}.${month}.${year}`;
-  };
+  const [cemeteries, setCemeteries] = useState([]);
 
   const fetchList = async () => {
     setLoading(true);
-    const res = await adminService.getSponosors();
-    setSponsors(res?.data ?? []);
+    try {
+      const res = await adminService.getCemeteries();
+      setCemeteries(res?.data ?? []);
+    } catch (error) {
+      toast.error("Error fetching cemeteries");
+    }
     setLoading(false);
   }
 
@@ -38,11 +29,19 @@ const CompaniesWithApprovalReq = () => {
     fetchList();
   }, [])
 
-  const deleteSponsor = async (id) => {
+  const deleteCemetery = async (id) => {
+    if (!confirm("Are you sure you want to delete this cemetery?")) {
+      return;
+    }
     setLoading(true);
-    await adminService.deleteSponsor(id);
-    setLoading(false);
-    fetchList();
+    try {
+      await adminService.deleteCemetery(id);
+      toast.success("Cemetery deleted successfully");
+      fetchList();
+    } catch (error) {
+      toast.error("Error deleting cemetery");
+      setLoading(false);
+    }
   }
 
   return (
@@ -50,7 +49,7 @@ const CompaniesWithApprovalReq = () => {
       <SideMenuAdmin setWhichScreen={setWhichScreen} headerCheck={2} whichtab={whichTab} />
       <div className="flex-1 p-6">
         <h1 className="text-[24px] font-semibold text-[#0073e6] mb-6">
-          Sponsors
+          Cemeteries
         </h1>
         <div className="flex justify-end mb-4">
           <button
@@ -60,70 +59,60 @@ const CompaniesWithApprovalReq = () => {
             }}
             className="w-[180px] h-[50px] rounded-[10px] bg-[#09C1A3] text-white font-semibold text-md"
           >
-            Add Sponsor
+            Add Cemetery
           </button>
         </div>
         <div className="overflow-x-auto bg-white rounded shadow">
           <table className="min-w-full table-auto text-[13px]">
             <thead>
               <tr className="uppercase font-semibold text-gray-600 h-[70px] border-b border-gray-300">
-                <th className="text-center px-4 text-left">Date</th>
-                <th className="text-center px-2 text-left">What page</th>
+                <th className="text-center px-4 text-left">Name</th>
+                <th className="text-center px-4 text-left">Address</th>
                 <th className="text-center px-4 text-left">City</th>
-                <th className="text-center px-4 text-left">Advertiser</th>
-                <th className="text-center px-4 text-left">C / P / A</th>
-                <th className="text-center px-4 text-left">Start</th>
-                <th className="text-center px-2 text-left">End</th>
-                <th className="text-center px-2 text-left">Price</th>
-                <th className="text-center px-4 text-left">Popup</th>
+                <th className="text-center px-4 text-left">Region</th>
+                <th className="text-center px-4 text-left">Actions</th>
               </tr>
             </thead>
             <tbody>
               {loading === true ? (
                 <tr>
-                  <td colSpan="9" className="text-center py-8">
+                  <td colSpan="5" className="text-center py-8">
                     <p className="text-[#6D778E]">Loading...</p>
                   </td>
                 </tr>
-              ) : sponsors.length === 0 ? (
+              ) : cemeteries.length === 0 ? (
                 <tr>
-                  <td colSpan="9" className="text-center py-8">
-                    <p className="text-[#6D778E]">No sponsors found</p>
+                  <td colSpan="5" className="text-center py-8">
+                    <p className="text-[#6D778E]">No cemeteries found</p>
                   </td>
                 </tr>
               ) : (
-                sponsors.map((company, index) => (
+                cemeteries.map((cemetery, index) => (
                   <tr
-                    key={company.id}
+                    key={cemetery.id}
                     className={`border-b text-gray-600 text-center ${index % 2 === 0 ? "bg-white" : "bg-[#f4f6f9]"}`}
                   >
-                    <td className="px-4 py-4">{company?.createdTimestamp ? formatDate(company?.createdTimestamp) : "N/A"}</td>
-                    <td className="px-2 py-4">{company?.page}</td>
-                    <td className="px-4 py-4 flex justify-center gap-3">
-                      <span>{company?.cities} </span>
-                    </td>
-                    <td className="px-4 py-4">{company?.who}</td>
-                    <td className="px-4 py-4">{company?.cpa}</td>
-                    <td className="px-4 py-4">{company?.startDate ? formatDate(company?.startDate) : "N/A"}</td>
-                    <td className="px-4 py-4">{company?.endDate ? formatDate(company?.endDate) : "N/A"}</td>
-                    <td className="px-4 py-4">{company?.price}</td>
-                    <td className="px-2 py-4  font-semibold cursor-pointer">
+                    <td className="px-4 py-4">{cemetery?.name || "N/A"}</td>
+                    <td className="px-4 py-4">{cemetery?.address || "N/A"}</td>
+                    <td className="px-4 py-4">{cemetery?.city || "N/A"}</td>
+                    <td className="px-4 py-4">{cemetery?.region || "N/A"}</td>
+                    <td className="px-2 py-4 font-semibold cursor-pointer">
                       <div className="flex items-center justify-center">
                         <button
                           onClick={() => {
                             setIsShowModal1(true);
-                            setEditId(company);
+                            setEditId(cemetery);
                           }}
                         >
                           <Image
                             src="/eye.png"
                             width={18}
                             height={18}
-                            alt="Open page"
+                            alt="Edit"
                             className="inline-block"
                           />
                         </button>
-                        <button onClick={() => deleteSponsor(company?.id)} className="ml-2">
+                        <button onClick={() => deleteCemetery(cemetery?.id)} className="ml-2">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="#000000" d="M8 9h1v9H8V9zm7 0h1v9h-1V9zM5 4h14v2H5V4zm3-1h8v1H8V3zM7 7h10v13H7V7zm2 0v12h6V7H9z" />
                           </svg>
@@ -137,7 +126,7 @@ const CompaniesWithApprovalReq = () => {
           </table>
         </div>
       </div>
-      <FormModal
+      <ModalCemetery
         isShowModal={isShowModal1}
         setIsShowModal={setIsShowModal1}
         editId={editId}
@@ -147,4 +136,5 @@ const CompaniesWithApprovalReq = () => {
   );
 };
 
-export default CompaniesWithApprovalReq;
+export default Cemeteries;
+

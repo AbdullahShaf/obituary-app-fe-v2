@@ -204,7 +204,7 @@ const Obituaries = () => {
     invoiceImg: obituary.deathReportExists ? "/ico_eye.png" : "",
     invoice: formatDate(obituary.funeralTimestamp),
     funeral: formatTime(obituary.funeralTimestamp),
-    cemetery: obituary.funeralCemetery || "Unknown Cemetery",
+    cemetery: obituary.Cemetry?.name || obituary.Cemeteries?.name || "Unknown Cemetery",
     Obituary: obituary.User?.company || obituary.User?.name || "Unknown",
     postedby: obituary.User?.city || "Unknown",
     date: formatDate(obituary.createdTimestamp),

@@ -10,11 +10,13 @@ import { getYear, getMonth } from "date-fns";
 import { toast } from "react-hot-toast";
 import obituaryService from "@/services/obituary-service";
 import cemetryService from "@/services/cemetry-service";
+import adminService from "@/services/admin-service";
 import ModalDropBox from "./ModalDropBox";
 import MobileCards from "./MobileCards";
 import { getCardsImageAndPdfsFiles } from "@/utils/downloadCards";
 import BackDropLoader from "../ui/backdrop-loader";
 import { useAuth } from "@/hooks/useAuth";
+import ModalCemetery from "./ModalCemetery";
 
 const AddObituary = ({ set_Id, setModal }) => {
   const router = useRouter();
@@ -50,6 +52,11 @@ const AddObituary = ({ set_Id, setModal }) => {
   const [obituaryResponse, setObituaryResponse] = useState(null);
   const cardRefs = useRef([]);
   const [birthMode, setBirthMode] = useState("full");
+  const [showMemoryPageIcon, setShowMemoryPageIcon] = useState(false);
+  const [memoryPageMessage, setMemoryPageMessage] = useState("Svojci cvetje in sveče hvaležno odklanjajo.");
+  const [showMemoryIconTooltip, setShowMemoryIconTooltip] = useState(false);
+  const [memoryIconTooltipSide, setMemoryIconTooltipSide] = useState("right");
+  const memoryIconButtonRef = useRef(null);
   const [events, setEvents] = useState([
     {
       eventName: "",
@@ -87,6 +94,7 @@ const AddObituary = ({ set_Id, setModal }) => {
   const funeralDropdownRef = useRef(null);
 
   const [cemeteries, setCemeteries] = useState([]);
+  const [showCemeteryModal, setShowCemeteryModal] = useState(false);
   useEffect(() => {
     console.log(inputValueFuneralCemetery, "=================");
   }, [inputValueFuneralCemetery]);
@@ -113,12 +121,39 @@ const AddObituary = ({ set_Id, setModal }) => {
   }, [selectedCity]);
   const getCemeteries = async (query) => {
     try {
-      let queryParams = {};
-      queryParams.city = query;
-      const response = await cemetryService.getCemeteries(queryParams);
-      setCemeteries(response.cemetries);
+      // NEW: Try fetching from admin cemeteries endpoint first (new cemeteries table)
+      const response = await adminService.getCemeteries();
+      if (response && response.data) {
+        // Filter by city if provided
+        let filteredCemeteries = response.data;
+        if (query && query.trim() !== "") {
+          filteredCemeteries = response.data.filter(
+            (cemetery) => cemetery.city === query
+          );
+        }
+        setCemeteries(filteredCemeteries || []);
+        return; // Success, exit early
+      }
     } catch (error) {
-      console.log(error);
+      // console.log("Error fetching cemeteries from admin:", error);
+    }
+    
+    // FALLBACK: Use original service if admin service fails (preserves old functionality)
+    try {
+      let queryParams = {};
+      if (query && query.trim() !== "") {
+        queryParams.city = query;
+      }
+      const response = await cemetryService.getCemeteries(queryParams);
+      setCemeteries(response?.cemetries || []);
+    } catch (fallbackError) {
+      // console.log("Error fetching cemeteries from user service:", fallbackError);
+      setCemeteries([]);
+    }
+  };
+  const refetchCemeteries = () => {
+    if (selectedCity.trim() !== "") {
+      getCemeteries(selectedCity);
     }
   };
   useEffect(() => {
@@ -199,6 +234,27 @@ const AddObituary = ({ set_Id, setModal }) => {
 
   const toggleCheckbox = () => {
     setIsDeathReportConfirmed(!isDeathReportConfirmed);
+  };
+
+  const handleToggleMemoryIcon = () => {
+    setShowMemoryPageIcon(!showMemoryPageIcon);
+  };
+
+  const handleIconClick = () => {
+    if (memoryIconButtonRef.current) {
+      const rect = memoryIconButtonRef.current.getBoundingClientRect();
+      const windowWidth = window.innerWidth;
+      if (rect.right + 260 > windowWidth) {
+        setMemoryIconTooltipSide("left");
+      } else {
+        setMemoryIconTooltipSide("right");
+      }
+    }
+    setShowMemoryIconTooltip(true);
+    // Auto-hide after 3 seconds
+    setTimeout(() => {
+      setShowMemoryIconTooltip(false);
+    }, 3000);
   };
 
   const handleDeathReportUpload = (event) => {
@@ -325,15 +381,15 @@ const handleSubmit = async () => {
     let formattedFuneralTimestamp = null;
     if (
       funeralDate &&
-      selectedFuneralHour !== null &&
-      selectedFuneralMinute !== null
+      selectedFuneralHour !== null
     ) {
+      const funeralMinute = selectedFuneralMinute !== null && selectedFuneralMinute !== undefined ? selectedFuneralMinute : 0;
       formattedFuneralTimestamp = new Date(
         funeralDate.getFullYear(),
         funeralDate.getMonth(),
         funeralDate.getDate(),
         selectedFuneralHour,
-        selectedFuneralMinute
+        funeralMinute
       ).toISOString();
     }
 
@@ -354,16 +410,38 @@ const handleSubmit = async () => {
     formData.append("deathDate", formattedDeathDate);
     formData.append("funeralLocation", selectedCity);
 
+    // Use new funeralCemeteryId field for new cemeteries table
+    // Keep old funeralCemetery for backward compatibility (old entries)
     if (inputValueFuneralCemetery !== "pokopalisce") {
-      formData.append("funeralCemetery", inputValueFuneralCemetery);
+      // Check if it's a number (ID from new cemeteries table) or old format
+      const cemeteryId = parseInt(inputValueFuneralCemetery);
+      if (!isNaN(cemeteryId)) {
+        formData.append("funeralCemeteryId", cemeteryId);
+      } else {
+        // Fallback to old field for backward compatibility
+        formData.append("funeralCemetery", inputValueFuneralCemetery);
+      }
     }
 
     if (formattedFuneralTimestamp) {
       formData.append("funeralTimestamp", formattedFuneralTimestamp);
     }
 
+    // Add refuseFlowersIcon flag to form data
+    formData.append("refuseFlowersIcon", showMemoryPageIcon ? "true" : "false");
+
     formData.append("deathReportExists", isDeathReportConfirmed);
-    formData.append("events", JSON.stringify(events));
+    // Process events with default text - use defaults if fields are empty
+    const processedEvents = events
+      .filter(event => event.eventDate) // Only include events with a date
+      .map(event => ({
+        eventName: event.eventName || "Zadnje slovo",
+        eventLocation: event.eventLocation || "Poslovilna vežica",
+        eventDate: event.eventDate ? new Date(event.eventDate).toISOString() : null,
+        eventHour: event.eventHour !== null && event.eventHour !== undefined ? event.eventHour : null,
+        eventMinute: event.eventMinute !== null && event.eventMinute !== undefined ? event.eventMinute : (event.eventHour !== null ? 0 : null),
+      }));
+    formData.append("events", JSON.stringify(processedEvents));
     formData.append("obituary", obituaryText);
 
     if (uploadedPicture) {
@@ -384,6 +462,7 @@ const handleSubmit = async () => {
     }
 
     if (response.error) {
+      console.error("Obituary submission error:", response.error);
       toast.error(response.error || "Prišlo je do napake. Poskusi znova.");
       return;
     }
@@ -399,9 +478,15 @@ const handleSubmit = async () => {
           .toString()
           .slice(2)}`;
 
-    setObituaryResponse(response);
+    // Add refuseFlowersIcon to response for memory page display
+    const responseWithIcon = {
+      ...response,
+      refuseFlowersIcon: showMemoryPageIcon,
+    };
+    setObituaryResponse(responseWithIcon);
   } catch (error) {
     console.error("Error creating obituary:", error);
+    console.error("Error response:", error?.response?.data);
     toast.error(
       error?.response?.data?.error ||
         "Prišlo je do napake."
@@ -1008,11 +1093,19 @@ const handleSubmit = async () => {
           {activeDivtype === "KORAK 2" && (
             <div className="flex flex-col justify-start  mobile:max-w-[310px] mobile:w-full ">
               <div className="flex flex-col">
-                <div
-                  className="text-[#6D778E] mobile:text-[14px] mobile:leading-[16px] mobile:font-variation-customOpt14
+                <div className="flex items-center justify-between">
+                  <div
+                    className="text-[#6D778E] mobile:text-[14px] mobile:leading-[16px] mobile:font-variation-customOpt14
              font-normal text-[16px] leading-[24px] font-variation-customOpt14"
-                >
-                  POGREB
+                  >
+                    POGREB
+                  </div>
+                  <button
+                    onClick={() => setShowCemeteryModal(true)}
+                    className="text-[#6D778E] text-[12px] cursor-pointer hover:opacity-70"
+                  >
+                    DODAJ
+                  </button>
                 </div>
 
                 <div className="flex w-full gap-9 mobile:gap-5 mobile:flex-col">
@@ -1202,6 +1295,8 @@ const handleSubmit = async () => {
                           ? `${selectedFuneralMinute
                             .toString()
                             .padStart(2, "0")}`
+                          : selectedFuneralHour !== null && selectedFuneralHour !== undefined
+                          ? "00"
                           : "Min:"
                       }
                     />
@@ -1251,7 +1346,7 @@ const handleSubmit = async () => {
                     <div className="h-[38px] flex mobile:hidden mt-[4px] bg-[#6D778E] border border-rgba(109, 119, 142, 0.22) desktop:shadow-custom-dark-to-white tablet:shadow-custom-dark-to-white w-full">
                       <input
                         type="text"
-                        placeholder="(npr. Zadnje slovo, Spominska maša, ipd)"
+                        placeholder="Zadnje slovo"
                         value={event.eventName}
                         onChange={(e) =>
                           updateEvent(index, "eventName", e.target.value)
@@ -1282,7 +1377,7 @@ const handleSubmit = async () => {
                     <div className="h-[38px] flex mobile:hidden mobile:h-[20px] mt-[4px] bg-[#6D778E] mobile:mt-0 mobile:bg-transparent desktop:shadow-custom-dark-to-white tablet:shadow-custom-dark-to-white mobile:border-b-2 mobile:boder-[#D4D4D4] w-full">
                       <input
                         type="text"
-                        placeholder="(npr. Mrliška vežica št x, Pokopališče Gabrsko, Trbovlje)"
+                        placeholder="Poslovilna vežica"
                         value={event.eventLocation}
                         onChange={(e) =>
                           updateEvent(index, "eventLocation", e.target.value)
@@ -1471,6 +1566,8 @@ const handleSubmit = async () => {
                                 ? `${event.eventMinute
                                   .toString()
                                   .padStart(2, "0")}`
+                                : event.eventHour !== null && event.eventHour !== undefined
+                                ? "00"
                                 : "Min:"
                             }
                           />
@@ -1685,8 +1782,68 @@ const handleSubmit = async () => {
 
               <div>
                 <div className="flex flex-col">
-                  <div className="text-[#6D778E] mobile:text-[#1E2125] text-[16px] mobile:text-[14px] py-3 border-b-[1px] border-[#D4D4D4] font-normal leading-[16px] font-variation-customOpt14 mt-7 mobile:mt-0">
-                    DOGODKI
+                  <div className="flex items-center justify-between text-[#6D778E] mobile:text-[#1E2125] text-[16px] mobile:text-[14px] py-3 border-b-[1px] border-[#D4D4D4] font-normal leading-[16px] font-variation-customOpt14 mt-7 mobile:mt-0">
+                    <span>DOGODKI</span>
+                    <div className="relative flex items-center gap-3 group" ref={memoryIconButtonRef}>
+                      <span className="sr-only">Preklopi ikono na spominski strani</span>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        className="fill-[#0A85C2] cursor-pointer"
+                        onClick={handleIconClick}
+                      >
+                        <path d="M1 15c4.075-1.121 9.51.505 11 6 1.985-5.939 7.953-7.051 11-6-2.467 1.524-3.497 9-11 9s-8.487-7.471-11-9zm8.203-12.081c.008-1.612 1.319-2.919 2.933-2.919 1.615 0 2.926 1.307 2.934 2.919 1.4-.799 3.187-.317 3.995 1.081.807 1.398.331 3.187-1.062 4 1.393.813 1.869 2.602 1.062 4-.808 1.398-2.595 1.88-3.995 1.081-.008 1.612-1.319 2.919-2.934 2.919-1.614 0-2.925-1.307-2.933-2.919-1.4.799-3.188.317-3.995-1.081-.807-1.398-.331-3.187 1.062-4-1.393-.813-1.869-2.602-1.062-4 .807-1.398 2.595-1.88 3.995-1.081zm2.797 2.581c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5z" />
+                        <line
+                          x1="21"
+                          y1="3"
+                          x2="3"
+                          y2="21"
+                          stroke="#1E2125"
+                          strokeWidth="2.3"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <div 
+                        className="relative w-6 h-6 border border-[#6D778E] rounded-sm flex items-center justify-center cursor-pointer"
+                        onClick={() => {
+                          handleToggleMemoryIcon();
+                          if (memoryIconButtonRef.current) {
+                            const rect = memoryIconButtonRef.current.getBoundingClientRect();
+                            const windowWidth = window.innerWidth;
+                            if (rect.right + 260 > windowWidth) {
+                              setMemoryIconTooltipSide("left");
+                            } else {
+                              setMemoryIconTooltipSide("right");
+                            }
+                          }
+                          setShowMemoryIconTooltip(true);
+                          // Auto-hide after 3 seconds
+                          setTimeout(() => {
+                            setShowMemoryIconTooltip(false);
+                          }, 3000);
+                        }}
+                      >
+                        {showMemoryPageIcon && (
+                          <div className="absolute inset-[3px] bg-[#0A85C2]"></div>
+                        )}
+                      </div>
+                      {showMemoryIconTooltip && (
+                        <div
+                          className={`absolute top-1/2 -translate-y-1/2 z-20 w-max max-w-[260px] rounded-md bg-[#0A85C2] text-white text-[12px] leading-[16px] px-3 py-2 shadow-lg after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 ${
+                            memoryIconTooltipSide === "right"
+                              ? "left-full ml-3 after:left-[-6px] after:border-y-[6px] after:border-y-transparent after:border-r-[6px] after:border-r-[#0A85C2]"
+                              : "right-full mr-3 after:right-[-6px] after:border-y-[6px] after:border-y-transparent after:border-l-[6px] after:border-l-[#0A85C2]"
+                          }`}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Svojci cvetje in sveče hvaležno odklanjajo.
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
 
@@ -1713,14 +1870,10 @@ const handleSubmit = async () => {
 
                           <div className="mobile:ml-6 text-[18px] font-normal text-[#1E2125] mobile:text-[16px] ml-3">
                             {selectedFuneralHour !== null &&
-                              selectedFuneralHour !== undefined &&
-                              selectedFuneralMinute !== null &&
-                              selectedFuneralMinute !== undefined
+                              selectedFuneralHour !== undefined
                               ? `${selectedFuneralHour
                                 .toString()
-                                .padStart(2, "0")}:${selectedFuneralMinute
-                                  .toString()
-                                  .padStart(2, "0")}`
+                                .padStart(2, "0")}:${(selectedFuneralMinute !== null && selectedFuneralMinute !== undefined) ? selectedFuneralMinute.toString().padStart(2, "0") : "00"}`
                               : ""}
                           </div>
                         </div>
@@ -1739,18 +1892,18 @@ const handleSubmit = async () => {
                     {events
                       .filter(
                         (event) =>
-                          event.eventName &&
-                          event.eventLocation &&
+                          (event.eventName || "Zadnje slovo") &&
+                          (event.eventLocation || "Poslovilna vežica") &&
                           event.eventDate
                       )
                       .sort((a, b) => {
                         const dateA = new Date(a.eventDate).setHours(
                           a.eventHour || 0,
-                          a.eventMinute || 0
+                          (a.eventMinute !== null && a.eventMinute !== undefined) ? a.eventMinute : (a.eventHour !== null ? 0 : 0)
                         );
                         const dateB = new Date(b.eventDate).setHours(
                           b.eventHour || 0,
-                          b.eventMinute || 0
+                          (b.eventMinute !== null && b.eventMinute !== undefined) ? b.eventMinute : (b.eventHour !== null ? 0 : 0)
                         );
                         return dateA - dateB;
                       })
@@ -1759,7 +1912,7 @@ const handleSubmit = async () => {
                           {" "}
                           {/* Added key prop */}
                           <div className="text-[16px] text-[#1E2125] font-normal leading-6">
-                            {event.eventName}
+                            {event.eventName || "Zadnje slovo"}
                           </div>
                           <div
                             index={index}
@@ -1779,22 +1932,18 @@ const handleSubmit = async () => {
                                   : ""}
                               </div>
 
-                              <div className="mobile:ml-6 text-[18px] font-normal text-[#1E2125] mobile:text-[16px] ml-3">
-                                {event.eventHour !== null &&
-                                  event.eventHour !== undefined &&
-                                  event.eventMinute !== null &&
-                                  event.eventMinute !== undefined
-                                  ? `${event.eventHour
-                                    .toString()
-                                    .padStart(2, "0")}:${event.eventMinute
-                                      .toString()
-                                      .padStart(2, "0")}`
-                                  : ""}
-                              </div>
+                          <div className="mobile:ml-6 text-[18px] font-normal text-[#1E2125] mobile:text-[16px] ml-3">
+                            {event.eventHour !== null &&
+                              event.eventHour !== undefined
+                              ? `${event.eventHour
+                                .toString()
+                                .padStart(2, "0")}:${(event.eventMinute !== null && event.eventMinute !== undefined) ? event.eventMinute.toString().padStart(2, "0") : "00"}`
+                              : ""}
+                          </div>
                             </div>
 
                             <div className="text-[18px] font-normal text-[#1E2125] mobile:text-[16px] mobile:mt-1">
-                              {event.eventLocation || ""}
+                              {event.eventLocation || "Poslovilna vežica"}
                             </div>
                           </div>
                         </div>
@@ -1881,6 +2030,7 @@ const handleSubmit = async () => {
                   </div>
                 )}
 
+
                 <div className="flex flex-row w-full space-x-8 mobile:space-y-2 mobile:space-x-0 mobile:flex-col  mt-16 mobile:mt-12">
                   <div
                     onClick={() => setActiveDivType("KORAK 2")}
@@ -1903,6 +2053,13 @@ const handleSubmit = async () => {
           )}
         </div>
       </div>
+      <ModalCemetery
+        isShowModal={showCemeteryModal}
+        setIsShowModal={setShowCemeteryModal}
+        editId={null}
+        refetch={refetchCemeteries}
+        selectedCity={selectedCity}
+      />
     </>
   );
 };

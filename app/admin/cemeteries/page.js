@@ -13,6 +13,7 @@ const Cemeteries = () => {
   const whichTab = "Cemeteries";
   const [loading, setLoading] = useState(true);
   const [cemeteries, setCemeteries] = useState([]);
+  const [sortConfig, setSortConfig] = useState({ key: "city", direction: "asc" });
 
   const fetchList = async () => {
     setLoading(true);
@@ -44,6 +45,45 @@ const Cemeteries = () => {
     }
   }
 
+  const sortedCemeteries = React.useMemo(() => {
+    const data = [...cemeteries];
+    const compare = (a, b, key) => {
+      const av = (a?.[key] || "").toString();
+      const bv = (b?.[key] || "").toString();
+      return av.localeCompare(bv, "sl", { sensitivity: "base" });
+    };
+
+    data.sort((a, b) => {
+      const direction = sortConfig.direction === "asc" ? 1 : -1;
+      const primary = compare(a, b, sortConfig.key);
+      if (primary !== 0) return primary * direction;
+      // Secondary sort to keep grouping predictable
+      if (sortConfig.key === "city") {
+        // When sorting by city, secondary sort by region, then name
+        const secondary = compare(a, b, "region");
+        if (secondary !== 0) return secondary * direction;
+        return compare(a, b, "name") * direction;
+      } else if (sortConfig.key === "region") {
+        // When sorting by region, secondary sort by city, then name
+        const secondary = compare(a, b, "city");
+        if (secondary !== 0) return secondary * direction;
+        return compare(a, b, "name") * direction;
+      }
+      // Default: sort by name
+      return compare(a, b, "name") * direction;
+    });
+    return data;
+  }, [cemeteries, sortConfig]);
+
+  const toggleSort = (key) => {
+    setSortConfig((prev) => {
+      if (prev.key === key) {
+        return { key, direction: prev.direction === "asc" ? "desc" : "asc" };
+      }
+      return { key, direction: "asc" };
+    });
+  };
+
   return (
     <div className="w-full min-h-screen bg-[#ECF0F3] pt-[80px] flex">
       <SideMenuAdmin setWhichScreen={setWhichScreen} headerCheck={2} whichtab={whichTab} />
@@ -63,14 +103,18 @@ const Cemeteries = () => {
           </button>
         </div>
         <div className="overflow-x-auto bg-white rounded shadow">
-          <table className="min-w-full table-auto text-[13px]">
+          <table className="min-w-full text-sm">
             <thead>
-              <tr className="uppercase font-semibold text-gray-600 h-[70px] border-b border-gray-300">
-                <th className="text-center px-4 text-left">Name</th>
-                <th className="text-center px-4 text-left">Address</th>
-                <th className="text-center px-4 text-left">City</th>
-                <th className="text-center px-4 text-left">Region</th>
-                <th className="text-center px-4 text-left">Actions</th>
+              <tr className="uppercase font-semibold text-gray-600 h-[70px] border-b border-gray-300 text-left">
+                <th className="px-4 w-[160px] cursor-pointer select-none" onClick={() => toggleSort("city")}>
+                  City {sortConfig.key === "city" ? (sortConfig.direction === "asc" ? "↑" : "↓") : ""}
+                </th>
+                <th className="px-4 w-[160px] cursor-pointer select-none" onClick={() => toggleSort("region")}>
+                  Region {sortConfig.key === "region" ? (sortConfig.direction === "asc" ? "↑" : "↓") : ""}
+                </th>
+                <th className="px-4 min-w-[240px]">Cemetery</th>
+                <th className="px-4 min-w-[260px]">Address</th>
+                <th className="px-4 w-[140px]">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -80,29 +124,30 @@ const Cemeteries = () => {
                     <p className="text-[#6D778E]">Loading...</p>
                   </td>
                 </tr>
-              ) : cemeteries.length === 0 ? (
+              ) : sortedCemeteries.length === 0 ? (
                 <tr>
                   <td colSpan="5" className="text-center py-8">
                     <p className="text-[#6D778E]">No cemeteries found</p>
                   </td>
                 </tr>
               ) : (
-                cemeteries.map((cemetery, index) => (
+                sortedCemeteries.map((cemetery, index) => (
                   <tr
                     key={cemetery.id}
-                    className={`border-b text-gray-600 text-center ${index % 2 === 0 ? "bg-white" : "bg-[#f4f6f9]"}`}
+                    className={`border-b text-gray-700 text-left ${index % 2 === 0 ? "bg-white" : "bg-[#f4f6f9]"}`}
                   >
-                    <td className="px-4 py-4">{cemetery?.name || "N/A"}</td>
-                    <td className="px-4 py-4">{cemetery?.address || "N/A"}</td>
                     <td className="px-4 py-4">{cemetery?.city || "N/A"}</td>
                     <td className="px-4 py-4">{cemetery?.region || "N/A"}</td>
-                    <td className="px-2 py-4 font-semibold cursor-pointer">
-                      <div className="flex items-center justify-center">
+                    <td className="px-4 py-4">{cemetery?.name || "N/A"}</td>
+                    <td className="px-4 py-4">{cemetery?.address || "N/A"}</td>
+                    <td className="px-4 py-4">
+                      <div className="flex items-center gap-2">
                         <button
                           onClick={() => {
                             setIsShowModal1(true);
                             setEditId(cemetery);
                           }}
+                          className="inline-flex items-center"
                         >
                           <Image
                             src="/eye.png"
@@ -112,8 +157,8 @@ const Cemeteries = () => {
                             className="inline-block"
                           />
                         </button>
-                        <button onClick={() => deleteCemetery(cemetery?.id)} className="ml-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <button onClick={() => deleteCemetery(cemetery?.id)} className="inline-flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                             <path fill="#000000" d="M8 9h1v9H8V9zm7 0h1v9h-1V9zM5 4h14v2H5V4zm3-1h8v1H8V3zM7 7h10v13H7V7zm2 0v12h6V7H9z" />
                           </svg>
                         </button>

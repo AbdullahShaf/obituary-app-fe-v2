@@ -14,6 +14,8 @@ const Dropdown = ({
   selectedValue = "",
   onSelect,
   isDisabled = false,
+  hideIcon = false,
+  isCemeteryCompact = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -33,8 +35,9 @@ const Dropdown = ({
           : isFrom == "pogrebi"
           ? "dropdown w-full h-12"
           : isFromObituary == "obituaryform"
-          ? "dropdown w-full h-full mobile:h-[20px]"
-          
+          ? isCemeteryCompact
+            ? "dropdown w-[340px] mobile:w-full h-full mobile:h-[20px]"
+            : "dropdown w-full h-full mobile:h-[20px]"
           : isFromNotification
           ? label == "Mesto"
             ? "dropdown w-[306px] mobile:w-[240px] h-[48.48px]"
@@ -60,7 +63,9 @@ const Dropdown = ({
             : isFromFlower
             ? "relative bg-white hover:ring-2 border-[#7C7C7C] border rounded-lg shadow-sm flex flex-1 items-center justify-between h-full pl-[23.8px] pr-[23.5px] cursor-pointer tablet:h-[48px] mobile:h-[48px]"
             : isFromObituary === "obituaryform"
-            ? "relative flex flex-1 items-center justify-between h-full px-[15px] mobile:h-5 mobile:bg-transparent mobile:border-b-2 mobile:boder-[#D4D4D4] border-[1px] border-[#d4d4d4] bg-[#F1FFFE] hover:ring-2 w-full"
+            ? isCemeteryCompact
+              ? "relative flex flex-1 items-center h-full px-[10px] py-[6px] mobile:h-5 mobile:bg-transparent mobile:border-b-2 mobile:boder-[#D4D4D4] border-[1px] border-[#d4d4d4] bg-[#F1FFFE] hover:ring-2 w-full justify-start"
+              : "relative flex flex-1 items-center justify-between h-full px-[15px] mobile:h-5 mobile:bg-transparent mobile:border-b-2 mobile:boder-[#D4D4D4] border-[1px] border-[#d4d4d4] bg-[#F1FFFE] hover:ring-2 w-full"
             : isFromFlowerGreenBgTablet
             ? "relative bg-white hover:ring-2 border-[#7C7C7C] border rounded-lg shadow-sm flex flex-1 items-center justify-between h-full pl-[23.8px] desktop:h-[48px] pr-[23.5px] cursor-pointer tablet:h-[48px] tablet:w-full mobile:h-[48px]"
             : "relative bg-white hover:ring-2 border-[#7C7C7C] border rounded-lg shadow-sm flex flex-1  items-center justify-between h-full pl-[15.8px] pr-[10.5px] desktop:pr-[15.5px] cursor-pointer"
@@ -69,8 +74,8 @@ const Dropdown = ({
         {selectedValue && (
           <span
             style={{
-              fontSize: "18px",
-              lineHeight: "24px",
+              fontSize: isFromObituary === "obituaryform" && isCemeteryCompact ? "13px" : "18px",
+              lineHeight: isFromObituary === "obituaryform" && isCemeteryCompact ? "18px" : "24px",
               fontWeight: 400,
               color: "#105CCF",
               fontVariationSettings: "'opsz' 16",
@@ -82,21 +87,22 @@ const Dropdown = ({
         {!selectedValue && (
           <span
             style={{
-              fontSize: "16px",
-              lineHeight: "24px",
+              fontSize: isFromObituary === "obituaryform" && isCemeteryCompact ? "13px" : "16px",
+              lineHeight: isFromObituary === "obituaryform" && isCemeteryCompact ? "18px" : "24px",
               fontWeight: 400,
               color: "#808080",
-
               fontVariationSettings: "'opsz' 16",
             }}
           >
             {label}
           </span>
         )}
-        <Image
-          src={iconDropDown}
-          className={`w-8 h-8 ${isDisabled ? "opacity-50" : ""}`}
-        />
+        {!hideIcon && (
+          <Image
+            src={iconDropDown}
+            className={`w-8 h-8 ${isDisabled ? "opacity-50" : ""}`}
+          />
+        )}
       </div>
 
       {isOpen && (

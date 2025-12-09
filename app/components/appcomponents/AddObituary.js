@@ -1113,10 +1113,12 @@ const handleSubmit = async () => {
                     {selectedCity}
                   </div>
 
-                  <div className="flex w-[231px] mobile:w-full py-2 justify-between border-b-[1px] border-[#D4D4D4]">
+                  <div className="flex w-[340px] mobile:w-full py-2 border-b-[1px] border-[#D4D4D4]">
                     <Dropdown
                       label="Izberi pokopališče"
                       isFromObituary={"obituaryform"}
+                      isCemeteryCompact
+                      hideIcon
                       data={funeralCemeteryOptions}
                       selectedValue={selectedCemeteryLabel}
                       onSelect={handleFuneralCemeterySelect}
@@ -1879,7 +1881,7 @@ const handleSubmit = async () => {
                         </div>
 
                         <div className="text-[18px] font-normal text-[#1E2125] mobile:text-[16px] mobile:mt-1">
-                          {inputValueFuneralCemetery || "Pokopališče"}
+                          {selectedCemeteryLabel || inputValueFuneralCemetery || "Pokopališče"}
                           {inputValueFuneralEnd
                             ? `, ${inputValueFuneralEnd}`
                             : ""}

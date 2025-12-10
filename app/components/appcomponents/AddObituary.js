@@ -1882,9 +1882,6 @@ const handleSubmit = async () => {
 
                         <div className="text-[18px] font-normal text-[#1E2125] mobile:text-[16px] mobile:mt-1">
                           {selectedCemeteryLabel || inputValueFuneralCemetery || "Pokopališče"}
-                          {inputValueFuneralEnd
-                            ? `, ${inputValueFuneralEnd}`
-                            : ""}
                         </div>
                       </div>
                     </div>

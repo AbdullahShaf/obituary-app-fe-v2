@@ -743,17 +743,12 @@ const MemorialPageTopComp = ({
                                     </p>
                                     <p className="text-[#414141] text-[14px] font-normal leading-[16.41px]">
                                       {(() => {
-                                        // const formattedText = `${
-                                        //   data?.Cemetry?.name || "Pokopalisce"
-                                        // }, ${data?.funeralLocation || ""}`;
+                                        // Check new Cemeteries relation first, then fallback to old Cemetry, then default
+                                        const cemeteryName = data?.Cemeteries?.name || data?.Cemetry?.name || "Pokopalisce";
 
-                                        const formattedText = `${
-                                          data?.Cemetry?.name || "Pokopalisce"
-                                        }`;
-
-                                        return formattedText.length > 50
-                                          ? `${formattedText.slice(0, 50)}...`
-                                          : formattedText;
+                                        return cemeteryName.length > 50
+                                          ? `${cemeteryName.slice(0, 50)}...`
+                                          : cemeteryName;
                                       })()}
                                     </p>
                                   </div>

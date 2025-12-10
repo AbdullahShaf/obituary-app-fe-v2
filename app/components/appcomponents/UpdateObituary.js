@@ -1757,9 +1757,6 @@ const UpdateObituary = ({ set_Id, setModal }) => {
 
                         <div className="text-[18px] font-normal text-[#1E2125] mobile:text-[16px] mobile:mt-1">
                           {selectedCemeteryLabel || inputValueFuneralCemetery || ""}
-                          {inputValueFuneralEnd
-                            ? `, ${inputValueFuneralEnd}`
-                            : ""}
                         </div>
                       </div>
                     </div>

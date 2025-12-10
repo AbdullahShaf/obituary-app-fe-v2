@@ -57,9 +57,10 @@ const DropdownWithCustomDesign = ({
         }
         placeholder={placeholder || ""}
         isSearchable
-        filterOption={(option, inputValue) =>
-          option.label.toLowerCase().startsWith(inputValue.toLowerCase())
-        }
+        filterOption={(option, inputValue) => {
+          if (!inputValue) return true;
+          return option.label.toLowerCase().startsWith(inputValue.toLowerCase());
+        }}
         isDisabled={isDisabled}
         styles={{
           control: (base) => ({
@@ -89,11 +90,20 @@ const DropdownWithCustomDesign = ({
             backgroundColor: isFocused ? "#e8f5f4" : "#fff", // Highlight on hover
             color: "#333", // Text color
             cursor: "pointer",
+            fontSize: "14px", // Match other fields in popup
+          }),
+          input: (base) => ({
+            ...base,
+            fontSize: "14px", // Match other fields in popup
+          }),
+          placeholder: (base) => ({
+            ...base,
+            fontSize: "14px", // Match other fields in popup
           }),
           singleValue: (base) => ({
             ...base,
             color: "#105CCF",
-            fontSize: "18px",
+            fontSize: "14px", // Match other fields in popup
           }),
         }}
       />

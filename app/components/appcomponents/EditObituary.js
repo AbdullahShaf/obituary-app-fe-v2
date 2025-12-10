@@ -1627,10 +1627,7 @@ const AddObituary = ({ set_Id, setModal }) => {
                         </div>
 
                         <div className="text-[18px] font-normal text-[#1E2125] mobile:text-[16px] mobile:mt-1">
-                          {inputValueFuneralCemetery || ""}
-                          {inputValueFuneralEnd
-                            ? `, ${inputValueFuneralEnd}`
-                            : ""}
+                          {selectedCemeteryLabel || inputValueFuneralCemetery || ""}
                         </div>
                       </div>
                     </div>

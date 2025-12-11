@@ -16,6 +16,17 @@ export default function WallGallery3D({ photos = [] }) {
   const [tilt, setTilt] = useState("flat"); // flat | left | right
   const [isCentered, setIsCentered] = useState(false);
   const touchState = useRef({ active: false, startX: 0, startScroll: 0 });
+  const tiltTimeoutRef = useRef(null);
+  const scrollPosRef = useRef(0);
+  const maxScrollRef = useRef(0);
+
+  useEffect(() => {
+    scrollPosRef.current = scrollPos;
+  }, [scrollPos]);
+
+  useEffect(() => {
+    maxScrollRef.current = maxScroll;
+  }, [maxScroll]);
 
   // Precompute a stable list of image sources
   const items = useMemo(
@@ -75,27 +86,29 @@ export default function WallGallery3D({ photos = [] }) {
 
   // Handle wheel scroll with a gentle tilt
   const handleWheel = (e) => {
-    if (maxScroll <= 0) return;
+    if (maxScrollRef.current <= 0) return;
     e.preventDefault();
     const delta = e.deltaY || e.deltaX || 0;
-    const next = clamp(scrollPos + delta * 0.6, 0, maxScroll);
-    setScrollPos(next);
+    const next = clamp(
+      scrollPosRef.current + delta * 0.6,
+      0,
+      maxScrollRef.current
+    );
+    setScrollPos(() => next);
     setTilt(delta > 0 ? "right" : "left");
     // reset tilt after animation frame
-    window.clearTimeout(handleWheel._tiltTimeout);
-    handleWheel._tiltTimeout = window.setTimeout(() => setTilt("flat"), 180);
+    clearTimeout(tiltTimeoutRef.current);
+    tiltTimeoutRef.current = window.setTimeout(() => setTilt("flat"), 180);
   };
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    el.addEventListener("wheel", handleWheel, { passive: false });
-    // Touch / pointer support for swipe
     const onPointerDown = (e) => {
       touchState.current = {
         active: true,
         startX: e.clientX ?? e.touches?.[0]?.clientX ?? 0,
-        startScroll: scrollPos,
+        startScroll: scrollPosRef.current,
       };
     };
     const onPointerMove = (e) => {
@@ -105,9 +118,9 @@ export default function WallGallery3D({ photos = [] }) {
       const next = clamp(
         touchState.current.startScroll + delta,
         0,
-        maxScroll
+        maxScrollRef.current
       );
-      setScrollPos(next);
+      setScrollPos(() => next);
       setTilt(delta > 0 ? "right" : "left");
     };
     const onPointerUp = () => {
@@ -117,6 +130,7 @@ export default function WallGallery3D({ photos = [] }) {
       }
     };
 
+    el.addEventListener("wheel", handleWheel, { passive: false });
     el.addEventListener("pointerdown", onPointerDown, { passive: true });
     el.addEventListener("pointermove", onPointerMove, { passive: false });
     el.addEventListener("pointerup", onPointerUp, { passive: true });
@@ -127,6 +141,7 @@ export default function WallGallery3D({ photos = [] }) {
     el.addEventListener("touchcancel", onPointerUp, { passive: true });
 
     return () => {
+      clearTimeout(tiltTimeoutRef.current);
       el.removeEventListener("wheel", handleWheel);
       el.removeEventListener("pointerdown", onPointerDown);
       el.removeEventListener("pointermove", onPointerMove);
@@ -137,7 +152,7 @@ export default function WallGallery3D({ photos = [] }) {
       el.removeEventListener("touchend", onPointerUp);
       el.removeEventListener("touchcancel", onPointerUp);
     };
-  });
+  }, []); // handlers use refs for latest state
 
   const tiltClass =
     tilt === "left" ? "turnLeft" : tilt === "right" ? "turnRight" : "flat";

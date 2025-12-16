@@ -11,7 +11,7 @@ import categoryService from "@/services/category-service";
 import screenSizes from "./constant";
 
 const LokalniContent = () => {
-  const [width, setWidth] = useState<number>(0);
+  const [width, setWidth] = useState<number | undefined>(undefined);
   const [screen, setScreen] = useState<string | null>(null);
 
   useEffect(() => {
@@ -28,6 +28,10 @@ const LokalniContent = () => {
   }, []);
 
   useEffect(() => {
+    if (width === undefined) {
+      return;
+    }
+    
     if (width < 744) {
       setScreen(screenSizes.MOBILE);
     } else if (width >= 744 && width <= 1279) {

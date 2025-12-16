@@ -7,12 +7,16 @@ import { APP_BASE_URL } from "@/config/apiConfig";
 
 export const dynamic = "force-dynamic";
 
-export function generateMetadata({ searchParams }: { searchParams?: { city?: string | string[]; region?: string | string[] } }): Metadata {
-  const city = typeof searchParams?.city === 'string' ? searchParams.city : Array.isArray(searchParams?.city) ? searchParams.city[0] : "";
+export async function generateMetadata({ searchParams }: { searchParams?: Promise<{ city?: string | string[]; region?: string | string[] }> }): Promise<Metadata> {
+  const resolvedSearchParams = await searchParams;
+  const city = typeof resolvedSearchParams?.city === 'string' ? resolvedSearchParams.city : Array.isArray(resolvedSearchParams?.city) ? resolvedSearchParams.city[0] : "";
+  
+  const defaultDescription = "Lokalni izvajalci in partnerji s slikami storitev ter neposrednimi povezavami do spletnih strani. Kamnoseštvo, svečarstvo, graverstvo, QR kode za nagrobnike, prevozi pokojnih, sedmine, govorniki.";
+  const cityDescription = city ? `Lokalni izvajalci in partnerji v ${city} s slikami storitev ter neposrednimi povezavami do spletnih strani. Kamnoseštvo, svečarstvo, graverstvo, QR kode za nagrobnike, prevozi pokojnih, sedmine, govorniki.` : defaultDescription;
   
   return {
     title: city ? `Lokalni izvajalci in partnerji v ${city} | Osmrtnica.com` : "Lokalni izvajalci in partnerji | Osmrtnica.com",
-    description: "Lokalni izvajalci in partnerji s slikami storitev ter neposrednimi povezavami do spletnih strani. Kamnoseštvo, svečarstvo, graverstvo, QR kode za nagrobnike, prevozi pokojnih, sedmine, govorniki.",
+    description: cityDescription,
     alternates: {
       canonical: city ? `${APP_BASE_URL}/lokalni?city=${encodeURIComponent(city)}` : `${APP_BASE_URL}/lokalni`,
     },

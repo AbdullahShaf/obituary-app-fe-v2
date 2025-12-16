@@ -318,6 +318,7 @@ const ObituaryListComponent = ({ city }) => {
 
         {/* TABLET VERSION */}
         <div className={`w-full tablet:w-full mobile:w-full tablet:flex hidden flex-col ${pathname?.includes('/u/') ? '' : 'items-center'}`}>
+          <h2 className="sr-only">Search buttons for searching pogrebi</h2>
           <div className={`w-[600px] h-[112px] columns-2 flex flex-wrap flex-row gap-4 ${pathname?.includes('/u/') ? '' : 'mt-[63px] mb-[53px]'}`}>
             {!hideDropdowns ? (
               <>
@@ -406,6 +407,7 @@ const ObituaryListComponent = ({ city }) => {
 
         {/* MOBILE VERSION */}
         <div className={`w-full tablet:w-full mobile:w-full mobile:flex hidden flex-col ${pathname?.includes('/u/') ? '' : 'items-center'}`}>
+          <h2 className="sr-only">Search buttons for searching pogrebi</h2>
           <div className={`w-[296px] ${pathname?.includes('/u/') ? '' : 'h-[240px] mt-[40px] mb-[42px]'} flex-wrap flex flex-row gap-4`}>
             {/* Search Input */}
             <div className={`flex relative ${pathname?.includes('/u/') ? '' : 'w-[296px]'} h-[48px] justify-center items-center`}>

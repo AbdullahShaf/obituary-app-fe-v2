@@ -5,7 +5,6 @@ import { useBreakpoint } from "../../hooks/useBreakpoint";
 
 const SlideTwo = () => {
   const breakpoint = useBreakpoint();
-  console.log(breakpoint)
 
 
 
@@ -149,7 +148,7 @@ const SlideTwo = () => {
           <img
             className="mt-[33px] mx-auto"
             src="/mobile-cards/slider-mobile.png"
-            alt="iPad Landscape"
+            alt="Prikaz spominske strani na mobilni napravi - Osmrtnica.com"
             loading="lazy"
           />
 
@@ -184,7 +183,7 @@ const SlideTwo = () => {
           <Image
             className="mt-[33px] mx-auto w-[150px] h-[300px]"
             src="/mobile-cards/slider-mobile.png"
-            alt="iPad Landscape"
+            alt="Prikaz spominske strani na mobilni napravi - Osmrtnica.com"
             width={150}
             height={300}
           />

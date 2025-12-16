@@ -318,7 +318,7 @@ export default function Darila() {
           <div className="items-center justify-center gap-[16px] mt-[16px] hidden tabletUserAcc:flex">
             <div className="flex items-center justify-center gap-2">
               <div className="border border-[#6D778E] rounded flex items-center justify-center w-[32px] h-[32px]">
-                <Image src="/grey_right.png" alt="left" width={24} height={24} className="w-[24px] h-[24px]" />
+                <Image src="/grey_right.png" alt="right" width={24} height={24} className="w-[24px] h-[24px]" />
               </div>
               <div className=" border border-[#6D778E] rounded flex items-center justify-center w-[32px] h-[32px] text-[14px] text-[#6D778E]">
                 1

@@ -1,4 +1,5 @@
 // components/Dropdown.js
+import { useId } from "react";
 import Select from "react-select";
 
 export const SelectDropdown = ({
@@ -13,6 +14,7 @@ export const SelectDropdown = ({
   selectedValue = "",
   onSelect,
   isDisabled = false,
+  id,
 }) => {
   const options = data.map((item) => ({
     label: item.place,
@@ -95,7 +97,11 @@ export const SelectDropdown = ({
 
     return lowerCaseLabel.startsWith(lowerCaseInput);
   };
-  const inputId = `select-${label?.toLowerCase().replace(/\s+/g, '-') || 'dropdown'}`;
+  
+  const uniqueId = useId();
+  const baseId = id || uniqueId;
+  const sanitizedLabel = label?.toLowerCase().replace(/\s+/g, '-') || 'dropdown';
+  const inputId = `select-${sanitizedLabel}-${baseId}`;
   
   return (
     <div className={`dropdown ${getContainerClass()}`}>

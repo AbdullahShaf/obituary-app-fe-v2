@@ -9,13 +9,6 @@ export async function generateMetadata({ params }) {
   const response = await obituaryService.getMemory({ slugKey });
   const obituary = response?.obituary || {};
 
-  const nameForTitle =
-    obituary?.name && obituary?.sirName
-      ? `${obituary.name} ${obituary.sirName}`
-      : obituary?.name
-      ? `${obituary.name}`
-      : null;
-
   const lastName = obituary?.sirName || "";
   const fullName = obituary?.name && lastName ? `${obituary.name} ${lastName}` : obituary?.name || "";
   const titleText = fullName ? `${fullName} – žalna stran` : "Žalna stran";
@@ -30,7 +23,7 @@ export async function generateMetadata({ params }) {
       canonical: `https://www.osmrtnica.com/m/${slugKey}`,
     },
     openGraph: {
-      title: fullName ? `${fullName} – žalna stran` : "Žalna stran",
+      title: titleText,
       description: descriptionText,
       url: `${APP_BASE_URL}/m/${slugKey}`,
       siteName: "Osmrtnica",

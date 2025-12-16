@@ -7,9 +7,8 @@ import { APP_BASE_URL } from "@/config/apiConfig";
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata({ searchParams }: { searchParams?: Promise<{ city?: string | string[]; region?: string | string[] }> }): Promise<Metadata> {
-  const resolvedSearchParams = await searchParams;
-  const city = typeof resolvedSearchParams?.city === 'string' ? resolvedSearchParams.city : Array.isArray(resolvedSearchParams?.city) ? resolvedSearchParams.city[0] : "";
+export function generateMetadata({ searchParams }: { searchParams?: { city?: string | string[]; region?: string | string[] } }): Metadata {
+  const city = typeof searchParams?.city === 'string' ? searchParams.city : Array.isArray(searchParams?.city) ? searchParams.city[0] : "";
   
   return {
     title: city ? `Lokalni izvajalci in partnerji v ${city} | Osmrtnica.com` : "Lokalni izvajalci in partnerji | Osmrtnica.com",

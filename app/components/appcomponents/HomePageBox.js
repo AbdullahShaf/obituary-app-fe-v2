@@ -15,7 +15,13 @@ const HomePageBox = () => {
       <div className="bg-[#F0F4F7] min-w-[1281px] h-auto">
         <div className="flex justify-center">
           <div className="image-container my-[125px] mr-[69px]">
-            <img src="/mobile-cards/mobile-export.png" alt="Digitalne kartice prilagojene mobilnemu telefonu za pošiljanje naprej" loading="lazy" />
+            <Image
+              src="/mobile-cards/mobile-export.png"
+              alt="Digitalne kartice prilagojene mobilnemu telefonu za pošiljanje naprej"
+              width={250}
+              height={250}
+              loading="lazy"
+            />
           </div>
           <div className="text-container my-[125px] w-[495px]">
             <span className="text-[#3090D5] text-[24px]">Priročno</span>
@@ -34,7 +40,7 @@ const HomePageBox = () => {
               <span>
                 <Image
                   src="/mobile-cards/loc-icon.png"
-                  alt=""
+                  alt="ikona lokacije"
                   width={24}
                   height={24}
                   className="w-[24px] h-[24px] inline-block"
@@ -61,7 +67,13 @@ const HomePageBox = () => {
       <div className="bg-[#F0F4F7] w-[1280px] h-auto">
         <div className="flex justify-center">
           <div className="image-container my-[125px] mr-[69px]">
-            <img src="/mobile-cards/mobile-export.png" alt="Digitalne kartice prilagojene mobilnemu telefonu za pošiljanje naprej" loading="lazy" />
+            <Image
+              src="/mobile-cards/mobile-export.png"
+              alt="Digitalne kartice prilagojene mobilnemu telefonu za pošiljanje naprej"
+              width={350}
+              height={350}
+              loading="lazy"
+            />
           </div>
           <div className="text-container my-[125px] w-[495px]">
             <span className="text-[#3090D5] text-[24px]">Priročno</span>
@@ -120,15 +132,23 @@ const HomePageBox = () => {
             </p>
           </div>
           <div className="image-container mt-[38px]">
-            <img src="/mobile-cards/mobile-export.png" alt="Digitalne kartice prilagojene mobilnemu telefonu za pošiljanje naprej" loading="lazy" />
+            <Image
+              src="/mobile-cards/mobile-export.png"
+              alt="Digitalne kartice prilagojene mobilnemu telefonu za pošiljanje naprej"
+              width={250}
+              height={250}
+              loading="lazy"
+            />
           </div>
 
           <p className="text-[#414141] flex items-center gap-2 mt-[20px]">
             Poišči lokacijsko ikonico
             <span>
-              <img
+              <Image
                 src="/mobile-cards/loc-icon.png"
-                alt=""
+                alt="ikona lokacije"
+                width={16}
+                height={16}
                 className="w-4 h-4 inline-block"
                 loading="lazy"
               />
@@ -168,9 +188,11 @@ const HomePageBox = () => {
           <p className="text-[#414141] flex items-center gap-2 mt-[11px] text-[16px] w-[313px] mx-auto">
             Poišči lokacijsko ikonico
             <span>
-              <img
+              <Image
                 src="/mobile-cards/loc-icon.png"
-                alt=""
+                alt="ikona lokacije"
+                width={16}
+                height={16}
                 className="w-4 h-4 inline-block"
                 loading="lazy"
               />

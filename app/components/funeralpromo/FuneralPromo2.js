@@ -116,7 +116,7 @@ const FuneralPromo2 = () => {
                 borderRadius: "1000px",
                 display: "inline-block",
               }}
-            >``
+            >
               <button
                 className="w-full px-[9px] py-[15px] rounded-[50px] text-[#414B5A] font-semibold"
                 style={{

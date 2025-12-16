@@ -123,14 +123,12 @@ const Login = () => {
 
         {/* Button container for Prijavi se */}
         <div className="w-[429px] mobile:w-[297px] h-[48px] mt-[40px] mx-auto">
-          <h3>
           <button
             onClick={handleLogin}
             className="flex w-full h-full bg-white items-center justify-center text-[16px] leading-[24px] font-variation-customOpt16 text-[#FFFFFF] bg-gradient-to-b from-[#0D94E8] to-[#1860A3] rounded-lg"
           >
             Prijavi se
           </button>
-          </h3>
         </div>
 
         {/* Buttons and text content main Container */}

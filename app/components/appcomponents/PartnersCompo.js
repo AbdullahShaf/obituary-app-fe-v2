@@ -105,7 +105,6 @@ const PartnersCompo = () => {
          mobile:bg-[#3C3E41] items-center justify-center text-[16px] text-[#1E2125] mobile:text-[#F6F6F6] 
          desktop:bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] rounded-lg font-variation-customOpt16 self-center"
           >
-            <h3 className="sr-only">Kontaktirajte nas</h3>
             Kontaktirajte nas
           </Link>
         </div>

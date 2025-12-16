@@ -39,17 +39,25 @@ const Indispensable = () => {
           className="flex relative w-full bg-no-repeat
              h-auto justify-center items-center tablet:items-start mobile:items-start"
         >
-          <img
-            src="/indispensable_bg_img.jpg"
-            alt="Ozadje za sekcijo pomoč pri delu"
-            className="relative hidden desktop:block h-[860px] tablet:h-[1139px] mobile:h-[1267px] w-full object-cover"
-          />
+          <div className="relative hidden desktop:block h-[860px] w-full">
+            <Image
+              src="/indispensable_bg_img.jpg"
+              alt="Ozadje za sekcijo pomoč pri delu"
+              fill
+              className="object-cover"
+              loading="lazy"
+            />
+          </div>
 
-          <img
-            src="/levo_spodaj_mob.jpg"
-            alt="Ozadje za sekcijo pomoč pri delu"
-            className="relative h-[860px] hidden mobile:block tablet:block tablet:h-[1139px] mobile:h-[1267px] w-full object-cover"
-          />
+          <div className="relative h-[860px] hidden mobile:block tablet:block tablet:h-[1139px] mobile:h-[1267px] w-full">
+            <Image
+              src="/levo_spodaj_mob.jpg"
+              alt="Ozadje za sekcijo pomoč pri delu"
+              fill
+              className="object-cover"
+              loading="lazy"
+            />
+          </div>
 
           <div className="absolute max-w-[1548px] tablet:mt-[43px] mobile:mt-[29px] tablet:max-w-[622px] mobile:max-w-[322px] tablet:h-[831px] h-[860px] tablet:mb-[263px] mobile:h-[1215px] w-full flex justify-end items-center">
             <div

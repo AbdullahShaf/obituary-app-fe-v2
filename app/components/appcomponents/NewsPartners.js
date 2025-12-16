@@ -84,9 +84,9 @@ const NewsPartnersComponentMobile = ({ screen }) => {
   };
   return (
     <div className="w-full max-w-[340px] mx-auto text-left my-24 px-4">
-      <h1 className="text-[#1E2125] text-[28px] leading-[100%] text-[#1E2125] mb-11 ">
+      <h2 className="text-[#1E2125] text-[28px] leading-[100%] text-[#1E2125] mb-11 ">
         Lokalne novice
-      </h1>
+      </h2>
       <NewsPartnersListMobile partners={partners} />
     </div>
   );

@@ -19,6 +19,7 @@ const RegisterComp = () => {
                   width={64}
                   height={64}
                   className="w-[64px] h-[64px] mx-auto"
+                  alt="Ikona registracije"
                 ></Image>
                 <div className="text-[20px] text-[#1E2125] font-variation-customOpt20wght400 text-center font-semibold mt-3">
                   Registrirajte se
@@ -35,6 +36,7 @@ const RegisterComp = () => {
                   width={64}
                   height={64}
                   className="w-[64px] h-[64px] mx-auto"
+                  alt="Ikona objave"
                 ></Image>
                 <div className="text-[20px] text-[#1E2125] font-variation-customOpt20wght400 text-center font-semibold mt-3">
                   Objava v 48 urah
@@ -54,6 +56,7 @@ const RegisterComp = () => {
                   width={64}
                   height={64}
                   className="w-[64px] h-[64px] mx-auto"
+                  alt="Ikona fleksibilnosti"
                 ></Image>
                 <div className="text-[20px] text-[#1E2125] font-variation-customOpt20wght400 text-center font-semibold mt-3">
                   Fleksibilnost
@@ -70,6 +73,7 @@ const RegisterComp = () => {
                   width={64}
                   height={64}
                   className="w-[64px] h-[64px]"
+                  alt="Ikona prilagojenosti vsem napravam"
                 ></Image>
                 <div className="text-[20px] text-[#1E2125] font-variation-customOpt20wght400 text-center font-semibold mt-3">
                   Prilagojeno vsem napravam
@@ -89,6 +93,7 @@ const RegisterComp = () => {
               width={64}
               height={64}
               className="w-[64px] h-[64px]"
+              alt="Ikona registracije"
             ></Image>
             <div className="text-[20px] text-[#1E2125] font-variation-customOpt20wght400 font-semibold mt-[13px]">
               Registrirajte se
@@ -101,7 +106,7 @@ const RegisterComp = () => {
 
           {/*C2 container for desktop*/}
           <div className="w-[295.42px] h-[200px] flex-col items-center flex desktop:ml-16 tablet:hidden mobile:mt-6 mobile:w-full mobile:max-w-[480px] mobile:px-2">
-            <Image src="/image_posting.png" width={64} height={64} className="w-[64px] h-[64px]"></Image>
+            <Image src="/image_posting.png" width={64} height={64} className="w-[64px] h-[64px]" alt="Ikona objave"></Image>
             <div className="text-[20px] text-[#1E2125] font-variation-customOpt20wght400 font-semibold mt-[13px]">
               Objava v 48 urah
             </div>
@@ -118,12 +123,14 @@ const RegisterComp = () => {
               width={64}
               height={64}
               className="w-[64px] h-[64px] hidden desktop:flex"
+              alt="Ikona fleksibilnosti"
             ></Image>
             <Image
               src="/image_tablet_flexibility.png"
               width={64}
               height={64}
               className="w-[64px] h-[64px] mx-auto hidden mobile:flex"
+              alt="Ikona fleksibilnosti"
             ></Image>
             <div className="text-[20px] text-[#1E2125] font-variation-customOpt20wght400 font-semibold mt-[13px]">
               Fleksibilnost

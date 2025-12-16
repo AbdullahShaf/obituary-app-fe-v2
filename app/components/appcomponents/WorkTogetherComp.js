@@ -34,7 +34,6 @@ const WorkTogetherComp = () => {
               Prikaži več
             </div>
             <Link href={"/kontakt"} className="flex desktop:hidden font-variation-customOpt16 text-[16px] text-[#1E2125] text-center">
-            <h3 className="sr-only">Kontaktirajte nas</h3>
             Kontaktirajte nas
             </Link >
           </div>

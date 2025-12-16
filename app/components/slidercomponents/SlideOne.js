@@ -29,7 +29,6 @@ const SlideOne = () => {
                 Vse navedeno je BREZPLAČNO.
               </p>
 
-              <h3 className="sr-only">Več o žalni strani</h3>
               <Link
                 href={"/zalna-stran"}
                 className="inline-flex shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] px-[25px] py-[12px] rounded-[8px] mt-[81px] w-[175px] items-center justify-center"
@@ -106,7 +105,6 @@ const SlideOne = () => {
               loading="lazy"
             />
           </div>
-          <h3 className="sr-only">Več o žalni strani</h3>
           <Link
             href={"/zalna-stran"}
             className="inline-flex px-[25px] rounded-[8px] py-[12px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] items-center justify-center"

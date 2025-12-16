@@ -42,7 +42,6 @@ const SlideTwo = () => {
               </p>
             </div>
             <div className="btn-container ">
-              <h3 className="sr-only">Več o Skrbniku</h3>
               <Link href={"/spominska"}>
                 <button className="px-[25px] py-[12px] w-[155px] rounded-[8px] mt-[47px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
                   Več o Skrbniku
@@ -95,7 +94,6 @@ const SlideTwo = () => {
               </p>
             </div>
             <div className="btn-container px-[89px]">
-              <h3 className="sr-only">Več o Skrbniku</h3>
               <Link href={"/spominska"}>
                 <button className="px-[25px] py-[12px] w-[155px] rounded-[8px] mt-[47px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
                   Več o Skrbniku
@@ -156,7 +154,6 @@ const SlideTwo = () => {
           />
 
           <div className="btn-container text-center">
-            <h3 className="sr-only">Več o Skrbniku</h3>
             <Link href={"/spominska"}>
               <button className="px-[25px] py-[12px] rounded-[8px] mt-[44px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
                 Več o Skrbniku
@@ -193,7 +190,6 @@ const SlideTwo = () => {
           />
 
           <div className="btn-container text-center mt-[22px]">
-            <h3 className="sr-only">Več o Skrbniku</h3>
             <Link href={"/spominska"}>
               <button className="px-[25px] py-[12px] rounded-[8px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
                 Več o Skrbniku

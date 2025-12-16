@@ -49,7 +49,7 @@ const HomePageBox = () => {
               na vrhu strani.
             </p>
 
-            <h3 className="sr-only">Prijavi se</h3>
+            <h3 className="sr-only">Prijavi se za dostop do lokalnih informacij</h3>
             <Link href={"/registracija"}>
               <button className="shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] text-[#414141] rounded-[8px] px-[25px] py-[12px] mt-[24px] w-[113px]">
                 Prijavi se
@@ -101,7 +101,7 @@ const HomePageBox = () => {
               na vrhu strani.
             </p>
 
-            <h3 className="sr-only">Prijavi se</h3>
+            <h3 className="sr-only">Prijavi se za dostop do lokalnih informacij</h3>
             <Link href={"/registracija"}>
               <button className="shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] text-[#414141] rounded-[8px] px-[25px] py-[12px] mt-[24px] w-[113px]">
                 Prijavi se

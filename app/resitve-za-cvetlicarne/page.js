@@ -1,29 +1,23 @@
-import React from "react";
-import Head from "next/head";
+import AdditionalPromotion from "../components/appcomponents/AdditionalPromotion";
+import CommonFooter from "../components/appcomponents/CommonFooter";
+import DirectoryEntry from "../components/appcomponents/DirectoryEntry";
+import FreeCharge from "../components/appcomponents/FreeCharge";
+import KickStart from "../components/appcomponents/KickStart";
 import Layout from "../components/appcomponents/Layout";
 import MultipleStores from "../components/appcomponents/MultipleStores";
-import FreeCharge from "../components/appcomponents/FreeCharge";
-import FreeTrial from "../components/appcomponents/FreeTrial";
-import RegisterComp from "../components/appcomponents/RegisterComp";
-import AdditionalPromotion from "../components/appcomponents/AdditionalPromotion";
 import NotJustObituaries from "../components/appcomponents/NotJustObituaries";
-import DirectoryEntry from "../components/appcomponents/DirectoryEntry";
-import FrequentlyAskedQuestionView from "../components/appcomponents/FrequentlyAskedQuestionView";
-import OfficialOpening from "../components/appcomponents/OfficialOpening";
-import KickStart from "../components/appcomponents/KickStart";
-import CommonFooter from "../components/appcomponents/CommonFooter";
-import Link from "next/link";
-import Image from "next/image";
+import RegisterComp from "../components/appcomponents/RegisterComp";
 import './local.css';
+
+export const metadata = {
+  title: "Rešitve za cvetličarne | Osmrtnica",
+  description: "Spletne rešitve za cvetličarne - brezplačna spletna stran, vpis v imenik lokalnih cvetličarn in dodatne promocijske možnosti. Enostavna izdelava v 30 minutah.",
+  robots: "index, follow",
+};
 
 const Floristspromo = () => {
   return (
     <>
-      {/* Allow crawlability but no indexing. */}
-      <Head>
-        <title>Rešitve za cvetličarne | Osmrtnica</title>
-        <meta name="robots" content="noindex, follow" />
-      </Head>
       
       <Layout
         megaMenu={""}

@@ -38,6 +38,7 @@ const FreeCharge = ({ mbZero = false }) => {
           {/* 7 October 2024 To be confirmed */}
           <img
             src="/image_desktop_offer.png"
+            alt="Prikaz izdelave spletne strani v 30 minutah na mobilni napravi - Osmrtnica.com"
             className="w-[336px] h-[217px] self-center mt-[42px] hidden mobile:flex"
           ></img>
 
@@ -45,6 +46,7 @@ const FreeCharge = ({ mbZero = false }) => {
           {/* 7 October 2024 - To be confirmed */}
           <img
             src="/image_desktop_offer.png"
+            alt="Prikaz izdelave spletne strani v 30 minutah na tabličnem računalniku - Osmrtnica.com"
             className=" h-[401px] self-center mx-4 mt-[63px] desktop:mt-[70px] flex mobile:hidden"
           ></img>
         </div>

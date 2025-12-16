@@ -6,7 +6,7 @@ export default function KickStart({ cUrl = "", showButton = "false" }) {
     <div className="flex w-full flex-col items-center bg-[#FFFFFF] mobile:bg-[#E0E9F3] pt-[85px] pb-[100px]">
       <Image
         src="/funeral-promo-footer.png"
-        alt="KickStart"
+        alt="Ikona za sodelovanje - Osmrtnica.com"
         width={94}
         height={94}
       />

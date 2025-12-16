@@ -190,6 +190,7 @@ const DirectoryEntry = () => {
     >
       <Image
         src={"/kako_naprej_icon.png"}
+        alt="Ikona za navodila - kako naprej"
         width={100}
         height={100}
         className={`${isMobile ? "w-5 h-5" : "w-4 h-4"} mt-[3px]`}
@@ -366,6 +367,7 @@ const ContainerView = ({ item, index, key }) => {
       <Image
         key={key}
         src={"/check_circle_icon.png"}
+        alt="Ikona potrditve - označeno"
         width={100}
         height={100}
         className="w-[14px] h-[14px] mt-[3px]"

@@ -11,6 +11,7 @@ const RegisterComp = () => {
         <div className="flex w-[1014.25px] tablet:w-[619px] mobile:w-[100%] mobile:max-w-[480px] mx-auto mobile:flex-col tablet:flex-col">
           {/*Main contianer for tablet*/}
           <div className="w-[619px] h-[424px] flex-col hidden tablet:flex">
+            <h2 className="sr-only">Funkcionalnosti registracije</h2>
             {/*1st coloum container*/}
             <div className="flex h-[200px]">
               <div className="w-[295.42px] h-[200px] flex-col items-center ">
@@ -88,6 +89,7 @@ const RegisterComp = () => {
 
           {/*C1 container for desktop*/}
           <div className="w-[295.42px] h-[200px] flex-col items-center flex tablet:hidden mobile:w-full mobile:max-w-[480px] mobile:px-2">
+            <h2 className="sr-only">Funkcionalnosti registracije</h2>
             <Image
               src="/image_registration_desktop.png"
               width={64}

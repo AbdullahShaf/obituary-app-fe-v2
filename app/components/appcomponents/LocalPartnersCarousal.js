@@ -158,20 +158,20 @@ const LocalCarousal = ({ categories, screen }) => {
       {/* Desktop Navigation */}
       <div className="hidden md:flex flex-row items-center justify-end w-full gap-8 mb-10">
         <button onClick={prev}>
-          <img src={ArrowLeft.src} className="w-4" />
+          <img src={ArrowLeft.src} alt="Puščica levo - prejšnji element" className="w-4" />
         </button>
         <button onClick={next}>
-          <img src={ArrowRight.src} className="w-4" />
+          <img src={ArrowRight.src} alt="Puščica desno - naslednji element" className="w-4" />
         </button>
       </div>
 
       {/* Mobile Navigation */}
       <div className="flex md:hidden flex-row items-center justify-center w-full gap-12 mt-3">
         <button onClick={prev}>
-          <img src={ArrowLeft.src} className="w-5" />
+          <img src={ArrowLeft.src} alt="Puščica levo - prejšnji element" className="w-5" />
         </button>
         <button onClick={next}>
-          <img src={ArrowRight.src} className="w-5" />
+          <img src={ArrowRight.src} alt="Puščica desno - naslednji element" className="w-5" />
         </button>
       </div>
     </div>

@@ -264,7 +264,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <div className="hiw_card_detail">
                           <h3>Skeniraj kodo</h3>
                           <p className="pb-16px">Pametni telefoni imajo skeniranje preko kamere avtomatizirano.</p>
-                          <p>Op. bolj podrobna navodila so <a href="javascript:void(0)">tukaj</a></p>
+                          <p>Op. bolj podrobna navodila so <a href="#faqs">tukaj</a></p>
                         </div>
                       </div>
                     </li>
@@ -473,7 +473,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
 
           {/* Frequently asked questions */}
 
-          <section className="faqs_sec p-0">
+          <section id="faqs" className="faqs_sec p-0">
             <div className="autoContent">
               <div className="faqs_sec_inner">
 

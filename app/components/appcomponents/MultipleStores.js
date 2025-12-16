@@ -26,6 +26,7 @@ const MultipleStores = () => {
           <div className="w-[635px] flex justify-end relative">
             <img
               src="/cvetlicarna_laptop.png"
+              alt="Prikaz spletne strani za cvetličarne na računalniku - Osmrtnica.com"
               className="relative z-10 h-[401px] w-[635px]  object-cover"
             />
             <div className="absolute top-full left-1/2 -translate-x-1/2  w-full flex justify-center items-center bg-[#000000] h-[9px] blur-[44px]" />
@@ -52,6 +53,7 @@ const MultipleStores = () => {
           {/*image for mobile */}
           <Image
             src={"/cvetlicarna_laptop.png"}
+            alt="Prikaz spletne strani za cvetličarne na mobilni napravi - Osmrtnica.com"
             width={336}
             height={217}
             className="w-[336px] h-[217px] self-center mt-[79px] hidden mobile:flex"
@@ -60,6 +62,7 @@ const MultipleStores = () => {
           {/*image for tablet*/}
           <img
             src="/cvetlicarna_laptop.png"
+            alt="Prikaz spletne strani za cvetličarne na tabličnem računalniku - Osmrtnica.com"
             className="w-[512px] h-[295px] mobile:w-[391px] self-center mt-[64px] mobile:mt-[44.9px] hidden tablet:flex"
           ></img>
 

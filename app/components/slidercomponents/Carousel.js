@@ -48,6 +48,7 @@ const CarouselEntry = ({ item }) => {
             })
           : "--:--"}
       </h1>
+      <h2 className="sr-only">Podrobnosti pogreba</h2>
       <h3 className="text-[#3C3E41] font-semibold text-[12px] mobile:text-[14px] tablet:text-[16px] desktop:text-[18px] flex-1 min-w-0 pl-[8px] mobile:pl-[12px] tablet:pl-[16px] desktop:pl-[22px] truncate">
         {item.name} {item.sirName}
       </h3>

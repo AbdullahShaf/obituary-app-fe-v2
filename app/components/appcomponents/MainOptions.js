@@ -171,7 +171,7 @@ export default function MainOptions() {
                       ? "/landing_features/landing_right_light.png"
                       : "/landing_features/landing_right_dark.png"
                   }
-                  alt={item.title}
+                  alt={item.isRedIcon ? "Puščica desno - označeno" : index === selectedIndex ? "Puščica desno - izbrano" : "Puščica desno"}
                   width={27}
                   height={27}
                 />
@@ -182,7 +182,7 @@ export default function MainOptions() {
             {selectedIndex === 13 ? (
               <Image
                 src="/landing_features/10.png"
-                alt="landing_right_light"
+                alt="Prikaz dodatnih možnosti na spominski strani"
                 width={210}
                 height={420}
               />
@@ -234,6 +234,7 @@ export default function MainOptions() {
                 {selectedIndex === 13 && (
                   <Image
                     src={"/landing_features/landing_right_light.png"}
+                    alt="Puščica desno - izbrano"
                     width={27}
                     height={27}
                   />
@@ -242,6 +243,7 @@ export default function MainOptions() {
               <div className="flex gap-[7px] items-center text-[14px] font-light text-[#1860A3] mobile:hidden">
                 <Image
                   src="/landing_features/landing_right_red.png"
+                  alt="Puščica desno - označeno"
                   width={24}
                   height={24}
                 />

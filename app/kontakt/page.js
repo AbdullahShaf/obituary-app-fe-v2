@@ -1,19 +1,15 @@
-"use client";
-import React from "react";
-import Head from "next/head";
 import ContactFormPage from "../components/appcomponents/ContactFormPage";
-import HeaderRegistration from "../components/appcomponents/HeaderRegistration";
-import LoginFooter from "../components/appcomponents/LoginFooter";
 import Layout from "../components/appcomponents/Layout";
+
+export const metadata = {
+  title: "Kontakt | Osmrtnica",
+  description: "Kontaktirajte nas za vprašanja, podporo ali dodatne informacije o storitvah Osmrtnica.com. Na voljo smo vam za pomoč pri izdelavi osmrtnic, spominskih strani in QR kod za nagrobnike.",
+  robots: "index, follow",
+};
 
 const ContactForm = () => {
   return (
     <>
-      {/* Allow crawlability but no indexing. */}
-      <Head>
-        <title>Kontakt | Osmrtnica</title>
-        <meta name="robots" content="noindex, follow" />
-      </Head>
 
       <Layout from={"18"} forFooter={"memorypage"} currentPage="">
         <div className="flex flex-1  flex-col bg-[#F5F7F9]">

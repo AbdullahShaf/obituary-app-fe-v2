@@ -339,7 +339,7 @@ body { -webkit-text-size-adjust:none; -webkit-overflow-scrolling: touch; overflo
 
     .text-web{ display: none; }
 
-    .text-mob{ color: #3C3E41; font-family: Roboto Flex;
+    .text-mob{ color: #3C3E41;
 font-weight: 400; 
 font-size: 18px; 
 line-height: 27px; 

@@ -217,8 +217,8 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                 <div className="banner_left">
                   <div className="banner_content">
                     <div className="banner_content_heading">
-                      <h1>QR kode za nagrobnike</h1>
-                      <h2>Sodobni in trajni način ohranjanja spomina na najdražje</h2>
+                      <h1 className="tablet:text-center mobile:text-center text-[40px] leading-[48px] text-[#3c3e41]">QR kode za nagrobnike</h1>
+                      <h2 className="!text-[22px] !tablet:text-center !mobile:text-center !font-bold !text-[#3c3e41] !leading-[48px]">Sodobni in trajni način ohranjanja spomina na najdražje</h2>
                     </div>
                     <div className="banner_content_detail">
                       <p>Nagrobniki se niso bistveno spremenili v zadnjih nekaj tisoč letih.... do zdaj.</p>
@@ -249,7 +249,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                     <li className="tab_how_it_works_card_li">
                       <div className="how_it_works_card tab_how_it_works_card">
                         <div className="hiw_card_detail">
-                          <h3>Skeniraj kodo</h3>
+                          <h3>Skeniraj QR kodo</h3>
                         </div>
                         <div className="hiw_card_icon">
                           <Image src={bnefitsQrImg2} alt="Bnefits Qr" />
@@ -262,7 +262,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                           <Image src={scanSvg} alt="Scanner Image" />
                         </div>
                         <div className="hiw_card_detail">
-                          <h3>Skeniraj kodo</h3>
+                          <h3 className="!text-[#1e2125] !font-semibold !text-[20px] !leading-[24px] !pb-4">Skeniraj QR kodo</h3>
                           <p className="pb-16px">Pametni telefoni imajo skeniranje preko kamere avtomatizirano.</p>
                           <p>Op. bolj podrobna navodila so <a href="#faqs">tukaj</a></p>
                         </div>
@@ -274,7 +274,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                           <Image src={mosnterPicIcon} alt="Scanner Image" />
                         </div>
                         <div className="hiw_card_detail">
-                          <h3>Odpre se spominska stran</h3>
+                          <h3 className="!text-[#1e2125] !font-semibold !text-[20px] !leading-[24px] !pb-4">Odpre se spominska</h3>
                           <p>in s tem možnost popolnoma drugačnega doživljanja in spominjanja na pokojnega. </p>
                         </div>
                       </div>
@@ -285,7 +285,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                           <Image src={editingIcon} alt="Scanner Image" />
                         </div>
                         <div className="hiw_card_detail">
-                          <h3>Vsak lahko sodeluje</h3>
+                          <h3 className="!text-[#1e2125] !font-semibold !text-[20px] !leading-[24px] !pb-4">Vsak lahko sodeluje</h3>
                           <p>Skrbnik pa na koncu odloči, kaj bo dejansko objavljeno.    </p>
                         </div>
                       </div>
@@ -311,7 +311,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                           <Image src={bnefitsQrImg1} alt="Bnefits Qr Img1" />
                         </div>
                         <div className="feature_text">
-                          <h3 className="web-text">Oživljanje spominov; prikliče nazaj že zbledele zgodbe</h3>
+                          <h3 className="web-text">1. Oživljanje spominov; prikliče nazaj že zbledele zgodbe</h3>
                           <p>Namesto zgolj imena in datumov na nagrobniku lahko obiskovalci vidijo pokojnikov nasmeh, slišijo njegov glas ali gledajo trenutke iz njegovega življenja prek videov, zvočnih posnetkov ali albumov slik. Morda že zbledele zgodbe in spomini znova oživijo, zgodbe pa ostanejo dostopne še prihodnjim rodovom.</p>
                         </div>
                       </div>
@@ -319,7 +319,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                     <li>
                       <div className="feature_item qr_osmrtnica_img_wrapper">
                         <div className="feature_text">
-                          <h3>Zbližuje ljudi, povezuje generacije</h3>
+                          <h3>2. Zbližuje ljudi, povezuje generacije</h3>
                           <p>Spominsko spletno stran lahko skupaj ustvarjajo vsi, ki so pokojnega imeli radi - družina, prijatelji in znanci. Mlajši, ki so navajeni digitalnih vsebin, lahko na ta način lažje vzpostavijo povezavo s predniki, oddaljeni sorodniki pa lahko sodelujejo ne glede na geografsko oddaljenost.</p>
                         </div>
                         <div className="feature_image qr_osmrtnica_img">
@@ -334,7 +334,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                           <Image src={bnefitsQrImg3} alt="Bnefits Qr Img3" />
                         </div>
                         <div className="feature_text">
-                          <h3>Visoka obstojnost</h3>
+                          <h3>3. Visoka obstojnost</h3>
                           <p>Zapisi na digitalnem mediju so večni, zgodbe živijo in slike ne zbledijo, drugače kot tiste v predalu ali albumu. Kovinske, keramične, akrilne, granitne QR kode imajo visoko obstojnost in tudi nalepke so lahko visoko kvalitetne in odporne proti vremenskim vplivom. Pa tudi če se zgodi, jih je mogoče enostavno ponovno izdelati, medtem ko QR koda ostaja vedno ista. </p>
                         </div>
                       </div>
@@ -342,7 +342,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                     <li>
                       <div className="feature_item">
                         <div className="feature_text">
-                          <h3>Enostavna uporaba</h3>
+                          <h3>4. Enostavna uporaba</h3>
                           <p>Skeniranje QR kod je s telefonom / tablico preko kamere povsem avtomatizirano, enako kot je odčitavanje kod v trgovini. Telefoni imajo bralnike običajno že nameščene; so brezplačni in vse bolj uporabljani zaradi svojih številnih prednosti.</p>
                         </div>
                         <div className="feature_image feature_image_forth">
@@ -649,8 +649,8 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                 <div className="getQRcode_accordian_wrapper">
                   <div className="qr_code_accordion_item bordor-top">
                     <div className="accordion_header">
-                      <h3 className="web-text">Kdo mi jo izdela, namesti</h3>
-                      <h3 className="mobile-text">Kdo mi jo izdela, namesti</h3>
+                      <h3 className="web-text !text-[#1e2125] !leading-[24px]">Kdo mi jo lahko dejansko izdela, namesti.</h3>
+                      <h3 className="mobile-text !text-[#1e2125] !leading-[24px]">Kdo mi jo lahko dejansko izdela, namesti.</h3>
                       <div className="accordian_icon">
                         <svg width="34" height="25" viewBox="0 0 34 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g filter="url(#filter0_d_9053_55410)">
@@ -745,7 +745,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_2">02.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <h3>Brezplačna žalna stran</h3>
+                        <h3 className="sr-only">Brezplačna žalna stran</h3>
                         <p>Istočasno vam izdela brezplačno <span>žalno spominsko stran</span>.</p>
                         <small>(ko urejate dokumente za pokop) </small>
                       </div>
@@ -757,7 +757,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_3">03.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <h3>Brezplačna spominska stran za cel mesec</h3>
+                        <h3 className="sr-only">Brezplačna spominska stran za cel mesec</h3>
                         <p>Vaša lokalna cvetličarna vam brezplačno podari <span>status Skrbnika</span> spominske strani.</p>
                         <small>(ko se dogovarjate za cvetlično ureditev vežice; status Skrbnika je za cel prvi mesec) </small>
                       </div>
@@ -769,7 +769,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_4">04.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <h3>Brezplačne digitalne kartice za pošiljanje preko mobilnega telefona</h3>
+                        <h3 className="sr-only">Brezplačne digitalne kartice za pošiljanje preko mobilnega telefona</h3>
                         <p>Vaša lokalna cvetličarna vam brezplačno podari <span>mobi kartice</span> za pošiljanje naprej</p>
                         <small>(ko se dogovarjate za cvetlično ureditev vežice) </small>
                       </div>
@@ -781,7 +781,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_5">05.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <h3>Brezplačna QR koda za nagrobnik</h3>
+                        <h3 className="sr-only">Brezplačna QR koda za nagrobnik</h3>
                         <p>Pogrebno podjetje vam brezplačno podari <span>QR kodo</span> za nagrobnik</p>
                         <small>(digitalna koda je že na žalni / spominski strani; izdelate si jo sami) </small>
                       </div>

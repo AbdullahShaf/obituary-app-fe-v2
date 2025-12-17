@@ -13,7 +13,6 @@ export default function PricingCard(props) {
 
   return (
     <div
-      style={{ fontFamily: "Roboto Flex" }}
       className={`relative w-full ${isClickable ? 'mobile:h-[85px] h-[105px]' : 'mobile:h-[75px] h-[90px]'} rounded-[8px] p-[2px] border-gradient-rounded shadow-md hover:shadow-lg transition-shadow duration-300 ${
         isClickable ? 'cursor-pointer hover:scale-[1.02] transition-transform' : ''
       }`}
@@ -29,7 +28,7 @@ export default function PricingCard(props) {
     >
       <div className="flex items-center justify-between rounded-[8px] mobile:py-1.5 p-3">
         <div>
-          <p className="mobile:text-[14px] flex items-center text-[14px] font-medium text-[#7A7A7A] uppercase">
+          <p className="mobile:text-[14px] flex items-center text-[14px] text-[#7A7A7A] uppercase">
             <span className={props.mobilelabel && "block mobile:hidden"}>
               {props.label}
             </span>
@@ -48,14 +47,14 @@ export default function PricingCard(props) {
             )}
           </p>
           <div
-            className={`mobile:text-[20px] flex items-center gap-1 text-[24px] text-[#1E2125] mt-1 font-[500]`}
+            className={`mobile:text-[20px] flex items-center gap-1 text-[24px] text-[#1E2125] mt-1`}
           >
             <p className={props.number && "mt-1"}>
-              <span className="font-medium">{props.title}</span>
+              <span>{props.title}</span>
             </p>{" "}
             {props.number && <p className="text-[14px]">{props.number}</p>}
             {props.subtitle && (
-              <p className="mobile:text-[14px] text-[16px] ml-1 text-[#6D778E] font-[500]">
+              <p className="mobile:text-[14px] text-[16px] ml-1 text-[#6D778E]">
                 {props.subtitle}
               </p>
             )}

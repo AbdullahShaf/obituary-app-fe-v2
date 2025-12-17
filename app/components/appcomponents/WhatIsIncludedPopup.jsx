@@ -18,7 +18,6 @@ export default function WhatIsIncludedPopup({ onClose }) {
   return (
     <div ref={popupRef} className="w-full bg-[#F5EFE6] pt-14 pb-14">
       <div
-        style={{ fontFamily: "Roboto Flex" }}
         className="relative desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 px-4 pt-8 pb-[114px] mobile:pt-4 mobile:pb-[60px] tablet:pb-[80px]"
       >
         <button
@@ -76,7 +75,6 @@ export default function WhatIsIncludedPopup({ onClose }) {
       <div className="border-t-[2px] border-[#0A85C2] w-full desktop:max-w-[1000px] tablet:max-w-[650px] mobile:max-w-[300px] mx-auto"></div>
 
       <div
-        style={{ fontFamily: "Roboto Flex" }}
         className="desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 pt-[114px] pb-8 mobile:pt-[60px] mobile:pb-4 tablet:pt-[80px]"
       >
         <div className="w-[766px]">

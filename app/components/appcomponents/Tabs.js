@@ -24,7 +24,7 @@ export default function Tabs({
             onClick={() => setActive(tab.id)}
             className={`mobile:text-[16px] ${
               tab.id === "pogrebna-podjetja" && "mobile:hidden"
-            } text-[20px] text-nowrap mobile:uppercase font-medium mobile:w-[33.33%] transition-all duration-200  
+            } text-[20px] text-nowrap mobile:uppercase mobile:w-[33.33%] transition-all duration-200  
                 ${
                   active === tab.id
                     ? `text-[#0A85C2] ${

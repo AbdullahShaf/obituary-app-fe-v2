@@ -13,6 +13,7 @@ import Layout from "../components/appcomponents/Layout";
 import PricingCard from "../components/appcomponents/PricingCard";
 import WhatIsIncludedPopup from "../components/appcomponents/WhatIsIncludedPopup";
 import WhatIsIncludedPopupAdvertisers from "../components/appcomponents/WhatIsIncludedPopupAdvertisers";
+import Breadcrumbs from "../components/appcomponents/Breadcrumbs";
 
 const Subscription = () => {
   const { user, isAuthenticated, isRole } = useAuth();
@@ -437,7 +438,7 @@ const Subscription = () => {
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
-                  za cvetličarne
+                Cvetličarne
                 </h2>
               </div>
 
@@ -585,7 +586,7 @@ const Subscription = () => {
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
-                  za oglaševalce
+                Oglaševalci
                 </h2>
               </div>
               <p className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[16px] text-[16px]">
@@ -788,7 +789,7 @@ const Subscription = () => {
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <h2 className="mobile:text-[24px] text-[32px] text-[#000000]">
-                  za pogrebna podjetja
+                Pogrebna podjetja
                 </h2>
               </div>
               <p className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
@@ -841,11 +842,19 @@ const Subscription = () => {
         return null;
     }
   };
+  const activeTab = tabs.find(tab => tab.id === active);
+  const breadcrumbItems = [
+    { label: "Domov", href: "/" },
+    { label: "Cenik" },
+  ];
+  if (activeTab) {
+    breadcrumbItems.push({ label: activeTab.label });
+  }
+
   return (
     <>
       <Layout from={"23"} forFooter={"cenikpage"}>
         <div
-          style={{ fontFamily: "Roboto Flex" }}
           className={`cenik-page-wrapper w-full bg-[#ECF0F3] mobile:py-3 py-8 ${(active === "cvetlicarne" && showFullFloristContent && isWhatIsIncludedOpen) ||
             (active === "oglasevalci" && isWhatIsIncludedAdvertisersOpen)
             ? "mb-[-2rem]"
@@ -853,6 +862,7 @@ const Subscription = () => {
             }`}
         >
           <div className="w-full desktop:w-[1200px] mx-auto">
+            <Breadcrumbs items={breadcrumbItems} />
             {/* Manage Payments Button for logged in users */}
             {/* Temporarily removed for this week */}
             {/* {user && (active === "spominske" || active === "cvetlicarne") && (

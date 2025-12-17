@@ -11,9 +11,11 @@ const WayToPost = () => {
 
                         <div className="w-[496.42px] mobile:w-[347px] desktop:h-[307px] tablet:h-[307px] tablet:mx-auto mobile:mx-auto desktop:my-[95px]
                         tablet:mt-[75px] mobile:mt-[50px] flex flex-col mobile:items-center tablet:items-center">
-                            <h1 className="text-[#3C3E41] text-[40px] mobile:text-[28px] leading-[48px] mobile:font-variation-customOpt28 font-variation-customOpt40">
-                                Osmrtnice – toplejši način objavljanja osmrtnic
+                            <h1 className="text-[#3C3E41] text-[40px] mobile:text-[28px] leading-[48px] mobile:font-variation-customOpt28 font-variation-customOpt40 tablet:text-center mobile:text-center">
+                            Žalna stran
                             </h1>
+
+                            <h2 className="text-[#3C3E41] font-bold text-[24px] leading-[48px] mt-[5px] tablet:text-center mobile:text-center">Toplejši način objavljanja osmrtnic</h2>
 
                             <p className="mt-[42px] text-[#3C3E41] tablet:text-center mobile:text-center mobile:mt-[42px] mobile:px-[20px] text-[18px] leading-[27px] font-variation-customOpt18">
                             Spomnimo se, kako so strani z osmrtnicami vedno tako zelo puste, 

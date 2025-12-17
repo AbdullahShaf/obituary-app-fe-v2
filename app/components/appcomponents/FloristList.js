@@ -299,7 +299,7 @@ const FloristlistCom = ({ item, index }) => {
           <div className="flex flex-1 flex-col w-full">
             <div className="flex justify-between h-[18px] tablet:h-7 desktop:h-7 w-full tablet:pr-[8px] desktop:pr-[10px]   ">
               <div className="flex items-center h-full">
-                <span className="font-variation-customOpt24 text-left desktop:text-[24px] tablet:text-[24px] mobile:text-[15px]  text-[#1E2125] leading-[28.13px] font-semibold block">
+                <span className="font-variation-customOpt24 text-left desktop:text-[24px] tablet:text-[24px] mobile:text-[15px]  text-[#1E2125] leading-[28.13px] block">
                   {item?.shopName || item?.CompanyPage?.name || "Cvetličarna"}
                 </span>
               </div>

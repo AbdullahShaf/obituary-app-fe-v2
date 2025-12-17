@@ -83,11 +83,11 @@ const MemoryPromo = () => {
             </li>
           </ul>
         </div>
-        <div className="w-full flex justify-center items-center py-8 desktop:py-12">
+        {/* <div className="w-full flex justify-center items-center py-8 desktop:py-12">
           <h1 className="text-[#3C3E41] text-[40px] mobile:text-[28px] tablet:text-[32px] leading-[48px] mobile:leading-[36px] font-variation-customOpt40 mobile:font-variation-customOpt28 text-center px-4 max-w-4xl">
             Žalna stran – Ustvarite spomin na najdražje
           </h1>
-        </div>
+        </div> */}
         <WayToPost />
         <ColdObituary />
         <SimpleComp />

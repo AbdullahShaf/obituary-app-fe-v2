@@ -2184,49 +2184,7 @@ const Modals = ({
                     maxLength={100}
                   />
                 </div>
-                {isMemoryPage && (
-                  <div className="mt-6 flex flex-col items-center">
-                    <div className="text-[#1E2125] text-sm mb-3 font-medium">
-                      Izberi usmeritev prikaza
-                    </div>
-                    <div className="flex gap-4">
-                      <button
-                        type="button"
-                        onClick={() => setPhotoOrientation("landscape")}
-                        className={`w-[128px] h-[88px] rounded-lg border-2 flex items-center justify-center bg-white transition ${
-                          photoOrientation === "landscape"
-                            ? "border-[#0A85C2] shadow-custom-dark-to-white"
-                            : "border-[#D7D7D7]"
-                        }`}
-                      >
-                        <span className="text-sm text-[#414141]">Ležeče</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setPhotoOrientation("portrait")}
-                        className={`w-[88px] h-[128px] rounded-lg border-2 flex items-center justify-center bg-white transition ${
-                          photoOrientation === "portrait"
-                            ? "border-[#0A85C2] shadow-custom-dark-to-white"
-                            : "border-[#D7D7D7]"
-                        }`}
-                      >
-                        <span className="text-sm text-[#414141]">Pokončno</span>
-                      </button>
-                    </div>
-                    <div className="text-xs text-[#6D778E] mt-3">
-                      (Če nisi prepričan, pusti privzeto)
-                    </div>
-                  </div>
-                )}
               </div>
-              {false && (
-                <div className="flex mt-4 items-center">
-                  <Image src={plus_icon} alt="imgCall" className="w-4 h-4 " />
-                  <div className=" text-[#1E2125] text-sm ml-2">
-                    {"Dodaj še eno sliko".toUpperCase()}
-                  </div>
-                </div>
-              )}
 
               <div className="mobile:w-[100%] w-[254px] mt-6">
                 <ButtonBlueBorder placeholder={"Objavi"} onClick={addPhoto} />

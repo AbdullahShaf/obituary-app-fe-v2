@@ -10,7 +10,10 @@ const config: Config = {
     fontFamily: {
       sourceSerif: ["var(--font-sourceserif)"],
       greatVibes: ["var(--font-greatvibes)"],
+      // Note: 'sourcesans' is kept for backward compatibility but actually maps to Roboto Flex
+      // Use 'robotoFlex' for new code to match the actual font being used
       sourcesans: ["var(--font-roboto-flex)", "sans-serif"],
+      robotoFlex: ["var(--font-roboto-flex)", "sans-serif"],
     },
     extend: {
       backgroundImage: {

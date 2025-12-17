@@ -12,7 +12,6 @@
     "chalu": "next dev"
   },
   "dependencies": {
-    "@fontsource/roboto-flex": "^5.0.15",
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
     "@iconify/react": "^5.0.2",

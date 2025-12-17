@@ -248,11 +248,6 @@
   resolved "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.8.tgz"
   integrity sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==
 
-"@fontsource/roboto-flex@^5.0.15":
-  version "5.0.15"
-  resolved "https://registry.npmjs.org/@fontsource/roboto-flex/-/roboto-flex-5.0.15.tgz"
-  integrity sha512-CZFszeV3wdzASBPbzKHYrzIJT5dZvXKKjYKdcEDL3S6Cg5MYaH5L5XDT3HLXstnF9cKrKYhPwFsMQSkC3n2sVA==
-
 "@formatjs/ecma402-abstract@2.0.0":
   version "2.0.0"
   resolved "https://registry.npmjs.org/@formatjs/ecma402-abstract/-/ecma402-abstract-2.0.0.tgz"

@@ -27,14 +27,9 @@ export default function RootLayout({
           src="https://cdn-cookieyes.com/client_data/4ea35c9889e0f2f54d3cfc92/script.js"
           strategy="afterInteractive"
         />
-
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400&display=swap"
-          rel="stylesheet"
-        />
       </head>
       <body
-        className={`${robotoFlex.className} ${sourceSerif.variable} ${greatVibes.variable}`}
+        className={`${robotoFlex.className} ${robotoFlex.variable} ${sourceSerif.variable} ${greatVibes.variable}`}
       >
         <Script
           id="datasag-analytics"

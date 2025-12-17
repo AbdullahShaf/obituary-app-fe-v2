@@ -1,7 +1,10 @@
 import localFont from "next/font/local";
 
 
-const robotoFlex = localFont({ src: '../public/fonts/RobotoFlex-VariableFont.ttf'})
+const robotoFlex = localFont({ 
+  src: '../public/fonts/RobotoFlex-VariableFont.ttf',
+  variable: "--font-roboto-flex",
+})
 
 const sourceSerif = localFont({
   src: [{ path: "../public/fonts/SourceSerif4-VariableFont.ttf" }],

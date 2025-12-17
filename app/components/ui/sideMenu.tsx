@@ -2,16 +2,11 @@
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-import { Roboto_Flex } from "next/font/google";
+import { robotoFlex } from "@/utils/customFonts";
 import Image from "next/image";
 import { MdCancel } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import { shouldShowBack } from "@/utils/navigationUtils";
-// Import Roboto Flex
-const roboto = Roboto_Flex({
-  subsets: ["latin"],
-  weight: ["400", "500"], // 500 = medium
-});
 
 export default function SideMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +21,7 @@ export default function SideMenu() {
 
   return (
     <menu
-      className={`${roboto.className} ml-2 relative  block mobile:block tablet:hidden desktop:hidden`}
+      className={`${robotoFlex.className} ml-2 relative  block mobile:block tablet:hidden desktop:hidden`}
     >
       {/* Menu Button */}
       <button onClick={() => setIsOpen(true)} className="p-1 text-gray-700">

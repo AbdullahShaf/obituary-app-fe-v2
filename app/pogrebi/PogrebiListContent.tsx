@@ -17,7 +17,7 @@ const PogrebiListContent = () => {
 
   return (
     <>
-      <ObituaryListBanner image={"/pogrebi_ozadje.png"} label={"Pogrebi"} />
+      <ObituaryListBanner image={"/pogrebi_ozadje.png"} label={"Pogrebi"} alt="pogrebi ozadje" />
       <PogrebiListComponent city={city || null} />
       <Carousel />
 

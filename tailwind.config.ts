@@ -10,7 +10,7 @@ const config: Config = {
     fontFamily: {
       sourceSerif: ["var(--font-sourceserif)"],
       greatVibes: ["var(--font-greatvibes)"],
-      sourcesans: ["Source Sans 3"],
+      sourcesans: ["var(--font-roboto-flex)", "sans-serif"],
     },
     extend: {
       backgroundImage: {

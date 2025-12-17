@@ -16,7 +16,7 @@ const ObituaryListContent = () => {
 
   return (
     <>
-      <ObituaryListBanner image={"/cvetje.avif"} label={"Osmrtnice"} />
+      <ObituaryListBanner image={"/cvetje.avif"} label={"Osmrtnice"} alt="osmrtnice ozadje" />
       <ObituaryListComponent city={city || null} />
       <NextFunerals />
       <MemorialPageView />

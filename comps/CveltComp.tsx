@@ -49,7 +49,7 @@ const CveltComp = () => {
         <ObituaryListBanner
           image={"/roza_ozadje.avif"}
           label={"Lokalne cvetličarne"}
-          alt={undefined}
+          alt="ozadje za cvetličarne"
         />
         <Breadcrumbs
           items={[

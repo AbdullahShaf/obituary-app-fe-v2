@@ -22,6 +22,7 @@ const FuneralsList = () => {
         <ObituaryListBanner
           image={"/belo_ozadje.jpg"}
           label={"Pogrebna podjetja"}
+          alt="ozadje za pogrebna podjetja"
         />
         <FuneralList />
         <WorkTogetherComp />

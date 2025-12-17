@@ -10,20 +10,7 @@ const config: Config = {
     fontFamily: {
       sourceSerif: ["var(--font-sourceserif)"],
       greatVibes: ["var(--font-greatvibes)"],
-      // GDPR Compliance: 'sourcesans' originally referenced Source Sans 3 (Google Font)
-      // but has been remapped to Roboto Flex (self-hosted) to comply with GDPR requirements.
-      // This remapping affects 100+ usages across admin pages, forms, and UI components.
-      // ⚠️ Visual Impact: Roboto Flex has different metrics than Source Sans 3, which may cause:
-      //    - Layout shifts (CLS) if text widths differ
-      //    - Readability changes due to different character shapes
-      //    - Visual inconsistencies in tightly-spaced layouts
-      // Recommendation: Verify visual appearance across affected components, especially:
-      //    - Admin dashboard pages (keepers, users, obituaries, funeral companies)
-      //    - Form components (OrbetoryFormComp.js has 25+ uses)
-      //    - Button and badge components
-      // Use 'robotoFlex' for new code to match the actual font being used
       sourcesans: ["var(--font-roboto-flex)", "sans-serif"],
-      robotoFlex: ["var(--font-roboto-flex)", "sans-serif"],
     },
     extend: {
       backgroundImage: {

@@ -1,4 +1,6 @@
 import Image from "next/image";
+import dynamic from "next/dynamic";
+const Gallery3D = dynamic(() => import("./WallGallery3D"), { ssr: false });
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
@@ -1278,9 +1280,8 @@ const MemorialPageTopComp = ({
                 22
               </div> */}
             </div>
-
             <button
-              className="flex cursor-pointer self-center tablet:self-start desktop:self-start items-center justify-center flex-col gap-[2px] border-2 rounded-[4px] border-[#FFFFFF] w-[165px] h-[60px] bg-gradient-to-br from-[#FFFFFF] to-[#FFFFFF30] z-20 mx-auto mt-[47px] tablet:hidden mobile:hidden mb-[30px]"
+              className="flex cursor-pointer self-center tablet:self-start desktop:self-start items-center justify-center flex-col gap-[2px] border-2 rounded-[4px] border-[#FFFFFF] w-[165px] h-[60px] bg-gradient-to-br from-[#FFFFFF] to-[#FFFFFF30] z-20 mx-auto mt-[20px] tablet:hidden mobile:hidden mb-[10px]"
               style={{
                 boxShadow: "3px 3px 18px 0px #00000040",
               }}
@@ -1300,12 +1301,15 @@ const MemorialPageTopComp = ({
                 Dodaj sliko
               </p>
             </button>
+
+            <Gallery3D photos={data?.Photos || []} />
+
             <button
               onClick={() => {
                 set_Id("6");
                 openCandleModal();
               }}
-              className="flex gap-[8px] items-center justify-end w-[1024px] tablet:w-[610px] mobile:w-[321px] text-end desktop:hidden text-[#414141] text-[14px] font-[400] mt-3 mb-[20px]"
+              className="flex gap-[8px] items-center justify-end w-[1024px] tablet:w-[610px] mobile:w-[321px] text-end desktop:hidden text-[#414141] text-[14px] font-[400] mt-1 mb-[12px]"
             >
               <Image
                 src={"/memory_page_plus_icon.png"}
@@ -1316,51 +1320,6 @@ const MemorialPageTopComp = ({
               />
               Dodaj Sliko
             </button>
-
-            <div className="w-full  space-y-[30px] px-[15px] mobile:space-y-[14px]">
-              <div className="hidden desktop:flex overflow-x-auto scrollbar-hide gap-[25px] w-[1024px]  flex-nowrap tablet:w-[800px] mobile:w-[406px] mobile:h-[125px] mx-auto mobile:gap-[14px]">
-                {data?.Photos?.length > 0 &&
-                  data?.Photos.map((item, index) => (
-                    <div
-                      key={index}
-                      className="p-[4px] bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] rounded-[10px] shrink-0"
-                      style={{
-                        boxShadow:
-                          "-5px -5px 10px 0px #FFFFFF80, 5px 5px 10px 0px #C2C2C280, -1px -1px 2px 0px #FFFFFF",
-                      }}
-                    >
-                      <Image
-                        src={item.fileUrl}
-                        alt={data?.name && data?.sirName ? `Fotografija spomina za ${data.name} ${data.sirName}` : "Fotografija spomina"}
-                        width={200}
-                        height={200}
-                        className="w-[175px] mobile:w-[125px] mobile:h-[125px] h-[175px] rounded-[8px] object-cover object-center"
-                      />
-                    </div>
-                  ))}
-              </div>
-              <div className="hidden overflow-x-auto scrollbar-hide tablet:flex mobile:flex gap-[25px] w-[1024px] mobile:h-[125px] tablet:w-[800px] mobile:w-[406px] mobile:gap-[14px] mx-auto">
-                {data?.Photos?.length > 0 &&
-                  data?.Photos.map((item, index) => (
-                    <div
-                      key={index}
-                      className="p-[4px] bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] rounded-[10px] shrink-0"
-                      style={{
-                        boxShadow:
-                          "-5px -5px 10px 0px #FFFFFF80, 5px 5px 10px 0px #C2C2C280, -1px -1px 2px 0px #FFFFFF",
-                      }}
-                    >
-                      <Image
-                        src={item.fileUrl}
-                        alt={data?.name && data?.sirName ? `Fotografija spomina za ${data.name} ${data.sirName}` : "Fotografija spomina"}
-                        width={200}
-                        height={200}
-                        className="w-[175px] mobile:w-[125px] mobile:h-[125px] h-[175px] rounded-[8px] object-cover object-center"
-                      />
-                    </div>
-                  ))}
-              </div>
-            </div>
           </div>
         </div>
       )}

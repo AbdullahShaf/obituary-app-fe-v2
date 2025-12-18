@@ -56,6 +56,9 @@ const Modals = ({
   const [obituaryText, setObituaryText] = useState("");
   const [uploadedPicture, setUploadedPicture] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [photoOrientation, setPhotoOrientation] = useState("auto"); // auto | landscape | portrait
+  const isMemoryPage =
+    typeof window !== "undefined" && window.location.pathname.startsWith("/m/");
   const [verse, setVerse] = useState(null);
   const [keeperEmail, setKeeperEmail] = useState(null);
   const [keeperMessage, setKeeperMessage] = useState(null);
@@ -107,6 +110,19 @@ const Modals = ({
     if (setters[field]) {
       setters[field](null);
     }
+  };
+
+  useEffect(() => {
+    if (isMemoryPage && photoOrientation === "auto") {
+      setPhotoOrientation("portrait");
+    }
+  }, [isMemoryPage, photoOrientation]);
+
+  const resetPhotoForm = () => {
+    setUploadedPicture(null);
+    setUploadedImage(null);
+    setPhotoOrientation(isMemoryPage ? "portrait" : "auto");
+    setName("");
   };
 
   const handleKeeperAssignment = async () => {
@@ -322,7 +338,7 @@ const Modals = ({
   };
 
   // Internal function for adding photo (without login check)
-  const addPhotoInternal = async (pictureFile, nameValue) => {
+  const addPhotoInternal = async (pictureFile, nameValue, shouldCloseModal = true) => {
     if (isCompany()) {
       toast.error("You are not allowed to do this!");
       return;
@@ -349,14 +365,16 @@ const Modals = ({
     formData.append("picture", pictureFile);
     formData.append("isKeeper", isKeeper());
     formData.append("userName", nameValue);
+    if (isMemoryPage) {
+      formData.append("orientation", photoOrientation || "auto");
+    }
     
     try {
       const response = await obituaryService.addPhoto(data?.id, formData);
 
       console.log(`Photo Sent to Keeper for review!`, response);
 
-      setUploadedPicture(null);
-      setUploadedImage(null);
+      resetPhotoForm();
 
       if (isKeeper()) {
         const updatedPhoto = [...data?.Photos, response];
@@ -367,7 +385,10 @@ const Modals = ({
           "Slika je bila poslano Skrbniku v potrditevCondolence Created Successfully"
         );
       }
-      closeModal();
+      if (shouldCloseModal) {
+        closeModal();
+      }
+      return response;
     } catch (error) {
       console.error(`Failed to add  photo`, error);
       // toast.error("Error Adding Photo");
@@ -388,6 +409,13 @@ const Modals = ({
     }
 
     await addPhotoInternal(uploadedPicture, name);
+  };
+
+  const handleAddAnotherPhoto = async () => {
+    const response = await addPhotoInternal(uploadedPicture, name, false);
+    if (response) {
+      resetPhotoForm();
+    }
   };
 
   // Internal function for adding condolence (without login check)
@@ -1989,63 +2017,180 @@ const Modals = ({
 
       {select_id == "6" ? (
         <div className="flex flex-col w-full">
-          <div className="text-[#1E2125] mobile:text-xl text-2xl font-medium ">
-            Dodaj fotografije
-          </div>
-          <div className="flex mt-6 text-[#3D3D3D] text-base ">
-            Vsak lahko doda slike, za objavo pa jih mora potrditi Skrbnik
-          </div>
-          {/* <div className="mt-6">
-            <TextFieldComp placeholder={"Napiši naslov"} />
-          </div> */}
-          <div className="flex flex-col mt-6 ">
-            <div
-              className={
-                "flex flex-col rounded-[6px] bg-[#F2F8FF66] shadow-custom-dark-to-white w-full py-7 px-[80px] mobile:px-5 items-center justify-center "
-              }
-            >
-              <ButtonBlue
-                placeholder={
-                  uploadedImage
-                    ? truncateFileName(uploadedPicture.name, 10)
-                    : "Izberi sliko in jo prenesi"
-                }
-                isFor="upload-button"
-              />
-              <input
-                id="upload-button"
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleImageUpload}
-              />
-              <div className="text-[#939393] font-normal text-xs mt-3 self-center ">
+          {isMemoryPage ? (
+            <div className="flex flex-col w-full">
+              <div className="text-[#1E2125] mobile:text-xl text-2xl font-medium">
+                Dodaj fotografije
+              </div>
+              <div className="flex mt-4 text-[#3D3D3D] text-base">
+                Vsak lahko doda slike, njihovo objavo pa mora potrditi Skrbnik.
+              </div>
+              <div className="text-[#939393] font-normal text-xs mt-2">
                 Format: jpg, png, webp
               </div>
+
+              <div className="flex flex-col mt-5">
+                <div className="flex flex-col rounded-[10px] bg-[#F2F8FF66] shadow-custom-dark-to-white w-full py-6 px-6 mobile:px-4 items-center justify-center">
+                  <ButtonBlue
+                    placeholder={"Dodaj sliko"}
+                    isFor="memory-upload-button"
+                  />
+                  <input
+                    id="memory-upload-button"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleImageUpload}
+                  />
+                  <div className="text-[#6D778E] font-normal text-xs mt-3 text-center">
+                    {uploadedPicture
+                      ? truncateFileName(uploadedPicture.name, 24)
+                      : "Izberi datoteko in jo prenesi"}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 text-[15px] text-[#414141] font-variation-customOpt16">
+                Ali gre za ležečo ali pokončno sliko?
+              </div>
+              <div className="flex gap-4 mt-3 flex-wrap">
+                <button
+                  type="button"
+                  onClick={() => setPhotoOrientation("portrait")}
+                  className="relative w-[103px] h-[130px] mobile:w-[96px] mobile:h-[138px] rounded-[6px] bg-[#E1E6EC] shadow-[3px_3px_6px_rgba(0,0,0,0.15),-3px_-3px_6px_rgba(255,255,255,0.9)] transition flex items-center justify-center border-[0.5px] border-white/40"
+                  style={
+                    photoOrientation === "portrait"
+                      ? {
+                          boxShadow:
+                            "inset 2.5px 2.5px 5px 0 #A6ABBD, inset -2.5px -2.5px 5px 0 #FAFBFF, 3px 3px 6px rgba(0,0,0,0.15), -3px -3px 6px rgba(255,255,255,0.9)",
+                        }
+                      : {}
+                  }
+                >
+                  {photoOrientation === "portrait" && (
+                    <div className="absolute bottom-3 right-3 z-10">
+                      <Image 
+                        src={check_ico} 
+                        alt="check icon" 
+                        width={18} 
+                        height={14} 
+                        className="brightness-0 opacity-[0.65]" 
+                      />
+                    </div>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setPhotoOrientation("landscape")}
+                  className="relative w-[195px] h-[130px] mobile:w-[138px] mobile:h-[100px] rounded-[6px] bg-[#E1E6EC] shadow-[3px_3px_6px_rgba(0,0,0,0.15),-3px_-3px_6px_rgba(255,255,255,0.9)] transition flex items-center justify-center border-[0.5px] border-white/40"
+                  style={
+                    photoOrientation === "landscape"
+                      ? {
+                          boxShadow:
+                            "inset 2.5px 2.5px 5px 0 #A6ABBD, inset -2.5px -2.5px 5px 0 #FAFBFF, 3px 3px 6px rgba(0,0,0,0.15), -3px -3px 6px rgba(255,255,255,0.9)",
+                        }
+                      : {}
+                  }
+                >
+                
+                  {photoOrientation === "landscape" && (
+                    <div className="absolute bottom-3 right-3 z-10">
+                      <Image 
+                        src={check_ico} 
+                        alt="check icon" 
+                        width={18} 
+                        height={14} 
+                        className="brightness-0 opacity-[0.65]" 
+                      />
+                    </div>
+                  )}
+                </button>
+              </div>
+              <div className="text-xs text-[#6D778E] mt-2">
+                Določi ali gre za ležečo ali pokončno sliko.
+              </div>
+
+              <div className="mt-5">
+                <TextFieldComp
+                  placeholder={"Dodaj svoje ime ali letnico ali kraj in dogodek"}
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                  maxLength={25}
+                />
+              </div>
+              <div className="text-xs text-[#6D778E] mt-2">
+                Npr Praga 1995 ali poroka ali Pavle ipd.
+              </div>
+
+              <div className="mobile:w-[100%] w-[254px] mt-6">
+                <ButtonBlueBorder placeholder={"Pošlji"} onClick={addPhoto} />
+              </div>
+
+              <button
+                type="button"
+                onClick={handleAddAnotherPhoto}
+                className="flex items-center mt-4 text-[#6D778E] text-sm font-medium"
+              >
+                <Image src={plus_icon} alt="plus icon" width={16} height={16} />
+                <span className="ml-2">Dodaj še eno sliko</span>
+              </button>
             </div>
-            <div className="mt-[24px] flex">
-              <TextFieldComp
-                placeholder={"Napiši svoje ime ali vzdevek"}
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                maxLength={100}
-              />
-            </div>
-          </div>
-          {false && (
-            <div className="flex mt-4 items-center">
-              <Image src={plus_icon} alt="imgCall" className="w-4 h-4 " />
-              <div className=" text-[#1E2125] text-sm ml-2">
-                {"Dodaj še eno sliko".toUpperCase()}
+          ) : (
+            <div className="flex flex-col w-full">
+              <div className="text-[#1E2125] mobile:text-xl text-2xl font-medium ">
+                Dodaj fotografije
+              </div>
+              <div className="flex mt-6 text-[#3D3D3D] text-base ">
+                Vsak lahko doda slike, za objavo pa jih mora potrditi Skrbnik
+              </div>
+              {/* <div className="mt-6">
+            <TextFieldComp placeholder={"Napiši naslov"} />
+          </div> */}
+              <div className="flex flex-col mt-6 ">
+                <div
+                  className={
+                    "flex flex-col rounded-[6px] bg-[#F2F8FF66] shadow-custom-dark-to-white w-full py-7 px-[80px] mobile:px-5 items-center justify-center "
+                  }
+                >
+                  <ButtonBlue
+                    placeholder={
+                      uploadedImage
+                        ? truncateFileName(uploadedPicture.name, 10)
+                        : "Izberi sliko in jo prenesi"
+                    }
+                    isFor="upload-button"
+                  />
+                  <input
+                    id="upload-button"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleImageUpload}
+                  />
+                  <div className="text-[#939393] font-normal text-xs mt-3 self-center ">
+                    Format: jpg, png, webp
+                  </div>
+                </div>
+                <div className="mt-[24px] flex">
+                  <TextFieldComp
+                    placeholder={"Napiši svoje ime ali vzdevek"}
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    maxLength={100}
+                  />
+                </div>
+              </div>
+
+              <div className="mobile:w-[100%] w-[254px] mt-6">
+                <ButtonBlueBorder placeholder={"Objavi"} onClick={addPhoto} />
               </div>
             </div>
           )}
-
-          <div className="mobile:w-[100%] w-[254px] mt-6">
-            <ButtonBlueBorder placeholder={"Objavi"} onClick={addPhoto} />
-          </div>
         </div>
       ) : null}
 

@@ -68,6 +68,7 @@ const MemorialPageTopComp = ({
     }
   }, [data]);
 
+
   const toggleText = () => {
     setShowFullObituaryText((prev) => !prev);
   };
@@ -1281,7 +1282,7 @@ const MemorialPageTopComp = ({
               </div> */}
             </div>
             <button
-              className="flex cursor-pointer self-center tablet:self-start desktop:self-start items-center justify-center flex-col gap-[2px] border-2 rounded-[4px] border-[#FFFFFF] w-[165px] h-[60px] bg-gradient-to-br from-[#FFFFFF] to-[#FFFFFF30] z-20 mx-auto mt-[20px] tablet:hidden mobile:hidden mb-[10px]"
+              className="flex cursor-pointer self-center tablet:self-start desktop:self-start items-center justify-center flex-col gap-[2px] border-2 rounded-[4px] border-[#FFFFFF] w-[165px] h-[60px] bg-gradient-to-br from-[#FFFFFF] to-[#FFFFFF30] z-20 mx-auto mt-[40px] tablet:mt-[40px] desktop:mt-[40px] tablet:hidden mobile:hidden mb-[40px]"
               style={{
                 boxShadow: "3px 3px 18px 0px #00000040",
               }}
@@ -1302,14 +1303,16 @@ const MemorialPageTopComp = ({
               </p>
             </button>
 
-            <Gallery3D photos={data?.Photos || []} />
+            <div className="mt-[40px] tablet:mt-[40px] desktop:mt-[40px] w-full">
+              <Gallery3D photos={data?.Photos || []} />
+            </div>
 
             <button
               onClick={() => {
                 set_Id("6");
                 openCandleModal();
               }}
-              className="flex gap-[8px] items-center justify-end w-[1024px] tablet:w-[610px] mobile:w-[321px] text-end desktop:hidden text-[#414141] text-[14px] font-[400] mt-1 mb-[12px]"
+              className="flex gap-[8px] items-center justify-end w-[1024px] tablet:w-[610px] mobile:w-[321px] text-end desktop:hidden text-[#414141] text-[14px] font-[400] mt-[40px] mb-[12px]"
             >
               <Image
                 src={"/memory_page_plus_icon.png"}

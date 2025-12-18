@@ -1,6 +1,7 @@
 // "use client" stays omitted; this component is used inside client components
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import obituaryService from "@/services/obituary-service";
 
 /**
  * A lightweight React/Next re-implementation of the Codrops 3D Wall Gallery.
@@ -20,6 +21,64 @@ export default function WallGallery3D({ photos = [] }) {
   const scrollPosRef = useRef(0);
   const maxScrollRef = useRef(0);
   const [aspectMap, setAspectMap] = useState({});
+  const [memoryLogs, setMemoryLogs] = useState([]);
+  const [photoUserNameMap, setPhotoUserNameMap] = useState({});
+
+  // Fetch memoryLogs directly using obituaryId from photos
+  useEffect(() => {
+    const fetchMemoryLogs = async () => {
+      // Get obituaryId from the first photo (all photos should have the same obituaryId)
+      const obituaryId = photos.length > 0 && photos[0]?.obituaryId;
+      
+      if (obituaryId) {
+        try {
+          const response = await obituaryService.getMemoryLogs(obituaryId);
+          if (response?.detailedLogs) {
+            setMemoryLogs(response?.detailedLogs);
+          }
+        } catch (error) {
+          console.error("Error fetching memory logs:", error);
+        }
+      }
+    };
+
+    fetchMemoryLogs();
+  }, []);
+
+  // Create a map of photoId to userName from memoryLogs
+  // We match each photo.id with memoryLog.interactionId to get the userName
+  useEffect(() => {
+    const map = {};
+    if (memoryLogs && Array.isArray(memoryLogs) && memoryLogs.length > 0) {
+      memoryLogs.forEach((log) => {
+        // Match photo ID with memoryLog interactionId where type is "photo"
+        if (log.type === "photo" && log.interactionId != null && log.userName) {
+          // Convert interactionId to number to match with photo.id (INTEGER)
+          const photoId = Number(log.interactionId);
+          // Store both number and string keys for flexible lookup
+          if (!isNaN(photoId)) {
+            map[photoId] = log.userName;
+            map[String(photoId)] = log.userName;
+          }
+        }
+      });
+    }
+    setPhotoUserNameMap(map);
+  }, [memoryLogs]);
+
+  // Initialize aspect map from photo orientation data
+  useEffect(() => {
+    const initialMap = {};
+    photos.forEach((p, idx) => {
+      const id = p.id ?? idx;
+      if (p.orientation) {
+        initialMap[id] = p.orientation;
+      }
+    });
+    if (Object.keys(initialMap).length > 0) {
+      setAspectMap(initialMap);
+    }
+  }, [photos]);
 
   useEffect(() => {
     scrollPosRef.current = scrollPos;
@@ -30,14 +89,28 @@ export default function WallGallery3D({ photos = [] }) {
   }, [maxScroll]);
 
   // Precompute a stable list of image sources
+  // Match each photo.id with memoryLog.interactionId to get userName
   const items = useMemo(
     () =>
-      photos.map((p, idx) => ({
-        id: p.id ?? idx,
-        src: p.fileUrl,
-        alt: p.alt ?? "",
-      })),
-    [photos]
+      photos.map((p, idx) => {
+        // Use the photo's actual id (INTEGER) for matching
+        const photoId = p.id ?? idx;
+        // Look up userName from memoryLogs by matching photo.id with log.interactionId
+        // Try both number and string keys for flexible matching
+        const userName = 
+          p.userName || 
+          photoUserNameMap[Number(photoId)] || 
+          photoUserNameMap[String(photoId)] || 
+          "";
+        return {
+          id: photoId,
+          src: p.fileUrl,
+          alt: p.alt ?? "",
+          userName: userName,
+          orientation: p.orientation ?? null, // Use orientation from backend if available
+        };
+      }),
+    [photos, photoUserNameMap]
   );
 
   // Clamp helper
@@ -195,36 +268,37 @@ export default function WallGallery3D({ photos = [] }) {
           }}
         >
           {items.map((item) => {
-            const orientation = aspectMap[item.id];
+            // Use backend orientation if available, otherwise use detected or default to landscape
+            const orientation = item.orientation || aspectMap[item.id] || "landscape";
+            const isPortrait = orientation === "portrait";
             return (
               <figure
-                className={`wg-photo ${
-                  orientation ? `wg-photo-${orientation}` : ""
-                }`}
+                className={`wg-photo wg-photo-${orientation}`}
                 key={item.id}
               >
                 <div className="wg-img-wrap">
                   <Image
                     src={item.src}
                     alt={item.alt}
-                    width={520}
-                    height={420}
-                    sizes="(max-width: 768px) 90vw, 520px"
+                    width={isPortrait ? 160 : 360}
+                    height={240}
+                    sizes="(max-width: 768px) 90vw, (max-width: 480px) 90vw, 360px"
                     className="wg-img"
                     loading="lazy"
                     onLoadingComplete={(img) => {
-                      const isPortrait = img.naturalHeight > img.naturalWidth;
-                      setAspectMap((prev) => ({
-                        ...prev,
-                        [item.id]: isPortrait ? "portrait" : "landscape",
-                      }));
+                      // Only detect if orientation wasn't set from backend
+                      if (!item.orientation) {
+                        const detectedPortrait = img.naturalHeight > img.naturalWidth;
+                        setAspectMap((prev) => ({
+                          ...prev,
+                          [item.id]: detectedPortrait ? "portrait" : "landscape",
+                        }));
+                      }
                     }}
                   />
-                  {item.alt && (
-                    <figcaption className="wg-caption-overlay">
-                      {item.alt}
-                    </figcaption>
-                  )}
+                  <figcaption className="wg-caption-overlay">
+                    {item.userName || ""}
+                  </figcaption>
                 </div>
               </figure>
             );
@@ -308,18 +382,23 @@ export default function WallGallery3D({ photos = [] }) {
           flex: 0 0 auto;
           transform-style: preserve-3d;
           box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.8);
-          border: 6px solid #ffffff;
+          border: 0.5px solid rgba(255, 255, 255, 0.4);
           background: #ffffff;
           margin-right: 0;
           max-width: 100%;
           display: inline-flex;
-          height: 420px;
+          overflow: hidden;
+          border-radius: 0;
         }
         .wg-photo-landscape {
-          width: 520px;
+          width: 360px;
+          height: 240px;
+          aspect-ratio: 3 / 2;
         }
         .wg-photo-portrait {
-          width: 320px;
+          width: 160px;
+          height: 240px;
+          aspect-ratio: 2 / 3;
         }
         .wg-img-wrap {
           position: relative;
@@ -327,29 +406,44 @@ export default function WallGallery3D({ photos = [] }) {
           background: transparent;
           width: 100%;
           height: 100%;
+          overflow: hidden;
+          display: flex;
+          cursor: pointer;
         }
         .wg-img {
           display: block;
-          height: 100%;
           width: 100%;
+          height: 100%;
           object-fit: cover;
           background: transparent;
+          flex-shrink: 0;
         }
         .wg-caption-overlay {
           position: absolute;
-          top: 20px;
+          bottom: 0;
+          left: 0;
           right: 0;
-          background: rgba(66, 59, 48, 0.6);
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.3) 80%, transparent 100%);
           color: #fff;
-          font-size: 12px;
-          padding: 20px;
+          font-size: 14px;
+          font-weight: 500;
+          padding: 24px 16px 16px;
           border-radius: 0;
           opacity: 0;
-          transition: opacity 0.2s ease;
+          transition: opacity 0.3s ease-in-out;
           pointer-events: none;
+          text-align: left;
+          z-index: 100;
+          display: flex;
+          align-items: flex-end;
+          min-height: 60px;
         }
+        .wg-photo:hover .wg-caption-overlay,
         .wg-img-wrap:hover .wg-caption-overlay {
           opacity: 1;
+        }
+        .wg-caption-overlay:empty {
+          display: none;
         }
         .wg-empty {
           text-align: center;
@@ -364,17 +458,15 @@ export default function WallGallery3D({ photos = [] }) {
           .wg-title {
             font-size: 26px;
           }
-          .wg-photo {
-            padding: 6px;
-          }
-          .wg-photo {
-            height: 340px;
-          }
           .wg-photo-landscape {
-            width: 420px;
+            width: 270px;
+            height: 180px;
+            aspect-ratio: 3 / 2;
           }
           .wg-photo-portrait {
-            width: 260px;
+            width: 120px;
+            height: 180px;
+            aspect-ratio: 2 / 3;
           }
           .wg-track {
             gap: 6px;
@@ -386,17 +478,18 @@ export default function WallGallery3D({ photos = [] }) {
           }
         }
         @media (max-width: 480px) {
-          .wg-photo {
-            height: 260px;
-          }
           .wg-photo-landscape {
-            width: 320px;
+            width: 240px;
+            height: 160px;
+            aspect-ratio: 3 / 2;
           }
           .wg-photo-portrait {
-            width: 200px;
+            width: 107px;
+            height: 160px;
+            aspect-ratio: 2 / 3;
           }
           .wg-photo {
-            border-width: 4px;
+            border-width: 0.5px;
             box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
           }
           .wg-track {

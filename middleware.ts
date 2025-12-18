@@ -68,18 +68,22 @@ function getClientIP(request: NextRequest): string {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip geolocation check for access-denied page to avoid infinite redirects
-  if (pathname === "/access-denied") {
-    return NextResponse.next();
-  }
-
-  // Perform geolocation check first (before any other checks)
-  const clientIP = getClientIP(request);
-  const isAllowedCountry = await checkGeolocation(clientIP);
+  // ! Pausing geolocation checks in the frontend. 
+  // The backend is still implemented
+  // If required later, just uncomment these lines
   
-  if (!isAllowedCountry) {
-    return NextResponse.redirect(new URL("/access-denied?reason=geo", request.url));
-  }
+  // // Skip geolocation check for access-denied page to avoid infinite redirects
+  // if (pathname === "/access-denied") {
+  //   return NextResponse.next();
+  // }
+
+  // // Perform geolocation check first (before any other checks)
+  // const clientIP = getClientIP(request);
+  // const isAllowedCountry = await checkGeolocation(clientIP);
+  
+  // if (!isAllowedCountry) {
+  //   return NextResponse.redirect(new URL("/access-denied?reason=geo", request.url));
+  // }
 
   const token = await getToken({
     req: request,

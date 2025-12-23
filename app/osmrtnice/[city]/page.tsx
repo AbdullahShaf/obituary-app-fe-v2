@@ -3,8 +3,32 @@ import type { Metadata } from "next";
 import Layout from "../../components/appcomponents/Layout";
 import ObituaryListContent from "../ObituaryListContent";
 import { slugToCity } from "@/utils/citySlug";
+import API_BASE_URL from "@/config/apiConfig";
 
 export const dynamic = "force-dynamic";
+
+async function fetchObituaries(city?: string, region?: string) {
+  try {
+    const queryParams = new URLSearchParams();
+    if (city) queryParams.append("city", city);
+    if (region) queryParams.append("region", region);
+    
+    const url = `${API_BASE_URL}/obituary${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
+    const response = await fetch(url, {
+      cache: "no-store",
+    });
+    
+    if (!response.ok) {
+      return { obituaries: [] };
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching obituaries:", error);
+    return { obituaries: [] };
+  }
+}
 
 const cityMetadata = {
   "ljubljana": {
@@ -60,9 +84,11 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   const cityData = citySlug in cityMetadata ? cityMetadata[citySlug as keyof typeof cityMetadata] : null;
 
   if (cityData) {
+    const cityName = slugToCity(resolvedParams.city);
     return {
       title: cityData.title,
       description: cityData.description,
+      keywords: `osmrtnice, ${cityName}, žalne strani, spominske strani, pogrebi, ${cityName} osmrtnice, zadnje osmrtnice ${cityName}`,
       alternates: {
         canonical: `https://www.osmrtnica.com/osmrtnice/${resolvedParams.city}`,
       },
@@ -73,6 +99,7 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   return {
     title: `${cityName} - osmrtnice | Vse zadnje osmrtnice v ${cityName}`,
     description: `Pregled vseh osmrtnic v ${cityName} s povezavo do njihove žalne/spominske strani. Prevzemite digitalne kartice sožalja in brezplačne QR kode za nagrobnike.`,
+    keywords: `osmrtnice, ${cityName}, žalne strani, spominske strani, pogrebi, ${cityName} osmrtnice, zadnje osmrtnice ${cityName}`,
     alternates: {
       canonical: `https://www.osmrtnica.com/osmrtnice/${resolvedParams.city}`,
     },
@@ -84,6 +111,14 @@ export default async function CityObituaryList({ params }: { params: Promise<{ c
   const citySlug = resolvedParams.city.toLowerCase();
   const cityData = citySlug in cityMetadata ? cityMetadata[citySlug as keyof typeof cityMetadata] : null;
   const h1Text = cityData?.h1 || "Zadnje osmrtnice";
+  const cityName = slugToCity(resolvedParams.city);
+  
+  const { default: regionsAndCities } = await import("@/utils/regionAndCities");
+  const region = Object.keys(regionsAndCities).find((region) =>
+    regionsAndCities[region].includes(cityName)
+  );
+  
+  const initialData = await fetchObituaries(cityName, region);
 
   return (
     <Layout
@@ -95,7 +130,7 @@ export default async function CityObituaryList({ params }: { params: Promise<{ c
     >
       <div className="flex flex-col mx-auto bg-[#F5F7F9] w-full">
         <Suspense fallback={<div>Loading...</div>}>
-          <ObituaryListContent cityParam={slugToCity(resolvedParams.city)} h1Text={h1Text} />
+          <ObituaryListContent cityParam={cityName} h1Text={h1Text} initialObituaries={initialData.obituaries || []} />
         </Suspense>
       </div>
     </Layout>

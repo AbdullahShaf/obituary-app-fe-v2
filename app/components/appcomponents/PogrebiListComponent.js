@@ -14,6 +14,23 @@ import { SelectDropdown } from "./SelectDropdown";
 import { set } from "date-fns";
 import { cityToSlug, slugToCity } from "@/utils/citySlug";
 
+const findCityFromSlug = (slug) => {
+  if (!slug) return null;
+  
+  const normalizedSlug = slug.toLowerCase().trim();
+
+  for (const region of Object.values(regionsAndCities)) {
+    for (const cityName of region) {
+      const citySlug = cityToSlug(cityName);
+      if (citySlug.toLowerCase() === normalizedSlug) {
+        return cityName;
+      }
+    }
+  }
+  
+  return slugToCity(slug);
+};
+
 const ObituaryListComponent = ({ city }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -36,11 +53,21 @@ const ObituaryListComponent = ({ city }) => {
       } else {
         const citySlug = pathname.split('/pogrebi/')[1];
         if (citySlug) {
-          const cityFromRoute = slugToCity(citySlug);
-          // Always set the city from route if conversion is successful
-          // This ensures the API call uses the correct capitalized city name
-          if (cityFromRoute && cityFromRoute !== citySlug) {
+          // findCityFromSlug searches all 150+ cities in regionsAndCities
+          // Falls back to slugToCity only if no match is found
+          const cityFromRoute = findCityFromSlug(citySlug);
+          // Set the city whenever we get a result (truthy check handles both mapped and unmapped cities)
+          // This ensures the API call uses the correct city name
+          if (cityFromRoute) {
             setSelectedCity(cityFromRoute);
+            
+            // Also set the region if we can find it in regionsAndCities
+            const region = Object.keys(regionsAndCities).find((region) =>
+              regionsAndCities[region].includes(cityFromRoute)
+            );
+            if (region) {
+              setSelectedRegion(region);
+            }
           }
         }
       }
@@ -547,13 +574,13 @@ const ObituaryListComponent = ({ city }) => {
 
         {/* Quick Selection - City Tabs */}
         {!pathname?.includes('/u/') && (
-          <div className="flex flex-col desktop:flex-row tablet:flex-row mobile:flex-col items-center desktop:justify-center tablet:justify-center mobile:justify-start desktop:mt-[48px] tablet:mt-[48px] mobile:mt-[32px] desktop:mb-[48px] tablet:mb-[48px] mobile:mb-[32px]">
-            <h2 className="flex items-center text-[32px] mobile:text-[24px] tablet:text-[24px] font-[400px] leading-[28.13px] text-[#1E2125] whitespace-nowrap mobile:h-7 tablet:h-7 desktop:h-auto mobile:mr-[24px] tablet:mr-[18px] desktop:mr-0">
+          <div className="flex flex-col desktop:flex-col tablet:flex-row mobile:flex-col desktop:items-start items-center desktop:justify-center tablet:justify-center mobile:justify-start desktop:mt-[48px] tablet:mt-[48px] mobile:mt-[32px] desktop:mb-[48px] tablet:mb-[48px] mobile:mb-[32px]">
+            <h2 className="flex text-[32px] mobile:text-[24px] tablet:text-[24px] font-[400px] leading-[28.13px] text-[#1E2125] whitespace-nowrap mobile:h-7 tablet:h-7 desktop:h-auto mobile:mr-[24px] tablet:mr-[18px] desktop:mr-0 desktop:mb-4">
               Hitri izbor
               <span className="hidden tablet:inline desktop:hidden text-[24px] text-[#1E2125] ml-0">:</span>
             </h2>
-            <div className="flex mobile:w-[330px] tablet:w-[480px] desktop:mt-4">
-              <ul className="flex flex-row list-none flex-wrap mobile:ml-[0px]">
+            <div className="flex mobile:w-[330px] tablet:w-[480px] desktop:mt-0">
+              <ul className="flex flex-row list-none flex-wrap mobile:ml-[0px] desktop:justify-center">
                 {quickSelectCities.map((cityName, index) => (
                   <li
                     key={cityName}

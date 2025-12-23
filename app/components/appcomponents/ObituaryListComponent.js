@@ -1,19 +1,37 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import Dropdown from "@/app/components/appcomponents/Dropdown";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import ObituaryCard from "@/app/components/appcomponents/ObituaryCard";
-import imgPrevious from "@/public/previous_img.png";
-import imgNext from "@/public/next_img.png";
+
 import Image from "next/image";
 import { toast } from "react-hot-toast";
-import obituaryService from "@/services/obituary-service";
-import regionsAndCities from "@/utils/regionAndCities";
-import { SelectDropdown } from "./SelectDropdown";
-import { cityToSlug, slugToCity } from "@/utils/citySlug";
+import React, { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const ObituaryListComponent = ({ city }) => {
+import imgNext from "@/public/next_img.png";
+import { SelectDropdown } from "./SelectDropdown";
+import imgPrevious from "@/public/previous_img.png";
+import regionsAndCities from "@/utils/regionAndCities";
+import { cityToSlug, slugToCity } from "@/utils/citySlug";
+import obituaryService from "@/services/obituary-service";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import ObituaryCard from "@/app/components/appcomponents/ObituaryCard";
+
+const findCityFromSlug = (slug) => {
+  if (!slug) return null;
+
+  const normalizedSlug = slug.toLowerCase().trim();
+
+  for (const region of Object.values(regionsAndCities)) {
+    for (const cityName of region) {
+      const citySlug = cityToSlug(cityName);
+      if (citySlug.toLowerCase() === normalizedSlug) {
+        return cityName;
+      }
+    }
+  }
+
+  return slugToCity(slug);
+};
+
+const ObituaryListComponent = ({ city, initialObituaries = [] }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -29,14 +47,14 @@ const ObituaryListComponent = ({ city }) => {
     "Velenje",
     "Nova Gorica",
   ];
-  const [obituaries, setObituaries] = useState([]);
+  const [obituaries, setObituaries] = useState(initialObituaries);
   const [obitLoading, setObitLoading] = useState(false);
   const allRegionsOption = {
     place: "- Pokaži vse regije -",
     id: "allRegions",
   };
   const allCitiesOption = { place: "- Pokaži vse občine -", id: "allCities" };
-  const [selectedCity, setSelectedCity] = useState(city ? city : null);
+  const [selectedCity, setSelectedCity] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState(regionParam1 ?? null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10); // default to mobile
@@ -71,45 +89,111 @@ const ObituaryListComponent = ({ city }) => {
           .sort((a, b) => a.place.localeCompare(b.place, "sl")),
       ];
 
-  // Update city when route changes (for dynamic routes like /osmrtnice/ljubljana)
   useEffect(() => {
+    console.log('[cityOptions-effect] cityOptions changed, selectedCity:', selectedCity, 'selectedRegion:', selectedRegion);
+    console.log('[cityOptions-effect] cityOptions length:', cityOptions.length, 'has selectedCity in options:', cityOptions.some(opt => opt.place === selectedCity));
+  }, [cityOptions, selectedCity, selectedRegion]);
+
+  useEffect(() => {
+    console.log('[useEffect-pathname] pathname:', pathname, 'selectedCity:', selectedCity, 'city prop:', city);
     if (pathname?.startsWith('/osmrtnice/') && pathname !== '/osmrtnice') {
-      // Prioritize city prop if available (already converted by parent component)
-      if (city) {
-        setSelectedCity(city);
-      } else {
-        const citySlug = pathname.split('/osmrtnice/')[1];
-        if (citySlug) {
-          const cityFromRoute = slugToCity(citySlug);
-          // Always set the city from route if conversion is successful
-          if (cityFromRoute && cityFromRoute !== citySlug) {
+      const citySlug = pathname.split('/osmrtnice/')[1];
+      console.log('[useEffect-pathname] citySlug from path:', citySlug);
+      if (citySlug) {
+        const cityFromRoute = findCityFromSlug(citySlug);
+        console.log('[useEffect-pathname] cityFromRoute from findCityFromSlug:', cityFromRoute, 'current selectedCity:', selectedCity, 'city prop:', city);
+        if (cityFromRoute) {
+          if (selectedCity !== cityFromRoute) {
+            console.log('[useEffect-pathname] UPDATING selectedCity from', selectedCity, 'to', cityFromRoute, '(ensuring capitalized)');
             setSelectedCity(cityFromRoute);
+          } else {
+            console.log('[useEffect-pathname] selectedCity already matches, not updating');
           }
+
+          const region = Object.keys(regionsAndCities).find((region) =>
+            regionsAndCities[region].includes(cityFromRoute)
+          );
+          console.log('[useEffect-pathname] Found region:', region, 'current selectedRegion:', selectedRegion);
+          if (region) {
+            if (selectedRegion !== region) {
+              console.log('[useEffect-pathname] UPDATING selectedRegion from', selectedRegion, 'to', region);
+              setSelectedRegion(region);
+            } else {
+              console.log('[useEffect-pathname] selectedRegion already matches, not updating');
+            }
+          } else {
+            console.log('[useEffect-pathname] No region found for city:', cityFromRoute);
+          }
+        } else {
+          console.log('[useEffect-pathname] cityFromRoute is null/undefined, not updating');
         }
       }
     } else if (pathname === '/osmrtnice') {
-      // Reset to default when on main page
       const cityFromQuery = searchParams.get("city");
-      setSelectedCity(cityFromQuery || city || null);
+      console.log('[useEffect-pathname] On main page, cityFromQuery:', cityFromQuery, 'city prop:', city);
+      if (cityFromQuery || city) {
+        setSelectedCity(cityFromQuery || city || null);
+      } else if (!cityFromQuery && !city) {
+        console.log('[useEffect-pathname] Clearing selectedCity');
+        setSelectedCity(null);
+      }
     }
-  }, [pathname, searchParams, city]);
+  }, [pathname, searchParams]);
 
-  const updateUrlParams = (city) => {
-    const params = new URLSearchParams();
-
-    if (city && city.trim() !== "") {
-      params.set("city", city);
+  const hasInitialData = React.useRef(initialObituaries.length > 0);
+  const initialCity = React.useRef(city);
+  const initialRegion = React.useRef(regionParam1);
+  
+  useEffect(() => {
+    if (pathname?.startsWith('/osmrtnice/') && pathname !== '/osmrtnice' && !selectedCity) {
+      console.log('[selectedCity-effect] Skipping fetch - on dynamic route but selectedCity is null (will be set by pathname effect)');
+      return;
     }
 
-    const newUrl = params.toString()
-      ? `?${params.toString()}`
-      : window.location.pathname;
+    if (pathname?.startsWith('/osmrtnice/') && pathname !== '/osmrtnice') {
+      const citySlug = pathname.split('/osmrtnice/')[1];
+      const cityFromPath = findCityFromSlug(citySlug);
+      if (cityFromPath && cityFromPath !== selectedCity) {
+        console.log('[selectedCity-effect] Skipping fetch - pathname city (', cityFromPath, ') does not match selectedCity (', selectedCity, ') - navigation in progress');
+        return;
+      }
+      if (cityFromPath && cityFromPath === selectedCity) {
+        console.log('[selectedCity-effect] City matches pathname, fetching data');
+      }
+    }
 
-    router.push(newUrl, { scroll: false });
-  };
+    if (hasInitialData.current && !selectedName && selectedCity === initialCity.current && selectedRegion === initialRegion.current) {
+      hasInitialData.current = false;
+      return;
+    }
+
+    fetchObituary();
+  }, [selectedCity, selectedRegion, pathname]);
 
   useEffect(() => {
-    fetchObituary();
+    console.log('[selectedCity-tracker] selectedCity value:', selectedCity, 'type:', typeof selectedCity);
+  }, [selectedCity]);
+
+  useEffect(() => {
+    if (selectedCity) {
+      document.title = `Osmrtnice v ${selectedCity} – Žalne strani in spominske | Osmrtnica.com`;
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute("content", `Osmrtnice v ${selectedCity}. Celovit pregled osmrtnic z datumi pogrebov, pokopališči ter možnostjo iskanja po imenu, kraju ali regiji.`);
+      }
+    } else if (selectedRegion) {
+      document.title = `Osmrtnice v regiji ${selectedRegion} | Osmrtnica.com`;
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute("content", `Pregled osmrtnic v regiji ${selectedRegion}. Celovit pregled osmrtnic z datumi pogrebov, pokopališči ter možnostjo iskanja po imenu, kraju ali regiji.`);
+      }
+    } else {
+      document.title = "Zadnje osmrtnice po Sloveniji | Osmrtnica.com";
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute("content", "Pregled vseh osmrtnic s povezavo do njihove žalne/spominske strani. Osmrtnice na Gorenjskem, Dolenjskem, Pomurju, Goriškem, Zasavju, Primorskem, Notranjskem");
+      }
+    }
   }, [selectedCity, selectedRegion]);
 
   const handleRegionSelect = (item) => {
@@ -123,8 +207,8 @@ const ObituaryListComponent = ({ city }) => {
     updateURL('', item.place, '');
   };
 
-  // Update URL with query parameters
   const updateURL = (city, region, search) => {
+    console.log('[updateURL] Called with city:', city, 'region:', region);
     const params = new URLSearchParams(window.location.search);
     if (city && city !== "allCities" && city !== "- Pokaži vse občine -") {
       params.set("city", city);
@@ -132,6 +216,7 @@ const ObituaryListComponent = ({ city }) => {
       params.delete("city");
     }
     if (!city) {
+      console.log('[updateURL] Clearing selectedCity because city is falsy');
       setSelectedCity('');
       params.delete("city");
     }
@@ -143,21 +228,22 @@ const ObituaryListComponent = ({ city }) => {
 
     const queryString = params.toString();
     const newURL = queryString ? `?${queryString}` : window.location.pathname;
+    console.log('[updateURL] Navigating to:', newURL);
     router.replace(newURL, { scroll: false });
   };
 
   const handleCitySelect = (item) => {
+    console.log('[handleCitySelect] Called with item:', item);
     if (item.id === "allCities") {
+      console.log('[handleCitySelect] Clearing city (allCities selected)');
       setSelectedCity(null);
-      // Navigate to base path without city (no query params)
+      setSelectedRegion(null);
       router.push("/osmrtnice");
       return;
     }
-    // Set the selectedCity state immediately with the capitalized city name
-    setSelectedCity(item.place);
-    setSelectedRegion(null);
-    // Convert city name to slug and navigate to path parameter (same as quick links)
+
     const citySlug = cityToSlug(item.place);
+    console.log('[handleCitySelect] Navigating to:', `/osmrtnice/${citySlug}`, 'will set city/region after navigation');
     if (citySlug) {
       router.push(`/osmrtnice/${citySlug}`);
     }
@@ -171,6 +257,12 @@ const ObituaryListComponent = ({ city }) => {
   };
 
   useEffect(() => {
+    if (!selectedName) {
+      console.log('[selectedName-effect] Skipping fetch - selectedName is empty');
+      return;
+    }
+
+    console.log('[selectedName-effect] Fetching with selectedName:', selectedName);
     fetchObituary();
   }, [selectedName]);
 
@@ -182,6 +274,8 @@ const ObituaryListComponent = ({ city }) => {
 
       if (selectedRegion && selectedRegion != '- Pokaži vse regije -') queryParams.region = selectedRegion;
       if (selectedName) queryParams.name = selectedName;
+
+      console.log('[fetchObituary] Calling API with params:', queryParams, 'pathname:', pathname);
       setObitLoading(true);
       const response = await obituaryService.getObituary(queryParams);
       setObitLoading(false);
@@ -271,8 +365,55 @@ const ObituaryListComponent = ({ city }) => {
     }
   }, [currentPage]);
 
+  const generateJsonLd = () => {
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://www.osmrtnica.com';
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : baseUrl;
+    
+    const itemListElement = obituaries.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((obituary, index) => ({
+      "@type": "ListItem",
+      "position": (currentPage - 1) * itemsPerPage + index + 1,
+      "item": {
+        "@type": "Person",
+        "name": `${obituary.name} ${obituary.sirName}`,
+        "deathDate": obituary.deathDate ? new Date(obituary.deathDate).toISOString().split('T')[0] : undefined,
+        "birthDate": obituary.birthDate && !obituary.birthDate.includes('1025') ? new Date(obituary.birthDate).toISOString().split('T')[0] : undefined,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": obituary.location || obituary.city || "",
+        },
+        "url": `${baseUrl}/m/${obituary.slugKey}`,
+      }
+    }));
+
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": selectedCity 
+        ? `Osmrtnice v ${selectedCity}`
+        : selectedRegion
+        ? `Osmrtnice v regiji ${selectedRegion}`
+        : "Osmrtnice po Sloveniji",
+      "description": selectedCity
+        ? `Pregled osmrtnic v ${selectedCity}`
+        : selectedRegion
+        ? `Pregled osmrtnic v regiji ${selectedRegion}`
+        : "Pregled osmrtnic po Sloveniji",
+      "url": currentUrl,
+      "numberOfItems": obituaries.length,
+      "itemListElement": itemListElement,
+    };
+
+    return jsonLd;
+  };
+
   return (
     <div className="max-w-[1920px] w-full tablet:w-full mobile:w-full mx-auto flex flex-col items-center desktop:bg-[#F5F7F9] mobile:bg-white tablet:bg-white">
+      {obituaries.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(generateJsonLd()) }}
+        />
+      )}
       {/* Main Container */}
       <div className=" flex flex-col items-center w-full tablet:w-full mobile:w-full">
         {/* Main container for inputs main container */}

@@ -241,11 +241,8 @@ const DirectoryEntry = () => {
     <div className="flex justify-center bg-[#F9EBD466] mobile:w-full">
       <div className="flex flex-col py-[65px] desktop:py-[105px] tablet:py-[75px] mobile:w-full mobile:px-4">
         <div className="flex self-center items-center h-[48px]">
-          <h2 className="mobile:hidden flex mobile:text-[28px] text-[40px] text-[#1E2125] font-variation-customOpt40 font-normal">
-            Vpis v imenik lokalnih cvetličarn
-          </h2>
-          <h2 className="hidden mobile:flex mobile:text-[28px] text-[40px] text-[#1E2125] font-variation-customOpt40 font-normal">
-            Vpis v imenik
+          <h2 className=" flex mobile:text-[28px] text-[40px] text-[#1E2125] font-variation-customOpt40 font-normal">
+            Vpis v imenik cvetličarn
           </h2>
         </div>
 

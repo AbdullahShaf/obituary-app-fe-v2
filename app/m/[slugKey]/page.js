@@ -29,17 +29,9 @@ export async function generateMetadata({ params }) {
     ? `Osmrtnica za ${firstName} – tu lahko prižgete svečko, delite spomine in najdete informacije o pogrebu. Enostavno in brezplačno.`
     : "Osmrtnica – tu lahko prižgete svečko, delite spomine in najdete informacije o pogrebu. Enostavno in brezplačno.";
 
-  const twitterTitle = firstName && lastName
-    ? `${firstName} ${lastName} - žalna stran | Osmrtnica.com`
-    : firstName
-    ? `${firstName} - žalna stran | Osmrtnica.com`
-    : "Žalna stran | Osmrtnica.com";
 
-  const twitterDescription = firstName && lastName
-    ? `Žalna stran ${firstName} ${lastName}. Prižgite svečko, izrazite sožalje, delite spomine in najdete informacije o pogrebu. Enostavno in brezplačno.`
-    : firstName
-    ? `Žalna stran ${firstName}. Prižgite svečko, izrazite sožalje, delite spomine in najdete informacije o pogrebu. Enostavno in brezplačno.`
-    : "Žalna stran. Prižgite svečko, izrazite sožalje, delite spomine in najdete informacije o pogrebu. Enostavno in brezplačno.";
+    const twitterTitle = titleText;
+    const twitterDescription = descriptionText;
 
   return {
     title: titleText,

@@ -869,9 +869,9 @@ const MemorialPageTopComp = ({
                     className="flex flex-col tablet:flex-row desktop:flex-row tablet:justify-between 
                   desktop:justify-between h-[39px] "
                   >
-                    <h2 className="text-[20px] text-[#1E2125] font-variation-customOpt20 font-normal desktop:mt-[2px] ">
+                    <div className="text-[20px] text-[#1E2125] font-variation-customOpt20 font-normal desktop:mt-[2px] ">
                       Prižgi svečko v spomin
-                    </h2>
+                    </div>
                     {/* <div className="hidden  tablet:flex desktop:flex text-[12px] text-[#1E2125] font-normal mt-[10px]">
                       Skupno ta teden: {data?.currentWeekVisits}
                     </div> */}
@@ -963,9 +963,9 @@ const MemorialPageTopComp = ({
                   }}
                 >
                   <div className="flex items-center  h-[39px]">
-                    <h2 className="text-[20px] text-[#1E2125] font-variation-customOpt20 font-normal  ">
+                    <div className="text-[20px] text-[#1E2125] font-variation-customOpt20 font-normal  ">
                       Povabi družino in prijatelje
-                    </h2>
+                    </div>
                   </div>
                   <div className="bg-[#D4D4D4] h-[1px] w-[100%] my-4 " />
                   <div
@@ -1159,9 +1159,9 @@ const MemorialPageTopComp = ({
 
           <div className="flex flex-col w-full items-center mt-[40px] tablet:mt-[60px] desktop:mt-[70px] ">
             <div className="flex items-center justify-center h-[33px] tablet:h-[47px] desktop:h-[47px] relative">
-              <div className="text-[#1E2125] text-[28px] tablet:text-[40px] desktop:text-[40px] font-variation-customOpt28 tablet:font-variation-customOpt40 desktop:font-variation-customOpt40 font-normal">
+              <h2 className="text-[#1E2125] text-[28px] tablet:text-[40px] desktop:text-[40px] font-variation-customOpt28 tablet:font-variation-customOpt40 desktop:font-variation-customOpt40 font-normal">
                 Žalna knjiga
-              </div>
+              </h2>
               {/* <div className="text-[#0A85C2] text-[24px] font-[400] absolute top-[-3px] right-[-38px] text-end">
                 22
               </div> */}
@@ -1680,14 +1680,14 @@ const ContentSlider = ({ data }) => {
         />
         <div className="w-[522px] h-auto mobile:w-[255px] relative mx-auto">
           <div className="flex justify-between items-center gap-[10px]">
-            <h3
+            <div
               className="text-[40px] mobile:text-[24px] font-greatVibes font-normal text-[#1E2125]"
               style={{
                 textShadow: "0px 1px 1px #000000, 0px 4px 4px #00000040",
               }}
             >
               {currentDedication?.title}
-            </h3>
+            </div>
             <div className="flex flex-col items-end justify-end gap-[7px] ">
               <p className="text-[14px] leading-[14px] font-variation-customOpt16 font-normal text-[#36556CE5]">
                 {currentDedication?.name}

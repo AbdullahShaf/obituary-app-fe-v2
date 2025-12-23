@@ -30,19 +30,42 @@ const ObituaryListComponent = ({ city }) => {
   // Update city when route changes (for dynamic routes like /pogrebi/ljubljana)
   useEffect(() => {
     if (pathname?.startsWith('/pogrebi/') && pathname !== '/pogrebi') {
-      const citySlug = pathname.split('/pogrebi/')[1];
-      if (citySlug) {
-        const cityFromRoute = slugToCity(citySlug);
-        if (cityFromRoute) {
-          setSelectedCity(cityFromRoute);
+      // Prioritize city prop if available (already converted by parent component)
+      if (city) {
+        setSelectedCity(city);
+      } else {
+        const citySlug = pathname.split('/pogrebi/')[1];
+        if (citySlug) {
+          const cityFromRoute = slugToCity(citySlug);
+          // Always set the city from route if conversion is successful
+          // This ensures the API call uses the correct capitalized city name
+          if (cityFromRoute && cityFromRoute !== citySlug) {
+            setSelectedCity(cityFromRoute);
+          }
         }
       }
     } else if (pathname === '/pogrebi') {
-      // Reset to default when on main page
+      // If on main page with no city, navigate to default city using path parameter
       const cityFromQuery = searchParams.get("city");
-      setSelectedCity(cityFromQuery || city || "Celje");
+      if (cityFromQuery) {
+        // Convert query param to path param
+        const citySlug = cityToSlug(cityFromQuery);
+        if (citySlug) {
+          router.push(`/pogrebi/${citySlug}`);
+        }
+      } else if (city) {
+        setSelectedCity(city);
+      } else {
+        // Navigate to default city using path parameter instead of query parameter
+        setSelectedCity("Celje");
+        const defaultCitySlug = cityToSlug("Celje");
+        if (defaultCitySlug) {
+          router.push(`/pogrebi/${defaultCitySlug}`);
+        }
+      }
     }
   }, [pathname, searchParams, city]);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [obituaries, setObituaries] = useState([]);
   const defaultCities = Object.values(regionsAndCities)
@@ -155,16 +178,17 @@ const ObituaryListComponent = ({ city }) => {
     }
   };
 
-  // Handle city selection
   const handleCitySelect = (item) => {
-    console.log("sssss", item);
 
     if (item.id === "allCities" || item.place === "- Pokaži vse občine -") {
       setSelectedCity(null);
-      updateURL(null, selectedRegion, searchTerm);
+      router.push("/pogrebi");
     } else {
       setSelectedCity(item.place);
-      updateURL(item.place, selectedRegion, searchTerm);
+      const citySlug = cityToSlug(item.place);
+      if (citySlug) {
+        router.push(`/pogrebi/${citySlug}`);
+      }
     }
   };
 
@@ -203,6 +227,9 @@ const ObituaryListComponent = ({ city }) => {
   const handleQuickSelect = (cityName) => {
     const citySlug = cityToSlug(cityName);
     if (citySlug) {
+      // Set the selectedCity state immediately with the capitalized city name
+      setSelectedCity(cityName);
+      // Navigate to clean URL without query parameter
       router.push(`/pogrebi/${citySlug}`);
     }
   };
@@ -218,13 +245,13 @@ const ObituaryListComponent = ({ city }) => {
     fetchObituary();
   };
 
-  // Set default city in URL if none is specified
-  useEffect(() => {
-    if (!searchParams.get("city") && !city && !selectedRegion) {
-      updateURL("Celje", selectedRegion, searchTerm);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedRegion]);
+  // Removed: Set default city in URL if none is specified
+  // This is now handled in the pathname useEffect above to use path parameters instead of query parameters
+  // useEffect(() => {
+  //   if (!searchParams.get("city") && !city && !selectedRegion) {
+  //     updateURL("Celje", selectedRegion, searchTerm);
+  //   }
+  // }, [selectedRegion]);
 
   // Fetch obituaries when filters change
   useEffect(() => {
@@ -521,14 +548,10 @@ const ObituaryListComponent = ({ city }) => {
         {/* Quick Selection - City Tabs */}
         {!pathname?.includes('/u/') && (
           <div className="flex flex-col desktop:flex-row tablet:flex-row mobile:flex-col items-center desktop:justify-center tablet:justify-center mobile:justify-start desktop:mt-[48px] tablet:mt-[48px] mobile:mt-[32px] desktop:mb-[48px] tablet:mb-[48px] mobile:mb-[32px]">
-            <div className="flex desktop:hidden items-center mr-[24px] tablet:mr-[18px] whitespace-nowrap h-7">
-              <h2 className="text-[24px] font-[400px] leading-[28.13px] text-[#1E2125]">
-                Hitri izbor
-              </h2>
-              <div className="hidden tablet:flex desktop:hidden text-[24px] text-[#1E2125]">
-                :
-              </div>
-            </div>
+            <h2 className="flex items-center text-[32px] mobile:text-[24px] tablet:text-[24px] font-[400px] leading-[28.13px] text-[#1E2125] whitespace-nowrap mobile:h-7 tablet:h-7 desktop:h-auto mobile:mr-[24px] tablet:mr-[18px] desktop:mr-0">
+              Hitri izbor
+              <span className="hidden tablet:inline desktop:hidden text-[24px] text-[#1E2125] ml-0">:</span>
+            </h2>
             <div className="flex mobile:w-[330px] tablet:w-[480px] desktop:mt-4">
               <ul className="flex flex-row list-none flex-wrap mobile:ml-[0px]">
                 {quickSelectCities.map((cityName, index) => (

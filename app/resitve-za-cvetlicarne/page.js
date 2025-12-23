@@ -9,11 +9,37 @@ import NotJustObituaries from "../components/appcomponents/NotJustObituaries";
 import RegisterComp from "../components/appcomponents/RegisterComp";
 import './local.css';
 
-export const metadata = {
-  title: "Spletne rešitve za cvetličarne – Enostavna izdelava strani | Osmrtnica.com",
-  description: "Rešitve za cvetličarne – izdelajte si brezplačno spletno stran, vpišite se v imenik cvetličarn in povečajte spletno vidnost. Enostavna izdelava v 30 minutah.",
-  robots: "index, follow",
-};
+export async function generateMetadata() {
+  return {
+    title: "Spletne rešitve za cvetličarne | Osmrtnica.com",
+    description: "Brezplačna izdelava spletne strani za cvetličarne, vpis v imenik in ostale spletne rešitve za cvetličarne in pogrebna podjetja.",
+    robots: "index, follow",
+    alternates: {
+      canonical: "https://www.osmrtnica.com/resitve-za-cvetlicarne",
+    },
+    openGraph: {
+      title: "Spletne rešitve za cvetličarne | Osmrtnica.com",
+      description: "Brezplačna izdelava spletne strani za cvetličarne, vpis v imenik in ostale spletne rešitve za cvetličarne in pogrebna podjetja.",
+      url: "https://www.osmrtnica.com/resitve-za-cvetlicarne",
+      siteName: "Osmrtnica",
+      type: "website",
+      images: [
+        {
+          url: "/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Spletne rešitve za cvetličarne",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Spletne rešitve za cvetličarne | Osmrtnica.com",
+      description: "Brezplačna izdelava spletne strani za cvetličarne, vpis v imenik in ostale spletne rešitve za cvetličarne in pogrebna podjetja.",
+      images: ["/og-image.jpg"],
+    },
+  };
+}
 
 const Floristspromo = () => {
   return (

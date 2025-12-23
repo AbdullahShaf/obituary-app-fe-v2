@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, Suspense } from "react";
+
 import { useSearchParams } from "next/navigation";
 import { useBreakpoint } from "@/app/hooks/useBreakpoint";
 import obituaryService from "@/services/obituary-service";
@@ -66,15 +67,14 @@ const CarouselEntry = ({ item }) => {
   );
 };
 
-const Carousel = () => {
+const Carousel = ({ city: cityProp, region: regionProp }) => {
   const searchParams = useSearchParams();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [obituaries, setObituaries] = useState([]);
   const breakpoint = useBreakpoint();
 
-  // Get city and region from URL parameters
-  const selectedCity = searchParams.get("city");
-  const selectedRegion = searchParams.get("region");
+  const selectedCity = cityProp || searchParams.get("city");
+  const selectedRegion = regionProp || searchParams.get("region");
   const selectedName = searchParams.get("search");
 
   // Fetch funerals when currentDate, city, or region changes
@@ -270,10 +270,10 @@ const CarouselLoading = () => (
 );
 
 // Wrapper component with Suspense boundary
-const CarouselWrapper = () => {
+const CarouselWrapper = ({ city, region }) => {
   return (
     <Suspense fallback={<CarouselLoading />}>
-      <Carousel />
+      <Carousel city={city} region={region} />
     </Suspense>
   );
 };

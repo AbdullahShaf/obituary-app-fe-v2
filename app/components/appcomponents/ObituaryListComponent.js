@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Dropdown from "@/app/components/appcomponents/Dropdown";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import ObituaryCard from "@/app/components/appcomponents/ObituaryCard";
@@ -11,10 +11,12 @@ import { toast } from "react-hot-toast";
 import obituaryService from "@/services/obituary-service";
 import regionsAndCities from "@/utils/regionAndCities";
 import { SelectDropdown } from "./SelectDropdown";
-import { cityToSlug } from "@/utils/citySlug";
+import { cityToSlug, slugToCity } from "@/utils/citySlug";
 
 const ObituaryListComponent = ({ city }) => {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
   const regionParam1 = searchParams.get("region");
   const languages = [
     "Ljubljana",
@@ -68,23 +70,29 @@ const ObituaryListComponent = ({ city }) => {
           }))
           .sort((a, b) => a.place.localeCompare(b.place, "sl")),
       ];
-  const router = useRouter();
 
+  // Update city when route changes (for dynamic routes like /osmrtnice/ljubljana)
   useEffect(() => {
-    const cityParam = searchParams.get("city");
-    const regionParam = searchParams.get("region");
-
-    if (cityParam) {
-      setSelectedCity(cityParam);
-
-      const region = Object.keys(regionsAndCities).find((region) =>
-        regionsAndCities[region].includes(cityParam)
-      );
-      if (region) {
-        setSelectedRegion(region);
+    if (pathname?.startsWith('/osmrtnice/') && pathname !== '/osmrtnice') {
+      // Prioritize city prop if available (already converted by parent component)
+      if (city) {
+        setSelectedCity(city);
+      } else {
+        const citySlug = pathname.split('/osmrtnice/')[1];
+        if (citySlug) {
+          const cityFromRoute = slugToCity(citySlug);
+          // Always set the city from route if conversion is successful
+          if (cityFromRoute && cityFromRoute !== citySlug) {
+            setSelectedCity(cityFromRoute);
+          }
+        }
       }
+    } else if (pathname === '/osmrtnice') {
+      // Reset to default when on main page
+      const cityFromQuery = searchParams.get("city");
+      setSelectedCity(cityFromQuery || city || null);
     }
-  }, []);
+  }, [pathname, searchParams, city]);
 
   const updateUrlParams = (city) => {
     const params = new URLSearchParams();
@@ -141,19 +149,18 @@ const ObituaryListComponent = ({ city }) => {
   const handleCitySelect = (item) => {
     if (item.id === "allCities") {
       setSelectedCity(null);
+      // Navigate to base path without city (no query params)
+      router.push("/osmrtnice");
       return;
     }
+    // Set the selectedCity state immediately with the capitalized city name
     setSelectedCity(item.place);
     setSelectedRegion(null);
-    updateURL(item.place, null, '')
-    // updateUrlParams(item.place);
-    // const region = Object.keys(regionsAndCities).find((region) =>
-    //   regionsAndCities[region].includes(item.place)
-    // );
-
-    // if (region) {
-    //   setSelectedRegion(region);
-    // }
+    // Convert city name to slug and navigate to path parameter (same as quick links)
+    const citySlug = cityToSlug(item.place);
+    if (citySlug) {
+      router.push(`/osmrtnice/${citySlug}`);
+    }
   };
 
   const handleCitySelectQuickLinks = (city) => {
@@ -324,16 +331,11 @@ const ObituaryListComponent = ({ city }) => {
           className="flex desktop:ml-[0px] desktop:h-[78px] tablet:w-[650px] tablet:h-[70px] tablet:justify-center mobile:w-[330px] mobile:flex-col desktop:flex-col"
           ref={cardTopRef}
         >
-          <h2 className="hidden desktop:flex text-[32px] font-[400px] leading-[28.13px] text-[#1E2125]">
+          <h2 className="flex items-center text-[32px] mobile:text-[24px] tablet:text-[24px] font-[400px] leading-[28.13px] text-[#1E2125] whitespace-nowrap mobile:h-7 tablet:h-7 desktop:h-auto">
             Hitri izbor
+            <span className="hidden tablet:inline desktop:hidden text-[24px] text-[#1E2125] ml-0">:</span>
           </h2>
           <div className="flex desktop:hidden items-center mr-[24px] tablet:mr-[18px] whitespace-nowrap h-7">
-            <h2 className="text-[24px] font-[400px] leading-[28.13px] text-[#1E2125]">
-              Hitri izbor
-            </h2>
-            <div className="hidden tablet:flex desktop:hidden text-[24px] text-[#1E2125]">
-              :
-            </div>
           </div>
           <div className="flex mobile:w-[330px] tablet:w-[480px] desktop:mt-4">
             <ul className="flex flex-row list-none flex-wrap mobile:ml-[0px]">

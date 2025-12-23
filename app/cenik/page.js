@@ -863,9 +863,6 @@ const Subscription = () => {
         >
           <div className="w-full desktop:w-[1200px] mx-auto">
             <Breadcrumbs items={breadcrumbItems} />
-            <h1 className="mobile:text-[28px] text-[40px] text-[#1E2125] font-normal mb-8 text-center desktop:text-left">
-              Cenik
-            </h1>
             {/* Manage Payments Button for logged in users */}
             {/* Temporarily removed for this week */}
             {/* {user && (active === "spominske" || active === "cvetlicarne") && (

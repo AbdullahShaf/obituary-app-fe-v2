@@ -168,16 +168,11 @@ const FloristList = () => {
           <div className="flex w-full items-center justify-center">
             <div className="flex mobile:flex tablet:flex desktop:flex-row desktop:justify-between mobile:w-[315px] mobile:mb-[59px] tablet:items-center tablet:justify-center tablet:w-[660px] tablet:mb-[42px] desktop:w-[1088px] desktop:mt-[20px] desktop:mb-[68px]">
               <div className="flex desktop:ml-[0px] desktop:h-[78px] tablet:w-[650px] tablet:h-[70px] tablet:justify-center mobile:w-[330px] mobile:flex-col desktop:flex-col">
-                <div className="hidden desktop:flex text-[32px] font-[400px] leading-[28.13px] text-[#1E2125]">
+                <h2 className="flex items-center text-[32px] mobile:text-[24px] tablet:text-[24px] font-[400px] leading-[28.13px] text-[#1E2125] whitespace-nowrap mobile:h-7 tablet:h-7 desktop:h-auto">
                   Hitri izbor
-                </div>
+                  <span className="hidden tablet:inline desktop:hidden text-[24px] text-[#1E2125] ml-0">:</span>
+                </h2>
                 <div className="flex desktop:hidden items-center mr-[24px] tablet:mr-[18px] whitespace-nowrap h-7">
-                  <div className="text-[24px] font-[400px] leading-[28.13px] text-[#1E2125]">
-                    Hitri izbor
-                  </div>
-                  <div className="hidden tablet:flex desktop:hidden text-[24px] text-[#1E2125]">
-                    :
-                  </div>
                 </div>
                 <div className="flex mobile:w-[330px] tablet:w-[480px] desktop:mt-4">
                   <ul className="flex flex-row list-none flex-wrap mobile:ml-[0px]">

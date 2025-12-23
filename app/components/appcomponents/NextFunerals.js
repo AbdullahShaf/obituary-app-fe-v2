@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 import Link from "next/link";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { cityToSlug } from "@/utils/citySlug";
 
 const NextFunerals = () => {
   const router = useRouter();
@@ -26,10 +27,14 @@ const NextFunerals = () => {
   const handleCitySelect = (item) => {
     if (item.id === "allCities") {
       setSelectedCity(null);
+      router.push("/pogrebi");
     } else {
       setSelectedCity(item.place);
-      // Redirect to pogrebi page with selected city
-      router.push(`/pogrebi?city=${encodeURIComponent(item.place)}`);
+      // Convert city name to slug and navigate to path parameter
+      const citySlug = cityToSlug(item.place);
+      if (citySlug) {
+        router.push(`/pogrebi/${citySlug}`);
+      }
     }
   };
   return (
@@ -44,10 +49,7 @@ const NextFunerals = () => {
             />
 
             <div className="flex h-[148px] mobile:h-[117px] flex-col justify-between desktop:items-center z-60">
-              <h2 className="mobile:hidden flex text-[40px] font-normal text-[#414141] font-variation-customOpt40 leading-[47px]">
-                Pogrebi v naslednjih dneh
-              </h2>
-              <h2 className=" mobile:flex hidden text-[28px] font-normal text-[#414141]  leading-[33px]">
+              <h2 className="flex text-[40px] mobile:text-[28px] font-normal text-[#414141] font-variation-customOpt40 leading-[47px] mobile:leading-[33px]">
                 Pogrebi v naslednjih dneh
               </h2>
 

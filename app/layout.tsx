@@ -17,6 +17,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Osmrtnica" }],
   creator: "Osmrtnica",
   publisher: "Osmrtnica",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.png",
+  },
   formatDetection: {
     email: false,
     address: false,

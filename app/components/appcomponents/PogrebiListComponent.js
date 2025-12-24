@@ -7,8 +7,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { SelectDropdown } from "./SelectDropdown";
 import regionsAndCities from "@/utils/regionAndCities";
 import obituaryService from "@/services/obituary-service";
-import { cityToSlug, slugToCity, findCityFromSlug } from "@/utils/citySlug";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { cityToSlug, findCityFromSlug } from "@/utils/citySlug";
 
 const ObituaryListComponent = ({ city }) => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const ObituaryListComponent = ({ city }) => {
   const pathname = usePathname();
 
   const [selectedCity, setSelectedCity] = useState(
-    searchParams.get("city") || city || "Celje"
+    searchParams.get("region") ? null : (searchParams.get("city") || city || null)
   );
   const [selectedRegion, setSelectedRegion] = useState(
     searchParams.get("region") || null
@@ -24,40 +24,58 @@ const ObituaryListComponent = ({ city }) => {
 
   useEffect(() => {
     if (pathname?.startsWith('/pogrebi/') && pathname !== '/pogrebi') {
-      if (city) {
-        setSelectedCity(city);
-      } else {
-        const citySlug = pathname.split('/pogrebi/')[1];
-        if (citySlug) {
+      const citySlug = pathname.split('/pogrebi/')[1];
+      if (citySlug) {
+        const isShowAllSlug = citySlug.includes('pokazi-vse') || citySlug === 'allCities';
+        if (isShowAllSlug) {
+          setSelectedCity("- Pokaži vse občine -");
+          setSelectedRegion("- Pokaži vse regije -");
+          router.push("/pogrebi");
+          return;
+        }
 
-          const cityFromRoute = findCityFromSlug(citySlug);
-          if (cityFromRoute) {
-            setSelectedCity(cityFromRoute);
-
-            const region = Object.keys(regionsAndCities).find((region) =>
-              regionsAndCities[region].includes(cityFromRoute)
-            );
-            if (region) {
-              setSelectedRegion(region);
-            }
-          }
+        const cityFromRoute = findCityFromSlug(citySlug);
+        if (cityFromRoute && !cityFromRoute.includes('pokazi-vse')) {
+          setSelectedCity(cityFromRoute);
+          setSelectedRegion(null);
+        } else {
+          setSelectedCity(null);
+          setSelectedRegion(null);
         }
       }
     } else if (pathname === '/pogrebi') {
       const cityFromQuery = searchParams.get("city");
-      if (cityFromQuery) {
-        const citySlug = cityToSlug(cityFromQuery);
-        if (citySlug) {
-          router.push(`/pogrebi/${citySlug}`);
+      const regionFromQuery = searchParams.get("region");
+
+      if (regionFromQuery) {
+        if (regionFromQuery === '- Pokaži vse regije -' || regionFromQuery === 'allRegions') {
+          setSelectedRegion("- Pokaži vse regije -");
+          setSelectedCity("- Pokaži vse občine -");
+        } else {
+          setSelectedRegion(regionFromQuery);
+          setSelectedCity(null);
         }
-      } else if (city) {
-        setSelectedCity(city);
-      } else {
-        setSelectedCity("Celje");
-        const defaultCitySlug = cityToSlug("Celje");
-        if (defaultCitySlug) {
-          router.push(`/pogrebi/${defaultCitySlug}`);
+      } else if (cityFromQuery) {
+        const cityValue = cityFromQuery;
+        const isShowAll = !cityValue || cityValue === '- Pokaži vse občine -' || cityValue === 'allCities' || (cityValue.includes && cityValue.includes('pokazi-vse'));
+        if (isShowAll) {
+          setSelectedCity('- Pokaži vse občine -');
+        } else {
+          setSelectedCity(cityValue);
         }
+        setSelectedRegion(null);
+      } else if (city && !regionFromQuery) {
+        const cityValue = city;
+        const isShowAll = !cityValue || cityValue === '- Pokaži vse občine -' || cityValue === 'allCities' || (cityValue.includes && cityValue.includes('pokazi-vse'));
+        if (isShowAll) {
+          setSelectedCity('- Pokaži vse občine -');
+        } else {
+          setSelectedCity(cityValue);
+        }
+        setSelectedRegion(null);
+      } else if (!cityFromQuery && !city && !regionFromQuery) {
+        setSelectedCity(null);
+        setSelectedRegion(null);
       }
     }
   }, [pathname, searchParams, city]);
@@ -162,25 +180,30 @@ const ObituaryListComponent = ({ city }) => {
 
   const handleRegionSelect = (item) => {
     if (item.id === "allRegions" || item.place === "- Pokaži vse regije -") {
-      setSelectedRegion(null);
-      updateURL("", null, searchTerm);
-    } else {
-      setSelectedRegion(item.place);
-      updateURL("", item.place, searchTerm);
+      setSelectedRegion("- Pokaži vse regije -");
+      setSelectedCity("- Pokaži vse občine -");
+      router.push("/pogrebi");
+      return;
     }
+    setSelectedRegion(item.place);
+    setSelectedCity(null);
+    const params = new URLSearchParams();
+    params.set("region", item.place);
+    router.push(`/pogrebi?${params.toString()}`);
   };
 
   const handleCitySelect = (item) => {
-
     if (item.id === "allCities" || item.place === "- Pokaži vse občine -") {
-      setSelectedCity(null);
+      setSelectedCity("- Pokaži vse občine -");
+      setSelectedRegion(null);
       router.push("/pogrebi");
-    } else {
-      setSelectedCity(item.place);
-      const citySlug = cityToSlug(item.place);
-      if (citySlug) {
-        router.push(`/pogrebi/${citySlug}`);
-      }
+      return;
+    }
+    setSelectedCity(item.place);
+    setSelectedRegion(null);
+    const citySlug = cityToSlug(item.place);
+    if (citySlug) {
+      router.push(`/pogrebi/${citySlug}`);
     }
   };
 
@@ -217,6 +240,7 @@ const ObituaryListComponent = ({ city }) => {
     const citySlug = cityToSlug(cityName);
     if (citySlug) {
       setSelectedCity(cityName);
+      setSelectedRegion(null);
       router.push(`/pogrebi/${citySlug}`);
     }
   };
@@ -248,8 +272,24 @@ const ObituaryListComponent = ({ city }) => {
     try {
       const queryParams = {};
 
-      if (selectedCity) queryParams.city = pathname?.includes('/u/') ? '' : selectedCity;
-      if (selectedRegion) queryParams.region = pathname?.includes('/u/') ? '' : selectedRegion;
+      const isShowAllCities = !selectedCity ||
+        selectedCity === '- Pokaži vse občine -' ||
+        selectedCity === 'allCities' ||
+        (selectedCity && selectedCity.includes && selectedCity.includes('pokazi-vse')) ||
+        selectedCity === '';
+
+      if (selectedCity && !isShowAllCities && !pathname?.includes('/u/')) {
+        queryParams.city = selectedCity;
+      }
+
+      const isShowAllRegions = !selectedRegion ||
+        selectedRegion === '- Pokaži vse regije -' ||
+        selectedRegion === 'allRegions';
+
+      if (selectedRegion && !isShowAllRegions && !pathname?.includes('/u/')) {
+        queryParams.region = selectedRegion;
+      }
+
       if (searchTerm) queryParams.search = searchTerm;
 
       console.log("Fetching with params:", queryParams);

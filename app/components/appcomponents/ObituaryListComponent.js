@@ -76,38 +76,50 @@ const ObituaryListComponent = ({ city, initialObituaries = [] }) => {
     if (pathname?.startsWith('/osmrtnice/') && pathname !== '/osmrtnice') {
       const citySlug = pathname.split('/osmrtnice/')[1];
       if (citySlug) {
+        const isShowAllSlug = citySlug.includes('pokazi-vse') || citySlug === 'allCities';
+        if (isShowAllSlug) {
+          setSelectedCity("- Pokaži vse občine -");
+          setSelectedRegion("- Pokaži vse regije -");
+          router.push("/osmrtnice");
+          return;
+        }
+        
         const cityFromRoute = findCityFromSlug(citySlug);
 
-        if (cityFromRoute) {
+        if (cityFromRoute && !cityFromRoute.includes('pokazi-vse')) {
           if (selectedCity !== cityFromRoute) {
             setSelectedCity(cityFromRoute);
-          } else {
-            console.log('[useEffect-pathname] selectedCity already matches, not updating');
           }
-
-          const region = Object.keys(regionsAndCities).find((region) =>
-            regionsAndCities[region].includes(cityFromRoute)
-          );
-          console.log('[useEffect-pathname] Found region:', region, 'current selectedRegion:', selectedRegion);
-          if (region) {
-            if (selectedRegion !== region) {
-              setSelectedRegion(region);
-            } else {
-              console.log('[useEffect-pathname] selectedRegion already matches, not updating');
-            }
-          } else {
-            console.log('[useEffect-pathname] No region found for city:', cityFromRoute);
-          }
+          setSelectedRegion(null);
         } else {
-          console.log('[useEffect-pathname] cityFromRoute is null/undefined, not updating');
+          setSelectedCity(null);
+          setSelectedRegion(null);
         }
       }
     } else if (pathname === '/osmrtnice') {
       const cityFromQuery = searchParams.get("city");
-      if (cityFromQuery || city) {
-        setSelectedCity(cityFromQuery || city || null);
-      } else if (!cityFromQuery && !city) {
+      const regionFromQuery = searchParams.get("region");
+      
+      if (regionFromQuery) {
+        if (regionFromQuery === '- Pokaži vse regije -' || regionFromQuery === 'allRegions') {
+          setSelectedRegion("- Pokaži vse regije -");
+          setSelectedCity("- Pokaži vse občine -");
+        } else {
+          setSelectedRegion(regionFromQuery);
+          setSelectedCity(null);
+        }
+      } else if (cityFromQuery || city) {
+        const cityValue = cityFromQuery || city;
+        const isShowAll = !cityValue || cityValue === '- Pokaži vse občine -' || cityValue === 'allCities' || cityValue.includes('pokazi-vse');
+        if (isShowAll) {
+          setSelectedCity('- Pokaži vse občine -');
+        } else {
+          setSelectedCity(cityValue);
+        }
+        setSelectedRegion(null);
+      } else if (!cityFromQuery && !city && !regionFromQuery) {
         setSelectedCity(null);
+        setSelectedRegion(null);
       }
     }
   }, [pathname, searchParams]);
@@ -170,13 +182,16 @@ const ObituaryListComponent = ({ city, initialObituaries = [] }) => {
 
   const handleRegionSelect = (item) => {
     if (item.id === "allRegions") {
-      setSelectedRegion(null);
-      setSelectedCity(null);
+      setSelectedRegion("- Pokaži vse regije -");
+      setSelectedCity("- Pokaži vse občine -");
+      router.push("/osmrtnice");
       return;
     }
     setSelectedRegion(item.place);
     setSelectedCity(null);
-    updateURL('', item.place, '');
+    const params = new URLSearchParams();
+    params.set("region", item.place);
+    router.push(`/osmrtnice?${params.toString()}`);
   };
 
   const updateURL = (city, region, search) => {
@@ -205,17 +220,15 @@ const ObituaryListComponent = ({ city, initialObituaries = [] }) => {
   };
 
   const handleCitySelect = (item) => {
-    console.log('[handleCitySelect] Called with item:', item);
-    if (item.id === "allCities") {
-      console.log('[handleCitySelect] Clearing city (allCities selected)');
-      setSelectedCity(null);
+    if (item.id === "allCities" || item.place === "- Pokaži vse občine -") {
+      setSelectedCity("- Pokaži vse občine -");
       setSelectedRegion(null);
       router.push("/osmrtnice");
       return;
     }
 
+    setSelectedRegion(null);
     const citySlug = cityToSlug(item.place);
-    console.log('[handleCitySelect] Navigating to:', `/osmrtnice/${citySlug}`, 'will set city/region after navigation');
     if (citySlug) {
       router.push(`/osmrtnice/${citySlug}`);
     }
@@ -242,9 +255,19 @@ const ObituaryListComponent = ({ city, initialObituaries = [] }) => {
     try {
       const queryParams = {};
 
-      if (selectedCity && selectedCity != '- Pokaži vse občine -') queryParams.city = selectedCity;
+      const isShowAllCities = !selectedCity || 
+        selectedCity === '- Pokaži vse občine -' || 
+        selectedCity === 'allCities' ||
+        (selectedCity && selectedCity.includes && selectedCity.includes('pokazi-vse')) ||
+        selectedCity === '';
+      
+      if (selectedCity && !isShowAllCities) queryParams.city = selectedCity;
 
-      if (selectedRegion && selectedRegion != '- Pokaži vse regije -') queryParams.region = selectedRegion;
+      const isShowAllRegions = !selectedRegion || 
+        selectedRegion === '- Pokaži vse regije -' || 
+        selectedRegion === 'allRegions';
+      
+      if (selectedRegion && !isShowAllRegions) queryParams.region = selectedRegion;
       if (selectedName) queryParams.name = selectedName;
 
       console.log('[fetchObituary] Calling API with params:', queryParams, 'pathname:', pathname);

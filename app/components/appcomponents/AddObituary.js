@@ -1,22 +1,24 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import Dropdown from "./Dropdown";
-import DropdownWithSearch from "./DropdownWithSearch";
-import { sl } from "date-fns/locale";
-import Image from "next/image";
-import DatePicker from "react-datepicker";
-import { getYear, getMonth } from "date-fns";
+
 import { toast } from "react-hot-toast";
-import obituaryService from "@/services/obituary-service";
-import cemetryService from "@/services/cemetry-service";
-import adminService from "@/services/admin-service";
-import ModalDropBox from "./ModalDropBox";
+import { useRouter } from "next/navigation";
+import { getYear, getMonth } from "date-fns";
+import React, { useEffect, useRef, useState } from "react";
+
+import Image from "next/image";
+import Dropdown from "./Dropdown";
+import { sl } from "date-fns/locale";
 import MobileCards from "./MobileCards";
-import { getCardsImageAndPdfsFiles } from "@/utils/downloadCards";
-import BackDropLoader from "../ui/backdrop-loader";
+import DatePicker from "react-datepicker";
+import ModalDropBox from "./ModalDropBox";
 import { useAuth } from "@/hooks/useAuth";
 import ModalCemetery from "./ModalCemetery";
+import BackDropLoader from "../ui/backdrop-loader";
+import adminService from "@/services/admin-service";
+import DropdownWithSearch from "./DropdownWithSearch";
+import cemetryService from "@/services/cemetry-service";
+import obituaryService from "@/services/obituary-service";
+import { getCardsImageAndPdfsFiles } from "@/utils/downloadCards";
 
 const AddObituary = ({ set_Id, setModal }) => {
   const router = useRouter();
@@ -119,6 +121,7 @@ const AddObituary = ({ set_Id, setModal }) => {
       getCemeteries(selectedCity);
     }
   }, [selectedCity]);
+  
   const getCemeteries = async (query) => {
     try {
       // NEW: Try fetching from admin cemeteries endpoint first (new cemeteries table)
@@ -137,7 +140,7 @@ const AddObituary = ({ set_Id, setModal }) => {
     } catch (error) {
       // console.log("Error fetching cemeteries from admin:", error);
     }
-    
+
     // FALLBACK: Use original service if admin service fails (preserves old functionality)
     try {
       let queryParams = {};
@@ -173,11 +176,25 @@ const AddObituary = ({ set_Id, setModal }) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (obituaryResponse?.id) {
+  // Around line 176-180
+useEffect(() => {
+  if (obituaryResponse?.id) {
+    // Add a small delay to ensure cards are rendered
+    const timer = setTimeout(() => {
       handleUploadTemplateCards();
-    }
-  }, [obituaryResponse]);
+    }, 100);
+    return () => clearTimeout(timer);
+  }
+}, [obituaryResponse]);
+
+useEffect(() => {
+  if (obituaryResponse?.id) {
+    const timer = setTimeout(() => {
+      handleUploadTemplateCards();
+    }, 100);
+    return () => clearTimeout(timer);
+  }
+}, [obituaryResponse]);
 
   const handleRegionSelect = (item) => {
     setSelectedRegion(item);
@@ -301,35 +318,91 @@ const AddObituary = ({ set_Id, setModal }) => {
   };
 
   const handleUploadTemplateCards = async () => {
-    setLoading(true);
-
-    // Wait for cardRefs to be populated
-    let attempts = 0;
-    while (!cardRefs.current && attempts < 10) {
-      await new Promise((resolve) => setTimeout(resolve, 50));
-      attempts++;
+    try {
+      setLoading(true);
+  
+      // Wait for cardRefs to be populated - check if all 5 cards are ready
+      let attempts = 0;
+      const maxAttempts = 50; // Increased attempts
+      while (attempts < maxAttempts) {
+        // Check if all 5 card refs are populated
+        if (cardRefs.current && 
+            cardRefs.current.length >= 5 && 
+            cardRefs.current[0] && 
+            cardRefs.current[1] && 
+            cardRefs.current[2] && 
+            cardRefs.current[3] && 
+            cardRefs.current[4]) {
+          break;
+        }
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        attempts++;
+      }
+  
+      // Final check - ensure we have all refs
+      if (!obituaryResponse || 
+          !cardRefs.current || 
+          cardRefs.current.length < 5 ||
+          !cardRefs.current[0] || 
+          !cardRefs.current[1] || 
+          !cardRefs.current[2] || 
+          !cardRefs.current[3] || 
+          !cardRefs.current[4]) {
+        console.error("Card refs not populated after waiting");
+        toast.error("Napaka pri generiranju digitalnih kartic. Poskusite znova.");
+        setLoading(false);
+        return;
+      }
+  
+      // Filter out any null/undefined refs
+      const validRefs = cardRefs.current.filter(ref => ref !== null && ref !== undefined);
+      
+      if (validRefs.length < 5) {
+        console.error(`Only ${validRefs.length} card refs available, expected 5`);
+        toast.error("Napaka pri generiranju digitalnih kartic. Poskusite znova.");
+        setLoading(false);
+        return;
+      }
+  
+      const { images, pdfs } = await getCardsImageAndPdfsFiles(validRefs);
+      
+      if (!images || images.length === 0 || !pdfs || pdfs.length === 0) {
+        console.error("No images or PDFs generated");
+        toast.error("Napaka pri generiranju digitalnih kartic. Poskusite znova.");
+        setLoading(false);
+        return;
+      }
+  
+      const formData = new FormData();
+      images.forEach((image) => {
+        formData.append(`cardImages`, image);
+      });
+      pdfs.forEach((pdf) => {
+        formData.append(`cardPdfs`, pdf);
+      });
+      
+      const response = await obituaryService.uploadObituaryTemplateCards(
+        obituaryResponse.id,
+        formData
+      );
+      
+      if (response.error) {
+        console.error("Upload error:", response.error);
+        toast.error(response.error || "Napaka pri nalaganju digitalnih kartic.");
+        setLoading(false);
+        return;
+      }
+      
+      toast.success("Digitalne katerice so dodane");
+      setLoading(false);
+      
+      // Only navigate after successful upload
+      router.push(`/m/${obituaryResponse.slugKey}`);
+    } catch (error) {
+      console.error("Error in handleUploadTemplateCards:", error);
+      toast.error("Napaka pri generiranju digitalnih kartic. Poskusite znova.");
+      setLoading(false);
     }
-    if (!obituaryResponse || !cardRefs.current) return;
-    const { images, pdfs } = await getCardsImageAndPdfsFiles(cardRefs.current);
-    const formData = new FormData();
-    images.forEach((image) => {
-      formData.append(`cardImages`, image);
-    });
-    pdfs.forEach((pdf) => {
-      formData.append(`cardPdfs`, pdf);
-    });
-    const response = await obituaryService.uploadObituaryTemplateCards(
-      obituaryResponse.id,
-      formData
-    );
-    if (response.error) {
-      // toast.error(response.error || "Failed to upload template cards.");
-      return;
-    }
-    toast.success("Digitalne katerice so dodane");
-    setLoading(false);
-    // Temporarily commented
-    router.push(`/m/${obituaryResponse.slugKey}`);
   };
 
   // helper function: format date as YYYY-MM-DD without timezone shift
@@ -341,160 +414,160 @@ const AddObituary = ({ set_Id, setModal }) => {
     return `${year}-${month}-${day}`;
   };
 
-const handleSubmit = async () => {
-  const currentUser = isAuthenticated ? user : {};
+  const handleSubmit = async () => {
+    const currentUser = isAuthenticated ? user : {};
 
-  // Temporarily commented
-  if (!currentUser.createObituaryPermission) {
-    toast.error("Nimaš dovoljenja za objavo osmrtnic");
-    return;
-  }
-
-  if (!validateFields()) return;
-
-  try {
-    setLoading(true);
-
-    const formData = new FormData();
-
-    // ---- Birth date ----
-    let formattedBirthDate = null;
-    if (birthDate) {
-      if (birthMode === "year") {
-        formattedBirthDate = `${birthDate.getFullYear()}-12-31`;
-      } else {
-        formattedBirthDate = formatDate(birthDate);
-      }
-    }
-
-    // ---- Death date ----
-    let formattedDeathDate = null;
-    if (deathDate) {
-      if (deathMode === "year") {
-        formattedDeathDate = `${deathDate.getFullYear()}-12-31`;
-      } else {
-        formattedDeathDate = formatDate(deathDate);
-      }
-    }
-
-    // ---- Funeral timestamp ----
-    let formattedFuneralTimestamp = null;
-    if (
-      funeralDate &&
-      selectedFuneralHour !== null
-    ) {
-      const funeralMinute = selectedFuneralMinute !== null && selectedFuneralMinute !== undefined ? selectedFuneralMinute : 0;
-      formattedFuneralTimestamp = new Date(
-        funeralDate.getFullYear(),
-        funeralDate.getMonth(),
-        funeralDate.getDate(),
-        selectedFuneralHour,
-        funeralMinute
-      ).toISOString();
-    }
-
-    const fullName = `${inputValueName} ${inputValueSirName}`;
-    const obituaryText =
-      inputValueGender === "Male"
-        ? `Sporočamo žalostno vest, da nas je zapustil naš predragi ${fullName}. Vsi njegovi.`
-        : `Sporočamo žalostno vest, da nas je zapustila naša predraga ${fullName}. Vsi njeni.`;
-
-    // ---- Append data ----
-    formData.append("name", inputValueName);
-    formData.append("sirName", inputValueSirName);
-    formData.append("location", inputValueEnd);
-    formData.append("region", selectedRegion);
-    formData.append("city", selectedCity);
-    formData.append("gender", inputValueGender);
-    formData.append("birthDate", formattedBirthDate?formattedBirthDate:"");
-    formData.append("deathDate", formattedDeathDate);
-    formData.append("funeralLocation", selectedCity);
-
-    // Use new funeralCemeteryId field for new cemeteries table
-    // Keep old funeralCemetery for backward compatibility (old entries)
-    if (inputValueFuneralCemetery !== "pokopalisce") {
-      // Check if it's a number (ID from new cemeteries table) or old format
-      const cemeteryId = parseInt(inputValueFuneralCemetery);
-      if (!isNaN(cemeteryId)) {
-        formData.append("funeralCemeteryId", cemeteryId);
-      } else {
-        // Fallback to old field for backward compatibility
-        formData.append("funeralCemetery", inputValueFuneralCemetery);
-      }
-    }
-
-    if (formattedFuneralTimestamp) {
-      formData.append("funeralTimestamp", formattedFuneralTimestamp);
-    }
-
-    // Add refuseFlowersIcon flag to form data
-    formData.append("refuseFlowersIcon", showMemoryPageIcon ? "true" : "false");
-
-    formData.append("deathReportExists", isDeathReportConfirmed);
-    // Process events with default text - use defaults if fields are empty
-    const processedEvents = events
-      .filter(event => event.eventDate) // Only include events with a date
-      .map(event => ({
-        eventName: event.eventName || "Zadnje slovo",
-        eventLocation: event.eventLocation || "Poslovilna vežica",
-        eventDate: event.eventDate ? new Date(event.eventDate).toISOString() : null,
-        eventHour: event.eventHour !== null && event.eventHour !== undefined ? event.eventHour : null,
-        eventMinute: event.eventMinute !== null && event.eventMinute !== undefined ? event.eventMinute : (event.eventHour !== null ? 0 : null),
-      }));
-    formData.append("events", JSON.stringify(processedEvents));
-    formData.append("obituary", obituaryText);
-
-    if (uploadedPicture) {
-      formData.append("picture", uploadedPicture);
-    }
-    if (uploadedDeathReport) {
-      formData.append("deathReport", uploadedDeathReport);
-    }
-
-    // ---- API request ----
-    let response;
-    if (dataExists) {
-      response = await obituaryService.updateObituary(user.id, formData);
-      toast.success("Osmrtnica je bila posodobljena");
-    } else {
-      response = await obituaryService.createObituary(formData);
-      toast.success("Osmrtnica je bila uspešno dodana");
-    }
-
-    if (response.error) {
-      console.error("Obituary submission error:", response.error);
-      toast.error(response.error || "Prišlo je do napake. Poskusi znova.");
+    // Temporarily commented
+    if (!currentUser.createObituaryPermission) {
+      toast.error("Nimaš dovoljenja za objavo osmrtnic");
       return;
     }
 
-    const responseDeathDate = new Date(response.deathDate);
-    const deathDateFormatted = `${responseDeathDate
-      .getDate()
-      .toString()
-      .padStart(2, "0")}${(responseDeathDate.getMonth() + 1)
-        .toString()
-        .padStart(2, "0")}${responseDeathDate
-          .getFullYear()
-          .toString()
-          .slice(2)}`;
+    if (!validateFields()) return;
 
-    // Add refuseFlowersIcon to response for memory page display
-    const responseWithIcon = {
-      ...response,
-      refuseFlowersIcon: showMemoryPageIcon,
-    };
-    setObituaryResponse(responseWithIcon);
-  } catch (error) {
-    console.error("Error creating obituary:", error);
-    console.error("Error response:", error?.response?.data);
-    toast.error(
-      error?.response?.data?.error ||
+    try {
+      setLoading(true);
+
+      const formData = new FormData();
+
+      // ---- Birth date ----
+      let formattedBirthDate = null;
+      if (birthDate) {
+        if (birthMode === "year") {
+          formattedBirthDate = `${birthDate.getFullYear()}-12-31`;
+        } else {
+          formattedBirthDate = formatDate(birthDate);
+        }
+      }
+
+      // ---- Death date ----
+      let formattedDeathDate = null;
+      if (deathDate) {
+        if (deathMode === "year") {
+          formattedDeathDate = `${deathDate.getFullYear()}-12-31`;
+        } else {
+          formattedDeathDate = formatDate(deathDate);
+        }
+      }
+
+      // ---- Funeral timestamp ----
+      let formattedFuneralTimestamp = null;
+      if (
+        funeralDate &&
+        selectedFuneralHour !== null
+      ) {
+        const funeralMinute = selectedFuneralMinute !== null && selectedFuneralMinute !== undefined ? selectedFuneralMinute : 0;
+        formattedFuneralTimestamp = new Date(
+          funeralDate.getFullYear(),
+          funeralDate.getMonth(),
+          funeralDate.getDate(),
+          selectedFuneralHour,
+          funeralMinute
+        ).toISOString();
+      }
+
+      const fullName = `${inputValueName} ${inputValueSirName}`;
+      const obituaryText =
+        inputValueGender === "Male"
+          ? `Sporočamo žalostno vest, da nas je zapustil naš predragi ${fullName}. Vsi njegovi.`
+          : `Sporočamo žalostno vest, da nas je zapustila naša predraga ${fullName}. Vsi njeni.`;
+
+      // ---- Append data ----
+      formData.append("name", inputValueName);
+      formData.append("sirName", inputValueSirName);
+      formData.append("location", inputValueEnd);
+      formData.append("region", selectedRegion);
+      formData.append("city", selectedCity);
+      formData.append("gender", inputValueGender);
+      formData.append("birthDate", formattedBirthDate ? formattedBirthDate : "");
+      formData.append("deathDate", formattedDeathDate);
+      formData.append("funeralLocation", selectedCity);
+
+      // Use new funeralCemeteryId field for new cemeteries table
+      // Keep old funeralCemetery for backward compatibility (old entries)
+      if (inputValueFuneralCemetery !== "pokopalisce") {
+        // Check if it's a number (ID from new cemeteries table) or old format
+        const cemeteryId = parseInt(inputValueFuneralCemetery);
+        if (!isNaN(cemeteryId)) {
+          formData.append("funeralCemeteryId", cemeteryId);
+        } else {
+          // Fallback to old field for backward compatibility
+          formData.append("funeralCemetery", inputValueFuneralCemetery);
+        }
+      }
+
+      if (formattedFuneralTimestamp) {
+        formData.append("funeralTimestamp", formattedFuneralTimestamp);
+      }
+
+      // Add refuseFlowersIcon flag to form data
+      formData.append("refuseFlowersIcon", showMemoryPageIcon ? "true" : "false");
+
+      formData.append("deathReportExists", isDeathReportConfirmed);
+      // Process events with default text - use defaults if fields are empty
+      const processedEvents = events
+        .filter(event => event.eventDate) // Only include events with a date
+        .map(event => ({
+          eventName: event.eventName || "Zadnje slovo",
+          eventLocation: event.eventLocation || "Poslovilna vežica",
+          eventDate: event.eventDate ? new Date(event.eventDate).toISOString() : null,
+          eventHour: event.eventHour !== null && event.eventHour !== undefined ? event.eventHour : null,
+          eventMinute: event.eventMinute !== null && event.eventMinute !== undefined ? event.eventMinute : (event.eventHour !== null ? 0 : null),
+        }));
+      formData.append("events", JSON.stringify(processedEvents));
+      formData.append("obituary", obituaryText);
+
+      if (uploadedPicture) {
+        formData.append("picture", uploadedPicture);
+      }
+      if (uploadedDeathReport) {
+        formData.append("deathReport", uploadedDeathReport);
+      }
+
+      // ---- API request ----
+      let response;
+      if (dataExists) {
+        response = await obituaryService.updateObituary(user.id, formData);
+        toast.success("Osmrtnica je bila posodobljena");
+      } else {
+        response = await obituaryService.createObituary(formData);
+        toast.success("Osmrtnica je bila uspešno dodana");
+      }
+
+      if (response.error) {
+        console.error("Obituary submission error:", response.error);
+        toast.error(response.error || "Prišlo je do napake. Poskusi znova.");
+        return;
+      }
+
+      const responseDeathDate = new Date(response.deathDate);
+      const deathDateFormatted = `${responseDeathDate
+        .getDate()
+        .toString()
+        .padStart(2, "0")}${(responseDeathDate.getMonth() + 1)
+          .toString()
+          .padStart(2, "0")}${responseDeathDate
+            .getFullYear()
+            .toString()
+            .slice(2)}`;
+
+      // Add refuseFlowersIcon to response for memory page display
+      const responseWithIcon = {
+        ...response,
+        refuseFlowersIcon: showMemoryPageIcon,
+      };
+      setObituaryResponse(responseWithIcon);
+    } catch (error) {
+      console.error("Error creating obituary:", error);
+      console.error("Error response:", error?.response?.data);
+      toast.error(
+        error?.response?.data?.error ||
         "Prišlo je do napake."
-    );
-  } finally {
-    setLoading(false);
-  }
-};
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   const [startDecade, setStartDecade] = useState(1950);
@@ -1298,8 +1371,8 @@ const handleSubmit = async () => {
                             .toString()
                             .padStart(2, "0")}`
                           : selectedFuneralHour !== null && selectedFuneralHour !== undefined
-                          ? "00"
-                          : "Min:"
+                            ? "00"
+                            : "Min:"
                       }
                     />
 
@@ -1569,8 +1642,8 @@ const handleSubmit = async () => {
                                   .toString()
                                   .padStart(2, "0")}`
                                 : event.eventHour !== null && event.eventHour !== undefined
-                                ? "00"
-                                : "Min:"
+                                  ? "00"
+                                  : "Min:"
                             }
                           />
 
@@ -1809,7 +1882,7 @@ const handleSubmit = async () => {
                           strokeLinecap="round"
                         />
                       </svg>
-                      <div 
+                      <div
                         className="relative w-6 h-6 border border-[#6D778E] rounded-sm flex items-center justify-center cursor-pointer"
                         onClick={() => {
                           handleToggleMemoryIcon();
@@ -1835,11 +1908,10 @@ const handleSubmit = async () => {
                       </div>
                       {showMemoryIconTooltip && (
                         <div
-                          className={`absolute top-1/2 -translate-y-1/2 z-20 w-max max-w-[260px] rounded-md bg-[#0A85C2] text-white text-[12px] leading-[16px] px-3 py-2 shadow-lg after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 ${
-                            memoryIconTooltipSide === "right"
+                          className={`absolute top-1/2 -translate-y-1/2 z-20 w-max max-w-[260px] rounded-md bg-[#0A85C2] text-white text-[12px] leading-[16px] px-3 py-2 shadow-lg after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 ${memoryIconTooltipSide === "right"
                               ? "left-full ml-3 after:left-[-6px] after:border-y-[6px] after:border-y-transparent after:border-r-[6px] after:border-r-[#0A85C2]"
                               : "right-full mr-3 after:right-[-6px] after:border-y-[6px] after:border-y-transparent after:border-l-[6px] after:border-l-[#0A85C2]"
-                          }`}
+                            }`}
                           onClick={(e) => e.stopPropagation()}
                         >
                           Svojci cvetje in sveče hvaležno odklanjajo.
@@ -1931,14 +2003,14 @@ const handleSubmit = async () => {
                                   : ""}
                               </div>
 
-                          <div className="mobile:ml-6 text-[18px] font-normal text-[#1E2125] mobile:text-[16px] ml-3">
-                            {event.eventHour !== null &&
-                              event.eventHour !== undefined
-                              ? `${event.eventHour
-                                .toString()
-                                .padStart(2, "0")}:${(event.eventMinute !== null && event.eventMinute !== undefined) ? event.eventMinute.toString().padStart(2, "0") : "00"}`
-                              : ""}
-                          </div>
+                              <div className="mobile:ml-6 text-[18px] font-normal text-[#1E2125] mobile:text-[16px] ml-3">
+                                {event.eventHour !== null &&
+                                  event.eventHour !== undefined
+                                  ? `${event.eventHour
+                                    .toString()
+                                    .padStart(2, "0")}:${(event.eventMinute !== null && event.eventMinute !== undefined) ? event.eventMinute.toString().padStart(2, "0") : "00"}`
+                                  : ""}
+                              </div>
                             </div>
 
                             <div className="text-[18px] font-normal text-[#1E2125] mobile:text-[16px] mobile:mt-1">

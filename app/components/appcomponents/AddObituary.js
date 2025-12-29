@@ -18,7 +18,16 @@ import adminService from "@/services/admin-service";
 import DropdownWithSearch from "./DropdownWithSearch";
 import cemetryService from "@/services/cemetry-service";
 import obituaryService from "@/services/obituary-service";
-import { getCardsImageAndPdfsFiles } from "@/utils/downloadCards";
+import {
+  getValidRefs,
+  waitForRefsReady,
+  validateObituaryResponse,
+  validateRefsAfterWaiting,
+  validateRefsCount,
+  generateAndValidateCards,
+  createFormDataFromCards,
+  uploadCardsToServer,
+} from "@/utils/cardUploadUtils";
 
 const AddObituary = ({ set_Id, setModal }) => {
   const router = useRouter();
@@ -55,7 +64,6 @@ const AddObituary = ({ set_Id, setModal }) => {
   const cardRefs = useRef([]);
   const [birthMode, setBirthMode] = useState("full");
   const [showMemoryPageIcon, setShowMemoryPageIcon] = useState(false);
-  const [memoryPageMessage, setMemoryPageMessage] = useState("Svojci cvetje in sveče hvaležno odklanjajo.");
   const [showMemoryIconTooltip, setShowMemoryIconTooltip] = useState(false);
   const [memoryIconTooltipSide, setMemoryIconTooltipSide] = useState("right");
   const memoryIconButtonRef = useRef(null);
@@ -98,7 +106,6 @@ const AddObituary = ({ set_Id, setModal }) => {
   const [cemeteries, setCemeteries] = useState([]);
   const [showCemeteryModal, setShowCemeteryModal] = useState(false);
   useEffect(() => {
-    console.log(inputValueFuneralCemetery, "=================");
   }, [inputValueFuneralCemetery]);
   const funeralCemeteryOptions = [
     ...(cemeteries?.map((item) => ({
@@ -124,10 +131,8 @@ const AddObituary = ({ set_Id, setModal }) => {
 
   const getCemeteries = async (query) => {
     try {
-      // NEW: Try fetching from admin cemeteries endpoint first (new cemeteries table)
       const response = await adminService.getCemeteries();
       if (response && response.data) {
-        // Filter by city if provided
         let filteredCemeteries = response.data;
         if (query && query.trim() !== "") {
           filteredCemeteries = response.data.filter(
@@ -135,13 +140,12 @@ const AddObituary = ({ set_Id, setModal }) => {
           );
         }
         setCemeteries(filteredCemeteries || []);
-        return; // Success, exit early
+        return;
       }
     } catch (error) {
       // console.log("Error fetching cemeteries from admin:", error);
     }
 
-    // FALLBACK: Use original service if admin service fails (preserves old functionality)
     try {
       let queryParams = {};
       if (query && query.trim() !== "") {
@@ -150,7 +154,6 @@ const AddObituary = ({ set_Id, setModal }) => {
       const response = await cemetryService.getCemeteries(queryParams);
       setCemeteries(response?.cemetries || []);
     } catch (fallbackError) {
-      // console.log("Error fetching cemeteries from user service:", fallbackError);
       setCemeteries([]);
     }
   };
@@ -257,7 +260,6 @@ const AddObituary = ({ set_Id, setModal }) => {
       }
     }
     setShowMemoryIconTooltip(true);
-    // Auto-hide after 3 seconds
     setTimeout(() => {
       setShowMemoryIconTooltip(false);
     }, 3000);
@@ -310,82 +312,38 @@ const AddObituary = ({ set_Id, setModal }) => {
     try {
       setLoading(true);
 
-      // Wait for cardRefs to be populated - check if all 5 cards are ready
-      let attempts = 0;
-      const maxAttempts = 50; // Increased attempts
-      while (attempts < maxAttempts) {
-        // Check if all 5 card refs are populated
-        if (cardRefs.current &&
-          cardRefs.current.length >= 5 &&
-          cardRefs.current[0] &&
-          cardRefs.current[1] &&
-          cardRefs.current[2] &&
-          cardRefs.current[3] &&
-          cardRefs.current[4]) {
-          break;
-        }
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        attempts++;
-      }
-
-      // Final check - ensure we have all refs
-      if (!obituaryResponse ||
-        !cardRefs.current ||
-        cardRefs.current.length < 5 ||
-        !cardRefs.current[0] ||
-        !cardRefs.current[1] ||
-        !cardRefs.current[2] ||
-        !cardRefs.current[3] ||
-        !cardRefs.current[4]) {
-        console.error("Card refs not populated after waiting");
-        toast.error("Napaka pri generiranju digitalnih kartic. Poskusite znova.");
-        setLoading(false);
+      if (!validateObituaryResponse(obituaryResponse, setLoading)) {
         return;
       }
 
-      // Filter out any null/undefined refs
-      const validRefs = cardRefs.current.filter(ref => ref !== null && ref !== undefined);
+      const allRefsReady = await waitForRefsReady(cardRefs);
 
-      if (validRefs.length < 5) {
-        console.error(`Only ${validRefs.length} card refs available, expected 5`);
-        toast.error("Napaka pri generiranju digitalnih kartic. Poskusite znova.");
-        setLoading(false);
+      if (!validateRefsAfterWaiting(allRefsReady, cardRefs, setLoading)) {
         return;
       }
 
-      const { images, pdfs } = await getCardsImageAndPdfsFiles(validRefs);
+      const validRefs = getValidRefs(cardRefs);
 
-      if (!images || images.length === 0 || !pdfs || pdfs.length === 0) {
-        console.error("No images or PDFs generated");
-        toast.error("Napaka pri generiranju digitalnih kartic. Poskusite znova.");
-        setLoading(false);
+      if (!validateRefsCount(validRefs, setLoading)) {
         return;
       }
 
-      const formData = new FormData();
-      images.forEach((image) => {
-        formData.append(`cardImages`, image);
-      });
-      pdfs.forEach((pdf) => {
-        formData.append(`cardPdfs`, pdf);
-      });
+      const cardsResult = await generateAndValidateCards(validRefs, setLoading);
+      if (!cardsResult) {
+        return;
+      }
 
-      const response = await obituaryService.uploadObituaryTemplateCards(
-        obituaryResponse.id,
-        formData
-      );
+      const { images, pdfs } = cardsResult;
+      const formData = createFormDataFromCards(images, pdfs);
 
-      if (response.error) {
-        console.error("Upload error:", response.error);
-        toast.error(response.error || "Napaka pri nalaganju digitalnih kartic.");
-        setLoading(false);
+      const uploadSuccess = await uploadCardsToServer(formData, obituaryResponse, obituaryService, setLoading);
+      if (!uploadSuccess) {
         return;
       }
 
       toast.success("Digitalne katerice so dodane");
       setLoading(false);
 
-      // Only navigate after successful upload
       router.push(`/m/${obituaryResponse.slugKey}`);
     } catch (error) {
       console.error("Error in handleUploadTemplateCards:", error);
@@ -394,7 +352,6 @@ const AddObituary = ({ set_Id, setModal }) => {
     }
   };
 
-  // helper function: format date as YYYY-MM-DD without timezone shift
   const formatDate = (date) => {
     if (!date) return null;
     const year = date.getFullYear();
@@ -406,7 +363,6 @@ const AddObituary = ({ set_Id, setModal }) => {
   const handleSubmit = async () => {
     const currentUser = isAuthenticated ? user : {};
 
-    // Temporarily commented
     if (!currentUser.createObituaryPermission) {
       toast.error("Nimaš dovoljenja za objavo osmrtnic");
       return;
@@ -419,7 +375,6 @@ const AddObituary = ({ set_Id, setModal }) => {
 
       const formData = new FormData();
 
-      // ---- Birth date ----
       let formattedBirthDate = null;
       if (birthDate) {
         if (birthMode === "year") {
@@ -429,7 +384,6 @@ const AddObituary = ({ set_Id, setModal }) => {
         }
       }
 
-      // ---- Death date ----
       let formattedDeathDate = null;
       if (deathDate) {
         if (deathMode === "year") {
@@ -439,7 +393,6 @@ const AddObituary = ({ set_Id, setModal }) => {
         }
       }
 
-      // ---- Funeral timestamp ----
       let formattedFuneralTimestamp = null;
       if (
         funeralDate &&
@@ -461,7 +414,6 @@ const AddObituary = ({ set_Id, setModal }) => {
           ? `Sporočamo žalostno vest, da nas je zapustil naš predragi ${fullName}. Vsi njegovi.`
           : `Sporočamo žalostno vest, da nas je zapustila naša predraga ${fullName}. Vsi njeni.`;
 
-      // ---- Append data ----
       formData.append("name", inputValueName);
       formData.append("sirName", inputValueSirName);
       formData.append("location", inputValueEnd);
@@ -472,15 +424,11 @@ const AddObituary = ({ set_Id, setModal }) => {
       formData.append("deathDate", formattedDeathDate);
       formData.append("funeralLocation", selectedCity);
 
-      // Use new funeralCemeteryId field for new cemeteries table
-      // Keep old funeralCemetery for backward compatibility (old entries)
       if (inputValueFuneralCemetery !== "pokopalisce") {
-        // Check if it's a number (ID from new cemeteries table) or old format
         const cemeteryId = parseInt(inputValueFuneralCemetery);
         if (!isNaN(cemeteryId)) {
           formData.append("funeralCemeteryId", cemeteryId);
         } else {
-          // Fallback to old field for backward compatibility
           formData.append("funeralCemetery", inputValueFuneralCemetery);
         }
       }
@@ -489,13 +437,11 @@ const AddObituary = ({ set_Id, setModal }) => {
         formData.append("funeralTimestamp", formattedFuneralTimestamp);
       }
 
-      // Add refuseFlowersIcon flag to form data
       formData.append("refuseFlowersIcon", showMemoryPageIcon ? "true" : "false");
 
       formData.append("deathReportExists", isDeathReportConfirmed);
-      // Process events with default text - use defaults if fields are empty
       const processedEvents = events
-        .filter(event => event.eventDate) // Only include events with a date
+        .filter(event => event.eventDate)
         .map(event => ({
           eventName: event.eventName || "Zadnje slovo",
           eventLocation: event.eventLocation || "Poslovilna vežica",
@@ -513,7 +459,6 @@ const AddObituary = ({ set_Id, setModal }) => {
         formData.append("deathReport", uploadedDeathReport);
       }
 
-      // ---- API request ----
       let response;
       if (dataExists) {
         response = await obituaryService.updateObituary(user.id, formData);
@@ -526,6 +471,7 @@ const AddObituary = ({ set_Id, setModal }) => {
       if (response.error) {
         console.error("Obituary submission error:", response.error);
         toast.error(response.error || "Prišlo je do napake. Poskusi znova.");
+        setLoading(false);
         return;
       }
 
@@ -540,7 +486,6 @@ const AddObituary = ({ set_Id, setModal }) => {
             .toString()
             .slice(2)}`;
 
-      // Add refuseFlowersIcon to response for memory page display
       const responseWithIcon = {
         ...response,
         refuseFlowersIcon: showMemoryPageIcon,
@@ -567,8 +512,8 @@ const AddObituary = ({ set_Id, setModal }) => {
       birthDate.getMonth(),
       birthDate.getDate()
     );
-    setBirthDate(updatedDate); // Update year
-    setStartDecade(decadeStart); // Update the selected decade
+    setBirthDate(updatedDate);
+    setStartDecade(decadeStart);
   };
 
   const getDecadeRange = (startYear) => {
@@ -587,18 +532,15 @@ const AddObituary = ({ set_Id, setModal }) => {
         />
       )}
       {loading && <BackDropLoader />}
-      {/* Main Container for all the content and background */}
       <div
         className={`w-full min-h-screen pt-[98px] pb-[123px] bg-[url('/img_obituary_bg.avif')] mx-auto bg-center bg-cover flex flex-col`}
       >
-        {/* Container for top texts */}
         <div className=" mx-auto desktop:mt-[92.02px] mobile:mt-[72px] tablet:mt-[79px] h-auto">
           <div className="text-[40px] mobile:text-[32px] mobile:font-variation-customOpt32 font-normal font-variation-customOpt40 text-center leading-[44px] text-[#1E2125]">
             Dodaj osmrtnico
           </div>
         </div>
 
-        {/* Container for top three buttons */}
         <div className="mx-auto mt-[44px] flex flex-row gap-[6px] mobile:flex-wrap mobile:justify-center">
           <div
             className={`${activeDivtype === "KORAK 1"
@@ -643,7 +585,6 @@ const AddObituary = ({ set_Id, setModal }) => {
           </div>
         </div>
 
-        {/*Main Container for details */}
         <div
           className={`px-[50px] mx-auto desktop:max-w-[650px]  desktop:w-full tablet:max-w-[650px]  tablet:w-full ${activeDivtype === "KOREK 1"
             ? "pt-[61px] pb-[44px]"
@@ -653,12 +594,8 @@ const AddObituary = ({ set_Id, setModal }) => {
      mobile:px-[15px] mobile:min-w-[360px] mobile:mt-[39px] mobile:pb-[23px]
      `}
         >
-          {/* Inside main conatiner data of first button */}
           {activeDivtype === "KORAK 1" && (
             <div className="flex flex-col justify-start  mobile:max-w-[310px] mobile:w-full">
-              {/* {/ Container for text fields /} */}
-
-              {/* {/ First text field and title /} */}
               <div className="text-[#6D778E] mobile:text-[#414B5A] text-[16px] mobile:text-[14px] font-normal leading-[24px] font-variation-customOpt14">
                 IME
               </div>
@@ -671,7 +608,6 @@ const AddObituary = ({ set_Id, setModal }) => {
                 />
               </div>
 
-              {/* {/ Second text field and title /} */}
               <div className="text-[#6D778E] mobile:text-[#414B5A] text-[16px] mobile:text-[14px] mt-4 font-normal leading-[24px] font-variation-customOpt14">
                 PRIIMEK
               </div>
@@ -684,7 +620,6 @@ const AddObituary = ({ set_Id, setModal }) => {
                 />
               </div>
 
-              {/* {/ Third text field and title /} */}
               <div className="flex mobile:hidden text-[#6D778E] text-[16px] mt-4 font-normal leading-[24px] font-variation-customOpt14">
                 KRAJ{" "}
                 <span className="text-[#ACAAAA] text-[12px] font-variation-customOpt12 font-normal ml-1">
@@ -746,7 +681,7 @@ const AddObituary = ({ set_Id, setModal }) => {
                       name="gender"
                       value="Male"
                       className="hidden"
-                      onChange={handleGenderInput} // setGender updates the state for gender
+                      onChange={handleGenderInput}
                     />
                     <span className="w-5 h-5 flex items-center justify-center border-2 border-[#6D778E] rounded-full">
                       {inputValueGender === "Male" && (
@@ -766,7 +701,7 @@ const AddObituary = ({ set_Id, setModal }) => {
                       name="gender"
                       value="Female"
                       className="hidden"
-                      onChange={handleGenderInput} // setGender updates the state for gender
+                      onChange={handleGenderInput}
                     />
                     <span className="w-5 h-5 flex items-center justify-center border-2 border-[#6D778E] rounded-full">
                       {inputValueGender === "Female" && (
@@ -794,9 +729,7 @@ const AddObituary = ({ set_Id, setModal }) => {
                   lahko obveščeni o prihajajočih obletnicah.
                 </p>
               </div>
-              {/* DATUM ROJSTVA */}
               <div className="flex flex-col mt-2">
-                {/* Title + Toggle */}
                 <div className="flex items-center justify-start gap-x-4">
                   <div className="text-[#6D778E] mobile:text-[#414B5A] font-normal text-[14px] leading-[24px] font-variation-customOpt14">
                     DATUM ROJSTVA
@@ -823,10 +756,6 @@ const AddObituary = ({ set_Id, setModal }) => {
                   </div>
                 </div>
 
-                {/* Info text */}
-
-
-                {/* Date pickers */}
                 <div className="flex flex-row mobile:gap-x-[11px] gap-x-[32px] gap-y-[8px] flex-wrap mt-2">
                   {birthMode === "year" && (
                     <>
@@ -860,7 +789,7 @@ const AddObituary = ({ set_Id, setModal }) => {
 
                   {birthMode === "full" && (
                     <>
-                      {/* Day */}
+
                       <ModalDropBox
                         placeholder={`Dan`}
                         onClick={() => togglePicker("birthDay")}
@@ -882,7 +811,6 @@ const AddObituary = ({ set_Id, setModal }) => {
                         </div>
                       )}
 
-                      {/* Month */}
                       <ModalDropBox
                         placeholder={`Mesec`}
                         onClick={() => togglePicker("birthMonth")}
@@ -911,7 +839,6 @@ const AddObituary = ({ set_Id, setModal }) => {
                         </div>
                       )}
 
-                      {/* Year */}
                       <ModalDropBox
                         placeholder={`Leto`}
                         onClick={() => togglePicker("birthYear")}
@@ -946,9 +873,7 @@ const AddObituary = ({ set_Id, setModal }) => {
                 </div>
               </div>
 
-              {/* DAN SLOVESA */}
               <div className="flex flex-col mt-8">
-                {/* Title + Toggle */}
                 <div className="flex items-center justify-start gap-x-4">
 
                   <div className="text-[#6D778E] mobile:text-[#414B5A] font-normal text-[14px] leading-[24px] font-variation-customOpt14">
@@ -988,7 +913,6 @@ const AddObituary = ({ set_Id, setModal }) => {
                   </p>
                 </div> */}
 
-                {/* Date pickers */}
                 <div className="flex flex-row mobile:gap-x-[11px] gap-x-[32px] gap-y-[8px] flex-wrap mt-2">
                   {deathMode === "year" && (
                     <>
@@ -1021,7 +945,6 @@ const AddObituary = ({ set_Id, setModal }) => {
 
                   {deathMode === "full" && (
                     <>
-                      {/* Day */}
                       <ModalDropBox
                         placeholder={`Dan`}
                         onClick={() => togglePicker("deathDay")}
@@ -1044,7 +967,6 @@ const AddObituary = ({ set_Id, setModal }) => {
                         </div>
                       )}
 
-                      {/* Month */}
                       <ModalDropBox
                         placeholder={`Mesec`}
                         onClick={() => togglePicker("deathMonth")}

@@ -6,7 +6,6 @@ import Image from "next/image";
 import regionsAndCities from "@/utils/regionAndCities";
 import { useRouter } from "next/navigation";
 
-import Link from "next/link";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { cityToSlug } from "@/utils/citySlug";
 
@@ -68,12 +67,9 @@ const NextFunerals = () => {
                   selectedValue={selectedCity}
                   onSelect={handleCitySelect}
                 />
-                <Link
-                  href={"/funeralcompany"}
-                  className="hidden desktop:flex justify-center ml-4 w-12 items-center h-full desktop:aspect-square rounded-lg bg-[#414141]"
-                >
+                <div className="hidden desktop:flex justify-center ml-4 w-12 items-center h-full desktop:aspect-square rounded-lg bg-[#414141]">
                   <MagnifyingGlassIcon className="w-5 h-5 text-white hidden desktop:block" />
-                </Link>
+                </div>
               </div>
 
               <div className="w-full h-[48px] flex desktop:hidden relative z-[60]">

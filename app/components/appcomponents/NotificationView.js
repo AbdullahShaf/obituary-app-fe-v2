@@ -1,7 +1,6 @@
 "use client";
 import { React, useState } from "react";
 import Dropdown from "@/app/components/appcomponents/Dropdown";
-import Link from "next/link";
 import regionsAndCities from "@/utils/regionAndCities";
 
 const NotificationView = () => {
@@ -119,13 +118,13 @@ const NotificationView = () => {
                 </div>
               </div>
               <div className="w-full flex flex-col items-center mt-6 mobile:mt-[39.5px] pt-[2px]">
-                <Link href={'/funeralcompany'} className="w-[276px] h-[47px]">
+                <div className="w-[276px] h-[47px]">
                   <div className="rounded-lg w-[276px] h-full flex justify-center items-center shadow-custom-light-dark  bg-[#CAF0F8] transition duration-100 ">
                     <span className="text-[#1E2125] text-[16px] font-variation-customOpt16">
                       Prijava
                     </span>
                   </div>
-                </Link>
+                </div>
                 <div className="flex justify-center items-center h-6 mt-2 mobile:mt-[7px]">
                   <p className="text-center text-[12px] text-[#414141] font-variation-customOpt12 tablet:text-[14px]">
                     Osmrtnice boste prejemali enkrat dnevno.

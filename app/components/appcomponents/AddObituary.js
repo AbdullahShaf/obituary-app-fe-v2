@@ -309,21 +309,18 @@ const AddObituary = ({ set_Id, setModal }) => {
   };
 
   const handleUploadTemplateCards = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
-
       if (!validateObituaryResponse(obituaryResponse, setLoading)) {
         return;
       }
 
-      const allRefsReady = await waitForRefsReady(cardRefs);
-
+      const allRefsReady = await waitForRefsReady(cardRefs, 10000);
       if (!validateRefsAfterWaiting(allRefsReady, cardRefs, setLoading)) {
         return;
       }
 
       const validRefs = getValidRefs(cardRefs);
-
       if (!validateRefsCount(validRefs, setLoading)) {
         return;
       }
@@ -333,21 +330,19 @@ const AddObituary = ({ set_Id, setModal }) => {
         return;
       }
 
-      const { images, pdfs } = cardsResult;
-      const formData = createFormDataFromCards(images, pdfs);
-
+      const formData = createFormDataFromCards(cardsResult.images, cardsResult.pdfs);
       const uploadSuccess = await uploadCardsToServer(formData, obituaryResponse, obituaryService, setLoading);
       if (!uploadSuccess) {
         return;
       }
 
       toast.success("Digitalne katerice so dodane");
-      setLoading(false);
 
       router.push(`/m/${obituaryResponse.slugKey}`);
     } catch (error) {
       console.error("Error in handleUploadTemplateCards:", error);
       toast.error("Napaka pri generiranju digitalnih kartic. Poskusite znova.");
+    } finally {
       setLoading(false);
     }
   };

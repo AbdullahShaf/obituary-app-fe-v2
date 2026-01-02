@@ -495,7 +495,7 @@ export default function HomeContent(props) {
               </div>
               <div className="relative">
                 <SelectDropdown
-                  label={"Mesto"}
+                  label={"Občina"}
                   isFromFlower={true}
                   isFromNotification={false}
                   isFrom={"mainPage"}

@@ -124,10 +124,18 @@ const SlideThree = () => {
                     <p className="text-[#414141] text-[16px] mt-[30px]">
                         Namesto zgolj črk vklesanih v hladni kamen, lahko obiskovalci vidijo pokojnikov nasmeh, slišijo njegov glas ali spremljajo trenutke iz njegovega življenja preko zapisov, zvočnih posnetkov ali albumov slik. Morda že zbledele zgodbe in spomini znova oživijo, zgodbe pa ostanejo dostopne še prihodnjim rodovom.{" "}
                     </p>
-                    <p className="text-[#414141] text-[16px] mt-[16px]">
+                    <Image
+                        className="mt-[79px] mx-auto"
+                        // className="mt-[140px] mx-auto"
+                        src="/mobile-cards/memorial.png"
+                        alt="Prikaz spominske strani na mobilni napravi - Osmrtnica.com"
+                        width={273}
+                        height={212}
+                    />
+                    <p className="text-[#414141] text-[16px] mt-[79px]">
                         Obiskovalci ne le berejo življenje pokojnika, ampak lahko aktivno sodelujejo, dodajo svoje zgodbe, delijo prigode ali dragocene spomine. Ali pa samo prižgejo virtualno svečko in se vpišejo v Žalno knjigo.{" "}
                     </p>
-                    <div className="inner-div mt-[79px]">
+                    <div className="inner-div mt-[89px]">
                         <div className="text-[#22281C] text-[24px] font-medium]">
                             QR koda odpre svet spominov
                         </div>
@@ -136,17 +144,17 @@ const SlideThree = () => {
                         </p>
                     </div>
 
-                    <Image
+                    {/* <Image
                         className="mt-[140px] mx-auto"
                         src="/mobile-cards/memorial.png"
                         alt="Prikaz spominske strani na mobilni napravi - Osmrtnica.com"
                         width={273}
                         height={212}
-                    />
+                    /> */}
 
                     <div className="btn-container text-center">
                         <Link href={"/spominska"}>
-                            <button className="px-[25px] py-[12px] rounded-[8px] mt-[44px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
+                            <button className="px-[25px] py-[12px] rounded-[8px] mt-[79px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
                                 Več o QR kodah
                             </button>
                         </Link>
@@ -163,7 +171,7 @@ const SlideThree = () => {
                 <div className="image-container mobile:w-full w-[352px] mobile:max-w-[500px]">
                     <h2 className="text-center mobile:text-left text-[28px] mobile:text-center">
                         QR kode{" "}
-                        <br />
+                        {/* <br /> */}
                         <span className="text-[#22281C]">za nagrobnike</span>
                     </h2>
                     <p className="text-[#414141] text-[16px] mt-[16px] leading-6 mobile:text-left">
@@ -186,7 +194,7 @@ const SlideThree = () => {
                         </Link>
                     </div>
 
-                    <div className="inner-div mt-[104px] w-[313px] mobile:w-full">
+                    <div className="inner-div mt-[65px] pb-[69px] w-[313px] mobile:w-full">
                         <div className="text-[#22281C] text-[24px] font-medium mt-[16px] mobile:text-left">
                             QR koda odpre svet spominov
                         </div>

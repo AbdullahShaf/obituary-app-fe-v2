@@ -30,6 +30,7 @@ const IpadSlider = ({ data }) => {
 
   return (
     <section className="w-auto mobile:max-h-[940px] h-auto  overflow-hidden border-y border-solid" style={{ borderColor: '#36556C33' }}>
+    {/* <section className="w-auto mobile:max-h-[940px] h-auto  overflow-hidden border-y border-solid" style={{ borderColor: '#36556C33' }}> */}
       <div className="relative w-screen">
         <div ref={sliderRef} className="keen-slider w-full">
           <div className="keen-slider__slide w-full">

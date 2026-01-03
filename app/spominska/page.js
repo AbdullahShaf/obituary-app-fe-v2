@@ -33,19 +33,13 @@ const Keeperpromo = () => {
     faqs: [
       {
         question: "Kako postanem Skrbnik brezplačno?",
-        answer: `Spominska stran s Skrbnikom (status administratorja spominske strani) je praviloma plačljiva storitev, vendarle pa želimo ta privilegij ponuditi vsem, zato smo skupaj s cvetličarnami pripravili možnost, po kateri le-te žalujočim same darujejo enomesečnega Skrbnika brezplačno. 
+        answer: `Pošljite nam email s svojimi podatki, sorodstvom s pokojnim, ime pokojnega in žalno stran ter smrtovnico (nujno potrebno, da se prepreči smetenje in objava lažnih osmrtnic) na info@osmrtnica.com. Status skrbnika bomo dodelili praviloma še istega dne.
 
-          Mi te možnosti na naši strani ne ponujamo, dosegljiva je zgolj v partnerskih cvetličarnah. Izkoristite jo povsem brez rizika in naročnine, saj po preteku enega meseca status samodejno ugasne brez obveznosti (v kolikor ga ne podaljšate). 
-
-          Seznam cvetličarn je <a href="https://dev111.osmrtnica.com/cvetlicarne" target="_blank" rel="noopener noreferrer">tukaj</a> (šele začeli smo, zato bo nekaj tednov trajalo, preden dodamo vse).`,
+         Če gre za objavljeno osmrtnico, je status skrbnika brezplačno dodeljen za cel mesec. Najbližnji, sorodniki in prijatelji lahko v tem času dodajajo vsebine (katerih objavo Skrbnik odobri ali zavrne), po preteku enega meseca pa vse vsebine ostanejo, le novih ni mogoče več dodajati (v kolikor se status Skrbnika ne podaljša za eno leto ali šest let po simbolični ceni).`,
       },
       {
-        question: "Kako dobim brezplačne digitalne kartice?",
-        answer: `Brezplačne digitalne mobi kartice zagotavljajo cvetličarne; mi teh kartic na naši strani ne ponujamo. Seznam cvetličarn je <a href="https://dev111.osmrtnica.com/cvetlicarne" target="_blank" rel="noopener noreferrer">tukaj</a>  (šele začeli smo, zato bo nekaj tednov trajalo, preden dodamo vse). 
-
-Obiščite jih, digitalno kartico vam bodo rade volje brezplačno izdelali in že takoj jo lahko preko mobilnega telefona neomejeno pošiljate naprej svojim sorodnikom in znancem, jih obvestite o pogrebu ali izrazite sožalje. 
-
-Digitalne kartice tako lahko ostanejo v telefonu tudi kot trajni spomin, obenem pa imajo direktno povezavo do spominske strani najdražjega, ki jo lahko kadarkoli obiščejo in na njej tudi sodelujejo.`,
+        question: "Kako lahko uporabim digitalne kartice?",
+        answer: `Digitalno kartico si prenesete na telefon in jo lahko kot sliko neomejeno pošiljate naprej svojim sorodnikom in znancem, jih obvestite o pogrebu ali izrazite sožalje. Digitalne kartice tako lahko ostanejo v telefonu tudi kot trajni spomin, obenem pa imajo direktno povezavo do spominske strani najdražjega, ki jo lahko kadarkoli obiščejo in na njej tudi sodelujejo.`,
       },
       {
         question: "Kako sodelujem na spominski strani?",
@@ -62,38 +56,38 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
   return (
     <>
       <Layout from={"18"} forFooter={"memorypage"} currentPage="spominska">
-      <div className="flex w-full flex-col  bg-gradient-to-br from-[#ECF0F3] to-[#F2F6F9]">
-        <div className="h-[72px] tablet:h-[80px] desktop:h-[92.02px] " />
-        <div className="mobile_navbar mobile_navbar_header top-[68px] z-[1]">
-          <ul>
-            <li>
-              <a href="/qr-kode">
-                QR KODE
-              </a>
-            </li>
-            <li>
-              <a href="/zalna-stran">
-                ŽALNA STRAN
-              </a>
-            </li>
-            <li>
-              <a href="/spominska">
-                SPOMINSKA
-              </a>
-            </li>
-          </ul>
-        </div>
-        <MemorialWithAdmin />
-        {/* <Difference /> */}
-        <AdminBenefits />
-        <AdditionalOptions />
-        <AdministratorCompo />
-        {/* <OpeningPromotion /> */}
-        {/* <div className="flex w-full mobile:bg-[#E0E9F3] bg-[#FFFFFF]"> */}
-        <FrequentlyAskedQuestionView2 data={faqData} />
-        {/* </div> */}
-        {/* <EverythingIsFree /> */}
-                  <section className="everything_free_sec">
+        <div className="flex w-full flex-col  bg-gradient-to-br from-[#ECF0F3] to-[#F2F6F9]">
+          <div className="h-[72px] tablet:h-[80px] desktop:h-[92.02px] " />
+          <div className="mobile_navbar mobile_navbar_header top-[68px] z-[1]">
+            <ul>
+              <li>
+                <a href="/qr-kode">
+                  QR KODE
+                </a>
+              </li>
+              <li>
+                <a href="/zalna-stran">
+                  ŽALNA STRAN
+                </a>
+              </li>
+              <li>
+                <a href="/spominska">
+                  SPOMINSKA
+                </a>
+              </li>
+            </ul>
+          </div>
+          <MemorialWithAdmin />
+          {/* <Difference /> */}
+          <AdminBenefits />
+          <AdditionalOptions />
+          <AdministratorCompo />
+          {/* <OpeningPromotion /> */}
+          {/* <div className="flex w-full mobile:bg-[#E0E9F3] bg-[#FFFFFF]"> */}
+          <FrequentlyAskedQuestionView2 data={faqData} />
+          {/* </div> */}
+          {/* <EverythingIsFree /> */}
+          <section className="everything_free_sec">
             <div className="autoContent">
               <div className="everything_free_inner">
                 <div className="everything_free_heading">
@@ -165,7 +159,7 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
             </div>
           </section>
 
-        <div className="mobile_navbar">
+          <div className="mobile_navbar">
             <div className="mobile_navbar_inner">
               <ul>
                 <li>
@@ -187,9 +181,9 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
             </div>
 
           </div>
-        <CommonFooter currentPage="/spominska" />
-      </div>
-    </Layout>
+          <CommonFooter currentPage="/spominska" />
+        </div>
+      </Layout>
     </>
   );
 };

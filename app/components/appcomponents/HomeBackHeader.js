@@ -65,7 +65,7 @@ const HomeBackHeader = () => {
           head={"VSE ZA POGREBE"}
           index={"03"}
           id={4}
-          endPoint={"https://www.osmrtnica.com/lokalni"}
+          endPoint={"/lokalni"}
           // endPoint={"/cvetlicarne"}
         />
       </div>
@@ -100,7 +100,7 @@ const HomeBackHeader = () => {
               head={"VSE ZA POGREBE"}
               index={"03."}
               id={4}
-              endPoint={"https://www.osmrtnica.com/lokalni"}
+              endPoint={"/lokalni"}
             />
           </li>
         </ul>
@@ -136,7 +136,7 @@ const HomeBackHeader = () => {
               head={"VSE ZA POGREBE"}
               index={"03."}
               id={4}
-              endPoint={"https://www.osmrtnica.com/lokalni"}
+              endPoint={"/lokalni"}
             />
           </li>
         </ul>

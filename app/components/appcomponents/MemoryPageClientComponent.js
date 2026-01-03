@@ -243,12 +243,12 @@ const MemoryPageContent = ({ params, obituaryDataFromServer }) => {
             showShop={showShops}
           />
 
-          <FlowerShops2
+          {/* <FlowerShops2
             setIsOpen={(value) => {
               setShowShops(value);
             }}
             showShop={showShops}
-          />
+          /> */}
 
           <ObituaryPublished
             set_Id={setSelect_Id}

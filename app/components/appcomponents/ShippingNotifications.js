@@ -114,10 +114,9 @@ const ShippingNotifications = ({
             Obvestila za pošiljanje
           </h2>
           <div className="text-[16px] leading-6 mt-4 font-normal text-[#414141]">
-            Prenesite si že pripravljena obvestila za pošiljanje naprej po
-            emailu ali preko mobilnega telefona. <br /> <br />
-            Predloge dobite brezplačno pri vašem cvetličarju, ki je v našem
-            imeniku in s pošiljanjem naprej lahko začnete takoj.
+            Prenesite si že pripravljena obvestila za pošiljanje naprej po emailu ali preko mobilnega telefona.
+            <br /> <br />
+            S pošiljanjem drugim lahko začnete takoj.
           </div>
           <div className="text-[20px] font-normal text-[#0977AE] mt-[65px] mobile:mt-[30px]">
             Obvestilo o pogrebu
@@ -128,23 +127,20 @@ const ShippingNotifications = ({
           <div className="text-[20px] font-normal text-[#0977AE] mt-2">
             Vabilo
           </div>
-          <div className="mobile:hidden flex flex-col items-start mt-20 mobile:justify-center whitespace-nowrap">
+          <div className="mobile:hidden flex flex-col items-start mt-32 mobile:justify-center whitespace-nowrap">
             {/* Row for BREZPLAČNO + v vaši cvetličarni */}
             <div className="flex flex-row items-end">
-              <div className="text-[28px] tablet:text-[28px] mobile:text-[24px] mobile:leading-[28px] leading-[38px] font-normal text-[#1E2125]">
-                BREZPLAČNO
-              </div>
-              <div className="text-[20px] font-normal text-[#1E2125] ml-[5px]">
-                v vaši cvetličarni
+              <div className="text-[20px] font-normal text-[#1E2125]">
+                Digitalne kartice so BREZPLAČNE.
               </div>
             </div>
 
             {/* Paragraph underneath */}
-            <p className="text-[#6D778E] text-[14px] jdmobile:text-[12px] pt-5">
+            {/* <p className="text-[#6D778E] text-[14px] jdmobile:text-[12px] pt-5">
               Op. Datum in kraj pogreba ob času objave osmrtnice običajno
               <br />
               niso znani in so vnešeni kasneje (velja za prve tri kartice).
-            </p>
+            </p> */}
           </div>
         </div>
         <div className="relative flex w-full desktop:ml-10 flex-col">
@@ -228,21 +224,21 @@ const ShippingNotifications = ({
                     set_Id("drugega");
                     setModal(true);
                   }}
-                  className="text-[24px] cursor-pointer leading-[28px] font-normal text-[#1E2125]"
+                  className="text-[20px] cursor-pointer leading-[28px] font-normal text-[#1E2125]"
                 >
-                  BREZPLAČNO
+                  Digitalne kartice so BREZPLAČNE.
                 </div>
-                <div className="text-[20px] font-normal text-[#1E2125] ml-[5px]">
+                {/* <div className="text-[20px] font-normal text-[#1E2125] ml-[5px]">
                   v vaši cvetličarni
-                </div>
+                </div> */}
               </div>
 
               {/* Paragraph underneath */}
-              <p className="text-[#6D778E] text-[14px] jdmobile:text-[12px] pt-3 text-center">
+              {/* <p className="text-[#6D778E] text-[14px] jdmobile:text-[12px] pt-3 text-center">
                 Op. Datum in kraj pogreba ob času objave osmrtnice običajno
                 <br />
                 niso znani in so vnešeni kasneje (velja za prve tri kartice).
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

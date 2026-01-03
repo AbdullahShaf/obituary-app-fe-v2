@@ -47,11 +47,7 @@ const MemoryPromo = () => {
       },
       {
         question: "Kako objavim spominsko stran s skrbnikom?",
-        answer: `Skrbnik = administrator spominske strani lahko postane izključno nekdo izmed najbližnjih pokojni/ku. Ker je pokojnega zelo dobro poznal, bo sam določal, katere vsebine, ki jih pošiljajo drugi uporabniki naj bodo objavljene na strani in katere ne, hkrati pa bo imel kopico možnosti narediti pravo spominsko stran, ki bo izžarevala kar največ topline. 
-
-        Spominska stran s Skrbnikom je plačljiva. Skrbnika je mogoče naročiti za eno leto ali šest let po simbolični ceni. 
-
-        Ker pa vendarle želimo ta privilegij ponuditi prav vsem, smo skupaj s cvetličarnami pripravili možnost, po kateri cvetličarne žalujočim nudijo enomesečnega Skrbnika brezplačno. Mi te možnosti na naši strani ne ponujamo, dosegljiva je zgolj v partnerskih cvetličarnah. Izkoristite jo povsem brez rizika in naročnine, saj po preteku enega meseca status samodejno ugasne brez obveznosti (v kolikor ga ne podaljšate).`,
+        answer: `Pošljite nam email s svojimi podatki, sorodstvom s pokojnim, ime pokojnega in žalno stran ter smrtovnico (nujno potrebno, da se prepreči smetenje in objava lažnih osmrtnic) na info@osmrtnica.com. Status skrbnika bomo dodelili praviloma še istega dne.`,
       },
       {
         question: "Še več vprašanj",

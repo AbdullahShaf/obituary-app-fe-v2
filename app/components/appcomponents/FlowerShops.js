@@ -67,7 +67,8 @@ const FlowerShops = ({ setIsOpen, data, showShop }) => {
 
   return showShop ? (
     <div
-      className="w-full flex flex-col  justify-center  items-center  bg-[#F8EDE3] relative py-20 desktop:py-28"
+      className="w-full flex flex-col  justify-center  items-center  bg-red relative py-20 desktop:py-28"
+      // className="w-full flex flex-col  justify-center  items-center  bg-[#F8EDE3] relative py-20 desktop:py-28"
       style={{
         boxShadow:
           "2.5px 2.5px 5px 0px #A6ABBD inset, -1.5px -1.5px 5px 0px #A6ABBDBF inset",

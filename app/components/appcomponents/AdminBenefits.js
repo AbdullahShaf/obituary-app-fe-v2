@@ -15,9 +15,9 @@ export default function AdminBenefits() {
             <div className="space-y-[10px]">
               <h3 className="text-[24px] font-[700] text-[#3C3E41] leading-[48px]">1. Omogoči številne dodatne možnosti VSEM bližnjim</h3>
               <p className="text-[18px] font-[400] text-[#3C3E41] leading-[27px]">
-              Skrbnik prevzame skrb za objavljenimi vsebinami vseh in s tem omogoči družini in vsem bližnjim dodajanje številnih vsebin osebne narave. <br />
-              Brez njega ne bi bilo mogoče dodajanje slik, deljenje zgodb, ki ne smejo nikoli v pozabo, čarobnih trenutkov, poezije, posvetil, niti zadnjega pozdrava, biografije. <br />
-              Stran postane s skrbnikom toplejša, barvita, pristna, polna življenja in spominov.
+                Skrbnik prevzame skrb za objavljenimi vsebinami vseh in s tem omogoči družini in vsem bližnjim dodajanje številnih vsebin osebne narave. <br />
+                Brez njega ne bi bilo mogoče dodajanje slik, deljenje zgodb, ki ne smejo nikoli v pozabo, čarobnih trenutkov, poezije, posvetil, niti zadnjega pozdrava, biografije. <br />
+                Stran postane s skrbnikom toplejša, barvita, pristna, polna življenja in spominov.
               </p>
             </div>
           </div>
@@ -25,8 +25,8 @@ export default function AdminBenefits() {
             <div className="space-y-[10px]">
               <h3 className="text-[24px] font-[700] text-[#3C3E41] leading-[48px]">2. Zbližuje ljudi, povezuje generacije</h3>
               <p className="text-[18px] font-[400] text-[#3C3E41] leading-[27px]">
-              Spominsko stran lahko tako skupaj soustvarjajo vsi, ki so pokojnega imeli radi – družina, prijatelji in znanci. Mlajši, ki so navajeni digitalnih vsebin, lahko na ta način lažje vzpostavijo povezavo s predniki, oddaljeni sorodniki pa lahko sodelujejo ne glede na geografsko oddaljenost. <br/>
-              Skrbnik lahko dodeli status skrbnika še nekomu in tako skupaj soustvarjata spominsko stran in se medsebojno povezujeta (npr. dedek - vnuk). 
+                Spominsko stran lahko tako skupaj soustvarjajo vsi, ki so pokojnega imeli radi – družina, prijatelji in znanci. Mlajši, ki so navajeni digitalnih vsebin, lahko na ta način lažje vzpostavijo povezavo s predniki, oddaljeni sorodniki pa lahko sodelujejo ne glede na geografsko oddaljenost. <br />
+                Skrbnik lahko dodeli status skrbnika še nekomu in tako skupaj soustvarjata spominsko stran in se medsebojno povezujeta (npr. dedek - vnuk).
               </p>
             </div>
             <div className="desktop:min-w-[250px] shrink-0 mobile:hidden tablet:flex tablet:gap-[44px]">
@@ -42,17 +42,17 @@ export default function AdminBenefits() {
             <div className="space-y-[10px]">
               <h3 className="text-[24px] font-[700] text-[#3C3E41] leading-[48px]">3. Večni zapisi. Lahko tudi samo za najbližje</h3>
               <p className="text-[18px] font-[400] text-[#3C3E41] leading-[27px]">
-              Zapisi na digitalnem mediju so večni, zgodbe živijo in slike ne zbledijo, drugače kot velja za tiste v predalu ali albumu. Tiste redko odpremo, medtem ko se na živo stran, ki se neprestano dopolnjuje, radi vračamo. Bližnji bodo hvaležni. <br />
-              Skrbnik lahko spominsko stran najdražje(ga) tudi skrije za javnost oz jo narediti zasebno, ki bo dostopna samo najbližjim, ki jim bo sam zaupal geslo.   
+                Zapisi na digitalnem mediju so večni, zgodbe živijo in slike ne zbledijo, drugače kot velja za tiste v predalu ali albumu. Tiste redko odpremo, medtem ko se na živo stran, ki se neprestano dopolnjuje, radi vračamo. Bližnji bodo hvaležni. <br />
+                Skrbnik lahko spominsko stran najdražje(ga) tudi skrije za javnost oz jo narediti zasebno, ki bo dostopna samo najbližjim, ki jim bo sam zaupal geslo.
               </p>
             </div>
           </div>
           <div className="flex gap-[100px] items-center">
             <div className="space-y-[10px]">
-              <h3 className="text-[24px] font-[700] text-[#3C3E41] leading-[48px]">4. Cvetličarne podarijo status skrbnika za en mesec</h3>
+              <h3 className="text-[24px] font-[700] text-[#3C3E41] leading-[48px]">4. Status skrbnika za en mesec BREZPLAČNO</h3>
               <p className="text-[18px] font-[400] text-[#3C3E41] leading-[27px]">
-              Žalujoči lahko v tem času neomejeno dopolnjujejo spominsko stran (Skrbnik mora potrditi objavo) in vse vsebine, ki se dodajo, bodo ostale tudi, ko status poteče. <br />
-              Po enem mesecu se obstoječi Skrbnik odloči, ali bo status podaljšal za eno leto ali več ali pa bo status skrbnika ukinjen in dodajanje novih vsebin ne bo več mogoče. 
+                Žalujoči lahko v tem času neomejeno dopolnjujejo spominsko stran (Skrbnik mora potrditi objavo) in vse vsebine, ki se dodajo, bodo ostale tudi, ko status poteče.  <br />
+                Po enem mesecu se obstoječi Skrbnik odloči, ali bo status podaljšal za eno leto ali več ali pa bo status skrbnika ukinjen in dodajanje novih vsebin ne bo več mogoče.
               </p>
             </div>
             <div className="min-w-[270px] shrink-0 mobile:hidden tablet:hidden">
@@ -64,45 +64,45 @@ export default function AdminBenefits() {
         <div className="hidden mobile:block space-y-[50px] mt-[35px] max-w-[335px] mx-auto text-center">
           {activeIndex === 0 && <div className="space-y-[16px]">
             <h3 className="text-[20px] font-[600] text-[#3C3E41] leading-[28px]">
-            1. <br />
-            Omogoči številne dodatne možnosti VSEM bližnjim
+              1. <br />
+              Omogoči številne dodatne možnosti VSEM bližnjim
             </h3>
             <p className="text-[15px] font-[400] text-[#3C3E41] leading-[22px]">
-            Skrbnik prevzame skrb za objavljenimi vsebinami vseh in s tem omogoči družini in vsem bližnjim dodajanje vsebin osebne narave. <br />
-            Brez skrbnika ne bi bilo mogoče dodajanje slik, deljenje zgodb, ki ne smejo nikoli v pozabo, čarobnih trenutkov, poezije, posvetil, niti zadnjega pozdrava, biografije. <br />
-            Stran postane s skrbnikom toplejša, barvita, pristna, polna življenja in spominov.
+              Skrbnik prevzame skrb za objavljenimi vsebinami vseh in s tem omogoči družini in vsem bližnjim dodajanje vsebin osebne narave. <br />
+              Brez skrbnika ne bi bilo mogoče dodajanje slik, deljenje zgodb, ki ne smejo nikoli v pozabo, čarobnih trenutkov, poezije, posvetil, niti zadnjega pozdrava, biografije. <br />
+              Stran postane s skrbnikom toplejša, barvita, pristna, polna življenja in spominov.
             </p>
           </div>}
           {activeIndex === 1 && <div className="space-y-[16px]">
             <h3 className="text-[20px] font-[600] text-[#3C3E41] leading-[28px]">
-            2. <br />
-            Zbližuje ljudi, povezuje generacije
+              2. <br />
+              Zbližuje ljudi, povezuje generacije
             </h3>
             <p className="text-[15px] font-[400] text-[#3C3E41] leading-[22px]">
-            Spominsko stran lahko tako skupaj soustvarjajo vsi, ki so pokojnega imeli radi – družina, prijatelji in znanci. Mlajši, ki so navajeni digitalnih vsebin, lahko na ta način laže vzpostavijo povezavo s predniki, oddaljeni sorodniki pa lahko sodelujejo ne glede na geografsko oddaljenost. <br />
+              Spominsko stran lahko tako skupaj soustvarjajo vsi, ki so pokojnega imeli radi – družina, prijatelji in znanci. Mlajši, ki so navajeni digitalnih vsebin, lahko na ta način laže vzpostavijo povezavo s predniki, oddaljeni sorodniki pa lahko sodelujejo ne glede na geografsko oddaljenost. <br />
             </p>
           </div>}
           {activeIndex === 2 && <div className="space-y-[16px]">
             <h3 className="text-[20px] font-[600] text-[#3C3E41] leading-[28px]">
-            3. <br />
-            Večni zapisi. Lahko tudi samo za najbližje
+              3. <br />
+              Večni zapisi. Lahko tudi samo za najbližje
             </h3>
             <p className="text-[15px] font-[400] text-[#3C3E41] leading-[22px]">
-            Zapisi na digitalnem mediju so večni, zgodbe živijo in slike ne zbledijo, drugače kot velja za tiste v predalu ali albumu. Tiste redko odpremo, medtem ko se na živo stran, ki se neprestano dopolnjuje, radi vračamo. Bližnji bodo hvaležni. <br />
-            Skrbnik lahko spominsko stran najdražje(ga) tudi skrije za javnost oz jo narediti zasebno, ki bo dostopna samo najbližjim, ki jim bo sam zaupal geslo.
+              Zapisi na digitalnem mediju so večni, zgodbe živijo in slike ne zbledijo, drugače kot velja za tiste v predalu ali albumu. Tiste redko odpremo, medtem ko se na živo stran, ki se neprestano dopolnjuje, radi vračamo. Bližnji bodo hvaležni. <br />
+              Skrbnik lahko spominsko stran najdražje(ga) tudi skrije za javnost oz jo narediti zasebno, ki bo dostopna samo najbližjim, ki jim bo sam zaupal geslo.
             </p>
           </div>}
           {activeIndex === 3 && <div className="space-y-[16px]">
             <h3 className="text-[20px] font-[600] text-[#3C3E41] leading-[28px]">
-            4. <br />
-            Cvetličarne podarijo status skrbnika za en mesec
+              4. <br />
+              Cvetličarne podarijo status skrbnika za en mesec
             </h3>
             <p className="text-[15px] font-[400] text-[#3C3E41] leading-[22px]">
-            Žalujoči lahko v tem času neomejeno dopolnjujejo spominsko stran (Skrbnik mora potrditi objavo) in vse vsebine, ki se dodajo, bodo ostale tudi, ko status poteče. <br />
+              Žalujoči lahko v tem času neomejeno dopolnjujejo spominsko stran (Skrbnik mora potrditi objavo) in vse vsebine, ki se dodajo, bodo ostale tudi, ko status poteče. <br />
             </p>
           </div>}
           <div className="flex gap-[45px] justify-between items-center">
-            <button 
+            <button
               type="button"
               onClick={() => (activeIndex > 0) && setActiveIndex(activeIndex - 1)}
               aria-label="Prejšnja prednost"
@@ -128,7 +128,7 @@ export default function AdminBenefits() {
                   boxShadow: activeIndex === 3 ? '5px 5px 10px 0px #C2C2C280, -5px -5px 10px 0px #FFFFFF' : 'none'
                 }}></div>
             </div>
-            <button 
+            <button
               type="button"
               onClick={() => (activeIndex < 3) && setActiveIndex(activeIndex + 1)}
               aria-label="Naslednja prednost"

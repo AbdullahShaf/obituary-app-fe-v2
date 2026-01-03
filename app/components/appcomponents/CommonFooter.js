@@ -10,9 +10,9 @@ import { usePathname } from "next/navigation";
 // ✅ Footer link sets based on page identifier
 const footerLinkSets = {
   "/lokalni": [
-{ label: "Začetna", path: "/", showOnMobile: false },
-{ label: "QR Kode", path: "/qr-kode", showOnMobile: false },
-{ label: "Cenik", path: "/cenik", showOnMobile: false },
+    { label: "Začetna", path: "/", showOnMobile: false },
+    { label: "QR Kode", path: "/qr-kode", showOnMobile: false },
+    { label: "Cenik", path: "/cenik", showOnMobile: false },
   ],
   "/osmrtnice": [
     { label: "Prva stran", path: "/", showOnMobile: false },
@@ -44,25 +44,37 @@ const footerLinkSets = {
     // { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: false },
   ],
   "/zalna-stran": [
-    { label: "Prva stran", path: "/", showOnMobile: false },
-    { label: "Osmrtnice", path: "/osmrtnice ", showOnMobile: true },
-    { label: "Pogrebi", path: "/pogrebi ", showOnMobile: true },
+    // { label: "Prva stran", path: "/", showOnMobile: false },
+    // { label: "Osmrtnice", path: "/osmrtnice ", showOnMobile: true },
+    // { label: "Pogrebi", path: "/pogrebi ", showOnMobile: true },
+    // { label: "Spominske", path: "/osmrtnice ", showOnMobile: true },
+    // { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
+    { label: "Prva stran", path: "/", showOnMobile: true },
+    { label: "QR kode", path: "/qr-kode ", showOnMobile: true },
+    { label: "Žalna stran", path: "/zalna-stran", showOnMobile: true },
     { label: "Spominske", path: "/osmrtnice ", showOnMobile: true },
-    { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
   ],
   "/spominska": [
-    { label: "Prva stran", path: "/", showOnMobile: false },
-    { label: "Osmrtnice", path: "/osmrtnice ", showOnMobile: true },
-    { label: "Pogrebi", path: "/pogrebi ", showOnMobile: true },
+    //   { label: "Prva stran", path: "/", showOnMobile: false },
+    //   { label: "Osmrtnice", path: "/osmrtnice ", showOnMobile: true },
+    //   { label: "Pogrebi", path: "/pogrebi ", showOnMobile: true },
+    //   { label: "Spominske", path: "/osmrtnice ", showOnMobile: true },
+    //   { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
+    { label: "Prva stran", path: "/", showOnMobile: true },
+    { label: "QR kode", path: "/qr-kode ", showOnMobile: true },
+    { label: "Žalna stran", path: "/zalna-stran", showOnMobile: true },
     { label: "Spominske", path: "/osmrtnice ", showOnMobile: true },
-    { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
   ],
   "/qr-kode": [
-    { label: "Prva stran", path: "/", showOnMobile: false },
-    { label: "Osmrtnice", path: "/osmrtnice", showOnMobile: true },
-    { label: "Pogrebi", path: "/pogrebi", showOnMobile: true },
-    { label: "Spominske", path: "/spominske", showOnMobile: true },
-    { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
+    // { label: "Prva stran", path: "/", showOnMobile: false },
+    // { label: "Osmrtnice", path: "/osmrtnice", showOnMobile: true },
+    // { label: "Pogrebi", path: "/pogrebi", showOnMobile: true },
+    // { label: "Spominske", path: "/spominske", showOnMobile: true },
+    // { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
+    { label: "Prva stran", path: "/", showOnMobile: true },
+    { label: "QR kode", path: "/qr-kode ", showOnMobile: true },
+    { label: "Žalna stran", path: "/zalna-stran", showOnMobile: true },
+    { label: "Spominske", path: "/osmrtnice ", showOnMobile: true },
   ],
   "/resitve-za-cvetlicarne": [
     { label: "Začetna ", path: "/ ", showOnMobile: false },
@@ -150,22 +162,20 @@ const CommonFooter = ({ currentPage = "/" }) => {
           alt="c"
           className="w-[160px] h-[20px] mobile:hidden"
         />
-        <div className="inline-flex gap-[10px] mobile:gap-[8px] text-[14px] items-center mobile:justify-end mobile:px-[20px] mobile:w-full">
+        <div className="inline-flex gap-[10px] mobile:gap-[8px] text-[14px] items-center mobile:justify-end mobile:px-[10px] mobile:w-full">
           {linksToRender.map((link, index) => (
             <React.Fragment key={link.label}>
               <Link
                 href={link.path}
-                className={`text-[#1860A3] underline ${
-                  link.showOnMobile === false ? "hidden md:block" : "block"
-                }`}
+                className={`text-[#1860A3] underline ${link.showOnMobile === false ? "hidden md:block" : "block"
+                  }`}
               >
                 {link.label}
               </Link>
               {index < linksToRender.length - 1 && (
                 <div
-                  className={`w-[5px] h-[5px] bg-[#1860A3] rounded-full ${
-                    link.showOnMobile === false ? "hidden md:block" : "block"
-                  }`}
+                  className={`w-[5px] h-[5px] bg-[#1860A3] rounded-full ${link.showOnMobile === false ? "hidden md:block" : "block"
+                    }`}
                 ></div>
               )}
             </React.Fragment>
@@ -221,7 +231,7 @@ const CommonFooter = ({ currentPage = "/" }) => {
       </div>
 
       {/* Bottom Section - Mobile */}
-      <div className="mobile:flex justify-between items-center tablet:w-[744px] mobile:w-[360px] desktop:w-[1190px] px-[15px] mobile:px-[22px] mx-auto mt-[18px] hidden">
+      <div className="mobile:flex justify-between items-center tablet:w-[744px] mobile:w-[360px] desktop:w-[1190px] mobile:pl-[34px] mobile:pr-[15px] mx-auto mt-[18px] hidden">
         <div className="flex flex-col">
           <Image
             src={logo2}

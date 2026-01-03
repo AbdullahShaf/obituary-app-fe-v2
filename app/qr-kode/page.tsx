@@ -235,7 +235,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
           {/* how it works */}
 
           <section className="how_it_works">
-            <div className="autoContent"> 
+            <div className="autoContent">
               <div className="how_it_works_inner">
                 <div className="how_it_works_heading">
                   <h2>Kako deluje</h2>
@@ -582,7 +582,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <div className="getQRcode_item_header">
                           <div>
                             <strong>Če gre za objavljeno osmrtnico </strong>
-                            <span>(v primeru, da je prišlo do pretresljivega dogodka te dni). </span>
+                            <span>(v primeru, da je prišlo do pretresljivega dogodka te dni).</span>
                           </div>
                         </div>
                         <div className="getQRcode_item_right d-none">
@@ -590,20 +590,23 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                             <div className="getQRcode_item_right_img">
                               <Image src={qr_screenshoot_img} alt="qr screenshoot" />
                             </div>
-                            <p>Ta okvir ti odpre QR kodo na strani osmrtnice</p>
+                            <p>Klikni na ta okvir na žalni strani pokojne/ga</p>
                           </div>
                         </div>
                       </div>
                       <div className="getQRcode_item_list">
                         <ul>
                           <li>
-                            <p>Pogrebno podjetje (ali cvetličarna) brezplačno objavi osmrtnico na seznamu osmrtnic.</p>
+                            <p>Osmrtnica je objavljena na naših straneh in žalna stran je že izdelana</p>
                           </li>
                           <li>
-                            <p>Istočasno vam brezplačno izdela samostojno Spominsko stran najdražje/ga </p>
+                            <p>Na žalni strani je že dodana brezplačna QR koda, ki si jo lahko prenesete</p>
                           </li>
                           <li>
-                            <p>in na spominski strani je že dodana brezplačna QR koda. </p>
+                            <p>in odnesete lokalnemu mojstru, ki vam jo bo izdelal na podlagi, ki ste si jo izbrali</p>
+                          </li>
+                          <li>
+                            <p>ali pa jo naročite pri nas (podlaga je nerjaveče jeklo, QR koda je plastificirana)</p>
                           </li>
                         </ul>
                       </div>
@@ -613,14 +616,14 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <div className="getQRcode_item_header">
                           <div>
                             <strong>Brez osmrtnice</strong>
-                            <span>(in za umrle v preteklosti). </span>
+                            <span>(in za umrle v preteklosti).</span>
                           </div>
                           <div className="getQRcode_item_right">
                             <div className="getQRcode_item_right_content">
                               <div className="getQRcode_item_right_img">
                                 <Image src={qr_screenshoot_img} alt="qr screenshoot" />
                               </div>
-                              <p>Ta okvir ti odpre QR kodo na strani osmrtnice</p>
+                              <p>Klikni na ta okvir na žalni strani pokojne/ga</p>
                             </div>
                           </div>
                         </div>
@@ -628,13 +631,13 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                       <div className="getQRcode_item_list">
                         <ul>
                           <li>
-                            <p>Potreben bo drug obrazec za izdelavo spominske in drugačna preverjanja, zato bo ves postopek potekal preko naše strani in ne preko naših partnerjev.</p>
+                            <p>Potrebno je naročiti izdelavo spominske strani in na njej bo tudi QR koda.</p>
                           </li>
                           <li>
-                            <p>Izdelali bomo spominsko stran in na spominski bo tudi QR koda. </p>
+                            <p>Možnost bo dodana v kratkem; je že v pripravi.</p>
                           </li>
                           <li>
-                            <p>Možnost bo dodana v kratkem; je že v pripravi.  </p>
+                            <p>Do takrat to možnost občasno ponujamo preko naših partnerjev; spremljajte nas na FB</p>
                           </li>
                         </ul>
                       </div>
@@ -645,8 +648,8 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                 <div className="getQRcode_accordian_wrapper">
                   <div className="qr_code_accordion_item bordor-top">
                     <div className="accordion_header">
-                      <h3 className="web-text !text-[#1e2125] !leading-[24px]">Kdo mi jo lahko dejansko izdela, namesti.</h3>
-                      <h3 className="mobile-text !text-[#1e2125] !leading-[24px]">Kdo mi jo lahko dejansko izdela, namesti.</h3>
+                      <h3 className="web-text !text-[#1e2125] font-bold !leading-[24px]">Kdo mi jo lahko dejansko izdela, namesti.</h3>
+                      <h3 className="mobile-text !text-[#1e2125] font-bold !leading-[24px]">Kdo mi jo lahko dejansko izdela, namesti.</h3>
                       <div className="accordian_icon">
                         <svg width="34" height="25" viewBox="0 0 34 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g filter="url(#filter0_d_9053_55410)">
@@ -669,26 +672,32 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                     </div>
                     <div className="accordion_body">
                       <div className="accordion_content">
+                        <span className="text-[18px] text-[#3C3E41]">Lokalni izvajalci v vašem domačem okolju, lahko pa jo naročite tudi pri nas.</span>
                         <div className="getQRcode_item_list">
                           <ul>
-                            <li>
-                              <p>Odvisno od tega na kakšni podlagi jo želite (kovinska ploščica, granit, steklo, nalepka), kje točno bo nameščena, ali naj bo vgravirana ali samo nalepka?</p>
+                            <li className="faq-web-text">
+                              <p>Odvisno od tega na kakšni podlagi jo želite (kovinska ploščica, granit, akril, nalepka), kje točno bo nameščena, ali naj bo vgravirana ali samo nalepka? </p>
+                            </li>
+                            <li className="faq-mobile-text">
+                              <p>Odvisno od tega na kakšni podlagi jo želite (kovinska ploščica, granit, akril, nalepka), kje točno bo nameščena, ali naj bo vgravirana ali samo nalepka? </p>
                             </li>
                             <li className="faq-web-text">
                               <p>V kratkem bomo pripravili seznam izvajalcev teh del iz različnih materialov v vašem lokalnem okolju (izdelovalci, kontaktirajte nas)</p>
                             </li>
                             <li className="faq-mobile-text">
-                              <p>V kratkem bomo pripravili seznam izvajalcev teh del iz različnih materialov v vašem lokalnem okolju</p>
+                              <p>V kratkem bomo pripravili seznam izvajalcev teh del iz različnih materialov v vašem lokalnem okolju (izdelovalci, kontaktirajte nas)</p>
                             </li>
                             <li className="faq-web-text">
-                              <p>Nekaj možnosti bomo ponudili tudi v naši trgovini. </p>
+                              <p>Plastificirano QR kodo na podlagi iz nerjavečega jekla in na visokokvalitetni nalepki lahko naročite tudi v naši trgovini </p>
                             </li>
                             <li className="faq-mobile-text">
-                              <p>Nekaj možnosti bo tudi v naši trgovini.</p>
+                              <p>Plastificirano QR kodo na podlagi iz nerjavečega jekla in na visokokvalitetni nalepki lahko naročite tudi v naši trgovini </p>
                             </li>
-
-                            <li className="pt-20px">
-                              <p>QR kodo lahko na nagrobnik nato nalepite  sami ali pa vam pomaga pokopališko podjetje (simbolično plačilo). </p>
+                            <li className="faq-web-text pt-20px">
+                              <p>QR kodo lahko na nagrobnik nato nalepite sami ali pa vam pomaga pokopališko podjetje (simbolično plačilo). </p>
+                            </li>
+                            <li className="faq-mobile-text pt-20px">
+                              <p>QR kodo lahko na nagrobnik nato nalepite sami ali pa vam pomaga pokopališko podjetje (simbolično plačilo). </p>
                             </li>
                           </ul>
                         </div>
@@ -721,7 +730,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
               <div className="everything_free_inner">
                 <div className="everything_free_heading">
                   <h2>VSE je brezplačno!</h2>
-                  <p>In brez odvečnih korakov </p>
+                  <p>In brez odvečnih korakov</p>
                 </div>
                 <div className="everything_free_content">
                   <div className="e_free_content_list">
@@ -730,8 +739,8 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_1">01.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Pogrebno podjetje vam brezplačno izdela in objavi <span>osmrtnico</span>.</p>
-                        <small>(ko urejate dokumente za pokop)</small>
+                        <p>Objava osmrtnice </p>
+                        <small>(in končno seznam po vseh občinah po Sloveniji na enem mestu)</small>
                       </div>
                     </div>
                   </div>
@@ -741,8 +750,8 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_2">02.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Istočasno vam izdela brezplačno <span>žalno spominsko stran</span>.</p>
-                        <small>(ko urejate dokumente za pokop) </small>
+                        <p>Žalna stran</p>
+                        <small>(z vsemi informacijami, Žalno knjigo in več možnostmi poklona sorodnikov in znancev)</small>
                       </div>
                     </div>
                   </div>
@@ -752,8 +761,8 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_3">03.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Vaša lokalna cvetličarna vam brezplačno podari <span>status Skrbnika</span> spominske strani.</p>
-                        <small>(ko se dogovarjate za cvetlično ureditev vežice; status Skrbnika je za cel prvi mesec) </small>
+                        <p>Status skrbnika spominske strani za cel mesec</p>
+                        <small>(Dovolj časa za izdelavo prave spominske strani. Podari lokalni partner v vašem kraju)</small>
                       </div>
                     </div>
                   </div>
@@ -763,8 +772,8 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_4">04.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Vaša lokalna cvetličarna vam brezplačno podari <span>mobi kartice</span> za pošiljanje naprej</p>
-                        <small>(ko se dogovarjate za cvetlično ureditev vežice) </small>
+                        <p>Personalizirane digitalne mobi kartice</p>
+                        <small>(za pošiljanje naprej, lažje obveščanje in nenazadnje, za večni spomin)</small>
                       </div>
                     </div>
                   </div>
@@ -774,14 +783,14 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_5">05.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Pogrebno podjetje vam brezplačno podari <span>QR kodo</span> za nagrobnik</p>
-                        <small>(digitalna koda je že na žalni / spominski strani; izdelate si jo sami) </small>
+                        <p>QR koda za nagrobnik</p>
+                        <small>(ki si jo lahko prenesete in sami izdelate)</small>
                       </div>
                     </div>
                   </div>
 
                   <div className="everything_free_content_text">
-                    <p>Ekskluzivno samo pri naših partnerjih. Poiščite jih! </p>
+                    <p>Za topel poklon življenju, ki je zaznamovalo naša srca</p>
                   </div>
                 </div>
               </div>

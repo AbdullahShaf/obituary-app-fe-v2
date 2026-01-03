@@ -101,8 +101,8 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
                         <strong className="number_1">01.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Pogrebno podjetje vam brezplačno izdela in objavi <span>osmrtnico</span>.</p>
-                        <small>(ko urejate dokumente za pokop)</small>
+                        <p>Objava osmrtnice </p>
+                        <small>(in končno seznam po vseh občinah po Sloveniji na enem mestu) </small>
                       </div>
                     </div>
                   </div>
@@ -112,8 +112,8 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
                         <strong className="number_2">02.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Istočasno vam izdela brezplačno <span>žalno spominsko stran</span>.</p>
-                        <small>(ko urejate dokumente za pokop) </small>
+                        <p>Žalna stran</p>
+                        <small>(z vsemi informacijami, Žalno knjigo in več možnostmi poklona sorodnikov in znancev)</small>
                       </div>
                     </div>
                   </div>
@@ -123,8 +123,8 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
                         <strong className="number_3">03.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Vaša lokalna cvetličarna vam brezplačno podari <span>status Skrbnika</span> spominske strani.</p>
-                        <small>(ko se dogovarjate za cvetlično ureditev vežice; status Skrbnika je za cel prvi mesec) </small>
+                        <p>Status skrbnika spominske strani za cel mesec</p>
+                        <small>(Dovolj časa za izdelavo prave spominske strani. Podari lokalni partner v vašem kraju)</small>
                       </div>
                     </div>
                   </div>
@@ -134,8 +134,8 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
                         <strong className="number_4">04.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Vaša lokalna cvetličarna vam brezplačno podari <span>mobi kartice</span> za pošiljanje naprej</p>
-                        <small>(ko se dogovarjate za cvetlično ureditev vežice) </small>
+                        <p>Personalizirane digitalne mobi kartice</p>
+                        <small>(za pošiljanje naprej, lažje obveščanje in nenazadnje, za večni spomin)</small>
                       </div>
                     </div>
                   </div>
@@ -145,14 +145,14 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
                         <strong className="number_5">05.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Pogrebno podjetje vam brezplačno podari <span>QR kodo</span> za nagrobnik</p>
-                        <small>(digitalna koda je že na žalni / spominski strani; izdelate si jo sami) </small>
+                        <p>QR koda za nagrobnik</p>
+                        <small>(ki si jo lahko prenesete in sami izdelate)</small>
                       </div>
                     </div>
                   </div>
 
                   <div className="everything_free_content_text">
-                    <p className="!mx-0 !px-0 w-full min-w-full">Ekskluzivno samo pri naših partnerjih. Poiščite jih! </p>
+                    <p className="!mx-0 !px-0 w-full min-w-full">Za topel poklon življenju, ki je zaznamovalo naša srca</p>
                   </div>
                 </div>
               </div>

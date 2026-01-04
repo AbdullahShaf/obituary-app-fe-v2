@@ -264,7 +264,7 @@ const Subscription = () => {
     switch (active) {
       case "spominske":
         return (
-          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center justify-center desktop:justify-start desktop:items-start mobile:gap-y-11 gap-y-9">
+          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center mobile:gap-y-11 gap-y-9">
             {/* // <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto flex flex-col mb-[40px] w-[766px] mx-auto mobile:gap-y-11 gap-y-9"> */}
             {/* <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto flex flex-col mb-[40px] w-[766px] mx-auto mobile:gap-y-11 gap-y-9"> */}
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4 mb-[40px]">
@@ -458,7 +458,7 @@ const Subscription = () => {
 
       case "cvetlicarne":
         return (
-          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center justify-center desktop:justify-start desktop:items-start mobile:gap-y-11 gap-y-9">
+          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center mobile:gap-y-11 gap-y-9">
             {/* <div className="mobile:px-1 mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto p-4 mb-[40px] flex flex-col mobile:items-center mobile:justify-center space-y-4"> */}
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
@@ -701,7 +701,7 @@ const Subscription = () => {
 
       case "oglasevalci":
         return (
-          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center justify-center desktop:justify-start desktop:items-start mobile:gap-y-11 gap-y-9">
+          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center mobile:gap-y-11 gap-y-9">
           {/* <div className="mobile:px-1 p-4 mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto mb-[40px] flex flex-col mobile:items-center mobile:justify-center space-y-4"> */}
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">

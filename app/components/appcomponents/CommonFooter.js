@@ -109,11 +109,12 @@ const footerLinkSets = {
     { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
   ],
   "/cenik": [
-    { label: "Prva stran", path: "/", showOnMobile: false },
+    { label: "Prva stran", path: "/", showOnMobile: true },
     { label: "Osmrtnice", path: "/osmrtnice ", showOnMobile: true },
     { label: "Pogrebi", path: "/pogrebi ", showOnMobile: true },
-    { label: "Spominske", path: "/osmrtnice ", showOnMobile: true },
-    { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
+    { label: "Partnerji", path: "/lokalni ", showOnMobile: true },
+    // { label: "Spominske", path: "/osmrtnice ", showOnMobile: true },
+    // { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
   ],
 };
 

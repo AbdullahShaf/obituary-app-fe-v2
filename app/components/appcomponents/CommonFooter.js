@@ -61,7 +61,7 @@ const footerLinkSets = {
     { label: "Prva stran", path: "/", showOnMobile: false },
     { label: "Osmrtnice", path: "/osmrtnice", showOnMobile: true },
     { label: "Pogrebi", path: "/pogrebi", showOnMobile: true },
-    { label: "Spominske", path: "/spominske", showOnMobile: true },
+    { label: "Spominske", path: "/osmrtnice", showOnMobile: true },
     { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
   ],
   "/resitve-za-cvetlicarne": [

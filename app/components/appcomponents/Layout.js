@@ -155,7 +155,7 @@ const Layout = ({
         </>
       ) : null}
 
-      <main className="main-content flex flex-grow bg-[#F5F7F9]" style={{minWidth:"100vw",maxWidth:"100vw"}}>{children}</main>
+      <main className="main-content flex flex-grow bg-[#F5F7F9]">{children}</main>
 
       {/* Footer */}
       {forFooter == "company" ? (

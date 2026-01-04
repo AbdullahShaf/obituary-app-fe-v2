@@ -290,7 +290,7 @@ const Subscription = () => {
               </div>
               <div className="border-[#0A85C2] border-t-[2px] w-[200px] my-6"></div> */}
 
-              <p className=" text-[#414141] flex flex-col gap-1 w-full desktop:w-[780px] mobile:text-[14px] text-[16px]">
+              <div className=" text-[#414141] flex flex-col gap-1 w-full desktop:w-[780px] mobile:text-[14px] text-[16px]">
                 <p className="text-[14px]"></p>{" "}
                 <p className="mt-1 mobile:hidden block">
                   Bližnji svojci lahko postanejo skrbniki spominske strani
@@ -321,7 +321,7 @@ const Subscription = () => {
                   vse dodane vsebine ostanejo na spominski strani, ni pa mogoče
                   dodajati več novih).
                 </p>
-              </p>
+              </div>
               <PricingCard
                 label="SPOMINSKA STRAN"
                 sublabel=""
@@ -473,8 +473,8 @@ const Subscription = () => {
               </div>
 
               <>
-                <p className="text-[#414141] flex flex-col gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
-                  <p className="flex flex-row">
+                <div className="text-[#414141] flex flex-col gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
+                  <div className="flex flex-row">
                     <p className="text-[14px]"></p>{" "}
                     <p className="mt-1">
                       Trenutno je cvetličarnam na voljo paket za oglaševalce, v
@@ -483,9 +483,9 @@ const Subscription = () => {
                       posebej. Že pridružene cvetličarne bodo deležne še
                       dodatnih ugodnosti in brezplačnega oglaševanja.
                     </p>
-                  </p>
+                  </div>
 
-                  <p className="flex flex-row mt-4">
+                  <div className="flex flex-row mt-4">
                     <p className="text-[14px]"></p>{" "}
                     <p>
                       Oglaševanje je mogoče v za to namenjenih sektorjih na
@@ -494,8 +494,8 @@ const Subscription = () => {
                       <span className="text-[#EB1D1D] font-bold">IN</span>{" "}
                       hkrati na posebni strani lokalnih partnerjev.
                     </p>
-                  </p>
-                </p>
+                  </div>
+                </div>
                 <div className="w-full mt-4">
                   <Tabs
                     tabs={formtabs}
@@ -519,12 +519,12 @@ const Subscription = () => {
                               predvidenih mest.
                             </p>
                           </div>
-                          <p className="text-[#414141] flex gap-1 mb-[40px] w-full desktop:w-[744px] text-[14px] desktop:text-[14px]">
+                          <div className="text-[#414141] flex gap-1 mb-[40px] w-full desktop:w-[744px] text-[14px] desktop:text-[14px]">
                             <p className="mt-1">
                               Naročnina s samodejnim podaljšanjem; velja do
                               preklica.
                             </p>
-                          </p>
+                          </div>
 
                           <div className="relative">
                             <PricingCard
@@ -827,7 +827,7 @@ const Subscription = () => {
                   Oglaševalci
                 </div>
               </div>
-              <p className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[16px] text-[16px]">
+              <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[16px] text-[16px]">
                 <p className="text-[14px]"></p>{" "}
                 <p className="mt-1">
                   Oglaševanje je mogoče v za to namenjenih sektorjih na strani
@@ -835,7 +835,7 @@ const Subscription = () => {
                   občini <span className="text-[#EB1D1D]">IN</span> hkrati na
                   posebni strani lokalnih partnerjev.
                 </p>
-              </p>
+              </div>
               <div className="w-full mt-4">
                 <Tabs
                   tabs={formtabsoglasevalci}
@@ -1051,13 +1051,13 @@ const Subscription = () => {
                   Pogrebna podjetja
                 </div>
               </div>
-              <p className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
+              <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] mobile:text-[14px] text-[16px]">
                 <p className="text-[14px]"></p>{" "}
                 <p className="mt-1">
                   Vse je brezplačno. Registrirajte se in vse potrebne
                   informacije vas čakajo v vašem uporabniškem računu.
                 </p>
-              </p>
+              </div>
               <p className="text-[16px] text-[#0A85C2] leading-[24px] underline underlin-offset-2 mt-7">
                 Kontaktirajte nas
               </p>

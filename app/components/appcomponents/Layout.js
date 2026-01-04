@@ -50,7 +50,7 @@ const Layout = ({
   };
 
   return (
-    <div className="main-wrapper flex flex-col min-h-screen">
+    <div className="main-wrapper flex flex-col min-h-screen min-w-[100vw] max-w-[100vw]">
       {/* Headers */}
       {from == "1" || from == "2" ? (
         <div className="fixed top-0 z-50 flex w-full justify-center">
@@ -141,11 +141,12 @@ const Layout = ({
           <div className="absolute top-0 left-0 w-full">
             <OglasevalciHeader arrowOnly={true} />
           </div>
-          <div className="flex relative mobile:h-[196px] tablet:h-[220px] desktop:h-[300px] mt-[73px] tablet:mt-[80px] mobile:mt-[55px] desktop:mt-[91px] w-full mx-auto mobile:z-50 mobile:relative">
+          <div className="flex relative mobile:h-[196px] tablet:h-[220px] desktop:h-[300px] mt-[73px] tablet:mt-[80px] mobile:mt-[55px] desktop:mt-[91px] w-full min-w-full max-w-full mx-auto mobile:z-50 mobile:relative">
             <img
               className="object-cover h-full w-full"
               src="/payment-hero.jpg"
               alt="Ozadje za sekcijo cenika - Osmrtnica.com"
+              style={{ objectFit: "cover", objectPosition: "center", minWidth: "100vw", maxWidth: "100vw" }}
             />
             <h1 className="absolute text-[#1E2125] border border-[#ffffff] mobile:text-[28px] text-[40px] top-[35%] mx-auto left-0 right-0 flex items-center justify-center mobile:w-[114px] mobile:h-[65px] w-[137px] h-[79px] bg-gradient-to-r from-[#ffffff] to-[#ffffff]/[30%] rounded-[8px]">
               Cenik
@@ -154,7 +155,7 @@ const Layout = ({
         </>
       ) : null}
 
-      <main className="main-content flex flex-grow bg-[#F5F7F9]">{children}</main>
+      <main className="main-content flex flex-grow bg-[#F5F7F9]" style={{minWidth:"100vw",maxWidth:"100vw"}}>{children}</main>
 
       {/* Footer */}
       {forFooter == "company" ? (

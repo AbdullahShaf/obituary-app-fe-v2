@@ -8,16 +8,15 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
 
   useEffect(() => {
     if (popupRef.current) {
-      const elementPosition = popupRef.current.getBoundingClientRect().top + window.scrollY;
+      const elementPosition =
+        popupRef.current.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({ top: elementPosition - 100, behavior: "smooth" });
     }
   }, []);
 
   return (
     <div ref={popupRef} className="w-full bg-[#F5EFE6] pt-14 pb-14">
-      <div
-        className="relative desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 pt-8 pb-[60px] mobile:pt-4 mobile:pb-[40px] tablet:pb-[60px]"
-      >
+      <div className="relative desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 pt-8 pb-[60px] mobile:pt-4 mobile:pb-[40px] tablet:pb-[60px]">
         <button
           onClick={onClose}
           className="absolute right-4 top-4 mobile:top-2 z-10"
@@ -46,15 +45,17 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
 
           <div className="flex-1 desktop:max-w-[383px] tablet:max-w-[383px]">
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal">
-              Oglaševanje v za to namenjenih sektorjih na spodnjem delu najbolj obiskanih strani:
+              Oglaševanje v za to namenjenih sektorjih na spodnjem delu najbolj
+              obiskanih strani:
             </p>
             <ul className="text-[16px] leading-[24px] text-[#444444] font-normal mt-3 list-disc list-inside">
               <li>osmrtnice</li>
               <li>pogrebi</li>
-              <li>cvetličarne</li>
+              {/* <li>cvetličarne</li> */}
             </ul>
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal mt-6">
-              Gre za oglaševanje logotipa z direktno povezavo do vaših strani. Logotip se pojavlja v izbrani občini.
+              Gre za oglaševanje logotipa z direktno povezavo do vaših strani.
+              Prikazan logotip se pojavlja v izbrani občini.
             </p>
           </div>
         </div>
@@ -71,7 +72,8 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
           </div>
           <div className="mt-4">
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal">
-              Oglaševanje v za to namenjenih sektorjih na spodnjem delu najbolj obiskanih strani:
+              Oglaševanje v za to namenjenih sektorjih na spodnjem delu najbolj
+              obiskanih strani:
             </p>
             <ul className="text-[16px] leading-[24px] text-[#444444] font-normal mt-3 list-disc list-inside">
               <li>osmrtnice</li>
@@ -79,25 +81,32 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
               <li>cvetličarne</li>
             </ul>
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal mt-4">
-              Gre za oglaševanje logotipa z direktno povezavo do vaših strani. Logotip se pojavlja v izbrani občini.
+              Gre za oglaševanje logotipa z direktno povezavo do vaših strani.
+              Logotip se pojavlja v izbrani občini.
             </p>
           </div>
         </div>
       </div>
 
-      <div
-        className="desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 pt-[25px] pb-8 mobile:pt-[25px] mobile:pb-4 tablet:pt-[25px]"
-      >
+      <div className="desktop:max-w-[766px] tablet:max-w-[580px] mobile:max-w-[500px] w-full mx-auto mobile:px-4 tablet:px-0 pt-[25px] pb-8 mobile:pt-[25px] mobile:pb-4 tablet:pt-[25px]">
         <div className="mobile:hidden tablet:hidden desktop:flex desktop:gap-[59px] items-start">
           <div className="flex-1 desktop:max-w-[383px]">
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal">
-              Istočasno oglaševalec dobi prostor tudi na posebni strani lokalnih partnerjev, kjer je mogoča prava predstavitev produktov.
+              Istočasno oglaševalec dobi prostor tudi na posebni strani lokalnih
+              partnerjev, kjer je mogoča prava predstavitev produktov.
             </p>
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal mt-6">
-              Vaš okvir se pojavlja tako med storitvami, kot tudi regionalno. Puščica odpre vašo spletno stran.
+              Vaš okvir se pojavlja tako med vrsto storitev, kot tudi
+              regionalno. Puščica odpre vašo spletno stran ali FB.
             </p>
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal mt-6">
-              V primeru oglaševanja na vsaj dveh omenjenih straneh (osmrtnice, pogrebi, cvetličarne), se odpre še druga slika in tekst v ozadju.
+              V primeru oglaševanja na obeh omenjenih straneh (osmrtnice,
+              pogrebi), vam pripada še druga slika v ozadju in tekst (sprehodi
+              se s kazalcem nad sliko na strani{" "}
+              <span className="text-[#0A85C2] underline">
+                Lokalni partnerji
+              </span>
+              ).
             </p>
             <Link
               href="/lokalni"
@@ -106,7 +115,8 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
               Odpri stran
             </Link>
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal mt-14">
-              Poleg naštetih so občasne še druge promocije. Kontaktirajte nas, da vam pripravimo ponudbo po meri.
+              Poleg naštetih so občasne še druge promocije. Kontaktirajte nas,
+              da vam pripravimo ponudbo po meri.
             </p>
           </div>
 
@@ -124,16 +134,20 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
         <div className="mobile:hidden tablet:flex desktop:hidden tablet:gap-8 items-start">
           <div className="flex-1 tablet:max-w-[370px]">
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal">
-              Istočasno oglaševalec dobi prostor tudi na posebni strani lokalnih partnerjev, kjer je mogoča prava predstavitev produktov.
+              Istočasno oglaševalec dobi prostor tudi na posebni strani lokalnih
+              partnerjev, kjer je mogoča prava predstavitev produktov.
             </p>
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal mt-6">
-              Vaš okvir se pojavlja tako med storitvami, kot tudi regionalno. Puščica odpre vašo spletno stran.
+              Vaš okvir se pojavlja tako med storitvami, kot tudi regionalno.
+              Puščica odpre vašo spletno stran.
             </p>
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal mt-6">
-              V primeru oglaševanja na vsaj dveh omenjenih straneh (osmrtnice, pogrebi, cvetličarne), se odpre še druga slika in tekst v ozadju.
+              V primeru oglaševanja na vsaj dveh omenjenih straneh (osmrtnice,
+              pogrebi, cvetličarne), se odpre še druga slika in tekst v ozadju.
             </p>
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal mt-14">
-              Poleg naštetih so občasne še druge promocije. Kontaktirajte nas, da vam pripravimo ponudbo po meri.
+              Poleg naštetih so občasne še druge promocije. Kontaktirajte nas,
+              da vam pripravimo ponudbo po meri.
             </p>
           </div>
 
@@ -177,18 +191,36 @@ export default function WhatIsIncludedPopupAdvertisers({ onClose }) {
 
           <div className="mt-6">
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal">
-              Istočasno oglaševalec dobi prostor tudi na posebni strani lokalnih partnerjev, kjer je mogoča prava predstavitev produktov.
+              Istočasno oglaševalec dobi prostor tudi na posebni strani lokalnih
+              partnerjev, kjer je mogoča prava predstavitev produktov.
             </p>
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal mt-6">
-              Vaš okvir se pojavlja tako med storitvami, kot tudi regionalno. Puščica odpre vašo spletno stran.
+              Vaš okvir se pojavlja tako med storitvami, kot tudi regionalno.
+              Puščica odpre vašo spletno stran.
             </p>
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal mt-6">
-              V primeru oglaševanja na vsaj dveh omenjenih straneh (osmrtnice, pogrebi, cvetličarne), se odpre še druga slika in tekst v ozadju.
+              V primeru oglaševanja na vsaj dveh omenjenih straneh (osmrtnice,
+              pogrebi, cvetličarne), se odpre še druga slika in tekst v ozadju.
             </p>
             <p className="text-[16px] leading-[24px] text-[#444444] font-normal mt-6">
-              Poleg naštetih so občasne še druge promocije. Kontaktirajte nas, da vam pripravimo ponudbo po meri.
+              Poleg naštetih so občasne še druge promocije. Kontaktirajte nas,
+              da vam pripravimo ponudbo po meri.
             </p>
           </div>
+        </div>
+
+        <div className="mobile:hidden tablet:flex">
+          <a
+            href="mailto:info@osmrtnica.com"
+            className="mt-11 w-[250px] h-[53px] shrink-0 rounded-full mobile:mx-auto text-white justify-center items-center self-center shadow-custom-light-dark bg-gradient-to-b from-[#0D94E8] to-[#1860A3] flex"
+            style={{
+              fontSize: "18px",
+              boxShadow:
+                "rgba(0, 0, 0, 0.22) 0px 4px 5px 0px, rgba(0, 0, 0, 0.45) 0px 2px 3px 0px",
+            }}
+          >
+            Povpraševanje
+          </a>
         </div>
 
         <div className="flex justify-end mt-[60px] mobile:mt-[40px]">

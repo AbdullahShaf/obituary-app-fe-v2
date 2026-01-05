@@ -3,15 +3,23 @@ import Link from "next/link";
 
 const MemorialPage = () => {
   return (
-    <div className="w-full bg-[#D4E6F9]">
+    <div className="w-full bg-[#F9EBD466]">
       <div className="relative max-w-[1920px] h-[584px] mobile:h-[871px] w-full overflow-hidden flex mx-auto justify-center items-center">
         {/*Main Container*/}
         <div className="flex w-[1039px] h-[584px] tablet:w-[600px] tablet:h-[504px] mobile:w-[296px] mobile:h-[771px] items-center flex-col">
           {/*Header Container*/}
           <div className="flex w-full h-[102px] mobile:h-[163px] desktop:mt-[55px] tablet:mt-1 items-center flex-col">
-            <h2 className="text-[40px] mobile:text-[28px] text-[#3C3E41] font-variation-customOpt40 mobile:font-variation-customOpt28 flex text-center mobile:leading-10">
+            {/* <h2 className="text-[40px] mobile:text-[28px] text-[#3C3E41] font-variation-customOpt40 mobile:font-variation-customOpt28 flex text-center mobile:leading-10">
+              Spominska stran s Skrbnikom
+            </h2> */}
+            <h2 className="text-[40px] text-[#3C3E41] font-variation-customOpt40 flex text-center leading-[48px] mobile:hidden">
               Spominska stran s Skrbnikom
             </h2>
+
+            <h2 className="text-[28px] text-[#3C3E41] font-variation-customOpt28 flex text-center leading-10 hidden mobile:block">
+              Spominska s Skrbnikom
+            </h2>
+
             <h3 className="text-[24px] mobile:text-[20px] text-[#3C3E41] font-bold mobile:font-variation-customOpt20wght400 mobile:font-bold mobile:text-center font-variation-customOpt24 mt-[6px] mobile:mt-[3px] mobile:leading-10">
               Nadgradnja v pravo spominsko stran
             </h3>
@@ -38,9 +46,11 @@ const MemorialPage = () => {
           </Link>
 
           {/*H4 Container*/}
-          <h3 className="flex w-[792px] h-[57px] tablet:w-[600px] tablet:h-[27px] mobile:w-[296px] mobile:h-[27px] text-center text-[18px] text-[#3C3E41] font-variation-customOpt18 mt-[9px] mobile:mt-[31px] tablet:mt-6 items-end justify-center leading-[27px]">
+          <Link
+            href={"/primerjava"}
+            className="flex w-[792px] h-[57px] tablet:w-[600px] tablet:h-[27px] mobile:w-[296px] mobile:h-[27px] text-center text-[18px] text-[#3C3E41] font-variation-customOpt18 mt-[9px] mobile:mt-[31px] tablet:mt-6 items-end justify-center leading-[27px]">
             Primerjava obeh podrobno
-          </h3>
+          </Link>
         </div>
       </div>
     </div>

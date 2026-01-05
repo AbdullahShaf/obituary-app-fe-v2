@@ -120,13 +120,6 @@ const footerLinkSets = {
     { label: "Spominske", path: "/osmrtnice", showOnMobile: true },
     { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
   ],
-  "/cenik": [
-    { label: "Prva stran", path: "/", showOnMobile: false },
-    { label: "Osmrtnice", path: "/osmrtnice", showOnMobile: true },
-    { label: "Pogrebi", path: "/pogrebi", showOnMobile: true },
-    { label: "Spominske", path: "/osmrtnice", showOnMobile: true },
-    { label: "Cvetličarne", path: "/cvetlicarne", showOnMobile: true },
-  ],
 };
 
 function useIsMobile() {

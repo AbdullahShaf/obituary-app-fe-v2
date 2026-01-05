@@ -72,6 +72,10 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
         question: "Je lahko na isti QR kodi več oseb? Kot jih je lahko tudi na spomeniku?",
         answer: "Lahko in to omogočeno predvidoma v novembru.",
       },
+      // {
+      //   question: "Je lahko na isti QR kodi več oseb? Kot jih je lahko tudi na spomeniku?",
+      //   answer: "Lahko in to omogočeno predvidoma v novembru.",
+      // },
       {
         question: "QR koda je lahko tudi darilo",
         answer: `...in prijetno presenečenje, ker gre za popolno novost.
@@ -99,7 +103,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
       },
       {
         question: "Ali lahko naročim QR kode za davno pokojne, pred leti, desetletji?",
-        answer: "Je že v pripravi. To možnost bomo omogočili v oktobru.",
+        answer: "Je že v pripravi. To možnost bomo omogočili kmalu.",
       },
       {
         question: "Je lahko na isti QR kodi več oseb? Kot jih je lahko tudi na spomeniku?",
@@ -136,7 +140,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
       },
       {
         question: "Ali je lahko na isti QR kodi več oseb?",
-        answer: "Lahko in to omogočeno predvidoma v novembru.",
+        answer: "Je že v pripravi. To možnost bomo omogočili kmalu.",
       },
       {
         question: "QR koda je lahko tudi darilo",
@@ -216,11 +220,11 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
               <div className="banner_inner">
                 <div className="banner_left">
                   <div className="banner_content">
-                    <div className="banner_content_heading">
-                      <h1 className="tablet:text-center mobile:text-center text-[40px] leading-[48px] text-[#3c3e41]">QR kode za nagrobnike</h1>
-                      <h2 className="!text-[22px] !tablet:text-center !mobile:text-center !font-bold !text-[#3c3e41] !leading-[48px]">Ohranite spomin na vaše najdražje za vedno</h2>
+                    <div className="">
+                      <h1 className="tablet:text-center mobile:text-center text-[40px] mobile:text-[28px] leading-[48px] text-[#3c3e41]">QR kode za nagrobnike</h1>
+                      <h2 className="text-[24px] tablet:text-[22px] mobile:text-[20px] leading-[48px] tablet:leading-[30px] mobile:leading-[28px] tablet:text-center mobile:text-center font-bold text-[#3c3e41]">Ohranite spomin na vaše najdražje za vedno</h2>
                     </div>
-                    <div className="banner_content_detail">
+                    <div className="banner_content_detail mt-[38px] tablet:mt-[38px] mobile:mt-[30px]">
                       <p>Nagrobniki se niso bistveno spremenili v zadnjih nekaj tisoč letih.... do zdaj.</p>
                       <p className="text-web">QR kode predstavljajo inovativno rešitev, ki združuje tradicionalne nagrobnike z digitalno tehnologijo, kar omogoča globljo povezavo z življenjsko zgodbo pokojnika preko dodajanja fotografij, življenjepisa, video posnetkov, deljenja zgodb in čarobnih trenutkov s pokojnim. </p>
                     </div>

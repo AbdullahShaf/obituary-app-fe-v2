@@ -95,11 +95,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
       },
       {
         question: "Ali lahko naročim QR kode za davno pokojne, pred leti, desetletji?",
-        answer: "Je že v pripravi. To možnost bomo omogočili v oktobru.",
-      },
-      {
-        question: "Je lahko na isti QR kodi več oseb? Kot jih je lahko tudi na spomeniku?",
-        answer: "Lahko in to omogočeno predvidoma v novembru.",
+        answer: "Je že v pripravi. To možnost bomo omogočili kmalu.",
       },
       {
         question: "QR koda je lahko tudi darilo",
@@ -128,11 +124,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
       },
       {
         question: "QR kode za že pred časom pokojne?",
-        answer: "Je že v pripravi. To možnost bomo omogočili v oktobru.",
-      },
-      {
-        question: "Ali je lahko na isti QR kodi več oseb?",
-        answer: "Lahko in to omogočeno predvidoma v novembru.",
+        answer: "Je že v pripravi. To možnost bomo omogočili kmalu.",
       },
       {
         question: "QR koda je lahko tudi darilo",

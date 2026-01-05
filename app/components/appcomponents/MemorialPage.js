@@ -53,13 +53,11 @@ const MemorialPage = () => {
           </Link>
 
           {/*H4 Container*/}
-          {/* <h3  */}
           <Link
             href={"/primerjava"}
             className="flex w-[792px] h-[57px] tablet:w-[600px] tablet:h-[27px] mobile:w-[296px] mobile:h-[27px] text-center text-[18px] text-[#3C3E41] font-variation-customOpt18 mt-[9px] mobile:mt-[31px] tablet:mt-6 items-end justify-center leading-[27px]">
             Primerjava obeh podrobno
           </Link>
-          {/* </h3> */}
         </div>
       </div>
     </div>

@@ -264,7 +264,8 @@ const Subscription = () => {
     switch (active) {
       case "spominske":
         return (
-          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center mobile:gap-y-11 gap-y-9">
+          // <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] w-[766px] mx-auto items-center mobile:gap-y-11 gap-y-9">
+          <div className="mobile:px-1 mobile:max-w-full mobile:min-w-full mobile:mx-auto p-4 flex flex-col mb-[40px] w-[766px] tablet:items-center mx-auto mobile:gap-y-11 gap-y-9">
             {/* // <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto flex flex-col mb-[40px] w-[766px] mx-auto mobile:gap-y-11 gap-y-9"> */}
             {/* <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto flex flex-col mb-[40px] w-[766px] mx-auto mobile:gap-y-11 gap-y-9"> */}
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4 mb-[40px]">
@@ -463,7 +464,8 @@ const Subscription = () => {
 
       case "cvetlicarne":
         return (
-          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center mobile:gap-y-11 gap-y-9">
+          // <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center mobile:gap-y-11 gap-y-9">
+          <div className="mobile:px-1 mobile:max-w-full mobile:min-w-full mobile:mx-auto p-4 flex flex-col mb-[40px] w-[766px] tablet:items-center mx-auto mobile:gap-y-11 gap-y-9">
             {/* <div className="mobile:px-1 mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto p-4 mb-[40px] flex flex-col mobile:items-center mobile:justify-center space-y-4"> */}
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
@@ -566,7 +568,7 @@ const Subscription = () => {
                               >
                                 info@osmrtnica.com
                               </a>
-                              <button
+                              {/* <button
                                 onClick={() =>
                                   setIsWhatIsIncludedAdvertisersOpen(true)
                                 }
@@ -578,7 +580,7 @@ const Subscription = () => {
                                 }}
                               >
                                 Kaj je vključeno
-                              </button>
+                              </button> */}
                             </div>
                             <p className="mt-14"></p>
                             {/* <p className="w-[756px] mt-14 mobile:w-full tablet:w-full">
@@ -819,7 +821,8 @@ const Subscription = () => {
 
       case "oglasevalci":
         return (
-          <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center mobile:gap-y-11 gap-y-9">
+          // <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto p-4 flex flex-col mb-[40px] items-center mobile:gap-y-11 gap-y-9">
+          <div className="mobile:px-1 mobile:max-w-full mobile:min-w-full mobile:mx-auto p-4 flex flex-col mb-[40px] w-[766px] tablet:items-center mx-auto mobile:gap-y-11 gap-y-9">
             {/* <div className="mobile:px-1 p-4 mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto mb-[40px] flex flex-col mobile:items-center mobile:justify-center space-y-4"> */}
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
@@ -1044,7 +1047,7 @@ const Subscription = () => {
 
       case "pogrebna-podjetja":
         return (
-          <div className="p-4 mb-[40px] mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto flex flex-col mobile:items-center mobile:justify-center space-y-4">
+          <div className="p-4 mb-[40px] mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto flex flex-col mobile:items-center tablet:items-center mobile:justify-center space-y-4">
             <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <div className="mobile:text-[24px] text-[32px] text-[#000000]">

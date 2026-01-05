@@ -136,7 +136,7 @@ const SlideThree = () => {
                         Obiskovalci ne le berejo življenje pokojnika, ampak lahko aktivno sodelujejo, dodajo svoje zgodbe, delijo prigode ali dragocene spomine. Ali pa samo prižgejo virtualno svečko in se vpišejo v Žalno knjigo.{" "}
                     </p>
                     <div className="inner-div mt-[89px]">
-                        <div className="text-[#22281C] text-[24px] font-medium]">
+                        <div className="text-[#22281C] text-[24px] font-medium">
                             QR koda odpre svet spominov
                         </div>
                         <p className="mt-[16px]">

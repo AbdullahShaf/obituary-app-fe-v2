@@ -17,32 +17,38 @@ const AdministratorCompo = () => {
           {/*Three container*/}
           <div className="flex desktop:mt-12 mt-10 desktop:flex-row flex-col">
             {/*c1 container*/}
-            <div className="flex w-[332px] h-[266px] tablet:w-[333px] mobile:w-[348px] mobile:h-[258px] bg-[#FFFFFF] border-t-8 border-[#EB1D1D] flex-col mx-auto desktop:mx-0">
-              <h3 className="text-[24px] text-[#3C3E41] font-variation-customOpt24 font-semibold text-center mt-[23.5px] tablet:mt-[30px]">
-                Mesečna svečka
-              </h3>
-              <div
-                style={{
-                  textShadow: "0px 3px 4px #00000050",
-                  color: "#2D3D48",
-                  fontWeight: 400,
-                  fontSize: "32px",
-                  fontVariationSettings: "'opsz' 32",
-                  fontVariationSettings: "'wdth' 100",
-                }}
-                className=" text-center mt-[6px]"
-              >
-                BREZPLAČNO
+            <div className="flex w-[332px] h-[266px] tablet:w-[333px] mobile:w-[348px] mobile:h-[258px] bg-[#FFFFFF] border-t-8 border-[#EB1D1D] flex-col mx-auto desktop:mx-0 justify-between">
+              <div>
+
+                <h3 className="text-[24px] text-[#3C3E41] font-variation-customOpt24 font-semibold text-center mt-[23.5px] tablet:mt-[30px]">
+                  Mesečna svečka
+                </h3>
+                <div
+                  style={{
+                    textShadow: "0px 3px 4px #00000050",
+                    color: "#2D3D48",
+                    fontWeight: 400,
+                    fontSize: "32px",
+                    fontVariationSettings: "'opsz' 32",
+                    fontVariationSettings: "'wdth' 100",
+                  }}
+                  className=" text-center mt-[6px]"
+                >
+                  BREZPLAČNO
+                </div>
               </div>
               {/* <div className="text-[14px] text-[#3090D5] font-variation-customOpt14 text-center mt-[20px]">
                 TEKOM OTVORITVENE AKCIJE
               </div> */}
-              <h3 className="text-[24px] text-[#3090D5] font-variation-customOpt32 text-center mt-[40px]">
+              {/* <h3 className="text-[24px] text-[#3090D5] font-variation-customOpt32 text-center mt-[40px]">
                 SAMO
-              </h3>
-              <div className="text-[24px] text-[#3090D5] font-variation-customOpt14 text-center mt-[3px]">
-                V VAŠI CVETLIČARNI
-              </div>
+              </h3> */}
+              <Link
+                href={"/primerjava"}
+                className="text-[14px] text-[#3090D5] font-variation-customOpt14 text-center mt-[3px] desktop:mb-[7px] tablet:mb-[2px] mobile:mb-[2px]"
+              >
+                POMENI BREZPLAČNI STATUS <br />SKRBNIKA SPOMINSKE STRANI ZA CEL MESEC
+              </Link>
             </div>
 
             {/*c2 container*/}
@@ -115,11 +121,11 @@ const AdministratorCompo = () => {
               </Link>
             </div>
           </div>
-          <p className="text-[#2D3D48] mt-4 mobile:text-center text-left mobile:px-4 px-0">
+          {/* <p className="text-[#2D3D48] mt-4 mobile:text-center text-left mobile:px-4 px-0">
             * Op. če na seznam ni vključena še nobena lokalna cvetličarna, nas
             kontaktirajte in vam bomo mesečnega skrbnika uredili mi, brezplačno
             seveda
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

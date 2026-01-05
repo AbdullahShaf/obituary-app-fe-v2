@@ -133,12 +133,14 @@ const SlideOne = () => {
           <div className="image-container flex justify-center">
             <img src="/mobile-cards/iPad Landscape.png" alt="Prikaz žalne strani na tabličnem računalniku - Osmrtnica.com" className=" h-[613px]  object-fill" loading="lazy" />
           </div>
-          <Link
-            href={"/zalna-stran"}
-            className="inline-flex px-[25px] rounded-[8px] py-[12px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] items-center justify-center"
-          >
-            Več o žalni strani
-          </Link>
+          <div>
+            <Link
+              href={"/zalna-stran"}
+              className="inline-flex px-[25px] rounded-[8px] py-[12px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF] items-center justify-center"
+            >
+              Več o žalni strani
+            </Link>
+          </div>
         </div>
       </div>
     );

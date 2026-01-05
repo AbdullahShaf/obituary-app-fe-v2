@@ -332,7 +332,7 @@ export default function HomeContent(props) {
                 e.preventDefault();
                 fetchObituary();
               }}
-              className="flex flex-col w-full items-center tablet:flex-row desktop:flex-row desktop:space-x-[16px] tablet:justify-between mobile:h-[112px] tablet:h-[48px] desktop:h-[48px]"
+              className="flex flex-col w-full items-center mobile:mb-[40px] tablet:flex-row desktop:flex-row gap-[16px] tablet:justify-between mobile:h-[112px] tablet:h-[48px] desktop:h-[48px]"
             >
               <div className="hidden desktop:flex h-[48px]">
                 <input
@@ -368,7 +368,8 @@ export default function HomeContent(props) {
                 selectedValue={selectedRegion}
                 onSelect={handleRegionSelect}
               />
-              <div className="flex h-[16px] w-[360px] tablet:hidden desktop:hidden" />
+              {/* <div className="flex h-[16px] w-[360px] tablet:hidden desktop:hidden" /> */}
+              <div className="flex h-[16px] w-[360px] mobile:hidden tablet:hidden desktop:hidden" />
               <SelectDropdown
                 heading={"Išči po kraju"}
                 data={cityOptions}
@@ -389,7 +390,8 @@ export default function HomeContent(props) {
               <button
                 type="submit"
                 onClick={() => fetchObituary()}
-                className="flex desktop:hidden h-[48px] mt-4 w-[296px] tablet:w-[292px] bg-[#414141] rounded-[8px] justify-center items-center"
+                className="flex desktop:hidden min-h-[48px] w-[296px] tablet:w-[292px] bg-[#414141] rounded-[8px] justify-center items-center"
+                // className="flex desktop:hidden w-[296px] h-[48px] text-[16px] text-[#F6F6F6] rounded-lg leading-6 bg-[#414141] font-[400] flex justify-center items-center cursor-pointer"
               >
                 <div
                   style={{
@@ -474,7 +476,8 @@ export default function HomeContent(props) {
               alt="Cvetličarne po občinah"
               className="h-[284px] w-[1280px] object-cover object-center mobile:h-[235px]"
             />
-            <div className="absolute flex flex-col items-center self-center desktop:h-[143px] desktop:w-[476px] desktop:right-[140px] tablet:h-[127px] tablet:w-[302px] tablet:left-1/2 mobile:right-[15px] mobile:h-[113px] mobile:w-[299px]">
+            {/* <div className="absolute flex flex-col items-center self-center desktop:h-[143px] desktop:w-[476px] desktop:right-[140px] tablet:h-[127px] tablet:w-[302px] tablet:left-1/2 mobile:right-[15px] mobile:h-[113px] mobile:w-[299px]"> */}
+            <div className="absolute flex flex-col self-center desktop:h-[143px] desktop:w-[476px] desktop:right-[140px] tablet:h-[127px] tablet:w-[302px] tablet:left-1/2 mobile:right-[15px] mobile:h-[113px] mobile:w-[299px]">
               <div className="tablet:mb-[32px] desktop:mb-[48px] mobile:mb-[32px] mobile:text-right mobile:w-full">
                 <h2
                   className="
@@ -483,12 +486,16 @@ export default function HomeContent(props) {
               font-normal text-[#FFFFFF]  
                 mobile:leading-[32.81px] whitespace-nowrap mobile:text-right mobile:w-full"
                 >
-                  Lokalne cvetličarne
+                  Lokalni partnerji
                 </h2>
+                <p className="
+              text-[20px]
+              font-normal text-[#FFFFFF]  
+                whitespace-nowrap mobile:text-[14px] tablet:text-[14px] mobile:text-right mobile:w-full mt-1">Podjetja, ki lahko pomagajo pri žalni slovesnosti</p>
               </div>
               <div className="relative">
                 <SelectDropdown
-                  label={"Mesto"}
+                  label={"Občina"}
                   isFromFlower={true}
                   isFromNotification={false}
                   isFrom={"mainPage"}
@@ -502,7 +509,7 @@ export default function HomeContent(props) {
             </div>
           </div>
         </div>
-        <NotificationView />
+        {/* <NotificationView /> */}
       </div>
     </Layout>
   );

@@ -32,7 +32,8 @@ export const SelectDropdown = ({
         ? "w-[306px] mobile:w-[240px] h-[48.48px]"
         : "w-[306px] h-[48.48px]";
     }
-    if (isFromFlower) return "w-[476px] h-[48px] tablet:w-[320px] mobile:w-[302px]";
+    if (isFromFlower) return "w-[405px] h-[48px] tablet:w-full mobile:w-full";
+    // if (isFromFlower) return "w-[476px] h-[48px] tablet:w-[320px] mobile:w-[302px]";
     if (isFromFlowerGreenBgTablet)
       return "w-[292px] desktop:w-[476px] h-[48px] tablet:w-[476px]";
     return "w-[292px] desktop:w-[227px] h-[48px]";

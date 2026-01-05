@@ -14,9 +14,9 @@ const HomeBackHeader = () => {
         alt="Naj spomin ne zbledi"
         className="mobile:flex hidden h-[257px] w-[1280px] object-cover"
       />
-      <div className="h-[170px] smmobile:w-[160px] smmobile:h-[332px] w-[288.58px] left-[25.41px] smmobile:left-[14px] top-2 rounded-lg border border-[#D4D4D4] absolute mobile:flex hidden overflow-hidden shadow-custom-light-dark-banner bg-gradient-to-br from-[#FFFFFF] to-[#FFFFFF10] backdrop-blur-sm">
+      <div className="h-[170px] smmobile:w-[135.58px] smmobile:h-[170px] w-[135.58px] left-[25.41px] smmobile:left-[14px] top-2 rounded-lg border border-[#D4D4D4] absolute mobile:flex hidden overflow-hidden shadow-custom-light-dark-banner bg-gradient-to-br from-[#FFFFFF] to-[#FFFFFF10] backdrop-blur-sm">
         <nav>
-          <ul className="grid grid-cols-2 smmobile:grid-cols-1 gap-[22px] p-4">
+          <ul className="grid grid-cols-2 mobile:grid-cols-1 gap-[22px] p-4">
             <li>
               <HeaderHeadingTextMobile
                 head={"OSMRTNICE"}
@@ -33,7 +33,7 @@ const HomeBackHeader = () => {
                 endPoint={"/pogrebi?city=Celje"}
               />
             </li>
-            <li>
+            <li style={{ visibility: 'hidden' }}>
               <HeaderHeadingTextMobile
                 head={"SPOMINSKA"}
                 index={"03."}
@@ -41,16 +41,33 @@ const HomeBackHeader = () => {
                 endPoint={"/osmrtnice"}
               />
             </li>
-            <li>
+            {/* <li style={{ display: 'none' }}>
               <HeaderHeadingTextMobile
-                head={"CVETLIČARNE"}
-                index={"04."}
+                head={"VSE ZA POGREBE"}
+                index={"03."}
                 id={4}
                 endPoint={"/cvetlicarne"}
               />
-            </li>
+            </li> */}
           </ul>
         </nav>
+        {/* <div className="absolute top-4 left-4">
+          <HeaderHeadingTextMobile
+            head={"VSE ZA POGREBE"}
+            index={"03."}
+            id={4}
+            endPoint={"/cvetlicarne"}
+          />
+        </div> */}
+      </div>
+      <div className="mobile:flex tablet:hidden desktop:hidden absolute top-[260px] right-[10px]">
+        <HeaderHeadingTextSpecial
+          head={"VSE ZA POGREBE"}
+          index={"03"}
+          id={4}
+          endPoint={"/lokalni"}
+          // endPoint={"/cvetlicarne"}
+        />
       </div>
       <nav className="justify-center absolute bottom-[44px] -mr-9 desktop:flex hidden">
         <ul className="flex">
@@ -70,7 +87,7 @@ const HomeBackHeader = () => {
               endPoint={"/pogrebi?city=Celje"}
             />
           </li>
-          <li>
+          <li style={{ visibility: 'hidden' }}>
             <HeaderHeadingText
               head={"SPOMINSKA"}
               index={"03."}
@@ -80,10 +97,10 @@ const HomeBackHeader = () => {
           </li>
           <li>
             <HeaderHeadingText
-              head={"CVETLIČARNE"}
-              index={"04."}
+              head={"VSE ZA POGREBE"}
+              index={"03."}
               id={4}
-              endPoint={"/cvetlicarne"}
+              endPoint={"/lokalni"}
             />
           </li>
         </ul>
@@ -106,7 +123,7 @@ const HomeBackHeader = () => {
               endPoint={"/pogrebi?city=Celje"}
             />
           </li>
-          <li>
+          <li style={{ visibility: 'hidden' }}>
             <HeaderHeadingTextTablet
               head={"SPOMINSKA"}
               index={"03."}
@@ -116,10 +133,10 @@ const HomeBackHeader = () => {
           </li>
           <li>
             <HeaderHeadingTextTablet
-              head={"CVETLIČARNE"}
-              index={"04."}
+              head={"VSE ZA POGREBE"}
+              index={"03."}
               id={4}
-              endPoint={"/cvetlicarne"}
+              endPoint={"/lokalni"}
             />
           </li>
         </ul>
@@ -132,7 +149,7 @@ export default HomeBackHeader;
 
 const HeaderHeadingText = ({ head, index, id, endPoint }) => {
   return (
-    <div className="flex flex-row items-end w-[220px] ">
+    <div className="flex flex-row items-end w-[230px] ">
       <div className="w-[1.5px] h-[60px] bg-[#FFFFFF80] mr-[15px]" />
       <Link href={endPoint} className="">
         <div className="h-[75px]">
@@ -212,7 +229,8 @@ const HeaderHeadingTextTablet = ({ head, index, id, endPoint }) => {
 };
 const HeaderHeadingTextMobile = ({ head, index, id, endPoint }) => {
   return (
-    <div className="flex flex-row w-[110px] items-end ">
+    <div className="flex flex-row w-[200px] items-end ">
+      {/* <div className="flex flex-row w-[110px] items-end "> */}
       <div className="w-[1px] h-[57px] bg-[#C0C0C080]  " />
       <Link href={endPoint} className="ml-[6px]">
         <div className="h-[38px]">
@@ -235,6 +253,45 @@ const HeaderHeadingTextMobile = ({ head, index, id, endPoint }) => {
             className="flex"
             style={{
               color: "#414141",
+              fontWeight: "500",
+              fontSize: "16px",
+              lineHeight: "19px",
+              fontVariationSettings: "'opsz' 16",
+            }}
+          >
+            {head}
+          </p>
+        </div>
+      </Link>
+    </div>
+  );
+};
+
+const HeaderHeadingTextSpecial = ({ head, index, id, endPoint }) => {
+  return (
+    <div className="flex flex-row w-[200px] items-center ">
+      <Link href={endPoint} className="ml-[6px] flex flex-row-reverse items-center gap-2">
+        <div className="h-[38px] flex items-center gap-2">
+          <div className="w-[1px] h-[47px] bg-[#C0C0C080]  " />
+          <p
+            className="flex"
+            style={{
+              fontWeight: "200",
+              textShadow: "1px 1px 2px #fff",
+              color: "#A2A2A2",
+              fontSize: "32px",
+              lineHeight: "38px",
+              fontVariationSettings: "'opsz' 32",
+            }}
+          >
+            {index}
+          </p>
+        </div>
+        <div className=" flex items-center h-[19px]">
+          <p
+            className="flex"
+            style={{
+              color: "#A2A2A2",
               fontWeight: "500",
               fontSize: "16px",
               lineHeight: "19px",

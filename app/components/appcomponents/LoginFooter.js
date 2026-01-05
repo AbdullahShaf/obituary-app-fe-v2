@@ -164,7 +164,7 @@ export default function LoginFooter() {
                     </li>
                     <li className=" mobile:h-[16px] tablet:h-[24px] desktop:h-[24px] items-center mt-4">
                       <a
-                        href="#"
+                        href="www.osmrtnica.com/lokalni"
                         className="text-[#414141] font-normal   hover:text-blue-500 transition duration-200 mobile:text-[14px] tablet:text-[16px] desktop:text-[16px]"
                       >
                         Partnerji

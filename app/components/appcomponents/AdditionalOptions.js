@@ -113,7 +113,7 @@ const AdditionalOptions = () => {
     <div className="bg-white w-full">
       <div className="relative max-w-[1920px] w-full overflow-hidden mx-auto justify-center items-center  flex ">
         {/*Main container*/}
-        <div className="flex flex-col items-center mobile:mt-10 pt-[114px] pb-[86px]">
+        <div className="flex flex-col items-center py-[114px] tablet:py-[95px] mobile:py-[54px]">
           {/*Header container*/}
           <div className="flex w-[617.64px] h-[170px] tablet:h-[136px] mobile:h-[127px] mobile:w-[360px] flex-col items-center">
             <h2 className="w-full flex justify-center h-12 text-[40px] mobile:text-[28px] text-[#1E2125] font-variation-customOpt40 mobile:font-variation-customOpt28 mobile:text-center ">

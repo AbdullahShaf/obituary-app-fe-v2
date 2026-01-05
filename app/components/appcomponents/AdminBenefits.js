@@ -7,7 +7,7 @@ export default function AdminBenefits() {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div className="bg-[#F9EBD466]">
-      <div className="relative max-w-[1029px] tablet:max-w-[640px] py-[125px] tablet:py-[95px] px-[10px] w-full mx-auto">
+      <div className="relative max-w-[1029px] tablet:max-w-[640px] py-[125px] tablet:py-[95px] mobile:py-[74px] px-[10px] w-full mx-auto">
         <h2 className="text-center text-[40px] font-[400] text-[#3C3E41] leading-[32px] mobile:text-[28px] mobile:leading-[40px]">Prednosti Skrbnika</h2>
         <div className="space-y-[125px] mobile:hidden tablet:space-y-[60px] mobile:space-y-[60px] mt-[100px] tablet:mt-[55px] mobile:mt-[55px]">
           <div className="flex gap-[100px] items-center">
@@ -21,7 +21,7 @@ export default function AdminBenefits() {
               </p>
             </div>
           </div>
-          <div className="flex mobile:flex-col mobile:px-[25px] tablet:px-[25px] tablet:flex-col gap-[120px] tablet:gap-[60px] mobile:gap-[60px] items-center">
+          <div className="flex mobile:flex-col mobile:px-[0px] tablet:px-[0px] tablet:flex-col gap-[120px] tablet:gap-[60px] mobile:gap-[60px] items-center">
             <div className="space-y-[10px]">
               <h3 className="text-[24px] font-[700] text-[#3C3E41] leading-[48px]">2. Zbližuje ljudi, povezuje generacije</h3>
               <p className="text-[18px] font-[400] text-[#3C3E41] leading-[27px]">
@@ -34,7 +34,7 @@ export default function AdminBenefits() {
               <Image src="/admin_benifits_3.png" alt="Prednosti Skrbnika - Večni zapisi" className="w-[85px] hidden tablet:block shrink-0 mx-auto" width={85} height={170} />
             </div>
           </div>
-          <div className="flex gap-[100px] mobile:px-[25px] tablet:px-[25px] items-center">
+          <div className="flex gap-[100px] mobile:px-[0px] tablet:px-[0px] items-center">
             <div className="min-w-[270px] shrink-0 mobile:hidden tablet:hidden">
               <Image src="/admin_benifits_3.png" alt="Prednosti Skrbnika - Večni zapisi" className="w-[123px] shrink-0 mx-auto" width={123} height={244} />
             </div>
@@ -64,8 +64,8 @@ export default function AdminBenefits() {
         <div className="hidden mobile:block space-y-[50px] mt-[35px] max-w-[335px] mx-auto text-center">
           {activeIndex === 0 && <div className="space-y-[16px]">
             <h3 className="text-[20px] font-[600] text-[#3C3E41] leading-[28px]">
-            1. <br />
-            Omogoči številne dodatne možnosti VSEM bližnjim
+              {/* 1. <br /> */}
+              Omogoči številne dodatne možnosti VSEM bližnjim
             </h3>
             <p className="text-[15px] font-[400] text-[#3C3E41] leading-[22px]">
             Skrbnik prevzame skrb za objavljenimi vsebinami vseh in s tem omogoči družini in vsem bližnjim dodajanje vsebin osebne narave. <br />
@@ -75,8 +75,8 @@ export default function AdminBenefits() {
           </div>}
           {activeIndex === 1 && <div className="space-y-[16px]">
             <h3 className="text-[20px] font-[600] text-[#3C3E41] leading-[28px]">
-            2. <br />
-            Zbližuje ljudi, povezuje generacije
+              {/* 2. <br /> */}
+              Zbližuje ljudi, povezuje generacije
             </h3>
             <p className="text-[15px] font-[400] text-[#3C3E41] leading-[22px]">
             Spominsko stran lahko tako skupaj soustvarjajo vsi, ki so pokojnega imeli radi – družina, prijatelji in znanci. Mlajši, ki so navajeni digitalnih vsebin, lahko na ta način laže vzpostavijo povezavo s predniki, oddaljeni sorodniki pa lahko sodelujejo ne glede na geografsko oddaljenost. <br />
@@ -84,8 +84,8 @@ export default function AdminBenefits() {
           </div>}
           {activeIndex === 2 && <div className="space-y-[16px]">
             <h3 className="text-[20px] font-[600] text-[#3C3E41] leading-[28px]">
-            3. <br />
-            Večni zapisi. Lahko tudi samo za najbližje
+              {/* 3. <br /> */}
+              Večni zapisi. Lahko tudi samo za najbližje
             </h3>
             <p className="text-[15px] font-[400] text-[#3C3E41] leading-[22px]">
             Zapisi na digitalnem mediju so večni, zgodbe živijo in slike ne zbledijo, drugače kot velja za tiste v predalu ali albumu. Tiste redko odpremo, medtem ko se na živo stran, ki se neprestano dopolnjuje, radi vračamo. Bližnji bodo hvaležni. <br />
@@ -94,8 +94,8 @@ export default function AdminBenefits() {
           </div>}
           {activeIndex === 3 && <div className="space-y-[16px]">
             <h3 className="text-[20px] font-[600] text-[#3C3E41] leading-[28px]">
-            4. <br />
-            Cvetličarne podarijo status skrbnika za en mesec
+              {/* 4. <br /> */}
+              Cvetličarne podarijo status skrbnika za en mesec
             </h3>
             <p className="text-[15px] font-[400] text-[#3C3E41] leading-[22px]">
             Žalujoči lahko v tem času neomejeno dopolnjujejo spominsko stran (Skrbnik mora potrditi objavo) in vse vsebine, ki se dodajo, bodo ostale tudi, ko status poteče. <br />

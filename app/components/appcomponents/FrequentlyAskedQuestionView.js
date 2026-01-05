@@ -55,7 +55,7 @@ export const FrequentlyAskedQuestionView = ({ from, data }) => {
       <div
         className={`h-full max-w-[1920px] mx-auto w-full flex py-[65px] desktop:py-[105px] tablet:py-[75px] bg-[#F1F8FF] justify-center overflow-hidden `}
       >
-        <div className="h-full  mx-auto max-w-[700px] px-5 w-full flex flex-col items-start tablet:items-center mobile:items-center">
+        <div className="h-full  mx-auto max-w-[700px] w-full flex flex-col items-start tablet:items-center mobile:items-center">
           <div className="flex mb-8 mobile:flex-col w-full justify-between ">
             <h2 className="self-start text-[#1E2125] text-[40px] mobile:text-[24px] font-normal leading-[47px] mobile:leading-[33px]">
               Pogosta vprašanja
@@ -155,7 +155,7 @@ export const FrequentlyAskedQuestionView2 = ({ from, data }) => {
       <div
         className={`h-full max-w-[1920px] mx-auto w-full flex py-[65px] desktop:py-[105px] tablet:py-[75px]  justify-center overflow-hidden `}
       >
-        <div className="h-full  mx-auto max-w-[700px] px-4 w-full flex flex-col items-start tablet:items-center mobile:items-center">
+        <div className="h-full  mx-auto max-w-[700px] w-full flex flex-col items-start tablet:items-center mobile:items-center">
           <div className="flex mobile:flex-col w-full justify-between mb-[27px]">
             <h2 className="self-start text-[#1E2125] text-[40px] mobile:text-[24px] font-normal leading-[47px] mobile:leading-[33px]">
               Pogosta vprašanja
@@ -198,7 +198,7 @@ export const FrequentlyAskedQuestionView2 = ({ from, data }) => {
                     <div
                       key={index}
                       dangerouslySetInnerHTML={{ __html: faq.answer }}
-                      className="text-[#1E2125] w-full prose mt-2 mb-6 desktop:px-6 whitespace-pre-line mobile:px-3.5"
+                      className="text-[#1E2125] w-full prose mt-2 mb-6 desktop:px-2 whitespace-pre-line mobile:px-2"
                     ></div>
                   )}
                 </React.Fragment>

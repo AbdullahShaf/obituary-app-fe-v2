@@ -15,10 +15,22 @@ const MemorialWithAdmin = () => {
                                 Spominska stran s <span className="text-[#0A85C2] font-semibold">Skrbnikom</span>
                             </h1>
 
-                            <h2 className="text-[24px] mobile:text-[20px] tablet:text-[22px] mobile:text-center tablet:text-center mobile:leading-[28px] tablet:leading-[30px] leading-[48px] mobile:mt-[12px] tablet:mt-[15px] mt-[5px] font-bold mobile:font-variation-customOpt24
-                         font-variation-customOpt24 text-[#3C3E41]">
-                                Nadgradnja v pravo spominsko stran
+                            <h2 className="text-[24px] tablet:text-[22px] mobile:text-[20px]
+               text-left text-[#3C3E41] font-bold
+               leading-[48px] tablet:leading-[30px] mobile:leading-[28px]
+               mt-[5px] tablet:mt-[15px] mobile:mt-[12px]
+               text-center tablet:text-center mobile:text-center">
+
+                                <span className="block tablet:hidden desktop:hidden">
+                                    Nadgradnja v stran spominov
+                                </span>
+
+                                <span className="hidden tablet:block desktop:block text-left" >
+                                    Nadgradnja v pravo spominsko stran
+                                </span>
+
                             </h2>
+
 
                             <p className="mt-[16px] mobile:mt-[12px] tablet:mt-[15px] text-[#3C3E41] tablet:text-center mobile:text-center text-[18px] mobile:text-[16px] tablet:text-[17px] leading-[27px] mobile:leading-[24px] tablet:leading-[25px] font-variation-customOpt18">
                                 Skrbnik (običajno nekdo, ki je bil pokojnemu blizu) omogoči številne dodatne
@@ -38,7 +50,7 @@ const MemorialWithAdmin = () => {
 
                 </div>
             </div>
-            <div className="h-[30px] mobile:h-[20px] tablet:h-[25px] bg-transparent w-full" />
+            <div className="h-[30px] mobile:hidden tablet:h-[25px] bg-transparent w-full" />
         </div>
     );
 

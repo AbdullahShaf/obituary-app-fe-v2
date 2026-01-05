@@ -51,7 +51,7 @@ export default function AdminBenefits() {
             <div className="space-y-[10px]">
               <h3 className="text-[24px] font-[700] text-[#3C3E41] leading-[48px]">4. Status skrbnika za en mesec BREZPLAČNO</h3>
               <p className="text-[18px] font-[400] text-[#3C3E41] leading-[27px]">
-                Žalujoči lahko v tem času neomejeno dopolnjujejo spominsko stran (Skrbnik mora potrditi objavo) in vse vsebine, ki se dodajo, bodo ostale tudi, ko status poteče.  <br />
+                Žalujoči lahko v tem času dopolnjujejo spominsko stran (Skrbnik mora potrditi objavo) in vse vsebine, ki se dodajo, bodo ostale tudi, ko status poteče.  <br />
                 Po enem mesecu se obstoječi Skrbnik odloči, ali bo status podaljšal za eno leto ali več ali pa bo status skrbnika ukinjen in dodajanje novih vsebin ne bo več mogoče.
               </p>
             </div>
@@ -95,7 +95,7 @@ export default function AdminBenefits() {
           {activeIndex === 3 && <div className="space-y-[16px]">
             <h3 className="text-[20px] font-[600] text-[#3C3E41] leading-[28px]">
               4. <br />
-              Cvetličarne podarijo status skrbnika za en mesec
+              Status skrbnika cel mesec BREZPLAČNO
             </h3>
             <p className="text-[15px] font-[400] text-[#3C3E41] leading-[22px]">
               Žalujoči lahko v tem času neomejeno dopolnjujejo spominsko stran (Skrbnik mora potrditi objavo) in vse vsebine, ki se dodajo, bodo ostale tudi, ko status poteče. <br />

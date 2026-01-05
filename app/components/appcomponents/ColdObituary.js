@@ -367,8 +367,8 @@ const ColdObituary = () => {
                 {/*box 4 contianer*/}
                 <div className='flex w-[1091px] h-[164px] tablet:w-[607px] tablet:h-[137px] mobile:w-[293px] mobile:h-[239px] mt-8 tablet:mt-[67px] mobile:mt-[40px] flex-col items-center justify-end'>
                     <div className='text-[24px] text-[#1E2125] font-variation-customOpt24 font-bold text-center mobile:leading-[48px]'>Vse navedeno je BREZPLAČNO!</div>
-                    <div className='text-[18px] w-[812px] tablet:w-[607px] mobile:w-[295px] mobile:h-[135px] mt-2 text-[#1E2125] font-variation-customOpt18 text-center leading-[27px]'>Tudi izdelava same strani osmrtnice je popolnoma brezplačna pri vašem lokalnem pogrebnem podjetju.
-                        Zato sodelujte, navdahnite strani najdražjih s svojo toplino.</div>
+                    <div className='text-[18px] w-[812px] tablet:w-[607px] mobile:w-[295px] mobile:h-[135px] mt-2 text-[#1E2125] font-variation-customOpt18 text-center leading-[27px]'>Tudi izdelava same strani osmrtnice je popolnoma brezplačna.<br/>
+                        Zato sodelujte, navdahnite strani najdražjih s svojo toplino. </div>
                 </div>
 
             </div>

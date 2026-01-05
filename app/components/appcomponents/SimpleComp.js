@@ -74,8 +74,7 @@ const SimpleComp = () => {
                     Povej naprej
                   </h3>
                   <div className="text-[16px] text-[#3C3E41] font-variation-customOpt16 text-center mt-4">
-                  V svoji lokalni cvetličarni brezplačno dobiš tudi digitalne kartice za pošiljanje naprej; in nekaj časa tudi Skrbnika.   
-                  </div>
+                    K sodelovanju in deljenju zgodb povabi tudi druge. Izdelane predloge te že čakajo in vneseš samo email ali tel številko.                     </div>
                 </div>
               </div>
             </div>
@@ -112,7 +111,8 @@ const SimpleComp = () => {
               <h3 className="text-[20px] text-[#1E2125] font-variation-customOpt20wght400 font-semibold mt-4 mobile:mt-3">
                 Začneš lahko takoj
               </h3>
-              <div className="text-[16px] h-[72px] text-[#3C3E41] font-variation-customOpt16 text-center mt-4 desktop:mx-3">
+              <div className="text-[16px] h-[72px] text-[#3C3E41] font-variation-customOpt16 text-center mt-4">
+              {/* <div className="text-[16px] h-[72px] text-[#3C3E41] font-variation-customOpt16 text-center mt-4 desktop:mx-3"> */}
                 Odpri osmrtnico svojih dragih in z izrekanji sožalja, vpisi v
                 Žalno knjigo, prižiganjem svečk, lahko pričneš takoj.
               </div>
@@ -130,8 +130,9 @@ const SimpleComp = () => {
               <h3 className="text-[20px] text-[#1E2125] font-variation-customOpt20wght400 font-semibold mt-[14px] mobile:mt-3">
                 Povej naprej
               </h3>
-              <div className="text-[16px] h-[72px] text-[#3C3E41] font-variation-customOpt16 text-center mt-4 mobile:mt-3 desktop:mx-3">
-              V svoji lokalni cvetličarni brezplačno dobiš tudi digitalne kartice za pošiljanje naprej; in nekaj časa tudi Skrbnika.   
+              <div className="text-[16px] h-[72px] text-[#3C3E41] font-variation-customOpt16 text-center mt-4 mobile:mt-3">
+              {/* <div className="text-[16px] h-[72px] text-[#3C3E41] font-variation-customOpt16 text-center mt-4 mobile:mt-3 desktop:mx-3"> */}
+                K sodelovanju in deljenju zgodb povabi tudi druge. Izdelane predloge te že čakajo in vneseš samo email ali tel številko.
               </div>
             </div>
           </div>

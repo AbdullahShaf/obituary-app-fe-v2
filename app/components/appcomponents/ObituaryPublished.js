@@ -25,7 +25,7 @@ const ObituaryPublished = ({ set_Id, setModal, data }) => {
                 {data && data.createdTimestamp
                   ? format(new Date(data.createdTimestamp), "dd.MM.yyyy")
                   : "N/A"}{" "}
-                by preko:
+                preko:
               </div>
               <div className="block text-[16px] text-[#36556C] leading-[100%] mb-[12px] mobile:hidden">
                 {data?.User?.name}

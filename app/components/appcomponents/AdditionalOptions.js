@@ -113,20 +113,20 @@ const AdditionalOptions = () => {
     <div className="bg-white w-full">
       <div className="relative max-w-[1920px] w-full overflow-hidden mx-auto justify-center items-center  flex ">
         {/*Main container*/}
-        <div className="flex flex-col items-center py-[114px] tablet:py-[95px] mobile:py-[54px]">
+        <div className="flex flex-col items-center py-[114px] mobile:py-[54px]">
           {/*Header container*/}
-          <div className="flex w-[617.64px] h-[170px] tablet:h-[136px] mobile:h-[127px] mobile:w-[360px] flex-col items-center">
-            <h2 className="w-full flex justify-center h-12 text-[40px] mobile:text-[28px] text-[#1E2125] font-variation-customOpt40 mobile:font-variation-customOpt28 mobile:text-center ">
+          <div className="flex w-[617.64px] h-[170px] mobile:h-[127px] mobile:w-[360px] flex-col items-center">
+            <h2 className="w-full flex justify-center h-12 text-[40px] text-[#1E2125] font-variation-customOpt40 mobile:text-[28px] mobile:font-variation-customOpt28 mobile:text-center">
               Dodatne možnosti
             </h2>
-            <div className="w-full h-[27px] text-[24px] mobile:text-[20px] mobile:font-variation-customOpt20wght400 text-[#3C3E41] font-bold font-variation-customOpt24 flex justify-center mt-2 mobile:mt-[2px]">
+            <div className="w-full h-[27px] text-[24px] text-[#3C3E41] font-bold font-variation-customOpt24 flex justify-center mt-2 mobile:text-[20px] mobile:font-variation-customOpt20wght400 mobile:mt-[2px]">
               na spominski strani{" "}
               <span className="text-[#0A85C2] ml-1"> s Skrbnikom</span>
             </div>
           </div>
 
           {/*grid container*/}
-          <div className="grid grid-cols-3 gap-x-[40px] tablet:gap-x-0 gap-y-6 tablet:grid-cols-2 mobile:grid-cols-1">
+          <div className="grid grid-cols-3 gap-x-[40px] gap-y-6 mobile:grid-cols-1 mobile:gap-x-0">
             {/*grid column container*/}
             {list.slice(0, expand ? list.length : 6).map((item, index) => (
               <div
@@ -144,7 +144,7 @@ const AdditionalOptions = () => {
                   <span className="text-[#0A85C2]">{item.subtitle}</span>
                 </div>
 
-                <div className="w-[295.42px] h-[72px] tablet:px-1 text-[14px] text-[#3C3E41] font-variation-customOpt14 text-center mt-[14px] leading-6">
+                <div className="w-[295.42px] h-[72px] text-[14px] text-[#3C3E41] font-variation-customOpt14 text-center mt-[14px] leading-6 mobile:px-1">
                   {item.description}
                 </div>
               </div>

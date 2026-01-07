@@ -7,11 +7,11 @@ export default function AdminBenefits() {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div className="bg-[#F9EBD466]">
-      <div className="relative max-w-[1029px] tablet:max-w-[640px] py-[125px] tablet:py-[95px] mobile:py-[74px] px-[10px] w-full mx-auto">
+      <div className="relative max-w-[1029px] py-[125px] mobile:py-[74px] px-[10px] w-full mx-auto">
         <h2 className="text-center text-[40px] font-[400] text-[#3C3E41] leading-[32px] mobile:text-[28px] mobile:leading-[40px]">Prednosti Skrbnika</h2>
-        <div className="space-y-[125px] mobile:hidden tablet:space-y-[60px] mobile:space-y-[60px] mt-[100px] tablet:mt-[55px] mobile:mt-[55px]">
+        <div className="space-y-[125px] mt-[100px] mobile:hidden mobile:space-y-[60px] mobile:mt-[55px]">
           <div className="flex gap-[100px] items-center">
-            <Image src="/admin_benifits_1.png" alt="Prednosti Skrbnika - Omogoči številne dodatne možnosti" className="w-[281px] shrink-0 tablet:hidden mobile:hidden" width={281} height={221} />
+            <Image src="/admin_benifits_1.png" alt="Prednosti Skrbnika - Omogoči številne dodatne možnosti" className="w-[281px] shrink-0 mobile:hidden" width={281} height={221} />
             <div className="space-y-[10px]">
               <h3 className="text-[24px] font-[700] text-[#3C3E41] leading-[48px]">1. Omogoči številne dodatne možnosti VSEM bližnjim</h3>
               <p className="text-[18px] font-[400] text-[#3C3E41] leading-[27px]">
@@ -21,7 +21,7 @@ export default function AdminBenefits() {
               </p>
             </div>
           </div>
-          <div className="flex mobile:flex-col mobile:px-[0px] tablet:px-[0px] tablet:flex-col gap-[120px] tablet:gap-[60px] mobile:gap-[60px] items-center">
+          <div className="flex gap-[120px] items-center mobile:flex-col mobile:px-[0px] mobile:gap-[60px]">
             <div className="space-y-[10px]">
               <h3 className="text-[24px] font-[700] text-[#3C3E41] leading-[48px]">2. Zbližuje ljudi, povezuje generacije</h3>
               <p className="text-[18px] font-[400] text-[#3C3E41] leading-[27px]">
@@ -29,13 +29,12 @@ export default function AdminBenefits() {
                 Skrbnik lahko dodeli status skrbnika še nekomu in tako skupaj soustvarjata spominsko stran in se medsebojno povezujeta (npr. dedek - vnuk).
               </p>
             </div>
-            <div className="desktop:min-w-[250px] shrink-0 mobile:hidden tablet:flex tablet:gap-[44px]">
-              <Image src="/admin_benifits_2.png" alt="Prednosti Skrbnika - Zbližuje ljudi, povezuje generacije" className="w-[181px] tablet:w-[130px]" width={181} height={237} />
-              <Image src="/admin_benifits_3.png" alt="Prednosti Skrbnika - Večni zapisi" className="w-[85px] hidden tablet:block shrink-0 mx-auto" width={85} height={170} />
+            <div className="min-w-[250px] shrink-0 mobile:hidden">
+              <Image src="/admin_benifits_2.png" alt="Prednosti Skrbnika - Zbližuje ljudi, povezuje generacije" className="w-[181px]" width={181} height={237} />
             </div>
           </div>
-          <div className="flex gap-[100px] mobile:px-[0px] tablet:px-[0px] items-center">
-            <div className="min-w-[270px] shrink-0 mobile:hidden tablet:hidden">
+          <div className="flex gap-[100px] items-center mobile:px-[0px]">
+            <div className="min-w-[270px] shrink-0 mobile:hidden">
               <Image src="/admin_benifits_3.png" alt="Prednosti Skrbnika - Večni zapisi" className="w-[123px] shrink-0 mx-auto" width={123} height={244} />
             </div>
 
@@ -55,7 +54,7 @@ export default function AdminBenefits() {
                 Po enem mesecu se obstoječi Skrbnik odloči, ali bo status podaljšal za eno leto ali več ali pa bo status skrbnika ukinjen in dodajanje novih vsebin ne bo več mogoče.
               </p>
             </div>
-            <div className="min-w-[270px] shrink-0 mobile:hidden tablet:hidden">
+            <div className="min-w-[270px] shrink-0 mobile:hidden">
               <Image src="/admin_benifits_4.jpg" alt="Prednosti Skrbnika - Cvetličarne podarijo status skrbnika" className="w-[270px] mx-auto" width={270} height={168} />
             </div>
           </div>

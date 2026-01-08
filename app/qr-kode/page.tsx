@@ -206,11 +206,11 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                   <div className="banner_content">
                     <div className="">
                       <h1 className="tablet:text-center mobile:text-center text-[40px] mobile:text-[28px] leading-[48px] text-[#3c3e41]">QR kode za nagrobnike</h1>
-                      <h2 className="text-[24px] tablet:text-[22px] mobile:text-[20px] leading-[48px] tablet:leading-[30px] mobile:leading-[28px] tablet:text-center mobile:text-center font-bold text-[#3c3e41]">Ohranite spomin na vaše najdražje za vedno</h2>
+                      <h2 className="text-[24px] tablet:text-[22px] mobile:text-[20px] leading-[32px] tablet:leading-[30px] mobile:leading-[28px] tablet:text-center mobile:text-center font-bold text-[#3c3e41]">Ohranite spomin na vaše najdražje za vedno</h2>
                     </div>
                     <div className="banner_content_detail mt-[38px] tablet:mt-[38px] mobile:mt-[30px]">
                       <p>Nagrobniki se niso bistveno spremenili v zadnjih nekaj tisoč letih.... do zdaj.</p>
-                      <p className="text-web">QR kode predstavljajo inovativno rešitev, ki združuje tradicionalne nagrobnike z digitalno tehnologijo, kar omogoča globljo povezavo z življenjsko zgodbo pokojnika preko dodajanja fotografij, življenjepisa, video posnetkov, deljenja zgodb in čarobnih trenutkov s pokojnim. </p>
+                      <p className="text-web leading-[27px]">QR kode predstavljajo inovativno rešitev, ki združuje tradicionalne nagrobnike z digitalno tehnologijo, kar omogoča globljo povezavo z življenjsko zgodbo pokojnika preko dodajanja fotografij, življenjepisa, video posnetkov, deljenja zgodb in čarobnih trenutkov s pokojnim. </p>
                     </div>
                   </div>
                 </div>
@@ -220,7 +220,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                   </div>
                 </div>
 
-                <p className="text-mob">QR kode predstavljajo inovativno rešitev, ki združuje tradicionalne nagrobnike z digitalno tehnologijo, kar omogoča globljo povezavo z življenjsko zgodbo pokojnika preko dodajanja fotografij, življenjepisa, video posnetkov, deljenja zgodb in čarobnih trenutkov s pokojnim. </p>
+                <p className="text-mob leading-[24px]">QR kode predstavljajo inovativno rešitev, ki združuje tradicionalne nagrobnike z digitalno tehnologijo, kar omogoča globljo povezavo z življenjsko zgodbo pokojnika preko dodajanja fotografij, življenjepisa, video posnetkov, deljenja zgodb in čarobnih trenutkov s pokojnim. </p>
               </div>
             </div>
           </section>
@@ -251,7 +251,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         </div>
                         <div className="hiw_card_detail">
                           <h3 className="!text-[#1e2125] !font-semibold !text-[20px] !leading-[24px] !pb-4">Skeniraj QR kodo</h3>
-                          <p className="pb-16px">Pametni telefoni imajo skeniranje preko kamere avtomatizirano.</p>
+                          <p className="pb-4">Pametni telefoni imajo skeniranje preko kamere avtomatizirano.</p>
                           <p>Op. bolj podrobna navodila so <a href="#faqs">tukaj</a></p>
                         </div>
                       </div>
@@ -263,7 +263,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         </div>
                         <div className="hiw_card_detail">
                           <h3 className="!text-[#1e2125] !font-semibold !text-[20px] !leading-[24px] !pb-4">Odpre se spominska</h3>
-                          <p>in s tem možnost popolnoma drugačnega doživljanja in spominjanja na pokojnega. </p>
+                          <p className="leading-[24px]">in s tem možnost popolnoma drugačnega doživljanja in spominjanja na pokojnega. </p>
                         </div>
                       </div>
                     </li>
@@ -274,7 +274,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         </div>
                         <div className="hiw_card_detail">
                           <h3 className="!text-[#1e2125] !font-semibold !text-[20px] !leading-[24px] !pb-4">Vsak lahko sodeluje</h3>
-                          <p>Skrbnik pa na koncu odloči, kaj bo dejansko objavljeno.    </p>
+                          <p className="leading-[24px]">Skrbnik pa na koncu odloči, kaj bo dejansko objavljeno.    </p>
                         </div>
                       </div>
                     </li>
@@ -299,16 +299,16 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                           <Image src={bnefitsQrImg1} alt="Bnefits Qr Img1" />
                         </div>
                         <div className="feature_text">
-                          <h3 className="web-text">1. Oživljanje spominov; prikliče nazaj že zbledele zgodbe</h3>
-                          <p>Namesto zgolj imena in datumov na nagrobniku lahko obiskovalci vidijo pokojnikov nasmeh, slišijo njegov glas ali gledajo trenutke iz njegovega življenja prek videov, zvočnih posnetkov ali albumov slik. Morda že zbledele zgodbe in spomini znova oživijo, zgodbe pa ostanejo dostopne še prihodnjim rodovom.</p>
+                          <h3 className="web-text leading-[28px]">1. Oživljanje spominov; prikliče nazaj že zbledele zgodbe</h3>
+                          <p className="leading-[27px]">Namesto zgolj imena in datumov na nagrobniku lahko obiskovalci vidijo pokojnikov nasmeh, slišijo njegov glas ali gledajo trenutke iz njegovega življenja prek videov, zvočnih posnetkov ali albumov slik. Morda že zbledele zgodbe in spomini znova oživijo, zgodbe pa ostanejo dostopne še prihodnjim rodovom.</p>
                         </div>
                       </div>
                     </li>
                     <li>
                       <div className="feature_item qr_osmrtnica_img_wrapper">
                         <div className="feature_text">
-                          <h3>2. Zbližuje ljudi, povezuje generacije</h3>
-                          <p>Spominsko spletno stran lahko skupaj ustvarjajo vsi, ki so pokojnega imeli radi - družina, prijatelji in znanci. Mlajši, ki so navajeni digitalnih vsebin, lahko na ta način lažje vzpostavijo povezavo s predniki, oddaljeni sorodniki pa lahko sodelujejo ne glede na geografsko oddaljenost.</p>
+                          <h3 className="leading-[28px]">2. Zbližuje ljudi, povezuje generacije</h3>
+                          <p className="leading-[27px]">Spominsko spletno stran lahko skupaj ustvarjajo vsi, ki so pokojnega imeli radi - družina, prijatelji in znanci. Mlajši, ki so navajeni digitalnih vsebin, lahko na ta način lažje vzpostavijo povezavo s predniki, oddaljeni sorodniki pa lahko sodelujejo ne glede na geografsko oddaljenost.</p>
                         </div>
                         <div className="feature_image qr_osmrtnica_img">
                           <Image src={bnefitsQrImg2} alt="Bnefits Qr Img2" />
@@ -322,16 +322,16 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                           <Image src={bnefitsQrImg3} alt="Bnefits Qr Img3" />
                         </div>
                         <div className="feature_text">
-                          <h3>3. Visoka obstojnost</h3>
-                          <p>Zapisi na digitalnem mediju so večni, zgodbe živijo in slike ne zbledijo, drugače kot tiste v predalu ali albumu. Kovinske, keramične, akrilne, granitne QR kode imajo visoko obstojnost in tudi nalepke so lahko visoko kvalitetne in odporne proti vremenskim vplivom. Pa tudi če se zgodi, jih je mogoče enostavno ponovno izdelati, medtem ko QR koda ostaja vedno ista. </p>
+                          <h3 className="leading-[28px]">3. Visoka obstojnost</h3>
+                          <p className="leading-[27px]">Zapisi na digitalnem mediju so večni, zgodbe živijo in slike ne zbledijo, drugače kot tiste v predalu ali albumu. Kovinske, keramične, akrilne, granitne QR kode imajo visoko obstojnost in tudi nalepke so lahko visoko kvalitetne in odporne proti vremenskim vplivom. Pa tudi če se zgodi, jih je mogoče enostavno ponovno izdelati, medtem ko QR koda ostaja vedno ista. </p>
                         </div>
                       </div>
                     </li>
                     <li>
                       <div className="feature_item">
                         <div className="feature_text">
-                          <h3>4. Enostavna uporaba</h3>
-                          <p>Skeniranje QR kod je s telefonom / tablico preko kamere povsem avtomatizirano, enako kot je odčitavanje kod v trgovini. Telefoni imajo bralnike običajno že nameščene; so brezplačni in vse bolj uporabljani zaradi svojih številnih prednosti.</p>
+                          <h3 className="leading-[28px]">4. Enostavna uporaba</h3>
+                          <p className="leading-[27px]">Skeniranje QR kod je s telefonom / tablico preko kamere povsem avtomatizirano, enako kot je odčitavanje kod v trgovini. Telefoni imajo bralnike običajno že nameščene; so brezplačni in vse bolj uporabljani zaradi svojih številnih prednosti.</p>
                         </div>
                         <div className="feature_image feature_image_forth">
                           <Image src={bnefitsQrImg4} alt="Bnefits Qr Img4" />
@@ -359,8 +359,8 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                     <li>
                       <div className="feature_item feature_item_two_three">
                         <div className="feature_text">
-                          <h3>Zbližuje ljudi, povezuje generacije</h3>
-                          <p>Spominsko spletno stran lahko skupaj ustvarjajo vsi, ki so pokojnega imeli radi - družina, prijatelji in znanci. Mlajši, ki so navajeni digitalnih vsebin, lahko na ta način lažje vzpostavijo povezavo s predniki, oddaljeni sorodniki pa lahko sodelujejo ne glede na geografsko oddaljenost.</p>
+                          <h3 className="leading-[26px]">Zbližuje ljudi, povezuje generacije</h3>
+                          <p className="leading-[24px]">Spominsko spletno stran lahko skupaj ustvarjajo vsi, ki so pokojnega imeli radi - družina, prijatelji in znanci. Mlajši, ki so navajeni digitalnih vsebin, lahko na ta način lažje vzpostavijo povezavo s predniki, oddaljeni sorodniki pa lahko sodelujejo ne glede na geografsko oddaljenost.</p>
                         </div>
                       </div>
                     </li>
@@ -379,16 +379,16 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                     <li>
                       <div className="feature_item feature_item_two_three">
                         <div className="feature_text">
-                          <h3>Visoka obstojnost</h3>
-                          <p>Zapisi na digitalnem mediju so večni, zgodbe živijo in slike ne zbledijo, drugače kot tiste v predalu ali albumu. Kovinske, keramične, akrilne, granitne QR kode imajo visoko obstojnost in tudi nalepke so lahko visoko kvalitetne in odporne proti vremenskim vplivom. Pa tudi če se zgodi, jih je mogoče enostavno ponovno izdelati, medtem ko QR koda ostaja vedno ista. </p>
+                          <h3 className="leading-[26px]">Visoka obstojnost</h3>
+                          <p className="leading-[24px]">Zapisi na digitalnem mediju so večni, zgodbe živijo in slike ne zbledijo, drugače kot tiste v predalu ali albumu. Kovinske, keramične, akrilne, granitne QR kode imajo visoko obstojnost in tudi nalepke so lahko visoko kvalitetne in odporne proti vremenskim vplivom. Pa tudi če se zgodi, jih je mogoče enostavno ponovno izdelati, medtem ko QR koda ostaja vedno ista. </p>
                         </div>
                       </div>
                     </li>
                     <li>
                       <div className="feature_item">
                         <div className="feature_text">
-                          <h3>Enostavna uporaba</h3>
-                          <p>Skeniranje QR kod je s telefonom / tablico preko kamere povsem avtomatizirano, enako kot je odčitavanje kod v trgovini. Telefoni imajo bralnike običajno že nameščene; so brezplačni in vse bolj uporabljani zaradi svojih številnih prednosti.</p>
+                          <h3 className="leading-[26px]">Enostavna uporaba</h3>
+                          <p className="leading-[24px]">Skeniranje QR kod je s telefonom / tablico preko kamere povsem avtomatizirano, enako kot je odčitavanje kod v trgovini. Telefoni imajo bralnike običajno že nameščene; so brezplačni in vse bolj uporabljani zaradi svojih številnih prednosti.</p>
                         </div>
                         <div className="feature_image feature_image_forth">
                           <Image src={bnefitsQrImg4} alt="Bnefits Qr Img4" />
@@ -408,16 +408,16 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                           <Image src={bnefitsQrImg1} alt="Bnefits Qr Img1" />
                         </div>
                         <div className="feature_text">
-                          <h3>Oživljanje spominov; prikliče nazaj že zbledele zgodbe</h3>
-                          <p>Namesto zgolj imena in datumov na nagrobniku lahko obiskovalci vidijo pokojnikov nasmeh, slišijo njegov glas ali gledajo trenutke iz njegovega življenja prek videov, zvočnih posnetkov ali albumov slik. Morda že zbledele zgodbe in spomini znova oživijo, zgodbe pa ostanejo dostopne še prihodnjim rodovom.</p>
+                          <h3 className="leading-[26px]">Oživljanje spominov; prikliče nazaj že zbledele zgodbe</h3>
+                          <p className="leading-[24px]">Namesto zgolj imena in datumov na nagrobniku lahko obiskovalci vidijo pokojnikov nasmeh, slišijo njegov glas ali gledajo trenutke iz njegovega življenja prek videov, zvočnih posnetkov ali albumov slik. Morda že zbledele zgodbe in spomini znova oživijo, zgodbe pa ostanejo dostopne še prihodnjim rodovom.</p>
                         </div>
                       </div>
                     </li>
                     <li>
                       <div className="feature_item feature_item_two_three">
                         <div className="feature_text">
-                          <h3>2. Zbližuje ljudi, povezuje generacije </h3>
-                          <p>Spominsko stran lahko skupaj ustvarjajo vsi, ki so pokojnega imeli radi, družina, prijatelji in znanci. Mlajši, ki so navajeni digitalnih vsebin, lahko na ta način lažje vzpostavijo povezavo s predniki, oddaljeni sorodniki pa lahko sodelujejo ne glede na geografsko oddaljenost.</p>
+                          <h3 className="leading-[26px]">2. Zbližuje ljudi, povezuje generacije </h3>
+                          <p className="leading-[24px]">Spominsko stran lahko skupaj ustvarjajo vsi, ki so pokojnega imeli radi, družina, prijatelji in znanci. Mlajši, ki so navajeni digitalnih vsebin, lahko na ta način lažje vzpostavijo povezavo s predniki, oddaljeni sorodniki pa lahko sodelujejo ne glede na geografsko oddaljenost.</p>
                         </div>
                       </div>
                     </li>
@@ -436,16 +436,16 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                     <li>
                       <div className="feature_item feature_item_two_three">
                         <div className="feature_text">
-                          <h3>Visoka obstojnost</h3>
-                          <p>Zapisi na digitalnem mediju so večni, zgodbe živijo in slike ne zbledijo, drugače kot tiste v predalu ali albumu. Kovinske, akrilne, granitne QR kode imajo visoko obstojnost in tudi nalepke so lahko visoko kvalitetne in odporne proti vremenskim vplivom. Pa tudi če se zgodi, jih je mogoče enostavno ponovno izdelati, medtem ko QR koda ostaja vedno ista. </p>
+                          <h3 className="leading-[26px]">Visoka obstojnost</h3>
+                          <p className="leading-[24px]">Zapisi na digitalnem mediju so večni, zgodbe živijo in slike ne zbledijo, drugače kot tiste v predalu ali albumu. Kovinske, akrilne, granitne QR kode imajo visoko obstojnost in tudi nalepke so lahko visoko kvalitetne in odporne proti vremenskim vplivom. Pa tudi če se zgodi, jih je mogoče enostavno ponovno izdelati, medtem ko QR koda ostaja vedno ista. </p>
                         </div>
                       </div>
                     </li>
                     <li>
                       <div className="feature_item">
                         <div className="feature_text">
-                          <h3>Enostavna uporaba</h3>
-                          <p>Skeniranje QR kod je s telefonom preko kamere povsem avtomatizirano, enako kot odčitavanje kod v trgovini. Telefoni imajo bralnike običajno že nameščene; so brezplačni in vse bolj uporabljani zaradi svojih številnih prednosti.</p>
+                          <h3 className="leading-[26px]">Enostavna uporaba</h3>
+                          <p className="leading-[24px]">Skeniranje QR kod je s telefonom preko kamere povsem avtomatizirano, enako kot odčitavanje kod v trgovini. Telefoni imajo bralnike običajno že nameščene; so brezplačni in vse bolj uporabljani zaradi svojih številnih prednosti.</p>
                         </div>
                         <div className="feature_image feature_image_forth">
                           <Image src={bnefitsQrImg4} alt="Bnefits Qr Img4" />
@@ -589,16 +589,16 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                       <div className="getQRcode_item_list">
                         <ul>
                           <li>
-                            <p>Osmrtnica je objavljena na naših straneh in žalna stran je že izdelana</p>
+                            <p className="leading-[24px]">Osmrtnica je objavljena na naših straneh in žalna stran je že izdelana</p>
                           </li>
                           <li>
-                            <p>Na žalni strani je že dodana brezplačna QR koda, ki si jo lahko prenesete</p>
+                            <p className="leading-[24px]">Na žalni strani je že dodana brezplačna QR koda, ki si jo lahko prenesete</p>
                           </li>
                           <li>
-                            <p>in odnesete lokalnemu mojstru, ki vam jo bo izdelal na podlagi, ki ste si jo izbrali</p>
+                            <p className="leading-[24px]">in odnesete lokalnemu mojstru, ki vam jo bo izdelal na podlagi, ki ste si jo izbrali</p>
                           </li>
                           <li>
-                            <p>ali pa jo naročite pri nas (podlaga je nerjaveče jeklo, QR koda je plastificirana)</p>
+                            <p className="leading-[24px]">ali pa jo naročite pri nas (podlaga je nerjaveče jeklo, QR koda je plastificirana)</p>
                           </li>
                         </ul>
                       </div>
@@ -623,13 +623,13 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                       <div className="getQRcode_item_list">
                         <ul>
                           <li>
-                            <p>Potrebno je naročiti izdelavo spominske strani in na njej bo tudi QR koda.</p>
+                            <p className="leading-[24px]">Potrebno je naročiti izdelavo spominske strani in na njej bo tudi QR koda.</p>
                           </li>
                           <li>
-                            <p>Možnost bo dodana v kratkem; je že v pripravi.</p>
+                            <p className="leading-[24px]">Možnost bo dodana v kratkem; je že v pripravi.</p>
                           </li>
                           <li>
-                            <p>Do takrat to možnost občasno ponujamo preko naših partnerjev; spremljajte nas na FB</p>
+                            <p className="leading-[24px]">Do takrat to možnost občasno ponujamo preko naših partnerjev; spremljajte nas na FB</p>
                           </li>
                         </ul>
                       </div>
@@ -668,25 +668,25 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <div className="getQRcode_item_list">
                           <ul>
                             <li className="faq-web-text">
-                              <p>Odvisno od tega na kakšni podlagi jo želite (kovinska ploščica, granit, akril, nalepka), kje točno bo nameščena, ali naj bo vgravirana ali samo nalepka? </p>
+                              <p className="leading-[24px]">Odvisno od tega na kakšni podlagi jo želite (kovinska ploščica, granit, akril, nalepka), kje točno bo nameščena, ali naj bo vgravirana ali samo nalepka? </p>
                             </li>
                             <li className="faq-mobile-text">
                               <p>Odvisno od tega na kakšni podlagi jo želite (kovinska ploščica, granit, akril, nalepka), kje točno bo nameščena, ali naj bo vgravirana ali samo nalepka? </p>
                             </li>
                             <li className="faq-web-text">
-                              <p>V kratkem bomo pripravili seznam izvajalcev teh del iz različnih materialov v vašem lokalnem okolju (izdelovalci, kontaktirajte nas)</p>
+                              <p className="leading-[24px]">V kratkem bomo pripravili seznam izvajalcev teh del iz različnih materialov v vašem lokalnem okolju (izdelovalci, kontaktirajte nas)</p>
                             </li>
                             <li className="faq-mobile-text">
                               <p>V kratkem bomo pripravili seznam izvajalcev teh del iz različnih materialov v vašem lokalnem okolju (izdelovalci, kontaktirajte nas)</p>
                             </li>
                             <li className="faq-web-text">
-                              <p>Plastificirano QR kodo na podlagi iz nerjavečega jekla in na visokokvalitetni nalepki lahko naročite tudi v naši trgovini </p>
+                              <p className="leading-[24px]">Plastificirano QR kodo na podlagi iz nerjavečega jekla in na visokokvalitetni nalepki lahko naročite tudi v naši trgovini </p>
                             </li>
                             <li className="faq-mobile-text">
                               <p>Plastificirano QR kodo na podlagi iz nerjavečega jekla in na visokokvalitetni nalepki lahko naročite tudi v naši trgovini </p>
                             </li>
                             <li className="faq-web-text pt-20px">
-                              <p>QR kodo lahko na nagrobnik nato nalepite sami ali pa vam pomaga pokopališko podjetje (simbolično plačilo). </p>
+                              <p className="leading-[24px]">QR kodo lahko na nagrobnik nato nalepite sami ali pa vam pomaga pokopališko podjetje (simbolično plačilo). </p>
                             </li>
                             <li className="faq-mobile-text pt-20px">
                               <p>QR kodo lahko na nagrobnik nato nalepite sami ali pa vam pomaga pokopališko podjetje (simbolično plačilo). </p>
@@ -704,7 +704,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <div className="doYouMakeQRcode_sec_inner">
                           <div className="doYouMakeQRcode_sec_text">
                             <h2>Izdelujete QR kode?</h2>
-                            <p>Ponujate morda druge produkte ali storitve, ki bi utegnile zanimati obiskovalce te spletne strani? </p>
+                            <p className="leading-[24px]">Ponujate morda druge produkte ali storitve, ki bi utegnile zanimati obiskovalce te spletne strani? </p>
                           </div>
                           <a href="/kontakt" className="light_btn">Sodelujmo!</a>
                         </div>
@@ -731,7 +731,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_1">01.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Objava osmrtnice </p>
+                        <p className="leading-[24px]">Objava osmrtnice </p>
                         <small>(in končno seznam po vseh občinah po Sloveniji na enem mestu)</small>
                       </div>
                     </div>
@@ -742,7 +742,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_2">02.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Žalna stran</p>
+                        <p className="leading-[24px]">Žalna stran</p>
                         <small>(z vsemi informacijami, Žalno knjigo in več možnostmi poklona sorodnikov in znancev)</small>
                       </div>
                     </div>
@@ -753,7 +753,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_3">03.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Status skrbnika spominske strani za cel mesec</p>
+                        <p className="leading-[24px]">Status skrbnika spominske strani za cel mesec</p>
                         <small>(Dovolj časa za izdelavo prave spominske strani. Podari lokalni partner v vašem kraju)</small>
                       </div>
                     </div>
@@ -764,7 +764,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_4">04.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>Personalizirane digitalne mobi kartice</p>
+                        <p className="leading-[24px]">Personalizirane digitalne mobi kartice</p>
                         <small>(za pošiljanje naprej, lažje obveščanje in nenazadnje, za večni spomin)</small>
                       </div>
                     </div>
@@ -775,7 +775,7 @@ Postopek je enostaven: odprite aplikacijo kamere in jo usmerite na kodo QR. Posk
                         <strong className="number_5">05.</strong>
                       </div>
                       <div className="e_free_c_list_txt">
-                        <p>QR koda za nagrobnik</p>
+                        <p className="leading-[24px]">QR koda za nagrobnik</p>
                         <small>(ki si jo lahko prenesete in sami izdelate)</small>
                       </div>
                     </div>

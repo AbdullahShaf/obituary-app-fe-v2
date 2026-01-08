@@ -20,8 +20,8 @@ const SlideTwo = () => {
   // === Desktop Layout ===
   if (breakpoint === "desktop") {
     return (
-      <div className="bg-[#F5F0E8] text-[#22281C] w-full h-[891px]">
-        <div className="flex justify-center p-[179px]">
+      <div className="bg-[#F5F0E8] text-[#22281C] w-full h-[891px] max-w-full">
+        <div className="flex justify-center p-[179px] max-w-[1920px] mx-auto">
           <div className="text-container w-[560px]">
             <h2 className="text-[40px] leading-[100%] h-[73px]">
               Spominska stran{" "}
@@ -73,7 +73,7 @@ const SlideTwo = () => {
 
   if (breakpoint === "laptop") {
     return (
-      <div className="bg-[#F5F0E8] text-[#22281C] w-[1280px]">
+      <div className="bg-[#F5F0E8] text-[#22281C] w-full max-w-[1280px] mx-auto">
         <div className="flex justify-center p-[179px]">
           <div className="text-container w-[560px]">
             <h2 className="text-[40px] leading-[100%] h-[73px]">
@@ -127,8 +127,8 @@ const SlideTwo = () => {
   // === Tablet Layout ===
   if (breakpoint === "tablet") {
     return (
-      <div className="bg-[#F5F0E8] h-full text-[#22281C] p-[64px] flex justify-center">
-        <div className="image-container w-[560px]">
+      <div className="bg-[#F5F0E8] h-full text-[#22281C] p-[64px] flex justify-center w-full">
+        <div className="image-container w-full max-w-[560px]">
           <h2 className="text-center text-[40px] mt-[16px]">
             Spominska stran{" "}
             <span className="text-[#de222e] font-medium">s skrbnikom</span>

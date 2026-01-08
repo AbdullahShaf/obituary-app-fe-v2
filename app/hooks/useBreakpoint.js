@@ -7,16 +7,10 @@ export const useBreakpoint = () => {
     const width = document.documentElement.clientWidth;
     console.log("Window width:", width);
 
-    // Fixed layouts above 460px - no responsive behavior
     if (width >= 1280) return "desktop";
     if (width >= 1024) return "laptop";
-    if (width >= 461) return "tablet"; // Fixed layout, no responsive
-    
-    // Responsive layout ONLY for 360-460px range
-    if (width >= 360) return "mobile";
-    
-    // For screens smaller than 360px, use fixed tablet layout
-    return "tablet";
+    if (width >= 740) return "tablet";
+    return "mobile";
   };
 
   useEffect(() => {

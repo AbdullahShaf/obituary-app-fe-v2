@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 
@@ -8,8 +9,8 @@ const SlideOne = () => {
   if (breakpoint === "desktop") {
     return (
       <>
-        <div className="bg-[#E0E9F3] text-[#22281C] w-full h-[891px]">
-          <div className="flex justify-center pt-10">
+        <div className="bg-[#E0E9F3] text-[#22281C] w-full h-[891px] max-w-full">
+          <div className="flex justify-center pt-10 max-w-[1920px] mx-auto">
             <div className="mt-[18px] image-container w-1/2 flex justify-end">
               <img
                 className="h-[761.1px]"
@@ -46,7 +47,7 @@ const SlideOne = () => {
   if (breakpoint === "laptop") {
     return (
       <>
-        <div className="bg-[#F5F0E8] text-[#22281C] w-[1280px] h-[891px]">
+        <div className="bg-[#F5F0E8] text-[#22281C] w-full max-w-[1280px] mx-auto h-[891px]">
           <div className="flex justify-center my-[80px]">
             <div className="mt-[18px] image-container w-1/2 flex justify-end">
               <img
@@ -83,9 +84,9 @@ const SlideOne = () => {
   // === Tablet Layout ===
   if (breakpoint === "tablet") {
     return (
-      <div className="bg-[#E0E9F3] text-[#22281C] h-full">
+      <div className="bg-[#E0E9F3] text-[#22281C] h-full w-full">
         <div className="p-[64px] text-center">
-          <div className="text-center text-container mx-auto pl-[35px] w-[464px]">
+          <div className="text-center text-container mx-auto pl-[35px] w-full max-w-[464px]">
             <h2 className="text-[40px]">Žalna stran</h2>
             <p className="text-[#414141] text-[16px] mt-[16px] leading-6">
               Stran, kjer izvemo vse o pogrebu, se vpišemo v Žalno knjigo,{" "}

@@ -49,9 +49,7 @@ const config: Config = {
       },
       screens: {
         smmobile: { max: "400px" },
-        // LIMITED: mobile responsive ONLY for 360-460px range (max 460px)
-        // Above 460px, design is fixed with no responsive behavior
-        mobile: { min: "360px", max: "460px" },
+        mobile: { max: "739px" },
         tab: "743px", //744px and up
         tablet: { min: "740px", max: "1279px" },
         desktop: { min: "1280px" },

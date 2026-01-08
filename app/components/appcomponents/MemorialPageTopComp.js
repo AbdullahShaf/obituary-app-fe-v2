@@ -25,35 +25,13 @@ const MemorialPageTopComp = ({
   const [maxCondolances, setMaxCondolances] = useState(6);
   const [limitedCondolances, setLimitedCondolances] = useState([]);
   const [currentCount, setCurrentCount] = useState(0);
-  const [screenWidth, setScreenWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1024);
+
   const [showQr, setShowQr] = useState(false);
   const [showMemoryIconTooltip, setShowMemoryIconTooltip] = useState(false);
   const [memoryIconTooltipSide, setMemoryIconTooltipSide] = useState("right");
   const memoryIconButtonRef = useRef(null);
 
-  useEffect(() => {
-    // Set initial screen width on mount (client-side only)
-    if (typeof window !== "undefined") {
-      setScreenWidth(window.innerWidth);
-    }
 
-    const handleResize = () => {
-      if (typeof window !== "undefined") {
-        setScreenWidth(window.innerWidth);
-      }
-    };
-
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", handleResize);
-    }
-
-    // Cleanup on unmount
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("resize", handleResize);
-      }
-    };
-  }, []);
 
   const defaultMessage = {
     message: "Počivaj v miru",
@@ -89,7 +67,7 @@ const MemorialPageTopComp = ({
   }, []);
 
   const parsedEvents = data?.events ? data?.events : [];
-  
+
   // Extract refuseFlowersIcon from database (stored in obituary record)
   const refuseFlowersIcon = data?.refuseFlowersIcon === true || data?.refuseFlowersIcon === 1;
 
@@ -130,12 +108,12 @@ const MemorialPageTopComp = ({
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    
+
     // If date is 31st December → return only year
     if (day === 31 && month === 12) {
       return `${year}`;
     }
-    
+
     // Otherwise, return full ISO date
     return format(date, "yyyy-MM-dd");
   };
@@ -479,17 +457,10 @@ const MemorialPageTopComp = ({
               <div className="flex flex-col w-[100%]   desktop:items-end items-center">
                 <div className="hidden desktop:flex h-[35px] w-full" />
                 <div
-                  className={`flex-col 
+                  className="flex-col 
                   pt-4 w-[100%] mobile:px-[21px] mobile:pb-[19px]
                   tablet:px-[22px] tablet:pb-[15px]
-                  ${
-                    screenWidth < 740
-                      ? "w-[330px] mobile:!w-[100%] mobile:!max-w-[470px]"
-                      : screenWidth >= 740 && screenWidth <= 1024
-                      ? "w-[550px]"
-                      : ""
-                  }
-                  desktop:w-[517px] desktop:pl-[22px] desktop:pr-[17px] bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]`}
+                  desktop:w-[517px] w-[550px] mobile:w-full mobile:max-w-[470px] desktop:pl-[22px] desktop:pr-[17px] bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]"
                   style={{
                     background:
                       "linear-gradient(113.63deg, #E3E8EC 0%, #FFFFFF 100%)",
@@ -563,14 +534,14 @@ const MemorialPageTopComp = ({
                   [
                     ...(data?.funeralTimestamp
                       ? [
-                          {
-                            type: "funeral",
-                            timestamp: new Date(
-                              data?.funeralTimestamp
-                            ).getTime(),
-                            details: data,
-                          },
-                        ]
+                        {
+                          type: "funeral",
+                          timestamp: new Date(
+                            data?.funeralTimestamp
+                          ).getTime(),
+                          details: data,
+                        },
+                      ]
                       : []),
                     ...(Array.isArray(parsedEvents) ? parsedEvents : [])
                       .filter((event) => {
@@ -597,13 +568,7 @@ const MemorialPageTopComp = ({
                       className={`flex-col w-[100%] pt-4 
                       mobile:px-[21px]  mobile:pb-[25px] 
                       tablet:pb-[23px]  tablet:px-[22px]                          
-                      desktop:w-[517px] ${
-                        screenWidth < 740
-                          ? "w-[330px] mobile:!w-[100%] mobile:!max-w-[470px]"
-                          : screenWidth >= 740 && screenWidth <= 1024
-                          ? "w-[550px]"
-                          : ""
-                      }  desktop:pb-[14px] desktop:pl-[22px] desktop:pr-[17px] shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF] mb-[28px]`}
+                      desktop:w-[517px] w-[550px] mobile:w-full mobile:max-w-[470px]  desktop:pb-[14px] desktop:pl-[22px] desktop:pr-[17px] shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF] mb-[28px]`}
                       style={{
                         background:
                           "linear-gradient(113.63deg, #E3E8EC 0%, #FFFFFF 100%)",
@@ -620,14 +585,14 @@ const MemorialPageTopComp = ({
                       {[
                         ...(data?.funeralTimestamp
                           ? [
-                              {
-                                type: "funeral",
-                                timestamp: new Date(
-                                  data?.funeralTimestamp
-                                ).getTime(),
-                                details: data,
-                              },
-                            ]
+                            {
+                              type: "funeral",
+                              timestamp: new Date(
+                                data?.funeralTimestamp
+                              ).getTime(),
+                              details: data,
+                            },
+                          ]
                           : []),
                         ...(Array.isArray(parsedEvents) ? parsedEvents : [])
                           .filter((event) => {
@@ -667,9 +632,9 @@ const MemorialPageTopComp = ({
                             .getHours()
                             .toString()
                             .padStart(2, "0")}:${date
-                            .getMinutes()
-                            .toString()
-                            .padStart(2, "0")}`;
+                              .getMinutes()
+                              .toString()
+                              .padStart(2, "0")}`;
 
                           if (item.type === "funeral") {
                             return (
@@ -686,8 +651,8 @@ const MemorialPageTopComp = ({
                                       {month === "Oct"
                                         ? "Okt"
                                         : month === "May"
-                                        ? "Maj"
-                                        : month}
+                                          ? "Maj"
+                                          : month}
                                     </div>
                                   </div>
                                 </div>
@@ -717,7 +682,7 @@ const MemorialPageTopComp = ({
                                         }}
                                         ref={memoryIconButtonRef}
                                       >
-                                      <svg
+                                        <svg
                                           width="24"
                                           height="24"
                                           viewBox="0 0 24 24"
@@ -739,11 +704,10 @@ const MemorialPageTopComp = ({
                                         </svg>
                                         {showMemoryIconTooltip && (
                                           <div
-                                            className={`absolute top-1/2 -translate-y-1/2 z-20 w-max max-w-[260px] rounded-md bg-[#0A85C2] text-white text-[12px] leading-[16px] px-3 py-2 shadow-lg after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 ${
-                                              memoryIconTooltipSide === "right"
-                                                ? "left-full ml-3 after:left-[-6px] after:border-y-[6px] after:border-y-transparent after:border-r-[6px] after:border-r-[#0A85C2]"
-                                                : "right-full mr-3 after:right-[-6px] after:border-y-[6px] after:border-y-transparent after:border-l-[6px] after:border-l-[#0A85C2]"
-                                            }`}
+                                            className={`absolute top-1/2 -translate-y-1/2 z-20 w-max max-w-[260px] rounded-md bg-[#0A85C2] text-white text-[12px] leading-[16px] px-3 py-2 shadow-lg after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 ${memoryIconTooltipSide === "right"
+                                              ? "left-full ml-3 after:left-[-6px] after:border-y-[6px] after:border-y-transparent after:border-r-[6px] after:border-r-[#0A85C2]"
+                                              : "right-full mr-3 after:right-[-6px] after:border-y-[6px] after:border-y-transparent after:border-l-[6px] after:border-l-[#0A85C2]"
+                                              }`}
                                             onClick={(e) => e.stopPropagation()}
                                           >
                                             Svojci cvetje in sveče hvaležno odklanjajo.
@@ -785,8 +749,8 @@ const MemorialPageTopComp = ({
                                       {month === "Oct"
                                         ? "Okt"
                                         : month === "May"
-                                        ? "Maj"
-                                        : month}
+                                          ? "Maj"
+                                          : month}
                                     </div>
                                   </div>
                                 </div>
@@ -795,8 +759,8 @@ const MemorialPageTopComp = ({
                                     <div className="text-[#1E2125] text-[20px] font-medium">
                                       {item.details.eventName
                                         ? formatTitleCase(
-                                            item.details.eventName
-                                          )
+                                          item.details.eventName
+                                        )
                                         : ""}
                                     </div>
                                   </div>
@@ -808,9 +772,9 @@ const MemorialPageTopComp = ({
                                       {item.details.eventLocation
                                         ? item.details.eventLocation.length > 50
                                           ? `${item.details.eventLocation.slice(
-                                              0,
-                                              50
-                                            )}...`
+                                            0,
+                                            50
+                                          )}...`
                                           : item.details.eventLocation
                                         : ""}
                                     </p>
@@ -844,19 +808,17 @@ const MemorialPageTopComp = ({
                 <div
                   className={`
                   flex-col pt-4 pl-[22px] pr-[18px] w-[100%]                       
-                  desktop:w-[517px] ${
-                    screenWidth < 740
+                  desktop:w-[517px] ${screenWidth < 740
                       ? "w-[330px] mobile:!w-[100%] mobile:!max-w-[470px]"
                       : screenWidth >= 740 && screenWidth <= 1024
-                      ? "w-[550px]"
-                      : ""
-                  } desktop:pl-[22px] desktop:pr-[14px]
+                        ? "w-[550px]"
+                        : ""
+                    } desktop:pl-[22px] desktop:pr-[14px]
                   bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]
-                  ${
-                    parsedEvents.length === 90
+                  ${parsedEvents.length === 90
                       ? "desktop:mt-2"
                       : "desktop:mt-[24px]"
-                  }
+                    }
                   `}
                   style={{
                     background:
@@ -917,11 +879,10 @@ const MemorialPageTopComp = ({
                 </div>
 
                 <div
-                  className={`flex self-end ${
-                    parsedEvents.length === 90
-                      ? "tablet:mt-2 desktop:mt-[10px] mobile:mt-[10px]"
-                      : "tablet:mt-4 desktop:mt-[28px] mobile:mt-[28px]"
-                  } desktop:h-[0px] items-center desktop:pr-[20px]`}
+                  className={`flex self-end ${parsedEvents.length === 90
+                    ? "tablet:mt-2 desktop:mt-[10px] mobile:mt-[10px]"
+                    : "tablet:mt-4 desktop:mt-[28px] mobile:mt-[28px]"
+                    } desktop:h-[0px] items-center desktop:pr-[20px]`}
                 >
                   {false && (
                     <>
@@ -948,13 +909,12 @@ const MemorialPageTopComp = ({
                             py-4      
                             pl-[21px] pr-[28px]
                             w-[100%] tablet:px-4 
-                            desktop:w-[517px] ${
-                              screenWidth < 740
-                                ? "w-[330px] mobile:!w-[100%] mobile:!max-w-[470px]"
-                                : screenWidth >= 740 && screenWidth <= 1024
-                                ? "w-[550px]"
-                                : ""
-                            } desktop:pl-[22px] desktop:pr-[17px] shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]`}
+                            desktop:w-[517px] ${screenWidth < 740
+                      ? "w-[330px] mobile:!w-[100%] mobile:!max-w-[470px]"
+                      : screenWidth >= 740 && screenWidth <= 1024
+                        ? "w-[550px]"
+                        : ""
+                    } desktop:pl-[22px] desktop:pr-[17px] shadow-custom-light-dark-box bg-gradient-to-br rounded-2xl from-[#E3E8EC] to-[#FFFFFF]`}
                   style={{
                     background:
                       "linear-gradient(113.63deg, #E3E8EC 0%, #FFFFFF 100%)",
@@ -1233,111 +1193,115 @@ const MemorialPageTopComp = ({
           )}
         </div>
       </div>
-      {data?.Dedications && data?.Dedications?.length > 0 && (
-        <div className="w-full pb-[150px]">
-          <div className="flex flex-col w-full items-center">
-            <div className="flex flex-col w-full items-center mt-[100px] ">
-              <div className="flex items-center justify-center h-[33px] tablet:h-[47px] desktop:h-[47px] relative mobile:mb-[16px]">
-                <h2 className="text-[#1E2125] text-[28px] tablet:text-[40px] desktop:text-[40px] font-variation-customOpt28 tablet:font-variation-customOpt40 desktop:font-variation-customOpt40 font-normal">
-                  Posvetilo
-                </h2>
-                {/* <div className="text-[#0A85C2] text-[24px] font-[400] absolute top-[-3px] right-[-38px]">
+      {
+        data?.Dedications && data?.Dedications?.length > 0 && (
+          <div className="w-full pb-[150px]">
+            <div className="flex flex-col w-full items-center">
+              <div className="flex flex-col w-full items-center mt-[100px] ">
+                <div className="flex items-center justify-center h-[33px] tablet:h-[47px] desktop:h-[47px] relative mobile:mb-[16px]">
+                  <h2 className="text-[#1E2125] text-[28px] tablet:text-[40px] desktop:text-[40px] font-variation-customOpt28 tablet:font-variation-customOpt40 desktop:font-variation-customOpt40 font-normal">
+                    Posvetilo
+                  </h2>
+                  {/* <div className="text-[#0A85C2] text-[24px] font-[400] absolute top-[-3px] right-[-38px]">
                   22
                 </div> */}
+                </div>
+                <div
+                  className="flex items-center mt-4 h-6 cursor-pointer"
+                  onClick={() => {
+                    set_Id("13");
+                    openCandleModal();
+                  }}
+                >
+                  <p className="text-[16px] text-[#414141] font-variation-customOpt16 font-normal text-center mobile:w-[306px] mobile:mx-auto">
+                    Delite zgodbe, čarobne trenutke, morda biografijo, zadnji
+                    pozdrav
+                  </p>
+                </div>
               </div>
+
               <div
-                className="flex items-center mt-4 h-6 cursor-pointer"
+                className="mt-[30px] w-[720px] mobile:w-[321px] mx-auto flex items-center justify-end cursor-pointer mb-[18px] px-[10px]"
                 onClick={() => {
                   set_Id("13");
                   openCandleModal();
                 }}
               >
-                <p className="text-[16px] text-[#414141] font-variation-customOpt16 font-normal text-center mobile:w-[306px] mobile:mx-auto">
-                  Delite zgodbe, čarobne trenutke, morda biografijo, zadnji
-                  pozdrav
+                <Image
+                  src={"/round_add.png"}
+                  alt="Ikona dodajanja"
+                  width={100}
+                  height={100}
+                  className="w-[12px] mb-[2px] h-[12px] mr-[10px]"
+                />
+                <p className="text-[14px] text-[#414141] font-variation-customOpt12 font-normal">
+                  Dodaj posvetilo
                 </p>
               </div>
-            </div>
 
-            <div
-              className="mt-[30px] w-[720px] mobile:w-[321px] mx-auto flex items-center justify-end cursor-pointer mb-[18px] px-[10px]"
-              onClick={() => {
-                set_Id("13");
-                openCandleModal();
-              }}
-            >
-              <Image
-                src={"/round_add.png"}
-                alt="Ikona dodajanja"
-                width={100}
-                height={100}
-                className="w-[12px] mb-[2px] h-[12px] mr-[10px]"
-              />
-              <p className="text-[14px] text-[#414141] font-variation-customOpt12 font-normal">
-                Dodaj posvetilo
-              </p>
+              <ContentSlider data={data?.Dedications} />
             </div>
-
-            <ContentSlider data={data?.Dedications} />
           </div>
-        </div>
-      )}
-      {data?.Photos && data?.Photos?.length > 0 && (
-        <div className="w-full pb-[150px]">
-          <div className="flex flex-col w-full items-center">
-            <div className="flex items-center justify-center h-[33px] tablet:h-[47px] desktop:h-[47px] relative">
-              <h2 className="text-[#1E2125] text-[28px] tablet:text-[40px] desktop:text-[40px] font-variation-customOpt28 tablet:font-variation-customOpt40 desktop:font-variation-customOpt40 font-normal">
-                Nepozabni trenutki
-              </h2>
-              {/* <div className="text-[#0A85C2] text-[24px] font-[400] absolute top-[-3px] right-[-38px]">
+        )
+      }
+      {
+        data?.Photos && data?.Photos?.length > 0 && (
+          <div className="w-full pb-[150px]">
+            <div className="flex flex-col w-full items-center">
+              <div className="flex items-center justify-center h-[33px] tablet:h-[47px] desktop:h-[47px] relative">
+                <h2 className="text-[#1E2125] text-[28px] tablet:text-[40px] desktop:text-[40px] font-variation-customOpt28 tablet:font-variation-customOpt40 desktop:font-variation-customOpt40 font-normal">
+                  Nepozabni trenutki
+                </h2>
+                {/* <div className="text-[#0A85C2] text-[24px] font-[400] absolute top-[-3px] right-[-38px]">
                 22
               </div> */}
-            </div>
-            <button
-              className="flex cursor-pointer self-center tablet:self-start desktop:self-start items-center justify-center flex-col gap-[2px] border-2 rounded-[4px] border-[#FFFFFF] w-[165px] h-[60px] bg-gradient-to-br from-[#FFFFFF] to-[#FFFFFF30] z-20 mx-auto mt-[40px] tablet:mt-[40px] desktop:mt-[40px] tablet:hidden mobile:hidden mb-[40px]"
-              style={{
-                boxShadow: "3px 3px 18px 0px #00000040",
-              }}
-              onClick={() => {
-                set_Id("6");
-                openCandleModal();
-              }}
-            >
-              <Image
-                src={"/memory_page_plus_icon.png"}
-                alt="Ikona dodajanja vsebine"
-                width={20}
-                height={20}
-                className=""
-              />
-              <p className="text-[16px] text-[#1E2125] font-variation-customOpt16 font-normal">
-                Dodaj sliko
-              </p>
-            </button>
+              </div>
+              <button
+                className="flex cursor-pointer self-center tablet:self-start desktop:self-start items-center justify-center flex-col gap-[2px] border-2 rounded-[4px] border-[#FFFFFF] w-[165px] h-[60px] bg-gradient-to-br from-[#FFFFFF] to-[#FFFFFF30] z-20 mx-auto mt-[40px] tablet:mt-[40px] desktop:mt-[40px] tablet:hidden mobile:hidden mb-[40px]"
+                style={{
+                  boxShadow: "3px 3px 18px 0px #00000040",
+                }}
+                onClick={() => {
+                  set_Id("6");
+                  openCandleModal();
+                }}
+              >
+                <Image
+                  src={"/memory_page_plus_icon.png"}
+                  alt="Ikona dodajanja vsebine"
+                  width={20}
+                  height={20}
+                  className=""
+                />
+                <p className="text-[16px] text-[#1E2125] font-variation-customOpt16 font-normal">
+                  Dodaj sliko
+                </p>
+              </button>
 
-            <div className="mt-[40px] tablet:mt-[40px] desktop:mt-[40px] w-full">
-              <Gallery3D photos={data?.Photos || []} />
-            </div>
+              <div className="mt-[40px] tablet:mt-[40px] desktop:mt-[40px] w-full">
+                <Gallery3D photos={data?.Photos || []} />
+              </div>
 
-            <button
-              onClick={() => {
-                set_Id("6");
-                openCandleModal();
-              }}
-              className="flex gap-[8px] items-center justify-end w-[1024px] tablet:w-[610px] mobile:w-[321px] text-end desktop:hidden text-[#414141] text-[14px] font-[400] mt-[40px] mb-[12px]"
-            >
-              <Image
-                src={"/memory_page_plus_icon.png"}
-                alt="Ozadje spominske strani"
-                width={16}
-                height={16}
-                className=""
-              />
-              Dodaj Sliko
-            </button>
+              <button
+                onClick={() => {
+                  set_Id("6");
+                  openCandleModal();
+                }}
+                className="flex gap-[8px] items-center justify-end w-[1024px] tablet:w-[610px] mobile:w-[321px] text-end desktop:hidden text-[#414141] text-[14px] font-[400] mt-[40px] mb-[12px]"
+              >
+                <Image
+                  src={"/memory_page_plus_icon.png"}
+                  alt="Ozadje spominske strani"
+                  width={16}
+                  height={16}
+                  className=""
+                />
+                Dodaj Sliko
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       <div className="w-[1024px] tablet:w-[678.78px]   mobile:w-[341px] h-auto  flex flex-col items-center ">
         <div className="flex flex-row h-[47px] items-center relative">
@@ -1471,7 +1435,7 @@ const MemorialPageTopComp = ({
             alt="Puščica navzdol"
             width={74}
             height={74}
-            // className="mt-[24px] mb-[71px] mx-auto"
+          // className="mt-[24px] mb-[71px] mx-auto"
           />
         </div>
       </div>
@@ -1493,7 +1457,7 @@ const MemorialPageTopComp = ({
           router.push("/spominska");
         }}
       />
-    </div>
+    </div >
   );
 };
 

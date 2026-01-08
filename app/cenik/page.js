@@ -119,7 +119,7 @@ const Subscription = () => {
       case "mesecno":
         return (
           <>
-            <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
+            <div className="mobile:w-full w-[550px] tablet:w-full flex flex-col gap-4">
               <PricingCard
                 label="MESEČNO"
                 title="Manjša mesta"
@@ -153,7 +153,7 @@ const Subscription = () => {
       case "letno":
         return (
           <>
-            <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
+            <div className="mobile:w-full w-[550px] tablet:w-full flex flex-col gap-4">
               <PricingCard
                 label="LETNO"
                 title="Manjša mesta"
@@ -193,7 +193,7 @@ const Subscription = () => {
     switch (activeFormTabOglasevalci) {
       case "mesecno":
         return (
-          <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
+          <div className="mobile:w-full w-[550px] tablet:w-full flex flex-col gap-4">
             <PricingCard
               label="MESEČNO"
               title="Manjša mesta"
@@ -225,7 +225,7 @@ const Subscription = () => {
         );
       case "letno":
         return (
-          <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
+          <div className="mobile:w-full w-[550px] tablet:w-full flex flex-col gap-4">
             <PricingCard
               label="LETNO"
               title="Manjša mesta"
@@ -264,10 +264,10 @@ const Subscription = () => {
     switch (active) {
       case "spominske":
         return (
-          <div className="mobile:px-1 mobile:max-w-full mobile:min-w-full mobile:mx-auto p-4 flex flex-col mb-[40px] w-[766px] tablet:items-center mx-auto mobile:gap-y-11 gap-y-9">
+          <div className="mobile:px-4 mobile:w-full mobile:mx-auto p-4 flex flex-col mb-[40px] w-[766px] tablet:w-full tablet:items-center mx-auto mobile:gap-y-11 gap-y-9">
             {/* // <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto flex flex-col mb-[40px] w-[766px] mx-auto mobile:gap-y-11 gap-y-9"> */}
             {/* <div className="mobile:px-1 mobile:max-w-[500px] mobile:mx-auto flex flex-col mb-[40px] w-[766px] mx-auto mobile:gap-y-11 gap-y-9"> */}
-            <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4 mb-[40px]">
+            <div className="mobile:w-full w-[550px] tablet:w-full flex flex-col gap-4 mb-[40px]">
               <div className="w-full flex items-center gap-4">
                 <div className="mobile:text-[24px] text-[32px] text-[#000000]">
                   Spominska stran
@@ -290,7 +290,7 @@ const Subscription = () => {
               </div>
               <div className="border-[#0A85C2] border-t-[2px] w-[200px] my-6"></div> */}
 
-              <div className=" text-[#414141] flex flex-col gap-1 w-full desktop:w-[780px] mobile:text-[14px] text-[16px]">
+              <div className="text-[#414141] flex flex-col gap-1 w-full desktop:w-[780px] mobile:text-[14px] text-[16px]">
                 <p className="text-[14px]"></p>{" "}
                 <p className="mt-1 mobile:hidden block">
                   Bližnji svojci lahko postanejo skrbniki spominske strani
@@ -327,7 +327,7 @@ const Subscription = () => {
                 sublabel=""
                 text="brezplačno"
                 title="1 mesec brezplačno"
-                // number={1}
+              // number={1}
               />
               {/* <PricingCard
                 label="SPOMINSKA STRAN"
@@ -373,7 +373,7 @@ const Subscription = () => {
                 </div>
               </div>
             </div>
-            <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
+            <div className="mobile:w-full w-[550px] tablet:w-full flex flex-col gap-4">
               <PricingCard
                 label="zadnji pozdrav, spomini, zahvale"
                 title="Brezplačno"
@@ -382,7 +382,7 @@ const Subscription = () => {
               <PricingCard
                 label="digitalne kartice"
                 title="Brezplačno"
-                // subtitle="(samo v cvetličarni)"
+              // subtitle="(samo v cvetličarni)"
               />
               <PricingCard label="QR kode za nagrobnike" title="Brezplačno" />
               <PricingCard
@@ -467,9 +467,9 @@ const Subscription = () => {
 
       case "cvetlicarne":
         return (
-          <div className="mobile:px-1 mobile:max-w-full mobile:min-w-full mobile:mx-auto p-4 flex flex-col mb-[40px] w-[766px] tablet:items-center mx-auto mobile:gap-y-11 gap-y-9">
+          <div className="mobile:px-4 mobile:w-full mobile:mx-auto p-4 flex flex-col mb-[40px] w-[766px] tablet:w-full tablet:items-center mx-auto mobile:gap-y-11 gap-y-9">
             {/* <div className="mobile:px-1 mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto p-4 mb-[40px] flex flex-col mobile:items-center mobile:justify-center space-y-4"> */}
-            <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
+            <div className="mobile:w-full w-[550px] tablet:w-full flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <div className="mobile:text-[24px] text-[32px] text-[#000000]">
                   Cvetličarne
@@ -507,7 +507,7 @@ const Subscription = () => {
                   tabContent={
                     <>
                       <FormTabsContentCvetlicarne />
-                      <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col">
+                      <div className="mobile:w-full mt-4 w-[550px] tablet:w-full flex flex-col">
                         <div className="text-[#414141] flex gap-1  w-full desktop:w-[744px] text-[14px] desktop:text-[14px]">
                           <p className="text-[14px]">1</p>{" "}
                           <p className="mt-1">
@@ -550,13 +550,13 @@ const Subscription = () => {
                             osmrtnice, pogrebi, cvetličarne. Pomeni oglaševanje
                             na treh straneh za ceno dveh.
                           </p> */}
-                          <p className="mt-14 mobile:w-full min-w-full w-[728px] desktop:w-[728px] tablet:w-full mb-5">
+                          <p className="mt-14 w-full desktop:w-[728px] mb-5">
                             {/* <p className="mt-14 w-full tablet:w-[728px] mb-5"> */}
                             Občasno so mogoče še druge promocije. Kontaktirajte
                             nas, da vam pripravimo ponudbo po meri.
                           </p>
                           {/* <div className="w-full tablet:w-[728px] gap-5 flex flex-row mobile:flex-col justify-between"> */}
-                          <div className="w-full tablet:max-w-[728px] gap-5 flex flex-row mobile:flex-col justify-between">
+                          <div className="w-full desktop:max-w-[728px] gap-5 flex flex-row mobile:flex-col justify-between">
                             <a
                               href="mailto:info@osmrtnica.com"
                               className="w-[250px] h-[53px] shrink-0 rounded-full mobile:mx-auto text-white justify-center items-center self-center shadow-custom-light-dark bg-gradient-to-b from-[#0D94E8] to-[#1860A3] flex"
@@ -655,9 +655,9 @@ const Subscription = () => {
 
       case "oglasevalci":
         return (
-          <div className="mobile:px-1 mobile:max-w-full mobile:min-w-full mobile:mx-auto p-4 flex flex-col mb-[40px] w-[766px] tablet:items-center mx-auto mobile:gap-y-11 gap-y-9">
+          <div className="mobile:px-4 mobile:w-full mobile:mx-auto p-4 flex flex-col mb-[40px] w-[766px] tablet:w-full tablet:items-center mx-auto mobile:gap-y-11 gap-y-9">
             {/* <div className="mobile:px-1 p-4 mobile:max-w-[500px] w-[766px] mx-auto mobile:mx-auto mb-[40px] flex flex-col mobile:items-center mobile:justify-center space-y-4"> */}
-            <div className="mobile:w-[99%] w-[550px] flex flex-col gap-4">
+            <div className="mobile:w-full w-[550px] tablet:w-full flex flex-col gap-4">
               <div className="w-full flex items-center gap-4">
                 <div className="mobile:text-[24px] text-[32px] text-[#000000]">
                   Oglaševalci
@@ -680,7 +680,7 @@ const Subscription = () => {
                   tabContent={
                     <>
                       <FormTabsContentOglasevalci />
-                      <div className="mobile:w-[99%] mt-4 w-[550px] flex flex-col gap-4">
+                      <div className="mobile:w-full mt-4 w-[550px] tablet:w-full flex flex-col gap-4">
                         <div className="mb-[40px] space-y-1">
                           <div className="text-[#414141] flex gap-1 w-full desktop:w-[744px] text-[14px]">
                             <p className="text-[12px]">1</p>{" "}
@@ -750,12 +750,12 @@ const Subscription = () => {
                             na treh straneh za ceno dveh.
                           </p> */}
                           {/* <p className="mt-14 w-full tablet:w-[728px] mb-5"> */}
-                          <p className="mt-14 mobile:w-full min-w-full w-[728px] tablet:w-full mb-5">
+                          <p className="mt-14 w-full desktop:w-[728px] mb-5">
                             Občasno so mogoče še druge promocije. Kontaktirajte
                             nas, da vam pripravimo ponudbo po meri.
                           </p>
                           {/* <div className="w-full tablet:w-[728px] gap-5 flex flex-row mobile:flex-col justify-between"> */}
-                          <div className="w-full tablet:max-w-[728px] gap-5 flex flex-row mobile:flex-col justify-between">
+                          <div className="w-full desktop:max-w-[728px] gap-5 flex flex-row mobile:flex-col justify-between">
                             <a
                               href="mailto:info@osmrtnica.com"
                               className="w-[250px] h-[53px] shrink-0 rounded-full mobile:mx-auto text-white justify-center items-center self-center shadow-custom-light-dark bg-gradient-to-b from-[#0D94E8] to-[#1860A3] flex"
@@ -947,14 +947,13 @@ const Subscription = () => {
     <>
       <Layout from={"23"} forFooter={"cenikpage"}>
         <div
-          className={`cenik-page-wrapper w-full bg-[#ECF0F3] mobile:py-3 py-8 ${
-            (active === "cvetlicarne" &&
-              showFullFloristContent &&
-              isWhatIsIncludedOpen) ||
+          className={`cenik-page-wrapper w-full bg-[#ECF0F3] mobile:py-3 py-8 ${(active === "cvetlicarne" &&
+            showFullFloristContent &&
+            isWhatIsIncludedOpen) ||
             (active === "oglasevalci" && isWhatIsIncludedAdvertisersOpen)
-              ? "mb-[-2rem]"
-              : "lg:px-8"
-          }`}
+            ? "mb-[-2rem]"
+            : "lg:px-8"
+            }`}
         >
           <div className="w-full desktop:w-[1200px] mx-auto">
             <div className="-mt-[20px]">
@@ -980,8 +979,8 @@ const Subscription = () => {
                 (active === "cvetlicarne" &&
                   showFullFloristContent &&
                   isWhatIsIncludedOpen) ||
-                (active === "oglasevalci" &&
-                  isWhatIsIncludedAdvertisersOpen) ? null : (
+                  (active === "oglasevalci" &&
+                    isWhatIsIncludedAdvertisersOpen) ? null : (
                   <TabContent />
                 )
               }

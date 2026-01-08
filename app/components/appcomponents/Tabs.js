@@ -12,30 +12,25 @@ export default function Tabs({
     <div className="w-full">
       {/* Tabs Container */}
       <div
-        className={`flex mobile:mb-5 mb-8  items-center mx-auto  ${
-          !innerTab
-            ? "mobile:bg-[#36556C] mobile:h-[35px] scrollbar-hide gap-6 justify-center mobile:justify-between"
-            : "flex mobile:flex-wrap gap-x-6 gap-y-2"
-        }  bg-transparent mobile:px-2 px-4`}
+        className={`flex mobile:mb-5 mb-8 items-center mx-auto ${!innerTab
+          ? "mobile:bg-[#36556C] mobile:h-[35px] scrollbar-hide gap-6 justify-center mobile:justify-start mobile:overflow-x-auto"
+          : "flex mobile:flex-wrap gap-x-6 gap-y-2"
+          } bg-transparent mobile:px-2 px-4`}
       >
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActive(tab.id)}
-            className={`mobile:text-[16px] ${
-              tab.id === "pogrebna-podjetja" && "mobile:hidden"
-            } text-[20px] text-nowrap mobile:uppercase mobile:w-[33.33%] transition-all duration-200  
-                ${
-                  active === tab.id
-                    ? `text-[#0A85C2] ${
-                        innerTab
-                          ? "bg-[#ffffff] border-b-2 border-[#0077CC] px-2 py-2"
-                          : "mobile:px-0 mobile:border-0 px-2 mobile:py-0 py-2"
-                      }  border-b-2 border-[#0077CC]`
-                    : `${
-                        !innerTab && "mobile:text-[#ffffff]"
-                      } mobile:border-0 mobile:py-0 py-2 border-b-2 border-[#D4D4D4] text-[#6D778E]`
-                }`}
+            className={`mobile:text-[16px] ${tab.id === "pogrebna-podjetja" && "mobile:hidden"
+              } text-[20px] text-nowrap mobile:uppercase mobile:flex-shrink-0 mobile:px-3 transition-all duration-200  
+                ${active === tab.id
+                ? `text-[#0A85C2] ${innerTab
+                  ? "bg-[#ffffff] border-b-2 border-[#0077CC] px-2 py-2"
+                  : "mobile:px-0 mobile:border-0 px-2 mobile:py-0 py-2"
+                }  border-b-2 border-[#0077CC]`
+                : `${!innerTab && "mobile:text-[#ffffff]"
+                } mobile:border-0 mobile:py-0 py-2 border-b-2 border-[#D4D4D4] text-[#6D778E]`
+              }`}
           >
             {tab.label}
           </button>

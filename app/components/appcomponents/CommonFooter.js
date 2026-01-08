@@ -122,32 +122,16 @@ const footerLinkSets = {
   ],
 };
 
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const checkMobile = () => setIsMobile(window.innerWidth < 768);
-      checkMobile(); // initial check
-      window.addEventListener("resize", checkMobile);
-      return () => window.removeEventListener("resize", checkMobile);
-    }
-  }, []);
-
-  return isMobile;
-}
 
 const CommonFooter = ({ currentPage = "/" }) => {
   const pathname = usePathname();
-  const isMobile = useIsMobile();
-  const linksToRender = !isMobile
-    ? footerLinkSets[currentPage] || []
-    : footerLinkSets[currentPage].filter((item) => item.showOnMobile);
+  const linksToRender = footerLinkSets[currentPage] || [];
 
   return (
     <div className="CommonFooter bg-[#D4E6F9] border-l-1 border-r-1 border-t-1 border-b-1 border-color-[#D3D3D3] tablet:pt-[31px] pt-[29px] mobile:pt-[15px] pb-[14px] mt-auto">
       {/* Top Section */}
-      <div className="flex justify-between items-center tablet:w-[744px] mobile:w-[360px] desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto">
+      <div className="flex justify-between items-center tablet:w-[744px] mobile:w-full desktop:w-[1190px] px-[15px] mobile:px-[5px] mx-auto">
         <Image
           src={logoWhite}
           width={160}
@@ -224,7 +208,7 @@ const CommonFooter = ({ currentPage = "/" }) => {
       </div>
 
       {/* Bottom Section - Mobile */}
-      <div className="mobile:flex justify-between items-center tablet:w-[744px] mobile:w-[360px] desktop:w-[1190px] mobile:pl-[34px] mobile:pr-[15px] mx-auto mt-[18px] hidden">
+      <div className="mobile:flex justify-between items-center tablet:w-[744px] mobile:w-full desktop:w-[1190px] mobile:pl-[34px] mobile:pr-[15px] mx-auto mt-[18px] hidden">
         <div className="flex flex-col">
           <Image
             src={logo2}

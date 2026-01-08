@@ -16,8 +16,6 @@
 /* @media only screen and (min-width: 1366px) and (max-width: 1535px){
    
  
-
-end of = (min-width: 1366px) and (max-width: 1900px)			
 } */
 
 
@@ -32,8 +30,6 @@ end of = (min-width: 1366px) and (max-width: 1900px)
      .everything_free_inner{ max-width: 685px; }
     
      .qr_page_wrapper{ padding-top: 70px; }
-    
-end of = (min-width: 1280px) and (max-width: 1365px)			
 } */
 
 
@@ -81,7 +77,7 @@ body { -webkit-text-size-adjust:none;  -webkit-overflow-scrolling: touch; }
 
 .getQRcode_item_right_content{ top: -11px; }
 
-/* .doYouMakeQRcode_sec_text p{ max-width: 380px; } */
+.doYouMakeQRcode_sec_text p{ max-width: 380px; }
 
 .everything_free_inner{ max-width: 602px; }
 .everything_free_sec{ padding: 83px 0px 75px 0px; }
@@ -132,8 +128,6 @@ body { -webkit-text-size-adjust:none;  -webkit-overflow-scrolling: touch; }
 
  .tab-faqs .tablet\:max-w-\[600px\]{ max-width: 655px !important; }
  .tab-faqs .tablet\:max-w-\[600px\] .px-5{ padding: 0px !important; }
-
-end of = (min-width: 1024px) and (max-width: 1279px)			
 } */
 
 
@@ -174,7 +168,7 @@ body { -webkit-text-size-adjust:none; -webkit-overflow-scrolling: touch; overflo
 
 .getQRcode_item_right_content{ top: -11px; }
 
-/* .doYouMakeQRcode_sec_text p{ max-width: 380px; } */
+.doYouMakeQRcode_sec_text p{ max-width: 380px; }
 
 .everything_free_inner{ max-width: 602px; }
 .everything_free_sec{ padding: 83px 0px 75px 0px; }
@@ -228,9 +222,6 @@ body { -webkit-text-size-adjust:none; -webkit-overflow-scrolling: touch; overflo
 .tab-faqs .tablet\:max-w-\[600px\]{ max-width: 655px !important; }
 .tab-faqs .tablet\:max-w-\[600px\] .px-5{ padding: 0px !important; }
 
-
-
-/* end 768 */
 } */
 
 
@@ -360,7 +351,6 @@ display: block; }
     .bnefits_qr_tombstones_inner{ max-width: 337px;
     margin: auto; }
 
-    /* .getQRcode_sec_inner{ max-width: 337px; margin: auto; } */
 
 .getQRcode_sec_inner .getQRcode_content {
         padding-top: 40px;
@@ -390,9 +380,9 @@ display: block; }
   overflow-x: hidden;
 }
 
-/* Ensure wrapper doesn't overflow */
+Ensure wrapper doesn't overflow
 .qr_page_wrapper {
-  position: relative;  /* absolute hata kar relative karna best hoga */
+  position: relative;
   width: 100%;
   left: 0;
   right: 0;

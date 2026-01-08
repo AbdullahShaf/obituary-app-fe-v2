@@ -50,7 +50,7 @@ const SlideThree = () => {
                             height={212}
                         />
                         <div className="btn-container flex w-full justify-center ">
-                            <Link href={"/spominska"}>
+                            <Link href={"https://www.osmrtnica.com/qr-kode"}>
                                 <button className="px-[15px] py-[12px] w-[155px] rounded-[8px] mt-[47px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
                                     Več o QR kodah
                                 </button>
@@ -101,7 +101,7 @@ const SlideThree = () => {
                             height={212}
                         />
                         <div className="btn-container flex w-full justify-center ">
-                            <Link href={"/spominska"}>
+                            <Link href={"https://www.osmrtnica.com/qr-kode"}>
                                 <button className="px-[15px] py-[12px] w-[155px] rounded-[8px] mt-[47px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
                                     Več o QR kodah
                                 </button>
@@ -153,7 +153,7 @@ const SlideThree = () => {
                     /> */}
 
                     <div className="btn-container text-center">
-                        <Link href={"/spominska"}>
+                        <Link href={"https://www.osmrtnica.com/qr-kode"}>
                             <button className="px-[25px] py-[12px] rounded-[8px] mt-[79px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
                                 Več o QR kodah
                             </button>
@@ -187,7 +187,7 @@ const SlideThree = () => {
                     />
 
                     <div className="btn-container text-center mt-[22px]">
-                        <Link href={"/spominska"}>
+                        <Link href={"https://www.osmrtnica.com/qr-kode"}>
                             <button className="px-[25px] py-[12px] rounded-[8px] shadow-custom-light-dark bg-gradient-to-br from-[#E3E8EC] to-[#FFFFFF]">
                                 Več o QR kodah
                             </button>

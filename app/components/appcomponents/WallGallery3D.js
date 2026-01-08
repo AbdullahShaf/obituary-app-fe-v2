@@ -452,7 +452,8 @@ export default function WallGallery3D({ photos = [] }) {
           color: #414141;
         }
 
-        @media (max-width: 768px) {
+        /* DISABLED: Media queries outside 360-450px range per requirements */
+        /* @media (max-width: 768px) {
           .wg-wrapper {
             padding: 12px 8px 28px;
           }
@@ -477,8 +478,9 @@ export default function WallGallery3D({ photos = [] }) {
             justify-content: flex-start;
             padding-right: 8px;
           }
-        }
-        @media (max-width: 480px) {
+        } */
+        /* DISABLED: Media queries outside 360-450px range per requirements */
+        /* @media (max-width: 480px) {
           .wg-photo-landscape {
             width: 240px;
             height: 180px;
@@ -496,7 +498,7 @@ export default function WallGallery3D({ photos = [] }) {
           .wg-track {
             gap: 5px;
           }
-        }
+        } */
       `}</style>
     </div>
   );

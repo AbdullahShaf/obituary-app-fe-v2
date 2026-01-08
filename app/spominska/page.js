@@ -57,7 +57,7 @@ Na žalni strani so možnosti za sodelovanje omejene, medtem ko je možnosti na 
     <>
       <Layout from={"18"} forFooter={"memorypage"} currentPage="spominska">
         <div className="flex w-full flex-col  bg-gradient-to-br from-[#ECF0F3] to-[#F2F6F9]">
-          <div className="h-[72px] tablet:h-[80px] desktop:h-[92.02px] " />
+          <div className="h-[72px] " />
           <div className="mobile_navbar mobile_navbar_header top-[68px] z-[1]">
             <ul>
               <li>

@@ -380,7 +380,6 @@ display: block; }
   overflow-x: hidden;
 }
 
-Ensure wrapper doesn't overflow
 .qr_page_wrapper {
   position: relative;
   width: 100%;
